@@ -16,7 +16,7 @@ Next, you'll need to download the latest version of Godot from [their website](h
 
 Once you have both SuperTux Classic and Godot downloaded, open Godot and add SuperTux Classic into your project list. You can do this in Godot by clicking "Scan", and then navigating to the folder where you downloaded SuperTux Classic.
 
-To learn how to use Godot, you can read the official documentation here: https://docs.godotengine.org/ 
+To learn how to use Godot to modify SuperTux Classic, you can read the official documentation here: https://docs.godotengine.org/ 
 
 Alternatively, there are plenty of helpful YouTube tutorials for Godot you can watch to learn how to use the engine! https://docs.godotengine.org/en/stable/community/tutorials.html
 
