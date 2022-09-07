@@ -1,0 +1,4 @@
+*.ogg filter=lfs diff=lfs merge=lfs -text
+*.aup3 filter=lfs diff=lfs merge=lfs -text
+*.aup filter=lfs diff=lfs merge=lfs -text
+*.xcf filter=lfs diff=lfs merge=lfs -text
