@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/AmbienceWaves.mp3-1698ce941448ba51eab758f0a8dd4276.mp3str"
+
+[deps]
+
+source_file="res://sounds/ambience_loops/AmbienceWaves.mp3"
+dest_files=[ "res://.import/AmbienceWaves.mp3-1698ce941448ba51eab758f0a8dd4276.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

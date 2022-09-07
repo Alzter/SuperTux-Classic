@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/ChipDisko.mp3-f1fe4dc5e8f4e6b1fb2ee5a5703600a6.mp3str"
+
+[deps]
+
+source_file="res://music/ChipDisko.mp3"
+dest_files=[ "res://.import/ChipDisko.mp3-f1fe4dc5e8f4e6b1fb2ee5a5703600a6.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

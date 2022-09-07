@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/Pingus - Snow.mp3-bcf6e87820ac4272d4a04e513ae4f1e4.mp3str"
+
+[deps]
+
+source_file="res://music/Pingus - Snow.mp3"
+dest_files=[ "res://.import/Pingus - Snow.mp3-bcf6e87820ac4272d4a04e513ae4f1e4.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=12.0

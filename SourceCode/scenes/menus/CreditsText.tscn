@@ -1,0 +1,403 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://scenes/menus/TextScroll.gd" type="Script" id=1]
+[ext_resource path="res://theme/FontCreditsBig.tres" type="DynamicFont" id=2]
+[ext_resource path="res://theme/FontCredits.tres" type="DynamicFont" id=3]
+[ext_resource path="res://theme/default_theme.tres" type="Theme" id=4]
+
+[node name="CreditsText" type="Control"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+theme = ExtResource( 4 )
+script = ExtResource( 1 )
+return_scene = "res://scenes/menus/TitleScreen.tscn"
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -320.0
+margin_right = 320.0
+margin_bottom = 2432.0
+rect_clip_content = false
+custom_fonts/bold_font = ExtResource( 2 )
+custom_fonts/normal_font = ExtResource( 3 )
+bbcode_enabled = true
+bbcode_text = "[center][b][wave]- SuperTux Classic -[/wave][/b]
+
+A remaster of SuperTux Milestone 1
+built from the ground up in the
+Godot Engine!
+
+
+[b][wave]Licensed Under[/wave][/b]
+
+[wave]The GNU GPL v3 or Later (GPL-3.0-or-later)[/wave]
+[i]This game is totally open source! You can modify
+and redistribute it for free without hassle, as long
+as you follow the conditions set in COPYING.TXT.[/i]
+
+
+[b][wave]Remastered by[/wave][/b]
+
+Alexander (Alzter) Small
+
+
+[b][wave]Remaster Programming[/wave][/b]
+
+Alexander (Alzter) Small
+
+
+[b][wave]New Graphics[/wave][/b]
+
+Alexander (Alzter) Small
+
+Ingo (grumbel) Ruhnke
+[i](Taken from future versions of SuperTux)[/i]
+
+
+[b][wave]Boss Battle Design[/wave][/b]
+
+Alexander (Alzter) Small
+
+Carsten (RustyBox) Wirtz
+
+
+[b][wave]New Sounds[/wave][/b]
+
+Shrehpog - Wooden Crate smash
+[i]https://freesound.org/people/Srehpog/sounds/31624/[/i]
+
+Qubodup - Fireball spell
+[i]https://freesound.org/people/qubodup/sounds/442827/[/i]
+
+Many other public domain sounds from Freesound.org
+
+
+[b][wave]Sound and Music Remastering[/wave][/b]
+
+Alexander (Alzter) Small
+
+
+[b][wave]New Music Tracks by:[/wave][/b]
+
+Joseph (ZhayTee) Toscano
+[i](Taken from TuxRacer and Pingus' soundtracks)[/i]
+
+Marek (Wansti) Moeckel
+[i](Taken from future versions of SuperTux)[/i]
+
+Alexander (Alzter) Small
+[i]Adapted from Marek Moeckel's compositions[/i]
+
+
+[b][wave]Voice Acting[/wave][/b]
+
+Matthias (MatzeB) Braun
+for the voice of Nolok
+[i](Adapted from the Yeti's voice in SuperTux Milestone 2)[/i]
+
+
+
+
+
+
+[b][wave]- Original Credits -[/wave][/b]
+
+for SuperTux Milestone 1 are as follows:
+
+
+
+
+
+
+[b][wave]Originally developed by[/wave][/b]
+
+Bill Kendrick
+
+
+[b][wave]Programming[/wave][/b]
+
+Tobias (tobgle) Glaesser
+
+Ricardo (blacksheep) Cruz
+ 
+Ingo (grumbel) Ruhnke
+ 
+Matthias (MatzeB) Braun
+
+
+[b][wave]Contrib Programming[/wave][/b]
+
+Ryan (sik0fewl) Flegel
+ 
+Duong-Khang (neoneurone) NGUYEN
+
+
+[b][wave]Graphics[/wave][/b]
+
+Ingo (grumbel) Ruhnke
+ 
+Christopher A. (paroneayea) Webber
+
+Benjamin P. (litespeed) Jung
+
+Nikolaj (unDEFER) Krivchenkov
+
+Stephen Groundwater
+
+
+[b][wave]Level Design[/wave][/b]
+
+Marek (Wansti) Moeckel
+ 
+Ingo (grumbel) Ruhnke
+
+
+[b][wave]Story[/wave][/b]
+
+Christopher A. (paroneayea) Webber
+
+
+[b][wave]Music[/wave][/b]
+
+Marek (Wansti) Moeckel
+
+Mystical
+
+Mortimer Twang
+
+
+[b][wave]Sounds[/wave][/b]
+
+Royalty free sound effects
+CDROMs and FTP sites
+
+
+[b][wave]Thanks to[/wave][/b]
+
+Larry Ewing
+[i]Creator of Tux, the Linux penguin[/i]
+
+SDL and OpenGL
+[i]For making such a great gaming experience[/i]
+[i]possible in Linux[/i]
+
+
+[b][wave]Contact[/wave][/b]
+
+Visit our website at
+[i]https://www.supertux.org/[/i]
+
+Or talk to us directly on
+our Discord server!
+[i]https://discord.gg/AcvtHWz[/i]
+
+We also have a forum for
+suggestions, comments and ideas:
+[i]http://forum.freegamedev.net/viewforum.php?f=66[/i]
+
+You can also find us on IRC:
+[i]#supertux at https://libera.chat/[/i]
+
+
+
+
+
+[wave]Thank you for playing!
+
+[b][wave]- SuperTux Classic -[/wave][/b]
+"
+text = "- SuperTux Classic -
+
+A remaster of SuperTux Milestone 1
+built from the ground up in the
+Godot Engine!
+
+
+Licensed Under
+
+The GNU GPL v3 or Later (GPL-3.0-or-later)
+This game is totally open source! You can modify
+and redistribute it for free without hassle, as long
+as you follow the conditions set in COPYING.TXT.
+
+
+Remastered by
+
+Alexander (Alzter) Small
+
+
+Remaster Programming
+
+Alexander (Alzter) Small
+
+
+New Graphics
+
+Alexander (Alzter) Small
+
+Ingo (grumbel) Ruhnke
+(Taken from future versions of SuperTux)
+
+
+Boss Battle Design
+
+Alexander (Alzter) Small
+
+Carsten (RustyBox) Wirtz
+
+
+New Sounds
+
+Shrehpog - Wooden Crate smash
+https://freesound.org/people/Srehpog/sounds/31624/
+
+Qubodup - Fireball spell
+https://freesound.org/people/qubodup/sounds/442827/
+
+Many other public domain sounds from Freesound.org
+
+
+Sound and Music Remastering
+
+Alexander (Alzter) Small
+
+
+New Music Tracks by:
+
+Joseph (ZhayTee) Toscano
+(Taken from TuxRacer and Pingus' soundtracks)
+
+Marek (Wansti) Moeckel
+(Taken from future versions of SuperTux)
+
+Alexander (Alzter) Small
+Adapted from Marek Moeckel's compositions
+
+
+Voice Acting
+
+Matthias (MatzeB) Braun
+for the voice of Nolok
+(Adapted from the Yeti's voice in SuperTux Milestone 2)
+
+
+
+
+
+
+- Original Credits -
+
+for SuperTux Milestone 1 are as follows:
+
+
+
+
+
+
+Originally developed by
+
+Bill Kendrick
+
+
+Programming
+
+Tobias (tobgle) Glaesser
+
+Ricardo (blacksheep) Cruz
+ 
+Ingo (grumbel) Ruhnke
+ 
+Matthias (MatzeB) Braun
+
+
+Contrib Programming
+
+Ryan (sik0fewl) Flegel
+ 
+Duong-Khang (neoneurone) NGUYEN
+
+
+Graphics
+
+Ingo (grumbel) Ruhnke
+ 
+Christopher A. (paroneayea) Webber
+
+Benjamin P. (litespeed) Jung
+
+Nikolaj (unDEFER) Krivchenkov
+
+Stephen Groundwater
+
+
+Level Design
+
+Marek (Wansti) Moeckel
+ 
+Ingo (grumbel) Ruhnke
+
+
+Story
+
+Christopher A. (paroneayea) Webber
+
+
+Music
+
+Marek (Wansti) Moeckel
+
+Mystical
+
+Mortimer Twang
+
+
+Sounds
+
+Royalty free sound effects
+CDROMs and FTP sites
+
+
+Thanks to
+
+Larry Ewing
+Creator of Tux, the Linux penguin
+
+SDL and OpenGL
+For making such a great gaming experience
+possible in Linux
+
+
+Contact
+
+Visit our website at
+https://www.supertux.org/
+
+Or talk to us directly on
+our Discord server!
+https://discord.gg/AcvtHWz
+
+We also have a forum for
+suggestions, comments and ideas:
+http://forum.freegamedev.net/viewforum.php?f=66
+
+You can also find us on IRC:
+#supertux at https://libera.chat/
+
+
+
+
+
+Thank you for playing!
+
+- SuperTux Classic -
+"
+fit_content_height = true
+scroll_active = false
+
+[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="RichTextLabel"]
+rect = Rect2( 0, 0, 640, 3350 )
+
+[connection signal="screen_exited" from="RichTextLabel/VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]

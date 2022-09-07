@@ -1,0 +1,142 @@
+[gd_scene load_steps=15 format=2]
+
+[ext_resource path="res://images/enemies/stalactite/stalactite-broken.png" type="Texture" id=1]
+[ext_resource path="res://images/enemies/stalactite/stalactite.png" type="Texture" id=2]
+[ext_resource path="res://scenes/master/SFX.gd" type="Script" id=3]
+[ext_resource path="res://sounds/enemies/stalactite_crash.wav" type="AudioStream" id=4]
+[ext_resource path="res://sounds/enemies/stalactite_crack.wav" type="AudioStream" id=5]
+[ext_resource path="res://scenes/master/damage_area.tscn" type="PackedScene" id=6]
+[ext_resource path="res://scenes/enemies/Stalactite.gd" type="Script" id=7]
+[ext_resource path="res://scenes/enemies/StalactiteSM.gd" type="Script" id=8]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 1 ) ],
+"loop": true,
+"name": "crashed",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 2 ) ],
+"loop": true,
+"name": "hanging",
+"speed": 5.0
+} ]
+
+[sub_resource type="Animation" id=6]
+resource_name = "falling"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("AnimatedSprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ) ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "hanging"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("AnimatedSprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ) ]
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "shaking"
+length = 0.1
+loop = true
+step = 0.025
+tracks/0/type = "value"
+tracks/0/path = NodePath("AnimatedSprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.025, 0.075 ),
+"transitions": PoolRealArray( -2, -2 ),
+"update": 0,
+"values": [ Vector2( 4, 0 ), Vector2( -4, 0 ) ]
+}
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 8, 16 )
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 10, 16 )
+
+[node name="Stalactite" type="KinematicBody2D" groups=["enemies"]]
+z_index = -10
+collision_layer = 0
+script = ExtResource( 7 )
+
+[node name="StateMachine" type="Node" parent="."]
+script = ExtResource( 8 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+frames = SubResource( 1 )
+animation = "hanging"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "hanging"
+anims/falling = SubResource( 6 )
+anims/hanging = SubResource( 4 )
+anims/shaking = SubResource( 5 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0, 8 )
+shape = SubResource( 2 )
+
+[node name="CeilingRaycast" type="RayCast2D" parent="."]
+cast_to = Vector2( 0, -120 )
+
+[node name="PlayerRaycast" type="RayCast2D" parent="."]
+enabled = true
+cast_to = Vector2( 0, 480 )
+collision_mask = 3
+
+[node name="VisibilityEnabler2D" type="VisibilityEnabler2D" parent="."]
+visible = false
+rect = Rect2( -320, -100, 640, 125 )
+process_parent = true
+physics_process_parent = true
+
+[node name="DamageArea" parent="." groups=["enemies"] instance=ExtResource( 6 )]
+collision_mask = 6
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DamageArea"]
+shape = SubResource( 3 )
+
+[node name="SFX" type="Node2D" parent="."]
+script = ExtResource( 3 )
+
+[node name="Crack" type="AudioStreamPlayer2D" parent="SFX"]
+stream = ExtResource( 5 )
+volume_db = 16.0
+pitch_scale = 1.25
+max_distance = 1000.0
+
+[node name="Crash" type="AudioStreamPlayer2D" parent="SFX"]
+stream = ExtResource( 4 )
+volume_db = 10.0
+max_distance = 1000.0
+
+[node name="FallTimer" type="Timer" parent="."]
+process_mode = 0
+one_shot = true
+
+[connection signal="body_entered" from="DamageArea" to="." method="_on_DamageArea_body_entered"]
+[connection signal="timeout" from="FallTimer" to="." method="_on_FallTimer_timeout"]

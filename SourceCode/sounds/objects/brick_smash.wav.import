@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/brick_smash.wav-4fea1fb3dd4d9c2abea6e833beb3fd7f.sample"
+
+[deps]
+
+source_file="res://sounds/objects/brick_smash.wav"
+dest_files=[ "res://.import/brick_smash.wav-4fea1fb3dd4d9c2abea6e833beb3fd7f.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=1

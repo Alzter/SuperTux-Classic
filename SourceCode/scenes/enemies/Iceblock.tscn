@@ -1,0 +1,119 @@
+[gd_scene load_steps=18 format=2]
+
+[ext_resource path="res://scenes/enemies/badguy.gd" type="Script" id=1]
+[ext_resource path="res://scenes/enemies/badguy_sm.gd" type="Script" id=2]
+[ext_resource path="res://images/enemies/iceblock/squished.png" type="Texture" id=3]
+[ext_resource path="res://images/enemies/iceblock/walk2.png" type="Texture" id=4]
+[ext_resource path="res://images/enemies/iceblock/walk3.png" type="Texture" id=5]
+[ext_resource path="res://images/enemies/iceblock/walk1.png" type="Texture" id=6]
+[ext_resource path="res://scenes/master/SFX.gd" type="Script" id=7]
+[ext_resource path="res://scenes/master/damage_area.tscn" type="PackedScene" id=8]
+[ext_resource path="res://scenes/master/bounce_area.tscn" type="PackedScene" id=9]
+[ext_resource path="res://sounds/enemies/stomp.wav" type="AudioStream" id=10]
+[ext_resource path="res://sounds/enemies/kick.wav" type="AudioStream" id=11]
+[ext_resource path="res://sounds/enemies/ricochet.wav" type="AudioStream" id=12]
+[ext_resource path="res://sounds/enemies/fall.wav" type="AudioStream" id=13]
+
+[sub_resource type="SpriteFrames" id=7]
+animations = [ {
+"frames": [ ExtResource( 6 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 4 ) ],
+"loop": true,
+"name": "walk",
+"speed": 10.0
+}, {
+"frames": [ ExtResource( 3 ) ],
+"loop": true,
+"name": "squished",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 3 ) ],
+"loop": true,
+"name": "kicked",
+"speed": 5.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 14, 16 )
+
+[sub_resource type="RectangleShape2D" id=5]
+extents = Vector2( 10, 5 )
+
+[sub_resource type="RectangleShape2D" id=6]
+extents = Vector2( 18, 12 )
+
+[node name="Iceblock" type="KinematicBody2D" groups=["enemies"]]
+collision_layer = 68
+collision_mask = 5
+script = ExtResource( 1 )
+type = "Iceblock"
+
+[node name="BlockRaycast" type="RayCast2D" parent="."]
+position = Vector2( 16, 0 )
+cast_to = Vector2( 32, 0 )
+collision_mask = 16
+collide_with_areas = true
+collide_with_bodies = false
+
+[node name="StateMachine" type="Node" parent="."]
+script = ExtResource( 2 )
+
+[node name="Control" type="Control" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+rect_pivot_offset = Vector2( 0, 10 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="Control"]
+frames = SubResource( 7 )
+animation = "walk"
+frame = 1
+playing = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 4 )
+
+[node name="DamageArea" parent="." instance=ExtResource( 8 )]
+collision_mask = 6
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DamageArea"]
+position = Vector2( 0, 12 )
+shape = SubResource( 5 )
+
+[node name="BounceArea" parent="." instance=ExtResource( 9 )]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BounceArea"]
+position = Vector2( 0, -4 )
+shape = SubResource( 6 )
+
+[node name="EdgeTurn" type="RayCast2D" parent="."]
+enabled = true
+cast_to = Vector2( 0, 18 )
+
+[node name="VisibilityEnabler2D" type="VisibilityEnabler2D" parent="."]
+rect = Rect2( -80, -100, 160, 200 )
+process_parent = true
+physics_process_parent = true
+
+[node name="SFX" type="Node2D" parent="."]
+script = ExtResource( 7 )
+
+[node name="Stomp" type="AudioStreamPlayer2D" parent="SFX"]
+stream = ExtResource( 10 )
+
+[node name="Kick" type="AudioStreamPlayer2D" parent="SFX"]
+stream = ExtResource( 11 )
+
+[node name="Ricochet" type="AudioStreamPlayer2D" parent="SFX"]
+stream = ExtResource( 12 )
+max_distance = 500.0
+
+[node name="Fall" type="AudioStreamPlayer2D" parent="SFX"]
+stream = ExtResource( 13 )
+
+[node name="DestroyTimer" type="Timer" parent="."]
+process_mode = 0
+one_shot = true
+
+[connection signal="body_entered" from="DamageArea" to="." method="_on_DamageArea_body_entered"]
+[connection signal="timeout" from="DestroyTimer" to="." method="_on_DestroyTimer_timeout"]

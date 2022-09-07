@@ -1,0 +1,99 @@
+[gd_scene load_steps=19 format=2]
+
+[ext_resource path="res://scenes/enemies/badguy.gd" type="Script" id=1]
+[ext_resource path="res://scenes/enemies/badguy_sm.gd" type="Script" id=2]
+[ext_resource path="res://scenes/master/SFX.gd" type="Script" id=3]
+[ext_resource path="res://sounds/enemies/fall.wav" type="AudioStream" id=4]
+[ext_resource path="res://images/enemies/bouncing_snowball/bounce6.png" type="Texture" id=5]
+[ext_resource path="res://images/enemies/bouncing_snowball/bounce1.png" type="Texture" id=6]
+[ext_resource path="res://images/enemies/bouncing_snowball/bounce5.png" type="Texture" id=7]
+[ext_resource path="res://scenes/master/damage_area.tscn" type="PackedScene" id=8]
+[ext_resource path="res://images/enemies/bouncing_snowball/bounce2.png" type="Texture" id=9]
+[ext_resource path="res://images/enemies/bouncing_snowball/bounce3.png" type="Texture" id=10]
+[ext_resource path="res://images/enemies/bouncing_snowball/bounce4.png" type="Texture" id=11]
+[ext_resource path="res://scenes/master/bounce_area.tscn" type="PackedScene" id=12]
+[ext_resource path="res://images/enemies/snowball/squished.png" type="Texture" id=13]
+[ext_resource path="res://sounds/enemies/squish.wav" type="AudioStream" id=14]
+
+[sub_resource type="SpriteFrames" id=6]
+animations = [ {
+"frames": [ ExtResource( 13 ) ],
+"loop": true,
+"name": "squished",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 6 ), ExtResource( 9 ), ExtResource( 10 ), ExtResource( 11 ), ExtResource( 7 ), ExtResource( 5 ) ],
+"loop": true,
+"name": "bounce_forward",
+"speed": 15.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 16, 16 )
+
+[sub_resource type="RectangleShape2D" id=7]
+extents = Vector2( 18, 8 )
+
+[sub_resource type="RectangleShape2D" id=5]
+
+[node name="Bouncing" type="KinematicBody2D" groups=["enemies"]]
+collision_layer = 4
+collision_mask = 5
+script = ExtResource( 1 )
+type = "Bouncing"
+turn_on_cliffs = true
+bounce_height_in_tiles = 3.0
+
+[node name="StateMachine" type="Node" parent="."]
+script = ExtResource( 2 )
+
+[node name="Control" type="Control" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+rect_pivot_offset = Vector2( 0, 10 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="Control"]
+frames = SubResource( 6 )
+animation = "bounce_forward"
+frame = 2
+playing = true
+offset = Vector2( 0, -1 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 4 )
+
+[node name="BounceArea" parent="." instance=ExtResource( 12 )]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BounceArea"]
+position = Vector2( 0, -8 )
+shape = SubResource( 7 )
+
+[node name="DamageArea" parent="." groups=["enemies"] instance=ExtResource( 8 )]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DamageArea"]
+position = Vector2( 0, 6 )
+shape = SubResource( 5 )
+
+[node name="VisibilityEnabler2D" type="VisibilityEnabler2D" parent="."]
+visible = false
+rect = Rect2( -160, -100, 320, 200 )
+process_parent = true
+physics_process_parent = true
+
+[node name="SFX" type="Node2D" parent="."]
+script = ExtResource( 3 )
+
+[node name="Squish" type="AudioStreamPlayer2D" parent="SFX"]
+stream = ExtResource( 14 )
+
+[node name="Fall" type="AudioStreamPlayer2D" parent="SFX"]
+stream = ExtResource( 4 )
+
+[node name="DestroyTimer" type="Timer" parent="."]
+process_mode = 0
+one_shot = true
+
+[connection signal="body_entered" from="DamageArea" to="." method="_on_DamageArea_body_entered"]
+[connection signal="timeout" from="DestroyTimer" to="." method="_on_DestroyTimer_timeout"]

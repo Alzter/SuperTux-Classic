@@ -1,0 +1,88 @@
+[gd_scene load_steps=17 format=2]
+
+[ext_resource path="res://music/TuxRacer - Race2.mp3" type="AudioStream" id=1]
+[ext_resource path="res://autoload/Music.gd" type="Script" id=2]
+[ext_resource path="res://music/Cave.mp3" type="AudioStream" id=3]
+[ext_resource path="res://music/ChipDisko.mp3" type="AudioStream" id=4]
+[ext_resource path="res://music/LevelDone.mp3" type="AudioStream" id=5]
+[ext_resource path="res://music/Pingus - Snow.mp3" type="AudioStream" id=6]
+[ext_resource path="res://music/Fortress.mp3" type="AudioStream" id=7]
+[ext_resource path="res://music/Fortress2.mp3" type="AudioStream" id=8]
+[ext_resource path="res://music/Invincible.mp3" type="AudioStream" id=9]
+[ext_resource path="res://music/WispHunt.mp3" type="AudioStream" id=10]
+[ext_resource path="res://music/GameOver.mp3" type="AudioStream" id=11]
+[ext_resource path="res://music/Title.mp3" type="AudioStream" id=12]
+[ext_resource path="res://music/TuxRacer - Credits.mp3" type="AudioStream" id=13]
+[ext_resource path="res://music/BossAttack07.mp3" type="AudioStream" id=14]
+[ext_resource path="res://music/TuxVictorious.mp3" type="AudioStream" id=15]
+[ext_resource path="res://music/Credits.mp3" type="AudioStream" id=16]
+
+[node name="Music" type="CanvasLayer"]
+script = ExtResource( 2 )
+
+[node name="Title" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 12 )
+volume_db = 10.0
+bus = "Music"
+
+[node name="TuxRacer - Race2" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 1 )
+bus = "Music"
+
+[node name="TuxRacer - Credits" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 13 )
+volume_db = 6.0
+bus = "Music"
+
+[node name="Pingus - Snow Level" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 6 )
+bus = "Music"
+
+[node name="LevelDone" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 5 )
+bus = "Music"
+
+[node name="ChipDisko" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 4 )
+
+[node name="Cave" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 3 )
+volume_db = 4.0
+
+[node name="Fortress" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 7 )
+volume_db = 6.0
+bus = "Music"
+
+[node name="Fortress2" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 8 )
+volume_db = 6.0
+bus = "Music"
+
+[node name="WispHunt" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 10 )
+volume_db = 12.0
+bus = "Music"
+
+[node name="BossAttack07" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 14 )
+volume_db = 11.0
+bus = "Music"
+
+[node name="Invincible" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 9 )
+
+[node name="GameOver" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 11 )
+volume_db = -1.0
+
+[node name="TuxVictorious" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 15 )
+volume_db = -5.0
+bus = "Music"
+
+[node name="Credits" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 16 )
+bus = "Music"
+
+[connection signal="finished" from="Invincible" to="." method="_on_Invincible_finished"]

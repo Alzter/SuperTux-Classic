@@ -1,0 +1,97 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://scenes/master/SFX.gd" type="Script" id=1]
+[ext_resource path="res://images/enemies/flame/flame-0.png" type="Texture" id=2]
+[ext_resource path="res://images/enemies/flame/flame-1.png" type="Texture" id=3]
+[ext_resource path="res://scenes/enemies/FlameOrb.gd" type="Script" id=4]
+[ext_resource path="res://scenes/master/damage_area.tscn" type="PackedScene" id=8]
+
+[sub_resource type="SpriteFrames" id=7]
+animations = [ {
+"frames": [ ExtResource( 2 ), ExtResource( 3 ) ],
+"loop": true,
+"name": "default",
+"speed": 20.0
+} ]
+
+[sub_resource type="CanvasItemMaterial" id=8]
+blend_mode = 1
+
+[sub_resource type="Animation" id=9]
+resource_name = "default"
+length = 0.5
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Glow:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( -2, -2 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 2.5, 2.5 ) ]
+}
+
+[sub_resource type="RectangleShape2D" id=10]
+extents = Vector2( 8, 8 )
+
+[node name="Flame" type="Node2D" groups=["enemies"]]
+z_index = -1
+script = ExtResource( 4 )
+speed = 200
+starting_angle = 180
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+z_index = 1
+frames = SubResource( 7 )
+frame = 1
+playing = true
+offset = Vector2( 0, -2 )
+
+[node name="Glow3" type="AnimatedSprite" parent="."]
+modulate = Color( 1, 0, 0, 0.137255 )
+material = SubResource( 8 )
+scale = Vector2( 5, 5 )
+z_index = 1
+frames = SubResource( 7 )
+frame = 1
+playing = true
+offset = Vector2( 0, -2 )
+
+[node name="Glow2" type="AnimatedSprite" parent="."]
+modulate = Color( 1, 0, 0, 0.541176 )
+material = SubResource( 8 )
+scale = Vector2( 2, 2 )
+z_index = 1
+frames = SubResource( 7 )
+playing = true
+offset = Vector2( 0, -2 )
+
+[node name="Glow" type="AnimatedSprite" parent="."]
+material = SubResource( 8 )
+scale = Vector2( 1.02614, 1.02614 )
+z_index = 1
+frames = SubResource( 7 )
+frame = 1
+playing = true
+offset = Vector2( 0, -2 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "default"
+anims/default = SubResource( 9 )
+
+[node name="VisibilityEnabler2D" type="VisibilityEnabler2D" parent="."]
+visible = false
+rect = Rect2( -160, -160, 320, 320 )
+process_parent = true
+physics_process_parent = true
+
+[node name="DamageArea" parent="." groups=["enemies"] instance=ExtResource( 8 )]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DamageArea"]
+shape = SubResource( 10 )
+
+[node name="SFX" type="Node2D" parent="."]
+script = ExtResource( 1 )

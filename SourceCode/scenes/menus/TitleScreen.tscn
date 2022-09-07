@@ -1,0 +1,191 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://theme/default_theme.tres" type="Theme" id=1]
+[ext_resource path="res://scenes/menus/TitleScreen.gd" type="Script" id=2]
+[ext_resource path="res://images/menu/Logo.png" type="Texture" id=3]
+[ext_resource path="res://scenes/backgrounds/IceMountainsBackground.tscn" type="PackedScene" id=4]
+[ext_resource path="res://theme/FontSmall.tres" type="DynamicFont" id=5]
+[ext_resource path="res://theme/FontTiny.tres" type="DynamicFont" id=6]
+
+[sub_resource type="CanvasItemMaterial" id=1]
+blend_mode = 3
+
+[node name="TitleScreen" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 1 )
+script = ExtResource( 2 )
+intro_scene = "res://scenes/menus/Intro.tscn"
+credits_scene = "res://scenes/menus/Credits.tscn"
+
+[node name="Logo" type="TextureRect" parent="."]
+anchor_left = 0.5
+anchor_top = 0.4
+anchor_right = 0.5
+anchor_bottom = 0.4
+margin_left = -163.5
+margin_top = -184.0
+margin_right = 163.5
+margin_bottom = 66.0
+mouse_filter = 2
+texture = ExtResource( 3 )
+
+[node name="Disclaimer" type="Control" parent="."]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -51.0
+
+[node name="ColorRect" type="ColorRect" parent="Disclaimer"]
+material = SubResource( 1 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.443137, 0.533333, 0.658824, 1 )
+
+[node name="Disclaimer" type="Label" parent="Disclaimer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 132.0
+margin_right = -8.0
+margin_bottom = -4.0
+custom_fonts/font = ExtResource( 6 )
+text = "This game comes under ABSOLUTELY NO WARRANTY! This is free, open-source software, and you are welcome to modify and redistribute it under certain conditions; see COPYING.TXT for details.
+
+Copyright © 2003-2022 SuperTux Team & Alexander Small"
+align = 2
+valign = 2
+autowrap = true
+
+[node name="Version" type="Label" parent="Disclaimer"]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 2.0
+margin_top = -15.0
+margin_right = 125.0
+margin_bottom = -2.0
+custom_colors/font_color = Color( 0.992157, 1, 0, 1 )
+custom_fonts/font = ExtResource( 5 )
+text = "Release v0.0.0"
+valign = 2
+
+[node name="Menu" type="Control" parent="."]
+anchor_top = 0.6
+anchor_right = 1.0
+anchor_bottom = 0.6
+margin_top = -36.0
+margin_bottom = 136.0
+mouse_filter = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Menu"]
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -175.0
+margin_right = 175.0
+custom_constants/separation = 5
+alignment = 1
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="NewGame" type="Button" parent="Menu/VBoxContainer"]
+margin_top = 18.0
+margin_right = 350.0
+margin_bottom = 48.0
+text = "New Game"
+
+[node name="LoadGame" type="Button" parent="Menu/VBoxContainer"]
+margin_top = 53.0
+margin_right = 350.0
+margin_bottom = 83.0
+disabled = true
+text = "Load Game"
+
+[node name="Credits" type="Button" parent="Menu/VBoxContainer"]
+margin_top = 88.0
+margin_right = 350.0
+margin_bottom = 118.0
+text = "Credits"
+
+[node name="LevelSelectDebug" type="Button" parent="Menu/VBoxContainer"]
+visible = false
+margin_top = 106.0
+margin_right = 350.0
+margin_bottom = 136.0
+text = "Level Select (DEBUG)"
+
+[node name="BossDebug" type="Button" parent="Menu/VBoxContainer"]
+visible = false
+margin_top = 106.0
+margin_right = 350.0
+margin_bottom = 136.0
+text = "Boss Battle (DEBUG)"
+
+[node name="Quit" type="Button" parent="Menu/VBoxContainer"]
+margin_top = 123.0
+margin_right = 350.0
+margin_bottom = 153.0
+text = "Quit Game"
+
+[node name="NewGameWarning" type="ConfirmationDialog" parent="Menu"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -178.5
+margin_top = -88.5
+margin_right = 178.5
+margin_bottom = 88.5
+rect_min_size = Vector2( 150, 52.5 )
+window_title = ""
+dialog_text = "Are you sure? Starting a new game will erase your current progress!"
+dialog_autowrap = true
+
+[node name="SaveFiles" type="VBoxContainer" parent="Menu"]
+visible = false
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -175.0
+margin_right = 175.0
+custom_constants/separation = 8
+alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Menu/SaveFiles"]
+margin_top = 64.0
+margin_right = 350.0
+margin_bottom = 94.0
+alignment = 1
+
+[node name="Button" type="Button" parent="Menu/SaveFiles/HBoxContainer"]
+margin_right = 223.0
+margin_bottom = 30.0
+size_flags_horizontal = 3
+text = "Save File 1"
+
+[node name="Button2" type="Button" parent="Menu/SaveFiles/HBoxContainer"]
+margin_left = 227.0
+margin_right = 350.0
+margin_bottom = 30.0
+text = " Delete "
+
+[node name="FileDialog" type="FileDialog" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_min_size = Vector2( 150, 52.5 )
+window_title = "Open a File"
+mode = 0
+current_dir = "res://scenes/levels"
+current_file = "Level1.tscn"
+current_path = "res://scenes/levels/Level1.tscn"
+
+[node name="IceMountainsBackground" parent="." instance=ExtResource( 4 )]
+
+[connection signal="pressed" from="Menu/VBoxContainer/NewGame" to="." method="_on_NewGame_pressed"]
+[connection signal="pressed" from="Menu/VBoxContainer/LoadGame" to="." method="_on_LoadGame_pressed"]
+[connection signal="pressed" from="Menu/VBoxContainer/Credits" to="." method="_on_Credits_pressed"]
+[connection signal="pressed" from="Menu/VBoxContainer/LevelSelectDebug" to="." method="_on_LevelSelectDebug_pressed"]
+[connection signal="pressed" from="Menu/VBoxContainer/BossDebug" to="." method="_on_BossDebug_pressed"]
+[connection signal="pressed" from="Menu/VBoxContainer/Quit" to="." method="_on_Quit_pressed"]
+[connection signal="confirmed" from="Menu/NewGameWarning" to="." method="_on_NewGameWarning_confirmed"]
+[connection signal="file_selected" from="FileDialog" to="." method="_on_FileDialog_file_selected"]

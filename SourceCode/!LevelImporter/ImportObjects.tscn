@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://!LevelImporter/ImportObjects.gd" type="Script" id=1]
+[ext_resource path="res://scenes/master/ObjectMap.tscn" type="PackedScene" id=2]
+[ext_resource path="res://!LevelImporter/ImportFunction.tscn" type="PackedScene" id=3]
+
+[node name="ObjectImporter" type="Node2D"]
+script = ExtResource( 1 )
+object_list = "(mriceblock  (x 10464) (y 128))    (mriceblock  (x 3616) (y 160))    (mrbomb  (x 9398) (y 306))    (mriceblock  (x 2240) (y 416))    (mriceblock  (x 2720) (y 416))    (mriceblock  (x 4224) (y 416))    (mriceblock  (x 4288) (y 416))    (mrbomb  (x 4384) (y 402))    (snowball  (x 1037) (y 410))    (snowball  (x 981) (y 409))    (snowball  (x 3672) (y 411))    (snowball  (x 6199) (y 411))    (snowball  (x 6145) (y 411))    (snowball  (x 6075) (y 411))    (bouncingsnowball  (x 5367) (y 221))    (bouncingsnowball  (x 5269) (y 253))    (snowball  (x 8879) (y 409))    (snowball  (x 8820) (y 410))    (snowball  (x 8752) (y 410))    (snowball  (x 2783) (y 412))    (snowball  (x 2837) (y 410))    (snowball  (x 7636) (y 403))    (snowball  (x 9112) (y 405))    (snowball  (x 9165) (y 406))    (mriceblock  (x 8518) (y 413))    (mrbomb  (x 8081) (y 401))    (mrbomb  (x 7888) (y 399))    (snowball  (x 10571) (y 407))    (snowball  (x 10932) (y 408))    (snowball  (x 9969) (y 410))"
+
+[node name="ObjectMap" parent="." instance=ExtResource( 2 )]
+convert_tiles_to_objects = false
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2( 320, 240 )
+current = true
+zoom = Vector2( 8, 8 )
+
+[node name="ImportFunctions" parent="." instance=ExtResource( 3 )]

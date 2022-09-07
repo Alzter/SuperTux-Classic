@@ -1,0 +1,97 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://scenes/particles/SnowfallSmall.tres" type="Material" id=1]
+[ext_resource path="res://images/background/arcticmountains-fg.png" type="Texture" id=2]
+[ext_resource path="res://images/background/arcticmountains-bg.png" type="Texture" id=3]
+[ext_resource path="res://images/particles/snow2.png" type="Texture" id=4]
+[ext_resource path="res://images/background/arcticmountains-sky.png" type="Texture" id=5]
+
+[sub_resource type="CanvasItemMaterial" id=1]
+blend_mode = 1
+
+[sub_resource type="CanvasItemMaterial" id=2]
+blend_mode = 1
+
+[node name="IceMistBackground" type="ParallaxBackground"]
+
+[node name="Sky" type="ParallaxLayer" parent="."]
+modulate = Color( 0.854902, 0.501961, 0.701961, 1 )
+motion_scale = Vector2( 0, 1 )
+motion_offset = Vector2( 0, -400 )
+motion_mirroring = Vector2( 1700, 0 )
+
+[node name="Sprite" type="Sprite" parent="Sky"]
+scale = Vector2( 4, 4 )
+texture = ExtResource( 5 )
+centered = false
+
+[node name="BG" type="ParallaxLayer" parent="."]
+modulate = Color( 0.627451, 0.45098, 0.760784, 1 )
+motion_scale = Vector2( 0.18, 0.2 )
+motion_offset = Vector2( 0, -200 )
+motion_mirroring = Vector2( 1530, 0 )
+
+[node name="Sprite" type="Sprite" parent="BG"]
+scale = Vector2( 1, 0.5 )
+texture = ExtResource( 3 )
+centered = false
+
+[node name="FG" type="ParallaxLayer" parent="."]
+modulate = Color( 0.788235, 0.505882, 0.901961, 1 )
+motion_scale = Vector2( 0.2, 0.2 )
+motion_offset = Vector2( 0, -250 )
+motion_mirroring = Vector2( 1700, 0 )
+
+[node name="Sprite" type="Sprite" parent="FG"]
+scale = Vector2( 1, 0.5 )
+texture = ExtResource( 2 )
+centered = false
+
+[node name="ParallaxLayer5" type="ParallaxLayer" parent="."]
+motion_scale = Vector2( 0.25, 1 )
+motion_mirroring = Vector2( 1636, 0 )
+
+[node name="Particles2D" type="Particles2D" parent="ParallaxLayer5"]
+position = Vector2( 256, -50 )
+scale = Vector2( 0.2, 0.2 )
+amount = 200
+lifetime = 3.0
+preprocess = 8.0
+speed_scale = 0.5
+visibility_rect = Rect2( -6500, 0, 8400, 3000 )
+process_material = ExtResource( 1 )
+texture = ExtResource( 4 )
+
+[node name="Particles2D2" type="Particles2D" parent="ParallaxLayer5"]
+position = Vector2( 1074, -50 )
+scale = Vector2( 0.2, 0.2 )
+amount = 200
+lifetime = 3.0
+preprocess = 8.0
+speed_scale = 0.5
+visibility_rect = Rect2( -6500, 0, 8400, 3000 )
+process_material = ExtResource( 1 )
+texture = ExtResource( 4 )
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/Control"]
+material = SubResource( 1 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = 2672.0
+margin_bottom = 1000.0
+color = Color( 0.364706, 0, 0.317647, 0.447059 )
+
+[node name="ColorRect2" type="ColorRect" parent="CanvasLayer/Control"]
+material = SubResource( 2 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = 99359.0
+margin_bottom = 99519.0
+rect_min_size = Vector2( 99999, 99999 )
+color = Color( 0.27451, 0, 0.4, 0.121569 )

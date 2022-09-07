@@ -1,0 +1,160 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://images/background/cave-bg1.png" type="Texture" id=1]
+[ext_resource path="res://images/background/cave-bg5.png" type="Texture" id=2]
+[ext_resource path="res://images/background/cave-bg4.png" type="Texture" id=3]
+[ext_resource path="res://scenes/backgrounds/CaveBGTorch.tscn" type="PackedScene" id=4]
+[ext_resource path="res://images/background/cave-bg2.png" type="Texture" id=5]
+
+[sub_resource type="CanvasItemMaterial" id=1]
+blend_mode = 3
+
+[node name="CaveBG" type="Node2D"]
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+offset = Vector2( -256, -384 )
+transform = Transform2D( 1, 0, 0, 1, -256, -384 )
+
+[node name="Tiles" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2( 0.4, 1 )
+motion_mirroring = Vector2( 2560, 2560 )
+
+[node name="TextureRect" type="TextureRect" parent="ParallaxBackground/Tiles"]
+margin_right = 2560.0
+margin_bottom = 2560.0
+texture = ExtResource( 1 )
+stretch_mode = 2
+
+[node name="VStrips" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2( 0.4, 1 )
+motion_mirroring = Vector2( 2048, 0 )
+
+[node name="Control" type="Control" parent="ParallaxBackground/VStrips"]
+margin_right = 1024.0
+margin_bottom = 2560.0
+
+[node name="TextureRect2" type="TextureRect" parent="ParallaxBackground/VStrips/Control"]
+margin_right = 128.0
+margin_bottom = 2560.0
+texture = ExtResource( 2 )
+stretch_mode = 2
+
+[node name="TextureRect3" type="TextureRect" parent="ParallaxBackground/VStrips/Control"]
+margin_left = 512.0
+margin_right = 640.0
+margin_bottom = 2560.0
+texture = ExtResource( 2 )
+stretch_mode = 2
+
+[node name="Control2" type="Control" parent="ParallaxBackground/VStrips"]
+margin_left = 1024.0
+margin_right = 2048.0
+margin_bottom = 2560.0
+
+[node name="TextureRect2" type="TextureRect" parent="ParallaxBackground/VStrips/Control2"]
+margin_right = 128.0
+margin_bottom = 2560.0
+texture = ExtResource( 2 )
+stretch_mode = 2
+
+[node name="TextureRect3" type="TextureRect" parent="ParallaxBackground/VStrips/Control2"]
+margin_left = 512.0
+margin_right = 640.0
+margin_bottom = 2560.0
+texture = ExtResource( 2 )
+stretch_mode = 2
+
+[node name="HStrips" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2( 0.4, 1 )
+motion_mirroring = Vector2( 1024, 1024 )
+
+[node name="TextureRect2" type="TextureRect" parent="ParallaxBackground/HStrips"]
+margin_right = 2560.0
+margin_bottom = 128.0
+texture = ExtResource( 3 )
+stretch_mode = 2
+
+[node name="TextureRect3" type="TextureRect" parent="ParallaxBackground/HStrips"]
+margin_top = 512.0
+margin_right = 2560.0
+margin_bottom = 640.0
+texture = ExtResource( 3 )
+stretch_mode = 2
+
+[node name="Connectors" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2( 0.4, 1 )
+motion_mirroring = Vector2( 2048, 1024 )
+
+[node name="Connectors" type="Control" parent="ParallaxBackground/Connectors"]
+margin_right = 1024.0
+margin_bottom = 1024.0
+
+[node name="Torch" type="Control" parent="ParallaxBackground/Connectors/Connectors"]
+margin_right = 1024.0
+margin_bottom = 128.0
+
+[node name="Torch" parent="ParallaxBackground/Connectors/Connectors/Torch" instance=ExtResource( 4 )]
+
+[node name="TextureRect" type="TextureRect" parent="ParallaxBackground/Connectors/Connectors/Torch"]
+margin_left = 512.0
+margin_right = 640.0
+margin_bottom = 128.0
+texture = ExtResource( 5 )
+
+[node name="Torch2" type="Control" parent="ParallaxBackground/Connectors/Connectors"]
+margin_top = 512.0
+margin_right = 1024.0
+margin_bottom = 640.0
+
+[node name="TextureRect" type="TextureRect" parent="ParallaxBackground/Connectors/Connectors/Torch2"]
+margin_right = 128.0
+margin_bottom = 128.0
+texture = ExtResource( 5 )
+
+[node name="Torch2" parent="ParallaxBackground/Connectors/Connectors/Torch2" instance=ExtResource( 4 )]
+margin_left = 512.0
+margin_right = 640.0
+
+[node name="Connectors2" type="Control" parent="ParallaxBackground/Connectors"]
+margin_left = 1024.0
+margin_right = 2048.0
+margin_bottom = 1024.0
+
+[node name="Torch" type="Control" parent="ParallaxBackground/Connectors/Connectors2"]
+margin_right = 1024.0
+margin_bottom = 128.0
+
+[node name="Torch" parent="ParallaxBackground/Connectors/Connectors2/Torch" instance=ExtResource( 4 )]
+
+[node name="TextureRect" type="TextureRect" parent="ParallaxBackground/Connectors/Connectors2/Torch"]
+margin_left = 512.0
+margin_right = 640.0
+margin_bottom = 128.0
+texture = ExtResource( 5 )
+
+[node name="Torch2" type="Control" parent="ParallaxBackground/Connectors/Connectors2"]
+margin_top = 512.0
+margin_right = 1024.0
+margin_bottom = 640.0
+
+[node name="TextureRect" type="TextureRect" parent="ParallaxBackground/Connectors/Connectors2/Torch2"]
+margin_right = 128.0
+margin_bottom = 128.0
+texture = ExtResource( 5 )
+
+[node name="Torch2" parent="ParallaxBackground/Connectors/Connectors2/Torch2" instance=ExtResource( 4 )]
+margin_left = 512.0
+margin_right = 640.0
+
+[node name="Control" type="Control" parent="ParallaxBackground"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+
+[node name="ColorRect" type="ColorRect" parent="ParallaxBackground/Control"]
+material = SubResource( 1 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = 4483.0
+margin_bottom = 3005.0
+color = Color( 0.564706, 0.45098, 0.690196, 1 )

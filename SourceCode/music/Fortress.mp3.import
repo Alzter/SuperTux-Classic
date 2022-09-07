@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/Fortress.mp3-8a4a994d4bf7ab14ac9e8c56304662b3.mp3str"
+
+[deps]
+
+source_file="res://music/Fortress.mp3"
+dest_files=[ "res://.import/Fortress.mp3-8a4a994d4bf7ab14ac9e8c56304662b3.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

@@ -1,0 +1,33 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://scenes/objects/EndGoalIgloo.gd" type="Script" id=1]
+[ext_resource path="res://scenes/master/TileMap.tscn" type="PackedScene" id=3]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 16, 512 )
+
+[node name="EndGoal" type="Node2D"]
+script = ExtResource( 1 )
+
+[node name="Node2D" type="Node2D" parent="."]
+position = Vector2( 656, 144 )
+
+[node name="Area2D" type="Area2D" parent="Node2D"]
+position = Vector2( -672, 0 )
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D/Area2D"]
+position = Vector2( 48, -416 )
+shape = SubResource( 1 )
+
+[node name="GoalPoleFG" parent="Node2D" instance=ExtResource( 3 )]
+z_index = 10
+tile_data = PoolIntArray( -262163, 19, 0, -196627, 19, 65536, -131091, 19, 65536, -65555, 19, 65536, -19, 19, 65536, 65517, 19, 65536, 131053, 19, 65536, 196589, 19, 131072 )
+
+[node name="GoalPoleBG" parent="Node2D" instance=ExtResource( 3 )]
+modulate = Color( 0.423529, 0.458824, 0.541176, 1 )
+z_index = -10
+tile_data = PoolIntArray( -262165, 19, 0, -196629, 19, 65536, -131093, 19, 65536, -65557, 19, 65536, -21, 19, 65536, 65515, 19, 65536, 131051, 19, 65536, 196587, 19, 131072 )
+
+[connection signal="body_entered" from="Node2D/Area2D" to="." method="_on_Area2D_body_entered"]

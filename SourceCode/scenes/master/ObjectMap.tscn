@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://scenes/master/ObjectMap.gd" type="Script" id=1]
+[ext_resource path="res://scenes/tilesets/ObjectTiles.tres" type="TileSet" id=2]
+
+[node name="ObjectMap" type="TileMap"]
+tile_set = ExtResource( 2 )
+cell_size = Vector2( 32, 32 )
+format = 1
+script = ExtResource( 1 )

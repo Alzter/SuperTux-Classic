@@ -1,0 +1,117 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://autoload/Scoreboard.gd" type="Script" id=1]
+[ext_resource path="res://theme/default_theme.tres" type="Theme" id=2]
+[ext_resource path="res://scenes/master/SFX.gd" type="Script" id=3]
+[ext_resource path="res://sounds/objects/1up.wav" type="AudioStream" id=4]
+[ext_resource path="res://images/ui/CoinIcon.png" type="Texture" id=5]
+[ext_resource path="res://images/ui/TuxIcon.png" type="Texture" id=6]
+[ext_resource path="res://theme/FontBig.tres" type="DynamicFont" id=7]
+[ext_resource path="res://scenes/menus/GameOver.tscn" type="PackedScene" id=8]
+[ext_resource path="res://images/ui/ClockIcon.png" type="Texture" id=9]
+[ext_resource path="res://sounds/objects/coin.wav" type="AudioStream" id=10]
+[ext_resource path="res://sounds/objects/time_over.wav" type="AudioStream" id=11]
+
+[node name="Scoreboard" type="CanvasLayer"]
+pause_mode = 2
+layer = 120
+script = ExtResource( 1 )
+
+[node name="LEVELTIMER" type="Timer" parent="."]
+wait_time = 50.0
+one_shot = true
+autostart = true
+
+[node name="Control" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+theme = ExtResource( 2 )
+
+[node name="ClockCounter" type="Control" parent="Control"]
+
+[node name="ClockIcon" type="TextureRect" parent="Control/ClockCounter"]
+margin_left = -16.0
+margin_top = -16.0
+margin_right = 80.0
+margin_bottom = 80.0
+texture = ExtResource( 9 )
+
+[node name="Timer" type="Label" parent="Control/ClockCounter"]
+margin_left = 67.0
+margin_top = 20.0
+margin_right = 127.0
+margin_bottom = 50.0
+custom_colors/font_color = Color( 1, 1, 0, 1 )
+custom_fonts/font = ExtResource( 7 )
+text = "300"
+
+[node name="CoinCounter" type="Control" parent="Control"]
+anchor_left = 1.0
+anchor_right = 1.0
+
+[node name="CoinIcon" type="TextureRect" parent="Control/CoinCounter"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -80.0
+margin_top = -16.0
+margin_right = 16.0
+margin_bottom = 80.0
+texture = ExtResource( 5 )
+
+[node name="Coins" type="Label" parent="Control/CoinCounter"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -124.0
+margin_top = 20.0
+margin_right = -65.0
+margin_bottom = 45.0
+rect_min_size = Vector2( 50, 0 )
+custom_colors/font_color = Color( 1, 1, 0, 1 )
+custom_fonts/font = ExtResource( 7 )
+text = "100"
+align = 2
+clip_text = true
+
+[node name="GameOverScreen" parent="Control" instance=ExtResource( 8 )]
+
+[node name="LifeCounter" type="Control" parent="Control"]
+anchor_top = 1.0
+anchor_bottom = 1.0
+
+[node name="TuxIcon" type="TextureRect" parent="Control/LifeCounter"]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = -18.0
+margin_top = -78.0
+margin_right = 78.0
+margin_bottom = 18.0
+texture = ExtResource( 6 )
+
+[node name="Lives" type="Label" parent="Control/LifeCounter"]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 63.0
+margin_top = -41.0
+margin_right = 81.0
+margin_bottom = -16.0
+custom_colors/font_color = Color( 1, 1, 0, 1 )
+custom_fonts/font = ExtResource( 7 )
+text = "3"
+
+[node name="SFX" type="Node2D" parent="."]
+script = ExtResource( 3 )
+
+[node name="1up" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource( 4 )
+
+[node name="Tick" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource( 10 )
+pitch_scale = 1.5
+
+[node name="TimeOver" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource( 11 )
+
+[node name="Tween" type="Tween" parent="."]
+
+[connection signal="timeout" from="LEVELTIMER" to="." method="_on_LEVELTIMER_timeout"]

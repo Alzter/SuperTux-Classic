@@ -1,0 +1,84 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://images/background/cave-bg3.png" type="Texture" id=1]
+[ext_resource path="res://images/enemies/flame/flame-0.png" type="Texture" id=2]
+[ext_resource path="res://images/enemies/flame/flame-1.png" type="Texture" id=3]
+
+[sub_resource type="CanvasItemMaterial" id=2]
+blend_mode = 1
+
+[sub_resource type="CanvasItemMaterial" id=3]
+blend_mode = 1
+
+[sub_resource type="SpriteFrames" id=4]
+animations = [ {
+"frames": [ ExtResource( 2 ), ExtResource( 3 ) ],
+"loop": true,
+"name": "default",
+"speed": 20.0
+} ]
+
+[node name="Torch" type="Control"]
+margin_right = 128.0
+margin_bottom = 128.0
+mouse_filter = 2
+
+[node name="TextureRect2" type="TextureRect" parent="."]
+margin_right = 128.0
+margin_bottom = 128.0
+texture = ExtResource( 1 )
+stretch_mode = 2
+
+[node name="TextureRect3" type="TextureRect" parent="."]
+visible = false
+modulate = Color( 1, 0, 0, 1 )
+material = SubResource( 2 )
+margin_top = -40.0
+margin_right = 128.0
+margin_bottom = 88.0
+texture = ExtResource( 2 )
+stretch_mode = 1
+
+[node name="TextureRect4" type="TextureRect" parent="."]
+visible = false
+modulate = Color( 0.937255, 0.933333, 0.427451, 0.286275 )
+material = SubResource( 2 )
+margin_top = -40.0
+margin_right = 128.0
+margin_bottom = 88.0
+texture = ExtResource( 2 )
+stretch_mode = 1
+flip_h = true
+
+[node name="Glow3" type="AnimatedSprite" parent="."]
+modulate = Color( 1, 0, 0, 1 )
+material = SubResource( 3 )
+position = Vector2( 64, 37 )
+scale = Vector2( 3, 3 )
+z_index = 1
+frames = SubResource( 4 )
+frame = 1
+speed_scale = 0.5
+playing = true
+offset = Vector2( 0, -2 )
+
+[node name="Glow5" type="AnimatedSprite" parent="."]
+modulate = Color( 1, 0.992157, 0, 0.466667 )
+material = SubResource( 3 )
+position = Vector2( 64, 37 )
+scale = Vector2( 7, 7 )
+z_index = 1
+frames = SubResource( 4 )
+speed_scale = 0.5
+playing = true
+offset = Vector2( 0, -2 )
+
+[node name="Glow4" type="AnimatedSprite" parent="."]
+modulate = Color( 1, 0.309804, 0, 1 )
+material = SubResource( 3 )
+position = Vector2( 64, 37 )
+scale = Vector2( 3, 3 )
+z_index = 1
+frames = SubResource( 4 )
+playing = true
+offset = Vector2( 0, -2 )

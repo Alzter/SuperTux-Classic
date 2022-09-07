@@ -1,0 +1,92 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://images/enemies/flame/flame-1.png" type="Texture" id=1]
+[ext_resource path="res://images/enemies/flame/flame-0.png" type="Texture" id=2]
+[ext_resource path="res://scenes/bosses/NolokFireball.gd" type="Script" id=3]
+[ext_resource path="res://scenes/master/SFX.gd" type="Script" id=4]
+[ext_resource path="res://scenes/master/damage_area.tscn" type="PackedScene" id=5]
+
+[sub_resource type="SpriteFrames" id=7]
+animations = [ {
+"frames": [ ExtResource( 2 ), ExtResource( 1 ) ],
+"loop": true,
+"name": "default",
+"speed": 20.0
+} ]
+
+[sub_resource type="CanvasItemMaterial" id=8]
+blend_mode = 1
+
+[sub_resource type="Animation" id=9]
+resource_name = "default"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Glow:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( -2, -2 ),
+"update": 0,
+"values": [ Vector2( 3, 3 ), Vector2( 4, 4 ) ]
+}
+
+[sub_resource type="RectangleShape2D" id=10]
+extents = Vector2( 16, 16 )
+
+[node name="Fireball" type="Node2D" groups=["enemies"]]
+z_index = 10
+script = ExtResource( 3 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+z_index = 1
+frames = SubResource( 7 )
+playing = true
+offset = Vector2( 0, -2 )
+
+[node name="Glow3" type="AnimatedSprite" parent="."]
+modulate = Color( 1, 0, 0, 0.588235 )
+material = SubResource( 8 )
+scale = Vector2( 6, 6 )
+z_index = 1
+frames = SubResource( 7 )
+playing = true
+offset = Vector2( 0, -2 )
+
+[node name="Glow2" type="AnimatedSprite" parent="."]
+modulate = Color( 1, 0, 0, 1 )
+material = SubResource( 8 )
+scale = Vector2( 3, 3 )
+z_index = 1
+frames = SubResource( 7 )
+frame = 1
+playing = true
+offset = Vector2( 0, -2 )
+
+[node name="Glow" type="AnimatedSprite" parent="."]
+material = SubResource( 8 )
+scale = Vector2( 3, 3 )
+z_index = 1
+frames = SubResource( 7 )
+playing = true
+offset = Vector2( 0, -2 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "default"
+anims/default = SubResource( 9 )
+
+[node name="DamageArea" parent="." groups=["enemies"] instance=ExtResource( 5 )]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DamageArea"]
+shape = SubResource( 10 )
+
+[node name="SFX" type="Node2D" parent="."]
+script = ExtResource( 4 )
+
+[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
+visible = false
+rect = Rect2( -64, -64, 128, 128 )
+
+[connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]

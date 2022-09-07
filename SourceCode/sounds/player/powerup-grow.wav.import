@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/powerup-grow.wav-a1e6c3fcc7229f7f3194a197ca5deb04.sample"
+
+[deps]
+
+source_file="res://sounds/player/powerup-grow.wav"
+dest_files=[ "res://.import/powerup-grow.wav-a1e6c3fcc7229f7f3194a197ca5deb04.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=1

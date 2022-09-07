@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/TuxRacer - Race2.mp3-a3a4d41e4db71c2d8077a47453896fb9.mp3str"
+
+[deps]
+
+source_file="res://music/TuxRacer - Race2.mp3"
+dest_files=[ "res://.import/TuxRacer - Race2.mp3-a3a4d41e4db71c2d8077a47453896fb9.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=3.851

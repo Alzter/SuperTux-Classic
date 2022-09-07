@@ -1,0 +1,285 @@
+[gd_scene load_steps=33 format=2]
+
+[ext_resource path="res://scenes/bosses/Nolok.gd" type="Script" id=1]
+[ext_resource path="res://scenes/bosses/NolokSM.gd" type="Script" id=2]
+[ext_resource path="res://scenes/bosses/NolokAI.gd" type="Script" id=3]
+[ext_resource path="res://scenes/master/damage_area.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scenes/enemies/Iceblock.tscn" type="PackedScene" id=5]
+[ext_resource path="res://scenes/master/SFX.gd" type="Script" id=6]
+[ext_resource path="res://sounds/bosses/nolok/grunt_hurt.wav" type="AudioStream" id=7]
+[ext_resource path="res://sounds/bosses/damaged.wav" type="AudioStream" id=8]
+[ext_resource path="res://sounds/bosses/nolok/jump.wav" type="AudioStream" id=9]
+[ext_resource path="res://sounds/bosses/nolok/thump.wav" type="AudioStream" id=10]
+[ext_resource path="res://sounds/enemies/stomp.wav" type="AudioStream" id=11]
+[ext_resource path="res://scenes/bosses/NolokFireball.tscn" type="PackedScene" id=12]
+[ext_resource path="res://sounds/bosses/nolok/fireball.wav" type="AudioStream" id=13]
+[ext_resource path="res://sounds/bosses/nolok/grunt_jump.wav" type="AudioStream" id=14]
+[ext_resource path="res://images/bosses/nolok/Idle.png" type="Texture" id=15]
+[ext_resource path="res://images/bosses/nolok/jump.png" type="Texture" id=16]
+[ext_resource path="res://images/bosses/nolok/Fireball.png" type="Texture" id=17]
+[ext_resource path="res://images/bosses/nolok/FireCharge.png" type="Texture" id=18]
+[ext_resource path="res://images/bosses/nolok/IceBlockCharge.png" type="Texture" id=19]
+[ext_resource path="res://sounds/bosses/nolok/grunt_defeated.wav" type="AudioStream" id=20]
+[ext_resource path="res://images/bosses/nolok/KnockOut.png" type="Texture" id=21]
+[ext_resource path="res://sounds/bosses/nolok/grunt_roar.wav" type="AudioStream" id=22]
+[ext_resource path="res://sounds/enemies/explode.wav" type="AudioStream" id=23]
+[ext_resource path="res://sounds/bosses/fireball_damage.wav" type="AudioStream" id=24]
+
+[sub_resource type="Animation" id=5]
+resource_name = "default"
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Control:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=8]
+resource_name = "firehurt"
+length = 0.25
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("Control:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.05, 0.25 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 0, 0, 1 ), Color( 1, 0.470588, 0, 1 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=6]
+resource_name = "hurt"
+length = 0.75
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("Control:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.05, 0.1, 0.15, 0.75 ),
+"transitions": PoolRealArray( 0, 0, 0, 1, 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 0, 1 ), Color( 1, 0, 0, 1 ), Color( 0, 0, 0, 1 ), Color( 1, 0, 0, 1 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=7]
+resource_name = "knockout"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("Control:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5, 1.2, 2 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 0.427451, 0.584314, 0.854902, 1 ), Color( 0.0196078, 0.207843, 0.6, 1 ), Color( 0, 0, 0, 1 ) ]
+}
+
+[sub_resource type="SpriteFrames" id=4]
+animations = [ {
+"frames": [ ExtResource( 15 ) ],
+"loop": true,
+"name": "idle",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 16 ) ],
+"loop": true,
+"name": "jump",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 17 ) ],
+"loop": true,
+"name": "fireball",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 19 ) ],
+"loop": true,
+"name": "iceblock",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 18 ) ],
+"loop": true,
+"name": "firecharge",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 21 ) ],
+"loop": true,
+"name": "knockout",
+"speed": 5.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 32, 64 )
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 36, 90 )
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 64, 96 )
+
+[node name="Nolok" type="KinematicBody2D" groups=["bosses"]]
+collision_layer = 4
+script = ExtResource( 1 )
+iceblock_scene = ExtResource( 5 )
+fireball_scene = ExtResource( 12 )
+
+[node name="StateMachine" type="Node" parent="."]
+script = ExtResource( 2 )
+
+[node name="AI" type="Node" parent="."]
+script = ExtResource( 3 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "default"
+anims/default = SubResource( 5 )
+anims/firehurt = SubResource( 8 )
+anims/hurt = SubResource( 6 )
+anims/knockout = SubResource( 7 )
+
+[node name="Control" type="Control" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+rect_scale = Vector2( -1, 1 )
+
+[node name="IceblockThrowPos" type="Position2D" parent="Control"]
+position = Vector2( 96, 64 )
+
+[node name="FireballPosition" type="Position2D" parent="Control"]
+position = Vector2( 96, 32 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="Control"]
+frames = SubResource( 4 )
+animation = "idle"
+
+[node name="AttackCooldown" type="Timer" parent="."]
+process_mode = 0
+wait_time = 0.75
+one_shot = true
+
+[node name="InvulnerableTimer" type="Timer" parent="."]
+process_mode = 0
+one_shot = true
+
+[node name="Tween" type="Tween" parent="."]
+
+[node name="DamageArea" parent="." instance=ExtResource( 4 )]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DamageArea"]
+position = Vector2( 0, 32 )
+shape = SubResource( 2 )
+
+[node name="HurtBox" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+position = Vector2( 0, 6 )
+shape = SubResource( 3 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource( 1 )
+
+[node name="SFX" type="Node2D" parent="."]
+script = ExtResource( 6 )
+
+[node name="Jump" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource( 9 )
+volume_db = 2.0
+pitch_scale = 0.5
+bus = "Sounds"
+
+[node name="SpawnIceblock" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource( 11 )
+volume_db = -6.0
+bus = "Sounds"
+
+[node name="Thump" type="AudioStreamPlayer2D" parent="SFX"]
+stream = ExtResource( 10 )
+volume_db = 3.0
+pitch_scale = 2.0
+max_distance = 4000.0
+bus = "Sounds"
+
+[node name="Fireball" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource( 13 )
+volume_db = -3.0
+pitch_scale = 1.25
+bus = "Sounds"
+
+[node name="Hurt" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource( 8 )
+volume_db = -9.0
+pitch_scale = 0.8
+bus = "Sounds"
+
+[node name="FireHurt" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource( 24 )
+volume_db = -8.0
+bus = "Sounds"
+
+[node name="Roar" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource( 22 )
+volume_db = -8.0
+pitch_scale = 1.25
+bus = "Sounds"
+
+[node name="GrowlCharge" type="AudioStreamPlayer2D" parent="SFX"]
+stream = ExtResource( 7 )
+volume_db = -2.0
+
+[node name="GrowlHurt" type="AudioStreamPlayer2D" parent="SFX"]
+stream = ExtResource( 7 )
+pitch_scale = 1.2
+
+[node name="GruntJump" type="AudioStreamPlayer2D" parent="SFX"]
+stream = ExtResource( 14 )
+volume_db = -1.0
+pitch_scale = 1.8
+max_distance = 4000.0
+
+[node name="GruntFireball" type="AudioStreamPlayer2D" parent="SFX"]
+stream = ExtResource( 14 )
+volume_db = -3.0
+pitch_scale = 1.3
+max_distance = 4000.0
+
+[node name="GruntDefeated" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource( 20 )
+volume_db = -10.0
+pitch_scale = 0.9
+bus = "Sounds"
+
+[node name="GruntDefeated2" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource( 22 )
+volume_db = -19.0
+pitch_scale = 1.1
+bus = "Sounds"
+
+[node name="KnockOut" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource( 23 )
+volume_db = -10.0
+pitch_scale = 0.5
+bus = "Sounds"
+
+[connection signal="timeout" from="AttackCooldown" to="." method="_on_AttackCooldown_timeout"]
+[connection signal="timeout" from="InvulnerableTimer" to="." method="_on_InvulnerableTimer_timeout"]
+[connection signal="area_entered" from="HurtBox" to="." method="_on_HurtBox_area_entered"]

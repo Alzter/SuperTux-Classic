@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://scenes/objects/BonusBlock.tscn" type="PackedScene" id=1]
+
+[node name="BrickSnow" type="Node2D"]
+
+[node name="BonusBlock" parent="." instance=ExtResource( 1 )]
+type = "Brick"
+initial_animation = "BrickSnow"
+contains_powerup = false

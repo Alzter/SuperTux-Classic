@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/time_over.wav-4aafff5f2eeeebe9ddf9cd8ab9ae0b09.sample"
+
+[deps]
+
+source_file="res://sounds/objects/time_over.wav"
+dest_files=[ "res://.import/time_over.wav-4aafff5f2eeeebe9ddf9cd8ab9ae0b09.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=1

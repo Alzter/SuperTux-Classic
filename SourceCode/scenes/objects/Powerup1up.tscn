@@ -1,0 +1,161 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://scenes/objects/Powerup.gd" type="Script" id=1]
+[ext_resource path="res://images/particles/invincible_sparkle.png" type="Texture" id=2]
+[ext_resource path="res://images/powerups/1up.png" type="Texture" id=3]
+[ext_resource path="res://scenes/particles/InvincibleParticlesSmall.tres" type="Material" id=4]
+
+[sub_resource type="Animation" id=7]
+resource_name = "appear"
+length = 0.4
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("Control:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 0.5, 1 ),
+"update": 0,
+"values": [ Vector2( -16, 16 ), Vector2( -16, -16 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Control:rect_size")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 0.5, 1 ),
+"update": 0,
+"values": [ Vector2( 32, 0 ), Vector2( 32, 32 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Particles:emitting")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.15 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "glow"
+length = 0.5
+loop = true
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("Control/Glow:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.15, 0.2, 0.3, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 0, 1 ), Color( 0, 0.156863, 1, 1 ), Color( 0, 0.905882, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 0, 0.905882, 1, 1 ), Color( 0, 0.156863, 1, 1 ) ]
+}
+
+[sub_resource type="SpriteFrames" id=33]
+animations = [ {
+"frames": [ ExtResource( 3 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[sub_resource type="CanvasItemMaterial" id=9]
+blend_mode = 1
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 16, 16 )
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 16, 16 )
+
+[sub_resource type="CanvasItemMaterial" id=23]
+blend_mode = 1
+
+[node name="1up" type="KinematicBody2D"]
+z_index = 2
+collision_layer = 0
+script = ExtResource( 1 )
+type = "1up"
+bounces = true
+move_speed_in_tiles = 6.0
+bounce_height_in_tiles = 4.0
+solid = false
+
+[node name="SpawnTimer" type="Timer" parent="."]
+process_mode = 0
+wait_time = 0.5
+one_shot = true
+autostart = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "appear"
+anims/appear = SubResource( 7 )
+
+[node name="Glow" type="AnimationPlayer" parent="."]
+autoplay = "glow"
+anims/glow = SubResource( 4 )
+
+[node name="Control" type="Control" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -16.0
+margin_top = 16.0
+margin_right = 16.0
+margin_bottom = 16.0
+rect_pivot_offset = Vector2( 16, 32 )
+rect_clip_content = true
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="Control"]
+frames = SubResource( 33 )
+centered = false
+
+[node name="Glow" type="AnimatedSprite" parent="Control"]
+modulate = Color( 0, 0.100084, 0.638036, 1 )
+self_modulate = Color( 0.694118, 0, 1, 0.662745 )
+material = SubResource( 9 )
+frames = SubResource( 33 )
+centered = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource( 3 )
+
+[node name="Area2D" type="Area2D" parent="."]
+visible = false
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource( 1 )
+
+[node name="Particles" type="Particles2D" parent="."]
+material = SubResource( 23 )
+z_index = -2
+emitting = false
+amount = 5
+lifetime = 0.2
+local_coords = false
+process_material = ExtResource( 4 )
+texture = ExtResource( 2 )
+
+[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
+rect = Rect2( -64, -64, 128, 128 )
+
+[connection signal="timeout" from="SpawnTimer" to="." method="_on_SpawnTimer_timeout"]
+[connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
+[connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]

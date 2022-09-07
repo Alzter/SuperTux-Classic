@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/ricochet.wav-05fd2170ca5b3d14275ba3dd2aff2fe8.sample"
+
+[deps]
+
+source_file="res://sounds/enemies/ricochet.wav"
+dest_files=[ "res://.import/ricochet.wav-05fd2170ca5b3d14275ba3dd2aff2fe8.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=1

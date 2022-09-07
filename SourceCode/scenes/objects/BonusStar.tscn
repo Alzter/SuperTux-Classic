@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://scenes/objects/BonusBlock.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scenes/objects/PowerupStar.tscn" type="PackedScene" id=2]
+
+[node name="BonusBlock" type="Node2D"]
+
+[node name="BonusBlock" parent="." instance=ExtResource( 1 )]
+contents_small = ExtResource( 2 )
+contents_big = ExtResource( 2 )

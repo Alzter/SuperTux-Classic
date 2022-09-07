@@ -1,0 +1,84 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://scenes/particles/SnowfallSmall.tres" type="Material" id=1]
+[ext_resource path="res://images/background/arcticmountains-fg.png" type="Texture" id=2]
+[ext_resource path="res://images/particles/snow2.png" type="Texture" id=3]
+[ext_resource path="res://images/background/arcticmountains-bg.png" type="Texture" id=5]
+
+[sub_resource type="CanvasItemMaterial" id=1]
+blend_mode = 1
+
+[node name="IceMountainsBackground" type="ParallaxBackground"]
+
+[node name="Sky" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+
+[node name="ColorRect" type="ColorRect" parent="Sky"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+color = Color( 0.0352941, 0.027451, 0.109804, 1 )
+
+[node name="BG" type="ParallaxLayer" parent="."]
+modulate = Color( 0.0980392, 0.141176, 0.329412, 1 )
+motion_scale = Vector2( 0.18, 0.2 )
+motion_offset = Vector2( 0, -200 )
+motion_mirroring = Vector2( 1530, 0 )
+
+[node name="Sprite" type="Sprite" parent="BG"]
+scale = Vector2( 1, 0.5 )
+texture = ExtResource( 5 )
+centered = false
+
+[node name="FG" type="ParallaxLayer" parent="."]
+modulate = Color( 0.105882, 0.223529, 0.47451, 1 )
+motion_scale = Vector2( 0.2, 0.2 )
+motion_offset = Vector2( 0, -250 )
+motion_mirroring = Vector2( 1700, 0 )
+
+[node name="Sprite" type="Sprite" parent="FG"]
+scale = Vector2( 1, 0.5 )
+texture = ExtResource( 2 )
+centered = false
+
+[node name="ParallaxLayer5" type="ParallaxLayer" parent="."]
+motion_scale = Vector2( 0.25, 1 )
+motion_mirroring = Vector2( 1636, 0 )
+
+[node name="Particles2D" type="Particles2D" parent="ParallaxLayer5"]
+position = Vector2( 256, -50 )
+scale = Vector2( 0.2, 0.2 )
+amount = 200
+lifetime = 3.0
+preprocess = 8.0
+speed_scale = 0.5
+visibility_rect = Rect2( -6500, 0, 8400, 3000 )
+process_material = ExtResource( 1 )
+texture = ExtResource( 3 )
+
+[node name="Particles2D2" type="Particles2D" parent="ParallaxLayer5"]
+position = Vector2( 1074, -50 )
+scale = Vector2( 0.2, 0.2 )
+amount = 200
+lifetime = 3.0
+preprocess = 8.0
+speed_scale = 0.5
+visibility_rect = Rect2( -6500, 0, 8400, 3000 )
+process_material = ExtResource( 1 )
+texture = ExtResource( 3 )
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/Control"]
+material = SubResource( 1 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+color = Color( 0, 0.952941, 1, 0.0352941 )

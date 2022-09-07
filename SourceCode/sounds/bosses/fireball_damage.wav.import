@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/fireball_damage.wav-db37cecb20c8920d140383ab0e541b66.sample"
+
+[deps]
+
+source_file="res://sounds/bosses/fireball_damage.wav"
+dest_files=[ "res://.import/fireball_damage.wav-db37cecb20c8920d140383ab0e541b66.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=1

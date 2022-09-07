@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/Invincible.mp3-e612ea80271ef6ed4d0158f313cad103.mp3str"
+
+[deps]
+
+source_file="res://music/Invincible.mp3"
+dest_files=[ "res://.import/Invincible.mp3-e612ea80271ef6ed4d0158f313cad103.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

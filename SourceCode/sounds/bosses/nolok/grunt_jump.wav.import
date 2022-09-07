@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/grunt_jump.wav-8df454a124c742be7a0e737ab8b07021.sample"
+
+[deps]
+
+source_file="res://sounds/bosses/nolok/grunt_jump.wav"
+dest_files=[ "res://.import/grunt_jump.wav-8df454a124c742be7a0e737ab8b07021.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=1
