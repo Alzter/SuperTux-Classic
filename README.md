@@ -20,6 +20,8 @@ To learn how to use Godot to modify SuperTux Classic, you can read the official 
 
 Alternatively, there are plenty of helpful YouTube tutorials for Godot you can watch to learn how to use the engine! https://docs.godotengine.org/en/stable/community/tutorials.html
 
+I personally recommend Game Endavour's tutorials for learning how to create 2D platformers in Godot: https://www.youtube.com/channel/UCLweX1UtQjRjj7rs_0XQ2Eg/videos
+
 ## Source files for art, music and sound effects
 The "Media" folder contains working files for every remastered sprite, music track and sound effect in SuperTux Classic.
 
