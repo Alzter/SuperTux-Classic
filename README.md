@@ -25,4 +25,4 @@ I personally recommend Game Endavour's tutorials for learning how to create 2D p
 ## Source files for art, music and sound effects
 The "Media" folder contains working files for every remastered sprite, music track and sound effect in SuperTux Classic.
 
-If you're looking for working files for SuperTux's original sprites and music, they're located in the original SuperTux Media repository. https://github.com/SuperTux/media
+The remastered assets in SuperTux Classic build off of the original work done for SuperTux by SuperTux Team. If you want the working files of SuperTux's ORIGINAL sprites and music, go to the original SuperTux Media repository. https://github.com/SuperTux/media
