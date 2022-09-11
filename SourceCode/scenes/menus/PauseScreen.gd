@@ -46,3 +46,20 @@ func _on_Restart_pressed():
 
 func _on_Quit_pressed():
 	Global.goto_scene( Global.title_screen_scene )
+
+# Focus signals
+
+func _on_Continue_mouse_entered():
+	$Control/CenterContainer/VBoxContainer/Continue.grab_focus()
+
+func _on_Restart_mouse_entered():
+	$Control/CenterContainer/VBoxContainer/Restart.grab_focus()
+
+func _on_Quit_mouse_entered():
+	$Control/CenterContainer/VBoxContainer/Quit.grab_focus()
+
+#Grabbing focus when not hidden
+
+func _on_Control_visibility_changed():
+	if $Control.visible == true:
+		$Control/CenterContainer/VBoxContainer/Continue.grab_focus()
