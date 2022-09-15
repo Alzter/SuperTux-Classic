@@ -28,6 +28,8 @@ func _ready():
 	Scoreboard.hide()
 	#new_game_button.disabled = SaveManager.has_savefile()
 	load_game_button.disabled = !SaveManager.has_savefile()
+	
+	$Menu/VBoxContainer/NewGame.grab_focus()
 
 func _on_NewGame_pressed():
 	if SaveManager.has_savefile():
@@ -55,3 +57,18 @@ func _on_BossDebug_pressed():
 
 func _on_Quit_pressed():
 	get_tree().quit()
+
+
+# Focus related signals
+
+func _on_NewGame_mouse_entered():
+	$Menu/VBoxContainer/NewGame.grab_focus()
+
+func _on_LoadGame_mouse_entered():
+	$Menu/VBoxContainer/LoadGame.grab_focus()
+
+func _on_Credits_mouse_entered():
+	$Menu/VBoxContainer/Credits.grab_focus()
+
+func _on_Quit_mouse_entered():
+	$Menu/VBoxContainer/Quit.grab_focus()
