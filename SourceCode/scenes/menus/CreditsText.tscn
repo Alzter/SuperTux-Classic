@@ -48,6 +48,8 @@ Alexander (Alzter) Small
 
 Alexander (Alzter) Small
 
+Matthew (Skyace65)
+
 
 [b][wave]New Graphics[/wave][/b]
 
@@ -233,6 +235,8 @@ Remaster Programming
 
 Alexander (Alzter) Small
 
+Matthew (Skyace65)
+
 
 New Graphics
 
@@ -398,6 +402,6 @@ fit_content_height = true
 scroll_active = false
 
 [node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="RichTextLabel"]
-rect = Rect2( 0, 0, 640, 3350 )
+rect = Rect2( 0, 0, 640, 3400 )
 
 [connection signal="screen_exited" from="RichTextLabel/VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]
