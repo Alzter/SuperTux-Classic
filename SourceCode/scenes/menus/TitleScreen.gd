@@ -21,6 +21,7 @@ export var intro_scene = ""
 export var credits_scene = ""
 onready var new_game_button = $Menu/VBoxContainer/NewGame
 onready var load_game_button = $Menu/VBoxContainer/LoadGame
+onready var quit_button = $Menu/VBoxContainer/Quit
 onready var new_game_warning = $Menu/NewGameWarning
 
 func _ready():
@@ -28,6 +29,12 @@ func _ready():
 	Scoreboard.hide()
 	#new_game_button.disabled = SaveManager.has_savefile()
 	load_game_button.disabled = !SaveManager.has_savefile()
+	
+	# Hide the "Quit Game" button if we're running the game
+	# inside of the browser (on HTML5) or on mobile devices
+	var is_on_mobile = OS.has_feature("Android") or OS.has_feature("iOS")
+	var is_on_browser = OS.has_feature("HTML5")
+	quit_button.visible = !is_on_browser and !is_on_mobile
 	
 	$Menu/VBoxContainer/NewGame.grab_focus()
 
