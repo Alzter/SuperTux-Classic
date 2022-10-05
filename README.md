@@ -1,5 +1,5 @@
 # SuperTux Classic
-A remake of SuperTux Milestone 1 (versions 0.1.0 - 0.1.4) created from the ground up in Godot v3.4.4!
+A remake of SuperTux Milestone 1 (versions 0.1.0 - 0.1.4) created from the ground up in Godot v3.5.1!
 
 ## Downloads
 Stable releases of SuperTux Classic for major platforms can be found at: https://github.com/Alzter/SuperTux-Classic/releases
