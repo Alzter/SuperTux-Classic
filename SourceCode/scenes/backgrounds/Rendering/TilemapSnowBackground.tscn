@@ -1,0 +1,26 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://images/background/snow_tiles_filling.png" type="Texture" id=2]
+[ext_resource path="res://images/background/snow_tiles.png" type="Texture" id=3]
+
+[node name="SnowTiles" type="Node2D"]
+
+[node name="Top" type="ParallaxLayer" parent="."]
+motion_mirroring = Vector2( 3552, 0 )
+
+[node name="TextureRect" type="TextureRect" parent="Top"]
+margin_right = 3552.0
+margin_bottom = 832.0
+texture = ExtResource( 3 )
+
+[node name="BottomFilling" type="ParallaxLayer" parent="."]
+motion_offset = Vector2( 3552, 0 )
+motion_mirroring = Vector2( 3552, 0 )
+
+[node name="TextureRect" type="TextureRect" parent="BottomFilling"]
+margin_top = 832.0
+margin_right = 3552.0
+margin_bottom = 4384.0
+texture = ExtResource( 2 )
+expand = true
+stretch_mode = 2
