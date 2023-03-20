@@ -2,7 +2,7 @@
 
 [ext_resource path="res://images/background/gradient.png" type="Texture" id=2]
 [ext_resource path="res://images/background/arcticmountains-sky.png" type="Texture" id=3]
-[ext_resource path="res://scenes/backgrounds/TilemapSnowBackground.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scenes/backgrounds/TilemapSnow.tscn" type="PackedScene" id=4]
 
 [sub_resource type="Shader" id=5]
 code = "// NOTE: Shader automatically converted from Godot Engine 3.4.4.stable's CanvasItemMaterial.
