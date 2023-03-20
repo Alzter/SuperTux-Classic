@@ -1,5 +1,5 @@
 # SuperTux Classic
-A remake of SuperTux Milestone 1 (versions 0.1.0 - 0.1.4) created from the ground up in Godot v3.4.4!
+A **remake of SuperTux Milestone 1** (versions 0.1.0 - 0.1.4) created from the ground up in **Godot v3.4.4**!
 
 ## Downloads
 Stable releases of SuperTux Classic for major platforms can be found at: https://github.com/Alzter/SuperTux-Classic/releases
@@ -14,11 +14,13 @@ If you would like to modify the game in any way, you'll need to open SuperTux Cl
 
 To do this, you'll first need to download SuperTux Classic's source code, either by cloning this repository or by downloading it as a .ZIP.
 
-Next, you'll need to download the latest version of Godot from [their website](https://godotengine.org/).
+Next, you'll need to download Godot v3.4.4-stable [from here](https://downloads.tuxfamily.org/godotengine/3.4.4). This is the specific version of Godot the game was made in.
 
 Once you have both SuperTux Classic and Godot downloaded, open Godot and add SuperTux Classic into your project list. You can do this in Godot by clicking "Scan", and then navigating to the folder where you downloaded SuperTux Classic.
 
-To learn how to use Godot to modify SuperTux Classic, you can read the official documentation here: https://docs.godotengine.org/ 
+### Relevant Documentation for Godot
+
+To learn how to use Godot to modify SuperTux Classic, you can read the official Godot documentation here: https://docs.godotengine.org/ 
 
 Alternatively, there are plenty of helpful YouTube tutorials for Godot you can watch to learn how to use the engine! https://docs.godotengine.org/en/stable/community/tutorials.html
 
