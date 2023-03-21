@@ -24,19 +24,86 @@ anchor_right = 0.5
 anchor_bottom = 1.0
 margin_left = -175.0
 margin_right = 175.0
-custom_constants/separation = 5
+custom_constants/separation = 15
 alignment = 1
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Label" type="Label" parent="Panel/VBoxContainer"]
-margin_top = 187.0
+[node name="MusicVolume" type="VBoxContainer" parent="Panel/VBoxContainer"]
+margin_top = 109.0
 margin_right = 350.0
-margin_bottom = 208.0
+margin_bottom = 150.0
+
+[node name="Label" type="Label" parent="Panel/VBoxContainer/MusicVolume"]
+margin_right = 350.0
+margin_bottom = 21.0
 text = "Music Volume"
 
-[node name="HSlider" type="HSlider" parent="Panel/VBoxContainer"]
-margin_top = 213.0
+[node name="VolumeMusic" type="HSlider" parent="Panel/VBoxContainer/MusicVolume"]
+margin_top = 25.0
 margin_right = 350.0
-margin_bottom = 229.0
+margin_bottom = 41.0
+min_value = -70.0
+max_value = 0.0
+
+[node name="SFXVolume" type="VBoxContainer" parent="Panel/VBoxContainer"]
+margin_top = 165.0
+margin_right = 350.0
+margin_bottom = 206.0
+
+[node name="Label" type="Label" parent="Panel/VBoxContainer/SFXVolume"]
+margin_right = 350.0
+margin_bottom = 21.0
+text = "Sound Volume"
+
+[node name="VolumeSFX" type="HSlider" parent="Panel/VBoxContainer/SFXVolume"]
+margin_top = 25.0
+margin_right = 350.0
+margin_bottom = 41.0
+min_value = -70.0
+max_value = 0.0
+
+[node name="AmbienceVolume" type="VBoxContainer" parent="Panel/VBoxContainer"]
+margin_top = 221.0
+margin_right = 350.0
+margin_bottom = 262.0
+
+[node name="Label" type="Label" parent="Panel/VBoxContainer/AmbienceVolume"]
+margin_right = 350.0
+margin_bottom = 21.0
+text = "Ambience Volume"
+
+[node name="VolumeAmbience" type="HSlider" parent="Panel/VBoxContainer/AmbienceVolume"]
+margin_top = 25.0
+margin_right = 350.0
+margin_bottom = 41.0
+min_value = -70.0
+max_value = 0.0
+
+[node name="Controls" type="Button" parent="Panel/VBoxContainer"]
+margin_top = 277.0
+margin_right = 350.0
+margin_bottom = 307.0
+focus_neighbour_top = NodePath("../Quit")
+focus_neighbour_bottom = NodePath("../LoadGame")
+text = "Configure Controls"
+
+[node name="Done" type="Button" parent="Panel"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -175.0
+margin_top = -53.0
+margin_right = 175.0
+margin_bottom = -23.0
+focus_neighbour_top = NodePath("../Quit")
+focus_neighbour_bottom = NodePath("../LoadGame")
+text = "Done"
+
+[connection signal="value_changed" from="Panel/VBoxContainer/MusicVolume/VolumeMusic" to="." method="_on_VolumeMusic_value_changed"]
+[connection signal="value_changed" from="Panel/VBoxContainer/SFXVolume/VolumeSFX" to="." method="_on_VolumeSFX_value_changed"]
+[connection signal="value_changed" from="Panel/VBoxContainer/AmbienceVolume/VolumeAmbience" to="." method="_on_VolumeAmbience_value_changed"]
+[connection signal="pressed" from="Panel/VBoxContainer/Controls" to="." method="_on_Done_pressed"]
+[connection signal="pressed" from="Panel/Done" to="." method="_on_Done_pressed"]

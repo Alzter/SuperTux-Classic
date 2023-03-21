@@ -1,16 +1,14 @@
 extends Control
 
+func _on_Done_pressed():
+	hide()
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
+func _on_VolumeMusic_value_changed(value):
+	AudioServer.set_bus_volume_db(2, value)
 
+func _on_VolumeSFX_value_changed(value):
+	AudioServer.set_bus_volume_db(1, value)
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+func _on_VolumeAmbience_value_changed(value):
+	AudioServer.set_bus_volume_db(3, value)
+	AudioServer.set_bus_volume_db(4, value)
