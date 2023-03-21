@@ -330,9 +330,11 @@ func place_worldmap_tile(tile, x, y, tilemap):
 	
 	if worldmap_tileset.has(tile):
 		tile_to_set = worldmap_tileset.get(tile)
+		print(tile_to_set)
 		tile_to_set = _get_tile_id_from_name(tile_to_set, tilemap_to_use)
 	else:
 		if !unknown_tiles.has(tile): unknown_tiles.append(tile)
+	
 	
 	tilemap_to_use.set_cell(x - 1, y, tile_to_set)
 	tilemap_to_use.update_bitmask_area(Vector2(x-1, y))

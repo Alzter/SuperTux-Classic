@@ -86,6 +86,7 @@ export var is_level_worldmap = false
 var level_width = 0
 var object_list = ""
 var checkpoint_list = ""
+var tiles_worldmap = ""
 var tiles_interactive = ""
 var tiles_background = ""
 var tiles_foreground = ""
@@ -122,7 +123,9 @@ func _ready():
 
 func import_worldmap():
 	level_width = int(_get_section_of_string(level_data, "width ", ")"))
-	var tiles = _get_worldmap_tile_data(level_data)
+	tiles_interactive = _get_worldmap_tile_data(level_data)
+	
+	_import_level(true)
 
 func import_level():
 	_get_level_attributes(level_data)
@@ -134,7 +137,7 @@ func import_level():
 	
 	_import_level()
 
-func _import_level():
+func _import_level(is_worldmap = false):
 	tile_importer.import = import
 	object_importer.import = import
 	
@@ -142,12 +145,13 @@ func _import_level():
 	tile_importer.level_width = level_width
 	tile_importer.default_tile = default_tile
 	
-	tile_importer.import_tilemap(tiles_interactive, level_intact, objectmap, true)
-	tile_importer.import_tilemap(tiles_background, level_bg, objectmap, true)
-	tile_importer.import_tilemap(tiles_foreground, level_fg, objectmap)
-	
-	object_importer.import_objects(object_list, objectmap)
-	object_importer.import_objects(checkpoint_list, objectmap)
+	tile_importer.import_tilemap(tiles_interactive, level_intact, objectmap, false)
+	if !is_worldmap:
+		tile_importer.import_tilemap(tiles_background, level_bg, objectmap, true)
+		tile_importer.import_tilemap(tiles_foreground, level_fg, objectmap)
+		
+		object_importer.import_objects(object_list, objectmap)
+		object_importer.import_objects(checkpoint_list, objectmap)
 	
 	objectmap.enabled = true
 	

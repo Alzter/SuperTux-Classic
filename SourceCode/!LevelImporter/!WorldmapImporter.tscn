@@ -27,6 +27,7 @@ script = ExtResource( 5 )
 
 [node name="TileImporter" type="Node2D" parent="."]
 script = ExtResource( 2 )
+is_worldmap = true
 
 [node name="ObjectImporter" type="Node2D" parent="."]
 script = ExtResource( 4 )
