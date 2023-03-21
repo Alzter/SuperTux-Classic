@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://theme/default_theme.tres" type="Theme" id=1]
 [ext_resource path="res://theme/FontBig.tres" type="DynamicFont" id=2]
 [ext_resource path="res://scenes/menus/PauseScreen.gd" type="Script" id=3]
+[ext_resource path="res://scenes/menus/Options.tscn" type="PackedScene" id=4]
 
 [sub_resource type="CanvasItemMaterial" id=1]
 blend_mode = 3
@@ -30,9 +31,9 @@ margin_bottom = -39.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Control/CenterContainer"]
 margin_left = 190.0
-margin_top = 114.0
+margin_top = 92.0
 margin_right = 450.0
-margin_bottom = 326.0
+margin_bottom = 349.0
 custom_constants/separation = 15
 
 [node name="Title" type="RichTextLabel" parent="Control/CenterContainer/VBoxContainer"]
@@ -42,7 +43,7 @@ custom_colors/default_color = Color( 1, 1, 0, 1 )
 custom_fonts/normal_font = ExtResource( 2 )
 bbcode_enabled = true
 bbcode_text = "[center][wave]PAUSED"
-text = "[center][wave]PAUSED"
+text = "PAUSED"
 fit_content_height = true
 scroll_active = false
 
@@ -67,22 +68,36 @@ margin_right = 260.0
 margin_bottom = 167.0
 rect_min_size = Vector2( 260, 0 )
 focus_neighbour_top = NodePath("../Continue")
-focus_neighbour_bottom = NodePath("../Quit")
+focus_neighbour_bottom = NodePath("../Options")
 text = "Restart Level"
 
-[node name="Quit" type="Button" parent="Control/CenterContainer/VBoxContainer"]
+[node name="Options" type="Button" parent="Control/CenterContainer/VBoxContainer"]
 margin_top = 182.0
 margin_right = 260.0
 margin_bottom = 212.0
 rect_min_size = Vector2( 260, 0 )
 focus_neighbour_top = NodePath("../Restart")
+focus_neighbour_bottom = NodePath("../Quit")
+text = "Options"
+
+[node name="Quit" type="Button" parent="Control/CenterContainer/VBoxContainer"]
+margin_top = 227.0
+margin_right = 260.0
+margin_bottom = 257.0
+rect_min_size = Vector2( 260, 0 )
+focus_neighbour_top = NodePath("../Options")
 focus_neighbour_bottom = NodePath("../Continue")
 text = "Save and Quit"
+
+[node name="OptionsMenu" parent="." instance=ExtResource( 4 )]
 
 [connection signal="visibility_changed" from="Control" to="." method="_on_Control_visibility_changed"]
 [connection signal="mouse_entered" from="Control/CenterContainer/VBoxContainer/Continue" to="." method="_on_Continue_mouse_entered"]
 [connection signal="pressed" from="Control/CenterContainer/VBoxContainer/Continue" to="." method="_on_Continue_pressed"]
 [connection signal="mouse_entered" from="Control/CenterContainer/VBoxContainer/Restart" to="." method="_on_Restart_mouse_entered"]
 [connection signal="pressed" from="Control/CenterContainer/VBoxContainer/Restart" to="." method="_on_Restart_pressed"]
+[connection signal="mouse_entered" from="Control/CenterContainer/VBoxContainer/Options" to="." method="_on_Options_mouse_entered"]
+[connection signal="pressed" from="Control/CenterContainer/VBoxContainer/Options" to="." method="_on_Options_pressed"]
 [connection signal="mouse_entered" from="Control/CenterContainer/VBoxContainer/Quit" to="." method="_on_Quit_mouse_entered"]
 [connection signal="pressed" from="Control/CenterContainer/VBoxContainer/Quit" to="." method="_on_Quit_pressed"]
+[connection signal="modal_closed" from="OptionsMenu" to="." method="_on_OptionsMenu_modal_closed"]

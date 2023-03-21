@@ -18,6 +18,7 @@
 extends CanvasLayer
 
 onready var menu = $Control
+onready var options_menu = $OptionsMenu
 var paused = false setget _set_paused
 
 func _ready():
@@ -55,6 +56,9 @@ func _on_Continue_mouse_entered():
 func _on_Restart_mouse_entered():
 	$Control/CenterContainer/VBoxContainer/Restart.grab_focus()
 
+func _on_Options_mouse_entered():
+	$Control/CenterContainer/VBoxContainer/Options.grab_focus()
+
 func _on_Quit_mouse_entered():
 	$Control/CenterContainer/VBoxContainer/Quit.grab_focus()
 
@@ -63,3 +67,9 @@ func _on_Quit_mouse_entered():
 func _on_Control_visibility_changed():
 	if $Control.visible == true:
 		$Control/CenterContainer/VBoxContainer/Continue.grab_focus()
+
+func _on_Options_pressed():
+	options_menu.popup()
+
+func _on_OptionsMenu_modal_closed():
+	$Control/CenterContainer/VBoxContainer/Options.grab_focus()
