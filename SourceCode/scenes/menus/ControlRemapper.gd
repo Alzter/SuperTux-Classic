@@ -10,10 +10,11 @@ func _ready():
 	label.text = action_to_remap.capitalize()
 	self.is_being_changed = false
 
+func _set_button_text_to_control_action():
+	button.text = InputMap.get_action_list(action_to_remap)[0].as_text().capitalize()
 
 func _on_RemapButton_pressed():
 	self.is_being_changed = true
-
 
 func _input(event):
 	if !is_being_changed: return
@@ -38,4 +39,10 @@ func _update_button_state(new_value):
 	else:
 		button.flat = false
 		button.disabled = false
-		button.text = "Change"
+		_set_button_text_to_control_action()
+
+func _on_RemapButton_mouse_entered():
+	if !is_being_changed: button.text = "Change"
+
+func _on_RemapButton_mouse_exited():
+	if !is_being_changed: _set_button_text_to_control_action()

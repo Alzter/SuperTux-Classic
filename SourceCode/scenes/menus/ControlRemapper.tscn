@@ -26,4 +26,6 @@ margin_left = -200.0
 focus_mode = 0
 text = "Change"
 
+[connection signal="mouse_entered" from="RemapButton" to="." method="_on_RemapButton_mouse_entered"]
+[connection signal="mouse_exited" from="RemapButton" to="." method="_on_RemapButton_mouse_exited"]
 [connection signal="pressed" from="RemapButton" to="." method="_on_RemapButton_pressed"]
