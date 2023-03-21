@@ -32,6 +32,7 @@ var can_pause = false
 signal level_loaded
 signal player_loaded
 signal level_ready # EMITS AFTER THE LEVEL TITLE CARD HAS DISAPPEARED
+signal options_data_created
 
 func _ready():
 	self.gravity = 1
@@ -39,9 +40,12 @@ func _ready():
 	current_scene = root.get_child(root.get_child_count() - 1)
 	current_level = current_scene.filename
 	
-	if SaveManager.does_options_data_exist():
-		var options_data : Dictionary = SaveManager.get_options_data()
-		apply_options(options_data)
+	if !SaveManager.does_options_data_exist():
+		create_options_data()
+		yield(self, "options_data_created")
+	
+	var options_data : Dictionary = SaveManager.get_options_data()
+	apply_options(options_data)
 
 func _update_gravity(new_value):
 	gravity = new_value * pow(60, 2) / 3
@@ -138,6 +142,19 @@ func get_current_camera():
 		if camera is Camera2D and camera.current:
 			return camera
 	return null
+
+# Creates the options data file for future modification.
+# This will reset the options file if it already exists.
+func create_options_data():
+	var options_data = {
+		"music_volume" : -6.0,
+		"sfx_volume" : 0.0,
+		"ambience_volume" : 0.0,
+	}
+	SaveManager.save_options_data(options_data)
+	yield(SaveManager, "save_completed")
+	print("Created Options Data")
+	emit_signal("options_data_created")
 
 # Applies options from the options file into the game.
 # E.g. sets the music volume to whatever the user previously set it to.

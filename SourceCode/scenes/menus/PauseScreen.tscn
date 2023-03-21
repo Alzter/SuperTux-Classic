@@ -90,6 +90,7 @@ focus_neighbour_bottom = NodePath("../Continue")
 text = "Save and Quit"
 
 [node name="OptionsMenu" parent="." instance=ExtResource( 4 )]
+visible = false
 
 [connection signal="visibility_changed" from="Control" to="." method="_on_Control_visibility_changed"]
 [connection signal="mouse_entered" from="Control/CenterContainer/VBoxContainer/Continue" to="." method="_on_Continue_mouse_entered"]

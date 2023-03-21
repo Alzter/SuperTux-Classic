@@ -1,0 +1,94 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://theme/default_theme.tres" type="Theme" id=1]
+[ext_resource path="res://scenes/menus/OptionsControls.gd" type="Script" id=2]
+[ext_resource path="res://theme/FontBig.tres" type="DynamicFont" id=3]
+
+[node name="ControlsMenu" type="Popup"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 1 )
+script = ExtResource( 2 )
+
+[node name="Panel" type="Panel" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 32.0
+margin_top = 32.0
+margin_right = -32.0
+margin_bottom = -32.0
+
+[node name="Title" type="Label" parent="Panel"]
+anchor_right = 1.0
+margin_bottom = 60.0
+custom_colors/font_color = Color( 0.560784, 0.560784, 0.560784, 1 )
+custom_fonts/font = ExtResource( 3 )
+text = "Configure Controls"
+align = 1
+valign = 2
+
+[node name="Controls" type="VBoxContainer" parent="Panel"]
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -200.0
+margin_right = 200.0
+alignment = 1
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Left" type="Control" parent="Panel/Controls"]
+margin_top = 176.0
+margin_right = 400.0
+margin_bottom = 206.0
+rect_min_size = Vector2( 0, 30 )
+
+[node name="Label" type="Label" parent="Panel/Controls/Left"]
+margin_top = 4.0
+margin_right = 134.0
+margin_bottom = 25.0
+text = "Move Left"
+valign = 1
+
+[node name="RemapButton" type="Button" parent="Panel/Controls/Left"]
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -200.0
+text = "Change"
+
+[node name="Right" type="Control" parent="Panel/Controls"]
+margin_top = 210.0
+margin_right = 400.0
+margin_bottom = 240.0
+rect_min_size = Vector2( 0, 30 )
+
+[node name="Label" type="Label" parent="Panel/Controls/Right"]
+margin_top = 4.0
+margin_right = 134.0
+margin_bottom = 25.0
+text = "Move Right"
+valign = 1
+
+[node name="RemapButton" type="Button" parent="Panel/Controls/Right"]
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -200.0
+text = "Change"
+
+[node name="Done" type="Button" parent="Panel"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -96.0
+margin_top = -53.0
+margin_right = 96.0
+margin_bottom = -23.0
+text = "Done"
+
+[connection signal="about_to_show" from="." to="." method="_on_OptionsMenu_about_to_show"]
+[connection signal="popup_hide" from="." to="." method="_on_OptionsMenu_popup_hide"]
+[connection signal="pressed" from="Panel/Done" to="." method="_on_Done_pressed"]

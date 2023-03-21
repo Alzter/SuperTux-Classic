@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://theme/default_theme.tres" type="Theme" id=1]
 [ext_resource path="res://scenes/menus/Options.gd" type="Script" id=2]
+[ext_resource path="res://scenes/menus/OptionsControls.tscn" type="PackedScene" id=3]
+[ext_resource path="res://theme/FontBig.tres" type="DynamicFont" id=4]
 
 [node name="OptionsMenu" type="Popup"]
 anchor_right = 1.0
@@ -16,6 +18,15 @@ margin_left = 32.0
 margin_top = 32.0
 margin_right = -32.0
 margin_bottom = -32.0
+
+[node name="Title" type="Label" parent="Panel"]
+anchor_right = 1.0
+margin_bottom = 60.0
+custom_colors/font_color = Color( 0.560784, 0.560784, 0.560784, 1 )
+custom_fonts/font = ExtResource( 4 )
+text = "Options"
+align = 1
+valign = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
 anchor_left = 0.5
@@ -93,18 +104,18 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-margin_left = -175.0
+margin_left = -96.0
 margin_top = -53.0
-margin_right = 175.0
+margin_right = 96.0
 margin_bottom = -23.0
-focus_neighbour_top = NodePath("../Quit")
-focus_neighbour_bottom = NodePath("../LoadGame")
 text = "Done"
+
+[node name="ControlsMenu" parent="." instance=ExtResource( 3 )]
 
 [connection signal="about_to_show" from="." to="." method="_on_OptionsMenu_about_to_show"]
 [connection signal="popup_hide" from="." to="." method="_on_OptionsMenu_popup_hide"]
 [connection signal="value_changed" from="Panel/VBoxContainer/MusicVolume/VolumeMusic" to="." method="_on_VolumeMusic_value_changed"]
 [connection signal="value_changed" from="Panel/VBoxContainer/SFXVolume/VolumeSFX" to="." method="_on_VolumeSFX_value_changed"]
 [connection signal="value_changed" from="Panel/VBoxContainer/AmbienceVolume/VolumeAmbience" to="." method="_on_VolumeAmbience_value_changed"]
-[connection signal="pressed" from="Panel/VBoxContainer/Controls" to="." method="_on_Done_pressed"]
+[connection signal="pressed" from="Panel/VBoxContainer/Controls" to="." method="_on_Controls_pressed"]
 [connection signal="pressed" from="Panel/Done" to="." method="_on_Done_pressed"]

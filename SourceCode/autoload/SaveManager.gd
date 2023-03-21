@@ -94,6 +94,7 @@ func save_game(level_reached, save_path = current_save_directory):
 		print("Error code: " + str(save_state))
 	
 	yield(get_tree(), "idle_frame")
+	emit_signal("save_completed")
 
 func _encapsulate_game_data(level_reached):
 	var level = level_reached

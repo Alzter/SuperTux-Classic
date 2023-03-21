@@ -6,22 +6,16 @@ onready var volume_music_slider = $Panel/VBoxContainer/MusicVolume/VolumeMusic
 onready var volume_sfx_slider = $Panel/VBoxContainer/SFXVolume/VolumeSFX
 onready var volume_ambience_slider = $Panel/VBoxContainer/AmbienceVolume/VolumeAmbience
 
+onready var controls_menu = $ControlsMenu
+
 func _on_OptionsMenu_about_to_show():
-	if SaveManager.does_options_data_exist():
-		options_data = SaveManager.get_options_data()
-	else:
-		print("Create Options Data")
-		create_options_data()
+	if !SaveManager.does_options_data_exist():
+		Global.create_options_data()
+		yield(Global, "options_data_created")
+	options_data = SaveManager.get_options_data()
 	load_options(options_data)
 	apply_options()
 
-func create_options_data():
-	options_data = {
-		"music_volume" : -6.0,
-		"sfx_volume" : 0.0,
-		"ambience_volume" : 0.0,
-	}
-	save_options()
 
 func load_options(options_data : Dictionary):
 	if options_data == null:
@@ -65,3 +59,7 @@ func _on_OptionsMenu_popup_hide():
 	print("Save Options")
 	save_slider_values_to_options_dictionary()
 	save_options()
+
+
+func _on_Controls_pressed():
+	controls_menu.popup()
