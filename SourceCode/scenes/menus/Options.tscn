@@ -6,6 +6,7 @@
 [ext_resource path="res://theme/FontBig.tres" type="DynamicFont" id=4]
 
 [node name="OptionsMenu" type="Popup"]
+visible = true
 anchor_right = 1.0
 anchor_bottom = 1.0
 theme = ExtResource( 1 )
@@ -22,7 +23,7 @@ margin_bottom = -32.0
 [node name="Title" type="Label" parent="Panel"]
 anchor_right = 1.0
 margin_bottom = 60.0
-custom_colors/font_color = Color( 0.560784, 0.560784, 0.560784, 1 )
+custom_colors/font_color = Color( 1, 1, 0, 1 )
 custom_fonts/font = ExtResource( 4 )
 text = "Options"
 align = 1
@@ -41,15 +42,15 @@ __meta__ = {
 }
 
 [node name="Controls" type="Button" parent="Panel/VBoxContainer"]
-margin_top = 277.0
+margin_top = 89.0
 margin_right = 350.0
-margin_bottom = 307.0
+margin_bottom = 119.0
 text = "Configure Controls"
 
 [node name="MusicVolume" type="VBoxContainer" parent="Panel/VBoxContainer"]
-margin_top = 109.0
+margin_top = 134.0
 margin_right = 350.0
-margin_bottom = 150.0
+margin_bottom = 188.0
 
 [node name="Label" type="Label" parent="Panel/VBoxContainer/MusicVolume"]
 margin_right = 350.0
@@ -59,14 +60,14 @@ text = "Music Volume"
 [node name="VolumeMusic" type="HSlider" parent="Panel/VBoxContainer/MusicVolume"]
 margin_top = 25.0
 margin_right = 350.0
-margin_bottom = 41.0
+margin_bottom = 54.0
 min_value = -70.0
 max_value = 0.0
 
 [node name="SFXVolume" type="VBoxContainer" parent="Panel/VBoxContainer"]
-margin_top = 165.0
+margin_top = 203.0
 margin_right = 350.0
-margin_bottom = 206.0
+margin_bottom = 257.0
 
 [node name="Label" type="Label" parent="Panel/VBoxContainer/SFXVolume"]
 margin_right = 350.0
@@ -76,14 +77,14 @@ text = "Sound Volume"
 [node name="VolumeSFX" type="HSlider" parent="Panel/VBoxContainer/SFXVolume"]
 margin_top = 25.0
 margin_right = 350.0
-margin_bottom = 41.0
+margin_bottom = 54.0
 min_value = -70.0
 max_value = 0.0
 
 [node name="AmbienceVolume" type="VBoxContainer" parent="Panel/VBoxContainer"]
-margin_top = 221.0
+margin_top = 272.0
 margin_right = 350.0
-margin_bottom = 262.0
+margin_bottom = 326.0
 
 [node name="Label" type="Label" parent="Panel/VBoxContainer/AmbienceVolume"]
 margin_right = 350.0
@@ -93,7 +94,7 @@ text = "Ambience Volume"
 [node name="VolumeAmbience" type="HSlider" parent="Panel/VBoxContainer/AmbienceVolume"]
 margin_top = 25.0
 margin_right = 350.0
-margin_bottom = 41.0
+margin_bottom = 54.0
 min_value = -70.0
 max_value = 0.0
 
@@ -109,6 +110,7 @@ margin_bottom = -23.0
 text = "Done"
 
 [node name="ControlsMenu" parent="." instance=ExtResource( 3 )]
+visible = false
 
 [connection signal="about_to_show" from="." to="." method="_on_OptionsMenu_about_to_show"]
 [connection signal="popup_hide" from="." to="." method="_on_OptionsMenu_popup_hide"]

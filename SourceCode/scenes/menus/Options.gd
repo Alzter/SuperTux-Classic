@@ -8,6 +8,8 @@ onready var volume_ambience_slider = $Panel/VBoxContainer/AmbienceVolume/VolumeA
 onready var controls_button = $ControlsMenu/Panel/Controls
 onready var done_button = $ControlsMenu/Panel/Done
 
+onready var options_menu = $Panel
+
 onready var controls_menu = $ControlsMenu
 
 func _on_OptionsMenu_about_to_show():
@@ -63,6 +65,7 @@ func _on_OptionsMenu_popup_hide():
 	save_options()
 
 func _on_Controls_pressed():
+	options_menu.modulate.a = 0
 	controls_menu.popup()
 
 func _on_Controls_mouse_entered():
@@ -70,3 +73,6 @@ func _on_Controls_mouse_entered():
 
 func _on_Done_mouse_entered():
 	done_button.grab_focus()
+
+func _on_ControlsMenu_popup_hide():
+	options_menu.modulate.a = 1
