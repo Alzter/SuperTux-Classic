@@ -43,6 +43,12 @@ func play(song, keep_other_songs = false):
 			current_song = song
 			current_song_node = s
 
+# Identical to play(), but continues playing a song if it is already playing rather than restarting it.
+# I.e. running continue("Invincible") while the Invincible music is already playing will result in no change.
+func continue(song):
+	if current_song != song:
+		play(song)
+
 func stop_all():
 	current_song_node = null
 	for child in get_children():

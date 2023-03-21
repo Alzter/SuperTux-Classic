@@ -18,14 +18,21 @@
 extends Control
 
 export var intro_scene = ""
+export var options_scene = ""
 export var credits_scene = ""
-onready var new_game_button = $Menu/VBoxContainer/NewGame
-onready var load_game_button = $Menu/VBoxContainer/LoadGame
-onready var quit_button = $Menu/VBoxContainer/Quit
-onready var new_game_warning = $Menu/NewGameWarning
+onready var title_content = $TitleContent
+
+onready var new_game_button = $TitleContent/Menu/VBoxContainer/NewGame
+onready var load_game_button = $TitleContent/Menu/VBoxContainer/LoadGame
+onready var options_button = $TitleContent/Menu/VBoxContainer/Options
+onready var credits_button = $TitleContent/Menu/VBoxContainer/Credits
+onready var quit_button = $TitleContent/Menu/VBoxContainer/Quit
+
+onready var new_game_warning = $TitleContent/Menu/NewGameWarning
+onready var options_menu = $OptionsMenu
 
 func _ready():
-	Music.play("Title")
+	Music.continue("Title")
 	Scoreboard.hide()
 	#new_game_button.disabled = SaveManager.has_savefile()
 	load_game_button.disabled = !SaveManager.has_savefile()
@@ -36,7 +43,7 @@ func _ready():
 	var is_on_browser = OS.has_feature("HTML5")
 	quit_button.visible = !is_on_browser and !is_on_mobile
 	
-	$Menu/VBoxContainer/NewGame.grab_focus()
+	new_game_button.grab_focus()
 
 func _on_NewGame_pressed():
 	if SaveManager.has_savefile():
@@ -56,6 +63,10 @@ func _on_FileDialog_file_selected(path):
 	if path.ends_with(".tscn"):
 		Global.goto_level(path)
 
+func _on_Options_pressed():
+	title_content.hide()
+	options_menu.popup()
+
 func _on_Credits_pressed():
 	Global.goto_scene(credits_scene)
 
@@ -65,17 +76,23 @@ func _on_BossDebug_pressed():
 func _on_Quit_pressed():
 	get_tree().quit()
 
-
 # Focus related signals
 
 func _on_NewGame_mouse_entered():
-	$Menu/VBoxContainer/NewGame.grab_focus()
+	new_game_button.grab_focus()
 
 func _on_LoadGame_mouse_entered():
-	$Menu/VBoxContainer/LoadGame.grab_focus()
+	load_game_button.grab_focus()
+
+func _on_Options_mouse_entered():
+	options_button.grab_focus()
 
 func _on_Credits_mouse_entered():
-	$Menu/VBoxContainer/Credits.grab_focus()
+	credits_button.grab_focus()
 
 func _on_Quit_mouse_entered():
-	$Menu/VBoxContainer/Quit.grab_focus()
+	quit_button.grab_focus()
+
+func _on_OptionsMenu_popup_hide():
+	title_content.show()
+	options_button.grab_focus()
