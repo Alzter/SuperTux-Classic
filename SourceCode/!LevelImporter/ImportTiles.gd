@@ -208,11 +208,11 @@ export var worldmap_tileset = {
 	54: "Snow",
 	55: "Snow",
 	56: "Snow",
-	57: "Snow",
+	57: "Path",
 	
 	58: "Igloo",
 	
-	59: "Snow", # Replaces old Igloo tile
+	59: "Path", # Replaces old Igloo tile
 	
 	60: "Snowman",
 	
@@ -232,9 +232,22 @@ export var worldmap_tileset = {
 	
 }
 
+var worldmap_foreground_tiles = [
+	"Castle",
+	"Igloo",
+	"Path",
+	"PathSecret",
+	"Snowman",
+	"Woods"
+]
+
 var tile = ""
 var unknown_tiles = []
 var default_tile = "" setget _update_default_tile
+
+var objectmap = null
+var expand = null
+var foreground_tilemap = null
 
 func _ready():
 	pass
@@ -250,10 +263,18 @@ func _ready():
 	
 	#_save_node_to_directory(self, output_directory)
 
-func import_tilemap(tile_data_string, tilemap_to_use, objectmap_to_use, expand = false):
+func import_tilemap(tile_data_string, tilemap_to_use, objectmap_to_use, expand_tilemap = false):
 	if tile_data_string == "": return # If level Data was left blank
+	objectmap = objectmap_to_use
+	expand = expand_tilemap
 	var tile_array = _level_string_to_array(tile_data_string)
-	_fill_tilemap_with_level_data(tile_array, tilemap_to_use, objectmap_to_use, expand)
+	_fill_tilemap_with_level_data(tile_array, tilemap_to_use)
+
+func import_worldmap_tiles(tile_data_string, tilemap_to_use, foreground_tilemap_to_use):
+	if tile_data_string == "": return # If level Data was left blank
+	foreground_tilemap = foreground_tilemap_to_use
+	var tile_array = _level_string_to_array(tile_data_string)
+	_fill_tilemap_with_level_data(tile_array, tilemap_to_use)
 
 func _get_tile_id_from_name(tile_name, tilemap_to_use = tilemap):
 	return import.get_tile_id_from_name(tile_name, tilemap_to_use)
@@ -274,7 +295,7 @@ func _level_string_to_array(level_string):
 func _save_node_to_directory(node, dir):
 	import.save_node_to_directory(node, dir)
 
-func _fill_tilemap_with_level_data(level_tile_array, tilemap, objectmap, expand = false):
+func _fill_tilemap_with_level_data(level_tile_array, tilemap):
 	var x = 0
 	var y = 0
 	unknown_tiles = [] # Populate this array with all the tile IDs we couldn't match for debugging purposes
@@ -287,7 +308,7 @@ func _fill_tilemap_with_level_data(level_tile_array, tilemap, objectmap, expand 
 			y += 1
 		
 		if is_worldmap:
-			place_worldmap_tile(tile, x, y, tilemap)
+			place_worldmap_tile(tile, x, y, tilemap, foreground_tilemap)
 		else:
 			place_level_tile(tile, x, y, tilemap, objectmap, expand)
 		
@@ -324,20 +345,28 @@ func place_level_tile(tile, x, y, tilemap, objectmap, expand):
 					tilemap_to_use.update_bitmask_area(Vector2(x-1, new_y))
 
 
-func place_worldmap_tile(tile, x, y, tilemap):
+func place_worldmap_tile(tile, x, y, tilemap, foreground_tilemap):
 	var tile_to_set = default_tile
 	var tilemap_to_use = tilemap
+	var tile_name = ""
 	
 	if worldmap_tileset.has(tile):
 		tile_to_set = worldmap_tileset.get(tile)
-		print(tile_to_set)
+		tile_name = tile_to_set
 		tile_to_set = _get_tile_id_from_name(tile_to_set, tilemap_to_use)
 	else:
 		if !unknown_tiles.has(tile): unknown_tiles.append(tile)
 	
+	if worldmap_foreground_tiles.has(tile_name):
+		tilemap_to_use = foreground_tilemap
 	
 	tilemap_to_use.set_cell(x - 1, y, tile_to_set)
 	tilemap_to_use.update_bitmask_area(Vector2(x-1, y))
+	
+	if tilemap_to_use == foreground_tilemap:
+		tile_to_set = _get_tile_id_from_name("Snow", tilemap)
+		tilemap.set_cell(x - 1, y, tile_to_set)
+		tilemap.update_bitmask_area(Vector2(x-1, y))
 
 # Used for some tiles. Alternates which tile to use for a level tile based on the position of the tile.
 func tile_specific_patterns(tile_name, x, y):

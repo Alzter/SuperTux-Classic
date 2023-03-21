@@ -145,8 +145,10 @@ func _import_level(is_worldmap = false):
 	tile_importer.level_width = level_width
 	tile_importer.default_tile = default_tile
 	
-	tile_importer.import_tilemap(tiles_interactive, level_intact, objectmap, false)
-	if !is_worldmap:
+	if is_worldmap:
+		tile_importer.import_worldmap_tiles(tiles_interactive, level_intact, level_fg)
+	else:
+		tile_importer.import_tilemap(tiles_interactive, level_intact, objectmap, false)
 		tile_importer.import_tilemap(tiles_background, level_bg, objectmap, true)
 		tile_importer.import_tilemap(tiles_foreground, level_fg, objectmap)
 		
