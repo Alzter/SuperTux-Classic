@@ -286,7 +286,10 @@ func _fill_tilemap_with_level_data(level_tile_array, tilemap, objectmap, expand 
 			x = 1
 			y += 1
 		
-		place_level_tile(tile, x, y, tilemap, objectmap, expand)
+		if is_worldmap:
+			place_worldmap_tile(tile, x, y, tilemap)
+		else:
+			place_level_tile(tile, x, y, tilemap, objectmap, expand)
 		
 	if unknown_tiles != []:
 		print("The following tile IDs were not found:")
@@ -319,6 +322,20 @@ func place_level_tile(tile, x, y, tilemap, objectmap, expand):
 					new_y += 1
 					tilemap_to_use.set_cell(x - 1, new_y, tile_to_set)
 					tilemap_to_use.update_bitmask_area(Vector2(x-1, new_y))
+
+
+func place_worldmap_tile(tile, x, y, tilemap):
+	var tile_to_set = default_tile
+	var tilemap_to_use = tilemap
+	
+	if worldmap_tileset.has(tile):
+		tile_to_set = worldmap_tileset.get(tile)
+		tile_to_set = _get_tile_id_from_name(tile_to_set, tilemap_to_use)
+	else:
+		if !unknown_tiles.has(tile): unknown_tiles.append(tile)
+	
+	tilemap_to_use.set_cell(x - 1, y, tile_to_set)
+	tilemap_to_use.update_bitmask_area(Vector2(x-1, y))
 
 # Used for some tiles. Alternates which tile to use for a level tile based on the position of the tile.
 func tile_specific_patterns(tile_name, x, y):
