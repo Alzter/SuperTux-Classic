@@ -24,6 +24,7 @@ onready var import = null
 
 export var level_height = 15
 export var level_width = 0
+export var is_worldmap = false
 
 export var ignore_tiles = [
 	6,7,8,9, 32,33,34, 86,87,88,89,90,91,92,
