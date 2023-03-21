@@ -18,7 +18,8 @@
 extends Node
 
 const SAVE_DIR = "user://savefiles/"
-const OPTIONS_FILE = "user://options.dat"
+const OPTIONS_DIR = "user://options/"
+const OPTIONS_FILE = "user://options/options.dat"
 
 const save_file_1 = SAVE_DIR + "file1.dat"
 const save_file_2 = SAVE_DIR + "file2.dat"
@@ -38,20 +39,30 @@ func get_options_data() -> Dictionary:
 		push_error("Options Data does not exist")
 		return {} # Return empty dictionary
 	
-	file.open(OPTIONS_FILE, File.READ)
-	var options : Dictionary = file.get_var()
-	file.close()
-	return options
+	var options_file = file.open(OPTIONS_FILE, File.READ)
+	if options_file == OK:
+		var options : Dictionary = file.get_var()
+		file.close()
+		return options
+	else:
+		push_error("Error reading options file")
+		return {}
 
 # Saves a Dictionary of game options to a file for later access.
 func save_options_data(optionsData : Dictionary):
+	var dir = Directory.new()
+	if !dir.dir_exists(OPTIONS_DIR):
+		dir.make_dir_recursive(OPTIONS_DIR)
+	
 	var file = File.new()
-	if !file.file_exists(OPTIONS_FILE):
-		push_error("Options Data does not exist")
-		return {} # Return empty dictionary
-	file.open(OPTIONS_FILE, File.WRITE)
-	file.store_var(optionsData)
-	file.close()
+	var options_file = file.open(OPTIONS_FILE, File.WRITE)
+	if options_file == OK:
+		file.store_var(optionsData)
+		file.close()
+	else:
+		push_error("Failure saving options file")
+	
+	yield(get_tree(), "idle_frame")
 
 func does_options_data_exist() -> bool:
 	var file = File.new()

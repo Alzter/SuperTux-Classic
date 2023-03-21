@@ -10,6 +10,7 @@ func _on_OptionsMenu_about_to_show():
 	if SaveManager.does_options_data_exist():
 		options_data = SaveManager.get_options_data()
 	else:
+		print("Create Options Data")
 		create_options_data()
 	load_options(options_data)
 	apply_options()
