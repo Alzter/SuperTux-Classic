@@ -233,7 +233,6 @@ export var worldmap_tileset = {
 }
 
 var tile = ""
-var unknown_tiles = []
 var default_tile = "" setget _update_default_tile
 
 func _ready():
@@ -277,7 +276,7 @@ func _save_node_to_directory(node, dir):
 func _fill_tilemap_with_level_data(level_tile_array, tilemap, objectmap, expand = false):
 	var x = 0
 	var y = 0
-	unknown_tiles = [] # Populate this array with all the tile IDs we couldn't match for debugging purposes
+	var unknown_tiles = [] # Populate this array with all the tile IDs we couldn't match for debugging purposes
 	
 	for tile in level_tile_array:
 		var position = Vector2(x, y)
@@ -286,39 +285,47 @@ func _fill_tilemap_with_level_data(level_tile_array, tilemap, objectmap, expand 
 			x = 1
 			y += 1
 		
-		place_level_tile(tile, x, y, tilemap, objectmap, expand)
+		if tile != 0:
+			if !tile in ignore_tiles:
+				
+				var tilemap_to_use = tilemap
+				var tile_to_set = _get_level_tile_from_id(tile, tilemap, objectmap, x, y)
+				
+				if tile_to_set == null: 
+					if !unknown_tiles.has(tile): unknown_tiles.append(tile)
+				
+				tilemap_to_use.set_cell(x - 1, y, tile_to_set)
+				tilemap_to_use.update_bitmask_area(Vector2(x-1, y))
+				
+				if y == 14 and expand:
+					var new_y = y
+					for i in 30:
+						new_y += 1
+						tilemap_to_use.set_cell(x - 1, new_y, tile_to_set)
+						tilemap_to_use.update_bitmask_area(Vector2(x-1, new_y))
 		
 	if unknown_tiles != []:
 		print("The following tile IDs were not found:")
 		print(unknown_tiles)
 
-func place_level_tile(tile, x, y, tilemap, objectmap, expand):
-	if tile != 0:
-		if !tile in ignore_tiles:
-			
-			var tile_to_set = default_tile
-			var tilemap_to_use = tilemap
-			
-			if object_tiles.has(tile):
-				tilemap_to_use = objectmap
-				tile_to_set = object_tiles.get(tile)
-				tile_to_set = _get_tile_id_from_name(tile_to_set, tilemap_to_use)
-			elif level_tileset.has(tile):
-				tile_to_set = level_tileset.get(tile)
-				tile_to_set = tile_specific_patterns(tile_to_set, x, y)
-				tile_to_set = _get_tile_id_from_name(tile_to_set, tilemap_to_use)
-			else:
-				if !unknown_tiles.has(tile): unknown_tiles.append(tile)
-			
-			tilemap_to_use.set_cell(x - 1, y, tile_to_set)
-			tilemap_to_use.update_bitmask_area(Vector2(x-1, y))
-			
-			if y == 14 and expand:
-				var new_y = y
-				for i in 30:
-					new_y += 1
-					tilemap_to_use.set_cell(x - 1, new_y, tile_to_set)
-					tilemap_to_use.update_bitmask_area(Vector2(x-1, new_y))
+func _get_level_tile_from_id(id : int, tilemap, objectmap, x : int, y : int):
+	var tilemap_to_use = tilemap
+	var tile_to_set = default_tile
+	
+	if object_tiles.has(tile):
+		tilemap_to_use = objectmap
+		tile_to_set = object_tiles.get(tile)
+		tile_to_set = _get_tile_id_from_name(tile_to_set, tilemap_to_use)
+		return tile_to_set
+		
+	elif level_tileset.has(tile):
+		tile_to_set = level_tileset.get(tile)
+		tile_to_set = tile_specific_patterns(tile_to_set, x, y)
+		tile_to_set = _get_tile_id_from_name(tile_to_set, tilemap_to_use)
+		return tile_to_set
+		
+	else:
+		return 0
 
 # Used for some tiles. Alternates which tile to use for a level tile based on the position of the tile.
 func tile_specific_patterns(tile_name, x, y):
