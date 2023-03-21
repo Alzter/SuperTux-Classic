@@ -19,7 +19,7 @@ func _on_RemapButton_pressed():
 func _input(event):
 	if !is_being_changed: return
 	
-	if (event is InputEventKey or event is InputEventJoypadButton):
+	if (event is InputEventKey):
 		
 		InputMap.action_erase_events(action_to_remap)
 		InputMap.action_add_event(action_to_remap, event)

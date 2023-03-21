@@ -20,6 +20,7 @@ extends Node
 const SAVE_DIR = "user://savefiles/"
 const OPTIONS_DIR = "user://options/"
 const OPTIONS_FILE = "user://options/options.dat"
+const CONTROLS_FILE = "user://options/controls.dat"
 
 const save_file_1 = SAVE_DIR + "file1.dat"
 const save_file_2 = SAVE_DIR + "file2.dat"
@@ -146,3 +147,57 @@ func _decapsulate_game_data(data_dictionary):
 func delete_save_file(save_path = current_save_directory):
 	var dir = Directory.new()
 	dir.remove(save_path)
+
+func save_current_controls():
+	print("Saving current player controls")
+	
+	# ENCAPSULATION:
+	# Store the list of controls as scancodes in an array.
+	var controls = []
+	for control in Global.controls:
+		var input : InputEventKey = InputMap.get_action_list(control)[0]
+		
+		if not input is InputEventKey:
+			push_error("Error saving controls: Cannot convert InputEvent " + input.as_text() + " into a scancode because it is not of type InputEventKey")
+		
+		var scancode = input.get_scancode()
+		controls.append(scancode)
+	
+	# Save this array of scancodes to the controls file.
+	var file = File.new()
+	var controls_file = file.open(CONTROLS_FILE, File.WRITE)
+	if controls_file == OK:
+		file.store_var(controls)
+		file.close()
+	else:
+		push_error("Failure saving controls file")
+	
+	yield(get_tree(), "idle_frame")
+
+
+func load_current_controls(load_path = CONTROLS_FILE):
+	var file = File.new()
+	var controls = null
+	if file.file_exists(load_path):
+		var load_state = file.open(load_path, file.READ)
+		
+		if load_state == OK:
+			controls = file.get_var()
+			file.close()
+			
+			_deencapsulate_player_controls(controls)
+
+# De-encapsulates the player controls from an array of scancodes into InputEventKeys
+# and assigns those to the relevant actions.
+func _deencapsulate_player_controls(scancode_array : Array):
+	print("Loading saved player controls")
+	var i = 0
+	for scancode in scancode_array:
+		var control_action = Global.controls[i]
+		var inputeventkey = InputEventKey.new()
+		inputeventkey.scancode = scancode
+		
+		InputMap.action_erase_events(control_action)
+		InputMap.action_add_event(control_action, inputeventkey)
+		
+		i += 1

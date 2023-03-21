@@ -20,4 +20,5 @@ func _populate_controls_menu():
 		control_button_container.add_child(remapper)
 
 func _on_Done_pressed():
+	SaveManager.save_current_controls()
 	hide()

@@ -27,7 +27,7 @@ var TILE_SIZE = 32
 var gravity = 1 setget _update_gravity
 var fireballs_on_screen = 0 setget _change_fireball_count
 
-var controls = ["jump", "move_left", "move_right", "duck", "run"]
+var controls = ["jump", "run", "move_left", "move_right", "move_up", "duck"]
 
 var can_pause = false
 
@@ -48,6 +48,7 @@ func _ready():
 	
 	var options_data : Dictionary = SaveManager.get_options_data()
 	apply_options(options_data)
+	SaveManager.load_current_controls()
 
 func _update_gravity(new_value):
 	gravity = new_value * pow(60, 2) / 3
