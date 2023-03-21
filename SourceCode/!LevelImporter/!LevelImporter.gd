@@ -81,6 +81,8 @@ export var level_data = ""
 export var export_file_path = "IMPORTS/Level.tscn"
 export var default_tile = "Placeholder"
 
+export var is_level_worldmap = false
+
 var level_width = 0
 var object_list = ""
 var checkpoint_list = ""
@@ -113,6 +115,16 @@ func _get_section_of_string(string, beginning_phrase, end_phrase):
 	return string.substr(start_pos, length)
 
 func _ready():
+	if !is_level_worldmap:
+		import_level()
+	else:
+		import_worldmap()
+
+func import_worldmap():
+	level_width = int(_get_section_of_string(level_data, "width ", ")"))
+	var tiles = _get_worldmap_tile_data(level_data)
+
+func import_level():
 	_get_level_attributes(level_data)
 	object_list = _get_objects_from_leveldata(level_data)
 	checkpoint_list = _get_reset_points_from_leveldata(level_data)
@@ -167,3 +179,6 @@ func _get_reset_points_from_leveldata(leveldata):
 
 func _get_tilemap_from_leveldata(leveldata, tilemap_name):
 	return _get_section_of_string(leveldata, "(" + tilemap_name + "-tm", ")")
+
+func _get_worldmap_tile_data(leveldata):
+	return _get_section_of_string(leveldata, "(data", ")")
