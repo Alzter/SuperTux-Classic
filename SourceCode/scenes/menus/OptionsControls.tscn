@@ -51,11 +51,12 @@ margin_bottom = 25.0
 text = "Move Left"
 valign = 1
 
-[node name="RemapButton" type="Button" parent="Panel/Controls/Left"]
+[node name="LeftRemapButton" type="Button" parent="Panel/Controls/Left"]
 anchor_left = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = -200.0
+focus_mode = 0
 text = "Change"
 
 [node name="Right" type="Control" parent="Panel/Controls"]
@@ -71,11 +72,12 @@ margin_bottom = 25.0
 text = "Move Right"
 valign = 1
 
-[node name="RemapButton" type="Button" parent="Panel/Controls/Right"]
+[node name="RightRemapButton" type="Button" parent="Panel/Controls/Right"]
 anchor_left = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = -200.0
+focus_mode = 0
 text = "Change"
 
 [node name="Done" type="Button" parent="Panel"]
@@ -89,6 +91,6 @@ margin_right = 96.0
 margin_bottom = -23.0
 text = "Done"
 
-[connection signal="about_to_show" from="." to="." method="_on_OptionsMenu_about_to_show"]
-[connection signal="popup_hide" from="." to="." method="_on_OptionsMenu_popup_hide"]
+[connection signal="about_to_show" from="." to="." method="_on_ControlsMenu_about_to_show"]
+[connection signal="pressed" from="Panel/Controls/Left/LeftRemapButton" to="." method="_on_LeftRemapButton_pressed"]
 [connection signal="pressed" from="Panel/Done" to="." method="_on_Done_pressed"]
