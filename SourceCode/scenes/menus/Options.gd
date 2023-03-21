@@ -47,10 +47,11 @@ func _on_Done_pressed():
 	hide()
 
 func apply_options():
-	AudioServer.set_bus_volume_db(2, volume_music_slider.value)
-	AudioServer.set_bus_volume_db(1, volume_sfx_slider.value)
-	AudioServer.set_bus_volume_db(3, volume_ambience_slider.value)
-	AudioServer.set_bus_volume_db(4, volume_ambience_slider.value)
+	save_slider_values_to_options_dictionary()
+	AudioServer.set_bus_volume_db(2, options_data["music_volume"])
+	AudioServer.set_bus_volume_db(1, options_data["sfx_volume"])
+	AudioServer.set_bus_volume_db(3, options_data["ambience_volume"])
+	AudioServer.set_bus_volume_db(4, options_data["ambience_volume"])
 
 func _on_VolumeMusic_value_changed(value):
 	apply_options()
