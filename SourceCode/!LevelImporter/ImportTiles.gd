@@ -145,6 +145,93 @@ export var level_tileset = {
 	
 	}
 
+export var worldmap_tileset = {
+	1 : "Path",
+	2 : "Path",
+	3 : "Path",
+	4 : "Path",
+	5 : "Path",
+	6 : "Path",
+	7 : "Path",
+	
+	8 : "Snow",
+	
+	9 : "Water",
+	
+	11 : "Snow",
+	12 : "Snow",
+	13 : "Snow",
+	14 : "Snow",
+	15 : "Snow",
+	16 : "Snow",
+	17 : "Snow",
+	18 : "Snow",
+	19 : "Snow",
+	20 : "Snow",
+	21 : "Snow",
+	22 : "Snow",
+	23 : "Snow",
+	
+	24 : "Woods",
+	25 : "Woods",
+	26 : "Woods",
+	27 : "Woods",
+	28 : "Woods",
+	29 : "Woods",
+	30 : "Woods",
+	31 : "Woods",
+	32 : "Woods",
+	33 : "Woods",
+	34 : "Woods",
+	35 : "Woods",
+	36 : "Woods",
+	
+	37 : "Path",
+	38 : "Path",
+	39 : "Path",
+	40 : "Path",
+	41 : "Path",
+	42 : "Path",
+	43 : "Path",
+	44 : "Path",
+	45 : "Path",
+	46 : "Path",
+	47 : "Path",
+	48 : "Path",
+	
+	49 : "Castle",
+	
+	50: "Snow", # These replace the old castle tiles
+	51: "Snow",
+	52: "Snow",
+	53: "Snow",
+	54: "Snow",
+	55: "Snow",
+	56: "Snow",
+	57: "Snow",
+	
+	58: "Igloo",
+	
+	59: "Snow", # Replaces old Igloo tile
+	
+	60: "Snowman",
+	
+	61: "Path",
+	
+	62: "Path",
+	63: "Path",
+	64: "Path",
+	65: "Path",
+	66: "Path",
+	67: "Path",
+	68: "Path",
+	69: "Path",
+	70: "Path",
+	71: "Path",
+	72: "Path",
+	
+}
+
 var tile = ""
 var default_tile = "" setget _update_default_tile
 
