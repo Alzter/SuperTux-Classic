@@ -4,7 +4,6 @@
 [ext_resource path="res://scenes/menus/Options.gd" type="Script" id=2]
 
 [node name="OptionsMenu" type="Popup"]
-visible = true
 anchor_right = 1.0
 anchor_bottom = 1.0
 theme = ExtResource( 1 )
@@ -102,6 +101,8 @@ focus_neighbour_top = NodePath("../Quit")
 focus_neighbour_bottom = NodePath("../LoadGame")
 text = "Done"
 
+[connection signal="about_to_show" from="." to="." method="_on_OptionsMenu_about_to_show"]
+[connection signal="popup_hide" from="." to="." method="_on_OptionsMenu_popup_hide"]
 [connection signal="value_changed" from="Panel/VBoxContainer/MusicVolume/VolumeMusic" to="." method="_on_VolumeMusic_value_changed"]
 [connection signal="value_changed" from="Panel/VBoxContainer/SFXVolume/VolumeSFX" to="." method="_on_VolumeSFX_value_changed"]
 [connection signal="value_changed" from="Panel/VBoxContainer/AmbienceVolume/VolumeAmbience" to="." method="_on_VolumeAmbience_value_changed"]

@@ -20,7 +20,7 @@ extends Node
 var min_size = Vector2.ZERO
 
 # If viewport is higher than this size, double the resolution
-var ratio_size = Vector2(500, 400)
+var ratio_size = Vector2(500, 480)
 
 var screen_shrink = 1
 
