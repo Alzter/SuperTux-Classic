@@ -5,6 +5,8 @@ var options_data = null
 onready var volume_music_slider = $Panel/VBoxContainer/MusicVolume/VolumeMusic
 onready var volume_sfx_slider = $Panel/VBoxContainer/SFXVolume/VolumeSFX
 onready var volume_ambience_slider = $Panel/VBoxContainer/AmbienceVolume/VolumeAmbience
+onready var controls_button = $ControlsMenu/Panel/Controls
+onready var done_button = $ControlsMenu/Panel/Done
 
 onready var controls_menu = $ControlsMenu
 
@@ -60,6 +62,11 @@ func _on_OptionsMenu_popup_hide():
 	save_slider_values_to_options_dictionary()
 	save_options()
 
-
 func _on_Controls_pressed():
 	controls_menu.popup()
+
+func _on_Controls_mouse_entered():
+	controls_button.grab_focus()
+
+func _on_Done_mouse_entered():
+	done_button.grab_focus()

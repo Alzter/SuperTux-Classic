@@ -49,7 +49,6 @@ margin_left = -96.0
 margin_top = -53.0
 margin_right = 96.0
 margin_bottom = -23.0
-focus_mode = 0
 text = "Done"
 
 [connection signal="about_to_show" from="." to="." method="_on_ControlsMenu_about_to_show"]
