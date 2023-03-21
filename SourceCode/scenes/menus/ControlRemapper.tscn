@@ -1,0 +1,28 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://theme/default_theme.tres" type="Theme" id=1]
+[ext_resource path="res://scenes/menus/ControlRemapper.gd" type="Script" id=2]
+
+[node name="ControlRemapper" type="Control"]
+margin_top = 176.0
+margin_right = 400.0
+margin_bottom = 206.0
+rect_min_size = Vector2( 0, 30 )
+theme = ExtResource( 1 )
+script = ExtResource( 2 )
+
+[node name="Label" type="Label" parent="."]
+margin_top = 4.0
+margin_right = 134.0
+margin_bottom = 25.0
+text = "Key"
+valign = 1
+
+[node name="RemapButton" type="Button" parent="."]
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -200.0
+text = "Change"
+
+[connection signal="pressed" from="RemapButton" to="." method="_on_RemapButton_pressed"]

@@ -1,10 +1,12 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://theme/default_theme.tres" type="Theme" id=1]
 [ext_resource path="res://scenes/menus/OptionsControls.gd" type="Script" id=2]
 [ext_resource path="res://theme/FontBig.tres" type="DynamicFont" id=3]
+[ext_resource path="res://scenes/menus/ControlRemapper.tscn" type="PackedScene" id=4]
 
 [node name="ControlsMenu" type="Popup"]
+visible = true
 anchor_right = 1.0
 anchor_bottom = 1.0
 theme = ExtResource( 1 )
@@ -38,47 +40,9 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Left" type="Control" parent="Panel/Controls"]
-margin_top = 176.0
-margin_right = 400.0
-margin_bottom = 206.0
-rect_min_size = Vector2( 0, 30 )
-
-[node name="Label" type="Label" parent="Panel/Controls/Left"]
-margin_top = 4.0
-margin_right = 134.0
-margin_bottom = 25.0
-text = "Move Left"
-valign = 1
-
-[node name="LeftRemapButton" type="Button" parent="Panel/Controls/Left"]
-anchor_left = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = -200.0
-focus_mode = 0
-text = "Change"
-
-[node name="Right" type="Control" parent="Panel/Controls"]
-margin_top = 210.0
-margin_right = 400.0
-margin_bottom = 240.0
-rect_min_size = Vector2( 0, 30 )
-
-[node name="Label" type="Label" parent="Panel/Controls/Right"]
-margin_top = 4.0
-margin_right = 134.0
-margin_bottom = 25.0
-text = "Move Right"
-valign = 1
-
-[node name="RightRemapButton" type="Button" parent="Panel/Controls/Right"]
-anchor_left = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = -200.0
-focus_mode = 0
-text = "Change"
+[node name="ControlRemapper" parent="Panel/Controls" instance=ExtResource( 4 )]
+margin_top = 193.0
+margin_bottom = 223.0
 
 [node name="Done" type="Button" parent="Panel"]
 anchor_left = 0.5
@@ -92,5 +56,4 @@ margin_bottom = -23.0
 text = "Done"
 
 [connection signal="about_to_show" from="." to="." method="_on_ControlsMenu_about_to_show"]
-[connection signal="pressed" from="Panel/Controls/Left/LeftRemapButton" to="." method="_on_LeftRemapButton_pressed"]
 [connection signal="pressed" from="Panel/Done" to="." method="_on_Done_pressed"]
