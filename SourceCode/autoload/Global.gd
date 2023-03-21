@@ -38,6 +38,10 @@ func _ready():
 	var root = get_tree().get_root()
 	current_scene = root.get_child(root.get_child_count() - 1)
 	current_level = current_scene.filename
+	
+	if SaveManager.does_options_data_exist():
+		var options_data : Dictionary = SaveManager.get_options_data()
+		apply_options(options_data)
 
 func _update_gravity(new_value):
 	gravity = new_value * pow(60, 2) / 3
@@ -134,3 +138,12 @@ func get_current_camera():
 		if camera is Camera2D and camera.current:
 			return camera
 	return null
+
+# Applies options from the options file into the game.
+# E.g. sets the music volume to whatever the user previously set it to.
+func apply_options(options_data : Dictionary):
+	if SaveManager.does_options_data_exist():
+		AudioServer.set_bus_volume_db(2, options_data["music_volume"])
+		AudioServer.set_bus_volume_db(1, options_data["sfx_volume"])
+		AudioServer.set_bus_volume_db(3, options_data["ambience_volume"])
+		AudioServer.set_bus_volume_db(4, options_data["ambience_volume"])

@@ -48,10 +48,7 @@ func _on_Done_pressed():
 
 func apply_options():
 	save_slider_values_to_options_dictionary()
-	AudioServer.set_bus_volume_db(2, options_data["music_volume"])
-	AudioServer.set_bus_volume_db(1, options_data["sfx_volume"])
-	AudioServer.set_bus_volume_db(3, options_data["ambience_volume"])
-	AudioServer.set_bus_volume_db(4, options_data["ambience_volume"])
+	Global.apply_options(options_data)
 
 func _on_VolumeMusic_value_changed(value):
 	apply_options()
@@ -65,6 +62,6 @@ func _on_VolumeAmbience_value_changed(value):
 # ========================================================================================
 # SAVE EVERYTHING
 func _on_OptionsMenu_popup_hide():
-	print("SAVE")
+	print("Save Options")
 	save_slider_values_to_options_dictionary()
 	save_options()
