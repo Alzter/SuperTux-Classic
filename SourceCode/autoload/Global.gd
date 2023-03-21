@@ -27,6 +27,8 @@ var TILE_SIZE = 32
 var gravity = 1 setget _update_gravity
 var fireballs_on_screen = 0 setget _change_fireball_count
 
+var controls = ["jump", "move_left", "move_right", "duck", "run"]
+
 var can_pause = false
 
 signal level_loaded

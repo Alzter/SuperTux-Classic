@@ -7,7 +7,7 @@ onready var button = $RemapButton
 onready var label = $Label
 
 func _ready():
-	label.text = action_to_remap
+	label.text = action_to_remap.capitalize()
 	self.is_being_changed = false
 
 

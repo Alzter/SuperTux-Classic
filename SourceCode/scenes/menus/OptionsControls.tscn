@@ -6,11 +6,11 @@
 [ext_resource path="res://scenes/menus/ControlRemapper.tscn" type="PackedScene" id=4]
 
 [node name="ControlsMenu" type="Popup"]
-visible = true
 anchor_right = 1.0
 anchor_bottom = 1.0
 theme = ExtResource( 1 )
 script = ExtResource( 2 )
+control_remapper = ExtResource( 4 )
 
 [node name="Panel" type="Panel" parent="."]
 anchor_right = 1.0
@@ -40,10 +40,6 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="ControlRemapper" parent="Panel/Controls" instance=ExtResource( 4 )]
-margin_top = 193.0
-margin_bottom = 223.0
-
 [node name="Done" type="Button" parent="Panel"]
 anchor_left = 0.5
 anchor_top = 1.0
@@ -53,6 +49,7 @@ margin_left = -96.0
 margin_top = -53.0
 margin_right = 96.0
 margin_bottom = -23.0
+focus_mode = 0
 text = "Done"
 
 [connection signal="about_to_show" from="." to="." method="_on_ControlsMenu_about_to_show"]
