@@ -89,7 +89,7 @@ focus_neighbour_top = NodePath("../Options")
 focus_neighbour_bottom = NodePath("../Continue")
 text = "Save and Quit"
 
-[node name="OptionsMenu" parent="." instance=ExtResource( 4 )]
+[node name="OptionsMenu" parent="Control" instance=ExtResource( 4 )]
 visible = false
 
 [connection signal="visibility_changed" from="Control" to="." method="_on_Control_visibility_changed"]
@@ -101,4 +101,4 @@ visible = false
 [connection signal="pressed" from="Control/CenterContainer/VBoxContainer/Options" to="." method="_on_Options_pressed"]
 [connection signal="mouse_entered" from="Control/CenterContainer/VBoxContainer/Quit" to="." method="_on_Quit_mouse_entered"]
 [connection signal="pressed" from="Control/CenterContainer/VBoxContainer/Quit" to="." method="_on_Quit_pressed"]
-[connection signal="modal_closed" from="OptionsMenu" to="." method="_on_OptionsMenu_modal_closed"]
+[connection signal="popup_hide" from="Control/OptionsMenu" to="." method="_on_OptionsMenu_popup_hide"]

@@ -18,7 +18,9 @@
 extends CanvasLayer
 
 onready var menu = $Control
-onready var options_menu = $OptionsMenu
+onready var menu_items = $Control/CenterContainer
+onready var options_menu = $Control/OptionsMenu
+
 var paused = false setget _set_paused
 
 func _ready():
@@ -69,7 +71,9 @@ func _on_Control_visibility_changed():
 		$Control/CenterContainer/VBoxContainer/Continue.grab_focus()
 
 func _on_Options_pressed():
+	menu_items.modulate.a = 0
 	options_menu.popup()
 
-func _on_OptionsMenu_modal_closed():
+func _on_OptionsMenu_popup_hide():
+	menu_items.modulate.a = 1
 	$Control/CenterContainer/VBoxContainer/Options.grab_focus()
