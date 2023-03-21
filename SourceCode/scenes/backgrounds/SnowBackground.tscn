@@ -2,7 +2,7 @@
 
 [ext_resource path="res://images/background/gradient.png" type="Texture" id=2]
 [ext_resource path="res://images/background/arcticmountains-sky.png" type="Texture" id=3]
-[ext_resource path="res://scenes/backgrounds/TilemapSnow.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scenes/backgrounds/assets/TilemapSnow.tscn" type="PackedScene" id=4]
 
 [sub_resource type="Shader" id=5]
 code = "// NOTE: Shader automatically converted from Godot Engine 3.4.4.stable's CanvasItemMaterial.
@@ -50,12 +50,12 @@ scale = Vector2( 4, 4 )
 texture = ExtResource( 3 )
 centered = false
 
-[node name="ParallaxLayer3" type="ParallaxLayer" parent="."]
-motion_scale = Vector2( 0.125, 1 )
-motion_offset = Vector2( -100, 64 )
+[node name="SnowTilesBG" type="ParallaxLayer" parent="."]
+motion_scale = Vector2( 0.125, 0.125 )
+motion_offset = Vector2( -100, -150 )
 motion_mirroring = Vector2( 1065.6, 0 )
 
-[node name="SnowTiles" parent="ParallaxLayer3" instance=ExtResource( 4 )]
+[node name="SnowTiles" parent="SnowTilesBG" instance=ExtResource( 4 )]
 modulate = Color( 0.611765, 0.823529, 1, 0.509804 )
 material = SubResource( 2 )
 rect_scale = Vector2( 0.3, 0.3 )
@@ -72,12 +72,12 @@ anchor_bottom = 1.0
 texture = ExtResource( 2 )
 expand = true
 
-[node name="ParallaxLayer" type="ParallaxLayer" parent="."]
-motion_scale = Vector2( 0.25, 1 )
-motion_offset = Vector2( -300, 64 )
+[node name="SnowTilesFG" type="ParallaxLayer" parent="."]
+motion_scale = Vector2( 0.25, 0.125 )
+motion_offset = Vector2( -300, -150 )
 motion_mirroring = Vector2( 1776, 0 )
 
-[node name="SnowTiles" parent="ParallaxLayer" instance=ExtResource( 4 )]
+[node name="SnowTiles" parent="SnowTilesFG" instance=ExtResource( 4 )]
 modulate = Color( 0.709804, 0.937255, 0.952941, 1 )
 material = SubResource( 2 )
 rect_scale = Vector2( 0.5, 0.5 )
