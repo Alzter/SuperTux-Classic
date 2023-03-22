@@ -32,5 +32,6 @@ func _update_sprite():
 	else:
 		sprite.animation = "default"
 
-func load_level():
-	Global.goto_level(level_file_path)
+func activate():
+	if !is_teleporter:
+		Global.goto_level(level_file_path)

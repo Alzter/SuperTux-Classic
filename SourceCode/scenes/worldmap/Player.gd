@@ -5,6 +5,8 @@ export var tilemaps = []   # An array of all the tilemap objects in the worldmap
 
 var current_level_dot = null # The node of the level dot the player is currently standing on.
 
+onready var camera = $Camera2D
+
 var move_direction = Vector2(0,0)
 var stop_direction = Vector2(0,0)
 
@@ -23,9 +25,23 @@ var corner_tiles = {
 	176 : "sw",
 }
 
+# Set the player camera boundaries to the boundaries of the largest tilemap
+func _ready():
+	if tilemaps == []: push_error("Worldmap player node cannot access any tilemaps in the worldmap")
+	
+	for t in tilemaps:
+		var tilemap : TileMap = t
+		var bounds = tilemap.get_used_rect()
+		bounds.position *= 32
+		bounds.end = (bounds.end - Vector2.ONE) * 32
+		print(bounds)
+		camera.limit_left = min(bounds.position.x, camera.limit_left)
+		camera.limit_right = max(bounds.end.x, camera.limit_right)
+		camera.limit_top = min(camera.limit_top, bounds.position.y)
+		camera.limit_bottom = max(camera.limit_bottom, bounds.end.y)
+
 func _process(delta):
-	if tilemaps == []:
-		push_error("Worldmap player node cannot access any tilemaps in the worldmap")
+	if tilemaps == []: push_error("Worldmap player node cannot access any tilemaps in the worldmap")
 	
 	for t in tilemaps:
 		var tilemap : TileMap = t
@@ -44,7 +60,7 @@ func _process(delta):
 	
 	if current_level_dot != null:
 		if Input.is_action_just_pressed("jump") or Input.is_action_just_pressed("ui_accept"):
-			current_level_dot.load_level()
+			current_level_dot.activate()
 
 func handle_path_movement(tilemap : TileMap, tile_position : Vector2, tile_id : int):
 	# Get the autotile bitmask of the path tile the player is currently standing on.
@@ -73,7 +89,6 @@ func handle_path_movement(tilemap : TileMap, tile_position : Vector2, tile_id : 
 		
 		if move_direction != Vector2.ZERO:
 			if corner_tiles.has(bitmask):
-				print(corner_tiles.get(bitmask))
 				match corner_tiles.get(bitmask):
 					"ne":
 						if move_direction == Vector2.LEFT: move_direction = Vector2.UP
@@ -111,7 +126,7 @@ func handle_leveldot_collisions(tilemap):
 		
 		if level_position == player_position:
 			current_level_dot = leveldot
-			if !leveldot.level_cleared:
+			if false:#!leveldot.level_cleared:
 				stop_direction = move_direction
 				move_direction = Vector2.ZERO
 				return
