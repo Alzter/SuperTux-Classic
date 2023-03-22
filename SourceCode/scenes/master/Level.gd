@@ -123,6 +123,9 @@ func _create_worldmap_player(position : Vector2, player_object : PackedScene):
 	var player = worldmap_player_node.instance()
 	player.global_position = player_position * 32 + Vector2(16,16)
 	
+	if WorldmapManager.player_stop_direction != null:
+		player.stop_direction = WorldmapManager.player_stop_direction
+	
 	# Set the worldmap player's level dots variable to an array of all the level dot objects
 	player.level_dots = worldmap_objects.get_children()
 	

@@ -2,6 +2,7 @@ extends Node
 
 var worldmap_level = null
 var worldmap_player_position = null
+var player_stop_direction = null
 
 var is_level_worldmap = false
 
@@ -12,6 +13,7 @@ func reset():
 	worldmap_player_position = null
 	is_level_worldmap = false
 	cleared_levels = []
+	player_stop_direction = null
 
 func add_current_level_to_cleared_levels():
 	if Global.current_level == null:

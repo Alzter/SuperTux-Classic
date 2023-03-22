@@ -57,7 +57,7 @@ func _on_Restart_pressed():
 	Global.respawn_player()
 
 func _on_Quit_pressed():
-	Global.goto_scene( Global.title_screen_scene )
+	Global.goto_title_screen()
 
 # Focus signals
 

@@ -5,6 +5,8 @@ export var tilemaps = []   # An array of all the tilemap objects in the worldmap
 
 var current_level_dot = null # The node of the level dot the player is currently standing on.
 
+var powerup_state = 0
+
 onready var camera = $Camera2D
 
 var move_direction = Vector2(0,0)
@@ -27,6 +29,7 @@ var corner_tiles = {
 
 # Set the player camera boundaries to the boundaries of the largest tilemap
 func _ready():
+	powerup_state = Scoreboard.player_initial_state
 	if tilemaps == []: push_error("Worldmap player node cannot access any tilemaps in the worldmap")
 	
 	for t in tilemaps:
@@ -59,7 +62,7 @@ func _process(delta):
 	if current_level_dot != null:
 		if Input.is_action_just_pressed("jump") or Input.is_action_just_pressed("ui_accept"):
 			var tile_position = tilemaps[0].world_to_map(position)
-			current_level_dot.activate(tile_position)
+			current_level_dot.activate(tile_position, stop_direction)
 
 func handle_path_movement(tilemap : TileMap, tile_position : Vector2, tile_id : int):
 	# Get the autotile bitmask of the path tile the player is currently standing on.
@@ -132,3 +135,6 @@ func handle_leveldot_collisions(tilemap):
 			else:
 				move_direction = Vector2.ZERO
 				return
+
+func update_sprite(state):
+	pass

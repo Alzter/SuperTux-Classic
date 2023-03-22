@@ -107,7 +107,7 @@ func _encapsulate_game_data(levels_cleared : Array, worldmap_level : String, wor
 	
 	var save_data = {
 		"levels_cleared" : levels_cleared,
-		"worldmap" : worldmap_level,
+		"worldmap_level" : worldmap_level,
 		"worldmap_x" : worldmap_position.x,
 		"worldmap_y" : worldmap_position.y,
 		"coins" : coins,
@@ -134,13 +134,13 @@ func load_game(load_path = current_save_directory):
 			_decapsulate_game_data(save_data)
 	
 	if save_data == null:
-		print("Error loading SuperTux save file at path: " + str(load_path))
+		push_error("Error loading SuperTux save file at path: " + str(load_path))
 	
 	yield(get_tree(), "idle_frame")
 
 func _decapsulate_game_data(data_dictionary):
 	var levels_cleared = data_dictionary.get("levels_cleared")
-	var worldmap_level = data_dictionary.get("worldmap_path")
+	var worldmap_level = data_dictionary.get("worldmap_level")
 	var worldmap_x = data_dictionary.get("worldmap_x")
 	var worldmap_y = data_dictionary.get("worldmap_y")
 	var worldmap_position = Vector2(worldmap_x, worldmap_y)
@@ -154,7 +154,8 @@ func _decapsulate_game_data(data_dictionary):
 	WorldmapManager.worldmap_level = worldmap_level
 	WorldmapManager.cleared_levels = levels_cleared
 	WorldmapManager.worldmap_player_position = worldmap_position
-	WorldmapManager.return_to_worldmap()
+	
+	Global.goto_level(worldmap_level)
 
 func delete_save_file(save_path = current_save_directory):
 	var dir = Directory.new()
