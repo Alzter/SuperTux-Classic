@@ -114,4 +114,20 @@ stream = ExtResource( 11 )
 
 [node name="Tween" type="Tween" parent="."]
 
+[node name="Message" type="RichTextLabel" parent="."]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -63.0
+theme = ExtResource( 2 )
+custom_colors/default_color = Color( 1, 1, 0, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 2
+custom_constants/shadow_offset_y = 2
+bbcode_enabled = true
+bbcode_text = "[center][wave]Message Text"
+text = "Message Text"
+fit_content_height = true
+scroll_active = false
+
 [connection signal="timeout" from="LEVELTIMER" to="." method="_on_LEVELTIMER_timeout"]

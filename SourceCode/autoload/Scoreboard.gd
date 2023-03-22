@@ -40,11 +40,14 @@ onready var timer_ui = $Control/ClockCounter
 onready var timer_text = $Control/ClockCounter/Timer
 onready var game_over_screen = $Control/GameOverScreen
 onready var sfx = $SFX
+onready var message_text_object = $Message
 
 var level_timer_enabled = false
 var tick_time = 999
+var message_text = "" setget update_message_text
 
 func _ready():
+	self.message_text = ""
 	stop_level_timer()
 
 func _process(delta):
@@ -201,3 +204,17 @@ func _on_LEVELTIMER_timeout():
 	var player_state = Global.player.state_machine.state
 	if !["win", "dead"].has(player_state):
 		Global.player.die()
+
+func update_message_text(new_value):
+	message_text = new_value
+	if message_text == "" or message_text == null:
+		message_text_object.hide()
+	else:
+		message_text_object.show()
+		message_text_object.bbcode_text = "[center][wave]" + new_value
+
+func display_message(message_text):
+	update_message_text(message_text)
+
+func clear_message():
+	update_message_text("")
