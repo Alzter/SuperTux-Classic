@@ -7,9 +7,15 @@ export var tilemaps = []   # An array of all the tilemap objects in the worldmap
 var current_level_dot = null setget set_current_level_dot
 
 var powerup_state = 0
+var sprite = null
 
 onready var camera = $Camera2D
-onready var sprite = $AnimatedSprite
+
+onready var sprite_big = $Control/SpriteBig
+onready var sprite_small = $Control/SpriteSmall
+onready var shader = $SpriteColour
+
+onready var sfx = $SFX
 
 var move_direction = Vector2(0,0)
 var stop_direction = Vector2(0,0)
@@ -34,8 +40,7 @@ func _ready():
 	if tilemaps == []: push_error("Worldmap player node cannot access any tilemaps in the worldmap")
 	
 	powerup_state = Scoreboard.player_initial_state
-	update_sprite()
-	
+	update_sprite_state()
 	
 	camera_bounds_to_tilemap_bounds()
 	
@@ -58,6 +63,8 @@ func _process(delta):
 				break
 	
 	position += MOVE_SPEED * move_direction
+	
+	update_sprite()
 	
 	if current_level_dot != null:
 		if Input.is_action_just_pressed("jump") or Input.is_action_just_pressed("ui_accept"):
@@ -155,13 +162,20 @@ func get_current_level_dot(tilemap = tilemaps[0]):
 		var player_position = tilemap.world_to_map(position)
 		
 		if level_position == player_position:
-			self.current_level_dot = leveldot
+			set_current_level_dot(leveldot, false)
 			return
 
-func update_sprite(state = powerup_state):
-	sprite.play(str(state))
+func update_sprite_state(state = powerup_state):
+	sprite_big.visible = (state != 0)
+	sprite_small.visible = (state == 0)
+	sprite = sprite_big if (state != 0) else sprite_small
+	
+	if state > 1:
+		shader.play("red")
+	else:
+		shader.play("black")
 
-func set_current_level_dot(new_value):
+func set_current_level_dot(new_value, sound = true):
 	if current_level_dot == new_value: return
 	current_level_dot = new_value
 	
@@ -170,3 +184,10 @@ func set_current_level_dot(new_value):
 	else:
 		var level_name = load(current_level_dot.level_file_path).instance().level_title
 		Scoreboard.display_message(level_name)
+		if sound: sfx.play("LevelDot")
+
+func update_sprite():
+	if move_direction == Vector2.ZERO:
+		sprite.play("default")
+	else:
+		sprite.play("walk")
