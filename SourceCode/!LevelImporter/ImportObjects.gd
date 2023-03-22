@@ -174,7 +174,7 @@ func _handle_leveldot_parameter(parameter_name, parameter_value, leveldot):
 			
 			if result:
 				var extro_level_filename = result.get_strings()[1]
-				var extro_level_file_path = "res://scenes/levels/" + world + "/" + extro_level_filename
+				var extro_level_file_path = "res://scenes/levels/" + world + "/" + extro_level_filename + ".tscn"
 				return extro_level_file_path
 			else:
 				push_error("Unable to parse level extro file path: " + parameter_value)

@@ -37,4 +37,10 @@ func activate(player_position : Vector2, stop_direction : Vector2):
 		WorldmapManager.worldmap_player_position = player_position
 		WorldmapManager.player_stop_direction = stop_direction
 		WorldmapManager.worldmap_level = Global.current_level
+		
+		if extro_level_file_path != "":
+			WorldmapManager.extro_level = extro_level_file_path
+		else:
+			WorldmapManager.extro_level = null
+		
 		Global.goto_level(level_file_path)

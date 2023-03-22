@@ -23,6 +23,7 @@ var worldmap_player_node = preload("res://scenes/worldmap/Player.tscn")
 var pause_menu = preload("res://scenes/menus/PauseScreen.tscn")
 
 onready var worldmap_objects = get_node_or_null("Objects")
+onready var extro_level = WorldmapManager.extro_level
 
 export var is_worldmap = false
 export var level_title = ""
@@ -143,3 +144,14 @@ func _create_worldmap_player(position : Vector2, player_object : PackedScene):
 	
 	Global.current_scene.add_child(player)
 	player.set_owner(Global.current_scene)
+
+func level_complete():
+	if extro_level != null:
+		print("GO TO EXTRO")
+		WorldmapManager.save_progress(true) # Clear the level in worldmap and save progress
+		Global.goto_level(extro_level)
+		return
+	if WorldmapManager.worldmap_level != null:
+		WorldmapManager.return_to_worldmap(true, true) # Clear the level in the worldmap and save progress
+	else:
+		Global.goto_title_screen()

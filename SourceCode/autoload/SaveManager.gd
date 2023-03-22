@@ -80,7 +80,16 @@ func new_game(initial_level, worldmap_level = null):
 	
 	Global.goto_level(initial_level)
 
-func save_game(levels_cleared : Array, worldmap_level : String, worldmap_position : Vector2, save_path : String = current_save_directory):
+func save_game(levels_cleared : Array = WorldmapManager.cleared_levels, worldmap_level : String = WorldmapManager.worldmap_level, worldmap_position : Vector2 = WorldmapManager.worldmap_player_position, save_path : String = current_save_directory):
+	if worldmap_level == null:
+		push_error("Error saving game: there is no worldmap level for the player to return to")
+		return
+	if worldmap_position == null:
+		push_error("Error saving game: player has no position in the worldmap")
+		return
+	if save_path == null:
+		push_error("Error saving game: No save path specified")
+	
 	var save_data = _encapsulate_game_data(levels_cleared, worldmap_level, worldmap_position)
 	
 	var dir = Directory.new()

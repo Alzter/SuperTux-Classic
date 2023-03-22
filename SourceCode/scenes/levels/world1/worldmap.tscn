@@ -120,7 +120,7 @@ level_file_path = "res://scenes/levels/world1/level25.tscn"
 [node name="level26" parent="Objects" instance=ExtResource( 1 )]
 position = Vector2( 240, 656 )
 level_file_path = "res://scenes/levels/world1/level26.tscn"
-extro_level_file_path = "res://scenes/levels/world1/extro"
+extro_level_file_path = "res://scenes/levels/world1/extro.tscn"
 
 [node name="TileMap" parent="." instance=ExtResource( 3 )]
 z_index = -10
