@@ -207,7 +207,7 @@ export var worldmap_tileset = {
 	53: "Snow",
 	54: "Snow",
 	55: "Snow",
-	56: "Snow",
+	56: "Path",
 	57: "Path",
 	
 	58: "Igloo",
