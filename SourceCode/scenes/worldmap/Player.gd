@@ -14,6 +14,13 @@ var down_tiles = [186, 146, 176, 152, 184, 178, 154, 144]
 var left_tiles = [186, 56, 152, 26, 154, 58, 184, 24]
 var right_tiles = [186, 56, 178, 58, 184, 48, 50, 176]
 
+var corner_tiles = {
+	50 : "ne",
+	26 : "nw",
+	152 : "se",
+	176 : "sw",
+}
+
 func _process(delta):
 	if tilemaps == []:
 		push_error("Worldmap player node cannot access any tilemaps in the worldmap")
@@ -58,8 +65,24 @@ func handle_path_movement(tilemap : TileMap, tile_position : Vector2, tile_id : 
 				move_direction = proposed_move_direction
 				stop_direction = Vector2.ZERO
 		
-		if !path_directions.has(move_direction): move_direction = Vector2.ZERO
+		if move_direction != Vector2.ZERO:
+			if corner_tiles.has(bitmask):
+				print(corner_tiles.get(bitmask))
+				match corner_tiles.get(bitmask):
+					"ne":
+						if move_direction == Vector2.LEFT: move_direction = Vector2.UP
+						if move_direction == Vector2.DOWN: move_direction = Vector2.RIGHT
+					"nw":
+						if move_direction == Vector2.RIGHT: move_direction = Vector2.UP
+						if move_direction == Vector2.DOWN: move_direction = Vector2.LEFT
+					"se":
+						if move_direction == Vector2.UP: move_direction = Vector2.LEFT
+						if move_direction == Vector2.RIGHT: move_direction = Vector2.DOWN
+					"sw":
+						if move_direction == Vector2.UP: move_direction = Vector2.RIGHT
+						if move_direction == Vector2.LEFT: move_direction = Vector2.DOWN
 		
+		if !path_directions.has(move_direction): move_direction = Vector2.ZERO
 
 func get_move_input():
 	var move_direction = Vector2.ZERO
