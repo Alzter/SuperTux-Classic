@@ -468,7 +468,10 @@ func _on_WinTimer_timeout():
 	_progress_to_next_level()
 
 func _progress_to_next_level():
-	Global.load_next_level()
+	if WorldmapManager.worldmap_level == null:
+		Global.goto_title_screen()
+	else:
+		WorldmapManager.return_to_worldmap(true, true) # Clear the level in the worldmap and save progress
 
 # Press escape to skip victory sequence
 func _unhandled_input(event):

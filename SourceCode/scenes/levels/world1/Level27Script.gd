@@ -40,5 +40,4 @@ func _process(delta):
 
 func _on_AnimationPlayer_animation_finished(anim_name):
 	if anim_name == "defeated":
-		SaveManager.delete_save_file()
-		Global.load_next_level(false)
+		WorldmapManager.

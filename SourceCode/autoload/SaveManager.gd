@@ -69,16 +69,19 @@ func does_options_data_exist() -> bool:
 	var file = File.new()
 	return file.file_exists(OPTIONS_FILE)
 
-
-func new_game():
+func new_game(initial_level, worldmap_level = null):
+	WorldmapManager.reset()
 	Scoreboard.coins = Scoreboard.initial_coins
 	Scoreboard.lives = Scoreboard.initial_lives
 	Scoreboard.player_initial_state = Scoreboard.initial_state
 	
-	Global.goto_level(LevelRoster.first_level)
+	if worldmap_level != null:
+		WorldmapManager.worldmap_level = worldmap_level
+	
+	Global.goto_level(initial_level)
 
-func save_game(level_reached, save_path = current_save_directory):
-	var save_data = _encapsulate_game_data(level_reached)
+func save_game(levels_cleared : Array, worldmap_level : String, worldmap_position : Vector2, save_path : String = current_save_directory):
+	var save_data = _encapsulate_game_data(levels_cleared, worldmap_level, worldmap_position)
 	
 	var dir = Directory.new()
 	if !dir.dir_exists(SAVE_DIR):
@@ -97,14 +100,16 @@ func save_game(level_reached, save_path = current_save_directory):
 	yield(get_tree(), "idle_frame")
 	emit_signal("save_completed")
 
-func _encapsulate_game_data(level_reached):
-	var level = level_reached
+func _encapsulate_game_data(levels_cleared : Array, worldmap_level : String, worldmap_position : Vector2):
 	var coins = Scoreboard.coins
 	var lives = Scoreboard.lives
 	var player_state = Scoreboard.player_initial_state
 	
 	var save_data = {
-		"level" : level,
+		"levels_cleared" : levels_cleared,
+		"worldmap" : worldmap_level,
+		"worldmap_x" : worldmap_position.x,
+		"worldmap_y" : worldmap_position.y,
 		"coins" : coins,
 		"lives" : lives,
 		"player_state" : player_state
@@ -134,7 +139,11 @@ func load_game(load_path = current_save_directory):
 	yield(get_tree(), "idle_frame")
 
 func _decapsulate_game_data(data_dictionary):
-	var level = data_dictionary.get("level")
+	var levels_cleared = data_dictionary.get("levels_cleared")
+	var worldmap_level = data_dictionary.get("worldmap_path")
+	var worldmap_x = data_dictionary.get("worldmap_x")
+	var worldmap_y = data_dictionary.get("worldmap_y")
+	var worldmap_position = Vector2(worldmap_x, worldmap_y)
 	var coins = data_dictionary.get("coins")
 	var lives = data_dictionary.get("lives")
 	var player_state = data_dictionary.get("player_state")
@@ -142,7 +151,10 @@ func _decapsulate_game_data(data_dictionary):
 	Scoreboard.coins = coins
 	Scoreboard.lives = lives
 	Scoreboard.player_initial_state = player_state
-	Global.goto_level(level)
+	WorldmapManager.worldmap_level = worldmap_level
+	WorldmapManager.cleared_levels = levels_cleared
+	WorldmapManager.worldmap_player_position = worldmap_position
+	WorldmapManager.return_to_worldmap()
 
 func delete_save_file(save_path = current_save_directory):
 	var dir = Directory.new()

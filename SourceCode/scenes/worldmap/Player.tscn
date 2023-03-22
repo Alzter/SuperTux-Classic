@@ -24,8 +24,6 @@ animations = [ {
 } ]
 
 [node name="Player" type="Node2D"]
-pause_mode = 2
-process_priority = 9999
 script = ExtResource( 4 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]

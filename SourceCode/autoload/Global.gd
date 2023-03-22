@@ -56,25 +56,28 @@ func _update_gravity(new_value):
 func respawn_player():
 	goto_level(current_level)
 
-func load_next_level(save_game = true):
-	var next_level = LevelRoster.get_subsequent_level(current_level)
-	
-	if next_level != null:
-		# Only save our progress if we're loading into
-		# A level (not a menu or a text scroll)
-		if !"levels" in next_level:
-			save_game = false
-		
-		if save_game:
-			yield(SaveManager.save_game(next_level), "completed")
-		
-		goto_level(next_level)
+#func load_next_level(save_game = true):
+#	var next_level = LevelRoster.get_subsequent_level(current_level)
+#
+#	if next_level != null:
+#		# Only save our progress if we're loading into
+#		# A level (not a menu or a text scroll)
+#		if !"levels" in next_level:
+#			save_game = false
+#
+#		if save_game:
+#			yield(SaveManager.save_game(next_level), "completed")
+#
+#		goto_level(next_level)
 
 func goto_level(path, reset_checkpoint = false):
 	if path != current_level or reset_checkpoint:
 		spawn_position = null
 	
 	goto_scene(path)
+
+func goto_title_screen():
+	goto_scene(title_screen_scene)
 
 func goto_scene(path, loading_level = false):
 	call_deferred("_deferred_goto_scene", path, loading_level)

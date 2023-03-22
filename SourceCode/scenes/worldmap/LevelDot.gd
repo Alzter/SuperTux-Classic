@@ -32,7 +32,8 @@ func _update_sprite():
 	else:
 		sprite.animation = "default"
 
-func activate():
+func activate(player_position : Vector2):
 	if !is_teleporter:
+		WorldmapManager.worldmap_player_position = player_position
 		WorldmapManager.worldmap_level = Global.current_level
 		Global.goto_level(level_file_path)

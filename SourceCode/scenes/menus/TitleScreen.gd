@@ -34,6 +34,7 @@ onready var options_menu = $OptionsMenu
 func _ready():
 	Music.continue("Title")
 	Scoreboard.hide()
+	WorldmapManager.reset()
 	#new_game_button.disabled = SaveManager.has_savefile()
 	load_game_button.disabled = !SaveManager.has_savefile()
 	
@@ -48,10 +49,10 @@ func _ready():
 func _on_NewGame_pressed():
 	if SaveManager.has_savefile():
 		new_game_warning.popup_centered()
-	else: SaveManager.new_game()
+	else: SaveManager.new_game(intro_scene)
 
 func _on_NewGameWarning_confirmed():
-	SaveManager.new_game()
+	SaveManager.new_game(intro_scene)
 
 func _on_LoadGame_pressed():
 	SaveManager.load_game()

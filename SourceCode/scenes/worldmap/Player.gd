@@ -58,7 +58,8 @@ func _process(delta):
 	
 	if current_level_dot != null:
 		if Input.is_action_just_pressed("jump") or Input.is_action_just_pressed("ui_accept"):
-			current_level_dot.activate()
+			var tile_position = tilemaps[0].world_to_map(position)
+			current_level_dot.activate(tile_position)
 
 func handle_path_movement(tilemap : TileMap, tile_position : Vector2, tile_id : int):
 	# Get the autotile bitmask of the path tile the player is currently standing on.
@@ -124,7 +125,7 @@ func handle_leveldot_collisions(tilemap):
 		
 		if level_position == player_position:
 			current_level_dot = leveldot
-			if false:#!leveldot.level_cleared:
+			if !leveldot.level_cleared:
 				stop_direction = move_direction
 				move_direction = Vector2.ZERO
 				return

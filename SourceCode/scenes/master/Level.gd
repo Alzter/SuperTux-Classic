@@ -116,8 +116,12 @@ func _load_pause_menu():
 	Global.current_scene.add_child(pause_screen_instance)
 
 func _create_worldmap_player(position : Vector2, player_object : PackedScene):
+	var player_position = position
+	if WorldmapManager.worldmap_player_position != null:
+		player_position = WorldmapManager.worldmap_player_position
+	
 	var player = worldmap_player_node.instance()
-	player.global_position = position * 32 + Vector2(16,16)
+	player.global_position = player_position * 32 + Vector2(16,16)
 	
 	# Set the worldmap player's level dots variable to an array of all the level dot objects
 	player.level_dots = worldmap_objects.get_children()

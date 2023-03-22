@@ -93,7 +93,6 @@ func _on_OptionsMenu_popup_hide():
 func _on_Abort_pressed():
 	if WorldmapManager.is_level_worldmap: return
 	
-	if WorldmapManager.worldmap_level != null:
-		Global.goto_level(WorldmapManager.worldmap_level)
+	WorldmapManager.return_to_worldmap()
 
 
