@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://music/TuxRacer - Race2.mp3" type="AudioStream" id=1]
 [ext_resource path="res://autoload/Music.gd" type="Script" id=2]
@@ -16,6 +16,7 @@
 [ext_resource path="res://music/BossAttack07.mp3" type="AudioStream" id=14]
 [ext_resource path="res://music/TuxVictorious.mp3" type="AudioStream" id=15]
 [ext_resource path="res://music/Credits.mp3" type="AudioStream" id=16]
+[ext_resource path="res://music/Salcon.mp3" type="AudioStream" id=17]
 
 [node name="Music" type="CanvasLayer"]
 script = ExtResource( 2 )
@@ -24,6 +25,9 @@ script = ExtResource( 2 )
 stream = ExtResource( 12 )
 volume_db = 10.0
 bus = "Music"
+
+[node name="Salcon" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 17 )
 
 [node name="TuxRacer - Race2" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 1 )
