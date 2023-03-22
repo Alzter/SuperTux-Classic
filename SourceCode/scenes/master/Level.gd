@@ -127,13 +127,19 @@ func _create_worldmap_player(position : Vector2, player_object : PackedScene):
 	if WorldmapManager.player_stop_direction != null:
 		player.stop_direction = WorldmapManager.player_stop_direction
 	
+	player.tilemaps = []
+	player.level_dots = []
+	
 	# Set the worldmap player's level dots variable to an array of all the level dot objects
-	player.level_dots = worldmap_objects.get_children()
+	for child in worldmap_objects.get_children():
+		if is_instance_valid(child):
+			player.level_dots.append(child)
 	
 	# Set the worldmap player's tile map variable to an array of all the level's tilemaps
-	for child in get_children():
-		if child is TileMap:
-			player.tilemaps.append(child)
+	for tilemap in get_children():
+		if tilemap is TileMap:
+			if is_instance_valid(tilemap):
+				player.tilemaps.append(tilemap)
 	
 	Global.current_scene.add_child(player)
 	player.set_owner(Global.current_scene)

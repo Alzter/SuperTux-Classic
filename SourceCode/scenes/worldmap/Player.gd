@@ -31,10 +31,11 @@ var corner_tiles = {
 
 # Set the player camera boundaries to the boundaries of the largest tilemap
 func _ready():
+	if tilemaps == []: push_error("Worldmap player node cannot access any tilemaps in the worldmap")
+	
 	powerup_state = Scoreboard.player_initial_state
 	update_sprite()
 	
-	if tilemaps == []: push_error("Worldmap player node cannot access any tilemaps in the worldmap")
 	
 	camera_bounds_to_tilemap_bounds()
 	
