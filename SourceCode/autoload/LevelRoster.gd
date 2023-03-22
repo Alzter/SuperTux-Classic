@@ -18,37 +18,37 @@
 extends Node
 
 var levels = [
-	"res://scenes/levels/world1/Intro.tscn",
-	"res://scenes/levels/world1/Level1.tscn",
-	"res://scenes/levels/world1/Level2.tscn",
-	"res://scenes/levels/world1/Level3.tscn",
-	"res://scenes/levels/world1/Level4.tscn",
-	"res://scenes/levels/world1/Level5.tscn",
-	"res://scenes/levels/world1/Level6.tscn",
-	"res://scenes/levels/world1/Level7.tscn",
-	"res://scenes/levels/world1/Level8.tscn",
-	"res://scenes/levels/world1/Level9.tscn",
-	"res://scenes/levels/world1/Level10.tscn",
-	"res://scenes/levels/world1/Level11.tscn",
-	"res://scenes/levels/world1/Level12.tscn",
-	"res://scenes/levels/world1/Level13.tscn",
-	"res://scenes/levels/world1/Level14.tscn",
-	"res://scenes/levels/world1/Level15.tscn",
-	"res://scenes/levels/world1/Level16.tscn",
-	"res://scenes/levels/world1/Level17.tscn",
-	"res://scenes/levels/world1/Level18.tscn",
-	"res://scenes/levels/world1/Level19.tscn",
-	"res://scenes/levels/world1/Level20.tscn",
-	"res://scenes/levels/world1/Level21.tscn",
-	"res://scenes/levels/world1/Level22.tscn",
-	"res://scenes/levels/world1/Level23.tscn",
-	"res://scenes/levels/world1/Level24.tscn",
-	"res://scenes/levels/world1/Level25.tscn",
-	"res://scenes/levels/world1/Level26.tscn", # The Castle of Nolok
+	"res://scenes/levels/world1/intro.tscn",
+	"res://scenes/levels/world1/level1.tscn",
+	"res://scenes/levels/world1/level2.tscn",
+	"res://scenes/levels/world1/level3.tscn",
+	"res://scenes/levels/world1/level4.tscn",
+	"res://scenes/levels/world1/level5.tscn",
+	"res://scenes/levels/world1/level6.tscn",
+	"res://scenes/levels/world1/level7.tscn",
+	"res://scenes/levels/world1/level8.tscn",
+	"res://scenes/levels/world1/level9.tscn",
+	"res://scenes/levels/world1/level10.tscn",
+	"res://scenes/levels/world1/level11.tscn",
+	"res://scenes/levels/world1/level12.tscn",
+	"res://scenes/levels/world1/level13.tscn",
+	"res://scenes/levels/world1/level14.tscn",
+	"res://scenes/levels/world1/level15.tscn",
+	"res://scenes/levels/world1/level16.tscn",
+	"res://scenes/levels/world1/level17.tscn",
+	"res://scenes/levels/world1/level18.tscn",
+	"res://scenes/levels/world1/level19.tscn",
+	"res://scenes/levels/world1/level20.tscn",
+	"res://scenes/levels/world1/level21.tscn",
+	"res://scenes/levels/world1/level22.tscn",
+	"res://scenes/levels/world1/level23.tscn",
+	"res://scenes/levels/world1/level24.tscn",
+	"res://scenes/levels/world1/level25.tscn",
+	"res://scenes/levels/world1/level26.tscn", # The Castle of Nolok
 	
-	"res://scenes/levels/world1/Level27BOSSBATTLE.tscn", # NOLOK BOSS FIGHT
+	"res://scenes/levels/world1/level27.tscn", # NOLOK BOSS FIGHT
 	
-	"res://scenes/levels/world1/Ending.tscn" # The good ending :D
+	"res://scenes/levels/world1/ending.tscn" # The good ending :D
 ]
 
 onready var first_level = levels[0]
