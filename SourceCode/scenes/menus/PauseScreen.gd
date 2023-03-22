@@ -31,6 +31,8 @@ var paused = false setget _set_paused
 
 func _ready():
 	if WorldmapManager.is_level_worldmap or WorldmapManager.worldmap_level == null:
+		button_continue.text = "Continue"
+		button_restart.hide()
 		button_abort.hide()
 	
 	# Make the music mute if we pause the game.

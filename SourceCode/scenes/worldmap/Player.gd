@@ -35,14 +35,9 @@ func _ready():
 	
 	if tilemaps == []: push_error("Worldmap player node cannot access any tilemaps in the worldmap")
 	
-	for t in tilemaps:
-		var tilemap : TileMap = t
-		var bounds = tilemap.get_used_rect()
-		bounds = Rect2(bounds.position * 32, (bounds.end - Vector2.ONE * 2) * 32)
-		camera.limit_left = min(bounds.position.x, camera.limit_left)
-		camera.limit_right = max(bounds.end.x, camera.limit_right)
-		camera.limit_top = min(camera.limit_top, bounds.position.y)
-		camera.limit_bottom = max(camera.limit_bottom, bounds.end.y)
+	camera_bounds_to_tilemap_bounds()
+	
+	get_current_level_dot()
 
 func _process(delta):
 	if tilemaps == []: push_error("Worldmap player node cannot access any tilemaps in the worldmap")
@@ -118,6 +113,16 @@ func get_move_input():
 	if Input.is_action_just_pressed("duck"): move_direction = Vector2.DOWN
 	return move_direction
 
+func camera_bounds_to_tilemap_bounds():
+	for t in tilemaps:
+		var tilemap : TileMap = t
+		var bounds = tilemap.get_used_rect()
+		bounds = Rect2(bounds.position * 32, (bounds.end - Vector2.ONE * 2) * 32)
+		camera.limit_left = min(bounds.position.x, camera.limit_left)
+		camera.limit_right = max(bounds.end.x, camera.limit_right)
+		camera.limit_top = min(camera.limit_top, bounds.position.y)
+		camera.limit_bottom = max(camera.limit_bottom, bounds.end.y)
+
 func handle_leveldot_collisions(tilemap):
 	if move_direction == Vector2.ZERO: return
 	if stop_direction != Vector2.ZERO:
@@ -138,6 +143,15 @@ func handle_leveldot_collisions(tilemap):
 			else:
 				move_direction = Vector2.ZERO
 				return
+
+func get_current_level_dot(tilemap = tilemaps[0]):
+	for leveldot in level_dots:
+		var level_position = tilemap.world_to_map(leveldot.position)
+		var player_position = tilemap.world_to_map(position)
+		
+		if level_position == player_position:
+			current_level_dot = leveldot
+			return
 
 func update_sprite(state = powerup_state):
 	sprite.play(str(state))
