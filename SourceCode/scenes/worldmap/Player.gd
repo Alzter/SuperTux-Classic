@@ -20,7 +20,7 @@ onready var sfx = $SFX
 var move_direction = Vector2(0,0)
 var stop_direction = Vector2(0,0)
 
-const MOVE_SPEED = 4 # Must be a power of 2 that's lower than 32
+const MOVE_SPEED = 2 # Must be a power of 2 that's lower than 32
 
 # PATH TILE BITMASK DETECTION
 var up_tiles = [186, 146, 18, 58, 178, 154, 50, 26]
@@ -166,9 +166,9 @@ func get_current_level_dot(tilemap = tilemaps[0]):
 			return
 
 func update_sprite_state(state = powerup_state):
-	sprite_big.visible = (state != 0)
-	sprite_small.visible = (state == 0)
-	sprite = sprite_big if (state != 0) else sprite_small
+	sprite_big.visible = (state == 0)
+	sprite_small.visible = (state != 0)
+	sprite = sprite_big if (state == 0) else sprite_small
 	
 	if state > 1:
 		shader.play("red")
