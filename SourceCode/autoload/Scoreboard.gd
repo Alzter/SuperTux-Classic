@@ -114,6 +114,7 @@ func _set_lives_count(new_value):
 	lives = clamp(new_value, -1, 99)
 
 func hide():
+	clear_message()
 	hud_node.hide()
 
 func show():

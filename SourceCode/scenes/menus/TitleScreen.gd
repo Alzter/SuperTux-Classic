@@ -32,7 +32,7 @@ onready var new_game_warning = $TitleContent/Menu/NewGameWarning
 onready var options_menu = $OptionsMenu
 
 func _ready():
-	Music.continue("Title")
+	Music.play("Title")
 	Scoreboard.hide()
 	WorldmapManager.reset()
 	#new_game_button.disabled = SaveManager.has_savefile()
