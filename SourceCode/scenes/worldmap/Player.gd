@@ -3,7 +3,8 @@ extends Node2D
 export var level_dots = [] # An array of all the level dot objects in the worldmap
 export var tilemaps = []   # An array of all the tilemap objects in the worldmap
 
-var current_level_dot = null # The node of the level dot the player is currently standing on.
+# The node of the level dot the player is currently standing on.
+var current_level_dot = null setget set_current_level_dot
 
 var powerup_state = 0
 
@@ -60,6 +61,7 @@ func _process(delta):
 	if current_level_dot != null:
 		if Input.is_action_just_pressed("jump") or Input.is_action_just_pressed("ui_accept"):
 			var tile_position = tilemaps[0].world_to_map(position)
+			Scoreboard.clear_message()
 			current_level_dot.activate(tile_position, stop_direction)
 
 func handle_path_movement(tilemap : TileMap, tile_position : Vector2, tile_id : int):
@@ -128,21 +130,23 @@ func handle_leveldot_collisions(tilemap):
 	if stop_direction != Vector2.ZERO:
 		if move_direction == stop_direction * -1: return
 	
-	current_level_dot = null
+	var new_level_dot = null
 	
 	for leveldot in level_dots:
 		var level_position = tilemap.world_to_map(leveldot.position)
 		var player_position = tilemap.world_to_map(position)
 		
 		if level_position == player_position:
-			current_level_dot = leveldot
+			new_level_dot = leveldot
 			if !leveldot.level_cleared:
 				stop_direction = move_direction
 				move_direction = Vector2.ZERO
-				return
+				break
 			else:
 				move_direction = Vector2.ZERO
-				return
+				break
+	
+	self.current_level_dot = new_level_dot
 
 func get_current_level_dot(tilemap = tilemaps[0]):
 	for leveldot in level_dots:
@@ -150,8 +154,18 @@ func get_current_level_dot(tilemap = tilemaps[0]):
 		var player_position = tilemap.world_to_map(position)
 		
 		if level_position == player_position:
-			current_level_dot = leveldot
+			self.current_level_dot = leveldot
 			return
 
 func update_sprite(state = powerup_state):
 	sprite.play(str(state))
+
+func set_current_level_dot(new_value):
+	if current_level_dot == new_value: return
+	current_level_dot = new_value
+	
+	if new_value == null:
+		Scoreboard.clear_message()
+	else:
+		var level_name = load(current_level_dot.level_file_path).instance().level_title
+		Scoreboard.display_message(level_name)
