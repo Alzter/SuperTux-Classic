@@ -38,6 +38,7 @@ ParticleCache="*res://autoload/ParticleCache.tscn"
 LevelRoster="*res://autoload/LevelRoster.gd"
 SaveManager="*res://autoload/SaveManager.gd"
 ResolutionManager="*res://autoload/ResolutionManager.gd"
+WorldmapManager="*res://autoload/WorldmapManager.gd"
 
 [display]
 

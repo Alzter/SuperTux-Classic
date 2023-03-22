@@ -34,4 +34,5 @@ func _update_sprite():
 
 func activate():
 	if !is_teleporter:
+		WorldmapManager.worldmap_level = Global.current_level
 		Global.goto_level(level_file_path)

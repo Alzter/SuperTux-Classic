@@ -21,9 +21,18 @@ onready var menu = $Control
 onready var menu_items = $Control/CenterContainer
 onready var options_menu = $Control/OptionsMenu
 
+onready var button_continue = $Control/CenterContainer/VBoxContainer/Continue
+onready var button_restart = $Control/CenterContainer/VBoxContainer/Restart
+onready var button_options = $Control/CenterContainer/VBoxContainer/Options
+onready var button_abort = $Control/CenterContainer/VBoxContainer/Abort
+onready var button_quit = $Control/CenterContainer/VBoxContainer/Quit
+
 var paused = false setget _set_paused
 
 func _ready():
+	if WorldmapManager.is_level_worldmap or WorldmapManager.worldmap_level == null:
+		button_abort.hide()
+	
 	# Make the music mute if we pause the game.
 	Music.pause_mode = PAUSE_MODE_INHERIT
 	menu.hide()
@@ -53,22 +62,25 @@ func _on_Quit_pressed():
 # Focus signals
 
 func _on_Continue_mouse_entered():
-	$Control/CenterContainer/VBoxContainer/Continue.grab_focus()
+	button_continue.grab_focus()
 
 func _on_Restart_mouse_entered():
-	$Control/CenterContainer/VBoxContainer/Restart.grab_focus()
+	button_restart.grab_focus()
 
 func _on_Options_mouse_entered():
-	$Control/CenterContainer/VBoxContainer/Options.grab_focus()
+	button_options.grab_focus()
+
+func _on_Abort_mouse_entered():
+	button_abort.grab_focus()
 
 func _on_Quit_mouse_entered():
-	$Control/CenterContainer/VBoxContainer/Quit.grab_focus()
+	button_quit.grab_focus()
 
 #Grabbing focus when not hidden
 
 func _on_Control_visibility_changed():
 	if $Control.visible == true:
-		$Control/CenterContainer/VBoxContainer/Continue.grab_focus()
+		button_continue.grab_focus()
 
 func _on_Options_pressed():
 	menu_items.modulate.a = 0
@@ -76,4 +88,12 @@ func _on_Options_pressed():
 
 func _on_OptionsMenu_popup_hide():
 	menu_items.modulate.a = 1
-	$Control/CenterContainer/VBoxContainer/Options.grab_focus()
+	button_options.grab_focus()
+
+func _on_Abort_pressed():
+	if WorldmapManager.is_level_worldmap: return
+	
+	if WorldmapManager.worldmap_level != null:
+		Global.goto_level(WorldmapManager.worldmap_level)
+
+

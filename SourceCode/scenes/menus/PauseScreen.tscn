@@ -31,9 +31,9 @@ margin_bottom = -39.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Control/CenterContainer"]
 margin_left = 190.0
-margin_top = 92.0
+margin_top = 69.0
 margin_right = 450.0
-margin_bottom = 349.0
+margin_bottom = 371.0
 custom_constants/separation = 15
 
 [node name="Title" type="RichTextLabel" parent="Control/CenterContainer/VBoxContainer"]
@@ -77,15 +77,24 @@ margin_right = 260.0
 margin_bottom = 212.0
 rect_min_size = Vector2( 260, 0 )
 focus_neighbour_top = NodePath("../Restart")
-focus_neighbour_bottom = NodePath("../Quit")
+focus_neighbour_bottom = NodePath("../Abort")
 text = "Options"
 
-[node name="Quit" type="Button" parent="Control/CenterContainer/VBoxContainer"]
+[node name="Abort" type="Button" parent="Control/CenterContainer/VBoxContainer"]
 margin_top = 227.0
 margin_right = 260.0
 margin_bottom = 257.0
 rect_min_size = Vector2( 260, 0 )
 focus_neighbour_top = NodePath("../Options")
+focus_neighbour_bottom = NodePath("../Quit")
+text = "Abort Level"
+
+[node name="Quit" type="Button" parent="Control/CenterContainer/VBoxContainer"]
+margin_top = 272.0
+margin_right = 260.0
+margin_bottom = 302.0
+rect_min_size = Vector2( 260, 0 )
+focus_neighbour_top = NodePath("../Abort")
 focus_neighbour_bottom = NodePath("../Continue")
 text = "Save and Quit"
 
@@ -98,6 +107,8 @@ text = "Save and Quit"
 [connection signal="pressed" from="Control/CenterContainer/VBoxContainer/Restart" to="." method="_on_Restart_pressed"]
 [connection signal="mouse_entered" from="Control/CenterContainer/VBoxContainer/Options" to="." method="_on_Options_mouse_entered"]
 [connection signal="pressed" from="Control/CenterContainer/VBoxContainer/Options" to="." method="_on_Options_pressed"]
+[connection signal="mouse_entered" from="Control/CenterContainer/VBoxContainer/Abort" to="." method="_on_Abort_mouse_entered"]
+[connection signal="pressed" from="Control/CenterContainer/VBoxContainer/Abort" to="." method="_on_Abort_pressed"]
 [connection signal="mouse_entered" from="Control/CenterContainer/VBoxContainer/Quit" to="." method="_on_Quit_mouse_entered"]
 [connection signal="pressed" from="Control/CenterContainer/VBoxContainer/Quit" to="." method="_on_Quit_pressed"]
 [connection signal="popup_hide" from="Control/OptionsMenu" to="." method="_on_OptionsMenu_popup_hide"]

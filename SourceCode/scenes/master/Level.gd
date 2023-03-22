@@ -40,6 +40,8 @@ onready var custom_camera = $Camera2D if has_node("Camera2D") else null
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	WorldmapManager.is_level_worldmap = is_worldmap
+	
 	if !is_worldmap:
 		# Set the level's gravity
 		# (Buggy atm - doesn't properly match Milestone 1)
