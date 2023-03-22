@@ -116,10 +116,9 @@ func _place_worldmap_objects(obj_array, object_node : Node):
 		
 		# Create the level dot object for the level dot and add it to the scene
 		var leveldot = level_dot_scene.instance()
-		object_node.add_child(leveldot)
 		leveldot.name = "LevelDot" + str(count)
-		leveldot.position = position * 32
-		leveldot.set_owner(object_node)
+		object_node.add_child(leveldot)
+		leveldot.position = position * 32 + Vector2(16,16)
 		
 		var regex = RegEx.new()
 		regex.compile('(\\D+) "(.+)"')
@@ -133,14 +132,10 @@ func _place_worldmap_objects(obj_array, object_node : Node):
 				
 				if leveldot_parameters.has(parameter_name):
 					var parameter_to_get = leveldot_parameters.get(parameter_name)
-					var parameter_to_change = leveldot.get(parameter_to_get)
-					parameter_to_change = parameter_value
+					leveldot.set(parameter_to_get, parameter_value)
+					print(leveldot.get(parameter_to_get))
 				else:
 					print("Unrecognised Level Dot Parameter: " + parameter_name)
-		
-		
-		return
-	return
 
 func _place_objects_in_level(obj_array, objmap_to_use):
 	for i in obj_array:

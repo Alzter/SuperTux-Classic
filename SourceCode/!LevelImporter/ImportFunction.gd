@@ -20,6 +20,8 @@ extends Node
 func save_node_to_directory(node, dir):
 	for child in node.get_children():
 		child.owner = node
+		for baby in child.get_children():
+			baby.owner = node
 	var packed_scene = PackedScene.new()
 	packed_scene.pack(node)
 	ResourceSaver.save("res://" + str(dir), packed_scene)

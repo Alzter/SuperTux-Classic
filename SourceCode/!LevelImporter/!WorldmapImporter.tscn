@@ -20,7 +20,6 @@ is_level_worldmap = true
 position = Vector2( 320, 240 )
 scale = Vector2( 10, 10 )
 current = true
-zoom = Vector2( 8, 8 )
 
 [node name="MusicImporter" type="Node" parent="."]
 script = ExtResource( 5 )
@@ -47,4 +46,4 @@ tile_set = ExtResource( 9 )
 z_index = -10
 tile_set = ExtResource( 9 )
 
-[node name="Objects" type="Node" parent="Level"]
+[node name="Objects" type="Node2D" parent="Level"]
