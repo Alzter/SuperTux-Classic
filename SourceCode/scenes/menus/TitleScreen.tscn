@@ -57,7 +57,7 @@ margin_bottom = -4.0
 custom_fonts/font = ExtResource( 6 )
 text = "This game comes under ABSOLUTELY NO WARRANTY! This is free, open-source software, and you are welcome to modify and redistribute it under certain conditions; see COPYING.TXT for details.
 
-Copyright © 2003-2022 SuperTux Team & Alexander Small"
+Copyright © 2003-2023 SuperTux Team & Alexander Small"
 align = 2
 valign = 2
 autowrap = true
@@ -71,7 +71,7 @@ margin_right = 125.0
 margin_bottom = -2.0
 custom_colors/font_color = Color( 0.992157, 1, 0, 1 )
 custom_fonts/font = ExtResource( 5 )
-text = "Release v0.0.2"
+text = "Release v0.1.0"
 valign = 2
 
 [node name="Menu" type="Control" parent="TitleContent"]
