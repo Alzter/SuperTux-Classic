@@ -24,6 +24,7 @@ func _update_cleared_state(new_value):
 	_update_sprite()
 
 func _update_sprite():
+	if sprite == null: return
 	if is_teleporter:
 		sprite.animation = "teleporter"
 	elif level_cleared:

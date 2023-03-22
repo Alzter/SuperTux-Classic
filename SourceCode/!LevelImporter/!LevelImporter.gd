@@ -127,7 +127,6 @@ func import_worldmap():
 	
 	tiles_interactive = _get_worldmap_tile_data(level_data)
 	object_list = _get_objects_from_leveldata(level_data, "levels")
-	#print(object_list)
 	
 	_import_level(true)
 
@@ -152,6 +151,12 @@ func _import_level(is_worldmap = false):
 	if is_worldmap:
 		tile_importer.import_worldmap_tiles(tiles_interactive, level_intact, level_fg)
 		object_importer.import_worldmap_objects(object_list, worldmap_objects)
+		
+		var player_x = int(_get_section_of_string(level_data, "(start_pos_x ", ")"))
+		var player_y = int(_get_section_of_string(level_data, "(start_pos_y ", ")"))
+		
+		level.worldmap_spawn = Vector2(player_x, player_y)
+		level.is_worldmap = true
 	else:
 		tile_importer.import_tilemap(tiles_interactive, level_intact, objectmap, false)
 		tile_importer.import_tilemap(tiles_background, level_bg, objectmap, true)

@@ -30,6 +30,8 @@ export var uses_timer = true
 export var time = 300
 export var gravity = 10
 export var starting_powerup = 0
+export var worldmap_spawn = Vector2()
+export var worldmap_player_object : PackedScene
 
 onready var custom_camera = $Camera2D if has_node("Camera2D") else null
 
@@ -41,6 +43,11 @@ func _ready():
 		Global.gravity = gravity / 10
 	else:
 		uses_timer = false
+		
+		# Create the player object inside the worldmap
+		var worldmap_player = worldmap_player_object.instance()
+		add_child(worldmap_player)
+		worldmap_player.position = worldmap_spawn * 32 + Vector2(16,16)
 	
 	# Set the player's starting powerup
 	if Scoreboard.player_initial_state < starting_powerup:
