@@ -5,7 +5,7 @@
 [ext_resource path="res://images/player/tux/worldmap/small/smalltuxwalk7.png" type="Texture" id=3]
 [ext_resource path="res://scenes/worldmap/Player.gd" type="Script" id=4]
 [ext_resource path="res://scenes/master/SFX.gd" type="Script" id=5]
-[ext_resource path="res://sounds/objects/brick.wav" type="AudioStream" id=6]
+[ext_resource path="res://sounds/objects/coin.wav" type="AudioStream" id=6]
 [ext_resource path="res://images/player/tux/worldmap/small/smalltux.png" type="Texture" id=7]
 [ext_resource path="res://images/player/tux/worldmap/small/smalltuxwalk8.png" type="Texture" id=8]
 [ext_resource path="res://images/player/tux/worldmap/big/tuxwalk3.png" type="Texture" id=9]
@@ -152,7 +152,6 @@ playing = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
 current = true
-zoom = Vector2( 0.5, 0.5 )
 limit_left = 0
 limit_top = 0
 limit_right = 0
@@ -166,7 +165,7 @@ script = ExtResource( 5 )
 
 [node name="LevelDot" type="AudioStreamPlayer" parent="SFX"]
 stream = ExtResource( 6 )
-volume_db = -5.0
+volume_db = -8.0
 bus = "Sounds"
 
 [node name="SpriteColour" type="AnimationPlayer" parent="."]
