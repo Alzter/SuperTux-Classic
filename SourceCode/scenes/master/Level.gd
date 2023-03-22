@@ -19,6 +19,7 @@ extends Node2D
 
 var level_intro = preload("res://scenes/menus/LevelIntroduction.tscn")
 var player_node = preload("res://scenes/player/Tux.tscn")
+var worldmap_player_node = preload("res://scenes/worldmap/Player.tscn")
 var pause_menu = preload("res://scenes/menus/PauseScreen.tscn")
 
 export var is_worldmap = false
@@ -56,6 +57,8 @@ func _ready():
 	
 	# Display the level title card and wait until it disappears
 	if !is_worldmap: yield(_level_title_card(), "completed")
+	else:
+		Global.emit_signal("level_ready")
 	
 	# Then we load the pause menu into the level so you can pause the game
 	_load_pause_menu()
@@ -109,6 +112,8 @@ func _load_pause_menu():
 	Global.current_scene.add_child(pause_screen_instance)
 
 func _create_worldmap_player(position : Vector2, player_object : PackedScene):
-	var worldmap_player = player_object.instance()
-	add_child(worldmap_player)
-	worldmap_player.position = position * 32 + Vector2(16,16)
+	var player = worldmap_player_node.instance()
+	player.global_position = position * 32 + Vector2(16,16)
+	Global.current_scene.add_child(player)
+	player.set_owner(Global.current_scene)
+	print(player)

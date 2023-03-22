@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://images/player/tux/worldmap/smalltux.png" type="Texture" id=1]
 [ext_resource path="res://images/player/tux/worldmap/firetux.png" type="Texture" id=2]
 [ext_resource path="res://images/player/tux/worldmap/tux.png" type="Texture" id=3]
+[ext_resource path="res://scenes/worldmap/Player.gd" type="Script" id=4]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -23,6 +24,9 @@ animations = [ {
 } ]
 
 [node name="Player" type="Node2D"]
+pause_mode = 2
+process_priority = 9999
+script = ExtResource( 4 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 1 )
