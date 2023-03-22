@@ -86,10 +86,10 @@ func handle_path_movement(tilemap : TileMap, tile_position : Vector2, tile_id : 
 
 func get_move_input():
 	var move_direction = Vector2.ZERO
-	if Input.is_action_pressed("move_left"): move_direction = Vector2.LEFT
-	if Input.is_action_pressed("move_right"): move_direction = Vector2.RIGHT
-	if Input.is_action_pressed("move_up"): move_direction = Vector2.UP
-	if Input.is_action_pressed("duck"): move_direction = Vector2.DOWN
+	if Input.is_action_just_pressed("move_left"): move_direction = Vector2.LEFT
+	if Input.is_action_just_pressed("move_right"): move_direction = Vector2.RIGHT
+	if Input.is_action_just_pressed("move_up"): move_direction = Vector2.UP
+	if Input.is_action_just_pressed("duck"): move_direction = Vector2.DOWN
 	return move_direction
 
 func handle_leveldot_collisions(tilemap):
