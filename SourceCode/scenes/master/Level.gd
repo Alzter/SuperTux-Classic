@@ -147,7 +147,7 @@ func _create_worldmap_player(position : Vector2, player_object : PackedScene):
 
 func level_complete():
 	if extro_level != null:
-		print("GO TO EXTRO")
+		WorldmapManager.extro_level = null
 		WorldmapManager.save_progress(true) # Clear the level in worldmap and save progress
 		Global.goto_level(extro_level)
 		return
