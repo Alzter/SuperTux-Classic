@@ -48,7 +48,7 @@ var levels = [
 	
 	"res://scenes/levels/world1/level27.tscn", # NOLOK BOSS FIGHT
 	
-	"res://scenes/levels/world1/ending.tscn" # The good ending :D
+	"res://scenes/levels/world1/extro.tscn" # The good ending :D
 ]
 
 onready var first_level = levels[0]

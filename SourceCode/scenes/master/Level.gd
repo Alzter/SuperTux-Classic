@@ -21,6 +21,7 @@ var level_intro = preload("res://scenes/menus/LevelIntroduction.tscn")
 var player_node = preload("res://scenes/player/Tux.tscn")
 var pause_menu = preload("res://scenes/menus/PauseScreen.tscn")
 
+export var is_worldmap = false
 export var level_title = ""
 export var level_author = ""
 export var music = "ChipDisko"
@@ -34,9 +35,12 @@ onready var custom_camera = $Camera2D if has_node("Camera2D") else null
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	# Set the level's gravity
-	# (Buggy atm - doesn't properly match Milestone 1)
-	Global.gravity = gravity / 10
+	if !is_worldmap:
+		# Set the level's gravity
+		# (Buggy atm - doesn't properly match Milestone 1)
+		Global.gravity = gravity / 10
+	else:
+		uses_timer = false
 	
 	# Set the player's starting powerup
 	if Scoreboard.player_initial_state < starting_powerup:
@@ -46,7 +50,7 @@ func _ready():
 	else: Scoreboard.disable_level_timer()
 	
 	# Display the level title card and wait until it disappears
-	yield(_level_title_card(), "completed")
+	if !is_worldmap: yield(_level_title_card(), "completed")
 	
 	# Then we load the pause menu into the level so you can pause the game
 	_load_pause_menu()

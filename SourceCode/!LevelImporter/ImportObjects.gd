@@ -25,6 +25,8 @@ var unknown_objects = []
 onready var object_map = null
 onready var import = null
 
+var world = null
+
 var object_types = {
 	"spiky" : "BadSpiky",
 	"snowball" : "BadSnowball",
@@ -133,32 +135,52 @@ func _place_worldmap_objects(obj_array, object_node : Node):
 				
 				if leveldot_parameters.has(parameter_name):
 					var parameter_to_get = leveldot_parameters.get(parameter_name)
-					parameter_value = _handle_leveldot_parameters(parameter_to_get, parameter_value)
+					parameter_value = _handle_leveldot_parameter(parameter_to_get, parameter_value)
 					leveldot.set(parameter_to_get, parameter_value)
-					print(leveldot.get(parameter_to_get))
 				else:
 					print("Unrecognised Level Dot Parameter: " + parameter_name)
 
 # This function converts the parameters from level dots in SuperTux worldmaps
 # into SuperTux Classic's format.
-func _handle_leveldot_parameters(parameter_name, parameter_value):
+func _handle_leveldot_parameter(parameter_name, parameter_value):
 	match parameter_name:
 		
 		# Converts level file paths
 		# e.g. "world1/level26.stl"
 		# Into a path readable by Godot
-		# e.g. "res://scences/levels/world1/level26.tscn"
+		# e.g. "res://scenes/levels/world1/level26.tscn"
 		"level_file_path":
 			var filepath_splitter = RegEx.new()
 			filepath_splitter.compile('(\\D+\\d+)\\/(\\D+\\d+).stl')
 			
 			var result = filepath_splitter.search(parameter_value)
-			if result.success:
-				level_folder = result.get_strings()[1]
+			if result:
+				var level_folder = result.get_strings()[1]
+				var level_filename = result.get_strings()[2]
+				world = level_folder
+				var new_level_file_path = "res://scenes/levels/" + level_folder + "/" + level_filename + ".tscn"
+				return new_level_file_path
 			else:
 				push_error("Unable to parse level file path: " + parameter_value)
+		
+		# Converts level extro file paths from
+		# "extro.txt"
+		# to "res://scenes/levels/world1/extro.tscn"
+		# using the world folder variable we stored from the last level
+		"extro_level_file_path":
+			var extro_filename_splitter = RegEx.new()
+			extro_filename_splitter.compile('(\\D+)\\.')
+			var result = extro_filename_splitter.search(parameter_value)
+			
+			if result:
+				var extro_level_filename = result.get_strings()[1]
+				var extro_level_file_path = "res://scenes/levels/" + world + "/" + extro_level_filename
+				return extro_level_file_path
+			else:
+				push_error("Unable to parse level extro file path: " + parameter_value)
 	
 	# Failsafe incase the value is not handled
+	print("Level dot parameter not handled: " + parameter_name)
 	return parameter_value
 
 func _place_objects_in_level(obj_array, objmap_to_use):

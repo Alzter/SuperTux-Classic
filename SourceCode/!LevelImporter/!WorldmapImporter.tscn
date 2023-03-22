@@ -37,6 +37,7 @@ level_dot_scene = ExtResource( 8 )
 
 [node name="Level" type="Node2D" parent="."]
 script = ExtResource( 1 )
+is_worldmap = true
 
 [node name="Foreground" parent="Level" instance=ExtResource( 7 )]
 z_index = -5
