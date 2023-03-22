@@ -50,6 +50,7 @@ var leveldot_parameters = {
 	"map-message" : "message",
 	"dest_x" : "teleport_location.x",
 	"dest_y" : "teleport_location.y",
+	"invisible-teleporter" : "invisible",
 }
 
 func import_worldmap_objects(object_string, object_node):
