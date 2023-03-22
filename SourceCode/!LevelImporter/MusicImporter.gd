@@ -26,5 +26,6 @@ export var music = {
 	"fortress.mod" : "Fortress",
 	"fortress2.mod" : "Fortress2",
 	"SALCON.mod" : "Salcon",
+	"SALCON.MOD" : "Salcon",
 	"credits.ogg" : "Credits"
 }

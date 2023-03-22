@@ -123,7 +123,8 @@ func _ready():
 		import_worldmap()
 
 func import_worldmap():
-	level_width = int(_get_section_of_string(level_data, "width ", ")"))
+	_get_level_attributes(level_data, true)
+	
 	tiles_interactive = _get_worldmap_tile_data(level_data)
 	object_list = _get_objects_from_leveldata(level_data, "levels")
 	#print(object_list)
@@ -163,12 +164,14 @@ func _import_level(is_worldmap = false):
 	
 	import.save_node_to_directory(level, export_file_path)
 
-func _get_level_attributes(leveldata):
+func _get_level_attributes(leveldata, is_worldmap = false):
 	level_width = int(_get_section_of_string(leveldata, "width ", ")"))
-	level.gravity = int(_get_section_of_string(leveldata, "gravity ", ")"))
-	level.level_title = _get_section_of_string(leveldata, "name \"", "\")")
-	level.level_author = _get_section_of_string(leveldata, "author \"", "\")")
-	level.particle_system = _get_section_of_string(leveldata, "particle_system \"", "\")")
+	
+	if !is_worldmap:
+		level.level_title = _get_section_of_string(leveldata, "name \"", "\")")
+		level.gravity = int(_get_section_of_string(leveldata, "gravity ", ")"))
+		level.level_author = _get_section_of_string(leveldata, "author \"", "\")")
+		level.particle_system = _get_section_of_string(leveldata, "particle_system \"", "\")")
 	
 	var level_music = _get_section_of_string(leveldata, "music \"", "\")")
 	if music.has(level_music):
