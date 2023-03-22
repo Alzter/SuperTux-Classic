@@ -7,7 +7,7 @@
 [ext_resource path="res://!LevelImporter/MusicImporter.gd" type="Script" id=5]
 [ext_resource path="res://!LevelImporter/ImportFunction.tscn" type="PackedScene" id=6]
 [ext_resource path="res://scenes/master/TileMap.tscn" type="PackedScene" id=7]
-[ext_resource path="res://scenes/master/ObjectMap.tscn" type="PackedScene" id=8]
+[ext_resource path="res://scenes/worldmap/LevelDot.tscn" type="PackedScene" id=8]
 [ext_resource path="res://scenes/tilesets/WorldmapTiles.tres" type="TileSet" id=9]
 
 [node name="WorldmapImporter" type="Node2D"]
@@ -31,6 +31,8 @@ is_worldmap = true
 
 [node name="ObjectImporter" type="Node2D" parent="."]
 script = ExtResource( 4 )
+is_worldmap = true
+level_dot_scene = ExtResource( 8 )
 
 [node name="ImportFunctions" parent="." instance=ExtResource( 6 )]
 
@@ -45,5 +47,4 @@ tile_set = ExtResource( 9 )
 z_index = -10
 tile_set = ExtResource( 9 )
 
-[node name="ObjectMap" parent="Level" instance=ExtResource( 8 )]
-enabled = false
+[node name="Objects" type="Node" parent="Level"]

@@ -17,7 +17,10 @@
 
 extends Node2D
 
+export var is_worldmap = false
+export var level_dot_scene : PackedScene
 var text = ""
+var unknown_objects = []
 
 onready var object_map = null
 onready var import = null
@@ -36,7 +39,23 @@ var object_types = {
 	"flame" : "BadFlame",
 
 	"point" : "!Checkpoint",
+	"level" : "level",
 }
+
+# Translates parameters from Milestone 1's leveldot objects into STC's leveldot objects.
+var leveldot_parameters = {
+	"name" : "level_file_path",
+	"extro-filename" : "extro_level_file_path",
+	"teleport-message" : "message",
+	"map-message" : "message",
+	"dest_x" : "teleport_location.x",
+	"dest_y" : "teleport_location.y",
+}
+
+func import_worldmap_objects(object_string, object_node):
+	if object_string == "" or object_string == null: return
+	var objects = _object_list_to_array(object_string)
+	_place_worldmap_objects(objects, object_node)
 
 func import_objects(object_string, object_map):
 	if object_string == "" or object_string == null: return
@@ -73,6 +92,8 @@ func _object_list_to_array(object_string):
 			if array != []:
 				obj_array.append(array)
 			array = []
+		#else:
+		#	if !unknown_objects.has(i): unknown_objects.append(i)
 		
 		var first_letter = i.substr(0, 1)
 		if ["x", "y"].has(first_letter):
@@ -85,8 +106,43 @@ func _object_list_to_array(object_string):
 	
 	return obj_array
 
+func _place_worldmap_objects(obj_array, object_node : Node):
+	# For every level dot in the worldmap
+	# They have the format [level, name "world/level.stl", X, Y, other_parameter "value"]
+	var count = 0
+	for i in obj_array:
+		count += 1
+		var position = Vector2(i[2], i[3])
+		
+		# Create the level dot object for the level dot and add it to the scene
+		var leveldot = level_dot_scene.instance()
+		object_node.add_child(leveldot)
+		leveldot.name = "LevelDot" + str(count)
+		leveldot.position = position * 32
+		leveldot.set_owner(object_node)
+		
+		var regex = RegEx.new()
+		regex.compile('(\\D+) "(.+)"')
+		
+		# Use a Regex to capture all string parameters in the level dot object
+		for j in i:
+			var result = regex.search(j)
+			if result:
+				var parameter_name = result.get_strings()[1] # name
+				var parameter_value = result.get_strings()[2] # world1/level1.stl
+				
+				if leveldot_parameters.has(parameter_name):
+					var parameter_to_get = leveldot_parameters.get(parameter_name)
+					var parameter_to_change = leveldot.get(parameter_to_get)
+					parameter_to_change = parameter_value
+				else:
+					print("Unrecognised Level Dot Parameter: " + parameter_name)
+		
+		
+		return
+	return
+
 func _place_objects_in_level(obj_array, objmap_to_use):
-	var unknown_objects = []
 	for i in obj_array:
 		var obj_offset = Vector2(0,0)
 		var type = i[0]

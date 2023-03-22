@@ -101,6 +101,7 @@ onready var level_intact = $Level/TileMap
 onready var level_bg = $Level/Background
 onready var level_fg = $Level/Foreground
 onready var objectmap = $Level/ObjectMap
+onready var worldmap_objects = get_node("Level/Objects")
 
 # Returns only the portion of a string between beginning_phrase and end_phrase.
 func _get_section_of_string(string, beginning_phrase, end_phrase):
@@ -124,7 +125,7 @@ func _ready():
 func import_worldmap():
 	level_width = int(_get_section_of_string(level_data, "width ", ")"))
 	tiles_interactive = _get_worldmap_tile_data(level_data)
-	#object_list = _get_objects_from_leveldata(level_data, "levels")
+	object_list = _get_objects_from_leveldata(level_data, "levels")
 	#print(object_list)
 	
 	_import_level(true)
@@ -149,6 +150,7 @@ func _import_level(is_worldmap = false):
 	
 	if is_worldmap:
 		tile_importer.import_worldmap_tiles(tiles_interactive, level_intact, level_fg)
+		object_importer.import_worldmap_objects(object_list, worldmap_objects)
 	else:
 		tile_importer.import_tilemap(tiles_interactive, level_intact, objectmap, false)
 		tile_importer.import_tilemap(tiles_background, level_bg, objectmap, true)
@@ -156,8 +158,8 @@ func _import_level(is_worldmap = false):
 		
 		object_importer.import_objects(object_list, objectmap)
 		object_importer.import_objects(checkpoint_list, objectmap)
-	
-	objectmap.enabled = true
+		
+		objectmap.enabled = true
 	
 	import.save_node_to_directory(level, export_file_path)
 
