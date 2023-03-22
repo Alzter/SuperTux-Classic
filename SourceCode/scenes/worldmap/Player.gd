@@ -33,7 +33,6 @@ func _ready():
 		var tilemap : TileMap = t
 		var bounds = tilemap.get_used_rect()
 		bounds = Rect2(bounds.position * 32, (bounds.end - Vector2.ONE * 2) * 32)
-		print(bounds)
 		camera.limit_left = min(bounds.position.x, camera.limit_left)
 		camera.limit_right = max(bounds.end.x, camera.limit_right)
 		camera.limit_top = min(camera.limit_top, bounds.position.y)

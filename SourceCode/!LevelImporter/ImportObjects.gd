@@ -119,7 +119,6 @@ func _place_worldmap_objects(obj_array, object_node : Node):
 		
 		# Create the level dot object for the level dot and add it to the scene
 		var leveldot = level_dot_scene.instance()
-		leveldot.name = "LevelDot" + str(count)
 		object_node.add_child(leveldot)
 		leveldot.position = position * 32 + Vector2(16,16)
 		
@@ -135,14 +134,14 @@ func _place_worldmap_objects(obj_array, object_node : Node):
 				
 				if leveldot_parameters.has(parameter_name):
 					var parameter_to_get = leveldot_parameters.get(parameter_name)
-					parameter_value = _handle_leveldot_parameter(parameter_to_get, parameter_value)
+					parameter_value = _handle_leveldot_parameter(parameter_to_get, parameter_value, leveldot)
 					leveldot.set(parameter_to_get, parameter_value)
 				else:
 					print("Unrecognised Level Dot Parameter: " + parameter_name)
 
 # This function converts the parameters from level dots in SuperTux worldmaps
 # into SuperTux Classic's format.
-func _handle_leveldot_parameter(parameter_name, parameter_value):
+func _handle_leveldot_parameter(parameter_name, parameter_value, leveldot):
 	match parameter_name:
 		
 		# Converts level file paths
@@ -157,6 +156,7 @@ func _handle_leveldot_parameter(parameter_name, parameter_value):
 			if result:
 				var level_folder = result.get_strings()[1]
 				var level_filename = result.get_strings()[2]
+				leveldot.name = level_filename
 				world = level_folder
 				var new_level_file_path = "res://scenes/levels/" + level_folder + "/" + level_filename + ".tscn"
 				return new_level_file_path
