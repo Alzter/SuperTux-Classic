@@ -37,7 +37,7 @@ animations = [ {
 "frames": [ ExtResource( 14 ), ExtResource( 15 ), ExtResource( 9 ), ExtResource( 10 ), ExtResource( 11 ), ExtResource( 16 ), ExtResource( 12 ), ExtResource( 21 ) ],
 "loop": true,
 "name": "walk",
-"speed": 20.0
+"speed": 30.0
 } ]
 
 [sub_resource type="SpriteFrames" id=1]
@@ -50,7 +50,7 @@ animations = [ {
 "frames": [ ExtResource( 22 ), ExtResource( 19 ), ExtResource( 20 ), ExtResource( 17 ), ExtResource( 18 ), ExtResource( 2 ), ExtResource( 3 ), ExtResource( 8 ) ],
 "loop": true,
 "name": "walk",
-"speed": 20.0
+"speed": 30.0
 } ]
 
 [sub_resource type="ShaderMaterial" id=10]
