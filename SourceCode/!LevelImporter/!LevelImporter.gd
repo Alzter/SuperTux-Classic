@@ -124,6 +124,8 @@ func _ready():
 func import_worldmap():
 	level_width = int(_get_section_of_string(level_data, "width ", ")"))
 	tiles_interactive = _get_worldmap_tile_data(level_data)
+	#object_list = _get_objects_from_leveldata(level_data, "levels")
+	#print(object_list)
 	
 	_import_level(true)
 
