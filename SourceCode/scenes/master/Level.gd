@@ -22,7 +22,7 @@ var player_node = preload("res://scenes/player/Tux.tscn")
 var worldmap_player_node = preload("res://scenes/worldmap/Player.tscn")
 var pause_menu = preload("res://scenes/menus/PauseScreen.tscn")
 
-onready var worldmap_objects = get_node("Objects").get_children()
+onready var worldmap_objects = get_node_or_null("Objects")
 
 export var is_worldmap = false
 export var level_title = ""
@@ -118,7 +118,7 @@ func _create_worldmap_player(position : Vector2, player_object : PackedScene):
 	player.global_position = position * 32 + Vector2(16,16)
 	
 	# Set the worldmap player's level dots variable to an array of all the level dot objects
-	player.level_dots = worldmap_objects
+	player.level_dots = worldmap_objects.get_children()
 	
 	# Set the worldmap player's tile map variable to an array of all the level's tilemaps
 	for child in get_children():

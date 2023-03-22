@@ -31,3 +31,6 @@ func _update_sprite():
 		sprite.animation = "cleared"
 	else:
 		sprite.animation = "default"
+
+func load_level():
+	Global.goto_level(level_file_path)
