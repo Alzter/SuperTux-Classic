@@ -8,6 +8,7 @@ var current_level_dot = null # The node of the level dot the player is currently
 var powerup_state = 0
 
 onready var camera = $Camera2D
+onready var sprite = $AnimatedSprite
 
 var move_direction = Vector2(0,0)
 var stop_direction = Vector2(0,0)
@@ -30,6 +31,8 @@ var corner_tiles = {
 # Set the player camera boundaries to the boundaries of the largest tilemap
 func _ready():
 	powerup_state = Scoreboard.player_initial_state
+	update_sprite()
+	
 	if tilemaps == []: push_error("Worldmap player node cannot access any tilemaps in the worldmap")
 	
 	for t in tilemaps:
@@ -136,5 +139,5 @@ func handle_leveldot_collisions(tilemap):
 				move_direction = Vector2.ZERO
 				return
 
-func update_sprite(state):
-	pass
+func update_sprite(state = powerup_state):
+	sprite.play(str(state))

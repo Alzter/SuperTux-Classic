@@ -9,17 +9,17 @@
 animations = [ {
 "frames": [ ExtResource( 3 ) ],
 "loop": true,
-"name": "default",
+"name": "1",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 2 ) ],
 "loop": true,
-"name": "fire",
+"name": "2",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 1 ) ],
 "loop": true,
-"name": "small",
+"name": "0",
 "speed": 5.0
 } ]
 
@@ -28,6 +28,7 @@ script = ExtResource( 4 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 1 )
+animation = "2"
 
 [node name="Camera2D" type="Camera2D" parent="."]
 current = true
