@@ -17,8 +17,8 @@ anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
 script = ExtResource( 6 )
-music = ""
-go_to_next_level = true
+music = "Title"
+return_scene = "res://scenes/levels/world1/worldmap.tscn"
 
 [node name="RichTextLabel" type="RichTextLabel" parent="TextScroll"]
 anchor_left = 0.5

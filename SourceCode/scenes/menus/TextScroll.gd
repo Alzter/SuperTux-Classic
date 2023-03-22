@@ -20,7 +20,6 @@ extends Control
 export var autostart = true
 export var music = "TuxRacer - Credits"
 export var stop_music = false
-export var go_to_next_level = false
 export var return_scene = ""
 
 var scroll_speed = 15
@@ -41,7 +40,7 @@ func start():
 	if stop_music:
 		Music.stop_all()
 	if music != "" or music == null:
-		Music.play(music)
+		Music.continue(music)
 	Scoreboard.hide()
 	
 	# If we use an onready var to set this it just returns 0!! whyy!!! grah!!
@@ -69,7 +68,4 @@ func _on_VisibilityNotifier2D_screen_exited():
 	if is_moving: _return_to_menu()
 
 func _return_to_menu():
-	if go_to_next_level:
-		Global.load_next_level(true)
-	else:
-		Global.goto_scene(return_scene)
+	Global.goto_scene(return_scene)
