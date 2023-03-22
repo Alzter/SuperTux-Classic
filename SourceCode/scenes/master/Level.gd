@@ -44,10 +44,8 @@ func _ready():
 	else:
 		uses_timer = false
 		
-		# Create the player object inside the worldmap
-		var worldmap_player = worldmap_player_object.instance()
-		add_child(worldmap_player)
-		worldmap_player.position = worldmap_spawn * 32 + Vector2(16,16)
+		if worldmap_player_object != null:
+			_create_worldmap_player(worldmap_spawn, worldmap_player_object)
 	
 	# Set the player's starting powerup
 	if Scoreboard.player_initial_state < starting_powerup:
@@ -109,3 +107,8 @@ func _level_title_card():
 func _load_pause_menu():
 	var pause_screen_instance = pause_menu.instance()
 	Global.current_scene.add_child(pause_screen_instance)
+
+func _create_worldmap_player(position : Vector2, player_object : PackedScene):
+	var worldmap_player = player_object.instance()
+	add_child(worldmap_player)
+	worldmap_player.position = position * 32 + Vector2(16,16)
