@@ -211,7 +211,7 @@ func update_message_text(new_value):
 		message_text_object.hide()
 	else:
 		message_text_object.show()
-		message_text_object.bbcode_text = "[center][wave]" + new_value
+		message_text_object.bbcode_text = "[center][wave]" + "\n" + new_value
 
 func display_message(message_text):
 	update_message_text(message_text)

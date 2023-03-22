@@ -23,6 +23,7 @@ func add_current_level_to_cleared_levels():
 
 func return_to_worldmap(level_clear = false, save_game = false):
 	if level_clear:
+		player_stop_direction = null
 		add_current_level_to_cleared_levels()
 	if save_game:
 		SaveManager.save_game(cleared_levels, worldmap_level, worldmap_player_position)
