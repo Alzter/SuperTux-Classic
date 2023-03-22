@@ -4,6 +4,7 @@ export var level_dots = [] # An array of all the level dot objects in the worldm
 export var tilemaps = []   # An array of all the tilemap objects in the worldmap
 
 var move_direction = Vector2(0,0)
+var stop_direction = Vector2(0,0)
 
 const MOVE_SPEED = 4 # Must be a power of 2 that's lower than 32
 
@@ -16,8 +17,6 @@ var right_tiles = [186, 56, 178, 58, 184, 48, 50, 176]
 func _process(delta):
 	if tilemaps == []:
 		push_error("Worldmap player node cannot access any tilemaps in the worldmap")
-	
-	handle_leveldot_collisions()
 	
 	for t in tilemaps:
 		var tilemap : TileMap = t
@@ -51,9 +50,16 @@ func handle_path_movement(tilemap : TileMap, tile_position : Vector2, tile_id : 
 	var is_player_aligned_to_tile = tilemap.map_to_world(tile_position) + Vector2(16,16) == position
 	if is_player_aligned_to_tile:
 		var proposed_move_direction = get_move_input()
-		if path_directions.has(proposed_move_direction): move_direction = proposed_move_direction
+		
+		handle_leveldot_collisions(tilemap)
+		if path_directions.has(proposed_move_direction):
+			var can_move = stop_direction == Vector2.ZERO or proposed_move_direction == stop_direction * -1
+			if can_move:
+				move_direction = proposed_move_direction
+				stop_direction = Vector2.ZERO
 		
 		if !path_directions.has(move_direction): move_direction = Vector2.ZERO
+		
 
 func get_move_input():
 	var move_direction = Vector2.ZERO
@@ -63,9 +69,20 @@ func get_move_input():
 	if Input.is_action_pressed("duck"): move_direction = Vector2.DOWN
 	return move_direction
 
-func handle_leveldot_collisions():
+func handle_leveldot_collisions(tilemap):
+	if move_direction == Vector2.ZERO: return
+	if stop_direction != Vector2.ZERO:
+		if move_direction == stop_direction * -1: return
+	
 	for leveldot in level_dots:
-		if leveldot.position == position:
+		var level_position = tilemap.world_to_map(leveldot.position)
+		var player_position = tilemap.world_to_map(position)
+		
+		if level_position == player_position:
 			if !leveldot.level_cleared:
-				print("Stop")
-				move_direction = Vector2(0,0)
+				stop_direction = move_direction
+				move_direction = Vector2.ZERO
+				return
+			else:
+				move_direction = Vector2.ZERO
+				return
