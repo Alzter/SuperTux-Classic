@@ -13,6 +13,7 @@ script = ExtResource( 1 )
 force_mobile_controls = true
 
 [node name="Control" type="Control" parent="."]
+modulate = Color( 1, 1, 1, 0.396078 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 theme = ExtResource( 2 )

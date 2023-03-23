@@ -46,6 +46,8 @@ var level_timer_enabled = false
 var tick_time = 999
 var message_text = "" setget update_message_text
 
+var visible = true
+
 func _ready():
 	self.message_text = ""
 	stop_level_timer()
@@ -114,10 +116,12 @@ func _set_lives_count(new_value):
 	lives = clamp(new_value, -1, 99)
 
 func hide():
+	visible = false
 	clear_message()
 	hud_node.hide()
 
 func show():
+	visible = true
 	hud_node.show()
 
 func reset_player_values(game_over = false):
