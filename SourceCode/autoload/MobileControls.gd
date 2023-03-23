@@ -61,6 +61,7 @@ func _physics_process(delta):
 	if !enabled: return
 	
 	if joystick_active and movement_vector.length() > deadzone:
+		if joystick_button.is_pressed(): return
 		
 		movement_directions = []
 		
