@@ -40,9 +40,9 @@ func _ready():
 	
 	# Hide the "Quit Game" button if we're running the game
 	# inside of the browser (on HTML5) or on mobile devices
-	var is_on_mobile = OS.has_feature("Android") or OS.has_feature("iOS")
+	var is_on_mobile = OS.has_feature("mobile")
 	var is_on_browser = OS.has_feature("HTML5")
-	quit_button.visible = !is_on_browser and !is_on_mobile
+	quit_button.visible = !is_on_browser and !is_on_mobile and !MobileControls.is_using_mobile
 	
 	new_game_button.grab_focus()
 
