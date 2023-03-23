@@ -40,11 +40,17 @@ func _ready():
 	menu.hide()
 	Global.can_pause = true
 
-func _unhandled_input(event):
+func _process(delta):
 	if !Global.can_pause: return
-	
-	if event.is_action_pressed("ui_cancel"):
+	if Input.is_action_just_pressed("ui_cancel"):
 		self.paused = !paused
+
+#func _input(event):
+#	#print(event.is_action_pressed("ui_cancel"))
+#	if !Global.can_pause: return
+#
+#	if event.is_action_pressed("ui_cancel"):
+#		self.paused = !paused
 
 func _set_paused(new_value):
 	paused = new_value
