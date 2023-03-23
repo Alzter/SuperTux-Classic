@@ -20,6 +20,8 @@ onready var joystick_button = $Control/Joystick/JoystickButton
 onready var joystick_container = $Control/Joystick
 onready var joystick_stick = $Control/Joystick/Stick
 
+onready var buttons = [$Control/Jump/JumpButton, $Control/Action/ActionButton]
+
 var cardinal_directions = {
 	Vector2.LEFT : "move_left",
 	Vector2.RIGHT : "move_right",
@@ -61,7 +63,10 @@ func _physics_process(delta):
 	if !enabled: return
 	
 	if joystick_active and movement_vector.length() > deadzone:
-		if joystick_button.is_pressed(): return
+		var ignore_joystick_input = false
+		for button in buttons:
+			if button.is_pressed(): ignore_joystick_input = true
+		if ignore_joystick_input: return
 		
 		movement_directions = []
 		
@@ -108,14 +113,18 @@ func activate_mobile_controls():
 	mobile_controls.show()
 
 func _on_JumpButton_pressed():
-	Input.action_press("run")
 	Input.action_press("jump")
 
 func _on_JumpButton_released():
 	#print("Jump Release")
-	Input.action_release("run")
 	Input.action_release("jump")
 	button_just_released = true
+
+func _on_ActionButton_pressed():
+	Input.action_press("run")
+
+func _on_ActionButton_released():
+	Input.action_release("run")
 
 func _on_PauseButton_pressed():
 	Input.action_release("ui_cancel")

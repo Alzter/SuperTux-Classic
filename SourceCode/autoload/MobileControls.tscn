@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://autoload/MobileControls.gd" type="Script" id=1]
 [ext_resource path="res://theme/default_theme.tres" type="Theme" id=2]
@@ -8,6 +8,8 @@
 [ext_resource path="res://images/touchscreen/joystick_stick_unpressed.png" type="Texture" id=6]
 [ext_resource path="res://images/touchscreen/joystick_stick_pressed.png" type="Texture" id=7]
 [ext_resource path="res://images/touchscreen/jump_button_down.png" type="Texture" id=8]
+[ext_resource path="res://images/touchscreen/action_button.png" type="Texture" id=9]
+[ext_resource path="res://images/touchscreen/action_button_down.png" type="Texture" id=10]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 64.0
@@ -69,6 +71,21 @@ normal = ExtResource( 5 )
 pressed = ExtResource( 8 )
 shape = SubResource( 1 )
 
+[node name="Action" type="Control" parent="Control"]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -160.0
+margin_top = -288.0
+margin_right = -32.0
+margin_bottom = -160.0
+
+[node name="ActionButton" type="TouchScreenButton" parent="Control/Action"]
+normal = ExtResource( 9 )
+pressed = ExtResource( 10 )
+shape = SubResource( 1 )
+
 [node name="Pause" type="Control" parent="Control"]
 anchor_left = 0.5
 anchor_right = 0.5
@@ -83,4 +100,6 @@ shape = SubResource( 2 )
 
 [connection signal="pressed" from="Control/Jump/JumpButton" to="." method="_on_JumpButton_pressed"]
 [connection signal="released" from="Control/Jump/JumpButton" to="." method="_on_JumpButton_released"]
+[connection signal="pressed" from="Control/Action/ActionButton" to="." method="_on_ActionButton_pressed"]
+[connection signal="released" from="Control/Action/ActionButton" to="." method="_on_ActionButton_released"]
 [connection signal="pressed" from="Control/Pause/PauseButton" to="." method="_on_PauseButton_pressed"]

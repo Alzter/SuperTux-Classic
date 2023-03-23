@@ -25,3 +25,5 @@ Exports/Windows/SuperTuxClassic.pck
 Exports/Windows/Windows.zip
 Exports/HTML/index.zip
 Exports/Android/SuperTuxClassic.apk
+SourceCode/autoload/MobileControls.gd
+Exports/Android/SuperTuxClassic.apk.idsig
