@@ -157,7 +157,6 @@ limit_top = 0
 limit_right = 0
 limit_bottom = 0
 limit_smoothed = true
-smoothing_enabled = true
 smoothing_speed = 30.0
 
 [node name="SFX" type="Node2D" parent="."]
