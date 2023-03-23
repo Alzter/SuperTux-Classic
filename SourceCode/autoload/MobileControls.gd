@@ -125,6 +125,7 @@ func _on_ActionButton_pressed():
 
 func _on_ActionButton_released():
 	Input.action_release("run")
+	button_just_released = true
 
 func _on_PauseButton_pressed():
 	Input.action_release("ui_cancel")
