@@ -474,5 +474,6 @@ func _progress_to_next_level():
 func _unhandled_input(event):
 	if event.is_action_pressed("ui_cancel"):
 		if win_timer.time_left > 0:
+			Input.action_release("ui_cancel") # Jank it up! A D V A N C E D
 			win_timer.stop()
 			_progress_to_next_level()

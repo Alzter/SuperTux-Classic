@@ -192,7 +192,6 @@ margin_bottom = 30.0
 text = " Delete "
 
 [node name="OptionsMenu" parent="." instance=ExtResource( 7 )]
-visible = false
 
 [node name="FileDialog" type="FileDialog" parent="."]
 anchor_right = 1.0
