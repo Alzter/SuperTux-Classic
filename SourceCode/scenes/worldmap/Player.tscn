@@ -165,7 +165,7 @@ script = ExtResource( 5 )
 
 [node name="LevelDot" type="AudioStreamPlayer" parent="SFX"]
 stream = ExtResource( 6 )
-volume_db = -8.0
+volume_db = -12.0
 bus = "Sounds"
 
 [node name="SpriteColour" type="AnimationPlayer" parent="."]
