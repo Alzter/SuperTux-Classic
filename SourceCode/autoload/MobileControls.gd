@@ -63,10 +63,10 @@ func _physics_process(delta):
 	if !enabled: return
 	
 	if joystick_active and movement_vector.length() > deadzone:
-		var ignore_joystick_input = false
-		for button in buttons:
-			if button.is_pressed(): ignore_joystick_input = true
-		if ignore_joystick_input: return
+#		var ignore_joystick_input = false
+#		for button in buttons:
+#			if button.is_pressed(): ignore_joystick_input = true
+#		if ignore_joystick_input: return
 		
 		movement_directions = []
 		
