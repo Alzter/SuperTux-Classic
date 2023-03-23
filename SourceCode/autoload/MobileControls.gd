@@ -13,6 +13,8 @@ export var max_direction_distance = 1
 var joystick_active = false
 var movement_vector = Vector2.ZERO
 
+var button_just_released = false
+
 onready var mobile_controls = $Control
 onready var joystick_button = $Control/Joystick/JoystickButton
 onready var joystick_container = $Control/Joystick
@@ -39,7 +41,11 @@ func _input(event):
 	
 	if event is InputEventScreenTouch:
 		if event.pressed == false:
-			joystick_active = false
+			if !button_just_released:
+				print("Joystick Disable")
+				joystick_active = false
+			else:
+				button_just_released = false
 
 func _physics_process(delta):
 	if !is_using_mobile: return
@@ -75,11 +81,11 @@ func clear_directions():
 				Input.action_release(direction_action)
 		movement_directions = []
 
-func get_movement_vector(touch_position):
+func get_movement_vector(touch_position, limit = true):
 	var joystick_center_position = joystick_button.global_position + joystick_container.rect_size * 0.5
 	var position_difference = touch_position - joystick_center_position
 	position_difference *= 2.0 / joystick_container.rect_size.x
-	if position_difference.length() > 1: position_difference = position_difference.normalized()
+	if position_difference.length() > 1 and limit: position_difference = position_difference.normalized()
 	return position_difference
 
 func activate_mobile_controls():
@@ -90,4 +96,6 @@ func _on_JumpButton_pressed():
 	Input.action_press("jump")
 
 func _on_JumpButton_released():
+	print("Jump Release")
 	Input.action_release("jump")
+	button_just_released = true
