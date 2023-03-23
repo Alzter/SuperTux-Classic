@@ -44,8 +44,9 @@ func _input(event):
 func _physics_process(delta):
 	if !is_using_mobile: return
 	
-	mobile_controls.visible = Scoreboard.visible
-	if !Scoreboard.visible: return
+	var enabled = Scoreboard.visible and !get_tree().paused
+	mobile_controls.visible = enabled
+	if !enabled: return
 	
 	if joystick_active and movement_vector.length() > deadzone:
 		

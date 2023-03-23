@@ -69,3 +69,10 @@ func _on_VisibilityNotifier2D_screen_exited():
 
 func _return_to_menu():
 	Global.goto_scene(return_scene)
+
+func _input(event):
+	if event is InputEventScreenTouch:
+		if event.pressed:
+			Input.action_press("ui_accept")
+		else:
+			Input.action_release("ui_accept")
