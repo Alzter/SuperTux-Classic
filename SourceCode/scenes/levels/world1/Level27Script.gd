@@ -40,4 +40,4 @@ func _process(delta):
 
 func _on_AnimationPlayer_animation_finished(anim_name):
 	if anim_name == "defeated":
-		WorldmapManager.
+		Global.level_completed()
