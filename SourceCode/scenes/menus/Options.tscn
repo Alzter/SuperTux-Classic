@@ -6,6 +6,7 @@
 [ext_resource path="res://theme/FontBig.tres" type="DynamicFont" id=4]
 
 [node name="OptionsMenu" type="Popup"]
+visible = true
 anchor_right = 1.0
 anchor_bottom = 1.0
 theme = ExtResource( 1 )
@@ -109,7 +110,6 @@ margin_bottom = -23.0
 text = "Done"
 
 [node name="ControlsMenu" parent="." instance=ExtResource( 3 )]
-visible = false
 
 [connection signal="about_to_show" from="." to="." method="_on_OptionsMenu_about_to_show"]
 [connection signal="popup_hide" from="." to="." method="_on_OptionsMenu_popup_hide"]
