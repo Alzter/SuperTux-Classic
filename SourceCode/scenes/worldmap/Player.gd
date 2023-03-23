@@ -37,6 +37,8 @@ var corner_tiles = {
 
 # Set the player camera boundaries to the boundaries of the largest tilemap
 func _ready():
+	ResolutionManager.connect("window_resized", self, "window_resized")
+	window_resized()
 	if tilemaps == []: push_error("Worldmap player node cannot access any tilemaps in the worldmap")
 	
 	powerup_state = Scoreboard.player_initial_state
@@ -128,6 +130,7 @@ func camera_bounds_to_tilemap_bounds():
 		var tilemap : TileMap = t
 		var bounds = tilemap.get_used_rect()
 		bounds = Rect2(bounds.position * 32, (bounds.end - Vector2.ONE * 2) * 32)
+		
 		camera.limit_left = min(bounds.position.x, camera.limit_left)
 		camera.limit_right = max(bounds.end.x, camera.limit_right)
 		camera.limit_top = min(camera.limit_top, bounds.position.y)
@@ -191,3 +194,17 @@ func update_sprite():
 		sprite.play("default")
 	else:
 		sprite.play("walk")
+
+func window_resized():
+	camera.zoom = Vector2(1,1)
+	var window_resolution = ResolutionManager.window_resolution
+	if window_resolution == null: return
+	
+	for tilemap in tilemaps:
+		var bounds = tilemap.get_used_rect()
+		bounds = Rect2(bounds.position * 32, (bounds.end - Vector2.ONE * 2) * 32)
+		var tilemap_size = (bounds.end - bounds.position)
+		print(window_resolution, tilemap_size)
+		
+		if tilemap_size.x < window_resolution.x or tilemap_size.y < window_resolution.y:
+			camera.zoom = Vector2(0.5, 0.5)

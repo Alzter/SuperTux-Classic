@@ -23,20 +23,27 @@ var min_size = Vector2.ZERO
 var ratio_size = Vector2(500, 480)
 
 var screen_shrink = 1
+var window_size = null
+var window_resolution = null
+
+signal window_resized
 
 func _ready():
 	get_viewport().connect("size_changed", self, "window_resized")
 	window_resized()
 
 func window_resized():
-	var size = get_viewport().size
+	window_size = get_viewport().size
 	var pixel_ratio = Vector2.ONE
 	
-	pixel_ratio.x = floor(size.x / ratio_size.x)
-	pixel_ratio.y = floor(size.y / ratio_size.y)
+	pixel_ratio.x = floor(window_size.x / ratio_size.x)
+	pixel_ratio.y = floor(window_size.y / ratio_size.y)
 	
 	var pixel_size = min(pixel_ratio.x, pixel_ratio.y)
 	pixel_size = max(pixel_size, 1)
 	screen_shrink = pixel_size
 	
+	window_resolution = window_size / pixel_size
+	
 	get_tree().set_screen_stretch(SceneTree.STRETCH_ASPECT_IGNORE, SceneTree.STRETCH_ASPECT_IGNORE, min_size, pixel_size)
+	emit_signal("window_resized")
