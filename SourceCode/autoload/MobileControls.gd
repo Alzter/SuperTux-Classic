@@ -13,6 +13,7 @@ export var max_direction_distance = 1
 var joystick_active = false
 var movement_vector = Vector2.ZERO
 
+var button_just_pressed = false
 var button_just_released = false
 
 onready var mobile_controls = $Control
@@ -41,19 +42,34 @@ func _input(event):
 	
 	if !is_using_mobile: return
 	
+	if button_just_released:
+		button_just_released = false
+		return
+	if button_just_pressed:
+		button_just_pressed = false
+		return
+	
 	if event is InputEventScreenTouch or event is InputEventScreenDrag:
 		if joystick_button.is_pressed():
 			joystick_active = true
-			movement_vector = get_movement_vector(event.position)
+			
+			# Ignore joystick move inputs when the jump / run buttons
+			# are being pressed.
+			var any_button_pressed = false
+			for button in buttons:
+				if button.is_pressed():
+					any_button_pressed = true
+			
+			var touch_on_left_side_of_screen = (event.position <= ResolutionManager.window_resolution * 0.5)
+			#print(touch_on_left_side_of_screen)
+			
+			if !any_button_pressed or touch_on_left_side_of_screen:
+				movement_vector = get_movement_vector(event.position)
 	
 	
 	if event is InputEventScreenTouch:
 		if event.pressed == false:
-			if !button_just_released:
-				#print("Joystick Disable")
-				joystick_active = false
-			else:
-				button_just_released = false
+			joystick_active = false
 
 func _physics_process(delta):
 	if !is_using_mobile: return
@@ -114,6 +130,7 @@ func activate_mobile_controls():
 
 func _on_JumpButton_pressed():
 	Input.action_press("jump")
+	button_just_pressed = true
 
 func _on_JumpButton_released():
 	#print("Jump Release")
@@ -122,6 +139,7 @@ func _on_JumpButton_released():
 
 func _on_ActionButton_pressed():
 	Input.action_press("run")
+	button_just_pressed = true
 
 func _on_ActionButton_released():
 	Input.action_release("run")
