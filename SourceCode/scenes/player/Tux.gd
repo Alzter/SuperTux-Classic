@@ -198,6 +198,10 @@ func check_bounce(delta):
 		# he's jumping since his hitbox is taller
 		if has_large_hitbox and velocity.y <= 0: bounce_raycasts.position.y -= 32
 		
+		# If Tux is riding a Dragon, lower the bounce raycasts when he's falling so they
+		# are at the dragon's feet
+		if riding_entity != null and velocity.y > 0: bounce_raycasts.position.y += 43
+		
 		# Make all the raycasts extend out to cover Tux's future position
 		for raycast in bounce_raycasts.get_children():
 			var direction = Vector2.DOWN if velocity.y > 0 else Vector2.UP
@@ -357,6 +361,7 @@ func toggle_nodes(nodes, enabled = true, only_hitbox = false):
 			node.set_deferred("disabled", !enabled)
 
 func can_duck():
+	if riding_entity != null: return false
 	var sm_state = state_machine.state
 	if state != states.SMALL:
 		if Input.is_action_pressed("duck"):
