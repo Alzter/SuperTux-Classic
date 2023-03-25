@@ -1,7 +1,6 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://theme/FontCredits.tres" type="DynamicFont" id=1]
-[ext_resource path="res://theme/FontCreditsBig.tres" type="DynamicFont" id=2]
 [ext_resource path="res://theme/default_theme.tres" type="Theme" id=3]
 [ext_resource path="res://scenes/backgrounds/IceMountainsBackground.tscn" type="PackedScene" id=4]
 [ext_resource path="res://scenes/menus/TextScroll.gd" type="Script" id=6]
@@ -20,39 +19,14 @@ script = ExtResource( 6 )
 music = "Title"
 return_scene = "res://scenes/levels/world1/worldmap.tscn"
 
-[node name="RichTextLabel" type="RichTextLabel" parent="TextScroll"]
+[node name="RichTextLabel" type="Label" parent="TextScroll"]
 anchor_left = 0.5
 anchor_right = 0.5
 margin_left = -320.0
 margin_right = 320.0
 margin_bottom = 434.0
-rect_clip_content = false
-custom_fonts/bold_font = ExtResource( 2 )
-custom_fonts/normal_font = ExtResource( 1 )
-bbcode_enabled = true
-bbcode_text = "[center][b][wave]Penny gets captured![/wave][/b]
-
-Tux and Penny were out having a nice
-picnic on the ice fields of Antarctica.
-Suddenly, a creature jumped from
-behind an ice bush, there was a flash,
-and Tux fell asleep!
-
-When Tux wakes up, he finds that Penny
-is missing. Where she lay before now
-lies a letter. \"Tux, my arch enemy!\"
-says the letter. \"I have captured
-your sweetheart Penny and have taken
-her to my fortress. The path to my
-fortress is littered with my minions.
-Give up on the thought of trying to
-reclaim her, you haven't a chance!
--Nolok\"
-
-Tux looks and see Nolok's fortress in
-the distance. Determined to save his
-beloved Penny, he begins his journey.
-"
+custom_constants/shadow_offset_x = 0
+custom_fonts/font = ExtResource( 1 )
 text = "Penny gets captured!
 
 Tux and Penny were out having a nice
@@ -76,8 +50,8 @@ Tux looks and see Nolok's fortress in
 the distance. Determined to save his
 beloved Penny, he begins his journey.
 "
-fit_content_height = true
-scroll_active = false
+align = 1
+clip_text = true
 
 [node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="TextScroll/RichTextLabel"]
 rect = Rect2( 0, 0, 640, 395 )

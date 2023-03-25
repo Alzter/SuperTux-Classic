@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=2]
+[gd_scene load_steps=29 format=2]
 
 [ext_resource path="res://scenes/tilesets/LevelTiles.tres" type="TileSet" id=1]
 [ext_resource path="res://scenes/shaders/Overlay.gdshader" type="Shader" id=2]
@@ -21,10 +21,8 @@
 [ext_resource path="res://scenes/master/Ambience.tscn" type="PackedScene" id=19]
 [ext_resource path="res://scenes/menus/TextScroll.gd" type="Script" id=20]
 [ext_resource path="res://theme/FontCredits.tres" type="DynamicFont" id=21]
-[ext_resource path="res://theme/FontCreditsBig.tres" type="DynamicFont" id=22]
 [ext_resource path="res://scenes/enemies/Stalactite.tscn" type="PackedScene" id=23]
 [ext_resource path="res://theme/default_theme.tres" type="Theme" id=24]
-
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 2 )
@@ -243,39 +241,14 @@ music = "Title"
 stop_music = true
 return_scene = "res://scenes/menus/CreditsEnding.tscn"
 
-[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/Control/TextScroll"]
+[node name="RichTextLabel" type="Label" parent="CanvasLayer/Control/TextScroll"]
 anchor_left = 0.5
 anchor_right = 0.5
 margin_left = -320.0
 margin_right = 320.0
 margin_bottom = 434.0
-rect_clip_content = false
-custom_fonts/bold_font = ExtResource( 22 )
-custom_fonts/normal_font = ExtResource( 21 )
-bbcode_enabled = true
-bbcode_text = "[center][b][wave]Penny is saved![/wave][/b]
-
-Tux had barely defeated Nolok by the
-skin of his teeth, when he remembered
-with a jolt that Penny was still being
-held captive somewhere in the castle.
-Desperately searching for her, Tux
-ran into Nolok's throne room.
-
-Tux bolted into the throne room,
-and couldn't believe his eyes when he
-saw...! \"Tux!\" Penny cried.
-
-\"That awful crocodile Nolok kidnapped
-me! Thank goodness you're here,
-let's get out of this place!\" Tux and
-Penny tore through the last of Nolok's
-fortress and escaped, returning back
-into the brisk, arctic air. Tux and
-Penny could finally walk back to
-their igloo together, returning to
-their home somewhere on the shores of
-Antarctica."
+custom_constants/shadow_offset_x = 0
+custom_fonts/font = ExtResource( 21 )
 text = "Penny is saved!
 
 Tux had barely defeated Nolok by the
@@ -299,8 +272,8 @@ Penny could finally walk back to
 their igloo together, returning to
 their home somewhere on the shores of
 Antarctica."
-fit_content_height = true
-scroll_active = false
+align = 1
+clip_text = true
 
 [node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="CanvasLayer/Control/TextScroll/RichTextLabel"]
 rect = Rect2( 0, 0, 99999, 400 )

@@ -50,7 +50,7 @@ custom_colors/default_color = Color( 1, 1, 0, 1 )
 custom_fonts/normal_font = ExtResource( 4 )
 bbcode_enabled = true
 bbcode_text = "[center][wave]Welcome to Antarctica"
-text = "Welcome to Antarctica"
+text = "[center][wave]Welcome to Antarctica"
 fit_content_height = true
 scroll_active = false
 
