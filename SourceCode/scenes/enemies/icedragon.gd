@@ -74,15 +74,18 @@ func initiate_riding(player):
 func exit_riding(from_damage = false):
 	invincible = false
 	if from_damage: take_damage()
-	temporary_invincibility()
+	
+	show()
 	
 	position = player_entity.position - tux_position_offset
 	facing = player_entity.facing
 	player_entity = null
-	disable_collision(false)
-	collide_with_other_enemies(true)
-	show()
-	state_machine.set_state("walk")
+	
+	if state_machine.state != "dead":
+		temporary_invincibility()
+		disable_collision(false)
+		collide_with_other_enemies(true)
+		state_machine.set_state("walk")
 
 func disable_collision( disabled = true ):
 	set_collision_layer_bit(2, !disabled)
@@ -154,4 +157,5 @@ func temporary_invincibility():
 	invincible_timer.start()
 
 func _on_InvincibleTimer_timeout():
+	if state_machine.state == "dead": return
 	invincible = false
