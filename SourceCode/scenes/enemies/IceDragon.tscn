@@ -4,8 +4,8 @@
 [ext_resource path="res://scenes/master/damage_area.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/master/bounce_area.tscn" type="PackedScene" id=3]
 [ext_resource path="res://images/enemies/icedragon/idle.png" type="Texture" id=4]
-[ext_resource path="res://scenes/enemies/badguy_sm.gd" type="Script" id=5]
-[ext_resource path="res://scenes/enemies/badguy.gd" type="Script" id=6]
+[ext_resource path="res://scenes/enemies/icedragon_sm.gd" type="Script" id=5]
+[ext_resource path="res://scenes/enemies/icedragon.gd" type="Script" id=6]
 [ext_resource path="res://sounds/bosses/fireball_damage.wav" type="AudioStream" id=7]
 [ext_resource path="res://sounds/enemies/fall.wav" type="AudioStream" id=9]
 
@@ -30,7 +30,8 @@ extents = Vector2( 35, 14 )
 collision_layer = 4
 collision_mask = 5
 script = ExtResource( 6 )
-type = "Snowball"
+walk_speed = 0.8
+run_speed = 2
 
 [node name="StateMachine" type="Node" parent="."]
 script = ExtResource( 5 )
