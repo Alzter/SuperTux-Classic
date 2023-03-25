@@ -1,0 +1,91 @@
+[gd_scene load_steps=13 format=2]
+
+[ext_resource path="res://scenes/master/SFX.gd" type="Script" id=1]
+[ext_resource path="res://scenes/master/damage_area.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/master/bounce_area.tscn" type="PackedScene" id=3]
+[ext_resource path="res://images/enemies/icedragon/idle.png" type="Texture" id=4]
+[ext_resource path="res://scenes/enemies/badguy_sm.gd" type="Script" id=5]
+[ext_resource path="res://scenes/enemies/badguy.gd" type="Script" id=6]
+[ext_resource path="res://sounds/bosses/fireball_damage.wav" type="AudioStream" id=7]
+[ext_resource path="res://sounds/enemies/fall.wav" type="AudioStream" id=9]
+
+[sub_resource type="SpriteFrames" id=7]
+animations = [ {
+"frames": [ ExtResource( 4 ) ],
+"loop": true,
+"name": "walk",
+"speed": 10.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=8]
+extents = Vector2( 32, 28 )
+
+[sub_resource type="RectangleShape2D" id=9]
+extents = Vector2( 19, 32 )
+
+[sub_resource type="RectangleShape2D" id=10]
+extents = Vector2( 35, 14 )
+
+[node name="IceDragon" type="KinematicBody2D" groups=["enemies"]]
+collision_layer = 4
+collision_mask = 5
+script = ExtResource( 6 )
+type = "Snowball"
+
+[node name="StateMachine" type="Node" parent="."]
+script = ExtResource( 5 )
+
+[node name="Control" type="Control" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+rect_pivot_offset = Vector2( 0, 10 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="Control"]
+position = Vector2( 0, -8 )
+frames = SubResource( 7 )
+animation = "walk"
+offset = Vector2( 0, -1 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0, 10 )
+shape = SubResource( 8 )
+
+[node name="DamageArea" parent="." groups=["enemies"] instance=ExtResource( 2 )]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DamageArea"]
+position = Vector2( 0, 6 )
+shape = SubResource( 9 )
+
+[node name="BounceArea" parent="." instance=ExtResource( 3 )]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BounceArea"]
+position = Vector2( 0, -24 )
+shape = SubResource( 10 )
+
+[node name="EdgeTurn" type="RayCast2D" parent="."]
+enabled = true
+cast_to = Vector2( 0, 18 )
+
+[node name="VisibilityEnabler2D" type="VisibilityEnabler2D" parent="."]
+rect = Rect2( -160, -100, 320, 200 )
+process_parent = true
+physics_process_parent = true
+
+[node name="SFX" type="Node2D" parent="."]
+script = ExtResource( 1 )
+
+[node name="Fall" type="AudioStreamPlayer2D" parent="SFX"]
+stream = ExtResource( 9 )
+
+[node name="FireHurt" type="AudioStreamPlayer2D" parent="SFX"]
+stream = ExtResource( 7 )
+volume_db = -8.0
+
+[node name="DestroyTimer" type="Timer" parent="."]
+process_mode = 0
+one_shot = true
+
+[connection signal="body_entered" from="DamageArea" to="." method="_on_DamageArea_body_entered"]
+[connection signal="timeout" from="DestroyTimer" to="." method="_on_DestroyTimer_timeout"]
