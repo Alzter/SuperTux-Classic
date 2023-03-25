@@ -172,15 +172,19 @@ func jump_input(running = abs(velocity.x) > walk_max):
 	if Input.is_action_just_pressed("jump"):
 		jump_buffer.start()
 	
+	var exit_riding = riding_entity and Input.is_action_pressed("move_up")
 	var jump_velocity = run_jump_height if running else jump_height
 	
-	var can_jump = grounded or coyote_timer.time_left > 0
+	var can_jump = grounded or coyote_timer.time_left > 0 or exit_riding
 	
 	if can_jump and jump_buffer.time_left > 0:
 		jump_buffer.stop()
 		velocity.y = jump_velocity
 		sfx.play("Jump")
 		self.grounded = false
+		if exit_riding:
+			jump_terminable = false
+			stop_riding_entity()
 	
 	# Jump termination by letting go of jump key
 	if velocity.y < 0 and !Input.is_action_pressed("jump") and jump_terminable:
@@ -310,21 +314,23 @@ func update_state(new_value, play_sound = true):
 
 # Called by enemies to damage the player
 func hurt(hurting_body):
-	if !invincible:
-		# HUMAN SHIELD: If player is holding an ice cube and touches an enemy,
-		# kill the ice cube as well as the enemy
-		if grabbed_object != null and hurting_body.has_method("die"):
-			var enemies_to_kill = [hurting_body, grabbed_object]
-			for enemy in enemies_to_kill:
-				enemy.die()
-			grabbed_object = null
-			
-		else:
-			if state == states.SMALL:
-				die()
-			else: # Get hurt
-				self.state -= 1
-				set_invincible()
+	if invincible: return
+	
+	# HUMAN SHIELD: If player is holding an ice cube and touches an enemy,
+	# kill the ice cube as well as the enemy
+	if grabbed_object != null and hurting_body.has_method("die"):
+		var enemies_to_kill = [hurting_body, grabbed_object]
+		for enemy in enemies_to_kill:
+			enemy.die()
+		grabbed_object = null
+		
+	else:
+		if riding_entity: stop_riding_entity()
+		if state == states.SMALL:
+			die()
+		else: # Get hurt
+			self.state -= 1
+			set_invincible()
 
 func die():
 	if !can_die: return
@@ -347,6 +353,7 @@ func die():
 	Global.can_pause = false
 
 func set_invincible():
+	if state_machine.state == "dead": return
 	invincible_type = invincible_types.DAMAGED
 	invincible_timer.start(damage_safe_time)
 	invincible = true
@@ -503,12 +510,14 @@ func skip_end_sequence():
 
 func ride_entity(entity : Node2D):
 	riding_entity = entity
-	#state_machine.set_state("riding")
 	duck_hitbox(true, false)
 	hitbox_riding.set_deferred("disabled", false)
 	dragon_sprite.show()
 
 func stop_riding_entity():
-	if riding_entity == null: return
+	if !riding_entity: return
 	dragon_sprite.hide()
 	hitbox_riding.set_deferred("disabled", true)
+	riding_entity.exit_riding()
+	riding_entity = null
+	set_invincible()

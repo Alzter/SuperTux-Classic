@@ -69,6 +69,7 @@ func initiate_riding(player):
 
 func exit_riding():
 	position = player_entity.position
+	facing = player_entity.facing
 	player_entity = null
 	disable_collision(false)
 	collide_with_other_enemies(true)

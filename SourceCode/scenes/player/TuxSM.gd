@@ -97,11 +97,6 @@ func _get_transition(delta):
 				if host.can_duck(): return "duck"
 				else: return "idle"
 			elif host.velocity.y < 0: return "jump"
-		
-		"riding":
-			if host.riding_entity == null:
-				host.set_invincible()
-				return "fall"
 	
 	return null
 
