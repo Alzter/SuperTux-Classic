@@ -178,5 +178,11 @@ autoplay = "default"
 anims/default = SubResource( 11 )
 anims/firehurt = SubResource( 12 )
 
+[node name="InvincibleTimer" type="Timer" parent="."]
+process_mode = 0
+wait_time = 0.1
+one_shot = true
+
 [connection signal="body_entered" from="DamageArea" to="." method="_on_DamageArea_body_entered"]
 [connection signal="timeout" from="DestroyTimer" to="." method="_on_DestroyTimer_timeout"]
+[connection signal="timeout" from="InvincibleTimer" to="." method="_on_InvincibleTimer_timeout"]

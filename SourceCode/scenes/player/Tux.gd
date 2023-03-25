@@ -45,10 +45,13 @@ var walk_max = 2.3 * 4.5 * Global.TILE_SIZE # If X speed is over this, player is
 var run_max = 3.2 * 4.5 * Global.TILE_SIZE
 var skid_min = 2.0 * 4 * Global.TILE_SIZE # Player can skid if travelling over this speed
 
+var riding_accel = 0.025 * pow(60, 2) / 11
+var riding_max = 3.2 * 5 * Global.TILE_SIZE # Max speed whilst riding Ice Dragon is increased
+
 # These values all get re-calculated in the initialize function using kinematic equations (thanks Game Endeavor)
 var jump_height = 5.0 * Global.TILE_SIZE # WAS 5.2 The peak height of holding jump in blocks
 var run_jump_height = 6.0 * Global.TILE_SIZE # WAS 5.8 Same as above but while moving fast
-var riding_jump_height = 6.0 * Global.TILE_SIZE
+var riding_jump_height = 7.0 * Global.TILE_SIZE
 
 var bounce_height = 2.0 * Global.TILE_SIZE # Bounce height while not holding jump
 var high_bounce_height = jump_height # Bounce height while holding jump
@@ -132,7 +135,10 @@ func horizontal_movement():
 		running = true
 	
 	var speed = run_accel if running else walk_accel
+	if riding_entity: speed = riding_accel
+	
 	var speedcap = run_max if running else walk_max
+	if riding_entity: speedcap = riding_max
 	
 	# Set movement speed to min walk speed when initiating movement
 	if move_direction != 0 and abs(velocity.x) < walk_min:
@@ -516,12 +522,12 @@ func skip_end_sequence():
 		win_timer.stop()
 		_progress_to_next_level()
 
-func ride_entity(entity : Node2D, initial_position : Vector2 = global_position):
-	global_position = initial_position
+func ride_entity(entity : Node2D):
 	riding_entity = entity
 	duck_hitbox(true, false)
 	hitbox_riding.set_deferred("disabled", false)
 	dragon_sprite.show()
+	velocity.x *= 0.5
 
 func stop_riding_entity(from_damage = false):
 	if !riding_entity: return
@@ -531,4 +537,4 @@ func stop_riding_entity(from_damage = false):
 	riding_entity.exit_riding(from_damage)
 	riding_entity = null
 	duck_hitbox(false)
-	set_invincible()
+	#set_invincible()

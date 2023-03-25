@@ -30,6 +30,7 @@ onready var edge_turn = $EdgeTurn
 onready var sfx = $SFX
 onready var destroy_timer = $DestroyTimer
 onready var player_riding_position = $RidingPosition
+onready var invincible_timer = $InvincibleTimer
 
 # Kinematic Equations
 func _ready():
@@ -61,7 +62,9 @@ func be_bounced_upon(body):
 
 func initiate_riding(player):
 	player_entity = player
-	player.ride_entity(self, global_position + tux_position_offset)
+	player_entity.global_position.y = global_position.y + tux_position_offset.y
+	player_entity.facing = facing
+	player.ride_entity(self)
 	state_machine.set_state("being_ridden")
 	disable_collision()
 	collide_with_other_enemies(false)
@@ -69,15 +72,17 @@ func initiate_riding(player):
 	hide()
 
 func exit_riding(from_damage = false):
+	invincible = false
+	if from_damage: take_damage()
+	temporary_invincibility()
+	
 	position = player_entity.position - tux_position_offset
 	facing = player_entity.facing
 	player_entity = null
 	disable_collision(false)
 	collide_with_other_enemies(true)
-	invincible = false
 	show()
 	state_machine.set_state("walk")
-	if from_damage: take_damage()
 
 func disable_collision( disabled = true ):
 	set_collision_layer_bit(2, !disabled)
@@ -109,16 +114,14 @@ func collide_with_other_enemies(colliding = true):
 
 # When a player (or enemy) enters our hitbox
 func _on_DamageArea_body_entered(body):
+	print(invincible)
+	if invincible: return
 	if body == self: return
 	if body.is_in_group("players"):
-		if body.riding_entity == self: return
+		if body.riding_entity: return
 		if body.invincible and body.invincible_type == body.invincible_types.STAR:
 			die(true)
 		else: body.hurt(self)
-	
-	if body.is_in_group("enemies"):
-		if ["kicked", "explode"].has(state_machine.state):
-			body.die()
 
 func die(bounce = false):
 	if invincible: return
@@ -145,3 +148,10 @@ func take_damage():
 
 func _on_DestroyTimer_timeout():
 	call_deferred("queue_free")
+
+func temporary_invincibility():
+	invincible = true
+	invincible_timer.start()
+
+func _on_InvincibleTimer_timeout():
+	invincible = false
