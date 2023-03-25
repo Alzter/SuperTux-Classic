@@ -48,11 +48,10 @@ func apply_gravity(delta, gravity_set = Global.gravity):
 
 func _on_EnemyKill_body_entered(body):
 	if !is_moving: return
-	if body.is_in_group("bosses"):
-		if body.has_method("fireball_hit"):
-			body.fireball_hit()
-			dissipate()
-			return
+	if body.has_method("fireball_hit"):
+		body.fireball_hit()
+		dissipate()
+		return
 	
 	if body.is_in_group("enemies"):
 		if body.has_method("die"):

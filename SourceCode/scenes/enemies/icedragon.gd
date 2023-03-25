@@ -3,19 +3,23 @@ extends KinematicBody2D
 export var facing = -1
 export var turn_on_walls = true
 export var turn_on_cliffs = false
-export var bounce_height_in_tiles = 6.0
+export var jump_height_in_tiles = 6.0
 export var walk_speed = 0.8 * 4
 export var run_speed = 8
+export var max_health = 3
 
 var invincible = false
 var velocity = Vector2()
 var grounded = false
 var touching_wall = false
-onready var walk_speed_tiles = walk_speed * 4 * Global.TILE_SIZE
 var die_height = 2.0 * Global.TILE_SIZE
 
-onready var bounce_height = bounce_height_in_tiles * Global.TILE_SIZE
+onready var walk_speed_tiles = walk_speed * 4 * Global.TILE_SIZE
+onready var jump_height = jump_height_in_tiles * Global.TILE_SIZE
+onready var health = max_health
+
 onready var sprite = $Control/AnimatedSprite
+onready var anim_player = $AnimationPlayer
 onready var state_machine = $StateMachine
 onready var hitbox = $DamageArea
 onready var bounce_area = $BounceArea
@@ -26,7 +30,7 @@ onready var destroy_timer = $DestroyTimer
 # Kinematic Equations
 func _ready():
 	var gravity = Global.gravity
-	bounce_height = -sqrt(2 * gravity * bounce_height)
+	jump_height = -sqrt(2 * gravity * jump_height)
 	die_height = -sqrt(2 * gravity * die_height)
 
 func apply_movement(delta, solid = true):
@@ -101,6 +105,15 @@ func die(bounce = false):
 	sprite.flip_v = true
 	state_machine.set_state("dead")
 	destroy_timer.start()
+
+func fireball_hit():
+	if invincible: return
+	health -= 1
+	if health > 0:
+		anim_player.play("firehurt")
+		sfx.play("FireHurt")
+	else:
+		die()
 
 func _on_DestroyTimer_timeout():
 	call_deferred("queue_free")

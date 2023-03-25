@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://scenes/master/SFX.gd" type="Script" id=1]
 [ext_resource path="res://scenes/master/damage_area.tscn" type="PackedScene" id=2]
@@ -7,7 +7,12 @@
 [ext_resource path="res://scenes/enemies/icedragon_sm.gd" type="Script" id=5]
 [ext_resource path="res://scenes/enemies/icedragon.gd" type="Script" id=6]
 [ext_resource path="res://sounds/bosses/fireball_damage.wav" type="AudioStream" id=7]
+[ext_resource path="res://scenes/shaders/Overlay.gdshader" type="Shader" id=8]
 [ext_resource path="res://sounds/enemies/fall.wav" type="AudioStream" id=9]
+
+[sub_resource type="ShaderMaterial" id=13]
+shader = ExtResource( 8 )
+shader_param/overlay_color = Color( 0.905882, 0, 0, 0.501961 )
 
 [sub_resource type="SpriteFrames" id=7]
 animations = [ {
@@ -26,6 +31,83 @@ extents = Vector2( 19, 32 )
 [sub_resource type="RectangleShape2D" id=10]
 extents = Vector2( 35, 14 )
 
+[sub_resource type="ShaderMaterial" id=14]
+shader = ExtResource( 8 )
+shader_param/overlay_color = Color( 0.5, 0.5, 0.5, 0.5 )
+
+[sub_resource type="Animation" id=11]
+resource_name = "default"
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Control:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Control:material")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ SubResource( 14 ) ]
+}
+
+[sub_resource type="ShaderMaterial" id=15]
+shader = ExtResource( 8 )
+shader_param/overlay_color = Color( 1, 1, 1, 0.282353 )
+
+[sub_resource type="Animation" id=12]
+resource_name = "firehurt"
+length = 0.15
+step = 0.025
+tracks/0/type = "value"
+tracks/0/path = NodePath("Control:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.025, 0.05, 0.15 ),
+"transitions": PoolRealArray( 2, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 0.4, 0, 1 ), Color( 1, 1, 1, 1 ), Color( 0.823529, 0.47451, 0.105882, 1 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Control:rect_scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.025, 0.1 ),
+"transitions": PoolRealArray( 0.5, 2.37841, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1.1, 1.1 ), Vector2( 1, 1 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Control:material")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.025, 0.05, 0.15 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ SubResource( 13 ), SubResource( 15 ), SubResource( 13 ), SubResource( 14 ) ]
+}
+
 [node name="IceDragon" type="KinematicBody2D" groups=["enemies"]]
 collision_layer = 4
 collision_mask = 5
@@ -37,6 +119,8 @@ run_speed = 2
 script = ExtResource( 5 )
 
 [node name="Control" type="Control" parent="."]
+modulate = Color( 1, 0.4, 0, 1 )
+material = SubResource( 13 )
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -44,6 +128,7 @@ anchor_bottom = 0.5
 rect_pivot_offset = Vector2( 0, 10 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Control"]
+use_parent_material = true
 position = Vector2( 0, -8 )
 frames = SubResource( 7 )
 animation = "walk"
@@ -87,6 +172,11 @@ volume_db = -8.0
 [node name="DestroyTimer" type="Timer" parent="."]
 process_mode = 0
 one_shot = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "default"
+anims/default = SubResource( 11 )
+anims/firehurt = SubResource( 12 )
 
 [connection signal="body_entered" from="DamageArea" to="." method="_on_DamageArea_body_entered"]
 [connection signal="timeout" from="DestroyTimer" to="." method="_on_DestroyTimer_timeout"]
