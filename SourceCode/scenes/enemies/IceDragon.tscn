@@ -178,5 +178,8 @@ autoplay = "default"
 anims/default = SubResource( 11 )
 anims/firehurt = SubResource( 12 )
 
+[node name="RidingPosition" type="Position2D" parent="."]
+position = Vector2( 0, -24 )
+
 [connection signal="body_entered" from="DamageArea" to="." method="_on_DamageArea_body_entered"]
 [connection signal="timeout" from="DestroyTimer" to="." method="_on_DestroyTimer_timeout"]

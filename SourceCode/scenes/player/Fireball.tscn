@@ -149,6 +149,7 @@ rect_scale = Vector2( 0.8, 0.8 )
 material = SubResource( 5 )
 z_index = 4096
 frames = SubResource( 6 )
+frame = 1
 playing = true
 offset = Vector2( 0, -2 )
 
@@ -157,7 +158,6 @@ material = SubResource( 5 )
 scale = Vector2( 2, 2 )
 z_index = 4096
 frames = SubResource( 6 )
-frame = 1
 playing = true
 offset = Vector2( 0, -2 )
 
@@ -166,7 +166,6 @@ material = SubResource( 5 )
 scale = Vector2( 4, 4 )
 z_index = 4096
 frames = SubResource( 6 )
-frame = 1
 playing = true
 offset = Vector2( 0, -2 )
 
@@ -176,6 +175,7 @@ material = SubResource( 5 )
 scale = Vector2( 4, 4 )
 z_index = 4096
 frames = SubResource( 6 )
+frame = 1
 playing = true
 offset = Vector2( 0, -2 )
 
@@ -194,7 +194,6 @@ material = SubResource( 5 )
 scale = Vector2( 2, 2 )
 z_index = 1
 frames = SubResource( 6 )
-frame = 1
 playing = true
 offset = Vector2( 0, -2 )
 

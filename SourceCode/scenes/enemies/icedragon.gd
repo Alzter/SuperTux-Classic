@@ -52,7 +52,12 @@ func move_forward(turn_on_wall, turn_on_cliff, speed = walk_speed_tiles):
 	velocity.x = speed * facing
 
 func be_bounced_upon(body):
-	pass
+	if body.is_in_group("players"):
+		initiate_riding(body)
+
+func initiate_riding(player):
+	remove_from_group("enemies")
+	player.ride_entity(self)
 
 func disable_collision( disabled = true ):
 	set_collision_layer_bit(2, !disabled)
@@ -86,6 +91,7 @@ func collide_with_other_enemies(colliding = true):
 func _on_DamageArea_body_entered(body):
 	if body == self: return
 	if body.is_in_group("players"):
+		if body.riding_entity == self: return
 		if body.invincible and body.invincible_type == body.invincible_types.STAR:
 			die(true)
 		else: body.hurt(self)
@@ -107,12 +113,14 @@ func die(bounce = false):
 	destroy_timer.start()
 
 func fireball_hit():
+	take_damage()
+
+func take_damage():
 	if invincible: return
 	health -= 1
-	if health > 0:
-		anim_player.play("firehurt")
-		sfx.play("FireHurt")
-	else:
+	anim_player.play("firehurt")
+	sfx.play("FireHurt")
+	if health <= 0:
 		die()
 
 func _on_DestroyTimer_timeout():

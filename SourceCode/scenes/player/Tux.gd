@@ -84,6 +84,8 @@ onready var big_nodes = [$HitboxBig, $Control/SpriteBig]
 onready var hitbox_small = $HitboxSmall
 onready var hitbox_big = $HitboxBig
 
+var riding_entity = null
+
 func _ready():
 	Global.player = self
 	initialize_character()
@@ -485,3 +487,7 @@ func skip_end_sequence():
 		Input.action_release("ui_cancel") # Jank it up! A D V A N C E D
 		win_timer.stop()
 		_progress_to_next_level()
+
+func ride_entity(entity : Node2D):
+	riding_entity = entity
+	state_machine.set_state("riding")

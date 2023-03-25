@@ -25,9 +25,13 @@ func _ready():
 	add_state("fall")
 	add_state("dead")
 	add_state("win")
+	add_state("riding")
 	call_deferred("set_state", "idle")
 
 func _state_logic(delta):
+	if "riding" in state:
+		return
+	
 	if "dead" in state:
 		host.apply_gravity(delta)
 		host.apply_movement(delta, false)
@@ -95,6 +99,11 @@ func _get_transition(delta):
 				if host.can_duck(): return "duck"
 				else: return "idle"
 			elif host.velocity.y < 0: return "jump"
+		
+		"riding":
+			if host.riding_entity == null:
+				host.set_invincible()
+				return "fall"
 	
 	return null
 

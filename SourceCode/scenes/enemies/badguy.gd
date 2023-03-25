@@ -229,8 +229,10 @@ func _on_DamageArea_body_entered(body):
 			else: body.hurt(self)
 	
 	if body.is_in_group("enemies"):
-		if ["kicked", "explode"].has(state_machine.state):
-			body.die()
+		if body.has_method("take_damage"):
+			body.take_damage()
+			if state_machine.state == "kicked": iceblock_ricochet()
+		else: body.die()
 
 func _on_DestroyTimer_timeout():
 	call_deferred("queue_free")
