@@ -48,6 +48,7 @@ var skid_min = 2.0 * 4 * Global.TILE_SIZE # Player can skid if travelling over t
 # These values all get re-calculated in the initialize function using kinematic equations (thanks Game Endeavor)
 var jump_height = 5.0 * Global.TILE_SIZE # WAS 5.2 The peak height of holding jump in blocks
 var run_jump_height = 6.0 * Global.TILE_SIZE # WAS 5.8 Same as above but while moving fast
+var riding_jump_height = 6.0 * Global.TILE_SIZE
 
 var bounce_height = 2.0 * Global.TILE_SIZE # Bounce height while not holding jump
 var high_bounce_height = jump_height # Bounce height while holding jump
@@ -99,6 +100,7 @@ func initialize_character():
 	
 	jump_height = -sqrt(2 * gravity * jump_height)
 	run_jump_height = -sqrt(2 * gravity * run_jump_height)
+	riding_jump_height = -sqrt(2 * gravity * riding_jump_height)
 	
 	bounce_height = -sqrt(2 * gravity * bounce_height)
 	high_bounce_height = -sqrt(2 * gravity * high_bounce_height)
@@ -174,6 +176,7 @@ func jump_input(running = abs(velocity.x) > walk_max):
 	
 	var exit_riding = riding_entity and Input.is_action_pressed("move_up")
 	var jump_velocity = run_jump_height if running else jump_height
+	if riding_entity: jump_height = riding_jump_height
 	
 	var can_jump = grounded or coyote_timer.time_left > 0 or exit_riding
 	
@@ -325,7 +328,9 @@ func hurt(hurting_body):
 		grabbed_object = null
 		
 	else:
-		if riding_entity: stop_riding_entity()
+		if riding_entity:
+			stop_riding_entity(true)
+			return
 		if state == states.SMALL:
 			die()
 		else: # Get hurt
@@ -385,6 +390,7 @@ func duck_hitbox(ducking = true, count_as_small_hitbox = true):
 	hitbox_big.set_deferred("disabled", ducking)
 
 func can_grab_enemy():
+	if riding_entity: return false
 	if ["idle", "walk", "jump", "fall", "duck"].has(state_machine.state):
 		if grabbed_object == null and Input.is_action_pressed("run"):
 			return true
@@ -514,10 +520,12 @@ func ride_entity(entity : Node2D):
 	hitbox_riding.set_deferred("disabled", false)
 	dragon_sprite.show()
 
-func stop_riding_entity():
+func stop_riding_entity(from_damage = false):
 	if !riding_entity: return
+	if from_damage: sfx.play("Hurt")
 	dragon_sprite.hide()
 	hitbox_riding.set_deferred("disabled", true)
-	riding_entity.exit_riding()
+	riding_entity.exit_riding(from_damage)
 	riding_entity = null
+	duck_hitbox(false)
 	set_invincible()

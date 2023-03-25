@@ -112,7 +112,6 @@ tracks/2/keys = {
 collision_layer = 4
 collision_mask = 5
 script = ExtResource( 6 )
-turn_on_cliffs = true
 walk_speed = 0.8
 run_speed = 2
 

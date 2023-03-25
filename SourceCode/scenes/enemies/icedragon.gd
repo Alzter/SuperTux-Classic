@@ -67,7 +67,7 @@ func initiate_riding(player):
 	invincible = true
 	hide()
 
-func exit_riding():
+func exit_riding(from_damage = false):
 	position = player_entity.position
 	facing = player_entity.facing
 	player_entity = null
@@ -76,6 +76,7 @@ func exit_riding():
 	invincible = false
 	show()
 	state_machine.set_state("walk")
+	if from_damage: take_damage()
 
 func disable_collision( disabled = true ):
 	set_collision_layer_bit(2, !disabled)
