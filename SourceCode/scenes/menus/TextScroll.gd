@@ -28,8 +28,6 @@ var move_speed = 250
 var new_position = null
 var is_moving = false
 
-onready var visibility_notif = $RichTextLabel/VisibilityNotifier2D
-
 func _ready():
 	# I don't know why we have to do this but Godot is a silly goose
 	yield(self, "draw")
