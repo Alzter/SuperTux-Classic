@@ -200,7 +200,7 @@ func check_bounce(delta):
 		
 		# If Tux is riding a Dragon, lower the bounce raycasts when he's falling so they
 		# are at the dragon's feet
-		if riding_entity != null and velocity.y > 0: bounce_raycasts.position.y += 43
+		if riding_entity and velocity.y > 0: bounce_raycasts.position.y += 43
 		
 		# Make all the raycasts extend out to cover Tux's future position
 		for raycast in bounce_raycasts.get_children():
@@ -290,8 +290,8 @@ func update_state(new_value, play_sound = true):
 		toggle_nodes(small_nodes, false) # Turn off small tux's sprite/hitbox
 		toggle_nodes(big_nodes, true) # Turn on big tux's sprite/hitbox
 	
-	var ducking = state_machine.state == "duck"
-	duck_hitbox(ducking) # We need to give Tux back the small hitbox if he's ducking
+	var ducking = state_machine.state == "duck" or riding_entity
+	duck_hitbox(ducking, !riding_entity) # We need to give Tux back the small hitbox if he's ducking
 	# Otherwise if you get a fire flower while ducking you incorrectly are assigned
 	# Tux's standing hitbox, which can result in clipping into terrain
 	
@@ -361,7 +361,7 @@ func toggle_nodes(nodes, enabled = true, only_hitbox = false):
 			node.set_deferred("disabled", !enabled)
 
 func can_duck():
-	if riding_entity != null: return false
+	if riding_entity: return false
 	var sm_state = state_machine.state
 	if state != states.SMALL:
 		if Input.is_action_pressed("duck"):
@@ -371,9 +371,9 @@ func can_duck():
 func can_unduck():
 	return !duck_raycast.is_colliding()
 
-func duck_hitbox(ducking = true):
+func duck_hitbox(ducking = true, count_as_small_hitbox = true):
 	if state == states.SMALL: return
-	has_large_hitbox = !ducking
+	if count_as_small_hitbox: has_large_hitbox = !ducking
 	hitbox_small.set_deferred("disabled", !ducking)
 	hitbox_big.set_deferred("disabled", ducking)
 
@@ -413,10 +413,14 @@ func release_grabbed_object(body = grabbed_object):
 	grabbed_object = null
 
 func fireball_input():
-	if state == states.FIRE and Input.is_action_just_pressed("run"):
+	if Input.is_action_just_pressed("run"):
 		if Global.fireballs_on_screen < fireball_amount:
-			Global.fireballs_on_screen += 1
-			shoot_fireball()
+			if state == states.FIRE and !riding_entity:
+				Global.fireballs_on_screen += 1
+				shoot_fireball()
+			elif riding_entity:
+				Global.fireballs_on_screen += 1
+				shoot_fireball()
 
 func shoot_fireball(bullet_to_instance = fireball_scene):
 	var b = bullet_to_instance.instance()
@@ -500,6 +504,7 @@ func skip_end_sequence():
 func ride_entity(entity : Node2D):
 	riding_entity = entity
 	#state_machine.set_state("riding")
+	duck_hitbox(true, false)
 	hitbox_riding.set_deferred("disabled", false)
 	dragon_sprite.show()
 

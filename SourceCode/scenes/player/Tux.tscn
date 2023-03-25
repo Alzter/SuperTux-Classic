@@ -348,7 +348,6 @@ anchor_bottom = 0.5
 
 [node name="Dragon" type="AnimatedSprite" parent="Control"]
 visible = false
-use_parent_material = true
 position = Vector2( 0, 29 )
 z_index = 1
 frames = SubResource( 19 )
