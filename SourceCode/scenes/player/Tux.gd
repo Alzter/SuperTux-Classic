@@ -456,6 +456,7 @@ func win():
 	state_machine.set_state("win")
 	Music.play("LevelDone")
 	Scoreboard.stop_level_timer()
+	Scoreboard.hide()
 	Global.can_pause = false
 	
 	# Once this timer depletes, load in the next level
@@ -473,9 +474,14 @@ func _progress_to_next_level():
 	Global.level_completed()
 
 # Press escape to skip victory sequence
-func _unhandled_input(event):
+func _input(event):
+	if event is InputEventScreenTouch:
+		if event.pressed: skip_end_sequence()
 	if event.is_action_pressed("ui_cancel"):
-		if win_timer.time_left > 0:
-			Input.action_release("ui_cancel") # Jank it up! A D V A N C E D
-			win_timer.stop()
-			_progress_to_next_level()
+		skip_end_sequence()
+
+func skip_end_sequence():
+	if win_timer.time_left > 0:
+		Input.action_release("ui_cancel") # Jank it up! A D V A N C E D
+		win_timer.stop()
+		_progress_to_next_level()
