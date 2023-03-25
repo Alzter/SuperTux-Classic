@@ -60,14 +60,21 @@ func be_bounced_upon(body):
 
 func initiate_riding(player):
 	player_entity = player
-	remove_from_group("enemies")
 	player.ride_entity(self)
-	state_machine.set_state("riding_idle")
+	state_machine.set_state("being_ridden")
+	disable_collision()
+	collide_with_other_enemies(false)
+	invincible = true
+	hide()
 
 func exit_riding():
-	if !is_in_group("enemies"): add_to_group("enemies")
-	state_machine.set_state("walk")
+	position = player_entity.position
 	player_entity = null
+	disable_collision(false)
+	collide_with_other_enemies(true)
+	invincible = false
+	show()
+	state_machine.set_state("walk")
 
 func disable_collision( disabled = true ):
 	set_collision_layer_bit(2, !disabled)
@@ -135,8 +142,3 @@ func take_damage():
 
 func _on_DestroyTimer_timeout():
 	call_deferred("queue_free")
-
-func glue_player_to_dragon(player = player_entity):
-	if player == null: return
-	player.global_position = player_riding_position.global_position
-	player.facing = player.facing

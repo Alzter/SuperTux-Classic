@@ -68,7 +68,7 @@ onready var coyote_timer = $CoyoteTimer
 onready var bounce_raycasts = $BounceRaycasts
 onready var duck_raycast = $DuckRaycast
 onready var sprite_master = $Control
-onready var sprites = [$Control/SpriteSmall, $Control/SpriteBig]
+onready var sprites = [$Control/SpriteSmall, $Control/SpriteBig, $Control/Dragon]
 onready var arm_sprite = $Control/GrabArm
 onready var sfx = $SFX
 onready var skid_timer = $SkidTimer
@@ -81,8 +81,10 @@ onready var grab_position = $GrabPosition
 # These get swapped out depending on Tux's state
 onready var small_nodes = [$HitboxSmall, $Control/SpriteSmall]
 onready var big_nodes = [$HitboxBig, $Control/SpriteBig]
+onready var dragon_sprite = $Control/Dragon
 onready var hitbox_small = $HitboxSmall
 onready var hitbox_big = $HitboxBig
+onready var hitbox_riding = $HitboxRiding
 
 var riding_entity = null
 
@@ -230,7 +232,9 @@ func bounce(bounce_velocity = bounce_height):
 func update_sprite():
 	var anim = state_machine.state
 	if skid_timer.time_left > 0 and grounded: anim = "skid"
-	play_animation(anim)
+	
+	if riding_entity == null: play_animation(anim)
+	else: play_animation("riding")
 	
 	# Make Tux face the direction you're holding
 	for sprite in sprites:
@@ -490,4 +494,11 @@ func skip_end_sequence():
 
 func ride_entity(entity : Node2D):
 	riding_entity = entity
-	state_machine.set_state("riding")
+	#state_machine.set_state("riding")
+	hitbox_riding.set_deferred("disabled", false)
+	dragon_sprite.show()
+
+func stop_riding_entity():
+	if riding_entity == null: return
+	dragon_sprite.hide()
+	hitbox_riding.set_deferred("disabled", true)

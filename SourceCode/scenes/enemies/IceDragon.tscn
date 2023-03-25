@@ -10,9 +10,9 @@
 [ext_resource path="res://scenes/shaders/Overlay.gdshader" type="Shader" id=8]
 [ext_resource path="res://sounds/enemies/fall.wav" type="AudioStream" id=9]
 
-[sub_resource type="ShaderMaterial" id=13]
+[sub_resource type="ShaderMaterial" id=14]
 shader = ExtResource( 8 )
-shader_param/overlay_color = Color( 0.905882, 0, 0, 0.501961 )
+shader_param/overlay_color = Color( 0.5, 0.5, 0.5, 0.5 )
 
 [sub_resource type="SpriteFrames" id=7]
 animations = [ {
@@ -30,10 +30,6 @@ extents = Vector2( 19, 32 )
 
 [sub_resource type="RectangleShape2D" id=10]
 extents = Vector2( 35, 14 )
-
-[sub_resource type="ShaderMaterial" id=14]
-shader = ExtResource( 8 )
-shader_param/overlay_color = Color( 0.5, 0.5, 0.5, 0.5 )
 
 [sub_resource type="Animation" id=11]
 resource_name = "default"
@@ -62,6 +58,10 @@ tracks/1/keys = {
 "update": 1,
 "values": [ SubResource( 14 ) ]
 }
+
+[sub_resource type="ShaderMaterial" id=13]
+shader = ExtResource( 8 )
+shader_param/overlay_color = Color( 0.905882, 0, 0, 0.501961 )
 
 [sub_resource type="ShaderMaterial" id=15]
 shader = ExtResource( 8 )
@@ -119,8 +119,7 @@ run_speed = 2
 script = ExtResource( 5 )
 
 [node name="Control" type="Control" parent="."]
-modulate = Color( 1, 0.4, 0, 1 )
-material = SubResource( 13 )
+material = SubResource( 14 )
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -177,9 +176,6 @@ one_shot = true
 autoplay = "default"
 anims/default = SubResource( 11 )
 anims/firehurt = SubResource( 12 )
-
-[node name="RidingPosition" type="Position2D" parent="."]
-position = Vector2( 0, -24 )
 
 [connection signal="body_entered" from="DamageArea" to="." method="_on_DamageArea_body_entered"]
 [connection signal="timeout" from="DestroyTimer" to="." method="_on_DestroyTimer_timeout"]

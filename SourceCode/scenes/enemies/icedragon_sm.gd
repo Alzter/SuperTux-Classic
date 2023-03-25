@@ -23,17 +23,11 @@ extends StateMachine
 func _ready():
 	add_state("walk")
 	add_state("dead")
-	add_state("riding_idle")
-	add_state("riding_walk")
-	add_state("riding_jump")
-	add_state("riding_fall")
+	add_state("being_ridden")
 
 	call_deferred("set_state", "walk")
 
 func _state_logic(delta):
-	if "riding" in state:
-		host.glue_player_to_dragon()
-	
 	match state:
 		"walk":
 			host.move_forward(host.turn_on_walls, host.turn_on_cliffs)
@@ -41,8 +35,8 @@ func _state_logic(delta):
 			host.apply_gravity(delta)
 			host.apply_movement(delta, false)
 			return
-		"riding_idle":
-			pass
+		"being_ridden":
+			return
 	
 	host.update_sprite()
 	host.apply_gravity(delta)
@@ -55,4 +49,6 @@ func _enter_state(new_state, old_state):
 	pass
 
 func _exit_state(old_state, new_state):
-	pass
+	match old_state:
+		"being_ridden":
+			host.exit_riding()

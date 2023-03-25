@@ -29,10 +29,8 @@ func _ready():
 	call_deferred("set_state", "idle")
 
 func _state_logic(delta):
-	if "riding" in state:
-		host.update_sprite()
-	
 	if "dead" in state:
+		host.stop_riding_entity()
 		host.apply_gravity(delta)
 		host.apply_movement(delta, false)
 		host.update_sprite()

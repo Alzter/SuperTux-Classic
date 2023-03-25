@@ -1,4 +1,4 @@
-[gd_scene load_steps=61 format=2]
+[gd_scene load_steps=64 format=2]
 
 [ext_resource path="res://sounds/player/bigjump.wav" type="AudioStream" id=1]
 [ext_resource path="res://sounds/player/jump.wav" type="AudioStream" id=2]
@@ -47,10 +47,19 @@
 [ext_resource path="res://music/InvincibleStart.mp3" type="AudioStream" id=45]
 [ext_resource path="res://scenes/player/PlayerCamera.gd" type="Script" id=46]
 [ext_resource path="res://images/player/tux/big/ride_entity.png" type="Texture" id=47]
+[ext_resource path="res://images/enemies/icedragon/idle.png" type="Texture" id=48]
 
 [sub_resource type="ShaderMaterial" id=10]
 shader = ExtResource( 44 )
 shader_param/overlay_color = Plane( 0.5, 0.5, 0.5, 0.5 )
+
+[sub_resource type="SpriteFrames" id=19]
+animations = [ {
+"frames": [ ExtResource( 48 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
 
 [sub_resource type="SpriteFrames" id=7]
 animations = [ {
@@ -240,6 +249,9 @@ extents = Vector2( 15, 14 )
 [sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 15, 30 )
 
+[sub_resource type="RectangleShape2D" id=20]
+extents = Vector2( 32, 34 )
+
 [sub_resource type="Animation" id=5]
 resource_name = "default"
 length = 0.1
@@ -334,6 +346,15 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 
+[node name="Dragon" type="AnimatedSprite" parent="Control"]
+visible = false
+use_parent_material = true
+position = Vector2( 0, 29 )
+z_index = 1
+frames = SubResource( 19 )
+playing = true
+offset = Vector2( 0, -12 )
+
 [node name="GrabArm" type="AnimatedSprite" parent="Control"]
 visible = false
 use_parent_material = true
@@ -343,6 +364,7 @@ animation = "small"
 offset = Vector2( 0, -12 )
 
 [node name="SpriteSmall" type="AnimatedSprite" parent="Control"]
+visible = false
 use_parent_material = true
 z_index = 1
 frames = SubResource( 2 )
@@ -350,11 +372,10 @@ animation = "idle"
 playing = true
 
 [node name="SpriteBig" type="AnimatedSprite" parent="Control"]
-visible = false
 use_parent_material = true
 z_index = 1
 frames = SubResource( 1 )
-animation = "idle"
+animation = "riding"
 playing = true
 offset = Vector2( 0, -12 )
 
@@ -376,6 +397,12 @@ shape = SubResource( 3 )
 position = Vector2( 0, -10 )
 z_index = 2
 shape = SubResource( 4 )
+disabled = true
+
+[node name="HitboxRiding" type="CollisionShape2D" parent="."]
+position = Vector2( 0, 29 )
+z_index = 2
+shape = SubResource( 20 )
 disabled = true
 
 [node name="InvincibleTimer" type="Timer" parent="."]
