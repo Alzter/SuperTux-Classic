@@ -37,7 +37,7 @@ export var starting_powerup = 0
 export var worldmap_spawn = Vector2()
 export var worldmap_player_object : PackedScene
 
-onready var custom_camera = $Camera2D if has_node("Camera2D") else null
+onready var custom_camera = get_node_or_null("Camera2D")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

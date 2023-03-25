@@ -244,7 +244,6 @@ rect_min_size = Vector2( 99999, 99999 )
 color = Color( 1, 0, 0, 0.0117647 )
 
 [node name="CastleBG" parent="." instance=ExtResource( 3 )]
-position = Vector2( 1, 54 )
 
 [node name="Shader" type="Node2D" parent="."]
 material = SubResource( 1 )
