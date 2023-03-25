@@ -18,7 +18,7 @@ theme = ExtResource( 1 )
 script = ExtResource( 2 )
 intro_scene = "res://scenes/levels/world1/intro.tscn"
 options_scene = "res://scenes/menus/Options.tscn"
-credits_scene = "res://scenes/menus/Credits.tscn"
+credits_scene = "res://scenes/menus/CreditsEnding.tscn"
 
 [node name="TitleContent" type="Control" parent="."]
 anchor_right = 1.0
@@ -71,7 +71,7 @@ margin_right = 125.0
 margin_bottom = -2.0
 custom_colors/font_color = Color( 0.992157, 1, 0, 1 )
 custom_fonts/font = ExtResource( 5 )
-text = "Release v0.1.1"
+text = "Release v0.2.0"
 valign = 2
 
 [node name="Menu" type="Control" parent="TitleContent"]
