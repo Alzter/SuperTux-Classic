@@ -35,6 +35,12 @@ func _process(_delta):
 		$Timer.stop()
 		_dissapear()
 
+func _input(event):
+	if event is InputEventScreenTouch:
+		if event.pressed:
+			$Timer.stop()
+			_dissapear()
+
 func _on_Timer_timeout():
 	_dissapear()
 
