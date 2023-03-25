@@ -246,6 +246,8 @@ func update_sprite():
 	
 	if riding_entity == null: play_animation(anim)
 	else: play_animation("riding")
+	if dragon_sprite.frames.has_animation(anim):
+		dragon_sprite.play(anim)
 	
 	# Make Tux face the direction you're holding
 	for sprite in sprites:
@@ -514,7 +516,8 @@ func skip_end_sequence():
 		win_timer.stop()
 		_progress_to_next_level()
 
-func ride_entity(entity : Node2D):
+func ride_entity(entity : Node2D, initial_position : Vector2 = global_position):
+	global_position = initial_position
 	riding_entity = entity
 	duck_hitbox(true, false)
 	hitbox_riding.set_deferred("disabled", false)

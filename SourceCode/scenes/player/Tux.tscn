@@ -1,4 +1,4 @@
-[gd_scene load_steps=64 format=2]
+[gd_scene load_steps=65 format=2]
 
 [ext_resource path="res://sounds/player/bigjump.wav" type="AudioStream" id=1]
 [ext_resource path="res://sounds/player/jump.wav" type="AudioStream" id=2]
@@ -48,6 +48,7 @@
 [ext_resource path="res://scenes/player/PlayerCamera.gd" type="Script" id=46]
 [ext_resource path="res://images/player/tux/big/ride_entity.png" type="Texture" id=47]
 [ext_resource path="res://images/enemies/icedragon/idle.png" type="Texture" id=48]
+[ext_resource path="res://images/enemies/icedragon/jump.png" type="Texture" id=49]
 
 [sub_resource type="ShaderMaterial" id=10]
 shader = ExtResource( 44 )
@@ -57,7 +58,27 @@ shader_param/overlay_color = Plane( 0.5, 0.5, 0.5, 0.5 )
 animations = [ {
 "frames": [ ExtResource( 48 ) ],
 "loop": true,
-"name": "default",
+"name": "idle",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 48 ) ],
+"loop": true,
+"name": "fall",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 48 ) ],
+"loop": true,
+"name": "walk",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 48 ) ],
+"loop": true,
+"name": "skid",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 49 ) ],
+"loop": true,
+"name": "jump",
 "speed": 5.0
 } ]
 
@@ -76,19 +97,14 @@ animations = [ {
 
 [sub_resource type="SpriteFrames" id=2]
 animations = [ {
-"frames": [ ExtResource( 47 ) ],
-"loop": true,
-"name": "riding",
-"speed": 5.0
-}, {
 "frames": [ ExtResource( 15 ) ],
 "loop": true,
 "name": "idle",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 31 ) ],
+"frames": [ ExtResource( 15 ) ],
 "loop": true,
-"name": "skid",
+"name": "duck",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 19 ) ],
@@ -101,9 +117,9 @@ animations = [ {
 "name": "walk",
 "speed": 15.0
 }, {
-"frames": [ ExtResource( 15 ) ],
+"frames": [ ExtResource( 16 ) ],
 "loop": true,
-"name": "duck",
+"name": "kick",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 23 ), ExtResource( 27 ) ],
@@ -111,32 +127,32 @@ animations = [ {
 "name": "dead",
 "speed": 10.0
 }, {
-"frames": [ ExtResource( 16 ) ],
+"frames": [ ExtResource( 31 ) ],
 "loop": true,
-"name": "kick",
+"name": "skid",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 19 ) ],
 "loop": true,
 "name": "jump",
 "speed": 5.0
-} ]
-
-[sub_resource type="SpriteFrames" id=1]
-animations = [ {
+}, {
 "frames": [ ExtResource( 47 ) ],
 "loop": true,
 "name": "riding",
 "speed": 5.0
-}, {
+} ]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
 "frames": [ ExtResource( 6 ) ],
 "loop": true,
 "name": "idle",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 4 ) ],
+"frames": [ ExtResource( 14 ) ],
 "loop": true,
-"name": "skid",
+"name": "duck",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 5 ) ],
@@ -149,19 +165,24 @@ animations = [ {
 "name": "walk",
 "speed": 10.0
 }, {
-"frames": [ ExtResource( 14 ) ],
-"loop": true,
-"name": "duck",
-"speed": 5.0
-}, {
 "frames": [ ExtResource( 13 ) ],
 "loop": true,
 "name": "kick",
 "speed": 5.0
 }, {
+"frames": [ ExtResource( 4 ) ],
+"loop": true,
+"name": "skid",
+"speed": 5.0
+}, {
 "frames": [ ExtResource( 5 ) ],
 "loop": true,
 "name": "jump",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 47 ) ],
+"loop": true,
+"name": "riding",
 "speed": 5.0
 } ]
 
@@ -351,6 +372,7 @@ visible = false
 position = Vector2( 0, 29 )
 z_index = 1
 frames = SubResource( 19 )
+animation = "skid"
 playing = true
 offset = Vector2( 0, -12 )
 

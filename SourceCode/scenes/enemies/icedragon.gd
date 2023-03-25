@@ -7,6 +7,7 @@ export var jump_height_in_tiles = 6.0
 export var walk_speed = 0.8 * 4
 export var run_speed = 8
 export var max_health = 3
+export var tux_position_offset = Vector2(0, -26)
 
 var invincible = false
 var velocity = Vector2()
@@ -60,7 +61,7 @@ func be_bounced_upon(body):
 
 func initiate_riding(player):
 	player_entity = player
-	player.ride_entity(self)
+	player.ride_entity(self, global_position + tux_position_offset)
 	state_machine.set_state("being_ridden")
 	disable_collision()
 	collide_with_other_enemies(false)
@@ -68,7 +69,7 @@ func initiate_riding(player):
 	hide()
 
 func exit_riding(from_damage = false):
-	position = player_entity.position
+	position = player_entity.position - tux_position_offset
 	facing = player_entity.facing
 	player_entity = null
 	disable_collision(false)
