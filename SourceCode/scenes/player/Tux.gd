@@ -107,6 +107,8 @@ func apply_movement(delta, solid = true):
 	else:
 		position += velocity * delta
 	
+	position.x = max(position.x, 16)
+	
 	self.grounded = is_on_floor()
 	if grounded: jump_terminable = true
 
