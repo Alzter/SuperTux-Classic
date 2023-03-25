@@ -30,7 +30,7 @@ func _ready():
 
 func _state_logic(delta):
 	if "riding" in state:
-		return
+		host.update_sprite()
 	
 	if "dead" in state:
 		host.apply_gravity(delta)

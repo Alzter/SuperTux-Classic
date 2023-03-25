@@ -1,4 +1,4 @@
-[gd_scene load_steps=60 format=2]
+[gd_scene load_steps=61 format=2]
 
 [ext_resource path="res://sounds/player/bigjump.wav" type="AudioStream" id=1]
 [ext_resource path="res://sounds/player/jump.wav" type="AudioStream" id=2]
@@ -46,6 +46,7 @@
 [ext_resource path="res://scenes/shaders/Overlay.gdshader" type="Shader" id=44]
 [ext_resource path="res://music/InvincibleStart.mp3" type="AudioStream" id=45]
 [ext_resource path="res://scenes/player/PlayerCamera.gd" type="Script" id=46]
+[ext_resource path="res://images/player/tux/big/ride_entity.png" type="Texture" id=47]
 
 [sub_resource type="ShaderMaterial" id=10]
 shader = ExtResource( 44 )
@@ -66,6 +67,11 @@ animations = [ {
 
 [sub_resource type="SpriteFrames" id=2]
 animations = [ {
+"frames": [ ExtResource( 47 ) ],
+"loop": true,
+"name": "riding",
+"speed": 5.0
+}, {
 "frames": [ ExtResource( 15 ) ],
 "loop": true,
 "name": "idle",
@@ -109,6 +115,11 @@ animations = [ {
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
+"frames": [ ExtResource( 47 ) ],
+"loop": true,
+"name": "riding",
+"speed": 5.0
+}, {
 "frames": [ ExtResource( 6 ) ],
 "loop": true,
 "name": "idle",

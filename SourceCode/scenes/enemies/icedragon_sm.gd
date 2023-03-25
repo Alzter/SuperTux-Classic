@@ -31,6 +31,9 @@ func _ready():
 	call_deferred("set_state", "walk")
 
 func _state_logic(delta):
+	if "riding" in state:
+		host.glue_player_to_dragon()
+	
 	match state:
 		"walk":
 			host.move_forward(host.turn_on_walls, host.turn_on_cliffs)
@@ -38,6 +41,8 @@ func _state_logic(delta):
 			host.apply_gravity(delta)
 			host.apply_movement(delta, false)
 			return
+		"riding_idle":
+			pass
 	
 	host.update_sprite()
 	host.apply_gravity(delta)

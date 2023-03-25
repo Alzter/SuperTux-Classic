@@ -14,6 +14,8 @@ var grounded = false
 var touching_wall = false
 var die_height = 2.0 * Global.TILE_SIZE
 
+var player_entity = null
+
 onready var walk_speed_tiles = walk_speed * 4 * Global.TILE_SIZE
 onready var jump_height = jump_height_in_tiles * Global.TILE_SIZE
 onready var health = max_health
@@ -26,6 +28,7 @@ onready var bounce_area = $BounceArea
 onready var edge_turn = $EdgeTurn
 onready var sfx = $SFX
 onready var destroy_timer = $DestroyTimer
+onready var player_riding_position = $RidingPosition
 
 # Kinematic Equations
 func _ready():
@@ -56,8 +59,15 @@ func be_bounced_upon(body):
 		initiate_riding(body)
 
 func initiate_riding(player):
+	player_entity = player
 	remove_from_group("enemies")
 	player.ride_entity(self)
+	state_machine.set_state("riding_idle")
+
+func exit_riding():
+	if !is_in_group("enemies"): add_to_group("enemies")
+	state_machine.set_state("walk")
+	player_entity = null
 
 func disable_collision( disabled = true ):
 	set_collision_layer_bit(2, !disabled)
@@ -125,3 +135,8 @@ func take_damage():
 
 func _on_DestroyTimer_timeout():
 	call_deferred("queue_free")
+
+func glue_player_to_dragon(player = player_entity):
+	if player == null: return
+	player.global_position = player_riding_position.global_position
+	player.facing = player.facing
