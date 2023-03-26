@@ -212,6 +212,9 @@ script = ExtResource( 7 )
 [node name="Fall" type="AudioStreamPlayer2D" parent="SFX"]
 stream = ExtResource( 6 )
 
+[node name="Splash" type="AudioStreamPlayer2D" parent="SFX"]
+stream = ExtResource( 6 )
+
 [node name="DestroyTimer" type="Timer" parent="."]
 process_mode = 0
 one_shot = true
