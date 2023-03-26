@@ -21,6 +21,7 @@
 extends StaticBody2D
 
 export var type = ""
+export var invisible = false
 export var initial_animation = "default"
 export var contains_powerup = false
 export var contains_coin = false

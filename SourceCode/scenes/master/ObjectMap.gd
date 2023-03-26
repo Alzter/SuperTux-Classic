@@ -39,6 +39,7 @@ var tile_entities = {
 	"ObjBonusCoin" : "objects/BonusCoin",
 	"ObjBonusPowerup" : "objects/BonusBlock",
 	"ObjBonusStar" : "objects/BonusStar",
+	"ObjBonusInvisible" : "objects/BonusInvisible",
 	
 	"ObjBrick" : "objects/Brick",
 	"ObjBrick1up" : "objects/Brick1up",

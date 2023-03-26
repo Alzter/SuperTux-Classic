@@ -25,15 +25,15 @@
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
-"frames": [ ExtResource( 15 ) ],
-"loop": true,
-"name": "BrickSnow",
-"speed": 5.0
-}, {
 "frames": [ ExtResource( 1 ), ExtResource( 2 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 3 ), ExtResource( 5 ), ExtResource( 4 ), ExtResource( 2 ) ],
 "loop": true,
 "name": "Bonus",
 "speed": 20.0
+}, {
+"frames": [ ExtResource( 15 ) ],
+"loop": true,
+"name": "BrickSnow",
+"speed": 5.0
 }, {
 "frames": [ ExtResource( 14 ) ],
 "loop": true,
@@ -133,7 +133,7 @@ tracks/4/keys = {
 
 [sub_resource type="Animation" id=9]
 resource_name = "default"
-length = 0.1
+length = 0.001
 tracks/0/type = "value"
 tracks/0/path = NodePath("AnimatedSprite:visible")
 tracks/0/interp = 1
@@ -328,6 +328,6 @@ anims/smash = SubResource( 10 )
 
 [node name="Coin" type="Sprite" parent="."]
 visible = false
-position = Vector2( 0, -64 )
+position = Vector2( 0, -16 )
 z_index = -1
 texture = ExtResource( 20 )

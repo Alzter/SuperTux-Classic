@@ -118,6 +118,7 @@ func _get_section_of_string(string, beginning_phrase, end_phrase):
 	return string.substr(start_pos, length)
 
 func _ready():
+	
 	if !is_level_worldmap:
 		import_level()
 	else:
@@ -159,7 +160,7 @@ func _import_level(is_worldmap = false):
 		level.worldmap_spawn = Vector2(player_x, player_y)
 		level.is_worldmap = true
 	else:
-		tile_importer.import_tilemap(tiles_interactive, level_intact, objectmap, false, level_water)
+		tile_importer.import_tilemap(tiles_interactive, level_intact, objectmap, true, level_water)
 		tile_importer.import_tilemap(tiles_background, level_bg, objectmap, true)
 		tile_importer.import_tilemap(tiles_foreground, level_fg, objectmap)
 		

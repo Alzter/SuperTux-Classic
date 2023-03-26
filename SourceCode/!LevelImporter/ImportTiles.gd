@@ -45,6 +45,7 @@ export var object_tiles = {
 	128: "ObjBonus1up",
 	83: "ObjBonusCoin",
 	84: "ObjBonusEmpty",
+	112: "ObjBonusInvisible",
 	
 	77: "ObjBrick",
 	78: "ObjSBrick",
@@ -102,7 +103,6 @@ export var level_tileset = {
 	23 : "Snow",
 	30 : "Snow",
 	31 : "Snow",
-	112 : "Snow",
 	113 : "Snow",
 	114 : "Snow",
 	115 : "Snow",
@@ -347,10 +347,9 @@ func place_level_tile(tile, x, y, tilemap, objectmap, expand, water_tilemap):
 			tilemap_to_use.update_bitmask_area(Vector2(x-1, y))
 			
 			if y == 14 and expand:
-				
 				# Don't repeat water surface tiles when expanding the bottom of the tilemap
 				# (Edge case fix)
-				if "Water" in tile_name:
+				if "Water" in tile_name and tile_name != "WaterFill":
 					tile_to_set = _get_tile_id_from_name("WaterFill", tilemap_to_use)
 				
 				var new_y = y
