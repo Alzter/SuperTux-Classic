@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://scenes/enemies/badguy.gd" type="Script" id=1]
 [ext_resource path="res://scenes/enemies/badguy_sm.gd" type="Script" id=2]
@@ -9,6 +9,8 @@
 [ext_resource path="res://scenes/master/SFX.gd" type="Script" id=7]
 [ext_resource path="res://scenes/master/damage_area.tscn" type="PackedScene" id=8]
 [ext_resource path="res://images/particles/splash.png" type="Texture" id=9]
+[ext_resource path="res://sounds/enemies/water_splash_out.wav" type="AudioStream" id=10]
+[ext_resource path="res://sounds/enemies/water_splash_in.wav" type="AudioStream" id=11]
 
 [sub_resource type="SpriteFrames" id=6]
 animations = [ {
@@ -212,8 +214,13 @@ script = ExtResource( 7 )
 [node name="Fall" type="AudioStreamPlayer2D" parent="SFX"]
 stream = ExtResource( 6 )
 
-[node name="Splash" type="AudioStreamPlayer2D" parent="SFX"]
-stream = ExtResource( 6 )
+[node name="SplashIn" type="AudioStreamPlayer2D" parent="SFX"]
+stream = ExtResource( 11 )
+pitch_scale = 1.2
+
+[node name="SplashOut" type="AudioStreamPlayer2D" parent="SFX"]
+stream = ExtResource( 10 )
+pitch_scale = 1.2
 
 [node name="DestroyTimer" type="Timer" parent="."]
 process_mode = 0

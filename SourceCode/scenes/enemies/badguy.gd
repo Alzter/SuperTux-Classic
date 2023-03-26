@@ -263,6 +263,7 @@ func enter_water():
 	collide_with_other_enemies(false)
 	invincible = true
 	anim_player.play("enter_water")
+	sfx.play("SplashIn")
 
 func exit_water():
 	grounded = false
@@ -272,6 +273,7 @@ func exit_water():
 	collide_with_other_enemies(true)
 	invincible = false
 	anim_player.play("default")
+	sfx.play("SplashOut")
 
 func _on_AnimationPlayer_animation_finished(anim_name):
 	if anim_name == "exit_water":
