@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://scenes/enemies/badguy.gd" type="Script" id=1]
 [ext_resource path="res://scenes/enemies/badguy_sm.gd" type="Script" id=2]
@@ -20,6 +20,11 @@ animations = [ {
 "loop": true,
 "name": "bounce_up",
 "speed": 10.0
+}, {
+"frames": [ ExtResource( 5 ) ],
+"loop": true,
+"name": "water_submerged",
+"speed": 5.0
 } ]
 
 [sub_resource type="RectangleShape2D" id=4]
@@ -28,6 +33,21 @@ extents = Vector2( 14, 16 )
 [sub_resource type="RectangleShape2D" id=5]
 extents = Vector2( 12, 16 )
 
+[sub_resource type="Animation" id=7]
+resource_name = "enter_water"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Control:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ) ]
+}
+
 [node name="Fish" type="KinematicBody2D" groups=["enemies"]]
 collision_layer = 4
 collision_mask = 5
@@ -35,7 +55,7 @@ script = ExtResource( 1 )
 type = "Fish"
 turn_on_cliffs = true
 sprite_faces_direction = false
-bounce_height_in_tiles = 7.0
+flip_vertically_when_dying = false
 
 [node name="StateMachine" type="Node" parent="."]
 script = ExtResource( 2 )
@@ -49,7 +69,7 @@ rect_pivot_offset = Vector2( 0, 10 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Control"]
 frames = SubResource( 6 )
-animation = "fall"
+animation = "water_submerged"
 playing = true
 offset = Vector2( 0, -5 )
 
@@ -85,6 +105,9 @@ one_shot = true
 [node name="RiseTimer" type="Timer" parent="."]
 process_mode = 0
 one_shot = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/enter_water = SubResource( 7 )
 
 [connection signal="body_entered" from="DamageArea" to="." method="_on_DamageArea_body_entered"]
 [connection signal="timeout" from="DestroyTimer" to="." method="_on_DestroyTimer_timeout"]

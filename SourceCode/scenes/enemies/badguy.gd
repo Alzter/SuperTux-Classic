@@ -26,6 +26,7 @@ export var turn_on_walls = true
 export var turn_on_cliffs = false
 export var sprite_faces_direction = true
 export var bounce_height_in_tiles = 6.0
+export var flip_vertically_when_dying = true
 
 var velocity = Vector2()
 var move_speed = 0.8 * 4 * Global.TILE_SIZE
@@ -176,7 +177,7 @@ func die(bounce = false):
 	z_index = 999
 	disable_collision()
 	collide_with_other_enemies(false)
-	sprite.flip_v = true
+	if flip_vertically_when_dying: sprite.flip_v = true
 	state_machine.set_state("dead")
 	destroy_timer.start()
 
@@ -247,7 +248,7 @@ func check_water_below(delta):
 	water_detector.cast_to.y = velocity.y * delta
 	water_detector.force_raycast_update()
 	if water_detector.is_colliding():
-		position = water_detector.get_collision_point() - water_detector.global_position
+		global_position += water_detector.get_collision_point() - water_detector.global_position
 		enter_water()
 		state_machine.set_state("water_submerged")
 
@@ -260,10 +261,13 @@ func enter_water():
 	disable_collision()
 	collide_with_other_enemies(false)
 	invincible = true
+	visible = false
 
 func exit_water():
+	grounded = false
+	velocity = Vector2(0, bounce_height)
 	state_machine.set_state("bounce_up")
 	disable_collision(false)
 	collide_with_other_enemies(true)
 	invincible = false
-	print(state_machine.state)
+	visible = true
