@@ -71,14 +71,14 @@ animations = [ {
 "name": "walk",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 48 ) ],
-"loop": true,
-"name": "skid",
-"speed": 5.0
-}, {
 "frames": [ ExtResource( 49 ) ],
 "loop": true,
 "name": "jump",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 48 ) ],
+"loop": true,
+"name": "skid",
 "speed": 5.0
 } ]
 
@@ -102,11 +102,6 @@ animations = [ {
 "name": "idle",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 15 ) ],
-"loop": true,
-"name": "duck",
-"speed": 5.0
-}, {
 "frames": [ ExtResource( 19 ) ],
 "loop": true,
 "name": "fall",
@@ -117,9 +112,19 @@ animations = [ {
 "name": "walk",
 "speed": 15.0
 }, {
-"frames": [ ExtResource( 16 ) ],
+"frames": [ ExtResource( 19 ) ],
 "loop": true,
-"name": "kick",
+"name": "jump",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 15 ) ],
+"loop": true,
+"name": "duck",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 31 ) ],
+"loop": true,
+"name": "skid",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 23 ), ExtResource( 27 ) ],
@@ -127,19 +132,14 @@ animations = [ {
 "name": "dead",
 "speed": 10.0
 }, {
-"frames": [ ExtResource( 31 ) ],
-"loop": true,
-"name": "skid",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 19 ) ],
-"loop": true,
-"name": "jump",
-"speed": 5.0
-}, {
 "frames": [ ExtResource( 47 ) ],
 "loop": true,
 "name": "riding",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 16 ) ],
+"loop": true,
+"name": "kick",
 "speed": 5.0
 } ]
 
@@ -148,11 +148,6 @@ animations = [ {
 "frames": [ ExtResource( 6 ) ],
 "loop": true,
 "name": "idle",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 14 ) ],
-"loop": true,
-"name": "duck",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 5 ) ],
@@ -165,9 +160,14 @@ animations = [ {
 "name": "walk",
 "speed": 10.0
 }, {
-"frames": [ ExtResource( 13 ) ],
+"frames": [ ExtResource( 5 ) ],
 "loop": true,
-"name": "kick",
+"name": "jump",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 14 ) ],
+"loop": true,
+"name": "duck",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 4 ) ],
@@ -175,14 +175,14 @@ animations = [ {
 "name": "skid",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 5 ) ],
-"loop": true,
-"name": "jump",
-"speed": 5.0
-}, {
 "frames": [ ExtResource( 47 ) ],
 "loop": true,
 "name": "riding",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 13 ) ],
+"loop": true,
+"name": "kick",
 "speed": 5.0
 } ]
 

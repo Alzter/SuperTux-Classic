@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://scenes/enemies/badguy.gd" type="Script" id=1]
 [ext_resource path="res://scenes/enemies/badguy_sm.gd" type="Script" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://sounds/enemies/fall.wav" type="AudioStream" id=6]
 [ext_resource path="res://scenes/master/SFX.gd" type="Script" id=7]
 [ext_resource path="res://scenes/master/damage_area.tscn" type="PackedScene" id=8]
+[ext_resource path="res://images/particles/splash.png" type="Texture" id=9]
 
 [sub_resource type="SpriteFrames" id=6]
 animations = [ {
@@ -87,6 +88,18 @@ tracks/1/keys = {
 "update": 0,
 "values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
 }
+tracks/2/type = "value"
+tracks/2/path = NodePath("SplashParticles:emitting")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
 
 [sub_resource type="Animation" id=9]
 resource_name = "exit_water"
@@ -115,6 +128,31 @@ tracks/1/keys = {
 "update": 0,
 "values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
 }
+tracks/2/type = "value"
+tracks/2/path = NodePath("SplashParticles:emitting")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.1 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+
+[sub_resource type="CanvasItemMaterial" id=10]
+particles_animation = true
+particles_anim_h_frames = 5
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="ParticlesMaterial" id=11]
+flag_disable_z = true
+gravity = Vector3( 0, 0, 0 )
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+anim_speed = 1.0
 
 [node name="Fish" type="KinematicBody2D" groups=["enemies"]]
 collision_layer = 4
@@ -129,13 +167,10 @@ flip_vertically_when_dying = false
 script = ExtResource( 2 )
 
 [node name="Control" type="Control" parent="."]
-modulate = Color( 1, 1, 1, 0 )
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_top = 64.0
-margin_bottom = 64.0
 rect_pivot_offset = Vector2( 0, 10 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Control"]
@@ -183,6 +218,16 @@ autoplay = "default"
 anims/default = SubResource( 8 )
 anims/enter_water = SubResource( 7 )
 anims/exit_water = SubResource( 9 )
+
+[node name="SplashParticles" type="Particles2D" parent="."]
+material = SubResource( 10 )
+emitting = false
+amount = 1
+one_shot = true
+speed_scale = 6.0
+local_coords = false
+process_material = SubResource( 11 )
+texture = ExtResource( 9 )
 
 [connection signal="body_entered" from="DamageArea" to="." method="_on_DamageArea_body_entered"]
 [connection signal="timeout" from="DestroyTimer" to="." method="_on_DestroyTimer_timeout"]
