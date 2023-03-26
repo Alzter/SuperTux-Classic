@@ -147,6 +147,7 @@ pause={
 2d_physics/layer_5="Blocks"
 2d_physics/layer_6="Coins"
 2d_physics/layer_7="Fireball Hittable"
+2d_physics/layer_8="Water"
 
 [physics]
 

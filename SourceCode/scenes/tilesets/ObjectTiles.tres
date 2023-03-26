@@ -1,4 +1,4 @@
-[gd_resource type="TileSet" load_steps=17 format=2]
+[gd_resource type="TileSet" load_steps=18 format=2]
 
 [ext_resource path="res://images/enemies/spiky/walk1.png" type="Texture" id=1]
 [ext_resource path="res://images/enemies/stalactite/stalactite.png" type="Texture" id=2]
@@ -16,6 +16,7 @@
 [ext_resource path="res://images/objects/checkpoint/bell-m.png" type="Texture" id=14]
 [ext_resource path="res://images/enemies/flame/flame-0.png" type="Texture" id=15]
 [ext_resource path="res://images/enemies/icedragon/idle.png" type="Texture" id=16]
+[ext_resource path="res://images/enemies/fish/up1.png" type="Texture" id=17]
 
 [resource]
 2/name = "BadSnowball"
@@ -438,3 +439,17 @@
 32/shape_one_way_margin = 0.0
 32/shapes = [  ]
 32/z_index = 0
+33/name = "BadFish"
+33/texture = ExtResource( 17 )
+33/tex_offset = Vector2( 0, 0 )
+33/modulate = Color( 1, 1, 1, 1 )
+33/region = Rect2( 0, 0, 32, 32 )
+33/tile_mode = 0
+33/occluder_offset = Vector2( 0, 0 )
+33/navigation_offset = Vector2( 0, 0 )
+33/shape_offset = Vector2( 0, 0 )
+33/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+33/shape_one_way = false
+33/shape_one_way_margin = 0.0
+33/shapes = [  ]
+33/z_index = 0

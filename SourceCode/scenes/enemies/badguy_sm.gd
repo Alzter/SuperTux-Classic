@@ -33,6 +33,8 @@ func _ready():
 	
 	# What initial state to use for the enemy depends on its type
 	match host.type:
+		"Fish":
+			call_deferred("set_state", "fall")
 		"Jumpy": # Jumpy goes to a bouncing state
 			call_deferred("set_state", "bounce_up")
 		"Bouncing": # Bouncing snowball bounces forwards
@@ -52,6 +54,13 @@ func _state_logic(delta):
 			host.jumpy_bounce()
 			host.apply_gravity(delta)
 			host.jumpy_movement()
+			host.update_sprite()
+			return
+		"fall":
+			host.jumpy_bounce()
+			host.apply_gravity(delta)
+			host.jumpy_movement()
+			host.update_sprite()
 			return
 		"bounce_forward":
 			host.move_forward(true, false, host.bounce_move_speed)
@@ -78,7 +87,11 @@ func _state_logic(delta):
 	host.apply_movement(delta)
 
 func _get_transition(delta):
-	return null
+	match state:
+		"fall":
+			if host.velocity.y <= 0: return "bounce_up"
+		"bounce_up":
+			if host.velocity.y > 0: return "fall"
 
 func _enter_state(new_state, old_state):
 	pass

@@ -63,6 +63,7 @@ var tile_entities = {
 	"BadStalactite" : "enemies/Stalactite",
 	"BadFlame" : "enemies/FlameOrb",
 	"BadIceDragon" : "enemies/IceDragon",
+	"BadFish" : "enemies/Fish",
 }
 
 var entity_offset = Vector2(16, 16)
