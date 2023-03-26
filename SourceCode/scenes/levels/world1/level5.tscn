@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://scenes/master/Level.gd" type="Script" id=1]
 [ext_resource path="res://scenes/master/TileMap.tscn" type="PackedScene" id=2]
@@ -36,48 +36,19 @@ void fragment()
 shader = SubResource( 7 )
 shader_param/overlay_color = Plane( 0.5, 0.5, 0.5, 0.5 )
 
-[sub_resource type="Shader" id=8]
-code = "// NOTE: Shader automatically converted from Godot Engine 3.4.4.stable's CanvasItemMaterial.
-
-shader_type canvas_item;
-render_mode blend_mix;
-
-uniform vec4 overlay_color = vec4(0,0,0,1);
-
-
-vec4 overlay(vec4 base, vec4 blend){
-	vec4 limit = step(0.5, base);
-	return mix(2.0 * base * blend, 1.0 - 2.0 * (1.0 - base) * (1.0 - blend), limit);
-}
-
-void fragment()
-{
-	// image texture
-	vec4 base = texture(TEXTURE, UV);
-	// noise texture
-	vec4 blend = overlay_color;
-	
-	COLOR = overlay(base, blend);
-}"
-
-[sub_resource type="ShaderMaterial" id=9]
-shader = SubResource( 8 )
-shader_param/overlay_color = Plane( 0.5, 0.5, 0.5, 0.5 )
-
 [node name="Level" type="Node2D"]
 script = ExtResource( 1 )
 level_title = "The Somewhat Smaller Bath"
 level_author = "Philippe Saint-Pierre"
 
-[node name="Background" parent="." instance=ExtResource( 2 )]
+[node name="Shader" type="Node2D" parent="."]
+
+[node name="Background" parent="Shader" instance=ExtResource( 2 )]
 material = SubResource( 6 )
 z_index = -20
 collision_layer = 0
 collision_mask = 0
 tile_data = PoolIntArray( 393528, 1, 0, 458962, 4, 0, 458963, 4, 1, 524404, 4, 0, 524405, 4, 1, 524453, 4, 0, 524454, 4, 1, 524460, 4, 0, 524461, 4, 1, 524495, 4, 0, 524496, 4, 1, 524498, 4, 65536, 524499, 4, 65537, 524501, 4, 0, 524502, 4, 1, 589900, 3, 0, 589937, 4, 0, 589938, 4, 1, 589940, 4, 65536, 589941, 4, 65537, 589943, 4, 0, 589944, 4, 1, 589967, 3, 0, 589986, 4, 0, 589987, 4, 1, 589989, 4, 65536, 589990, 4, 65537, 589996, 4, 65536, 589997, 4, 65537, 589999, 4, 0, 590000, 4, 1, 590020, 3, 0, 590031, 4, 65536, 590032, 4, 65537, 590034, 4, 65536, 590035, 4, 65537, 590037, 4, 65536, 590038, 4, 65537, 590073, 3, 0, 590114, 3, 0, 590144, 3, 0, 590160, 3, 0, 655366, 3, 0, 655406, 3, 0, 655423, 2, 0, 655435, 1, 0, 655445, 1, 0, 655473, 4, 131072, 655474, 4, 131073, 655476, 4, 131072, 655477, 4, 131073, 655479, 4, 131072, 655480, 4, 131073, 655511, 1, 0, 655522, 4, 131072, 655523, 4, 131073, 655525, 4, 131072, 655526, 4, 131073, 655528, 2, 0, 655532, 4, 131072, 655533, 4, 131073, 655535, 4, 131072, 655536, 4, 131073, 655539, 1, 0, 655563, 2, 0, 655567, 4, 131072, 655568, 4, 131073, 655570, 4, 131072, 655571, 4, 131073, 655573, 4, 131072, 655574, 4, 131073, 655592, 2, 0, 655616, 2, 0, 655633, 2, 0, 655665, 1, 0, 655694, 1, 0, 720899, 2, 0, 720917, 0, 131072, 720918, 0, 131073, 720919, 0, 131073, 720920, 0, 131073, 720921, 0, 131073, 720922, 0, 131074, 720925, 1, 0, 851980, 21, 0, 852019, 2, 0 )
-
-[node name="Shader" type="Node2D" parent="."]
-material = SubResource( 9 )
 
 [node name="TileMap" parent="Shader" instance=ExtResource( 2 )]
 material = SubResource( 6 )
