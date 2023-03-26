@@ -87,7 +87,7 @@ func _make_box_empty():
 		invisible_shimmer_bodies = []
 		invisible = false
 		sprite.modulate.a = 1
-		#animation_player.play("default")
+		animation_player.play("default")
 	sprite.play("Empty")
 	hit = true
 
