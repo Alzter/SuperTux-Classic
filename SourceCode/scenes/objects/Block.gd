@@ -167,11 +167,10 @@ func invisible_shimmer():
 	sprite.modulate.a = 0
 	if invisible_shimmer_bodies.size() > 0:
 		for body in invisible_shimmer_bodies:
-			if body.visible:
-				var distance = (body.global_position - global_position).length() * 2
-				distance -= 62
-				var closeness = (invisible_max_distance - distance) * 0.05
-				closeness += 1 / distance * (invisible_max_distance * 0.05)
-				closeness *= 0.1
-				closeness = clamp(closeness, 0, 1)
-				sprite.modulate.a += closeness
+			var distance = (body.global_position - global_position).length() * 2
+			distance -= 62
+			var closeness = (invisible_max_distance - distance) * 0.05
+			closeness += 1 / distance * (invisible_max_distance * 0.05)
+			closeness *= 0.1
+			closeness = clamp(closeness, 0, 1)
+			sprite.modulate.a += closeness
