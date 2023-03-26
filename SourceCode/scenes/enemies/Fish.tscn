@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://scenes/enemies/badguy.gd" type="Script" id=1]
 [ext_resource path="res://scenes/enemies/badguy_sm.gd" type="Script" id=2]
@@ -147,12 +147,20 @@ particles_anim_h_frames = 5
 particles_anim_v_frames = 1
 particles_anim_loop = false
 
+[sub_resource type="Gradient" id=12]
+colors = PoolColorArray( 1, 1, 1, 1, 0.44165, 0.589296, 0.84375, 1 )
+
+[sub_resource type="GradientTexture" id=13]
+gradient = SubResource( 12 )
+
 [sub_resource type="ParticlesMaterial" id=11]
 flag_disable_z = true
 gravity = Vector3( 0, 0, 0 )
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
+color_ramp = SubResource( 13 )
 anim_speed = 1.0
+anim_offset = 0.1
 
 [node name="Fish" type="KinematicBody2D" groups=["enemies"]]
 collision_layer = 4
@@ -224,7 +232,7 @@ material = SubResource( 10 )
 emitting = false
 amount = 1
 one_shot = true
-speed_scale = 6.0
+speed_scale = 4.0
 local_coords = false
 process_material = SubResource( 11 )
 texture = ExtResource( 9 )
