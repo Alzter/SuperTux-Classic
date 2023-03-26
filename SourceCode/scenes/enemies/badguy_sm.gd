@@ -57,7 +57,6 @@ func _state_logic(delta):
 			host.update_sprite()
 			return
 		"fall":
-			host.jumpy_bounce()
 			host.apply_gravity(delta)
 			host.jumpy_movement()
 			host.update_sprite()

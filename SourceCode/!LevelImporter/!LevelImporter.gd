@@ -100,6 +100,7 @@ onready var level = $Level
 onready var level_intact = $Level/TileMap
 onready var level_bg = $Level/Background
 onready var level_fg = $Level/Foreground
+onready var level_water = $Level/Water
 onready var objectmap = $Level/ObjectMap
 onready var worldmap_objects = get_node("Level/Objects")
 
@@ -158,7 +159,7 @@ func _import_level(is_worldmap = false):
 		level.worldmap_spawn = Vector2(player_x, player_y)
 		level.is_worldmap = true
 	else:
-		tile_importer.import_tilemap(tiles_interactive, level_intact, objectmap, false)
+		tile_importer.import_tilemap(tiles_interactive, level_intact, objectmap, false, level_water)
 		tile_importer.import_tilemap(tiles_background, level_bg, objectmap, true)
 		tile_importer.import_tilemap(tiles_foreground, level_fg, objectmap)
 		

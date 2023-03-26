@@ -31,6 +31,10 @@ export var ignore_tiles = [
 	107, 108, 109, 110, 111, 137, 138, 139,
 	132, 133, 127, 129, 49, 51, 52, 135, 16, 17, 18]
 
+export var water_tiles = [
+	75, 76, 200, 201
+]
+
 export var object_tiles = {
 	44: "ObjCoin",
 	45: "ObjCoin",
@@ -263,12 +267,12 @@ func _ready():
 	
 	#_save_node_to_directory(self, output_directory)
 
-func import_tilemap(tile_data_string, tilemap_to_use, objectmap_to_use, expand_tilemap = false):
+func import_tilemap(tile_data_string, tilemap_to_use, objectmap_to_use, expand_tilemap = false, water_tilemap = null):
 	if tile_data_string == "": return # If level Data was left blank
 	objectmap = objectmap_to_use
 	expand = expand_tilemap
 	var tile_array = _level_string_to_array(tile_data_string)
-	_fill_tilemap_with_level_data(tile_array, tilemap_to_use)
+	_fill_tilemap_with_level_data(tile_array, tilemap_to_use, water_tilemap)
 
 func import_worldmap_tiles(tile_data_string, tilemap_to_use, foreground_tilemap_to_use):
 	if tile_data_string == "": return # If level Data was left blank
@@ -295,7 +299,7 @@ func _level_string_to_array(level_string):
 func _save_node_to_directory(node, dir):
 	import.save_node_to_directory(node, dir)
 
-func _fill_tilemap_with_level_data(level_tile_array, tilemap):
+func _fill_tilemap_with_level_data(level_tile_array, tilemap, water_tilemap = null):
 	var x = 0
 	var y = 0
 	unknown_tiles = [] # Populate this array with all the tile IDs we couldn't match for debugging purposes
@@ -310,13 +314,13 @@ func _fill_tilemap_with_level_data(level_tile_array, tilemap):
 		if is_worldmap:
 			place_worldmap_tile(tile, x, y, tilemap, foreground_tilemap)
 		else:
-			place_level_tile(tile, x, y, tilemap, objectmap, expand)
+			place_level_tile(tile, x, y, tilemap, objectmap, expand, water_tilemap)
 		
 	if unknown_tiles != []:
 		print("The following tile IDs were not found:")
 		print(unknown_tiles)
 
-func place_level_tile(tile, x, y, tilemap, objectmap, expand):
+func place_level_tile(tile, x, y, tilemap, objectmap, expand, water_tilemap):
 	if tile != 0:
 		if !tile in ignore_tiles:
 			
@@ -328,6 +332,10 @@ func place_level_tile(tile, x, y, tilemap, objectmap, expand):
 				tile_to_set = object_tiles.get(tile)
 				tile_to_set = _get_tile_id_from_name(tile_to_set, tilemap_to_use)
 			elif level_tileset.has(tile):
+				
+				if water_tiles.has(tile) and water_tilemap != null:
+					tilemap_to_use = water_tilemap
+				
 				tile_to_set = level_tileset.get(tile)
 				tile_to_set = tile_specific_patterns(tile_to_set, x, y)
 				tile_to_set = _get_tile_id_from_name(tile_to_set, tilemap_to_use)

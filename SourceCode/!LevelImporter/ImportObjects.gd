@@ -35,6 +35,7 @@ var object_types = {
 	"bouncingsnowball" : "BadBouncing",
 	"flyingsnowball" : "BadFlying",
 	"stalactite" : "BadStalactite",
+	"fish" : "BadFish",
 
 	"money" : "BadJumpy",
 	"jumpy" : "BadJumpy",
