@@ -326,19 +326,20 @@ func place_level_tile(tile, x, y, tilemap, objectmap, expand, water_tilemap):
 			
 			var tile_to_set = default_tile
 			var tilemap_to_use = tilemap
+			var tile_name = ""
 			
 			if object_tiles.has(tile):
 				tilemap_to_use = objectmap
-				tile_to_set = object_tiles.get(tile)
-				tile_to_set = _get_tile_id_from_name(tile_to_set, tilemap_to_use)
+				tile_name = object_tiles.get(tile)
+				tile_to_set = _get_tile_id_from_name(tile_name, tilemap_to_use)
 			elif level_tileset.has(tile):
 				
 				if water_tiles.has(tile) and water_tilemap != null:
 					tilemap_to_use = water_tilemap
 				
-				tile_to_set = level_tileset.get(tile)
-				tile_to_set = tile_specific_patterns(tile_to_set, x, y)
-				tile_to_set = _get_tile_id_from_name(tile_to_set, tilemap_to_use)
+				tile_name = level_tileset.get(tile)
+				tile_name = tile_specific_patterns(tile_name, x, y)
+				tile_to_set = _get_tile_id_from_name(tile_name, tilemap_to_use)
 			else:
 				if !unknown_tiles.has(tile): unknown_tiles.append(tile)
 			
@@ -346,6 +347,12 @@ func place_level_tile(tile, x, y, tilemap, objectmap, expand, water_tilemap):
 			tilemap_to_use.update_bitmask_area(Vector2(x-1, y))
 			
 			if y == 14 and expand:
+				
+				# Don't repeat water surface tiles when expanding the bottom of the tilemap
+				# (Edge case fix)
+				if "Water" in tile_name:
+					tile_to_set = _get_tile_id_from_name("WaterFill", tilemap_to_use)
+				
 				var new_y = y
 				for i in 30:
 					new_y += 1
