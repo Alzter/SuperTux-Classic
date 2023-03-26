@@ -6,4 +6,5 @@
 
 [node name="BonusBlock" parent="." instance=ExtResource( 1 )]
 invisible = true
+initial_animation = "Invisible"
 contains_powerup = false

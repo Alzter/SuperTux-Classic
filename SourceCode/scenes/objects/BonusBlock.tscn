@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=2]
+[gd_scene load_steps=35 format=2]
 
 [ext_resource path="res://images/objects/bonusblock/bonus2-1.png" type="Texture" id=1]
 [ext_resource path="res://images/objects/bonusblock/bonus2-2.png" type="Texture" id=2]
@@ -22,6 +22,7 @@
 [ext_resource path="res://images/objects/coin/coin1.png" type="Texture" id=20]
 [ext_resource path="res://sounds/objects/coin.wav" type="AudioStream" id=21]
 [ext_resource path="res://scenes/particles/BrickSmash.tres" type="Material" id=22]
+[ext_resource path="res://images/objects/bonusblock/invisible.png" type="Texture" id=23]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -43,6 +44,11 @@ animations = [ {
 "frames": [ ExtResource( 13 ) ],
 "loop": true,
 "name": "Empty",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 23 ) ],
+"loop": true,
+"name": "Invisible",
 "speed": 5.0
 } ]
 
@@ -194,6 +200,121 @@ tracks/4/keys = {
 "update": 1,
 "values": [ false ]
 }
+tracks/5/type = "value"
+tracks/5/path = NodePath("AnimatedSprite:material")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ null ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("AnimatedSprite:modulate")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="CanvasItemMaterial" id=12]
+blend_mode = 1
+
+[sub_resource type="Animation" id=13]
+resource_name = "invisible"
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("AnimatedSprite:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("AnimatedSprite:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("AnimatedSprite:offset")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("SmashParticles:emitting")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Coin:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("AnimatedSprite:material")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ SubResource( 12 ) ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("AnimatedSprite:modulate")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ) ]
+}
 
 [sub_resource type="Animation" id=10]
 resource_name = "smash"
@@ -248,6 +369,9 @@ tracks/3/keys = {
 "values": [ Vector2( 0, 0 ), Vector2( 0, -10 ) ]
 }
 
+[sub_resource type="CircleShape2D" id=14]
+radius = 256.0
+
 [node name="BonusBlock" type="StaticBody2D" groups=["blocks"]]
 z_index = 1
 script = ExtResource( 6 )
@@ -259,7 +383,7 @@ contents_big = ExtResource( 7 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 1 )
-animation = "Empty"
+animation = "Invisible"
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -324,6 +448,7 @@ texture = SubResource( 8 )
 autoplay = "default"
 anims/coin = SubResource( 11 )
 anims/default = SubResource( 9 )
+anims/invisible = SubResource( 13 )
 anims/smash = SubResource( 10 )
 
 [node name="Coin" type="Sprite" parent="."]
@@ -331,3 +456,14 @@ visible = false
 position = Vector2( 0, -16 )
 z_index = -1
 texture = ExtResource( 20 )
+
+[node name="InvisibleShimmer" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 6
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InvisibleShimmer"]
+shape = SubResource( 14 )
+
+[connection signal="body_entered" from="InvisibleShimmer" to="." method="_on_InvisibleShimmer_body_entered"]
+[connection signal="body_exited" from="InvisibleShimmer" to="." method="_on_InvisibleShimmer_body_exited"]

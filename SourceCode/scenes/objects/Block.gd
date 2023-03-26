@@ -34,12 +34,17 @@ onready var collision_shapes = [$Hitbox, $AboveHitbox, $CollisionShape2D]
 onready var above_hitbox = $AboveHitbox
 onready var destroy_timer = $DestroyTimer
 
+onready var invisible_max_distance = $InvisibleShimmer/CollisionShape2D.shape.radius
+
 onready var initial_position = global_position
 
 var velocity = Vector2()
 var hit = false
 
+var invisible_shimmer_bodies = []
+
 func _ready():
+	if invisible: animation_player.play("invisible")
 	sprite.play(initial_animation)
 
 func be_hit_from_above(body):
@@ -92,6 +97,9 @@ func _process(delta):
 	velocity *= 0.8
 	global_position.x = lerp(global_position.x, initial_position.x, 0.1)
 	global_position.y = lerp(global_position.y, initial_position.y, 0.1)
+	
+	if invisible:
+		invisible_shimmer()
 
 # Returns true if small tux hit this box
 func is_body_small(body, default = true):
@@ -130,3 +138,33 @@ func _disable_collision():
 
 func _on_DestroyTimer_timeout():
 	call_deferred("queue_free")
+
+
+func _on_Area2D_area_entered(area):
+	pass # Replace with function body.
+
+
+func _on_Area2D_area_exited(area):
+	pass # Replace with function body.
+
+
+func _on_InvisibleShimmer_body_entered(body):
+	if !invisible: return
+	if !invisible_shimmer_bodies.has(body):
+		invisible_shimmer_bodies.append(body)
+
+func _on_InvisibleShimmer_body_exited(body):
+	if !invisible: return
+	if invisible_shimmer_bodies.has(body):
+		var position = invisible_shimmer_bodies.erase(body)
+
+func invisible_shimmer():
+	sprite.modulate.a = 0
+	if invisible_shimmer_bodies.size() > 0:
+		for body in invisible_shimmer_bodies:
+			var distance = (body.global_position - global_position).length() * 2
+			distance -= 62
+			var closeness = (invisible_max_distance - distance) * 0.05
+			closeness += 1 / distance * (invisible_max_distance * 0.1)
+			closeness *= 0.5
+			sprite.modulate.a += closeness
