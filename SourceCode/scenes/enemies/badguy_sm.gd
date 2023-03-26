@@ -94,7 +94,7 @@ func _get_transition(delta):
 		"fall":
 			if host.velocity.y <= 0: return "bounce_up"
 		"bounce_up":
-			if host.velocity.y > 0: return "fall"
+			if host.velocity.y > 0 and host.type != "Jumpy": return "fall"
 
 func _enter_state(new_state, old_state):
 	pass
