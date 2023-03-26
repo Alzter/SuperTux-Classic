@@ -347,6 +347,8 @@ func place_level_tile(tile, x, y, tilemap, objectmap, expand, water_tilemap):
 			tilemap_to_use.update_bitmask_area(Vector2(x-1, y))
 			
 			if y == 14 and expand:
+				if object_tiles.has(tile): return
+				
 				# Don't repeat water surface tiles when expanding the bottom of the tilemap
 				# (Edge case fix)
 				if "Water" in tile_name and tile_name != "WaterFill":
