@@ -117,7 +117,6 @@ func collide_with_other_enemies(colliding = true):
 
 # When a player (or enemy) enters our hitbox
 func _on_DamageArea_body_entered(body):
-	print(invincible)
 	if invincible: return
 	if body == self: return
 	if body.is_in_group("players"):

@@ -46,7 +46,7 @@ var run_max = 3.2 * 4.5 * Global.TILE_SIZE
 var skid_min = 2.0 * 4 * Global.TILE_SIZE # Player can skid if travelling over this speed
 
 var riding_accel = 0.025 * pow(60, 2) / 11
-var riding_max = 3.2 * 5 * Global.TILE_SIZE # Max speed whilst riding Ice Dragon is increased
+var riding_max = 4 * 4.5 * Global.TILE_SIZE # Max speed whilst riding Ice Dragon is increased
 
 # These values all get re-calculated in the initialize function using kinematic equations (thanks Game Endeavor)
 var jump_height = 5.0 * Global.TILE_SIZE # WAS 5.2 The peak height of holding jump in blocks
@@ -531,7 +531,8 @@ func ride_entity(entity : Node2D):
 
 func stop_riding_entity(from_damage = false):
 	if !riding_entity: return
-	if from_damage: sfx.play("Hurt")
+	if from_damage:
+		sfx.play("Hurt")
 	dragon_sprite.hide()
 	hitbox_riding.set_deferred("disabled", true)
 	riding_entity.exit_riding(from_damage)
