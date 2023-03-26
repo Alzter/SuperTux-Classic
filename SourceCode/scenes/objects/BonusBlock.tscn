@@ -24,6 +24,9 @@
 [ext_resource path="res://scenes/particles/BrickSmash.tres" type="Material" id=22]
 [ext_resource path="res://images/objects/bonusblock/invisible.png" type="Texture" id=23]
 
+[sub_resource type="CanvasItemMaterial" id=12]
+blend_mode = 1
+
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
 "frames": [ ExtResource( 1 ), ExtResource( 2 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 3 ), ExtResource( 5 ), ExtResource( 4 ), ExtResource( 2 ) ],
@@ -225,9 +228,6 @@ tracks/6/keys = {
 "values": [ Color( 1, 1, 1, 1 ) ]
 }
 
-[sub_resource type="CanvasItemMaterial" id=12]
-blend_mode = 1
-
 [sub_resource type="Animation" id=13]
 resource_name = "invisible"
 length = 0.001
@@ -370,7 +370,7 @@ tracks/3/keys = {
 }
 
 [sub_resource type="CircleShape2D" id=14]
-radius = 256.0
+radius = 128.0
 
 [node name="BonusBlock" type="StaticBody2D" groups=["blocks"]]
 z_index = 1
@@ -382,6 +382,8 @@ contents_small = ExtResource( 8 )
 contents_big = ExtResource( 7 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+modulate = Color( 1, 1, 1, 0 )
+material = SubResource( 12 )
 frames = SubResource( 1 )
 animation = "Invisible"
 playing = true

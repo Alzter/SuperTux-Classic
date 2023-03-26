@@ -83,6 +83,11 @@ func _get_coin():
 	Scoreboard.coins += 1
 
 func _make_box_empty():
+	if invisible:
+		invisible_shimmer_bodies = []
+		invisible = false
+		sprite.modulate.a = 1
+		#animation_player.play("default")
 	sprite.play("Empty")
 	hit = true
 
@@ -162,9 +167,11 @@ func invisible_shimmer():
 	sprite.modulate.a = 0
 	if invisible_shimmer_bodies.size() > 0:
 		for body in invisible_shimmer_bodies:
-			var distance = (body.global_position - global_position).length() * 2
-			distance -= 62
-			var closeness = (invisible_max_distance - distance) * 0.05
-			closeness += 1 / distance * (invisible_max_distance * 0.1)
-			closeness *= 0.5
-			sprite.modulate.a += closeness
+			if body.visible:
+				var distance = (body.global_position - global_position).length() * 2
+				distance -= 62
+				var closeness = (invisible_max_distance - distance) * 0.05
+				closeness += 1 / distance * (invisible_max_distance * 0.05)
+				closeness *= 0.1
+				closeness = clamp(closeness, 0, 1)
+				sprite.modulate.a += closeness
