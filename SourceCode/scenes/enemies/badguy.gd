@@ -46,6 +46,8 @@ onready var edge_turn = $EdgeTurn if has_node("EdgeTurn") else null
 onready var block_raycast = $BlockRaycast if has_node("BlockRaycast") else null
 onready var sfx = $SFX
 onready var destroy_timer = $DestroyTimer
+onready var water_detector = get_node_or_null("WaterDetector")
+onready var water_rise_timer = get_node_or_null("RiseTimer")
 
 # Kinematic Equations
 func _ready():
@@ -239,3 +241,29 @@ func _on_DestroyTimer_timeout():
 
 func _on_FuseTimer_timeout():
 	explode()
+
+func check_water_below(delta):
+	if water_detector == null: return
+	water_detector.cast_to.y = velocity.y * delta
+	water_detector.force_raycast_update()
+	if water_detector.is_colliding():
+		position = water_detector.get_collision_point() - water_detector.global_position
+		enter_water()
+		state_machine.set_state("water_submerged")
+
+func _on_RiseTimer_timeout():
+	exit_water()
+
+func enter_water():
+	velocity = Vector2.ZERO
+	water_rise_timer.start()
+	disable_collision()
+	collide_with_other_enemies(false)
+	invincible = true
+
+func exit_water():
+	state_machine.set_state("bounce_up")
+	disable_collision(false)
+	collide_with_other_enemies(true)
+	invincible = false
+	print(state_machine.state)

@@ -30,6 +30,8 @@ func _ready():
 	add_state("bounce_up")
 	add_state("bounce_forward")
 	add_state("fly")
+	add_state("fall")
+	add_state("water_submerged")
 	
 	# What initial state to use for the enemy depends on its type
 	match host.type:
@@ -46,6 +48,7 @@ func _ready():
 
 func _state_logic(delta):
 	match state:
+		"water_submerged": return
 		"fly":
 			host.flying_movement(delta)
 			host.jumpy_movement()
@@ -60,6 +63,7 @@ func _state_logic(delta):
 			host.apply_gravity(delta)
 			host.jumpy_movement()
 			host.update_sprite()
+			host.check_water_below(delta)
 			return
 		"bounce_forward":
 			host.move_forward(true, false, host.bounce_move_speed)

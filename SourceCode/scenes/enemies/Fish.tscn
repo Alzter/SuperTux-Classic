@@ -56,6 +56,10 @@ offset = Vector2( 0, -5 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 4 )
 
+[node name="WaterDetector" type="RayCast2D" parent="."]
+position = Vector2( 0, 15 )
+collision_mask = 128
+
 [node name="DamageArea" parent="." groups=["enemies"] instance=ExtResource( 8 )]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DamageArea"]
@@ -78,5 +82,10 @@ stream = ExtResource( 6 )
 process_mode = 0
 one_shot = true
 
+[node name="RiseTimer" type="Timer" parent="."]
+process_mode = 0
+one_shot = true
+
 [connection signal="body_entered" from="DamageArea" to="." method="_on_DamageArea_body_entered"]
 [connection signal="timeout" from="DestroyTimer" to="." method="_on_DestroyTimer_timeout"]
+[connection signal="timeout" from="RiseTimer" to="." method="_on_RiseTimer_timeout"]
