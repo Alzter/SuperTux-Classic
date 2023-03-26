@@ -30,8 +30,8 @@ animations = [ {
 "speed": 10.0
 } ]
 
-[sub_resource type="RectangleShape2D" id=4]
-extents = Vector2( 14, 16 )
+[sub_resource type="RectangleShape2D" id=14]
+extents = Vector2( 14, 22 )
 
 [sub_resource type="RectangleShape2D" id=5]
 extents = Vector2( 12, 16 )
@@ -202,7 +202,8 @@ playing = true
 offset = Vector2( 0, -5 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource( 4 )
+position = Vector2( 0, -5 )
+shape = SubResource( 14 )
 
 [node name="WaterDetector" type="RayCast2D" parent="."]
 position = Vector2( 0, 15 )
