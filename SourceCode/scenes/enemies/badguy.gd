@@ -49,6 +49,7 @@ onready var sfx = $SFX
 onready var destroy_timer = $DestroyTimer
 onready var water_detector = get_node_or_null("WaterDetector")
 onready var water_rise_timer = get_node_or_null("RiseTimer")
+onready var anim_player = get_node_or_null("AnimationPlayer")
 
 # Kinematic Equations
 func _ready():
@@ -253,7 +254,7 @@ func check_water_below(delta):
 		state_machine.set_state("water_submerged")
 
 func _on_RiseTimer_timeout():
-	exit_water()
+	anim_player.play("exit_water")
 
 func enter_water():
 	velocity = Vector2.ZERO
@@ -261,7 +262,7 @@ func enter_water():
 	disable_collision()
 	collide_with_other_enemies(false)
 	invincible = true
-	visible = false
+	anim_player.play("enter_water")
 
 func exit_water():
 	grounded = false
@@ -270,4 +271,8 @@ func exit_water():
 	disable_collision(false)
 	collide_with_other_enemies(true)
 	invincible = false
-	visible = true
+	anim_player.play("default")
+
+func _on_AnimationPlayer_animation_finished(anim_name):
+	if anim_name == "exit_water":
+		exit_water()
