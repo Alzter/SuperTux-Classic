@@ -6,7 +6,6 @@
 [ext_resource path="res://scenes/backgrounds/assets/CaveBGTorch.tscn" type="PackedScene" id=4]
 [ext_resource path="res://images/background/cave-bg2.png" type="Texture" id=5]
 
-
 [sub_resource type="CanvasItemMaterial" id=1]
 blend_mode = 3
 
