@@ -188,5 +188,7 @@ func level_complete():
 
 func window_resized():
 	if is_autoscrolling and custom_camera:
-		var zoom = 640 / ResolutionManager.window_resolution.x
+		var max_size = Vector2(640, 480)
+		var window_size = ResolutionManager.window_resolution
+		var zoom = max(max_size.x / window_size.x, max_size.y / window_size.y)
 		custom_camera.zoom = Vector2.ONE * zoom
