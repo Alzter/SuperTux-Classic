@@ -19,15 +19,15 @@ animations = [ {
 "name": "fall",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 5 ) ],
-"loop": true,
-"name": "water_submerged",
-"speed": 5.0
-}, {
 "frames": [ ExtResource( 3 ), ExtResource( 4 ) ],
 "loop": true,
 "name": "bounce_up",
 "speed": 10.0
+}, {
+"frames": [ ExtResource( 5 ) ],
+"loop": true,
+"name": "water_submerged",
+"speed": 5.0
 } ]
 
 [sub_resource type="RectangleShape2D" id=14]
@@ -229,10 +229,12 @@ stream = ExtResource( 6 )
 
 [node name="SplashIn" type="AudioStreamPlayer2D" parent="SFX"]
 stream = ExtResource( 11 )
+volume_db = -2.0
 pitch_scale = 1.2
 
 [node name="SplashOut" type="AudioStreamPlayer2D" parent="SFX"]
 stream = ExtResource( 10 )
+volume_db = -2.0
 pitch_scale = 1.2
 
 [node name="DestroyTimer" type="Timer" parent="."]
