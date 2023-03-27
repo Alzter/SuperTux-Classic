@@ -188,17 +188,19 @@ func _place_objects_in_level(obj_array, objmap_to_use):
 	for i in obj_array:
 		var obj_offset = Vector2(0,0)
 		var type = i[0]
-		var position = Vector2(i[1], i[2])
+		var position = Vector2(int(i[1]), int(i[2]))
 		print(type)
 		
 		if object_types.has(type):
 			type = object_types.get(type)
 			obj_offset = _get_object_offset(type)
 			var tile_to_set = _get_tile_id_from_name(type, objmap_to_use)
+			position.x = round(position.x / 32.0) * 32.0
+			position.y = round(position.y / 32.0) * 32.0
 			var pos = objmap_to_use.world_to_map(position)
 			pos += obj_offset
 			
-			objmap_to_use.set_cell(pos.x + 1, pos.y, tile_to_set, true)
+			objmap_to_use.set_cell(pos.x, pos.y, tile_to_set, true)
 		else:
 			if !unknown_objects.has(type): unknown_objects.append(type)
 	
@@ -209,7 +211,7 @@ func _place_objects_in_level(obj_array, objmap_to_use):
 func _get_object_offset(object_type):
 	if object_type == "BadFlame":
 		#print(object_type)
-		return Vector2(-1, 0)
+		return Vector2.ZERO
 	else: return Vector2.ZERO
 
 func _save_node_to_directory(node, dir):
