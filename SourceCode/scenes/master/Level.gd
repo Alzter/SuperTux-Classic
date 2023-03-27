@@ -167,7 +167,9 @@ func create_autoscroll_camera():
 	is_autoscrolling = true
 	window_resized()
 	var horizontal_width = ResolutionManager.window_resolution.x * 0.5 * camera.zoom.x
-	camera.position = Vector2(horizontal_width, 320)
+	var player_position = Global.player.position.x
+	var camera_pos = max(horizontal_width, player_position)
+	camera.position = Vector2(camera_pos, 320)
 	camera.current = true
 
 func autoscroll(delta):
@@ -176,6 +178,7 @@ func autoscroll(delta):
 		if Global.player: custom_camera.position.y = Global.player.position.y
 
 func level_complete():
+	is_autoscrolling = false
 	if extro_level != null:
 		WorldmapManager.extro_level = null
 		WorldmapManager.save_progress(true) # Clear the level in worldmap and save progress
