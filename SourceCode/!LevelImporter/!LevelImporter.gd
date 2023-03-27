@@ -81,6 +81,13 @@ export var level_data = ""
 export var export_file_path = "IMPORTS/Level.tscn"
 export var default_tile = "Placeholder"
 
+# EXPAND TILEMAPS: If this option is enabled for a tilemap,
+# Every tile at the bottom will be copied downwards a number of times
+# Effectively filling the bottom of the level.
+export var expand_interactive_tilemap = true
+export var expand_background_tilemap = true 
+export var expand_foreground_tilemap = false
+
 export var is_level_worldmap = false
 
 var level_width = 0
@@ -160,9 +167,9 @@ func _import_level(is_worldmap = false):
 		level.worldmap_spawn = Vector2(player_x, player_y)
 		level.is_worldmap = true
 	else:
-		tile_importer.import_tilemap(tiles_interactive, level_intact, objectmap, true, level_water)
-		tile_importer.import_tilemap(tiles_background, level_bg, objectmap, true)
-		tile_importer.import_tilemap(tiles_foreground, level_fg, objectmap)
+		tile_importer.import_tilemap(tiles_interactive, level_intact, objectmap, expand_interactive_tilemap, level_water)
+		tile_importer.import_tilemap(tiles_background, level_bg, objectmap, expand_background_tilemap)
+		tile_importer.import_tilemap(tiles_foreground, level_fg, objectmap, expand_foreground_tilemap)
 		
 		object_importer.import_objects(object_list, objectmap)
 		object_importer.import_objects(checkpoint_list, objectmap)
@@ -179,6 +186,11 @@ func _get_level_attributes(leveldata, is_worldmap = false):
 		level.gravity = int(_get_section_of_string(leveldata, "gravity ", ")"))
 		level.level_author = _get_section_of_string(leveldata, "author \"", "\")")
 		level.particle_system = _get_section_of_string(leveldata, "particle_system \"", "\")")
+		
+		var autoscroll_speed = _get_section_of_string(leveldata, "hor_autoscroll_speed ", ")")
+		print(autoscroll_speed)
+		if autoscroll_speed == null: autoscroll_speed = 0
+		level.autoscroll_speed = autoscroll_speed
 	
 	var level_music = _get_section_of_string(leveldata, "music \"", "\")")
 	if music.has(level_music):

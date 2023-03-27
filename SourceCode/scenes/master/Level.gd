@@ -33,6 +33,7 @@ export var particle_system = ""
 export var uses_timer = true
 export var time = 300
 export var gravity = 10
+export var autoscroll_speed = 0.0
 export var starting_powerup = 0
 export var worldmap_spawn = Vector2()
 export var worldmap_player_object : PackedScene
