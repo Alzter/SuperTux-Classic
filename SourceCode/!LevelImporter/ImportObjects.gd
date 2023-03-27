@@ -189,7 +189,7 @@ func _place_objects_in_level(obj_array, objmap_to_use):
 		var obj_offset = Vector2(0,0)
 		var type = i[0]
 		var position = Vector2(int(i[1]), int(i[2]))
-		print(type)
+		#print(type)
 		
 		if object_types.has(type):
 			type = object_types.get(type)
@@ -199,6 +199,11 @@ func _place_objects_in_level(obj_array, objmap_to_use):
 			position.y = round(position.y / 32.0) * 32.0
 			var pos = objmap_to_use.world_to_map(position)
 			pos += obj_offset
+			
+			var tile_occupied = objmap_to_use.get_cell(pos.x, pos.y) != -1
+			if tile_occupied:
+				print("Object overlap at X: " + str(pos.x) + " Y: " + str(pos.y))
+				pos.y -= 1
 			
 			objmap_to_use.set_cell(pos.x, pos.y, tile_to_set, true)
 		else:
