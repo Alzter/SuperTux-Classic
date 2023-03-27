@@ -189,6 +189,7 @@ func _place_objects_in_level(obj_array, objmap_to_use):
 		var obj_offset = Vector2(0,0)
 		var type = i[0]
 		var position = Vector2(i[1], i[2])
+		print(type)
 		
 		if object_types.has(type):
 			type = object_types.get(type)
@@ -207,7 +208,7 @@ func _place_objects_in_level(obj_array, objmap_to_use):
 
 func _get_object_offset(object_type):
 	if object_type == "BadFlame":
-		print(object_type)
+		#print(object_type)
 		return Vector2(-1, 0)
 	else: return Vector2.ZERO
 

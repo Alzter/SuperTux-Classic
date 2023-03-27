@@ -188,9 +188,8 @@ func _get_level_attributes(leveldata, is_worldmap = false):
 		level.particle_system = _get_section_of_string(leveldata, "particle_system \"", "\")")
 		
 		var autoscroll_speed = _get_section_of_string(leveldata, "hor_autoscroll_speed ", ")")
-		print(autoscroll_speed)
 		if autoscroll_speed == null: autoscroll_speed = 0
-		level.autoscroll_speed = autoscroll_speed
+		level.autoscroll_speed = int(autoscroll_speed)
 	
 	var level_music = _get_section_of_string(leveldata, "music \"", "\")")
 	if music.has(level_music):
@@ -207,7 +206,9 @@ func _get_objects_from_leveldata(leveldata, string = "objects"):
 	return obj_2
 
 func _get_reset_points_from_leveldata(leveldata):
-	return _get_section_of_string(leveldata, "(reset-points", "))   )")
+	var check_1 = _get_section_of_string(leveldata, "(reset-points", "))   )")
+	if check_1: return check_1
+	else: return _get_section_of_string(leveldata, "(reset-points", ")))")
 
 func _get_tilemap_from_leveldata(leveldata, tilemap_name):
 	return _get_section_of_string(leveldata, "(" + tilemap_name + "-tm", ")")

@@ -130,6 +130,7 @@ func apply_movement(delta, solid = true):
 			var right_camera_boundary = level_camera.global_position.x + horizontal_width * zoom - 16
 			
 			position.x = clamp(position.x, left_camera_boundary, right_camera_boundary)
+			
 			#print(str(position.x), ", ",  str(left_camera_boundary), ", ",  str(right_camera_boundary))
 	
 	self.grounded = is_on_floor()
