@@ -43,6 +43,7 @@ onready var custom_camera = get_node_or_null("Camera2D")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	ResolutionManager.connect("window_resized", self, "window_resized")
 	Scoreboard.show()
 	WorldmapManager.is_level_worldmap = is_worldmap
 	
@@ -162,15 +163,17 @@ func create_autoscroll_camera():
 	camera.limit_top = 0
 	camera.limit_bottom = 480
 	add_child(camera)
-	var horizontal_width = ResolutionManager.window_resolution.x * 0.5
-	camera.position = Vector2(horizontal_width, 320)
-	camera.current = true
 	custom_camera = camera
 	is_autoscrolling = true
+	window_resized()
+	var horizontal_width = ResolutionManager.window_resolution.x * 0.5 * camera.zoom.x
+	camera.position = Vector2(horizontal_width, 320)
+	camera.current = true
 
 func autoscroll(delta):
 	if custom_camera != null:
 		custom_camera.position.x += autoscroll_speed * delta * 60 * 2
+		if Global.player: custom_camera.position.y = Global.player.position.y
 
 func level_complete():
 	if extro_level != null:
@@ -182,3 +185,8 @@ func level_complete():
 		WorldmapManager.return_to_worldmap(true, true) # Clear the level in the worldmap and save progress
 	else:
 		Global.goto_title_screen()
+
+func window_resized():
+	if is_autoscrolling and custom_camera:
+		var zoom = 640 / ResolutionManager.window_resolution.x
+		custom_camera.zoom = Vector2.ONE * zoom

@@ -125,8 +125,9 @@ func apply_movement(delta, solid = true):
 		var level_camera = Global.get_current_camera()
 		if level_camera != null:
 			var horizontal_width = ResolutionManager.window_resolution.x * 0.5
-			var left_camera_boundary = level_camera.global_position.x - horizontal_width + 16
-			var right_camera_boundary = level_camera.global_position.x + horizontal_width - 16
+			var zoom = level_camera.zoom.x
+			var left_camera_boundary = level_camera.global_position.x - horizontal_width * zoom + 16
+			var right_camera_boundary = level_camera.global_position.x + horizontal_width * zoom - 16
 			
 			position.x = clamp(position.x, left_camera_boundary, right_camera_boundary)
 			#print(str(position.x), ", ",  str(left_camera_boundary), ", ",  str(right_camera_boundary))
