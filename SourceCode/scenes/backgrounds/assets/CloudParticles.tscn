@@ -10,7 +10,7 @@ blend_mode = 1
 layer = 100
 
 [node name="ParallaxLayer" type="ParallaxLayer" parent="."]
-modulate = Color( 1, 1, 1, 0.207843 )
+modulate = Color( 0.403922, 0.419608, 0.776471, 0.745098 )
 material = SubResource( 1 )
 motion_mirroring = Vector2( 6144, 0 )
 
