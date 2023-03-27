@@ -166,9 +166,9 @@ func create_autoscroll_camera():
 	custom_camera = camera
 	is_autoscrolling = true
 	window_resized()
-	var horizontal_width = ResolutionManager.window_resolution.x * 0.5 * camera.zoom.x
-	var player_position = Global.player.position.x
-	var camera_pos = max(horizontal_width, player_position)
+	var camera_pos = ResolutionManager.window_resolution.x * 0.5 * camera.zoom.x
+	if Global.spawn_position != null:
+		camera_pos = Global.spawn_position.x
 	camera.position = Vector2(camera_pos, 320)
 	camera.current = true
 
