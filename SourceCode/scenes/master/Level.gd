@@ -75,6 +75,11 @@ func _ready():
 	if custom_camera != null:
 		custom_camera.current = true
 	
+	# If the level has a specified autoscroll speed, we make our own
+	# custom camera node to override the player's
+	elif autoscroll_speed != 0:
+		create_autoscroll_camera()
+	
 	# If we're using the level timer, start the clock!
 	if uses_timer:
 		Scoreboard.set_level_timer(time)
@@ -145,6 +150,16 @@ func _create_worldmap_player(position : Vector2, player_object : PackedScene):
 	
 	Global.current_scene.add_child(player)
 	player.set_owner(Global.current_scene)
+
+func create_autoscroll_camera():
+	var camera = Camera2D.new()
+	camera.limit_left = 0
+	camera.limit_top = 0
+	camera.limit_bottom = 480
+	add_child(camera)
+	camera.position.y = 320
+	camera.current = true
+	custom_camera = camera
 
 func level_complete():
 	if extro_level != null:
