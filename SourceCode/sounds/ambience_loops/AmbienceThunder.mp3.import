@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/AmbienceThunder.mp3-4185e954621016d4ef5e4ea215a35769.mp3str"
+
+[deps]
+
+source_file="res://sounds/ambience_loops/AmbienceThunder.mp3"
+dest_files=[ "res://.import/AmbienceThunder.mp3-4185e954621016d4ef5e4ea215a35769.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

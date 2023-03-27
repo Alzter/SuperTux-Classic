@@ -170,6 +170,7 @@ func apply_options(options_data : Dictionary):
 		AudioServer.set_bus_volume_db(1, options_data["sfx_volume"])
 		AudioServer.set_bus_volume_db(3, options_data["ambience_volume"])
 		AudioServer.set_bus_volume_db(4, options_data["ambience_volume"])
+		AudioServer.set_bus_volume_db(5, options_data["ambience_volume"])
 
 func level_completed():
 	if current_scene.has_method("level_complete"):

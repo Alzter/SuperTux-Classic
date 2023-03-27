@@ -6,7 +6,7 @@
 [ext_resource path="res://scenes/backgrounds/assets/RainParticlesBackground.tscn" type="PackedScene" id=4]
 [ext_resource path="res://scenes/backgrounds/ThunderstormBackground.gd" type="Script" id=5]
 [ext_resource path="res://scenes/master/SFX.gd" type="Script" id=6]
-[ext_resource path="res://sounds/ambience_loops/Thunder.mp3" type="AudioStream" id=7]
+[ext_resource path="res://sounds/ambience_loops/lightning.wav" type="AudioStream" id=7]
 
 [sub_resource type="CanvasItemMaterial" id=2]
 blend_mode = 1
@@ -205,7 +205,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 margin_right = 962.0
 margin_bottom = 103.0
-color = Color( 0.631373, 0.74902, 0.843137, 1 )
+color = Color( 0.101961, 0.101961, 0.101961, 1 )
 
 [node name="Ocean" type="Control" parent="."]
 modulate = Color( 0.0352941, 0.0627451, 0.160784, 0.741176 )
@@ -330,7 +330,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 margin_right = 962.0
 margin_bottom = 103.0
-color = Color( 0, 0, 0, 0 )
+color = Color( 0, 0, 0, 0.478431 )
 
 [node name="Control" type="Control" parent="."]
 anchor_right = 1.0
@@ -346,6 +346,7 @@ margin_bottom = 488.0
 color = Color( 0.647059, 0.690196, 0.843137, 0.0352941 )
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 101
 
 [node name="ColorRect2" type="ColorRect" parent="CanvasLayer"]
 material = SubResource( 3 )
@@ -373,7 +374,8 @@ anims/default = SubResource( 4 )
 anims/lightning = SubResource( 5 )
 
 [node name="LightningTimer" type="Timer" parent="."]
-wait_time = 4.0
+wait_time = 6.0
+one_shot = true
 autostart = true
 
 [node name="SFX" type="Node2D" parent="."]
@@ -381,8 +383,9 @@ script = ExtResource( 6 )
 
 [node name="Lightning" type="AudioStreamPlayer" parent="SFX"]
 stream = ExtResource( 7 )
-volume_db = -10.0
-bus = "Ambience2"
+volume_db = -8.0
+pitch_scale = 2.0
+bus = "Ambience3"
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
 [connection signal="timeout" from="LightningTimer" to="." method="_on_LightningTimer_timeout"]
