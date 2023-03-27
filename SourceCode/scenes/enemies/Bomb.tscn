@@ -18,15 +18,15 @@
 
 [sub_resource type="SpriteFrames" id=7]
 animations = [ {
-"frames": [ ExtResource( 12 ), ExtResource( 6 ), ExtResource( 12 ), ExtResource( 9 ) ],
-"loop": true,
-"name": "walk",
-"speed": 10.0
-}, {
 "frames": [ ExtResource( 7 ), ExtResource( 8 ) ],
 "loop": true,
 "name": "squished",
 "speed": 15.0
+}, {
+"frames": [ ExtResource( 12 ), ExtResource( 6 ), ExtResource( 12 ), ExtResource( 9 ) ],
+"loop": true,
+"name": "walk",
+"speed": 10.0
 } ]
 
 [sub_resource type="SpriteFrames" id=8]
@@ -38,7 +38,7 @@ animations = [ {
 } ]
 
 [sub_resource type="RectangleShape2D" id=4]
-extents = Vector2( 14, 16 )
+extents = Vector2( 14, 15 )
 
 [sub_resource type="RectangleShape2D" id=5]
 
@@ -65,6 +65,7 @@ rect_pivot_offset = Vector2( 0, 10 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Control"]
 frames = SubResource( 7 )
 animation = "walk"
+frame = 3
 playing = true
 offset = Vector2( 0, -5 )
 
@@ -76,6 +77,7 @@ playing = true
 offset = Vector2( 0, -16 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0, 1 )
 shape = SubResource( 4 )
 
 [node name="DamageArea" parent="." groups=["enemies"] instance=ExtResource( 11 )]

@@ -19,7 +19,7 @@ animations = [ {
 } ]
 
 [sub_resource type="RectangleShape2D" id=4]
-extents = Vector2( 14, 16 )
+extents = Vector2( 14, 15 )
 
 [sub_resource type="RectangleShape2D" id=5]
 
@@ -48,6 +48,7 @@ playing = true
 offset = Vector2( 0, -4 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0, 1 )
 shape = SubResource( 4 )
 
 [node name="DamageArea" parent="." groups=["enemies"] instance=ExtResource( 11 )]

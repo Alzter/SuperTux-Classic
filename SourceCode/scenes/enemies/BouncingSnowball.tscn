@@ -29,7 +29,7 @@ animations = [ {
 } ]
 
 [sub_resource type="RectangleShape2D" id=4]
-extents = Vector2( 16, 16 )
+extents = Vector2( 16, 15 )
 
 [sub_resource type="RectangleShape2D" id=7]
 extents = Vector2( 18, 8 )
@@ -62,6 +62,7 @@ playing = true
 offset = Vector2( 0, -1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0, 1 )
 shape = SubResource( 4 )
 
 [node name="BounceArea" parent="." instance=ExtResource( 12 )]
