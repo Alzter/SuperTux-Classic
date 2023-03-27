@@ -1,4 +1,4 @@
-[gd_resource type="TileSet" load_steps=18 format=2]
+[gd_resource type="TileSet" load_steps=20 format=2]
 
 [ext_resource path="res://images/enemies/spiky/walk1.png" type="Texture" id=1]
 [ext_resource path="res://images/enemies/stalactite/stalactite.png" type="Texture" id=2]
@@ -17,6 +17,8 @@
 [ext_resource path="res://images/enemies/flame/flame-0.png" type="Texture" id=15]
 [ext_resource path="res://images/enemies/icedragon/idle.png" type="Texture" id=16]
 [ext_resource path="res://images/enemies/fish/up1.png" type="Texture" id=17]
+[ext_resource path="res://images/enemies/smartball/walk1.png" type="Texture" id=18]
+[ext_resource path="res://images/enemies/smartblock/walk1.png" type="Texture" id=19]
 
 [resource]
 2/name = "BadSnowball"
@@ -467,3 +469,31 @@
 34/shape_one_way_margin = 0.0
 34/shapes = [  ]
 34/z_index = 0
+35/name = "BadSmartblock"
+35/texture = ExtResource( 19 )
+35/tex_offset = Vector2( 0, 0 )
+35/modulate = Color( 1, 1, 1, 1 )
+35/region = Rect2( 0, 0, 32, 32 )
+35/tile_mode = 0
+35/occluder_offset = Vector2( 0, 0 )
+35/navigation_offset = Vector2( 0, 0 )
+35/shape_offset = Vector2( 0, 0 )
+35/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+35/shape_one_way = false
+35/shape_one_way_margin = 0.0
+35/shapes = [  ]
+35/z_index = 0
+36/name = "BadSmartball"
+36/texture = ExtResource( 18 )
+36/tex_offset = Vector2( 0, 0 )
+36/modulate = Color( 1, 1, 1, 1 )
+36/region = Rect2( 0, 0, 32, 32 )
+36/tile_mode = 0
+36/occluder_offset = Vector2( 0, 0 )
+36/navigation_offset = Vector2( 0, 0 )
+36/shape_offset = Vector2( 0, 0 )
+36/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+36/shape_one_way = false
+36/shape_one_way_margin = 0.0
+36/shapes = [  ]
+36/z_index = 0

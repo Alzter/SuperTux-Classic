@@ -45,6 +45,11 @@ var object_types = {
 	"level" : "level",
 }
 
+var smart_enemies = {
+	"BadSnowball" : "BadSmartball",
+	"BadIceblock" : "BadSmartblock",
+}
+
 # Translates parameters from Milestone 1's leveldot objects into STC's leveldot objects.
 var leveldot_parameters = {
 	"name" : "level_file_path",
@@ -189,10 +194,18 @@ func _place_objects_in_level(obj_array, objmap_to_use):
 		var obj_offset = Vector2(0,0)
 		var type = i[0]
 		var position = Vector2(int(i[1]), int(i[2]))
-		#print(type)
+		
+		var stay_on_platform = i.has("stay-on-platform #t")
 		
 		if object_types.has(type):
+			
 			type = object_types.get(type)
+			
+			if stay_on_platform and smart_enemies.has(type):
+				type = smart_enemies.get(type)
+			
+			print(type)
+			
 			obj_offset = _get_object_offset(type)
 			var tile_to_set = _get_tile_id_from_name(type, objmap_to_use)
 			position.x = round(position.x / 32.0) * 32.0

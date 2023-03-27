@@ -54,4 +54,5 @@ collision_mask = 128
 
 [node name="ObjectMap" parent="Level" instance=ExtResource( 3 )]
 z_index = 40
+tile_data = PoolIntArray( 65538, 5, 0 )
 enabled = false
