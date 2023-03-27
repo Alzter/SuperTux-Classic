@@ -129,7 +129,24 @@ func apply_movement(delta, solid = true):
 			var left_camera_boundary = level_camera.global_position.x - horizontal_width * zoom + 16
 			var right_camera_boundary = level_camera.global_position.x + horizontal_width * zoom - 16
 			
-			position.x = clamp(position.x, left_camera_boundary, right_camera_boundary)
+			# If Tux is outside the left or right camera boundary,
+			# set boundary to the position of the boundary he is outside of
+			var boundary = null
+			if position.x < left_camera_boundary: boundary = left_camera_boundary
+			elif position.x > right_camera_boundary: boundary = right_camera_boundary
+			
+			# If Tux is outside the camera boundaries,
+			# try to push him back in using move_and_collide.
+			# If he collides with a wall during this time, kill him
+			if boundary:
+				var kill_normal = Vector2.LEFT if boundary == left_camera_boundary else Vector2.RIGHT
+				var distance = Vector2(boundary - global_position.x, 0)
+				var collision = move_and_collide(distance)
+				if collision:
+					# Crush Tux if he is stuck and cannot be pushed into the camera boundaries
+					if collision.get_normal() == kill_normal: die()
+			
+			#position.x = clamp(position.x, left_camera_boundary, right_camera_boundary)
 			
 			#print(str(position.x), ", ",  str(left_camera_boundary), ", ",  str(right_camera_boundary))
 	
