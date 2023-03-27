@@ -21,6 +21,7 @@ var level_intro = preload("res://scenes/menus/LevelIntroduction.tscn")
 var player_node = preload("res://scenes/player/Tux.tscn")
 var worldmap_player_node = preload("res://scenes/worldmap/Player.tscn")
 var pause_menu = preload("res://scenes/menus/PauseScreen.tscn")
+var is_autoscrolling = false
 
 onready var worldmap_objects = get_node_or_null("Objects")
 onready var extro_level = WorldmapManager.extro_level
@@ -86,6 +87,11 @@ func _ready():
 	
 	# And play the level music!
 	Music.play(music)
+
+func _process(delta):
+	if is_autoscrolling:
+		if custom_camera != null:
+			custom_camera.position.x += autoscroll_speed * delta * 60
 
 func _level_title_card():
 	# Stop the music
@@ -157,9 +163,10 @@ func create_autoscroll_camera():
 	camera.limit_top = 0
 	camera.limit_bottom = 480
 	add_child(camera)
-	camera.position.y = 320
+	camera.position = Vector2(320,320)
 	camera.current = true
 	custom_camera = camera
+	is_autoscrolling = true
 
 func level_complete():
 	if extro_level != null:
