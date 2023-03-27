@@ -11,5 +11,5 @@ dest_files=[ "res://.import/Thunder.mp3-7b53d11de91c5c4b506f8f8e7d0dde2a.mp3str"
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0
