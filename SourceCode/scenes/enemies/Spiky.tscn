@@ -43,7 +43,7 @@ rect_pivot_offset = Vector2( 0, 10 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Control"]
 frames = SubResource( 6 )
 animation = "walk"
-frame = 1
+frame = 2
 playing = true
 offset = Vector2( 0, -4 )
 
@@ -61,7 +61,6 @@ enabled = true
 cast_to = Vector2( 0, 18 )
 
 [node name="VisibilityEnabler2D" type="VisibilityEnabler2D" parent="."]
-visible = false
 rect = Rect2( -160, -100, 320, 200 )
 process_parent = true
 physics_process_parent = true

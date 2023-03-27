@@ -90,8 +90,7 @@ func _ready():
 
 func _process(delta):
 	if is_autoscrolling:
-		if custom_camera != null:
-			custom_camera.position.x += autoscroll_speed * delta * 60
+		autoscroll(delta)
 
 func _level_title_card():
 	# Stop the music
@@ -163,10 +162,15 @@ func create_autoscroll_camera():
 	camera.limit_top = 0
 	camera.limit_bottom = 480
 	add_child(camera)
-	camera.position = Vector2(320,320)
+	var horizontal_width = ResolutionManager.window_resolution.x * 0.5
+	camera.position = Vector2(horizontal_width, 320)
 	camera.current = true
 	custom_camera = camera
 	is_autoscrolling = true
+
+func autoscroll(delta):
+	if custom_camera != null:
+		custom_camera.position.x += autoscroll_speed * delta * 60 * 2
 
 func level_complete():
 	if extro_level != null:
