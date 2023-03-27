@@ -2554,7 +2554,7 @@ points = PoolVector2Array( 0, 0, 32, 0, 32, 16, 0, 16 )
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 } ]
 33/z_index = -5
-34/name = "Invisible"
+34/name = "InvisibleUniSolid"
 34/texture = ExtResource( 12 )
 34/tex_offset = Vector2( 0, 0 )
 34/modulate = Color( 1, 1, 1, 1 )
@@ -2565,11 +2565,11 @@ points = PoolVector2Array( 0, 0, 32, 0, 32, 16, 0, 16 )
 34/shape_offset = Vector2( 0, 0 )
 34/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
 34/shape = SubResource( 186 )
-34/shape_one_way = false
+34/shape_one_way = true
 34/shape_one_way_margin = 1.0
 34/shapes = [ {
 "autotile_coord": Vector2( 0, 0 ),
-"one_way": false,
+"one_way": true,
 "one_way_margin": 1.0,
 "shape": SubResource( 186 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
