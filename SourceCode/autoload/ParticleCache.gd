@@ -28,6 +28,7 @@ var InvincibleParticlesBig = preload("res://scenes/particles/" + "InvinciblePart
 var InvincibleParticlesSmall = preload("res://scenes/particles/" + "InvincibleParticlesSmall" + ".tres")
 var InvincibleParticlesTrail = preload("res://scenes/particles/" + "InvincibleParticlesTrail" + ".tres")
 var SnowfallSmall = preload("res://scenes/particles/" + "SnowfallSmall" + ".tres")
+var Rainfall = preload("res://scenes/particles/" + "Rainfall" + ".tres")
 
 var materials = [
 	BrickSmash,

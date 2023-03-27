@@ -3,7 +3,7 @@
 shader_type canvas_item;
 render_mode blend_mix;
 
-uniform vec4 overlay_color : hint_color = vec4(0,0,0,1);
+uniform vec4 overlay_color = vec4(0,0,0,1);
 
 
 vec4 overlay(vec4 base, vec4 blend){

@@ -64,7 +64,7 @@ void fragment()
 shader = SubResource( 1 )
 shader_param/overlay_color = Plane( 1, 0.9, 1, 0 )
 
-[sub_resource type="CanvasItemMaterial" id=3]
+[sub_resource type="CanvasItemMaterial" id=5]
 blend_mode = 1
 
 [node name="SnowBG" type="ParallaxBackground"]
@@ -147,7 +147,7 @@ texture = ExtResource( 4 )
 
 [node name="ColorRect2" type="ColorRect" parent="CanvasLayer"]
 visible = false
-material = SubResource( 3 )
+material = SubResource( 5 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_right = 99359.0
