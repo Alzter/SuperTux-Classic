@@ -6,6 +6,7 @@ extends ParallaxBackground
 func _ready():
 	ResolutionManager.connect("window_resized", self, "window_resized")
 	Global.connect("level_ready", self, "window_resized")
+	window_resized()
 
 func window_resized():
 	var offset = ResolutionManager.window_resolution.y - 480

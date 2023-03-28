@@ -33,5 +33,6 @@ func play(sound_to_play):
 	if has_node(sound_to_play):
 		var s = get_node(sound_to_play)
 		if s != null:
-			s.bus = "Sounds"
+			if s.bus == "Master":
+				s.bus = "Sounds"
 			s.play()

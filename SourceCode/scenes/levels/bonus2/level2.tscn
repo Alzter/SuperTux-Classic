@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://scenes/master/Level.gd" type="Script" id=1]
 [ext_resource path="res://scenes/master/ObjectMap.tscn" type="PackedScene" id=2]
@@ -8,10 +8,11 @@
 [ext_resource path="res://scenes/backgrounds/assets/WaterForegroundDark.tscn" type="PackedScene" id=6]
 [ext_resource path="res://sounds/ambience_loops/AmbienceCave.mp3" type="AudioStream" id=7]
 [ext_resource path="res://scenes/master/Ambience.tscn" type="PackedScene" id=8]
+[ext_resource path="res://scenes/backgrounds/assets/CloudParticlesDark.tscn" type="PackedScene" id=10]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 5 )
-shader_param/overlay_color = Color( 0.227451, 0.0392157, 0.682353, 0.501961 )
+shader_param/overlay_color = Color( 0.341176, 0.219608, 0.635294, 0.501961 )
 
 [node name="Level" type="Node2D"]
 script = ExtResource( 1 )
@@ -21,7 +22,7 @@ music = "Cave"
 autoscroll_speed = 1.0
 
 [node name="Shader" type="Node2D" parent="."]
-modulate = Color( 0.721569, 0.478431, 0.478431, 1 )
+modulate = Color( 0.694118, 0.592157, 0.592157, 1 )
 material = SubResource( 1 )
 
 [node name="Background" parent="Shader" instance=ExtResource( 3 )]
@@ -65,7 +66,7 @@ anchor_bottom = 1.0
 [node name="ColorRect" type="ColorRect" parent="ParallaxBackground/Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-color = Color( 0, 0, 0, 0.643137 )
+color = Color( 0.117647, 0.117647, 0.121569, 0.509804 )
 
 [node name="CaveBG" parent="." instance=ExtResource( 4 )]
 
@@ -80,3 +81,5 @@ pitch_scale = 0.5
 
 [node name="Ambience2" parent="." instance=ExtResource( 8 )]
 pitch_scale = 0.5
+
+[node name="CloudParticlesDark" parent="." instance=ExtResource( 10 )]

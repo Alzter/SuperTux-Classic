@@ -41,8 +41,6 @@ export var worldmap_player_object : PackedScene
 
 onready var custom_camera = get_node_or_null("Camera2D")
 
-signal autoscroll_ready
-
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	ResolutionManager.connect("window_resized", self, "window_resized")
@@ -84,7 +82,6 @@ func _ready():
 	elif autoscroll_speed != 0:
 		create_autoscroll_camera()
 		ResolutionManager.emit_signal("window_resized")
-		yield(self, "autoscroll_ready")
 	
 	# If we're using the level timer, start the clock!
 	if uses_timer:
@@ -117,8 +114,6 @@ func _level_title_card():
 	title.title = level_title
 	title.author = level_author
 	add_child(title)
-	
-	ResolutionManager.emit_signal("window_resized")
 	
 	# Wait until the title card disappears,
 	yield(title, "tree_exited")
@@ -179,8 +174,6 @@ func create_autoscroll_camera():
 		camera_pos = Global.spawn_position.x
 	camera.position = Vector2(camera_pos, 320)
 	camera.current = true
-	yield(camera, "tree_entered")
-	emit_signal("autoscroll_ready")
 
 func autoscroll(delta):
 	if custom_camera != null:
