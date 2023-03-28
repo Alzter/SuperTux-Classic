@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://scenes/master/Level.gd" type="Script" id=1]
 [ext_resource path="res://scenes/master/TileMap.tscn" type="PackedScene" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://scenes/master/Ambience.tscn" type="PackedScene" id=7]
 [ext_resource path="res://sounds/ambience_loops/AmbienceWaves.mp3" type="AudioStream" id=8]
 [ext_resource path="res://sounds/ambience_loops/AmbienceThunder.mp3" type="AudioStream" id=9]
+[ext_resource path="res://scenes/backgrounds/assets/CloudParticlesDark.tscn" type="PackedScene" id=10]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 6 )
@@ -80,3 +81,5 @@ tile_data = PoolIntArray( -130483, 28, 0, 65937, 34, 0, 65939, 536870919, 0, 659
 [node name="ThunderstormBackground" parent="." instance=ExtResource( 4 )]
 
 [node name="RainParticles" parent="." instance=ExtResource( 5 )]
+
+[node name="CloudParticlesDark" parent="." instance=ExtResource( 10 )]
