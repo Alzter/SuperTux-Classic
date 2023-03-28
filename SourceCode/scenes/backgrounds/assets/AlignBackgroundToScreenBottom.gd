@@ -9,6 +9,13 @@ func _ready():
 
 func window_resized():
 	var offset = ResolutionManager.window_resolution.y - 480
+	
 	var camera = Global.get_current_camera()
+	
+	if camera:
+		var zoom = abs(1 - camera.zoom.y)
+		offset -= 480 * ResolutionManager.window_resolution.y * zoom
+		print(zoom)
+	
 	offset = max(offset, 0)
 	scroll_base_offset.y = offset

@@ -20,7 +20,6 @@ level_title = "Mario's Supposed to Deal With This..."
 level_author = "Kevin"
 music = "Fortress2"
 particle_system = "clouds"
-autoscroll_speed = 0.9
 
 [node name="Ambience" parent="." instance=ExtResource( 5 )]
 stream = ExtResource( 9 )

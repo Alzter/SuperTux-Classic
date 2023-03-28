@@ -9,15 +9,14 @@ blend_mode = 1
 
 [node name="Fog" type="ParallaxBackground"]
 layer = 100
-scroll_base_scale = Vector2( 1.2, 1.2 )
-scroll_ignore_camera_zoom = true
+scroll_base_scale = Vector2( 1.3, 0 )
 script = ExtResource( 2 )
 
 [node name="Fog" type="ParallaxLayer" parent="."]
-modulate = Color( 0.0235294, 0.133333, 0.247059, 1 )
+modulate = Color( 0.0235294, 0.027451, 0.247059, 1 )
 material = SubResource( 1 )
-position = Vector2( 0, 96 )
 motion_scale = Vector2( 1.25, 1 )
+motion_offset = Vector2( 0, 96 )
 motion_mirroring = Vector2( 2560, 0 )
 
 [node name="TextureRect" type="TextureRect" parent="Fog"]
@@ -33,7 +32,7 @@ texture = ExtResource( 1 )
 stretch_mode = 2
 
 [node name="Cloud1" type="ParallaxLayer" parent="."]
-modulate = Color( 0.227451, 0.254902, 0.286275, 1 )
+modulate = Color( 0.258824, 0.262745, 0.317647, 1 )
 material = SubResource( 1 )
 motion_offset = Vector2( 200, 0 )
 motion_mirroring = Vector2( 2560, 0 )
@@ -51,10 +50,10 @@ stretch_mode = 2
 flip_v = true
 
 [node name="Cloud2" type="ParallaxLayer" parent="."]
-modulate = Color( 0.0313726, 0.137255, 0.254902, 1 )
+modulate = Color( 0.113725, 0.156863, 0.309804, 1 )
 material = SubResource( 1 )
 motion_scale = Vector2( 0.8, 1 )
-motion_offset = Vector2( 200, 0 )
+motion_offset = Vector2( 200, 20 )
 motion_mirroring = Vector2( 2560, 0 )
 
 [node name="TextureRect" type="TextureRect" parent="Cloud2"]
