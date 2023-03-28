@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://images/background/gradient.png" type="Texture" id=1]
 [ext_resource path="res://images/background/OceanDark.png" type="Texture" id=2]
@@ -7,6 +7,8 @@
 [ext_resource path="res://scenes/backgrounds/ThunderstormBackground.gd" type="Script" id=5]
 [ext_resource path="res://scenes/master/SFX.gd" type="Script" id=6]
 [ext_resource path="res://sounds/ambience_loops/lightning.wav" type="AudioStream" id=7]
+[ext_resource path="res://scenes/backgrounds/assets/CloudParticlesDark.tscn" type="PackedScene" id=8]
+[ext_resource path="res://scenes/backgrounds/assets/RainParticles.tscn" type="PackedScene" id=9]
 
 [sub_resource type="CanvasItemMaterial" id=2]
 blend_mode = 1
@@ -386,6 +388,10 @@ stream = ExtResource( 7 )
 volume_db = -8.0
 pitch_scale = 2.0
 bus = "Ambience3"
+
+[node name="CloudParticlesDark" parent="." instance=ExtResource( 8 )]
+
+[node name="RainParticles" parent="CloudParticlesDark" instance=ExtResource( 9 )]
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
 [connection signal="timeout" from="LightningTimer" to="." method="_on_LightningTimer_timeout"]

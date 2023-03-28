@@ -1,9 +1,7 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://scenes/shaders/Overlay.gdshader" type="Shader" id=1]
 [ext_resource path="res://scenes/master/Level.gd" type="Script" id=2]
-[ext_resource path="res://scenes/backgrounds/assets/CloudParticlesDark.tscn" type="PackedScene" id=3]
-[ext_resource path="res://scenes/backgrounds/assets/RainParticles.tscn" type="PackedScene" id=4]
 [ext_resource path="res://scenes/master/Ambience.tscn" type="PackedScene" id=5]
 [ext_resource path="res://scenes/master/TileMap.tscn" type="PackedScene" id=6]
 [ext_resource path="res://scenes/master/ObjectMap.tscn" type="PackedScene" id=7]
@@ -22,6 +20,7 @@ level_title = "Mario's Supposed to Deal With This..."
 level_author = "Kevin"
 music = "Fortress2"
 particle_system = "clouds"
+autoscroll_speed = 0.9
 
 [node name="Ambience" parent="." instance=ExtResource( 5 )]
 stream = ExtResource( 9 )
@@ -80,10 +79,4 @@ tile_data = PoolIntArray( -130483, 28, 0, 65937, 34, 0, 65939, 536870919, 0, 659
 
 [node name="ThunderstormBackground" parent="." instance=ExtResource( 8 )]
 
-[node name="RainParticles" parent="." instance=ExtResource( 4 )]
-
-[node name="CloudParticlesDark" parent="." instance=ExtResource( 3 )]
-
 [node name="Fog" parent="." instance=ExtResource( 11 )]
-offset = Vector2( 0, 160 )
-transform = Transform2D( 1, 0, 0, 1, 0, 160 )
