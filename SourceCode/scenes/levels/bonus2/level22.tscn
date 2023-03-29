@@ -1,12 +1,14 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://scenes/master/Level.gd" type="Script" id=1]
 [ext_resource path="res://scenes/master/ObjectMap.tscn" type="PackedScene" id=2]
-[ext_resource path="res://scenes/backgrounds/SnowBackground.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/backgrounds/IceMountainsBackgroundFog.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/master/TileMap.tscn" type="PackedScene" id=4]
 [ext_resource path="res://scenes/backgrounds/assets/WaterForeground.tscn" type="PackedScene" id=5]
 [ext_resource path="res://scenes/backgrounds/assets/RainParticles.tscn" type="PackedScene" id=6]
-[ext_resource path="res://scenes/backgrounds/assets/CloudParticles.tscn" type="PackedScene" id=7]
+[ext_resource path="res://scenes/backgrounds/assets/RainParticlesBackground.tscn" type="PackedScene" id=7]
+[ext_resource path="res://scenes/master/Ambience.tscn" type="PackedScene" id=8]
+[ext_resource path="res://sounds/ambience_loops/AmbienceWaves.mp3" type="AudioStream" id=9]
 
 [node name="Level" type="Node2D"]
 script = ExtResource( 1 )
@@ -14,8 +16,6 @@ level_title = "Water Ways"
 level_author = "Penguinmaster"
 particle_system = "clouds"
 time = 600
-
-[node name="CloudParticles" parent="." instance=ExtResource( 7 )]
 
 [node name="RainParticles" parent="." instance=ExtResource( 6 )]
 
@@ -42,8 +42,16 @@ tile_data = PoolIntArray( 720896, 21, 0, 720897, 22, 0, 720898, 23, 0, 720899, 2
 
 [node name="ObjectMap" parent="." instance=ExtResource( 2 )]
 z_index = 40
-tile_data = PoolIntArray( 18, 536870918, 0, 65744, 536870923, 0, 131275, 536870918, 0, 196636, 536870922, 0, 262148, 13, 0, 262149, 13, 0, 262150, 14, 0, 327796, 18, 0, 327801, 34, 0, 327804, 34, 0, 327906, 28, 0, 393332, 18, 0, 393337, 34, 0, 393340, 34, 0, 393380, 4, 0, 393382, 4, 0, 458754, 5, 0, 458804, 34, 0, 458819, 13, 0, 458820, 13, 0, 458821, 13, 0, 458822, 14, 0, 458823, 13, 0, 458868, 18, 0, 458873, 34, 0, 458876, 34, 0, 458902, 536870919, 0, 458906, 536870919, 0, 458917, 4, 0, 458984, 27, 0, 524310, 16, 0, 524311, 15, 0, 524314, 536870945, 0, 524340, 34, 0, 524404, 18, 0, 524450, 4, 0, 524456, 4, 0, 589873, 34, 0, 589874, 34, 0, 589875, 34, 0, 589876, 34, 0, 589940, 18, 0, 589987, 4, 0, 589989, 15, 0, 589991, 4, 0, 655405, 34, 0, 655406, 34, 0, 655407, 34, 0, 655408, 34, 0, 655409, 34, 0, 655425, 536870918, 0, 655476, 18, 0, 655501, 536870922, 0, 655522, 4, 0, 655528, 4, 0, 655559, 536870923, 0, 720941, 34, 0, 721012, 18, 0, 721101, 536870914, 0, 721103, 536870914, 0, 721105, 536870914, 0, 721109, 536870919, 0, 721111, 536870919, 0, 721113, 536870919, 0, 786477, 34, 0, 786548, 18, 0, 786624, 536870922, 0, 786628, 536870922, 0, 851992, 34, 0, 851996, 34, 0, 851999, 34, 0, 852000, 34, 0, 852008, 34, 0, 852013, 34, 0, 852084, 18, 0, 917541, 34, 0, 917542, 34, 0, 917543, 34, 0, 917544, 34, 0, 917545, 34, 0, 917546, 34, 0, 917547, 34, 0, 917548, 34, 0, 917549, 34, 0, 917620, 18, 0 )
-
-[node name="SnowBG" parent="." instance=ExtResource( 3 )]
+tile_data = PoolIntArray( 18, 536870918, 0, 65744, 536870923, 0, 131275, 536870918, 0, 196636, 536870922, 0, 262148, 13, 0, 262149, 13, 0, 262150, 14, 0, 327796, 18, 0, 327801, 34, 0, 327804, 34, 0, 327906, 28, 0, 393332, 18, 0, 393337, 34, 0, 393340, 34, 0, 393380, 4, 0, 393382, 4, 0, 458754, 5, 0, 458804, 34, 0, 458819, 13, 0, 458820, 13, 0, 458821, 13, 0, 458822, 14, 0, 458823, 13, 0, 458868, 18, 0, 458873, 34, 0, 458876, 34, 0, 458902, 536870919, 0, 458906, 536870919, 0, 458917, 4, 0, 458984, 27, 0, 524310, 16, 0, 524311, 15, 0, 524314, 536870945, 0, 524340, 34, 0, 524404, 18, 0, 524450, 4, 0, 524456, 4, 0, 589873, 34, 0, 589874, 34, 0, 589875, 34, 0, 589876, 34, 0, 589940, 18, 0, 589987, 4, 0, 589989, 15, 0, 589991, 4, 0, 655405, 34, 0, 655406, 34, 0, 655407, 34, 0, 655408, 34, 0, 655409, 34, 0, 655425, 536870918, 0, 655476, 18, 0, 655501, 536870922, 0, 655522, 4, 0, 655528, 4, 0, 655559, 536870923, 0, 720941, 34, 0, 721012, 18, 0, 721101, 536870914, 0, 721103, 536870914, 0, 721105, 536870914, 0, 721109, 536870919, 0, 721111, 536870919, 0, 721113, 536870919, 0, 786477, 34, 0, 786548, 18, 0, 786624, 536870922, 0, 786628, 536870922, 0, 851992, 34, 0, 851996, 34, 0, 851997, 34, 0, 851998, 34, 0, 851999, 34, 0, 852000, 34, 0, 852001, 34, 0, 852002, 34, 0, 852008, 34, 0, 852013, 34, 0, 852084, 18, 0, 917541, 34, 0, 917542, 34, 0, 917543, 34, 0, 917544, 34, 0, 917545, 34, 0, 917546, 34, 0, 917547, 34, 0, 917548, 34, 0, 917549, 34, 0, 917620, 18, 0 )
 
 [node name="WaterFG" parent="." instance=ExtResource( 5 )]
+
+[node name="IceMountainsBackground" parent="." instance=ExtResource( 3 )]
+
+[node name="RainParticles2" parent="." instance=ExtResource( 7 )]
+
+[node name="Ambience" parent="." instance=ExtResource( 8 )]
+stream = ExtResource( 9 )
+volume_db = -25.0
+pitch_scale = 4.0
+bus = "Ambience2"
