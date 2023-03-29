@@ -9,7 +9,7 @@ gradient = SubResource( 1 )
 
 [resource]
 emission_shape = 2
-emission_box_extents = Vector3( 0, 2048, 1 )
+emission_box_extents = Vector3( 0, 1024, 1 )
 flag_disable_z = true
 direction = Vector3( -1, 0, 0 )
 spread = 0.0

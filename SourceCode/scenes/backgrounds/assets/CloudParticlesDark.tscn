@@ -10,28 +10,28 @@ blend_mode = 1
 layer = 100
 
 [node name="ParallaxLayer" type="ParallaxLayer" parent="."]
-modulate = Color( 0.0901961, 0.0941176, 0.376471, 0.388235 )
+modulate = Color( 0.0784314, 0.0784314, 0.223529, 0.388235 )
 material = SubResource( 1 )
 motion_mirroring = Vector2( 6144, 0 )
 
 [node name="Particles2D" type="Particles2D" parent="ParallaxLayer"]
 use_parent_material = true
-position = Vector2( 256, -30 )
-amount = 400
+position = Vector2( 256, 994 )
+amount = 300
 lifetime = 50.0
 preprocess = 50.0
 speed_scale = 1.5
-visibility_rect = Rect2( -7000, 0, 9000, 3000 )
+visibility_rect = Rect2( -7000, -3000, 9000, 3000 )
 process_material = ExtResource( 1 )
 texture = ExtResource( 2 )
 
 [node name="Particles2D2" type="Particles2D" parent="ParallaxLayer"]
 use_parent_material = true
-position = Vector2( 4096, -30 )
-amount = 400
+position = Vector2( 4096, 994 )
+amount = 300
 lifetime = 50.0
 preprocess = 50.0
 speed_scale = 1.5
-visibility_rect = Rect2( -7000, 0, 9000, 3000 )
+visibility_rect = Rect2( -7000, -3000, 9000, 3000 )
 process_material = ExtResource( 1 )
 texture = ExtResource( 2 )
