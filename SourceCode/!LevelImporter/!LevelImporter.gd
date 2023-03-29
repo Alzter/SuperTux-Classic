@@ -124,6 +124,11 @@ func _get_section_of_string(string, beginning_phrase, end_phrase):
 	
 	return string.substr(start_pos, length)
 
+func _get_section_of_string_as_int(string, beginning_phrase, end_phrase):
+	var string_section = _get_section_of_string(string, beginning_phrase, end_phrase)
+	if string_section: return int(string_section)
+	else: return null
+
 func _ready():
 	
 	if !is_level_worldmap:
@@ -186,10 +191,12 @@ func _get_level_attributes(leveldata, is_worldmap = false):
 		level.gravity = int(_get_section_of_string(leveldata, "gravity ", ")"))
 		level.level_author = _get_section_of_string(leveldata, "author \"", "\")")
 		level.particle_system = _get_section_of_string(leveldata, "particle_system \"", "\")")
+		level.time = _get_section_of_string_as_int(leveldata, "time ", ")")
 		
-		var autoscroll_speed = _get_section_of_string(leveldata, "hor_autoscroll_speed ", ")")
+		
+		var autoscroll_speed = _get_section_of_string_as_int(leveldata, "hor_autoscroll_speed ", ")")
 		if autoscroll_speed == null: autoscroll_speed = 0
-		level.autoscroll_speed = int(autoscroll_speed)
+		level.autoscroll_speed = autoscroll_speed
 	
 	var level_music = _get_section_of_string(leveldata, "music \"", "\")")
 	if music.has(level_music):

@@ -19,6 +19,7 @@ script = ExtResource( 1 )
 level_title = "Think Fast, or Die"
 level_author = "Kevin"
 music = "Cave"
+time = 350
 autoscroll_speed = 1.0
 
 [node name="Shader" type="Node2D" parent="."]

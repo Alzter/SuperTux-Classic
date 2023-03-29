@@ -12,6 +12,7 @@ level_title = "Cliff Jumping"
 level_author = "Jason Kleinemas"
 music = "Title"
 particle_system = "clouds"
+time = 100
 
 [node name="Background" parent="." instance=ExtResource( 3 )]
 z_index = -20

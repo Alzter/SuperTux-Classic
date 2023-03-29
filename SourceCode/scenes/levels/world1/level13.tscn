@@ -14,6 +14,7 @@ script = ExtResource( 1 )
 level_title = "Above the Arctic Skies"
 level_author = "Ricardo Cruz"
 particle_system = "clouds"
+time = 200
 
 [node name="Background" parent="." instance=ExtResource( 3 )]
 z_index = -20

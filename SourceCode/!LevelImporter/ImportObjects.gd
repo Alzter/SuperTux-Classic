@@ -191,6 +191,7 @@ func _handle_leveldot_parameter(parameter_name, parameter_value, leveldot):
 
 func _place_objects_in_level(obj_array, objmap_to_use):
 	for i in obj_array:
+		if i.size() <= 1: break
 		var obj_offset = Vector2(0,0)
 		var type = i[0]
 		var position = Vector2(int(i[1]), int(i[2]))
@@ -204,7 +205,7 @@ func _place_objects_in_level(obj_array, objmap_to_use):
 			if stay_on_platform and smart_enemies.has(type):
 				type = smart_enemies.get(type)
 			
-			print(type)
+			#print(type)
 			
 			obj_offset = _get_object_offset(type)
 			var tile_to_set = _get_tile_id_from_name(type, objmap_to_use)
