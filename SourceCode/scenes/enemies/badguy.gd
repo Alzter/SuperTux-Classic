@@ -264,6 +264,7 @@ func enter_water():
 	invincible = true
 	anim_player.play("enter_water")
 	sfx.play("SplashIn")
+	disable_bounce_area()
 
 func exit_water():
 	grounded = false
@@ -274,6 +275,7 @@ func exit_water():
 	invincible = false
 	anim_player.play("default")
 	sfx.play("SplashOut")
+	disable_bounce_area()
 
 func _on_AnimationPlayer_animation_finished(anim_name):
 	if anim_name == "exit_water":

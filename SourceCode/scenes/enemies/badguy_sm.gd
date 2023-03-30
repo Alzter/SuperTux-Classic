@@ -97,7 +97,9 @@ func _get_transition(delta):
 			if host.velocity.y > 0 and host.type != "Jumpy": return "fall"
 
 func _enter_state(new_state, old_state):
-	pass
+	match new_state:
+		"fall":
+			host.disable_bounce_area(false)
 
 func _exit_state(old_state, new_state):
 	pass
