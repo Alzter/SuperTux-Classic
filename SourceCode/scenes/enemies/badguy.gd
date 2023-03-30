@@ -245,6 +245,7 @@ func _on_FuseTimer_timeout():
 	explode()
 
 func check_water_below(delta):
+	if state_machine.state == "squished": return
 	if water_detector == null: return
 	water_detector.cast_to.y = velocity.y * delta
 	water_detector.force_raycast_update()
@@ -259,12 +260,12 @@ func _on_RiseTimer_timeout():
 func enter_water():
 	velocity = Vector2.ZERO
 	water_rise_timer.start()
+	disable_bounce_area()
 	disable_collision()
 	collide_with_other_enemies(false)
 	invincible = true
 	anim_player.play("enter_water")
 	sfx.play("SplashIn")
-	disable_bounce_area()
 
 func exit_water():
 	grounded = false
