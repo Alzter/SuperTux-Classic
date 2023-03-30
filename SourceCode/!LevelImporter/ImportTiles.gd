@@ -49,7 +49,7 @@ export var object_tiles = {
 	
 	77: "ObjBrick",
 	78: "ObjSBrick",
-	104: "ObjBrickPowerup",
+	104: "ObjBrickCoin",
 	105: "ObjBrickStar",
 	
 	130: "!EndGoalPosts", # EXIT POLE
