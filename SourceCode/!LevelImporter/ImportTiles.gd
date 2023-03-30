@@ -73,6 +73,8 @@ export var level_tileset = {
 	134 : "NolokStatue",
 	136 : "RUNSign",
 	
+	81 : "Flag",
+	
 	48 : "Block",
 	61 : "BlockStone1",
 	62 : "BlockStone2",
