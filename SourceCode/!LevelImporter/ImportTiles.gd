@@ -47,6 +47,8 @@ export var object_tiles = {
 	84: "ObjBonusEmpty",
 	112: "ObjBonusInvisible",
 	
+	174 : "HazLavaHitbox",
+	
 	77: "ObjBrick",
 	78: "ObjSBrick",
 	104: "ObjBrickCoin",
@@ -380,37 +382,42 @@ func place_level_tile(tile, x, y, tilemap, objectmap, expand, water_tilemap):
 			var tilemap_to_use = tilemap
 			var tile_name = ""
 			
-			if object_tiles.has(tile):
-				tilemap_to_use = objectmap
-				tile_name = object_tiles.get(tile)
-				tile_to_set = _get_tile_id_from_name(tile_name, tilemap_to_use)
-			elif level_tileset.has(tile):
+			if object_tiles.has(tile) or level_tileset.has(tile):
 				
-				if water_tiles.has(tile) and water_tilemap != null:
-					tilemap_to_use = water_tilemap
+				if object_tiles.has(tile):
+					tilemap_to_use = objectmap
+					tile_name = object_tiles.get(tile)
+					tile_to_set = _get_tile_id_from_name(tile_name, tilemap_to_use)
+					
+					tilemap_to_use.set_cell(x - 1, y, tile_to_set)
+					tilemap_to_use.update_bitmask_area(Vector2(x-1, y))
 				
-				tile_name = level_tileset.get(tile)
-				tile_name = tile_specific_patterns(tile_name, x, y)
-				tile_to_set = _get_tile_id_from_name(tile_name, tilemap_to_use)
-			else:
-				if !unknown_tiles.has(tile): unknown_tiles.append(tile)
+				if level_tileset.has(tile):
+					tilemap_to_use = tilemap
+					
+					if water_tiles.has(tile) and water_tilemap != null:
+						tilemap_to_use = water_tilemap
+					
+					tile_name = level_tileset.get(tile)
+					tile_name = tile_specific_patterns(tile_name, x, y)
+					tile_to_set = _get_tile_id_from_name(tile_name, tilemap_to_use)
+					
+					tilemap_to_use.set_cell(x - 1, y, tile_to_set)
+					tilemap_to_use.update_bitmask_area(Vector2(x-1, y))
+					
+					if y == 14 and expand:
+						# Don't repeat water surface tiles when expanding the bottom of the tilemap
+						# (Edge case fix)
+						if "Water" in tile_name and tile_name != "WaterFill":
+							tile_to_set = _get_tile_id_from_name("WaterFill", tilemap_to_use)
+						
+						var new_y = y
+						for i in 30:
+							new_y += 1
+							tilemap_to_use.set_cell(x - 1, new_y, tile_to_set)
+							tilemap_to_use.update_bitmask_area(Vector2(x-1, new_y))
 			
-			tilemap_to_use.set_cell(x - 1, y, tile_to_set)
-			tilemap_to_use.update_bitmask_area(Vector2(x-1, y))
-			
-			if y == 14 and expand:
-				if object_tiles.has(tile): return
-				
-				# Don't repeat water surface tiles when expanding the bottom of the tilemap
-				# (Edge case fix)
-				if "Water" in tile_name and tile_name != "WaterFill":
-					tile_to_set = _get_tile_id_from_name("WaterFill", tilemap_to_use)
-				
-				var new_y = y
-				for i in 30:
-					new_y += 1
-					tilemap_to_use.set_cell(x - 1, new_y, tile_to_set)
-					tilemap_to_use.update_bitmask_area(Vector2(x-1, new_y))
+			elif !unknown_tiles.has(tile): unknown_tiles.append(tile)
 
 
 func place_worldmap_tile(tile, x, y, tilemap, foreground_tilemap):

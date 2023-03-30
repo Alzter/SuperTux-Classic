@@ -1,4 +1,4 @@
-[gd_resource type="TileSet" load_steps=20 format=2]
+[gd_resource type="TileSet" load_steps=21 format=2]
 
 [ext_resource path="res://images/enemies/spiky/walk1.png" type="Texture" id=1]
 [ext_resource path="res://images/enemies/stalactite/stalactite.png" type="Texture" id=2]
@@ -19,6 +19,7 @@
 [ext_resource path="res://images/enemies/fish/up1.png" type="Texture" id=17]
 [ext_resource path="res://images/enemies/smartball/walk1.png" type="Texture" id=18]
 [ext_resource path="res://images/enemies/smartblock/walk1.png" type="Texture" id=19]
+[ext_resource path="res://images/editor/LavaHitbox.png" type="Texture" id=20]
 
 [resource]
 2/name = "BadSnowball"
@@ -497,3 +498,17 @@
 36/shape_one_way_margin = 0.0
 36/shapes = [  ]
 36/z_index = 0
+37/name = "HazLavaHitbox"
+37/texture = ExtResource( 20 )
+37/tex_offset = Vector2( 0, 0 )
+37/modulate = Color( 1, 1, 1, 1 )
+37/region = Rect2( 0, 0, 32, 32 )
+37/tile_mode = 0
+37/occluder_offset = Vector2( 0, 0 )
+37/navigation_offset = Vector2( 0, 0 )
+37/shape_offset = Vector2( 0, 0 )
+37/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+37/shape_one_way = false
+37/shape_one_way_margin = 0.0
+37/shapes = [  ]
+37/z_index = 10
