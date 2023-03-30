@@ -29,7 +29,8 @@ export var is_worldmap = false
 export var ignore_tiles = [
 	6,7,8,9, 32,33,34, 86,87,88,89,90,91,92,
 	107, 108, 109, 110, 111, 137, 138, 139,
-	132, 133, 127, 129, 49, 51, 52, 135, 16, 17, 18]
+	132, 133, 127, 129, 49, 51, 52, 135, 16, 17, 18,
+	94, 95, 96, 97, 98, 99, 100]
 
 export var water_tiles = [
 	75, 76, 200, 201
@@ -67,6 +68,8 @@ export var level_tileset = {
 	124 : "IceHill",
 	125 : "IceHill",
 	106 : "IceChunk",
+	93 : "IceChunk2",
+	101 : "IceChunk2",
 	134 : "NolokStatue",
 	136 : "RUNSign",
 	
@@ -382,42 +385,43 @@ func place_level_tile(tile, x, y, tilemap, objectmap, expand, water_tilemap):
 			var tilemap_to_use = tilemap
 			var tile_name = ""
 			
-			if object_tiles.has(tile) or level_tileset.has(tile):
-				
-				if object_tiles.has(tile):
-					tilemap_to_use = objectmap
-					tile_name = object_tiles.get(tile)
-					tile_to_set = _get_tile_id_from_name(tile_name, tilemap_to_use)
-					
-					tilemap_to_use.set_cell(x - 1, y, tile_to_set)
-					tilemap_to_use.update_bitmask_area(Vector2(x-1, y))
-				
-				if level_tileset.has(tile):
-					tilemap_to_use = tilemap
-					
-					if water_tiles.has(tile) and water_tilemap != null:
-						tilemap_to_use = water_tilemap
-					
-					tile_name = level_tileset.get(tile)
-					tile_name = tile_specific_patterns(tile_name, x, y)
-					tile_to_set = _get_tile_id_from_name(tile_name, tilemap_to_use)
-					
-					tilemap_to_use.set_cell(x - 1, y, tile_to_set)
-					tilemap_to_use.update_bitmask_area(Vector2(x-1, y))
-					
-					if y == 14 and expand:
-						# Don't repeat water surface tiles when expanding the bottom of the tilemap
-						# (Edge case fix)
-						if "Water" in tile_name and tile_name != "WaterFill":
-							tile_to_set = _get_tile_id_from_name("WaterFill", tilemap_to_use)
-						
-						var new_y = y
-						for i in 30:
-							new_y += 1
-							tilemap_to_use.set_cell(x - 1, new_y, tile_to_set)
-							tilemap_to_use.update_bitmask_area(Vector2(x-1, new_y))
 			
-			elif !unknown_tiles.has(tile): unknown_tiles.append(tile)
+			if object_tiles.has(tile):
+				tilemap_to_use = objectmap
+				tile_name = object_tiles.get(tile)
+				tile_to_set = _get_tile_id_from_name(tile_name, tilemap_to_use)
+				
+				tilemap_to_use.set_cell(x - 1, y, tile_to_set)
+				tilemap_to_use.update_bitmask_area(Vector2(x-1, y))
+			
+			if level_tileset.has(tile):
+				tilemap_to_use = tilemap
+				
+				if water_tiles.has(tile) and water_tilemap != null:
+					tilemap_to_use = water_tilemap
+				
+				tile_name = level_tileset.get(tile)
+				tile_name = tile_specific_patterns(tile_name, x, y)
+				tile_to_set = _get_tile_id_from_name(tile_name, tilemap_to_use)
+			
+			tilemap_to_use.set_cell(x - 1, y, tile_to_set)
+			tilemap_to_use.update_bitmask_area(Vector2(x-1, y))
+			
+			if level_tileset.has(tile):
+				if y == 14 and expand:
+					# Don't repeat water surface tiles when expanding the bottom of the tilemap
+					# (Edge case fix)
+					if "Water" in tile_name and tile_name != "WaterFill":
+						tile_to_set = _get_tile_id_from_name("WaterFill", tilemap_to_use)
+					
+					var new_y = y
+					for i in 30:
+						new_y += 1
+						tilemap_to_use.set_cell(x - 1, new_y, tile_to_set)
+						tilemap_to_use.update_bitmask_area(Vector2(x-1, new_y))
+		
+			if !object_tiles.has(tile) and !level_tileset.has(tile):
+				if !unknown_tiles.has(tile): unknown_tiles.append(tile)
 
 
 func place_worldmap_tile(tile, x, y, tilemap, foreground_tilemap):
