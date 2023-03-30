@@ -34,11 +34,6 @@ animations = [ {
 "name": "Bonus",
 "speed": 20.0
 }, {
-"frames": [ ExtResource( 15 ) ],
-"loop": true,
-"name": "BrickSnow",
-"speed": 5.0
-}, {
 "frames": [ ExtResource( 14 ) ],
 "loop": true,
 "name": "Brick",
@@ -52,6 +47,11 @@ animations = [ {
 "frames": [ ExtResource( 23 ) ],
 "loop": true,
 "name": "Invisible",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 15 ) ],
+"loop": true,
+"name": "BrickSnow",
 "speed": 5.0
 } ]
 
@@ -460,6 +460,7 @@ z_index = -1
 texture = ExtResource( 20 )
 
 [node name="InvisibleShimmer" type="Area2D" parent="."]
+visible = false
 collision_layer = 0
 collision_mask = 70
 monitorable = false

@@ -247,6 +247,8 @@ func check_bounce(delta):
 		# are at the dragon's feet
 		if riding_entity and velocity.y > 0: bounce_raycasts.position.y += 43
 		
+		var new_velocity
+		
 		# Make all the raycasts extend out to cover Tux's future position
 		for raycast in bounce_raycasts.get_children():
 			var direction = Vector2.DOWN if velocity.y > 0 else Vector2.UP
@@ -264,9 +266,13 @@ func check_bounce(delta):
 				
 				# Bonus blocks can only be hit if Tux is travelling upwards
 				elif velocity.y < 0 and object.has_method("be_hit_from_above"):
-					velocity.y = (raycast.get_collision_point() - raycast.global_position - direction).y / delta
 					object.call_deferred("be_hit_from_above", self)
-					break
+					
+					var velocity_adjust = (raycast.get_collision_point() - raycast.global_position - direction).y / delta
+					if !new_velocity: new_velocity = velocity_adjust
+					else: new_velocity = max(velocity_adjust, new_velocity)
+		
+		if new_velocity: velocity.y = new_velocity
 
 func bounce(bounce_velocity = bounce_height):
 	if state_machine.state != "duck": state_machine.set_state("jump")
