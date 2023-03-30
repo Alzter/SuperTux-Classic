@@ -121,6 +121,9 @@ export var level_tileset = {
 	200 : "WaterFill",
 	201 : "Water1",
 	
+	173 : "LavaFill",
+	174 : "Lava1",
+	
 	79 : "Pole",
 	80 : "PoleTop",
 	
@@ -435,9 +438,10 @@ func place_worldmap_tile(tile, x, y, tilemap, foreground_tilemap):
 
 # Used for some tiles. Alternates which tile to use for a level tile based on the position of the tile.
 func tile_specific_patterns(tile_name, x, y):
-	if tile_name == "Water1":
+	if ["Water1", "Lava1"].has(tile_name):
+		tile_name.erase(tile_name.length() - 1, 1)
 		var tile_id = fmod(x, 4) + 1
-		tile_name = "Water" + str(tile_id)
+		tile_name = tile_name + str(tile_id)
 	return tile_name
 
 func _update_default_tile(new_value):
