@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/DarkForestKeep.mp3-ef2fc0a9b9355fa283c8360d94e2d241.mp3str"
+
+[deps]
+
+source_file="res://music/DarkForestKeep.mp3"
+dest_files=[ "res://.import/DarkForestKeep.mp3-ef2fc0a9b9355fa283c8360d94e2d241.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

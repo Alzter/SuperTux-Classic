@@ -1903,7 +1903,7 @@ points = PoolVector2Array( 0, 0, 32, 0, 32, 16, 0, 16 )
 "shape": SubResource( 114 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 } ]
-18/z_index = 0
+18/z_index = -1
 19/name = "GoalPole"
 19/texture = ExtResource( 7 )
 19/tex_offset = Vector2( 0, 0 )

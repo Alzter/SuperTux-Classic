@@ -25,6 +25,7 @@ func _ready():
 	add_state("fall")
 	add_state("dead")
 	add_state("win")
+	add_state("win_inside_igloo")
 	add_state("riding")
 	call_deferred("set_state", "idle")
 
@@ -37,7 +38,7 @@ func _state_logic(delta):
 		return
 	
 	if "win" in state:
-		host.win_loop()
+		host.win_loop(state == "win")
 		host.apply_gravity(delta, Global.gravity * 0.25)
 		host.apply_movement(delta)
 		host.update_sprite()

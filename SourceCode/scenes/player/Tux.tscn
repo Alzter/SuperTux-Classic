@@ -66,9 +66,9 @@ animations = [ {
 "name": "skid",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 48 ) ],
+"frames": [ ExtResource( 49 ) ],
 "loop": true,
-"name": "fall",
+"name": "jump",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 48 ) ],
@@ -76,22 +76,22 @@ animations = [ {
 "name": "walk",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 49 ) ],
+"frames": [ ExtResource( 48 ) ],
 "loop": true,
-"name": "jump",
+"name": "fall",
 "speed": 5.0
 } ]
 
 [sub_resource type="SpriteFrames" id=7]
 animations = [ {
-"frames": [ ExtResource( 35 ) ],
-"loop": true,
-"name": "small",
-"speed": 5.0
-}, {
 "frames": [ ExtResource( 36 ) ],
 "loop": true,
 "name": "big",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 35 ) ],
+"loop": true,
+"name": "small",
 "speed": 5.0
 } ]
 
@@ -109,12 +109,7 @@ animations = [ {
 }, {
 "frames": [ ExtResource( 19 ) ],
 "loop": true,
-"name": "fall",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 15 ) ],
-"loop": true,
-"name": "duck",
+"name": "jump",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 18 ), ExtResource( 17 ), ExtResource( 21 ), ExtResource( 24 ), ExtResource( 26 ), ExtResource( 22 ), ExtResource( 20 ), ExtResource( 25 ) ],
@@ -124,7 +119,12 @@ animations = [ {
 }, {
 "frames": [ ExtResource( 19 ) ],
 "loop": true,
-"name": "jump",
+"name": "fall",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 15 ) ],
+"loop": true,
+"name": "duck",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 47 ) ],
@@ -132,15 +132,15 @@ animations = [ {
 "name": "riding",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 16 ) ],
-"loop": true,
-"name": "kick",
-"speed": 5.0
-}, {
 "frames": [ ExtResource( 23 ), ExtResource( 27 ) ],
 "loop": true,
 "name": "dead",
 "speed": 10.0
+}, {
+"frames": [ ExtResource( 16 ) ],
+"loop": true,
+"name": "kick",
+"speed": 5.0
 } ]
 
 [sub_resource type="SpriteFrames" id=1]
@@ -157,12 +157,7 @@ animations = [ {
 }, {
 "frames": [ ExtResource( 5 ) ],
 "loop": true,
-"name": "fall",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 14 ) ],
-"loop": true,
-"name": "duck",
+"name": "jump",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 7 ), ExtResource( 12 ), ExtResource( 8 ), ExtResource( 9 ), ExtResource( 10 ), ExtResource( 11 ) ],
@@ -172,7 +167,12 @@ animations = [ {
 }, {
 "frames": [ ExtResource( 5 ) ],
 "loop": true,
-"name": "jump",
+"name": "fall",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 14 ) ],
+"loop": true,
+"name": "duck",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 47 ) ],
