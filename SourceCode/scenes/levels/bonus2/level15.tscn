@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://scenes/shaders/Overlay.gdshader" type="Shader" id=1]
 [ext_resource path="res://scenes/master/Level.gd" type="Script" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://scenes/backgrounds/assets/CloudParticlesDark.tscn" type="PackedScene" id=6]
 [ext_resource path="res://scenes/backgrounds/assets/FogBottom.tscn" type="PackedScene" id=7]
 [ext_resource path="res://scenes/master/ObjectMap.tscn" type="PackedScene" id=8]
+[ext_resource path="res://scenes/master/Ambience.tscn" type="PackedScene" id=9]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 1 )
@@ -79,3 +80,7 @@ margin_right = 99359.0
 margin_bottom = 99519.0
 rect_min_size = Vector2( 99999, 99999 )
 color = Color( 0, 0.227451, 1, 0.164706 )
+
+[node name="Ambience" parent="." instance=ExtResource( 9 )]
+volume_db = -5.0
+pitch_scale = 0.5
