@@ -26,6 +26,7 @@ export var turn_on_walls = true
 export var turn_on_cliffs = false
 export var sprite_faces_direction = true
 export var bounce_height_in_tiles = 6.0
+export var hop_height_in_tiles = 1.0 # If standing on another badguy, hop this many tiles up 
 export var flip_vertically_when_dying = true
 
 var velocity = Vector2()
@@ -39,6 +40,7 @@ var invincible = false
 var die_height = 2.0 * Global.TILE_SIZE
 
 onready var bounce_height = bounce_height_in_tiles * Global.TILE_SIZE
+onready var hop_height = hop_height_in_tiles * Global.TILE_SIZE
 onready var sprite = $Control/AnimatedSprite
 onready var state_machine = $StateMachine
 onready var hitbox = $DamageArea
@@ -56,16 +58,36 @@ func _ready():
 	if !sprite_faces_direction: facing = -1
 	var gravity = Global.gravity
 	bounce_height = -sqrt(2 * gravity * bounce_height)
+	hop_height = -sqrt(2 * gravity * hop_height)
 	die_height = -sqrt(2 * gravity * die_height)
 
 func apply_movement(delta, solid = true):
 	if solid:
 		velocity = move_and_slide(velocity, Vector2(0, -1))
 		
+		# We need to do this special check after moving and sliding.
+		hop_upwards_if_standing_on_another_badguy()
+		
 		grounded = is_on_floor()
 		touching_wall = is_on_wall()
 	else:
 		position += velocity * delta
+
+# If this badguy is standing on another bad guy,
+# we automatically make it hop upwards.
+func hop_upwards_if_standing_on_another_badguy():
+	for i in get_slide_count():
+		var collision = get_slide_collision(i)
+		var collider = collision.get_collider()
+		
+		if !collider.is_in_group("enemies"): break
+		
+		var normal = collision.get_normal()
+		if normal == Vector2.UP:
+			velocity.y = hop_height
+			facing *= -1
+			return
+		
 
 func jumpy_movement():
 	move_and_slide(velocity, Vector2(0, -1))
