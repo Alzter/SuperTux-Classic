@@ -46,7 +46,7 @@ onready var state_machine = $StateMachine
 onready var hitbox = $DamageArea
 onready var bounce_area = $BounceArea if has_node("BounceArea") else null
 onready var edge_turn = $EdgeTurn if has_node("EdgeTurn") else null
-onready var block_raycast = $BlockRaycast if has_node("BlockRaycast") else null
+onready var block_raycasts = get_node_or_null("BlockRaycasts")
 onready var sfx = $SFX
 onready var destroy_timer = $DestroyTimer
 onready var water_detector = get_node_or_null("WaterDetector")
@@ -113,17 +113,18 @@ func move_forward(turn_on_wall, turn_on_cliff, speed = move_speed):
 # Used by kicked Iceblocks to hit bricks when they crash into them
 func hit_blocks(delta):
 	var direction = Vector2(sign(velocity.x), 0)
-	block_raycast.cast_to = Vector2.RIGHT * velocity * delta + direction
-	block_raycast.position.x = 16 * sign(velocity.x)
-	block_raycast.force_raycast_update()
-	if block_raycast.is_colliding():
-		var object = block_raycast.get_collider().get_parent()
-		if object.is_in_group("blocks"):
-			if object.has_method("be_hit_from_side"):
-				object.call_deferred("be_hit_from_side", velocity, self)
-				velocity.x = (block_raycast.get_collision_point() - block_raycast.global_position - direction).x / delta
-				iceblock_ricochet()
-				return
+	for block_raycast in block_raycasts.get_children():
+		block_raycast.cast_to = Vector2.RIGHT * velocity * delta + direction
+		block_raycast.position.x = 16 * sign(velocity.x)
+		block_raycast.force_raycast_update()
+		if block_raycast.is_colliding():
+			var object = block_raycast.get_collider().get_parent()
+			if object.is_in_group("blocks"):
+				if object.has_method("be_hit_from_side"):
+					object.call_deferred("be_hit_from_side", velocity, self)
+					velocity.x = (block_raycast.get_collision_point() - block_raycast.global_position - direction).x / delta
+					iceblock_ricochet()
+					return
 
 func jumpy_bounce():
 	if grounded:
@@ -138,6 +139,7 @@ func kicked_movement():
 
 func iceblock_ricochet():
 	facing *= -1
+	velocity.x *= -1
 	sfx.play("Ricochet")
 
 func be_bounced_upon(body):

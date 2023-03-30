@@ -78,8 +78,8 @@ func _state_logic(delta):
 		"walk":
 			host.move_forward(host.turn_on_walls, host.turn_on_cliffs)
 		"kicked":
-			host.hit_blocks(delta)
 			host.kicked_movement()
+			host.hit_blocks(delta)
 		"dead":
 			host.apply_gravity(delta)
 			host.apply_movement(delta, false)
