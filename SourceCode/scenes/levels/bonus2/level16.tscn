@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://scenes/master/Level.gd" type="Script" id=1]
 [ext_resource path="res://scenes/master/ObjectMap.tscn" type="PackedScene" id=2]
@@ -7,6 +7,8 @@
 [ext_resource path="res://scenes/backgrounds/GradientBackground.tscn" type="PackedScene" id=5]
 [ext_resource path="res://scenes/shaders/Overlay.gdshader" type="Shader" id=6]
 [ext_resource path="res://images/background/gradient.png" type="Texture" id=7]
+[ext_resource path="res://scenes/master/Ambience.tscn" type="PackedScene" id=8]
+[ext_resource path="res://sounds/ambience_loops/AmbienceCave.mp3" type="AudioStream" id=9]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 6 )
@@ -76,3 +78,12 @@ anchor_bottom = 1.0
 texture = ExtResource( 7 )
 expand = true
 flip_v = true
+
+[node name="Ambience" parent="." instance=ExtResource( 8 )]
+volume_db = -11.0
+pitch_scale = 1.5
+
+[node name="Ambience2" parent="." instance=ExtResource( 8 )]
+stream = ExtResource( 9 )
+volume_db = -18.0
+pitch_scale = 10.0

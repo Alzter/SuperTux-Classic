@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://scenes/master/Level.gd" type="Script" id=1]
 [ext_resource path="res://scenes/master/TileMap.tscn" type="PackedScene" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://scenes/backgrounds/assets/FogBottom.tscn" type="PackedScene" id=6]
 [ext_resource path="res://scenes/backgrounds/assets/CloudParticlesDark.tscn" type="PackedScene" id=7]
 [ext_resource path="res://scenes/shaders/Overlay.gdshader" type="Shader" id=8]
+[ext_resource path="res://scenes/master/Ambience.tscn" type="PackedScene" id=9]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 8 )
@@ -61,3 +62,7 @@ tile_data = PoolIntArray( 57, 536870922, 0, 64, 536870922, 0, 129, 536870914, 0,
 [node name="Fog" parent="." instance=ExtResource( 6 )]
 
 [node name="CloudParticlesDark" parent="." instance=ExtResource( 7 )]
+
+[node name="Ambience" parent="." instance=ExtResource( 9 )]
+volume_db = -6.0
+pitch_scale = 1.0
