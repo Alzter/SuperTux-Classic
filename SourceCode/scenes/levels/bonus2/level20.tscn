@@ -5,7 +5,7 @@
 [ext_resource path="res://scenes/master/TileMap.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/master/ObjectMap.tscn" type="PackedScene" id=4]
 [ext_resource path="res://scenes/shaders/Overlay.gdshader" type="Shader" id=5]
-[ext_resource path="res://scenes/backgrounds/assets/SnowfallParticles.tscn" type="PackedScene" id=6]
+[ext_resource path="res://scenes/backgrounds/assets/CloudParticlesDark.tscn" type="PackedScene" id=6]
 [ext_resource path="res://scenes/master/Ambience.tscn" type="PackedScene" id=7]
 [ext_resource path="res://sounds/ambience_loops/AmbienceThunder.mp3" type="AudioStream" id=8]
 
@@ -45,7 +45,10 @@ tile_data = PoolIntArray( 107, 536870921, 0, 116, 536870921, 0, 65873, 4, 0, 658
 
 [node name="CastleBG" parent="." instance=ExtResource( 2 )]
 
-[node name="SnowfallParticles" parent="." instance=ExtResource( 6 )]
-
 [node name="Ambience" parent="." instance=ExtResource( 7 )]
+pitch_scale = 0.8
+
+[node name="Ambience2" parent="." instance=ExtResource( 7 )]
 stream = ExtResource( 8 )
+
+[node name="CloudParticlesDark" parent="." instance=ExtResource( 6 )]
