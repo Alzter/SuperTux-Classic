@@ -110,6 +110,7 @@ onready var level_fg = $Level/Foreground
 onready var level_water = $Level/Water
 onready var objectmap = $Level/ObjectMap
 onready var worldmap_objects = get_node("Level/Objects")
+onready var gradient_background = get_node_or_null("Level/GradientBG")
 
 # Returns only the portion of a string between beginning_phrase and end_phrase.
 func _get_section_of_string(string, beginning_phrase, end_phrase):
@@ -192,6 +193,24 @@ func _get_level_attributes(leveldata, is_worldmap = false):
 		level.level_author = _get_section_of_string(leveldata, "author \"", "\")")
 		level.particle_system = _get_section_of_string(leveldata, "particle_system \"", "\")")
 		level.time = _get_section_of_string_as_int(leveldata, "time ", ")")
+		
+		if gradient_background:
+			var top_colour = Color(1,1,1)
+			var bottom_colour = Color(1,1,1)
+			
+			top_colour.r = _get_section_of_string_as_int(leveldata, "bkgd_red_top", ")")
+			top_colour.g = _get_section_of_string_as_int(leveldata, "bkgd_green_top", ")")
+			top_colour.b = _get_section_of_string_as_int(leveldata, "bkgd_blue_top", ")")
+			bottom_colour.r = _get_section_of_string_as_int(leveldata, "bkgd_red_bottom", ")")
+			bottom_colour.g = _get_section_of_string_as_int(leveldata, "bkgd_green_bottom", ")")
+			bottom_colour.b = _get_section_of_string_as_int(leveldata, "bkgd_blue_bottom", ")")
+			
+			gradient_background.top_colour = top_colour / 255
+			gradient_background.bottom_colour = bottom_colour / 255
+			gradient_background.top_colour.a = 1
+			gradient_background.bottom_colour.a = 1
+			
+		
 		
 		
 		var autoscroll_speed = _get_section_of_string_as_int(leveldata, "hor_autoscroll_speed ", ")")
