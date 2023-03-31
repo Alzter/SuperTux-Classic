@@ -40,6 +40,7 @@ export var object_tiles = {
 	44: "ObjCoin",
 	45: "ObjCoin",
 	46: "ObjCoin",
+	82: "ObjCoin",
 	26: "ObjBonusCoin",
 	102: "ObjBonusPowerup",
 	103: "ObjBonusStar",
