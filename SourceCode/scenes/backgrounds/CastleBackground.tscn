@@ -54,7 +54,8 @@ color = Color( 0.576471, 0.4, 0.54902, 1 )
 
 [node name="InteriorBack" type="ParallaxLayer" parent="."]
 modulate = Color( 0.737255, 0.737255, 0.737255, 1 )
-motion_scale = Vector2( 0.4, 1 )
+motion_scale = Vector2( 0.4, 0.5 )
+motion_offset = Vector2( 0, -240 )
 motion_mirroring = Vector2( 2500, 0 )
 
 [node name="TextureRect" type="TextureRect" parent="InteriorBack"]
@@ -77,7 +78,8 @@ stretch_mode = 2
 [node name="GlassShine" type="ParallaxLayer" parent="."]
 modulate = Color( 0.00784314, 0.0862745, 0.211765, 1 )
 material = SubResource( 4 )
-motion_scale = Vector2( 0.45, 1 )
+motion_scale = Vector2( 0.45, 0.45 )
+motion_offset = Vector2( 0, -216 )
 motion_mirroring = Vector2( 3456, 0 )
 
 [node name="TextureRect" type="TextureRect" parent="GlassShine"]
@@ -90,7 +92,8 @@ stretch_mode = 2
 
 [node name="Interior" type="ParallaxLayer" parent="."]
 modulate = Color( 0.737255, 0.737255, 0.737255, 1 )
-motion_scale = Vector2( 0.5, 1 )
+motion_scale = Vector2( 0.5, 0.5 )
+motion_offset = Vector2( 0, -240 )
 motion_mirroring = Vector2( 2500, 0 )
 
 [node name="TextureRect" type="TextureRect" parent="Interior"]
@@ -110,7 +113,8 @@ texture = ExtResource( 3 )
 stretch_mode = 2
 
 [node name="GlassRim" type="ParallaxLayer" parent="."]
-motion_scale = Vector2( 0.5, 1 )
+motion_scale = Vector2( 0.5, 0.5 )
+motion_offset = Vector2( 0, -240 )
 motion_mirroring = Vector2( 2500, 0 )
 
 [node name="TextureRect" type="TextureRect" parent="GlassRim"]

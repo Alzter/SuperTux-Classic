@@ -1,10 +1,13 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://scenes/master/Level.gd" type="Script" id=1]
 [ext_resource path="res://scenes/backgrounds/CastleBackground.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/master/TileMap.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/master/ObjectMap.tscn" type="PackedScene" id=4]
 [ext_resource path="res://scenes/shaders/Overlay.gdshader" type="Shader" id=5]
+[ext_resource path="res://scenes/backgrounds/assets/SnowfallParticles.tscn" type="PackedScene" id=6]
+[ext_resource path="res://scenes/master/Ambience.tscn" type="PackedScene" id=7]
+[ext_resource path="res://sounds/ambience_loops/AmbienceThunder.mp3" type="AudioStream" id=8]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 5 )
@@ -41,3 +44,8 @@ z_index = 40
 tile_data = PoolIntArray( 107, 536870921, 0, 116, 536870921, 0, 65873, 4, 0, 65874, 4, 0, 65875, 4, 0, 65876, 4, 0, 65877, 4, 0, 131075, 5, 0, 131317, 536870920, 0, 196659, 14, 0, 196947, 14, 0, 197019, 536870920, 0, 197031, 536870920, 0, 197085, 28, 0, 262353, 14, 0, 262417, 536870942, 0, 262549, 536870920, 0, 327693, 536870943, 0, 327710, 536870943, 0, 327752, 536870943, 0, 327775, 536870943, 0, 327842, 536870943, 0, 327895, 536870922, 0, 328073, 536870920, 0, 393400, 536870923, 0, 393403, 536870923, 0, 393418, 4, 0, 393419, 4, 0, 393420, 4, 0, 393421, 4, 0, 393422, 4, 0, 393423, 4, 0, 393424, 4, 0, 393425, 4, 0, 393426, 4, 0, 393427, 4, 0, 393428, 4, 0, 393429, 4, 0, 393430, 4, 0, 393431, 4, 0, 393432, 4, 0, 393535, 536870919, 0, 393542, 536870919, 0, 393633, 536870920, 0, 393668, 14, 0, 458891, 536870921, 0, 459066, 536870943, 0, 459070, 536870943, 0, 459074, 536870943, 0, 459106, 536870943, 0, 459111, 536870943, 0, 459116, 536870943, 0, 459121, 536870943, 0, 459126, 536870943, 0, 459151, 536870920, 0, 524408, 536870923, 0, 590162, 13, 0, 590163, 13, 0, 590164, 13, 0, 655373, 536870943, 0, 655390, 536870943, 0, 655402, 34, 0, 655432, 536870943, 0, 655449, 536870943, 0, 655521, 536870943, 0, 786679, 536870923, 0, 786746, 536870919, 0, 786750, 536870919, 0, 786754, 536870919, 0, 786758, 536870919, 0, 852183, 536870919, 0, 852187, 536870919, 0 )
 
 [node name="CastleBG" parent="." instance=ExtResource( 2 )]
+
+[node name="SnowfallParticles" parent="." instance=ExtResource( 6 )]
+
+[node name="Ambience" parent="." instance=ExtResource( 7 )]
+stream = ExtResource( 8 )
