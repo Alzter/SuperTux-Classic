@@ -207,6 +207,8 @@ export var level_tileset = {
 	198 : "WaterfallEdgeBottom",
 	199 : "WaterfallEdgeRightBottom",
 	
+	295 : "Tree",
+	
 	}
 
 export var worldmap_tileset = {
