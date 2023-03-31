@@ -1,0 +1,92 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://images/background/gradient.png" type="Texture" id=1]
+[ext_resource path="res://scenes/particles/SnowfallSmall.tres" type="Material" id=3]
+[ext_resource path="res://images/particles/snow2.png" type="Texture" id=4]
+[ext_resource path="res://images/background/castle_tiles.png" type="Texture" id=5]
+
+[sub_resource type="CanvasItemMaterial" id=1]
+blend_mode = 1
+
+[node name="CastleBG" type="Node2D"]
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2( 0.3, 0.3 )
+motion_mirroring = Vector2( 1440, 960 )
+
+[node name="TextureRect" type="TextureRect" parent="ParallaxBackground/ParallaxLayer"]
+margin_right = 2880.0
+margin_bottom = 1920.0
+rect_scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 5 )
+expand = true
+stretch_mode = 2
+
+[node name="Gradients2" type="Control" parent="ParallaxBackground"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+
+[node name="ColorRect" type="ColorRect" parent="ParallaxBackground/Gradients2"]
+use_parent_material = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = 2334.0
+margin_bottom = 1335.0
+color = Color( 0.0431373, 0.0470588, 0.054902, 0.67451 )
+
+[node name="TextureRect3" type="TextureRect" parent="ParallaxBackground/Gradients2"]
+modulate = Color( 0, 0, 0, 0.12549 )
+use_parent_material = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 1 )
+expand = true
+
+[node name="ParallaxLayer5" type="ParallaxLayer" parent="ParallaxBackground"]
+modulate = Color( 0.45098, 0.0862745, 0.0862745, 1 )
+motion_scale = Vector2( 0.25, 1 )
+motion_mirroring = Vector2( 1636, 0 )
+
+[node name="Particles2D" type="Particles2D" parent="ParallaxBackground/ParallaxLayer5"]
+position = Vector2( 256, 0 )
+scale = Vector2( 0.2, 0.2 )
+amount = 500
+lifetime = 3.0
+preprocess = 8.0
+visibility_rect = Rect2( -6500, 0, 8400, 3000 )
+process_material = ExtResource( 3 )
+texture = ExtResource( 4 )
+
+[node name="Particles2D2" type="Particles2D" parent="ParallaxBackground/ParallaxLayer5"]
+position = Vector2( 1074, 0 )
+scale = Vector2( 0.2, 0.2 )
+amount = 500
+lifetime = 3.0
+preprocess = 8.0
+visibility_rect = Rect2( -6500, 0, 8400, 3000 )
+process_material = ExtResource( 3 )
+texture = ExtResource( 4 )
+
+[node name="Gradients" type="Control" parent="ParallaxBackground"]
+material = SubResource( 1 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+
+[node name="ColorRect" type="ColorRect" parent="ParallaxBackground/Gradients"]
+use_parent_material = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.364706, 0, 0, 0.0627451 )
+
+[node name="TextureRect2" type="TextureRect" parent="ParallaxBackground/Gradients"]
+modulate = Color( 0.580392, 0, 0, 0.454902 )
+use_parent_material = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 1 )
+expand = true
+flip_v = true
