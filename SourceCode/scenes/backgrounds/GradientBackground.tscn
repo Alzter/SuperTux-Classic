@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://scenes/backgrounds/GradientBackground.gd" type="Script" id=1]
-[ext_resource path="res://images/background/gradient.png" type="Texture" id=3]
+[ext_resource path="res://images/background/gradient2.png" type="Texture" id=2]
 
 [node name="GradientBG" type="ParallaxBackground"]
 script = ExtResource( 1 )
@@ -18,6 +18,6 @@ anchor_bottom = 1.0
 modulate = Color( 0, 0, 0, 1 )
 anchor_right = 1.0
 anchor_bottom = 1.0
-texture = ExtResource( 3 )
+texture = ExtResource( 2 )
 expand = true
 flip_v = true
