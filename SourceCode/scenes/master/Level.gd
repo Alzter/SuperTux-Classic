@@ -48,8 +48,7 @@ func _ready():
 	WorldmapManager.is_level_worldmap = is_worldmap
 	
 	if !is_worldmap:
-		# Set the level's gravity
-		Global.gravity = gravity / 10.0
+		_set_level_gravity()
 	else:
 		uses_timer = false
 		
@@ -94,6 +93,20 @@ func _ready():
 func _process(delta):
 	if is_autoscrolling:
 		autoscroll(delta)
+
+func _set_level_gravity():
+	if gravity < 10 && gravity > 0:
+		
+		# If gravity is lower than normal (under 10), we add
+		# more gravity it the closer it is to 5 to more closely
+		# imitate how Milestone 1's gravity behaviour
+		var additional_gravity = (gravity / (10.0 - gravity)) + ((10.0 - gravity) / gravity)
+		additional_gravity = (10 - additional_gravity)
+		additional_gravity /= 10
+		
+		gravity += additional_gravity
+	
+	Global.gravity = gravity / 10.0
 
 func _level_title_card():
 	# Stop the music

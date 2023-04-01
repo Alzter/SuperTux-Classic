@@ -10,7 +10,7 @@ script = ExtResource( 4 )
 level_title = "You have 1 minute"
 level_author = "Denilson"
 particle_system = "clouds"
-gravity = 5
+gravity = 8
 
 [node name="Background" parent="." instance=ExtResource( 2 )]
 z_index = -20

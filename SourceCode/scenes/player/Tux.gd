@@ -21,6 +21,12 @@
 extends KinematicBody2D
 
 export (PackedScene) var fireball_scene
+export var jump_height_in_tiles = 5.0
+export var run_jump_height_in_tiles = 6.0
+export var riding_jump_height_in_tiles = 7.0
+export var low_bounce_height_in_tiles = 2.0
+export var high_bounce_height_in_tiles = 5.0
+
 export var invincible_star_time = 10.0
 export var invincible_warning_time = 3.0 # Tux flashes green this many seconds before the invincible star wears out
 export var damage_safe_time = 1.0
@@ -49,12 +55,12 @@ var riding_accel = 0.025 * pow(60, 2) / 11
 var riding_max = 4 * 4.5 * Global.TILE_SIZE # Max speed whilst riding Ice Dragon is increased
 
 # These values all get re-calculated in the initialize function using kinematic equations (thanks Game Endeavor)
-var jump_height = 5.0 * Global.TILE_SIZE # WAS 5.2 The peak height of holding jump in blocks
-var run_jump_height = 6.0 * Global.TILE_SIZE # WAS 5.8 Same as above but while moving fast
-var riding_jump_height = 7.0 * Global.TILE_SIZE
+onready var jump_height = jump_height_in_tiles * Global.TILE_SIZE # WAS 5.2 The peak height of holding jump in blocks
+onready var run_jump_height = run_jump_height_in_tiles * Global.TILE_SIZE # WAS 5.8 Same as above but while moving fast
+onready var riding_jump_height = riding_jump_height_in_tiles * Global.TILE_SIZE
 
-var bounce_height = 2.0 * Global.TILE_SIZE # Bounce height while not holding jump
-var high_bounce_height = jump_height # Bounce height while holding jump
+onready var bounce_height = low_bounce_height_in_tiles * Global.TILE_SIZE # Bounce height while not holding jump
+onready var high_bounce_height = high_bounce_height_in_tiles * Global.TILE_SIZE # Bounce height while holding jump
 
 var has_large_hitbox = false # Returns true if tux is using big Tux's hitbox
 var can_die = true
