@@ -39,7 +39,6 @@ signal options_data_created
 
 func _ready():
 	self.gravity = 1
-	print(base_gravity)
 	var root = get_tree().get_root()
 	current_scene = root.get_child(root.get_child_count() - 1)
 	current_level = current_scene.filename
@@ -53,7 +52,7 @@ func _ready():
 	SaveManager.load_current_controls()
 
 func _update_gravity(new_value):
-	gravity = new_value * pow(60, 2) / 3
+	gravity = new_value * pow(60.0, 2.0) / 3.0
 
 func respawn_player():
 	goto_level(current_level)

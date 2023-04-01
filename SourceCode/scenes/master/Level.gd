@@ -49,8 +49,7 @@ func _ready():
 	
 	if !is_worldmap:
 		# Set the level's gravity
-		# (Buggy atm - doesn't properly match Milestone 1)
-		Global.gravity = gravity / 10
+		Global.gravity = gravity / 10.0
 	else:
 		uses_timer = false
 		
