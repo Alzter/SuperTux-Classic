@@ -98,7 +98,7 @@ func _ready():
 	update_state(Scoreboard.player_initial_state, false)
 
 func initialize_character():
-	var gravity = Global.gravity
+	var gravity = Global.base_gravity
 	var delta = 60
 	
 	jump_height = -sqrt(2 * gravity * jump_height)

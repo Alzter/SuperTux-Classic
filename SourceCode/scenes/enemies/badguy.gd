@@ -56,7 +56,7 @@ onready var anim_player = get_node_or_null("AnimationPlayer")
 # Kinematic Equations
 func _ready():
 	if !sprite_faces_direction: facing = -1
-	var gravity = Global.gravity
+	var gravity = Global.base_gravity
 	bounce_height = -sqrt(2 * gravity * bounce_height)
 	hop_height = -sqrt(2 * gravity * hop_height)
 	die_height = -sqrt(2 * gravity * die_height)

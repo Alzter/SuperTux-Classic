@@ -34,7 +34,7 @@ onready var invincible_timer = $InvincibleTimer
 
 # Kinematic Equations
 func _ready():
-	var gravity = Global.gravity
+	var gravity = Global.base_gravity
 	jump_height = -sqrt(2 * gravity * jump_height)
 	die_height = -sqrt(2 * gravity * die_height)
 

@@ -36,7 +36,7 @@ onready var bounce_height = bounce_height_in_tiles * Global.TILE_SIZE
 
 # Kinematic Equations
 func _ready():
-	var gravity = Global.gravity
+	var gravity = Global.base_gravity
 	bounce_height = -sqrt(2 * gravity * bounce_height)
 
 func _physics_process(delta):

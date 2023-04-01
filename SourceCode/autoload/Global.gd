@@ -24,6 +24,7 @@ var current_level = null
 var player = null setget player_set
 var spawn_position = null
 var TILE_SIZE = 32
+var base_gravity = 1 * pow(60, 2) / 3
 var gravity = 1 setget _update_gravity
 var fireballs_on_screen = 0 setget _change_fireball_count
 
@@ -38,6 +39,7 @@ signal options_data_created
 
 func _ready():
 	self.gravity = 1
+	print(base_gravity)
 	var root = get_tree().get_root()
 	current_scene = root.get_child(root.get_child_count() - 1)
 	current_level = current_scene.filename
