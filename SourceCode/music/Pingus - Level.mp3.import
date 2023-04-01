@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/Pingus - Level.mp3-6f676fa30a620f56d328a2fc1d501ad6.mp3str"
+
+[deps]
+
+source_file="res://music/Pingus - Level.mp3"
+dest_files=[ "res://.import/Pingus - Level.mp3-6f676fa30a620f56d328a2fc1d501ad6.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=5.32
