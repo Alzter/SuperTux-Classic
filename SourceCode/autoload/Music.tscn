@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://music/TuxRacer - Race2.mp3" type="AudioStream" id=1]
 [ext_resource path="res://autoload/Music.gd" type="Script" id=2]
@@ -19,6 +19,7 @@
 [ext_resource path="res://music/Salcon.mp3" type="AudioStream" id=17]
 [ext_resource path="res://music/DarkForestKeep.mp3" type="AudioStream" id=18]
 [ext_resource path="res://music/Pingus - Level.mp3" type="AudioStream" id=19]
+[ext_resource path="res://music/Scary.mp3" type="AudioStream" id=20]
 
 [node name="Music" type="CanvasLayer"]
 script = ExtResource( 2 )
@@ -31,6 +32,10 @@ bus = "Music"
 [node name="Salcon" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 17 )
 volume_db = 1.0
+
+[node name="Salcon2" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 20 )
+volume_db = -5.0
 
 [node name="TuxRacer - Race2" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 1 )
