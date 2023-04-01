@@ -106,6 +106,11 @@ func _set_level_gravity():
 		
 		gravity += additional_gravity
 	
+	if gravity > 10:
+		var additional_gravity = (gravity - 10) * 0.5
+		
+		gravity += additional_gravity
+	
 	Global.gravity = gravity / 10.0
 
 func _level_title_card():

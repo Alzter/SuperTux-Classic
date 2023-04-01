@@ -13,7 +13,7 @@
 
 [sub_resource type="ShaderMaterial" id=2]
 shader = ExtResource( 10 )
-shader_param/overlay_color = Color( 0, 0, 0, 0.501961 )
+shader_param/overlay_color = Color( 0.188235, 0.266667, 0.352941, 0.501961 )
 
 [sub_resource type="CanvasItemMaterial" id=1]
 blend_mode = 1
