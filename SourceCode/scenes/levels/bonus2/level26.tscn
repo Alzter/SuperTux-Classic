@@ -57,7 +57,7 @@ tile_data = PoolIntArray( 233, 536870943, 0, 243, 536870943, 0, 253, 536870943, 
 
 [node name="Ambience" parent="." instance=ExtResource( 7 )]
 stream = ExtResource( 5 )
-volume_db = -15.0
+volume_db = -18.0
 pitch_scale = 3.0
 bus = "Ambience2"
 
