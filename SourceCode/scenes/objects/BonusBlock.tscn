@@ -34,6 +34,16 @@ animations = [ {
 "name": "Bonus",
 "speed": 20.0
 }, {
+"frames": [ ExtResource( 15 ) ],
+"loop": true,
+"name": "BrickSnow",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 23 ) ],
+"loop": true,
+"name": "Invisible",
+"speed": 5.0
+}, {
 "frames": [ ExtResource( 14 ) ],
 "loop": true,
 "name": "Brick",
@@ -42,16 +52,6 @@ animations = [ {
 "frames": [ ExtResource( 13 ) ],
 "loop": true,
 "name": "Empty",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 23 ) ],
-"loop": true,
-"name": "Invisible",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 15 ) ],
-"loop": true,
-"name": "BrickSnow",
 "speed": 5.0
 } ]
 
@@ -382,10 +382,10 @@ contents_small = ExtResource( 8 )
 contents_big = ExtResource( 7 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
-modulate = Color( 1, 1, 1, 0 )
 material = SubResource( 12 )
 frames = SubResource( 1 )
-animation = "Invisible"
+animation = "Bonus"
+frame = 7
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
