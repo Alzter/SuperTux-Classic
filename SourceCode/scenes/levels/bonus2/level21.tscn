@@ -1,12 +1,13 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://scenes/master/TileMap.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/backgrounds/CastleTilesBackground.tscn" type="PackedScene" id=2]
-[ext_resource path="res://scenes/backgrounds/assets/SnowfallParticles.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/backgrounds/assets/SnowfallParticlesLight.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/master/ObjectMap.tscn" type="PackedScene" id=4]
 [ext_resource path="res://scenes/shaders/Overlay.gdshader" type="Shader" id=5]
 [ext_resource path="res://scenes/master/Level.gd" type="Script" id=6]
 [ext_resource path="res://images/background/gradient.png" type="Texture" id=7]
+[ext_resource path="res://scenes/master/Ambience.tscn" type="PackedScene" id=8]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 5 )
@@ -60,7 +61,7 @@ tile_data = PoolIntArray( 108, 4, 0, 65610, 536870943, 0, 65642, 4, 0, 65686, 53
 
 [node name="CastleBG" parent="." instance=ExtResource( 2 )]
 
-[node name="SnowfallParticles" parent="." instance=ExtResource( 3 )]
+[node name="LightSnowParticles" parent="." instance=ExtResource( 3 )]
 
 [node name="Overlay" type="ParallaxBackground" parent="."]
 
@@ -74,3 +75,8 @@ anchor_bottom = 1.0
 texture = ExtResource( 7 )
 expand = true
 flip_v = true
+
+[node name="Ambience" parent="." instance=ExtResource( 8 )]
+volume_db = -20.0
+pitch_scale = 1.0
+bus = "Ambience3"
