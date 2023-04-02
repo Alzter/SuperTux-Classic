@@ -22,16 +22,17 @@ export var options_scene = ""
 export var credits_scene = ""
 onready var title_content = $TitleContent
 
-onready var new_game_button = $TitleContent/Menu/VBoxContainer/NewGame
-onready var load_game_button = $TitleContent/Menu/VBoxContainer/LoadGame
+onready var start_game_button = $TitleContent/Menu/VBoxContainer/StartGame
+onready var bonus_levels_button = $TitleContent/Menu/VBoxContainer/BonusLevels
 onready var options_button = $TitleContent/Menu/VBoxContainer/Options
 onready var credits_button = $TitleContent/Menu/VBoxContainer/Credits
 onready var quit_button = $TitleContent/Menu/VBoxContainer/Quit
 
 onready var new_game_warning = $TitleContent/Menu/NewGameWarning
 onready var options_menu = $OptionsMenu
+onready var bonus_levels_menu = $BonusLevelsMenu
 
-var default_world = "world1"
+export var default_world = "world1"
 
 func _ready():
 	Music.play("Title")
@@ -42,15 +43,13 @@ func _ready():
 	if SaveManager.has_old_savefile():
 		SaveManager.transfer_old_savefile_to_new_save_path()
 	
-	load_game_button.disabled = !SaveManager.has_savefile(default_world)
-	
 	# Hide the "Quit Game" button if we're running the game
 	# inside of the browser (on HTML5) or on mobile devices
 	var is_on_mobile = OS.has_feature("mobile")
 	var is_on_browser = OS.has_feature("HTML5")
 	quit_button.visible = !is_on_browser and !is_on_mobile and !MobileControls.is_using_mobile
 	
-	new_game_button.grab_focus()
+	start_game_button.grab_focus()
 
 func _on_NewGame_pressed():
 	if SaveManager.has_savefile(default_world):
@@ -85,12 +84,6 @@ func _on_Quit_pressed():
 
 # Focus related signals
 
-func _on_NewGame_mouse_entered():
-	new_game_button.grab_focus()
-
-func _on_LoadGame_mouse_entered():
-	load_game_button.grab_focus()
-
 func _on_Options_mouse_entered():
 	options_button.grab_focus()
 
@@ -103,3 +96,14 @@ func _on_Quit_mouse_entered():
 func _on_OptionsMenu_popup_hide():
 	title_content.show()
 	options_button.grab_focus()
+
+func _on_BonusLevels_mouse_entered():
+	bonus_levels_button.grab_focus()
+
+func _on_BonusLevels_pressed():
+	title_content.hide()
+	bonus_levels_menu.popup()
+
+func _on_BonusLevelsMenu_popup_hide():
+	title_content.show()
+	bonus_levels_button.grab_focus()

@@ -1,0 +1,71 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://theme/default_theme.tres" type="Theme" id=1]
+[ext_resource path="res://scenes/menus/BonusLevels.gd" type="Script" id=2]
+[ext_resource path="res://theme/FontBig.tres" type="DynamicFont" id=3]
+[ext_resource path="res://scenes/menus/WorldButton.tscn" type="PackedScene" id=4]
+
+[node name="BonusLevelsMenu" type="Popup"]
+visible = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 1 )
+script = ExtResource( 2 )
+
+[node name="Panel" type="Panel" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 32.0
+margin_top = 32.0
+margin_right = -32.0
+margin_bottom = -32.0
+
+[node name="Title" type="Label" parent="Panel"]
+anchor_right = 1.0
+margin_bottom = 60.0
+custom_colors/font_color = Color( 1, 1, 0, 1 )
+custom_fonts/font = ExtResource( 3 )
+text = "Bonus Levels"
+align = 1
+valign = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -175.0
+margin_right = 175.0
+custom_constants/separation = 15
+alignment = 1
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Bonus1" parent="Panel/VBoxContainer" instance=ExtResource( 4 )]
+disabled = true
+text = "Bonus Island I"
+world_to_load = "bonus1"
+initial_scene_for_world = "res://scenes/levels/bonus1/worldmap.tscn"
+
+[node name="Bonus2" parent="Panel/VBoxContainer" instance=ExtResource( 4 )]
+margin_top = 215.0
+margin_bottom = 245.0
+text = "Bonus Island II"
+world_to_load = "bonus2"
+initial_scene_for_world = "res://scenes/levels/bonus2/worldmap.tscn"
+
+[node name="Back" type="Button" parent="Panel"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -96.0
+margin_top = -53.0
+margin_right = 96.0
+margin_bottom = -23.0
+text = "Back"
+
+[connection signal="about_to_show" from="." to="." method="_on_OptionsMenu_about_to_show"]
+[connection signal="popup_hide" from="." to="." method="_on_OptionsMenu_popup_hide"]
+[connection signal="mouse_entered" from="Panel/Back" to="." method="_on_Back_mouse_entered"]
+[connection signal="pressed" from="Panel/Back" to="." method="_on_Back_pressed"]

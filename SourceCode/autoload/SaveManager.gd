@@ -75,7 +75,7 @@ func new_game(initial_level, worldmap_level = null):
 	Scoreboard.lives = Scoreboard.initial_lives
 	Scoreboard.player_initial_state = Scoreboard.initial_state
 	
-	if worldmap_level != null:
+	if worldmap_level:
 		WorldmapManager.worldmap_level = worldmap_level
 	
 	Global.goto_level(initial_level)
@@ -289,5 +289,9 @@ func transfer_old_savefile_to_new_save_path():
 	else:
 		print("Error transferring old SuperTux Classic save file from path " + old_save_file_path + " to path " + new_save_file_path)
 		print("Error code: " + str(save_transfer_status))
-	
-	
+
+func load_world(world_name : String, initial_level_of_world : String):
+	if has_savefile(world_name):
+		load_game(world_name)
+	else:
+		new_game(initial_level_of_world)
