@@ -47,7 +47,6 @@ func activate(player, player_position : Vector2, stop_direction : Vector2):
 		
 		if extro_level_file_path != "":
 			WorldmapManager.extro_level = extro_level_file_path
-			print(extro_level_file_path)
 		else:
 			WorldmapManager.extro_level = null
 		
