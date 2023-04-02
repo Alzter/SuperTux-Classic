@@ -26,6 +26,7 @@ tile_data = PoolIntArray( 0, 1, 0, 1, 1, 0, 2, 1, 0, 3, 1, 0, 4, 1, 0, 5, 1, 0, 
 
 [node name="Objects" type="Node2D" parent="."]
 script = ExtResource( 2 )
+debug = true
 
 [node name="level1" parent="Objects" instance=ExtResource( 3 )]
 position = Vector2( 592, 496 )
