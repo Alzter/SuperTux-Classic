@@ -49,7 +49,7 @@ bus = "Music"
 
 [node name="Pingus - Level" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 19 )
-volume_db = 8.0
+volume_db = 3.0
 bus = "Music"
 
 [node name="LevelDone" type="AudioStreamPlayer" parent="."]
@@ -61,6 +61,7 @@ stream = ExtResource( 4 )
 
 [node name="Scary" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 20 )
+volume_db = -3.0
 
 [node name="Cave" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 3 )
