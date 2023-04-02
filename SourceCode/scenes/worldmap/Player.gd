@@ -44,8 +44,6 @@ func _ready():
 	if tilemaps == []: push_error("Worldmap player node cannot access any tilemaps in the worldmap")
 	
 	_populate_stop_tiles()
-	print(stop_tiles)
-	print(corner_tiles)
 	
 	powerup_state = Scoreboard.player_initial_state
 	update_sprite_state()
@@ -92,7 +90,7 @@ func _process(delta):
 		if Input.is_action_just_pressed("jump") or Input.is_action_just_pressed("ui_accept"):
 			var tile_position = tilemaps[0].world_to_map(position)
 			Scoreboard.clear_message()
-			current_level_dot.activate(tile_position, stop_direction)
+			current_level_dot.activate(self, tile_position, stop_direction)
 
 func handle_path_movement(tilemap : TileMap, tile_position : Vector2, tile_id : int):
 	# Get the autotile bitmask of the path tile the player is currently standing on.
@@ -153,7 +151,7 @@ func camera_bounds_to_tilemap_bounds():
 	for t in tilemaps:
 		var tilemap : TileMap = t
 		var bounds = tilemap.get_used_rect()
-		bounds = Rect2(bounds.position * 32, (bounds.end - Vector2.ONE * 2) * 32)
+		bounds = Rect2(bounds.position * 32, bounds.size * 32)
 		
 		camera.limit_left = min(bounds.position.x, camera.limit_left)
 		camera.limit_right = max(bounds.end.x, camera.limit_right)
@@ -233,7 +231,7 @@ func window_resized():
 		var bounds = tilemap.get_used_rect()
 		bounds = Rect2(bounds.position * 32, (bounds.end - Vector2.ONE * 2) * 32)
 		var tilemap_size = (bounds.end - bounds.position)
-		print(window_resolution, tilemap_size)
+		#print(window_resolution, tilemap_size)
 		
 		if tilemap_size.x < window_resolution.x or tilemap_size.y < window_resolution.y:
 			camera.zoom = Vector2(0.5, 0.5)

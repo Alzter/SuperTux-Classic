@@ -87,10 +87,10 @@ texture = ExtResource( 12 )
 expand = true
 
 [node name="CanvasLayer2" type="CanvasLayer" parent="Overlay"]
-layer = 100
+layer = -50
 
 [node name="Gradient" type="TextureRect" parent="Overlay/CanvasLayer2"]
-modulate = Color( 0.152941, 0.145098, 0.27451, 1 )
+modulate = Color( 0.152941, 0.145098, 0.27451, 0.654902 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 texture = ExtResource( 12 )

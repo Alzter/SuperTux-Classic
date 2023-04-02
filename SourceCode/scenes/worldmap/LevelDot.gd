@@ -1,6 +1,7 @@
 extends Node2D
 
 onready var sprite = $AnimatedSprite
+onready var sfx = $SFX
 
 export var level_file_path = ""
 export var level_cleared = false setget _update_cleared_state
@@ -33,8 +34,14 @@ func _update_sprite():
 	else:
 		sprite.animation = "default"
 
-func activate(player_position : Vector2, stop_direction : Vector2):
-	if level_file_path != "":
+func activate(player, player_position : Vector2, stop_direction : Vector2):
+	if is_teleporter:
+		print("Warp")
+		sfx.play("Warp")
+		player.position = teleport_location * 32 + Vector2(16,16)
+		return
+	
+	elif level_file_path != "":
 		WorldmapManager.worldmap_player_position = player_position
 		WorldmapManager.player_stop_direction = stop_direction
 		WorldmapManager.worldmap_level = Global.current_level
