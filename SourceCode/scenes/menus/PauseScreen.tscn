@@ -59,33 +59,33 @@ margin_right = 260.0
 margin_bottom = 122.0
 rect_min_size = Vector2( 260, 0 )
 focus_neighbour_top = NodePath("../Quit")
-focus_neighbour_bottom = NodePath("../Restart")
-text = "Continue Level"
+focus_neighbour_bottom = NodePath("../Options")
+text = "Continue"
 
-[node name="Restart" type="Button" parent="Control/CenterContainer/VBoxContainer"]
+[node name="Options" type="Button" parent="Control/CenterContainer/VBoxContainer"]
 margin_top = 137.0
 margin_right = 260.0
 margin_bottom = 167.0
 rect_min_size = Vector2( 260, 0 )
 focus_neighbour_top = NodePath("../Continue")
-focus_neighbour_bottom = NodePath("../Options")
-text = "Restart Level"
+focus_neighbour_bottom = NodePath("../Restart")
+text = "Options"
 
-[node name="Options" type="Button" parent="Control/CenterContainer/VBoxContainer"]
+[node name="Restart" type="Button" parent="Control/CenterContainer/VBoxContainer"]
 margin_top = 182.0
 margin_right = 260.0
 margin_bottom = 212.0
 rect_min_size = Vector2( 260, 0 )
-focus_neighbour_top = NodePath("../Restart")
+focus_neighbour_top = NodePath("../Options")
 focus_neighbour_bottom = NodePath("../Abort")
-text = "Options"
+text = "Restart Level"
 
 [node name="Abort" type="Button" parent="Control/CenterContainer/VBoxContainer"]
 margin_top = 227.0
 margin_right = 260.0
 margin_bottom = 257.0
 rect_min_size = Vector2( 260, 0 )
-focus_neighbour_top = NodePath("../Options")
+focus_neighbour_top = NodePath("../Restart")
 focus_neighbour_bottom = NodePath("../Quit")
 text = "Abort Level"
 
@@ -103,10 +103,10 @@ text = "Save and Quit"
 [connection signal="visibility_changed" from="Control" to="." method="_on_Control_visibility_changed"]
 [connection signal="mouse_entered" from="Control/CenterContainer/VBoxContainer/Continue" to="." method="_on_Continue_mouse_entered"]
 [connection signal="pressed" from="Control/CenterContainer/VBoxContainer/Continue" to="." method="_on_Continue_pressed"]
-[connection signal="mouse_entered" from="Control/CenterContainer/VBoxContainer/Restart" to="." method="_on_Restart_mouse_entered"]
-[connection signal="pressed" from="Control/CenterContainer/VBoxContainer/Restart" to="." method="_on_Restart_pressed"]
 [connection signal="mouse_entered" from="Control/CenterContainer/VBoxContainer/Options" to="." method="_on_Options_mouse_entered"]
 [connection signal="pressed" from="Control/CenterContainer/VBoxContainer/Options" to="." method="_on_Options_pressed"]
+[connection signal="mouse_entered" from="Control/CenterContainer/VBoxContainer/Restart" to="." method="_on_Restart_mouse_entered"]
+[connection signal="pressed" from="Control/CenterContainer/VBoxContainer/Restart" to="." method="_on_Restart_pressed"]
 [connection signal="mouse_entered" from="Control/CenterContainer/VBoxContainer/Abort" to="." method="_on_Abort_mouse_entered"]
 [connection signal="pressed" from="Control/CenterContainer/VBoxContainer/Abort" to="." method="_on_Abort_pressed"]
 [connection signal="mouse_entered" from="Control/CenterContainer/VBoxContainer/Quit" to="." method="_on_Quit_mouse_entered"]
