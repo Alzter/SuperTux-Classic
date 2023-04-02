@@ -36,7 +36,6 @@ func _update_sprite():
 
 func activate(player, player_position : Vector2, stop_direction : Vector2):
 	if is_teleporter:
-		print("Warp")
 		sfx.play("Warp")
 		player.position = teleport_location * 32 + Vector2(16,16)
 		return

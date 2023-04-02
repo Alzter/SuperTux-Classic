@@ -189,10 +189,6 @@ func game_over():
 	# When we game over we want a blank slate to start the game on!
 	reset_player_values(true)
 	
-	# Save the fact that the player has game over'ed
-	# (REMOVED)
-	#yield(SaveManager.save_game(Global.current_level), "completed")
-	
 	# Hide the game over UI
 	game_over_screen.hide()
 	

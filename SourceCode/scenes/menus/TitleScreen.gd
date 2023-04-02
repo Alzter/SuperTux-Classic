@@ -31,12 +31,13 @@ onready var quit_button = $TitleContent/Menu/VBoxContainer/Quit
 onready var new_game_warning = $TitleContent/Menu/NewGameWarning
 onready var options_menu = $OptionsMenu
 
+var default_world = "world1"
+
 func _ready():
 	Music.play("Title")
 	Scoreboard.hide()
 	WorldmapManager.reset()
-	#new_game_button.disabled = SaveManager.has_savefile()
-	load_game_button.disabled = !SaveManager.has_savefile()
+	load_game_button.disabled = !SaveManager.has_savefile(default_world)
 	
 	# Hide the "Quit Game" button if we're running the game
 	# inside of the browser (on HTML5) or on mobile devices
@@ -47,7 +48,7 @@ func _ready():
 	new_game_button.grab_focus()
 
 func _on_NewGame_pressed():
-	if SaveManager.has_savefile():
+	if SaveManager.has_savefile(default_world):
 		new_game_warning.popup_centered()
 	else: SaveManager.new_game(intro_scene)
 
@@ -55,7 +56,7 @@ func _on_NewGameWarning_confirmed():
 	SaveManager.new_game(intro_scene)
 
 func _on_LoadGame_pressed():
-	SaveManager.load_game()
+	SaveManager.load_game(default_world)
 
 func _on_LevelSelectDebug_pressed():
 	$FileDialog.popup()

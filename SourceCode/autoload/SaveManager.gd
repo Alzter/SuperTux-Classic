@@ -22,11 +22,11 @@ const OPTIONS_DIR = "user://options/"
 const OPTIONS_FILE = "user://options/options.dat"
 const CONTROLS_FILE = "user://options/controls.dat"
 
-const save_file_1 = SAVE_DIR + "file1.dat"
-const save_file_2 = SAVE_DIR + "file2.dat"
-const save_file_3 = SAVE_DIR + "file3.dat"
-const save_file_4 = SAVE_DIR + "file4.dat"
-const save_file_5 = SAVE_DIR + "file5.dat"
+const save_file_1 = SAVE_DIR + "file1/"
+const save_file_2 = SAVE_DIR + "file2/"
+const save_file_3 = SAVE_DIR + "file3/"
+const save_file_4 = SAVE_DIR + "file4/"
+const save_file_5 = SAVE_DIR + "file5/"
 
 var current_save_directory = save_file_1
 
@@ -80,7 +80,12 @@ func new_game(initial_level, worldmap_level = null):
 	
 	Global.goto_level(initial_level)
 
-func save_game(levels_cleared : Array = WorldmapManager.cleared_levels, worldmap_level : String = WorldmapManager.worldmap_level, worldmap_position : Vector2 = WorldmapManager.worldmap_player_position, save_path : String = current_save_directory):
+func save_game(world : String = WorldmapManager.worldmap_name, levels_cleared : Array = WorldmapManager.cleared_levels, worldmap_level : String = WorldmapManager.worldmap_level, worldmap_position : Vector2 = WorldmapManager.worldmap_player_position, save_path : String = current_save_directory):
+	save_path = save_path + world + ".dat"
+	
+	if !world:
+		push_error("Error saving game: The current worldmap isn't inside a folder. The worldmap's folder name will become the name of the save file.")
+		return
 	if worldmap_level == null:
 		push_error("Error saving game: there is no worldmap level for the player to return to")
 		return
@@ -93,8 +98,8 @@ func save_game(levels_cleared : Array = WorldmapManager.cleared_levels, worldmap
 	var save_data = _encapsulate_game_data(levels_cleared, worldmap_level, worldmap_position)
 	
 	var dir = Directory.new()
-	if !dir.dir_exists(SAVE_DIR):
-		dir.make_dir_recursive(SAVE_DIR)
+	if !dir.dir_exists(current_save_directory):
+		dir.make_dir_recursive(current_save_directory)
 	
 	var file = File.new()
 	var save_state = file.open(save_path, file.WRITE)
@@ -126,13 +131,24 @@ func _encapsulate_game_data(levels_cleared : Array, worldmap_level : String, wor
 	
 	return save_data
 
-func has_savefile(dir_to_check = current_save_directory):
+func has_savefile(world = WorldmapManager.worldmap_name, dir_to_check = current_save_directory):
+	if !world:
+		push_error("Error checking for save file: No world to check specified!")
+		return false
+	
 	var file = File.new()
-	return file.file_exists(dir_to_check)
+	return file.file_exists(dir_to_check + world + ".dat")
 
-func load_game(load_path = current_save_directory):
+func load_game(world = WorldmapManager.worldmap_name, load_path = current_save_directory):
 	var file = File.new()
 	var save_data = null
+	
+	if !world:
+		push_error("Error loading save file: No world was specified to load!")
+		return
+	
+	load_path = load_path + world + ".dat"
+	
 	if file.file_exists(load_path):
 		var load_state = file.open(load_path, file.READ)
 		
@@ -167,8 +183,11 @@ func _decapsulate_game_data(data_dictionary):
 	Global.goto_level(worldmap_level)
 
 func delete_save_file(save_path = current_save_directory):
+	var files_to_delete = _list_files_in_directory(current_save_directory)
 	var dir = Directory.new()
-	dir.remove(save_path)
+	for file in files_to_delete:
+		print(file)
+		#dir.remove(file)
 
 func save_current_controls():
 	print("Saving current player controls")
@@ -223,3 +242,21 @@ func _deencapsulate_player_controls(scancode_array : Array):
 		InputMap.action_add_event(control_action, inputeventkey)
 		
 		i += 1
+
+func _list_files_in_directory(path):
+	var files = []
+	var dir = Directory.new()
+	dir.open(path)
+	
+	dir.list_dir_begin()
+
+	while true:
+		var file = dir.get_next()
+		if file == "":
+			break
+		elif not file.begins_with("."):
+			files.append(file)
+
+	dir.list_dir_end()
+
+	return files
