@@ -52,6 +52,8 @@ var smart_enemies = {
 
 # Translates parameters from Milestone 1's leveldot objects into STC's leveldot objects.
 var leveldot_parameters = {
+	"x" : "position.x",
+	"y" : "position.y",
 	"name" : "level_file_path",
 	"extro-filename" : "extro_level_file_path",
 	"teleport-message" : "message",
@@ -63,7 +65,7 @@ var leveldot_parameters = {
 
 func import_worldmap_objects(object_string, object_node):
 	if object_string == "" or object_string == null: return
-	var objects = _object_list_to_array(object_string)
+	var objects = _object_list_to_array(object_string, false)
 	_place_worldmap_objects(objects, object_node)
 
 func import_objects(object_string, object_map):
@@ -74,7 +76,7 @@ func import_objects(object_string, object_map):
 func _get_tile_id_from_name(tile_name, tilemap_to_use = object_map):
 	return import.get_tile_id_from_name(tile_name, tilemap_to_use)
 
-func _object_list_to_array(object_string):
+func _object_list_to_array(object_string, contract_xy_positions = true):
 	text = ""
 	
 	var object_array = []
@@ -104,9 +106,10 @@ func _object_list_to_array(object_string):
 		#else:
 		#	if !unknown_objects.has(i): unknown_objects.append(i)
 		
-		var first_letter = i.substr(0, 1)
-		if ["x", "y"].has(first_letter):
-			i = i.substr(2, i.length() - 2)
+		if contract_xy_positions:
+			var first_letter = i.substr(0, 1)
+			if ["x", "y"].has(first_letter):
+				i = i.substr(2, i.length() - 2)
 		
 		array.append(i)
 	
@@ -119,17 +122,21 @@ func _place_worldmap_objects(obj_array, object_node : Node):
 	# For every level dot in the worldmap
 	# They have the format [level, name "world/level.stl", X, Y, other_parameter "value"]
 	var count = 0
+	var teleporters = 1
+	var messages = 1
+	
 	for i in obj_array:
+		print(i)
 		count += 1
-		var position = Vector2(i[2], i[3])
+		#var position = Vector2(i[2], i[3])
 		
 		# Create the level dot object for the level dot and add it to the scene
 		var leveldot = level_dot_scene.instance()
 		object_node.add_child(leveldot)
-		leveldot.position = position * 32 + Vector2(16,16)
+		#leveldot.position = position * 32 + Vector2(16,16)
 		
 		var regex = RegEx.new()
-		regex.compile('(\\D+) "(.+)"')
+		regex.compile('([^ ]+) (.+)')
 		
 		# Use a Regex to capture all string parameters in the level dot object
 		for j in i:
@@ -138,17 +145,46 @@ func _place_worldmap_objects(obj_array, object_node : Node):
 				var parameter_name = result.get_strings()[1] # name
 				var parameter_value = result.get_strings()[2] # world1/level1.stl
 				
+				# If the parameter value is encased in quotes like "this"
+				if parameter_value.begins_with("\""):
+					# Remove the quotes and treat it as a string.
+					parameter_value = parameter_value.replace("\"", "")
+				else:
+					# Otherwise, convert it to an integer
+					parameter_value = int(parameter_value)
+				
 				if leveldot_parameters.has(parameter_name):
 					var parameter_to_get = leveldot_parameters.get(parameter_name)
 					parameter_value = _handle_leveldot_parameter(parameter_to_get, parameter_value, leveldot)
 					leveldot.set(parameter_to_get, parameter_value)
 				else:
 					print("Unrecognised Level Dot Parameter: " + parameter_name)
+		
+		if leveldot.level_file_path == "":
+			if leveldot.teleport_location != Vector2.ZERO:
+				leveldot.name = "Teleporter" + str(teleporters)
+				teleporters += 1
+			else:
+				leveldot.name = "Message" + str(messages)
+				messages += 1
 
 # This function converts the parameters from level dots in SuperTux worldmaps
 # into SuperTux Classic's format.
 func _handle_leveldot_parameter(parameter_name, parameter_value, leveldot):
 	match parameter_name:
+		"position.x":
+			leveldot.position.x = parameter_value * 32 + 16
+			return
+		"position.y":
+			leveldot.position.y = parameter_value * 32 + 16
+			return
+		
+		"teleport_location.x":
+			leveldot.teleport_location.x = parameter_value
+			return
+		"teleport_location.y":
+			leveldot.teleport_location.y = parameter_value
+			return
 		
 		# Converts level file paths
 		# e.g. "world1/level26.stl"
