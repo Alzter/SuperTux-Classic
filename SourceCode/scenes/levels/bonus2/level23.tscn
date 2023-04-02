@@ -10,6 +10,7 @@
 script = ExtResource( 1 )
 level_title = "All That Glistens Is Not Gold"
 level_author = "Penguinmaster"
+music = "Pingus - Level"
 particle_system = "snow"
 time = 500
 

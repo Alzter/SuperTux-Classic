@@ -55,3 +55,5 @@ volume_db = -20.0
 bus = "Ambience3"
 
 [node name="WaterFG" parent="." instance=ExtResource( 6 )]
+offset = Vector2( 0, -96 )
+transform = Transform2D( 1, 0, 0, 1, 0, -96 )
