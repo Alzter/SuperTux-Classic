@@ -37,6 +37,11 @@ func _ready():
 	Music.play("Title")
 	Scoreboard.hide()
 	WorldmapManager.reset()
+	
+	# Transfer save-files made in v0.2.0 to the current save directory if they exist.
+	if SaveManager.has_old_savefile():
+		SaveManager.transfer_old_savefile_to_new_save_path()
+	
 	load_game_button.disabled = !SaveManager.has_savefile(default_world)
 	
 	# Hide the "Quit Game" button if we're running the game

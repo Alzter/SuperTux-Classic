@@ -186,8 +186,7 @@ func delete_save_file(save_path = current_save_directory):
 	var files_to_delete = _list_files_in_directory(current_save_directory)
 	var dir = Directory.new()
 	for file in files_to_delete:
-		print(file)
-		#dir.remove(file)
+		dir.remove(file)
 
 func save_current_controls():
 	print("Saving current player controls")
@@ -260,3 +259,35 @@ func _list_files_in_directory(path):
 	dir.list_dir_end()
 
 	return files
+
+# Old versions of SuperTux Classic (0.2.0 and below) stored save-files in a different directory
+# to the current version. These methods transfer the save-files made in STC 0.2.0 to the new directory
+# used in STC 0.3.0 and above.
+
+func has_old_savefile():
+	var old_save_file = SAVE_DIR + "file1.dat"
+	var file = File.new()
+	return file.file_exists(old_save_file)
+
+func transfer_old_savefile_to_new_save_path():
+	if !has_old_savefile():
+		push_error("No old save file exists to transfer!")
+		return
+	
+	var old_save_file_path = SAVE_DIR + "file1.dat"
+	var new_save_file_path = current_save_directory + "world1.dat"
+	
+	var dir = Directory.new()
+	
+	if !dir.dir_exists(current_save_directory):
+		dir.make_dir_recursive(current_save_directory)
+	
+	var save_transfer_status = dir.copy(old_save_file_path, new_save_file_path)
+	
+	if save_transfer_status == OK:
+		dir.remove(old_save_file_path)
+	else:
+		print("Error transferring old SuperTux Classic save file from path " + old_save_file_path + " to path " + new_save_file_path)
+		print("Error code: " + str(save_transfer_status))
+	
+	
