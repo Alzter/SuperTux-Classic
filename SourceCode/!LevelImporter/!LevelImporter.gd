@@ -88,8 +88,6 @@ export var expand_interactive_tilemap = true
 export var expand_background_tilemap = true 
 export var expand_foreground_tilemap = false
 
-export var is_level_worldmap = false
-
 var level_width = 0
 var object_list = ""
 var checkpoint_list = ""
@@ -112,6 +110,8 @@ onready var objectmap = $Level/ObjectMap
 onready var worldmap_objects = get_node("Level/Objects")
 onready var gradient_background = get_node_or_null("Level/GradientBG")
 
+export var is_worldmap_importer = false
+
 # Returns only the portion of a string between beginning_phrase and end_phrase.
 func _get_section_of_string(string, beginning_phrase, end_phrase):
 	var start_pos = string.find(beginning_phrase)
@@ -131,6 +131,13 @@ func _get_section_of_string_as_int(string, beginning_phrase, end_phrase):
 	else: return null
 
 func _ready():
+	var is_level_worldmap = "supertux-worldmap" in level_data
+	
+	if is_worldmap_importer != is_level_worldmap:
+		push_error("Wrong level type! Use LevelImporter to import levels, and WorldmapImporter to import worldmaps.")
+		print("Wrong level type! Use LevelImporter to import levels, and WorldmapImporter to import worldmaps.")
+		get_tree().quit()
+		return
 	
 	if !is_level_worldmap:
 		import_level()
