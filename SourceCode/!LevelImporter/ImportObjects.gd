@@ -57,7 +57,7 @@ var leveldot_parameters = {
 	"name" : "level_file_path",
 	"extro-filename" : "extro_level_file_path",
 	"teleport-message" : "message",
-	"map-message" : "message",
+	"map-message" : "map_message",
 	"dest_x" : "teleport_location.x",
 	"dest_y" : "teleport_location.y",
 	"invisible-teleporter" : "invisible",
@@ -126,14 +126,12 @@ func _place_worldmap_objects(obj_array, object_node : Node):
 	var messages = 1
 	
 	for i in obj_array:
-		print(i)
 		count += 1
 		#var position = Vector2(i[2], i[3])
 		
 		# Create the level dot object for the level dot and add it to the scene
 		var leveldot = level_dot_scene.instance()
 		object_node.add_child(leveldot)
-		#leveldot.position = position * 32 + Vector2(16,16)
 		
 		var regex = RegEx.new()
 		regex.compile('([^ ]+) (.+)')
@@ -180,10 +178,17 @@ func _handle_leveldot_parameter(parameter_name, parameter_value, leveldot):
 			return
 		
 		"teleport_location.x":
+			leveldot.is_teleporter = true
 			leveldot.teleport_location.x = parameter_value
 			return
 		"teleport_location.y":
+			leveldot.is_teleporter = true
 			leveldot.teleport_location.y = parameter_value
+			return
+		
+		"map_message":
+			leveldot.message = parameter_value
+			leveldot.invisible = true
 			return
 		
 		# Converts level file paths

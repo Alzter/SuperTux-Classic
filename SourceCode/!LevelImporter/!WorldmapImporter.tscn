@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://scenes/master/Level.gd" type="Script" id=1]
 [ext_resource path="res://!LevelImporter/ImportTiles.gd" type="Script" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://scenes/worldmap/LevelDot.tscn" type="PackedScene" id=8]
 [ext_resource path="res://scenes/tilesets/WorldmapTiles.tres" type="TileSet" id=9]
 [ext_resource path="res://scenes/worldmap/Player.tscn" type="PackedScene" id=10]
+[ext_resource path="res://scenes/worldmap/LevelDotContainer.gd" type="Script" id=11]
 
 [node name="WorldmapImporter" type="Node2D"]
 script = ExtResource( 3 )
@@ -51,3 +52,4 @@ z_index = -10
 tile_set = ExtResource( 9 )
 
 [node name="Objects" type="Node2D" parent="Level"]
+script = ExtResource( 11 )

@@ -225,9 +225,10 @@ func _get_level_attributes(leveldata, is_worldmap = false):
 		level.autoscroll_speed = autoscroll_speed
 	
 	var level_music = _get_section_of_string(leveldata, "music \"", "\")")
-	if music.has(level_music):
-		level_music = music.get(level_music)
-	level.music = level_music
+	if level_music:
+		if music.has(level_music):
+			level_music = music.get(level_music)
+		level.music = level_music
 
 func _get_objects_from_leveldata(leveldata, string = "objects"):
 	var get = "(" + string + "    "

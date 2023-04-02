@@ -35,11 +35,17 @@ var corner_tiles = {
 	176 : "sw",
 }
 
+var stop_tiles = [186]
+
 # Set the player camera boundaries to the boundaries of the largest tilemap
 func _ready():
 	ResolutionManager.connect("window_resized", self, "window_resized")
 	window_resized()
 	if tilemaps == []: push_error("Worldmap player node cannot access any tilemaps in the worldmap")
+	
+	_populate_stop_tiles()
+	print(stop_tiles)
+	print(corner_tiles)
 	
 	powerup_state = Scoreboard.player_initial_state
 	update_sprite_state()
@@ -47,6 +53,20 @@ func _ready():
 	camera_bounds_to_tilemap_bounds()
 	
 	get_current_level_dot()
+
+func _populate_stop_tiles():
+	for tile in up_tiles:
+		if (left_tiles.has(tile) or right_tiles.has(tile)) and !corner_tiles.has(tile):
+			stop_tiles.append(tile)
+	for tile in left_tiles:
+		if (down_tiles.has(tile) or up_tiles.has(tile)) and !corner_tiles.has(tile):
+			stop_tiles.append(tile)
+	for tile in right_tiles:
+		if (down_tiles.has(tile) or up_tiles.has(tile)) and !corner_tiles.has(tile):
+			stop_tiles.append(tile)
+	for tile in down_tiles:
+		if (left_tiles.has(tile) or right_tiles.has(tile)) and !corner_tiles.has(tile):
+			stop_tiles.append(tile)
 
 func _process(delta):
 	if tilemaps == []: push_error("Worldmap player node cannot access any tilemaps in the worldmap")
@@ -90,6 +110,10 @@ func handle_path_movement(tilemap : TileMap, tile_position : Vector2, tile_id : 
 	# If the player is grid-aligned we can move
 	var is_player_aligned_to_tile = tilemap.map_to_world(tile_position) + Vector2(16,16) == position
 	if is_player_aligned_to_tile:
+		if stop_tiles.has(bitmask):
+			move_direction = Vector2.ZERO
+			handle_leveldot_collisions(tilemap, true)
+		
 		var proposed_move_direction = get_move_input()
 		
 		handle_leveldot_collisions(tilemap)
@@ -136,8 +160,8 @@ func camera_bounds_to_tilemap_bounds():
 		camera.limit_top = min(camera.limit_top, bounds.position.y)
 		camera.limit_bottom = max(camera.limit_bottom, bounds.end.y)
 
-func handle_leveldot_collisions(tilemap):
-	if move_direction == Vector2.ZERO: return
+func handle_leveldot_collisions(tilemap, force = false):
+	if move_direction == Vector2.ZERO and !force: return
 	if stop_direction != Vector2.ZERO:
 		if move_direction == stop_direction * -1: return
 	
@@ -149,6 +173,7 @@ func handle_leveldot_collisions(tilemap):
 		
 		if level_position == player_position:
 			new_level_dot = leveldot
+			
 			if !leveldot.level_cleared:
 				stop_direction = move_direction
 				move_direction = Vector2.ZERO
@@ -182,11 +207,15 @@ func set_current_level_dot(new_value, sound = true):
 	if current_level_dot == new_value: return
 	current_level_dot = new_value
 	
-	if new_value == null:
-		Scoreboard.clear_message()
-	else:
-		var level_name = load(current_level_dot.level_file_path).instance().level_title
-		Scoreboard.display_message(level_name)
+	Scoreboard.clear_message()
+	
+	if new_value:
+		if current_level_dot.level_file_path != "":
+			var level_name = load(current_level_dot.level_file_path).instance().level_title
+			Scoreboard.display_message(level_name)
+		elif current_level_dot.message != "":
+			Scoreboard.display_message(current_level_dot.message)
+		
 		if sound: sfx.play("LevelDot")
 
 func update_sprite():
