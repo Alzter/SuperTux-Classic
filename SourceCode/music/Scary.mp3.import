@@ -12,4 +12,4 @@ dest_files=[ "res://.import/Scary.mp3-1d128d5e29a9013505ae9ad550fa239b.mp3str" ]
 [params]
 
 loop=true
-loop_offset=0
+loop_offset=5.6
