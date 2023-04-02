@@ -109,8 +109,8 @@ func handle_path_movement(tilemap : TileMap, tile_position : Vector2, tile_id : 
 	var is_player_aligned_to_tile = tilemap.map_to_world(tile_position) + Vector2(16,16) == position
 	if is_player_aligned_to_tile:
 		if stop_tiles.has(bitmask):
+			handle_leveldot_collisions(tilemap)
 			move_direction = Vector2.ZERO
-			handle_leveldot_collisions(tilemap, true)
 		
 		var proposed_move_direction = get_move_input()
 		
@@ -158,8 +158,8 @@ func camera_bounds_to_tilemap_bounds():
 		camera.limit_top = min(camera.limit_top, bounds.position.y)
 		camera.limit_bottom = max(camera.limit_bottom, bounds.end.y)
 
-func handle_leveldot_collisions(tilemap, force = false):
-	if move_direction == Vector2.ZERO and !force: return
+func handle_leveldot_collisions(tilemap):
+	if move_direction == Vector2.ZERO: return
 	if stop_direction != Vector2.ZERO:
 		if move_direction == stop_direction * -1: return
 	
