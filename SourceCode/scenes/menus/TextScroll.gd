@@ -22,6 +22,8 @@ export var music = "TuxRacer - Credits"
 export var stop_music = false
 export var return_scene = ""
 
+var title_scene = "res://scenes/menus/TitleScreen.tscn"
+
 var scroll_speed = 15
 var move_speed = 250
 
@@ -66,6 +68,8 @@ func _on_VisibilityNotifier2D_screen_exited():
 	if is_moving: _return_to_menu()
 
 func _return_to_menu():
+	if return_scene == "":
+		return_scene = title_scene
 	Global.goto_scene(return_scene)
 
 func _input(event):

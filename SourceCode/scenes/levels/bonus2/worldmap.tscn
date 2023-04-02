@@ -106,7 +106,7 @@ level_file_path = "res://scenes/levels/bonus2/level19.tscn"
 [node name="level20" parent="Objects" instance=ExtResource( 3 )]
 position = Vector2( 688, 272 )
 level_file_path = "res://scenes/levels/bonus2/level20.tscn"
-extro_level_file_path = "extro-bonus2.txt"
+extro_level_file_path = "res://scenes/levels/bonus2/extro.tscn"
 
 [node name="level21" parent="Objects" instance=ExtResource( 3 )]
 position = Vector2( 432, 400 )
