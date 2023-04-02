@@ -149,6 +149,7 @@ func import_worldmap():
 	
 	tiles_interactive = _get_worldmap_tile_data(level_data)
 	object_list = _get_objects_from_leveldata(level_data, "levels")
+	print(object_list)
 	
 	_import_level(true)
 
@@ -230,13 +231,17 @@ func _get_level_attributes(leveldata, is_worldmap = false):
 	level.music = level_music
 
 func _get_objects_from_leveldata(leveldata, string = "objects"):
-	var obj_1 = "(" + string + "    "
-	obj_1 = _get_section_of_string(leveldata, obj_1, "))  )")
-	if obj_1 != null: return obj_1
+	var get = "(" + string + "    "
+	get = _get_section_of_string(leveldata, get, "))  )")
+	if get: return get
 	
-	var obj_2 = "(" + string
-	obj_2 = _get_section_of_string(leveldata, obj_2, ")))")
-	return obj_2
+	get = "(" + string
+	get = _get_section_of_string(leveldata, get, ")))")
+	if get: return get
+	
+	get = "(" + string + "      "
+	get = _get_section_of_string(leveldata, get, ")   ))")
+	return get
 
 func _get_reset_points_from_leveldata(leveldata):
 	var check_1 = _get_section_of_string(leveldata, "(reset-points", "))   )")
