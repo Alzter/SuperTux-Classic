@@ -34,7 +34,7 @@ z_index = -50
 texture = ExtResource( 4 )
 
 [node name="Cape" type="AnimatedSprite" parent="."]
-modulate = Color( 0.737255, 0.737255, 0.737255, 1 )
+modulate = Color( 0.607843, 0.607843, 0.607843, 1 )
 z_index = -5
 frames = SubResource( 2 )
 
