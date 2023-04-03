@@ -5,10 +5,11 @@
 
 [sub_resource type="ShaderMaterial" id=3]
 shader = ExtResource( 2 )
-shader_param/hue_shift_speed = 1.0
+shader_param/rainbow_speed = 1.0
 shader_param/displacement_strength = 1.0
-shader_param/noise_strength = 1.0
+shader_param/noise_strength = 0.75
 shader_param/noise_shimmer_speed = 100.0
+shader_param/color_shimmer_strength = 1.0
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {

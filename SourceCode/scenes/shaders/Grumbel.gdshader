@@ -1,10 +1,11 @@
 shader_type canvas_item;
 render_mode unshaded;
 
-uniform float hue_shift_speed : hint_range(-10,10) = 1.0;
-uniform float displacement_strength = 1.0;
-uniform float noise_strength : hint_range(0, 1.0) = 0.2;
-uniform float noise_shimmer_speed = 5.0;
+uniform float rainbow_speed : hint_range(-10,10) = 1.0;
+uniform float displacement_strength : hint_range(0, 1.0) = 1.0;
+uniform float noise_strength : hint_range(0, 1.0) = 0.75;
+uniform float noise_shimmer_speed = 100.0;
+uniform float color_shimmer_strength = 1.0;
 
 void fragment() {
 // Input:3
@@ -34,7 +35,7 @@ void fragment() {
 		color_hsv=vec3(abs(q.z + (q.w - q.y) / (6.0 * d + e)), d / (q.x + e), q.x);
 	}
 	
-	float Shift_Hue = TIME * hue_shift_speed;
+	float Shift_Hue = TIME * rainbow_speed;
 	
 	color_hsv.x = mod((color_hsv.x + Shift_Hue), 1.0f);
 	
@@ -46,7 +47,7 @@ void fragment() {
 	noise *= noise_power;
 	
 	float noise2 = tan(TIME + (round(UV.x / TEXTURE_PIXEL_SIZE.x)) / (round(UV.y / TEXTURE_PIXEL_SIZE.y)));
-	color_hsv.x += noise2 * 0.2f;
+	color_hsv.x += noise2 * color_shimmer_strength;
 	
 	color_hsv.z += sin(TIME + noise + noise2) * noise_power;
 
