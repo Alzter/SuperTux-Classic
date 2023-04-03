@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://images/bosses/grumbel/idle.png" type="Texture" id=1]
+[ext_resource path="res://scenes/shaders/Grumbel.gdshader" type="Shader" id=2]
+
+[sub_resource type="ShaderMaterial" id=3]
+shader = ExtResource( 2 )
+shader_param/hue_shift_speed = 1.0
+shader_param/displacement_strength = 1.0
+shader_param/noise_strength = 1.0
+shader_param/noise_shimmer_speed = 100.0
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 1 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[node name="Grumbel" type="KinematicBody2D"]
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+material = SubResource( 3 )
+frames = SubResource( 1 )
