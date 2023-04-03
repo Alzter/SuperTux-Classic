@@ -198,13 +198,13 @@ smoothing_speed = 2.0
 [node name="Tux" type="AnimatedSprite" parent="Penguins"]
 position = Vector2( 32, 0 )
 frames = SubResource( 2 )
-frame = 2
+frame = 1
 playing = true
 
 [node name="Penny" type="AnimatedSprite" parent="Penguins"]
 position = Vector2( -32, 0 )
 frames = SubResource( 3 )
-frame = 4
+frame = 3
 playing = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
