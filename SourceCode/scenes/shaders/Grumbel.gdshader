@@ -15,10 +15,11 @@ void fragment() {
 	
 	float displace = (TIME + (UV.x / UV.y)) * 10f;
 	displace = mod(displace, 2.0f);
-	displace = (sin(displace)) * TEXTURE_PIXEL_SIZE.x;
+	displace = round(sin(displace)) * TEXTURE_PIXEL_SIZE.x;
 	
 	//float displace = sin((TIME + (UV.x / UV.y)) * 10f) * TEXTURE_PIXEL_SIZE.x;
 	uv.x += displace * displacement_strength;
+	uv.y += displace * -1f * displacement_strength;
 	
 	vec4 texture_color = texture(TEXTURE, uv);
 	input_color = texture_color.rgb;

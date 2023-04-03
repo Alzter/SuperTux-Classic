@@ -1,15 +1,7 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://images/bosses/grumbel/idle.png" type="Texture" id=1]
-[ext_resource path="res://scenes/shaders/Grumbel.gdshader" type="Shader" id=2]
-
-[sub_resource type="ShaderMaterial" id=3]
-shader = ExtResource( 2 )
-shader_param/rainbow_speed = 1.0
-shader_param/displacement_strength = 1.0
-shader_param/noise_strength = 0.75
-shader_param/noise_shimmer_speed = 100.0
-shader_param/color_shimmer_strength = 1.0
+[ext_resource path="res://scenes/shaders/Grumbel.tres" type="Material" id=2]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -22,5 +14,5 @@ animations = [ {
 [node name="Grumbel" type="KinematicBody2D"]
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
-material = SubResource( 3 )
+material = ExtResource( 2 )
 frames = SubResource( 1 )
