@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://images/bosses/grumbel/idle.png" type="Texture" id=1]
-[ext_resource path="res://scenes/shaders/GrumbelAngry.tres" type="Material" id=2]
+[ext_resource path="res://scenes/shaders/Grumbel.tres" type="Material" id=2]
 [ext_resource path="res://images/bosses/grumbel/cape.png" type="Texture" id=3]
 [ext_resource path="res://images/bosses/grumbel/aura.png" type="Texture" id=4]
 
@@ -28,12 +28,17 @@ animations = [ {
 
 [node name="Aura" type="Sprite" parent="."]
 material = SubResource( 3 )
+position = Vector2( 0, -16 )
+scale = Vector2( 2, 2 )
+z_index = -50
 texture = ExtResource( 4 )
 
 [node name="Cape" type="AnimatedSprite" parent="."]
 modulate = Color( 0.737255, 0.737255, 0.737255, 1 )
+z_index = -5
 frames = SubResource( 2 )
 
 [node name="Body" type="AnimatedSprite" parent="."]
 material = ExtResource( 2 )
+z_index = 15
 frames = SubResource( 1 )
