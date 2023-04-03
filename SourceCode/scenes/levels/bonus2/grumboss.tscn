@@ -1,8 +1,9 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://scenes/shaders/Overlay.gdshader" type="Shader" id=1]
 [ext_resource path="res://scenes/master/Camera.gd" type="Script" id=2]
 [ext_resource path="res://scenes/master/Level.gd" type="Script" id=3]
+[ext_resource path="res://scenes/bosses/Grumbel.tscn" type="PackedScene" id=4]
 [ext_resource path="res://scenes/backgrounds/CastleBackground.tscn" type="PackedScene" id=5]
 [ext_resource path="res://scenes/backgrounds/assets/SnowfallParticlesLight.tscn" type="PackedScene" id=6]
 [ext_resource path="res://scenes/master/TileMap.tscn" type="PackedScene" id=8]
@@ -114,3 +115,6 @@ tile_data = PoolIntArray( -65533, 5, 0 )
 volume_db = -5.0
 
 [node name="CastleBG" parent="." instance=ExtResource( 5 )]
+
+[node name="Grumbel" parent="." instance=ExtResource( 4 )]
+position = Vector2( 320, 280 )
