@@ -4,6 +4,7 @@ render_mode unshaded;
 uniform float rainbow_speed : hint_range(-10,10) = 1.0;
 uniform float displacement_strength : hint_range(0, 1.0) = 1.0;
 uniform float noise_strength : hint_range(0, 1.0) = 0.75;
+uniform float brightness_add : hint_range(-10.0, 10.0) = 0;
 uniform float noise_shimmer_speed = 100.0;
 uniform float color_shimmer_strength = 1.0;
 
@@ -51,6 +52,8 @@ void fragment() {
 	color_hsv.x += noise2 * color_shimmer_strength;
 	
 	color_hsv.z += sin(TIME + noise + noise2) * noise_power;
+	
+	color_hsv.z += brightness_add;
 
 // VectorFunc:5
 	vec3 color_rgb;
