@@ -6,7 +6,7 @@
 shader = ExtResource( 1 )
 shader_param/rainbow_speed = 1.0
 shader_param/displacement_strength = 0.0
-shader_param/noise_strength = 0.75
+shader_param/noise_strength = 0.3
 shader_param/brightness_add = 0.0
-shader_param/noise_shimmer_speed = 0.0
+shader_param/noise_shimmer_speed = 100.0
 shader_param/color_shimmer_strength = 0.0
