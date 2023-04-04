@@ -22,7 +22,7 @@
 [ext_resource path="res://sounds/enemies/explode.wav" type="AudioStream" id=20]
 [ext_resource path="res://sounds/enemies/squish.wav" type="AudioStream" id=21]
 [ext_resource path="res://sounds/bosses/fireball_damage.wav" type="AudioStream" id=22]
-[ext_resource path="res://sounds/player/shoot_fireball.wav" type="AudioStream" id=23]
+[ext_resource path="res://sounds/bosses/damaged.wav" type="AudioStream" id=23]
 [ext_resource path="res://scenes/bosses/GrumbelFireball.tscn" type="PackedScene" id=24]
 [ext_resource path="res://scenes/objects/PowerupEgg.tscn" type="PackedScene" id=25]
 [ext_resource path="res://scenes/objects/PowerupFireFlower.tscn" type="PackedScene" id=26]
@@ -327,19 +327,22 @@ script = ExtResource( 19 )
 
 [node name="Squish" type="AudioStreamPlayer" parent="SFX"]
 stream = ExtResource( 21 )
+volume_db = 1.0
 
 [node name="Squish2" type="AudioStreamPlayer" parent="SFX"]
-stream = ExtResource( 20 )
-volume_db = -5.0
-pitch_scale = 2.0
+stream = ExtResource( 23 )
+volume_db = -3.0
+pitch_scale = 0.8
 
 [node name="FireHurt" type="AudioStreamPlayer" parent="SFX"]
 stream = ExtResource( 22 )
 volume_db = -8.0
 bus = "Sounds"
 
-[node name="Fireball" type="AudioStreamPlayer" parent="SFX"]
-stream = ExtResource( 23 )
+[node name="Fireball" type="AudioStreamPlayer2D" parent="SFX"]
+stream = ExtResource( 20 )
+volume_db = 6.0
+pitch_scale = 1.5
 bus = "Sounds"
 
 [node name="InvincibleTimer" type="Timer" parent="."]

@@ -59,6 +59,7 @@ func idle_loop(delta):
 	position.y = lerp(position.y, new_position.y, lerp_speed)
 
 func shoot_eye_fireballs(fireball_packed_scene = fireball_scene):
+	Global.camera_shake(50, 0.7)
 	sfx.play("Fireball")
 	for eye in eye_positions.get_children():
 		var eye_position = eye.global_position
@@ -82,7 +83,7 @@ func squished():
 		sfx.play("Squish2")
 		disable_bounce_area()
 		disable_damage_area()
-		Global.camera_shake(40, 0.95)
+		Global.camera_shake(60, 0.9)
 		fire_hit_anim.play("default")
 		spawn_powerup()
 

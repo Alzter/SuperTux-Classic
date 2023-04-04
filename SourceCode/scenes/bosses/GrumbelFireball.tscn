@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://images/enemies/flame/flame-1.png" type="Texture" id=1]
 [ext_resource path="res://images/enemies/flame/flame-0.png" type="Texture" id=2]
@@ -6,6 +6,8 @@
 [ext_resource path="res://scenes/master/SFX.gd" type="Script" id=4]
 [ext_resource path="res://scenes/master/damage_area.tscn" type="PackedScene" id=5]
 [ext_resource path="res://images/player/tux/fireball/fireball.png" type="Texture" id=6]
+[ext_resource path="res://sounds/objects/powerup-bumped.wav" type="AudioStream" id=7]
+[ext_resource path="res://sounds/bosses/fireball_damage.wav" type="AudioStream" id=8]
 
 [sub_resource type="Animation" id=4]
 resource_name = "default"
@@ -63,7 +65,7 @@ tracks/3/keys = {
 
 [sub_resource type="Animation" id=7]
 resource_name = "dissipate"
-length = 0.2
+length = 0.25
 step = 0.05
 tracks/0/type = "value"
 tracks/0/path = NodePath("Flash:visible")
@@ -111,7 +113,7 @@ tracks/3/keys = {
 "times": PoolRealArray( 0, 0.2 ),
 "transitions": PoolRealArray( 2.21914, 1 ),
 "update": 0,
-"values": [ Vector2( 0.8, 0.8 ), Vector2( 0, 0 ) ]
+"values": [ Vector2( 2, 2 ), Vector2( 0, 0 ) ]
 }
 
 [sub_resource type="RectangleShape2D" id=10]
@@ -165,13 +167,22 @@ shape = SubResource( 10 )
 [node name="SFX" type="Node2D" parent="."]
 script = ExtResource( 4 )
 
+[node name="Dissipate" type="AudioStreamPlayer2D" parent="SFX"]
+stream = ExtResource( 7 )
+
+[node name="Dissipate2" type="AudioStreamPlayer2D" parent="SFX"]
+stream = ExtResource( 8 )
+volume_db = -5.0
+pitch_scale = 0.7
+
 [node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
 visible = false
 rect = Rect2( -64, -64, 128, 128 )
 
 [node name="Control" type="Control" parent="."]
 visible = false
-rect_rotation = 360.0
+rect_rotation = 302.334
+rect_scale = Vector2( 2, 2 )
 
 [node name="Sprite" type="Sprite" parent="Control"]
 texture = ExtResource( 6 )
@@ -187,6 +198,7 @@ material = SubResource( 12 )
 scale = Vector2( 2, 2 )
 z_index = 1
 frames = SubResource( 13 )
+frame = 1
 playing = true
 offset = Vector2( 0, -2 )
 
@@ -194,14 +206,12 @@ offset = Vector2( 0, -2 )
 shape = SubResource( 14 )
 
 [node name="Flash" type="Control" parent="."]
-modulate = Color( 0, 0, 0, 1 )
-rect_scale = Vector2( 1e-05, 1e-05 )
+rect_scale = Vector2( 2, 2 )
 
 [node name="Glow" type="AnimatedSprite" parent="Flash"]
 material = SubResource( 15 )
 z_index = 4096
 frames = SubResource( 16 )
-frame = 1
 playing = true
 offset = Vector2( 0, -2 )
 
@@ -210,6 +220,7 @@ material = SubResource( 15 )
 scale = Vector2( 2, 2 )
 z_index = 4096
 frames = SubResource( 16 )
+frame = 1
 playing = true
 offset = Vector2( 0, -2 )
 
@@ -218,6 +229,7 @@ material = SubResource( 15 )
 scale = Vector2( 4, 4 )
 z_index = 4096
 frames = SubResource( 16 )
+frame = 1
 playing = true
 offset = Vector2( 0, -2 )
 
@@ -227,13 +239,11 @@ material = SubResource( 15 )
 scale = Vector2( 4, 4 )
 z_index = 4096
 frames = SubResource( 16 )
-frame = 1
 playing = true
 offset = Vector2( 0, -2 )
 
 [node name="DestroyTimer" type="Timer" parent="."]
 process_mode = 0
-wait_time = 0.3
 one_shot = true
 
 [connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]

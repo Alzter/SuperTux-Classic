@@ -24,6 +24,8 @@ export var angle = 90
 onready var speed = initial_speed * Global.TILE_SIZE
 onready var destroy_timer = $DestroyTimer
 onready var animation_player = $AnimationPlayer
+onready var sfx = $SFX
+onready var damage_area = $DamageArea/CollisionShape2D
 
 var is_moving = true
 
@@ -44,6 +46,9 @@ func _on_VisibilityNotifier2D_screen_exited():
 	queue_free()
 
 func dissipate():
+	damage_area.set_deferred("disabled", true)
+	sfx.play("Dissipate")
+	sfx.play("Dissipate2")
 	destroy_timer.start()
 	animation_player.play("dissipate")
 	is_moving = false
