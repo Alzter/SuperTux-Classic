@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/idle.png-b7ee17a42f50f71349bf696d865c0584.stex"
+path="res://.import/squished5.png-a702fbd49af28a459904f6526e989bb8.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://images/bosses/grumbel/idle.png"
-dest_files=[ "res://.import/idle.png-b7ee17a42f50f71349bf696d865c0584.stex" ]
+source_file="res://images/bosses/grumbel/body/squished5.png"
+dest_files=[ "res://.import/squished5.png-a702fbd49af28a459904f6526e989bb8.stex" ]
 
 [params]
 

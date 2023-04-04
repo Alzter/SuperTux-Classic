@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/cape.png-43d08e057006c3711362596e70ec0540.stex"
+path="res://.import/squished4.png-634d84dde52962b4010d7f6c508db0b1.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://images/bosses/grumbel/cape.png"
-dest_files=[ "res://.import/cape.png-43d08e057006c3711362596e70ec0540.stex" ]
+source_file="res://images/bosses/grumbel/body/squished4.png"
+dest_files=[ "res://.import/squished4.png-634d84dde52962b4010d7f6c508db0b1.stex" ]
 
 [params]
 
