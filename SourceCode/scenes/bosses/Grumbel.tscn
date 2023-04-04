@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=2]
+[gd_scene load_steps=34 format=2]
 
 [ext_resource path="res://images/bosses/grumbel/body/idle.png" type="Texture" id=1]
 [ext_resource path="res://scenes/shaders/Grumbel.tres" type="Material" id=2]
@@ -21,6 +21,7 @@
 [ext_resource path="res://scenes/master/SFX.gd" type="Script" id=19]
 [ext_resource path="res://sounds/enemies/explode.wav" type="AudioStream" id=20]
 [ext_resource path="res://sounds/enemies/squish.wav" type="AudioStream" id=21]
+[ext_resource path="res://sounds/bosses/fireball_damage.wav" type="AudioStream" id=22]
 
 [sub_resource type="CanvasItemMaterial" id=3]
 blend_mode = 2
@@ -32,15 +33,15 @@ animations = [ {
 "name": "idle",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 13 ) ],
-"loop": true,
-"name": "squishrecover",
-"speed": 5.0
-}, {
 "frames": [ ExtResource( 10 ), ExtResource( 8 ) ],
 "loop": false,
 "name": "squished",
 "speed": 15.0
+}, {
+"frames": [ ExtResource( 13 ) ],
+"loop": true,
+"name": "squishrecover",
+"speed": 5.0
 } ]
 
 [sub_resource type="SpriteFrames" id=1]
@@ -50,15 +51,15 @@ animations = [ {
 "name": "idle",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 12 ) ],
-"loop": true,
-"name": "squishrecover",
-"speed": 5.0
-}, {
 "frames": [ ExtResource( 5 ), ExtResource( 7 ), ExtResource( 7 ), ExtResource( 7 ), ExtResource( 7 ), ExtResource( 6 ), ExtResource( 9 ) ],
 "loop": false,
 "name": "squished",
 "speed": 15.0
+}, {
+"frames": [ ExtResource( 12 ) ],
+"loop": true,
+"name": "squishrecover",
+"speed": 5.0
 } ]
 
 [sub_resource type="Animation" id=4]
@@ -211,13 +212,51 @@ tracks/4/keys = {
 "values": [ Color( 1, 1, 1, 0 ) ]
 }
 
+[sub_resource type="Animation" id=11]
+resource_name = "default"
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=12]
+resource_name = "firehit"
+length = 0.25
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.25 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 0, 0, 1 ), Color( 1, 0.470588, 0, 1 ), Color( 1, 1, 1, 1 ) ]
+}
+
 [sub_resource type="RectangleShape2D" id=8]
 extents = Vector2( 32, 18 )
 
 [sub_resource type="RectangleShape2D" id=9]
 extents = Vector2( 20, 26 )
 
+[sub_resource type="RectangleShape2D" id=10]
+extents = Vector2( 32, 42 )
+
 [node name="Grumbel" type="KinematicBody2D"]
+collision_layer = 4
+collision_mask = 0
 script = ExtResource( 18 )
 invincible_time = 1.0
 
@@ -252,6 +291,11 @@ autoplay = "idle"
 anims/idle = SubResource( 4 )
 anims/squished = SubResource( 5 )
 
+[node name="FireHitAnim" type="AnimationPlayer" parent="."]
+autoplay = "default"
+anims/default = SubResource( 11 )
+anims/firehit = SubResource( 12 )
+
 [node name="BounceArea" parent="." instance=ExtResource( 14 )]
 z_index = 50
 
@@ -266,6 +310,10 @@ position = Vector2( 0, 20 )
 z_index = 40
 shape = SubResource( 9 )
 
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0, 6 )
+shape = SubResource( 10 )
+
 [node name="SFX" type="Node2D" parent="."]
 script = ExtResource( 19 )
 
@@ -276,6 +324,11 @@ stream = ExtResource( 21 )
 stream = ExtResource( 20 )
 volume_db = -5.0
 pitch_scale = 2.0
+
+[node name="FireHurt" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource( 22 )
+volume_db = -8.0
+bus = "Sounds"
 
 [node name="InvincibleTimer" type="Timer" parent="."]
 process_mode = 0
