@@ -154,10 +154,10 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.75, 0.8 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.75 ),
+"transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ "squished", "squishrecover", "idle" ]
+"values": [ "squished", "squishrecover" ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("Body:animation")
@@ -166,10 +166,10 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.75, 0.8 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.75 ),
+"transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ "squished", "squishrecover", "idle" ]
+"values": [ "squished", "squishrecover" ]
 }
 tracks/2/type = "value"
 tracks/2/path = NodePath("Body:material")
@@ -202,10 +202,10 @@ tracks/4/loop_wrap = true
 tracks/4/imported = false
 tracks/4/enabled = true
 tracks/4/keys = {
-"times": PoolRealArray( 0, 0.65, 0.8 ),
-"transitions": PoolRealArray( 1, 4.59479, 1 ),
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+"values": [ Color( 1, 1, 1, 0 ) ]
 }
 
 [sub_resource type="RectangleShape2D" id=8]
@@ -261,3 +261,5 @@ shape = SubResource( 8 )
 position = Vector2( 0, 20 )
 z_index = 40
 shape = SubResource( 9 )
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]

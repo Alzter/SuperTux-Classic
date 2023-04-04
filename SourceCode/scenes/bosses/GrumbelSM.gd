@@ -30,7 +30,8 @@ func _state_logic(delta):
 	pass
 
 func _enter_state(new_state, old_state):
-	pass
+	if host.anim_player.has_animation(new_state):
+		host.anim_player.play(new_state)
 	
 	if new_state in host.ai.ATTACKS:
 		# IF Grumbel is in an attacking state,
@@ -41,3 +42,5 @@ func _enter_state(new_state, old_state):
 		# Then if he's still in the same state, set his state to idle again
 		if state == new_state:
 			set_state("idle")
+	
+	elif host.has_method(new_state): host.call(new_state)
