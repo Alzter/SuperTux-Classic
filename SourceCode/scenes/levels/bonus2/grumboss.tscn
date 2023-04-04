@@ -16,6 +16,17 @@
 [sub_resource type="CanvasItemMaterial" id=2]
 blend_mode = 3
 
+[sub_resource type="ShaderMaterial" id=7]
+shader = ExtResource( 12 )
+shader_param/rainbow_speed = 1.0
+shader_param/noise_strength = 4.0
+shader_param/brightness_add = 1.0
+shader_param/noise_shimmer_speed = 1.0
+shader_param/noise_permanent = true
+shader_param/color_shimmer_strength = 0.0
+shader_param/move_direction = Vector2( 1, 1 )
+shader_param/move_speed = 0.2
+
 [sub_resource type="ShaderMaterial" id=6]
 shader = ExtResource( 12 )
 shader_param/rainbow_speed = 1.0
@@ -78,17 +89,6 @@ tracks/3/keys = {
 "update": 1,
 "values": [ SubResource( 6 ) ]
 }
-
-[sub_resource type="ShaderMaterial" id=7]
-shader = ExtResource( 12 )
-shader_param/rainbow_speed = 1.0
-shader_param/noise_strength = 4.0
-shader_param/brightness_add = 1.0
-shader_param/noise_shimmer_speed = 1.0
-shader_param/noise_permanent = true
-shader_param/color_shimmer_strength = 0.0
-shader_param/move_direction = Vector2( 1, 1 )
-shader_param/move_speed = 0.2
 
 [sub_resource type="Animation" id=4]
 resource_name = "phase_two_transition"
@@ -176,13 +176,14 @@ anchor_bottom = 1.0
 margin_right = 99359.0
 margin_bottom = 99519.0
 rect_min_size = Vector2( 99999, 99999 )
+color = Color( 0, 0, 0, 1 )
 
 [node name="RainbowBG" type="ParallaxBackground" parent="."]
 layer = -5
 
 [node name="Rainbow" type="TextureRect" parent="RainbowBG"]
-visible = false
-material = SubResource( 6 )
+modulate = Color( 0, 0, 0, 1 )
+material = SubResource( 7 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 texture = ExtResource( 11 )
@@ -212,6 +213,7 @@ script = ExtResource( 2 )
 layer = 0
 
 [node name="Shader" type="Node2D" parent="."]
+modulate = Color( 0, 0, 0, 1 )
 material = SubResource( 1 )
 z_index = -10
 

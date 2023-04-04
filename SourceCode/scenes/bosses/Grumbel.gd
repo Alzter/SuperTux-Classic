@@ -117,12 +117,15 @@ func be_bounced_upon(body):
 	if body.is_in_group("players"):
 		player = body
 		body.bounce()
-		health -= 1
-		if health <= 0:
-			if phase == 1:
-				state_machine.set_state("fake_death")
-		else:
-			state_machine.set_state("squished")
+		get_hit()
+
+func get_hit():
+	health -= 1
+	if health <= 0:
+		if phase == 1:
+			state_machine.set_state("fake_death")
+	else:
+		state_machine.set_state("squished")
 
 func disable_bounce_area( disabled = true ):
 	if bounce_area != null:
@@ -156,7 +159,7 @@ func fireball_hit():
 	fireball_hits += 1
 	if fireball_hits >= fireballs_per_hit:
 		fireball_hits = 0
-		state_machine.set_state("squished")
+		get_hit()
 	else:
 		sfx.play("FireHurt")
 		fire_hit_anim.stop()
