@@ -1,27 +1,25 @@
-shader_type canvas_item;
-render_mode unshaded;
+[gd_resource type="Shader" format=2]
+
+[resource]
+code = "shader_type canvas_item;
+render_mode blend_sub;
 
 
 uniform float rainbow_speed : hint_range(-10,10) = 1.0;
-uniform float displacement_strength : hint_range(0, 1.0) = 1.0;
 uniform float noise_strength : hint_range(0, 10.0) = 0.75;
 uniform float brightness_add : hint_range(-10.0, 10.0) = 0;
 uniform float noise_shimmer_speed = 100.0;
+uniform bool noise_permanent = false;
 uniform float color_shimmer_strength = 1.0;
+uniform vec2 move_direction = vec2(1.0, 0.0);
+uniform float move_speed = 2;
 
 void fragment() {
 // Input:3
 	vec3 input_color;
 	
 	vec2 uv = UV;
-	
-	float displace = (TIME + (UV.x / UV.y)) * 10f;
-	displace = mod(displace, 2.0f);
-	displace = round(sin(displace)) * TEXTURE_PIXEL_SIZE.x;
-	
-	//float displace = sin((TIME + (UV.x / UV.y)) * 10f) * TEXTURE_PIXEL_SIZE.x;
-	uv.x += displace * displacement_strength;
-	uv.y += displace * -1f * displacement_strength;
+	uv += move_direction * move_speed * TIME;
 	
 	vec4 texture_color = texture(TEXTURE, uv);
 	input_color = texture_color.rgb;
@@ -47,6 +45,7 @@ void fragment() {
 	noise = mod(noise * 200f, 30);
 	noise /= sin(TIME * 20.0f) * 1.0f;
 	float noise_power = abs(sin(TIME * noise_shimmer_speed)) * noise_strength;
+	if (noise_permanent) { noise_power = noise_strength }
 	noise *= noise_power;
 	
 	float noise2 = tan(TIME + (round(UV.x / TEXTURE_PIXEL_SIZE.x)) / (round(UV.y / TEXTURE_PIXEL_SIZE.y)));
@@ -73,4 +72,4 @@ void fragment() {
 	texture_color.a = clamp(texture_color.a, 0, 1);
 	COLOR.rgba = texture_color;
 
-}
+}"
