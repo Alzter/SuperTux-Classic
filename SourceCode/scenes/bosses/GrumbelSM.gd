@@ -27,7 +27,7 @@ func _ready():
 	call_deferred("set_state", "idle")
 
 func _state_logic(delta):
-	pass
+	host.update_sprite()
 
 func _enter_state(new_state, old_state):
 	if host.anim_player.has_animation(new_state):
@@ -44,3 +44,8 @@ func _enter_state(new_state, old_state):
 			set_state("idle")
 	
 	elif host.has_method(new_state): host.call(new_state)
+
+func _exit_state(new_state, old_state):
+	match old_state:
+		"squished":
+			host.set_invincible()
