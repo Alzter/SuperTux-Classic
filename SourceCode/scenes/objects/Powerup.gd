@@ -25,6 +25,7 @@ export var bounces = false
 export var move_speed_in_tiles = 0.8 * 4
 export var bounce_height_in_tiles = 6.0
 export var solid = true
+export var friction = 0.75
 
 var velocity = Vector2()
 var touching_wall = false
@@ -34,16 +35,20 @@ var is_solid = true
 onready var move_speed = move_speed_in_tiles * Global.TILE_SIZE
 onready var bounce_height = bounce_height_in_tiles * Global.TILE_SIZE
 
+var intangibility_timer = 0
+
 # Kinematic Equations
 func _ready():
 	var gravity = Global.base_gravity
 	bounce_height = -sqrt(2 * gravity * bounce_height)
 
 func _physics_process(delta):
+	intangibility_timer -= delta
 	if moving: move_forward()
 	apply_gravity(delta)
-	if bounces and moving: bounce() 
+	if bounces and moving: bounce()
 	apply_movement(delta, is_solid)
+	if !moving and grounded: velocity.x *= friction
 
 func move_forward():
 	if touching_wall: facing *= -1
@@ -67,6 +72,8 @@ func bounce():
 		is_solid = solid
 
 func _on_Area2D_body_entered(body):
+	if intangibility_timer > 0: return
+	
 	if body.is_in_group("players"):
 		match type:
 			"Powerup":

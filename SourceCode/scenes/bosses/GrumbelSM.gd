@@ -28,6 +28,8 @@ func _ready():
 	call_deferred("set_state", "idle")
 
 func _state_logic(delta):
+	host.set_anger()
+	
 	match state:
 		"idle":
 			host.idle_loop(delta)
