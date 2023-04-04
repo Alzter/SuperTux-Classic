@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://music/TuxRacer - Race2.mp3" type="AudioStream" id=1]
 [ext_resource path="res://autoload/Music.gd" type="Script" id=2]
@@ -20,6 +20,7 @@
 [ext_resource path="res://music/DarkForestKeep.mp3" type="AudioStream" id=18]
 [ext_resource path="res://music/Pingus - Level.mp3" type="AudioStream" id=19]
 [ext_resource path="res://music/Scary.mp3" type="AudioStream" id=20]
+[ext_resource path="res://music/Prophecy.mp3" type="AudioStream" id=21]
 
 [node name="Music" type="CanvasLayer"]
 script = ExtResource( 2 )
@@ -87,6 +88,10 @@ stream = ExtResource( 14 )
 volume_db = 11.0
 bus = "Music"
 
+[node name="Prophecy" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 21 )
+volume_db = 4.0
+
 [node name="Invincible" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 9 )
 
@@ -107,5 +112,7 @@ bus = "Music"
 [node name="Credits" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 16 )
 bus = "Music"
+
+[node name="Tween" type="Tween" parent="."]
 
 [connection signal="finished" from="Invincible" to="." method="_on_Invincible_finished"]

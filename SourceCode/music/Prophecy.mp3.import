@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/Prophecy.mp3-65b1c02e4bace0d9436b15ae48084535.mp3str"
+
+[deps]
+
+source_file="res://music/Prophecy.mp3"
+dest_files=[ "res://.import/Prophecy.mp3-65b1c02e4bace0d9436b15ae48084535.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

@@ -21,7 +21,6 @@ onready var host = get_parent()
 onready var state_machine = host.get_node("StateMachine")
 
 const ATTACKS = [
-	"Lazer"
 ]
 
 var movelist = []

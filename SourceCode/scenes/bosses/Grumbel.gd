@@ -1,9 +1,10 @@
 extends KinematicBody2D
 
 export var invincible_time = 2.0
-export var fireballs_per_hit = 5
+export var fireballs_per_hit = 3
 
 export var max_health = 5
+export var max_health_phase_two = 8
 
 export var fireball_scene : PackedScene
 export var powerup_small_scene : PackedScene
@@ -23,8 +24,10 @@ onready var fireball_timer = $FireballTimer
 onready var powerup_spawn_pos = $PowerupSpawn
 
 onready var health = max_health
+onready var tween = $Tween
 
 var _initial_position = Vector2()
+var velocity = Vector2()
 
 var invincible = false
 var fireball_hits = 0
@@ -33,11 +36,16 @@ var _angle = 0
 var player = null
 var anger = 0
 
+var phase = 1
+
+signal fake_death
+
 func _ready():
 	_initial_position = position
 
 func set_anger():
 	anger = abs(health - max_health) * (1.0 / (max_health - 1.0))
+	if phase == 1: anger *= 0.8
 	# Anger is 0 when grumbel is on max health, and 1 when grumbel is about to die
 	# The lower health grumbel has, the angrier he is
 
@@ -72,20 +80,34 @@ func instance_node(packedscene, global_pos):
 	return child
 
 func squished():
-	health -= 1
-	
-	if health <= 0:
-		queue_free()
-	else:
-		fireball_hits = 0
-		invincible = true
-		sfx.play("Squish")
-		sfx.play("Squish2")
-		disable_bounce_area()
-		disable_damage_area()
-		Global.camera_shake(60, 0.9)
-		fire_hit_anim.play("default")
-		spawn_powerup()
+	disable_bounce_area()
+	disable_damage_area()
+	invincible = true
+	fireball_hits = 0
+	sfx.play("Squish")
+	sfx.play("Squish2")
+	Global.camera_shake(80, 0.92)
+	fire_hit_anim.play("default")
+	spawn_powerup()
+
+func fake_death():
+	disable_bounce_area()
+	disable_damage_area()
+	sfx.play("Squish")
+	sfx.play("FakeDie")
+	velocity = Vector2.ZERO
+	emit_signal("fake_death")
+	Music.pitch_slide_down()
+	enable_phase_two()
+
+func enable_phase_two():
+	health = max_health_phase_two
+	phase = 2
+
+func fake_death_loop(delta):
+	velocity.x = 0
+	velocity.y += Global.gravity * delta
+	position += velocity * delta
 
 func update_sprite():
 	modulate.a = 0.5 if invincible else 1
@@ -95,7 +117,12 @@ func be_bounced_upon(body):
 	if body.is_in_group("players"):
 		player = body
 		body.bounce()
-		state_machine.set_state("squished")
+		health -= 1
+		if health <= 0:
+			if phase == 1:
+				state_machine.set_state("fake_death")
+		else:
+			state_machine.set_state("squished")
 
 func disable_bounce_area( disabled = true ):
 	if bounce_area != null:
@@ -140,7 +167,7 @@ func fireball_hit():
 func _on_FireballTimer_timeout():
 	if state_machine.state == "idle":
 		if !invincible: shoot_eye_fireballs()
-		fireball_timer.start(1.5 - anger * 0.75)
+		fireball_timer.start(3 - anger * 3)
 
 func spawn_powerup():
 	if player == null: return
@@ -154,3 +181,16 @@ func spawn_powerup():
 	var powerup = instance_node(powerup_to_spawn, powerup_spawn_pos.global_position)
 	powerup.velocity = Vector2(0, -300)
 	powerup.intangibility_timer = 0.5
+
+
+func _on_VisibilityNotifier2D_screen_exited():
+	if state_machine.state == "fake_death":
+		state_machine.set_state("phase_two_transition")
+
+func phase_two_transition():
+	yield(get_tree().create_timer(1), "timeout")
+	
+	anim_player.play("angry")
+	var pos_y = _initial_position.y - Global.TILE_SIZE * 4
+	tween.interpolate_property(self, "position:y", position.y, pos_y, 6, Tween.TRANS_SINE, Tween.EASE_OUT)
+	tween.start()

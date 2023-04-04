@@ -21,6 +21,8 @@ var previous_song = null
 var current_song = null
 var current_song_node = null
 
+onready var tween = $Tween
+
 var special_songs = [
 	"Invincible"
 ]
@@ -62,3 +64,13 @@ func _on_Invincible_finished():
 func speed_up():
 	if current_song_node != null:
 		current_song_node.pitch_scale = 1.25
+
+func pitch_slide_down():
+	if current_song_node != null:
+		tween.interpolate_property(current_song_node, "pitch_scale", 1, 0.1, 2, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+		tween.start()
+
+func pitch_slide_up():
+	if current_song_node != null:
+		tween.interpolate_property(current_song_node, "pitch_scale", 0.1, 1, 0.5, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+		tween.start()

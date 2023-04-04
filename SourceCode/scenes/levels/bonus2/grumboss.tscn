@@ -18,9 +18,12 @@ shader_param/overlay_color = Color( 0.541176, 0.235294, 0.65098, 1 )
 script = ExtResource( 3 )
 level_title = "Mustn't Grumbel"
 level_author = "Alexander Small"
-music = "BossAttack07"
+music = "Prophecy"
 uses_timer = false
 starting_powerup = 2
+
+[node name="Grumbel" parent="." instance=ExtResource( 4 )]
+position = Vector2( 320, 256 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
 pause_mode = 2
@@ -47,6 +50,3 @@ volume_db = -5.0
 [node name="CastleBG" parent="." instance=ExtResource( 5 )]
 offset = Vector2( 0, -35 )
 transform = Transform2D( 1, 0, 0, 1, 0, -35 )
-
-[node name="Grumbel" parent="." instance=ExtResource( 4 )]
-position = Vector2( 320, 256 )

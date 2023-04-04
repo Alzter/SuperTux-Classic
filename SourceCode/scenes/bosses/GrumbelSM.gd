@@ -20,6 +20,8 @@ extends StateMachine
 func _ready():
 	add_state("idle")
 	add_state("squished")
+	add_state("fake_death")
+	add_state("phase_two_transition")
 	
 	# Don't do anything until the level title card is gone
 	yield(Global, "level_ready")
@@ -33,12 +35,16 @@ func _state_logic(delta):
 	match state:
 		"idle":
 			host.idle_loop(delta)
+		"fake_death":
+			host.fake_death_loop(delta)
 	
 	host.update_sprite()
 
 func _enter_state(new_state, old_state):
 	if host.anim_player.has_animation(new_state):
 		host.anim_player.play(new_state)
+	if new_state == "idle" and host.phase == 2:
+		host.anim_player.play("phase_two")
 	
 	if new_state in host.ai.ATTACKS:
 		# IF Grumbel is in an attacking state,
