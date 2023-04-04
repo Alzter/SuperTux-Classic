@@ -139,7 +139,7 @@ func fireball_hit():
 
 func _on_FireballTimer_timeout():
 	if state_machine.state == "idle":
-		shoot_eye_fireballs()
+		if !invincible: shoot_eye_fireballs()
 		fireball_timer.start(1.5 - anger * 0.75)
 
 func spawn_powerup():
