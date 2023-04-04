@@ -45,7 +45,7 @@ func _enter_state(new_state, old_state):
 	
 	elif host.has_method(new_state): host.call(new_state)
 
-func _exit_state(new_state, old_state):
+func _exit_state(old_state, new_state):
 	match old_state:
 		"squished":
 			host.set_invincible()

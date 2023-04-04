@@ -17,8 +17,9 @@ onready var health = max_health
 var invincible = false
 
 func idle():
-	disable_bounce_area(false)
-	disable_damage_area(false)
+	pass
+	#disable_bounce_area(false)
+	#disable_damage_area(false)
 
 func squished():
 	invincible = true
@@ -57,3 +58,5 @@ func set_invincible(time = invincible_time):
 
 func _on_InvincibleTimer_timeout():
 	invincible = false
+	disable_bounce_area(false)
+	disable_damage_area(false)

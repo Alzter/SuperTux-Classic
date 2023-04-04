@@ -219,6 +219,7 @@ extents = Vector2( 20, 26 )
 
 [node name="Grumbel" type="KinematicBody2D"]
 script = ExtResource( 18 )
+invincible_time = 1.0
 
 [node name="StateMachine" type="Node" parent="."]
 script = ExtResource( 17 )
