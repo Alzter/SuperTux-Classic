@@ -47,8 +47,7 @@ func idle():
 	#disable_damage_area(false)
 
 func idle_loop(delta):
-	var move_speed = 3 + anger
-	print(anger)
+	var move_speed = 3 + anger * 1.5
 	var radius = Vector2(200, 200)
 	var lerp_speed = 0.05
 	
@@ -73,15 +72,19 @@ func instance_node(packedscene, global_pos):
 
 func squished():
 	health -= 1
-	fireball_hits = 0
-	invincible = true
-	sfx.play("Squish")
-	sfx.play("Squish2")
-	disable_bounce_area()
-	disable_damage_area()
-	Global.camera_shake(40, 0.95)
-	fire_hit_anim.play("default")
-	spawn_powerup()
+	
+	if health <= 0:
+		queue_free()
+	else:
+		fireball_hits = 0
+		invincible = true
+		sfx.play("Squish")
+		sfx.play("Squish2")
+		disable_bounce_area()
+		disable_damage_area()
+		Global.camera_shake(40, 0.95)
+		fire_hit_anim.play("default")
+		spawn_powerup()
 
 func update_sprite():
 	modulate.a = 0.5 if invincible else 1
@@ -136,7 +139,7 @@ func fireball_hit():
 func _on_FireballTimer_timeout():
 	if state_machine.state == "idle":
 		shoot_eye_fireballs()
-		fireball_timer.start(1.5 - anger * 0.5)
+		fireball_timer.start(1.5 - anger * 0.75)
 
 func spawn_powerup():
 	if player == null: return

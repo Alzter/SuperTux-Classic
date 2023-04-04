@@ -263,6 +263,7 @@ collision_layer = 4
 collision_mask = 0
 script = ExtResource( 18 )
 invincible_time = 1.0
+max_health = 8
 fireball_scene = ExtResource( 24 )
 powerup_small_scene = ExtResource( 25 )
 powerup_big_scene = ExtResource( 26 )
