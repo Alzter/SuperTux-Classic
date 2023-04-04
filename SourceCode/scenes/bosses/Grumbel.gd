@@ -22,6 +22,7 @@ func idle():
 func squished():
 	disable_bounce_area()
 	disable_damage_area()
+	Global.camera_shake(40, 0.95)
 
 func disable_bounce_area( disabled = true ):
 	if bounce_area != null:

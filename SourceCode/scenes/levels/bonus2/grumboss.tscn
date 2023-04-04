@@ -44,6 +44,8 @@ tile_data = PoolIntArray( -65533, 5, 0 )
 volume_db = -5.0
 
 [node name="CastleBG" parent="." instance=ExtResource( 5 )]
+offset = Vector2( 0, -35 )
+transform = Transform2D( 1, 0, 0, 1, 0, -35 )
 
 [node name="Grumbel" parent="." instance=ExtResource( 4 )]
 position = Vector2( 320, 352 )
