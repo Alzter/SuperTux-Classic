@@ -9,6 +9,7 @@ onready var bounce_area = $BounceArea
 onready var damage_area = $DamageArea
 onready var sfx = $SFX
 onready var invincible_timer = $InvincibleTimer
+onready var aura = $Aura
 
 export var max_health = 5
 
@@ -31,6 +32,7 @@ func squished():
 
 func update_sprite():
 	modulate.a = 0.5 if invincible else 1
+	aura.visible = !invincible
 
 func be_bounced_upon(body):
 	if body.is_in_group("players"):
