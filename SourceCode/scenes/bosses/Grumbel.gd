@@ -45,8 +45,11 @@ func _ready():
 	_initial_position = position
 
 func set_anger():
-	anger = abs(health - max_health) * (1.0 / (max_health - 1.0))
+	var max_hp = max_health if phase == 1 else max_health_phase_two
+	anger = abs(health - max_hp) * (1.0 / (max_hp - 1.0))
 	if phase == 1: anger *= 0.8
+	else: anger += 0.5
+	anger = clamp(anger, 0, 1)
 	# Anger is 0 when grumbel is on max health, and 1 when grumbel is about to die
 	# The lower health grumbel has, the angrier he is
 
@@ -120,6 +123,8 @@ func get_hit():
 	if health <= 0:
 		if phase == 1:
 			state_machine.set_state("fake_death")
+		else:
+			queue_free()
 	else:
 		state_machine.set_state("squished")
 
