@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=27 format=2]
 
 [ext_resource path="res://images/bosses/grumbel/body/idle.png" type="Texture" id=1]
 [ext_resource path="res://scenes/shaders/Grumbel.tres" type="Material" id=2]
@@ -15,6 +15,9 @@
 [ext_resource path="res://images/bosses/grumbel/cape/squished5.png" type="Texture" id=13]
 [ext_resource path="res://scenes/master/bounce_area.tscn" type="PackedScene" id=14]
 [ext_resource path="res://scenes/master/damage_area.tscn" type="PackedScene" id=15]
+[ext_resource path="res://scenes/bosses/GrumbelAI.gd" type="Script" id=16]
+[ext_resource path="res://scenes/bosses/GrumbelSM.gd" type="Script" id=17]
+[ext_resource path="res://scenes/bosses/Grumbel.gd" type="Script" id=18]
 
 [sub_resource type="CanvasItemMaterial" id=3]
 blend_mode = 2
@@ -206,14 +209,19 @@ tracks/4/keys = {
 }
 
 [sub_resource type="RectangleShape2D" id=8]
-extents = Vector2( 36, 18 )
+extents = Vector2( 32, 18 )
 
 [sub_resource type="RectangleShape2D" id=9]
-extents = Vector2( 16, 32 )
+extents = Vector2( 20, 26 )
 
 [node name="Grumbel" type="KinematicBody2D"]
+script = ExtResource( 18 )
 
 [node name="StateMachine" type="Node" parent="."]
+script = ExtResource( 17 )
+
+[node name="AI" type="Node" parent="."]
+script = ExtResource( 16 )
 
 [node name="Aura" type="Sprite" parent="."]
 material = SubResource( 3 )
@@ -231,7 +239,6 @@ playing = true
 
 [node name="Body" type="AnimatedSprite" parent="."]
 material = ExtResource( 2 )
-z_index = 15
 frames = SubResource( 1 )
 animation = "idle"
 playing = true
@@ -245,12 +252,12 @@ anims/squished = SubResource( 5 )
 z_index = 50
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BounceArea"]
-position = Vector2( 0, -32 )
+position = Vector2( 0, -22 )
 shape = SubResource( 8 )
 
 [node name="DamageArea" parent="." instance=ExtResource( 15 )]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DamageArea"]
-position = Vector2( 0, 4 )
+position = Vector2( 0, 20 )
 z_index = 40
 shape = SubResource( 9 )

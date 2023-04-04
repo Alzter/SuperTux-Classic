@@ -46,4 +46,4 @@ volume_db = -5.0
 [node name="CastleBG" parent="." instance=ExtResource( 5 )]
 
 [node name="Grumbel" parent="." instance=ExtResource( 4 )]
-position = Vector2( 320, 280 )
+position = Vector2( 320, 352 )
