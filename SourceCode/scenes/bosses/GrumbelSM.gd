@@ -28,6 +28,8 @@ func _ready():
 	
 	yield(get_tree().create_timer(1), "timeout")
 	call_deferred("set_state", "idle")
+	
+	if host.phase == 2: host.commence_phase_two()
 
 func _state_logic(delta):
 	host.set_anger()

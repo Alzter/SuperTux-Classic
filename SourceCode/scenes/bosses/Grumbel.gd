@@ -1,5 +1,7 @@
 extends KinematicBody2D
 
+export var phase = 1
+
 export var invincible_time = 2.0
 export var fireballs_per_hit = 3
 
@@ -36,9 +38,8 @@ var _angle = 0
 var player = null
 var anger = 0
 
-var phase = 1
-
 signal fake_death
+signal phase_two
 
 func _ready():
 	_initial_position = position
@@ -98,11 +99,6 @@ func fake_death():
 	velocity = Vector2.ZERO
 	emit_signal("fake_death")
 	Music.pitch_slide_down()
-	enable_phase_two()
-
-func enable_phase_two():
-	health = max_health_phase_two
-	phase = 2
 
 func fake_death_loop(delta):
 	velocity.x = 0
@@ -142,6 +138,18 @@ func _on_AnimationPlayer_animation_finished(anim_name):
 	match anim_name:
 		"squished":
 			state_machine.set_state("idle")
+		"angry":
+			commence_phase_two()
+
+func commence_phase_two():
+	Music.play("BossAttack07")
+	health = max_health_phase_two
+	phase = 2
+	invincible = false
+	disable_bounce_area(false)
+	disable_damage_area(false)
+	state_machine.set_state("idle")
+	emit_signal("phase_two")
 
 func set_invincible(time = invincible_time):
 	invincible = true
@@ -184,7 +192,6 @@ func spawn_powerup():
 	var powerup = instance_node(powerup_to_spawn, powerup_spawn_pos.global_position)
 	powerup.velocity = Vector2(0, -300)
 	powerup.intangibility_timer = 0.5
-
 
 func _on_VisibilityNotifier2D_screen_exited():
 	if state_machine.state == "fake_death":
