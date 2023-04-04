@@ -141,6 +141,8 @@ func _on_FireballTimer_timeout():
 func spawn_powerup():
 	if player == null: return
 	
+	if player.state == player.states.FIRE: return
+	
 	var player_is_small = player.state == player.states.SMALL
 	var powerup_to_spawn = powerup_small_scene if player_is_small else powerup_big_scene
 	
