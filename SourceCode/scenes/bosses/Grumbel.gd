@@ -3,6 +3,10 @@ extends KinematicBody2D
 export var invincible_time = 2.0
 export var fireballs_per_hit = 5
 
+export var max_health = 5
+
+export var fireball_scene : PackedScene
+
 onready var ai = $AI
 onready var state_machine = $StateMachine
 onready var anim_player = $AnimationPlayer
@@ -12,8 +16,8 @@ onready var damage_area = $DamageArea
 onready var sfx = $SFX
 onready var invincible_timer = $InvincibleTimer
 onready var aura = $Aura
-
-export var max_health = 5
+onready var eye_positions = $EyePositions
+onready var fireball_timer = $FireballTimer
 
 onready var health = max_health
 
@@ -28,21 +32,33 @@ func _ready():
 	_initial_position = position
 
 func idle():
-	pass
+	fireball_timer.start()
 	#disable_bounce_area(false)
 	#disable_damage_area(false)
 
 func idle_loop(delta):
 	var move_speed = 3
-	var radius = 150
-	_angle += delta * move_speed
-	var offset = Vector2(sin(_angle), cos(_angle * 0.5)) * radius
-	offset.x *= 2
+	var radius = Vector2(200, 200)
 	var lerp_speed = 0.05
+	
+	_angle += delta * move_speed
+	var offset = Vector2(sin(_angle * 0.6), cos(_angle * 0.5)) * radius
 	
 	var new_position = _initial_position + offset
 	position.x = lerp(position.x, new_position.x, lerp_speed)
 	position.y = lerp(position.y, new_position.y, lerp_speed)
+
+func shoot_eye_fireballs(fireball_packed_scene = fireball_scene):
+	sfx.play("Fireball")
+	for eye in eye_positions.get_children():
+		var eye_position = eye.global_position
+		instance_node(fireball_packed_scene, eye_position)
+
+func instance_node(packedscene, global_pos):
+	var child = packedscene.instance()
+	child.global_position = global_pos
+	Global.current_scene.add_child(child)
+	return child
 
 func squished():
 	fireball_hits = 0
@@ -101,3 +117,9 @@ func fireball_hit():
 		fire_hit_anim.stop()
 		fire_hit_anim.play("firehit")
 		Global.camera_shake(10, 0.7)
+
+
+func _on_FireballTimer_timeout():
+	if state_machine.state == "idle":
+		shoot_eye_fireballs()
+		fireball_timer.start()

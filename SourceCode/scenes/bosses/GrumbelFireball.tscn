@@ -1,9 +1,11 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=16 format=2]
 
-[ext_resource path="res://images/player/tux/fireball/fireball.png" type="Texture" id=1]
-[ext_resource path="res://scenes/player/Fireball.gd" type="Script" id=2]
-[ext_resource path="res://images/enemies/flame/flame-1.png" type="Texture" id=3]
-[ext_resource path="res://images/enemies/flame/flame-0.png" type="Texture" id=4]
+[ext_resource path="res://images/enemies/flame/flame-1.png" type="Texture" id=1]
+[ext_resource path="res://images/enemies/flame/flame-0.png" type="Texture" id=2]
+[ext_resource path="res://scenes/bosses/GrumbelFireball.gd" type="Script" id=3]
+[ext_resource path="res://scenes/master/SFX.gd" type="Script" id=4]
+[ext_resource path="res://scenes/master/damage_area.tscn" type="PackedScene" id=5]
+[ext_resource path="res://images/player/tux/fireball/fireball.png" type="Texture" id=6]
 
 [sub_resource type="Animation" id=4]
 resource_name = "default"
@@ -112,114 +114,127 @@ tracks/3/keys = {
 "values": [ Vector2( 0.8, 0.8 ), Vector2( 0, 0 ) ]
 }
 
-[sub_resource type="CanvasItemMaterial" id=5]
+[sub_resource type="RectangleShape2D" id=10]
+extents = Vector2( 16, 16 )
+
+[sub_resource type="CanvasItemMaterial" id=11]
 blend_mode = 1
 
-[sub_resource type="SpriteFrames" id=6]
+[sub_resource type="CanvasItemMaterial" id=12]
+blend_mode = 1
+
+[sub_resource type="SpriteFrames" id=13]
 animations = [ {
-"frames": [ ExtResource( 4 ), ExtResource( 3 ) ],
+"frames": [ ExtResource( 2 ), ExtResource( 1 ) ],
 "loop": true,
 "name": "default",
 "speed": 20.0
 } ]
 
-[sub_resource type="CanvasItemMaterial" id=1]
+[sub_resource type="RectangleShape2D" id=14]
+extents = Vector2( 8, 8 )
+
+[sub_resource type="CanvasItemMaterial" id=15]
 blend_mode = 1
 
-[sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 8, 8 )
+[sub_resource type="SpriteFrames" id=16]
+animations = [ {
+"frames": [ ExtResource( 2 ), ExtResource( 1 ) ],
+"loop": true,
+"name": "default",
+"speed": 20.0
+} ]
 
-[sub_resource type="RectangleShape2D" id=3]
-extents = Vector2( 8, 8 )
-
-[node name="Fireball" type="KinematicBody2D" groups=["fireballs"]]
+[node name="Fireball" type="KinematicBody2D" groups=["enemies"]]
+z_index = 10
 collision_layer = 0
-script = ExtResource( 2 )
+script = ExtResource( 3 )
+initial_speed = 3
+acceleration = 10
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "default"
 anims/default = SubResource( 4 )
 anims/dissipate = SubResource( 7 )
 
-[node name="Flash" type="Control" parent="."]
-modulate = Color( 0, 0, 0, 1 )
-rect_scale = Vector2( 1e-05, 1e-05 )
+[node name="DamageArea" parent="." groups=["enemies"] instance=ExtResource( 5 )]
 
-[node name="Glow" type="AnimatedSprite" parent="Flash"]
-material = SubResource( 5 )
-z_index = 4096
-frames = SubResource( 6 )
-frame = 1
-playing = true
-offset = Vector2( 0, -2 )
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DamageArea"]
+shape = SubResource( 10 )
 
-[node name="Glow2" type="AnimatedSprite" parent="Flash"]
-material = SubResource( 5 )
-scale = Vector2( 2, 2 )
-z_index = 4096
-frames = SubResource( 6 )
-playing = true
-offset = Vector2( 0, -2 )
+[node name="SFX" type="Node2D" parent="."]
+script = ExtResource( 4 )
 
-[node name="Glow3" type="AnimatedSprite" parent="Flash"]
-material = SubResource( 5 )
-scale = Vector2( 4, 4 )
-z_index = 4096
-frames = SubResource( 6 )
-playing = true
-offset = Vector2( 0, -2 )
-
-[node name="Glow4" type="AnimatedSprite" parent="Flash"]
-modulate = Color( 1, 0, 0, 1 )
-material = SubResource( 5 )
-scale = Vector2( 4, 4 )
-z_index = 4096
-frames = SubResource( 6 )
-frame = 1
-playing = true
-offset = Vector2( 0, -2 )
+[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
+visible = false
+rect = Rect2( -64, -64, 128, 128 )
 
 [node name="Control" type="Control" parent="."]
 visible = false
 rect_rotation = 360.0
 
 [node name="Sprite" type="Sprite" parent="Control"]
-texture = ExtResource( 1 )
+texture = ExtResource( 6 )
 
 [node name="Glow" type="Sprite" parent="Control"]
 visible = false
-material = SubResource( 1 )
-texture = ExtResource( 1 )
+material = SubResource( 11 )
+texture = ExtResource( 6 )
 
 [node name="Glow2" type="AnimatedSprite" parent="Control"]
 modulate = Color( 1, 0, 0, 0.541176 )
-material = SubResource( 5 )
+material = SubResource( 12 )
 scale = Vector2( 2, 2 )
 z_index = 1
-frames = SubResource( 6 )
+frames = SubResource( 13 )
 playing = true
 offset = Vector2( 0, -2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
-shape = SubResource( 2 )
+shape = SubResource( 14 )
 
-[node name="EnemyKill" type="Area2D" parent="."]
-visible = false
-collision_layer = 0
-collision_mask = 69
+[node name="Flash" type="Control" parent="."]
+modulate = Color( 0, 0, 0, 1 )
+rect_scale = Vector2( 1e-05, 1e-05 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyKill"]
-shape = SubResource( 3 )
+[node name="Glow" type="AnimatedSprite" parent="Flash"]
+material = SubResource( 15 )
+z_index = 4096
+frames = SubResource( 16 )
+frame = 1
+playing = true
+offset = Vector2( 0, -2 )
+
+[node name="Glow2" type="AnimatedSprite" parent="Flash"]
+material = SubResource( 15 )
+scale = Vector2( 2, 2 )
+z_index = 4096
+frames = SubResource( 16 )
+playing = true
+offset = Vector2( 0, -2 )
+
+[node name="Glow3" type="AnimatedSprite" parent="Flash"]
+material = SubResource( 15 )
+scale = Vector2( 4, 4 )
+z_index = 4096
+frames = SubResource( 16 )
+playing = true
+offset = Vector2( 0, -2 )
+
+[node name="Glow4" type="AnimatedSprite" parent="Flash"]
+modulate = Color( 1, 0, 0, 1 )
+material = SubResource( 15 )
+scale = Vector2( 4, 4 )
+z_index = 4096
+frames = SubResource( 16 )
+frame = 1
+playing = true
+offset = Vector2( 0, -2 )
 
 [node name="DestroyTimer" type="Timer" parent="."]
 process_mode = 0
 wait_time = 0.3
 one_shot = true
 
-[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
-rect = Rect2( -16, -16, 32, 32 )
-
-[connection signal="body_entered" from="EnemyKill" to="." method="_on_EnemyKill_body_entered"]
-[connection signal="timeout" from="DestroyTimer" to="." method="_on_DestroyTimer_timeout"]
 [connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]
+[connection signal="timeout" from="DestroyTimer" to="." method="_on_DestroyTimer_timeout"]

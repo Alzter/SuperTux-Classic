@@ -49,4 +49,4 @@ offset = Vector2( 0, -35 )
 transform = Transform2D( 1, 0, 0, 1, 0, -35 )
 
 [node name="Grumbel" parent="." instance=ExtResource( 4 )]
-position = Vector2( 320, 192 )
+position = Vector2( 320, 256 )
