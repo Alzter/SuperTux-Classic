@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://scenes/shaders/Overlay.gdshader" type="Shader" id=1]
 [ext_resource path="res://scenes/master/Camera.gd" type="Script" id=2]
@@ -6,9 +6,69 @@
 [ext_resource path="res://scenes/bosses/Grumbel.tscn" type="PackedScene" id=4]
 [ext_resource path="res://scenes/backgrounds/CastleBackground.tscn" type="PackedScene" id=5]
 [ext_resource path="res://scenes/backgrounds/assets/SnowfallParticlesLight.tscn" type="PackedScene" id=6]
+[ext_resource path="res://scenes/levels/bonus2/Grumboss.gd" type="Script" id=7]
 [ext_resource path="res://scenes/master/TileMap.tscn" type="PackedScene" id=8]
 [ext_resource path="res://scenes/master/ObjectMap.tscn" type="PackedScene" id=9]
 [ext_resource path="res://scenes/master/Ambience.tscn" type="PackedScene" id=10]
+
+[sub_resource type="CanvasItemMaterial" id=2]
+blend_mode = 3
+
+[sub_resource type="Animation" id=3]
+resource_name = "default"
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Script/Darken/ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Shader:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "phase_two_transition"
+length = 4.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("Script/Darken/ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 2, 4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 0.513726, 0.054902, 0.054902, 1 ), Color( 0, 0, 0, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Shader:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 2, 4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 0, 0, 1 ), Color( 0.501961, 0, 0, 1 ) ]
+}
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 1 )
@@ -22,7 +82,27 @@ music = "Prophecy"
 uses_timer = false
 starting_powerup = 2
 
-[node name="Grumbel" parent="." instance=ExtResource( 4 )]
+[node name="Script" type="Node2D" parent="."]
+script = ExtResource( 7 )
+
+[node name="Darken" type="ParallaxBackground" parent="Script"]
+layer = -50
+
+[node name="ColorRect" type="ColorRect" parent="Script/Darken"]
+material = SubResource( 2 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = 99359.0
+margin_bottom = 99519.0
+rect_min_size = Vector2( 99999, 99999 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Script"]
+root_node = NodePath("../..")
+autoplay = "default"
+anims/default = SubResource( 3 )
+anims/phase_two_transition = SubResource( 4 )
+
+[node name="Grumbel" parent="Script" instance=ExtResource( 4 )]
 position = Vector2( 320, 256 )
 
 [node name="Camera2D" type="Camera2D" parent="."]

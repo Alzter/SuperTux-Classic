@@ -50,15 +50,6 @@ animations = [ {
 "speed": 15.0
 } ]
 
-[sub_resource type="ShaderMaterial" id=16]
-shader = ExtResource( 11 )
-shader_param/rainbow_speed = 3.0
-shader_param/displacement_strength = 1.0
-shader_param/noise_strength = 3.0
-shader_param/brightness_add = -2.0
-shader_param/noise_shimmer_speed = 100.0
-shader_param/color_shimmer_strength = 2.0
-
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
 "frames": [ ExtResource( 1 ) ],
@@ -76,6 +67,15 @@ animations = [ {
 "name": "squished",
 "speed": 15.0
 } ]
+
+[sub_resource type="ShaderMaterial" id=16]
+shader = ExtResource( 11 )
+shader_param/rainbow_speed = 3.0
+shader_param/displacement_strength = 1.0
+shader_param/noise_strength = 3.0
+shader_param/brightness_add = -2.0
+shader_param/noise_shimmer_speed = 100.0
+shader_param/color_shimmer_strength = 2.0
 
 [sub_resource type="Animation" id=15]
 resource_name = "angry"
@@ -666,7 +666,6 @@ extents = Vector2( 20, 26 )
 extents = Vector2( 32, 42 )
 
 [node name="Grumbel" type="KinematicBody2D"]
-z_index = -10
 collision_layer = 4
 collision_mask = 0
 script = ExtResource( 18 )
@@ -689,14 +688,14 @@ z_index = -50
 texture = ExtResource( 4 )
 
 [node name="Cape" type="AnimatedSprite" parent="."]
-modulate = Color( 0, 0, 0, 1 )
+modulate = Color( 0.607843, 0.607843, 0.607843, 1 )
 z_index = -5
 frames = SubResource( 6 )
 animation = "idle"
 playing = true
 
 [node name="Body" type="AnimatedSprite" parent="."]
-material = SubResource( 16 )
+material = ExtResource( 2 )
 frames = SubResource( 1 )
 animation = "idle"
 playing = true
