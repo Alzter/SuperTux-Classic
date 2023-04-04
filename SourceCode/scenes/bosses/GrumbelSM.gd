@@ -24,9 +24,14 @@ func _ready():
 	# Don't do anything until the level title card is gone
 	yield(Global, "level_ready")
 	
+	yield(get_tree().create_timer(1), "timeout")
 	call_deferred("set_state", "idle")
 
 func _state_logic(delta):
+	match state:
+		"idle":
+			host.idle_loop(delta)
+	
 	host.update_sprite()
 
 func _enter_state(new_state, old_state):

@@ -17,13 +17,32 @@ export var max_health = 5
 
 onready var health = max_health
 
+var _initial_position = Vector2()
+
 var invincible = false
 var fireball_hits = 0
+
+var _angle = 0
+
+func _ready():
+	_initial_position = position
 
 func idle():
 	pass
 	#disable_bounce_area(false)
 	#disable_damage_area(false)
+
+func idle_loop(delta):
+	var move_speed = 3
+	var radius = 150
+	_angle += delta * move_speed
+	var offset = Vector2(sin(_angle), cos(_angle * 0.5)) * radius
+	offset.x *= 2
+	var lerp_speed = 0.05
+	
+	var new_position = _initial_position + offset
+	position.x = lerp(position.x, new_position.x, lerp_speed)
+	position.y = lerp(position.y, new_position.y, lerp_speed)
 
 func squished():
 	fireball_hits = 0
@@ -50,7 +69,7 @@ func disable_bounce_area( disabled = true ):
 			child.set_deferred("disabled", disabled)
 
 func disable_damage_area( disabled = true ):
-	set_collision_layer_bit(2, !disabled)
+	#set_collision_layer_bit(2, !disabled)
 	if damage_area != null:
 		for child in damage_area.get_children():
 			child.set_deferred("disabled", disabled)
