@@ -94,6 +94,8 @@ func chomp():
 	anim_player.play("chomp_split")
 	yield(get_tree().create_timer(0.25), "timeout")
 	Global.camera_shake(30, 0.7)
+	if phase == 1:
+		yield(get_tree().create_timer(0.5), "timeout")
 	#yield(anim_player, "animation_finished")
 	
 	var chomp_time = 1 - anger * 0.4 - int(phase == 2) * 0.25
