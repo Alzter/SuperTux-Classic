@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=2]
+[gd_scene load_steps=58 format=2]
 
 [ext_resource path="res://images/bosses/grumbel/body/idle.png" type="Texture" id=1]
 [ext_resource path="res://scenes/shaders/Grumbel.tres" type="Material" id=2]
@@ -28,26 +28,48 @@
 [ext_resource path="res://scenes/objects/PowerupFireFlower.tscn" type="PackedScene" id=26]
 [ext_resource path="res://sounds/enemies/fall.wav" type="AudioStream" id=27]
 [ext_resource path="res://scenes/shaders/GrumbelAngry.tres" type="Material" id=28]
+[ext_resource path="res://images/bosses/grumbel/body/chomp_splitting4.png" type="Texture" id=29]
+[ext_resource path="res://images/bosses/grumbel/body/chomp_smash3.png" type="Texture" id=30]
+[ext_resource path="res://images/bosses/grumbel/body/chomp_smash4.png" type="Texture" id=31]
+[ext_resource path="res://images/bosses/grumbel/body/chomp_smash5.png" type="Texture" id=32]
+[ext_resource path="res://images/bosses/grumbel/body/chomp_splitting3.png" type="Texture" id=33]
+[ext_resource path="res://images/bosses/grumbel/body/chomp_splitting5.png" type="Texture" id=34]
+[ext_resource path="res://images/bosses/grumbel/body/chomp_splitting1.png" type="Texture" id=35]
+[ext_resource path="res://images/bosses/grumbel/body/chomp_splitting2.png" type="Texture" id=36]
+[ext_resource path="res://images/bosses/grumbel/body/chomp_smash2.png" type="Texture" id=37]
+[ext_resource path="res://images/bosses/grumbel/body/chomp_smash1.png" type="Texture" id=38]
+[ext_resource path="res://images/bosses/grumbel/cape/chomp_recover.png" type="Texture" id=39]
+[ext_resource path="res://images/bosses/grumbel/body/chomp_recover.png" type="Texture" id=40]
 
 [sub_resource type="CanvasItemMaterial" id=3]
 blend_mode = 2
 
 [sub_resource type="SpriteFrames" id=6]
 animations = [ {
+"frames": [  ],
+"loop": true,
+"name": "empty",
+"speed": 5.0
+}, {
 "frames": [ ExtResource( 3 ) ],
 "loop": true,
 "name": "idle",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 13 ) ],
+"frames": [ ExtResource( 39 ) ],
 "loop": true,
-"name": "squishrecover",
+"name": "chomp_recover",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 10 ), ExtResource( 8 ) ],
 "loop": false,
 "name": "squished",
 "speed": 15.0
+}, {
+"frames": [ ExtResource( 13 ) ],
+"loop": true,
+"name": "squishrecover",
+"speed": 5.0
 } ]
 
 [sub_resource type="SpriteFrames" id=1]
@@ -57,14 +79,29 @@ animations = [ {
 "name": "idle",
 "speed": 5.0
 }, {
+"frames": [ ExtResource( 40 ) ],
+"loop": true,
+"name": "chomp_recover",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 38 ), ExtResource( 38 ), ExtResource( 38 ), ExtResource( 37 ), ExtResource( 30 ), ExtResource( 31 ), ExtResource( 31 ), ExtResource( 31 ), ExtResource( 32 ) ],
+"loop": false,
+"name": "chomp_smash",
+"speed": 20.0
+}, {
+"frames": [ ExtResource( 5 ), ExtResource( 7 ), ExtResource( 7 ), ExtResource( 7 ), ExtResource( 7 ), ExtResource( 6 ), ExtResource( 9 ) ],
+"loop": false,
+"name": "squished",
+"speed": 15.0
+}, {
 "frames": [ ExtResource( 12 ) ],
 "loop": true,
 "name": "squishrecover",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 5 ), ExtResource( 7 ), ExtResource( 7 ), ExtResource( 7 ), ExtResource( 7 ), ExtResource( 6 ), ExtResource( 9 ) ],
+"frames": [ ExtResource( 35 ), ExtResource( 36 ), ExtResource( 35 ), ExtResource( 35 ), ExtResource( 33 ), ExtResource( 29 ), ExtResource( 34 ) ],
 "loop": false,
-"name": "squished",
+"name": "chomp_split",
 "speed": 15.0
 } ]
 
