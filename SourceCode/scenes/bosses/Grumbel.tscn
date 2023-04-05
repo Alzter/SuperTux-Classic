@@ -1,4 +1,4 @@
-[gd_scene load_steps=58 format=2]
+[gd_scene load_steps=60 format=2]
 
 [ext_resource path="res://images/bosses/grumbel/body/idle.png" type="Texture" id=1]
 [ext_resource path="res://scenes/shaders/Grumbel.tres" type="Material" id=2]
@@ -254,6 +254,62 @@ tracks/9/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 1,
 "values": [ -10 ]
+}
+
+[sub_resource type="Animation" id=19]
+resource_name = "chomp_smash"
+length = 0.95
+tracks/0/type = "value"
+tracks/0/path = NodePath("Body:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.9 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ "chomp_smash", "chomp_recover" ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Cape:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.9 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ "empty", "chomp_recover" ]
+}
+
+[sub_resource type="Animation" id=20]
+resource_name = "chomp_split"
+length = 0.75
+tracks/0/type = "value"
+tracks/0/path = NodePath("Body:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ "chomp_split" ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Cape:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ "empty" ]
 }
 
 [sub_resource type="Animation" id=13]
@@ -746,18 +802,21 @@ texture = ExtResource( 4 )
 modulate = Color( 0.607843, 0.607843, 0.607843, 1 )
 z_index = -5
 frames = SubResource( 6 )
-animation = "idle"
+animation = "empty"
 playing = true
 
 [node name="Body" type="AnimatedSprite" parent="."]
 material = ExtResource( 2 )
 frames = SubResource( 1 )
-animation = "idle"
+animation = "chomp_split"
+frame = 6
 playing = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "idle"
 anims/angry = SubResource( 15 )
+anims/chomp_smash = SubResource( 19 )
+anims/chomp_split = SubResource( 20 )
 anims/fake_death = SubResource( 13 )
 anims/idle = SubResource( 4 )
 anims/phase_two = SubResource( 14 )
