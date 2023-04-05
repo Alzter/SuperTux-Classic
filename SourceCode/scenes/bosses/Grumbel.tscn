@@ -1,4 +1,4 @@
-[gd_scene load_steps=62 format=2]
+[gd_scene load_steps=63 format=2]
 
 [ext_resource path="res://images/bosses/grumbel/body/idle.png" type="Texture" id=1]
 [ext_resource path="res://scenes/shaders/Grumbel.tres" type="Material" id=2]
@@ -826,6 +826,9 @@ extents = Vector2( 20, 26 )
 [sub_resource type="RectangleShape2D" id=10]
 extents = Vector2( 32, 42 )
 
+[sub_resource type="RectangleShape2D" id=21]
+extents = Vector2( 76, 64 )
+
 [node name="Grumbel" type="KinematicBody2D"]
 collision_layer = 4
 collision_mask = 0
@@ -852,14 +855,13 @@ texture = ExtResource( 4 )
 modulate = Color( 0.607843, 0.607843, 0.607843, 1 )
 z_index = -5
 frames = SubResource( 6 )
-animation = "empty"
+animation = "chomp_recover"
 playing = true
 
 [node name="Body" type="AnimatedSprite" parent="."]
 material = ExtResource( 2 )
 frames = SubResource( 1 )
-animation = "chomp_smash"
-frame = 8
+animation = "chomp_recover"
 playing = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -927,11 +929,11 @@ volume_db = 1.0
 
 [node name="Chomp" type="AudioStreamPlayer" parent="SFX"]
 stream = ExtResource( 41 )
-volume_db = -4.0
+volume_db = 1.0
 
 [node name="Split" type="AudioStreamPlayer" parent="SFX"]
 stream = ExtResource( 42 )
-volume_db = -3.0
+volume_db = -1.0
 
 [node name="InvincibleTimer" type="Timer" parent="."]
 process_mode = 0
@@ -961,6 +963,13 @@ rect = Rect2( -128, -128, 256, 256 )
 [node name="AttackTimer" type="Timer" parent="."]
 process_mode = 0
 one_shot = true
+
+[node name="ChompHitbox" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ChompHitbox"]
+shape = SubResource( 21 )
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
 [connection signal="timeout" from="InvincibleTimer" to="." method="_on_InvincibleTimer_timeout"]

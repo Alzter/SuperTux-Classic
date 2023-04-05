@@ -25,6 +25,7 @@ onready var eye_positions = $EyePositions
 onready var powerup_spawn_pos = $PowerupSpawn
 onready var fireball_timer = $FireballTimer
 onready var attack_timer = $AttackTimer
+onready var chomp_hitbox = $ChompHitbox
 
 onready var health = max_health
 onready var tween = $Tween
@@ -80,19 +81,32 @@ func chomp():
 	disable_damage_area()
 	
 	anim_player.play("chomp_split")
-	yield(anim_player, "animation_finished")
+	yield(get_tree().create_timer(0.25), "timeout")
+	Global.camera_shake(30, 0.7)
+	#yield(anim_player, "animation_finished")
 	
 	tween.interpolate_property(self, "position", position, player.position, 1, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
 	tween.start()
-	yield(tween, "tween_all_completed")
+	yield(get_tree().create_timer(0.75), "timeout")
 	
 	anim_player.play("chomp_smash")
+	yield(get_tree().create_timer(0.2), "timeout")
+	Global.camera_shake(50, 0.7)
+	chomp_kill_player()
+	
 	yield(anim_player, "animation_finished")
 	
 	idle_animation()
 	invincible = false
 	disable_bounce_area(false)
 	disable_damage_area(false)
+
+func chomp_kill_player():
+	for body in chomp_hitbox.get_overlapping_bodies():
+		if body.is_in_group("players"):
+			if !body.invincible:
+				body.global_position.x = global_position.x
+				body.die()
 
 func shoot_eye_fireballs(fireball_packed_scene = fireball_scene):
 	Global.camera_shake(50, 0.7)
