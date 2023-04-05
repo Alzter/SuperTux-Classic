@@ -85,21 +85,24 @@ func chomp():
 	Global.camera_shake(30, 0.7)
 	#yield(anim_player, "animation_finished")
 	
-	tween.interpolate_property(self, "position", position, player.position, 1, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
+	var chomp_time = 1 - anger * 0.4 - int(phase == 2) * 0.25
+	
+	tween.interpolate_property(self, "position", position, player.position, chomp_time, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
 	tween.start()
-	yield(get_tree().create_timer(0.75), "timeout")
+	yield(get_tree().create_timer(chomp_time * 0.75), "timeout")
 	
 	anim_player.play("chomp_smash")
 	yield(get_tree().create_timer(0.2), "timeout")
 	Global.camera_shake(50, 0.7)
 	chomp_kill_player()
+	invincible = false
+	disable_bounce_area(false)
+	disable_damage_area(false)
 	
 	yield(anim_player, "animation_finished")
 	
 	idle_animation()
-	invincible = false
-	disable_bounce_area(false)
-	disable_damage_area(false)
+	yield(get_tree(), "idle_frame")
 
 func chomp_kill_player():
 	for body in chomp_hitbox.get_overlapping_bodies():

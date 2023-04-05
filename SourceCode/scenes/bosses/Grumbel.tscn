@@ -827,7 +827,7 @@ extents = Vector2( 20, 26 )
 extents = Vector2( 32, 42 )
 
 [sub_resource type="RectangleShape2D" id=21]
-extents = Vector2( 76, 64 )
+extents = Vector2( 76, 48 )
 
 [node name="Grumbel" type="KinematicBody2D"]
 collision_layer = 4
@@ -962,6 +962,7 @@ rect = Rect2( -128, -128, 256, 256 )
 
 [node name="AttackTimer" type="Timer" parent="."]
 process_mode = 0
+wait_time = 4.0
 one_shot = true
 
 [node name="ChompHitbox" type="Area2D" parent="."]

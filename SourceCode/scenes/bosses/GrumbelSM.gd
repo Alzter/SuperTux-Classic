@@ -58,12 +58,11 @@ func _enter_state(new_state, old_state):
 		# IF Grumbel is in an attacking state,
 		
 		# Execute the attack and wait until it finishes
-		host.call(new_state)
-		#yield( host.call(new_state), "completed" )
+		yield( host.call(new_state), "completed" )
 		
 		# Then if he's still in the same state, set his state to idle again
-		#if state == new_state:
-		#	set_state("idle")
+		if state == new_state:
+			set_state("idle")
 	
 	elif host.has_method(new_state): host.call(new_state)
 
