@@ -23,8 +23,13 @@ func _ready():
 	add_state("fake_death")
 	add_state("phase_two_transition")
 	
+	# ATTACKS
+	add_state("chomp")
+	
 	# Don't do anything until the level title card is gone
 	yield(Global, "level_ready")
+	
+	host.player = Global.player
 	
 	yield(get_tree().create_timer(1), "timeout")
 	call_deferred("set_state", "idle")
@@ -43,20 +48,22 @@ func _state_logic(delta):
 	host.update_sprite()
 
 func _enter_state(new_state, old_state):
-	if host.anim_player.has_animation(new_state):
-		host.anim_player.play(new_state)
-	if new_state == "idle" and host.phase == 2:
-		host.anim_player.play("phase_two")
+	if new_state == "idle":
+		host.idle_animation()
+	else:
+		if host.anim_player.has_animation(new_state):
+			host.anim_player.play(new_state)
 	
 	if new_state in host.ai.ATTACKS:
 		# IF Grumbel is in an attacking state,
 		
 		# Execute the attack and wait until it finishes
-		yield( host.call(new_state), "completed" )
+		host.call(new_state)
+		#yield( host.call(new_state), "completed" )
 		
 		# Then if he's still in the same state, set his state to idle again
-		if state == new_state:
-			set_state("idle")
+		#if state == new_state:
+		#	set_state("idle")
 	
 	elif host.has_method(new_state): host.call(new_state)
 

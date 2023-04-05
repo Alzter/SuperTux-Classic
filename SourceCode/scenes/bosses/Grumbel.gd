@@ -22,8 +22,9 @@ onready var sfx = $SFX
 onready var invincible_timer = $InvincibleTimer
 onready var aura = $Aura
 onready var eye_positions = $EyePositions
-onready var fireball_timer = $FireballTimer
 onready var powerup_spawn_pos = $PowerupSpawn
+onready var fireball_timer = $FireballTimer
+onready var attack_timer = $AttackTimer
 
 onready var health = max_health
 onready var tween = $Tween
@@ -32,11 +33,13 @@ var _initial_position = Vector2()
 var velocity = Vector2()
 
 var invincible = false
+var hurt = false
 var fireball_hits = 0
 
 var _angle = 0
-var player = null
 var anger = 0
+
+var player = null
 
 signal fake_death
 signal phase_two
@@ -55,6 +58,7 @@ func set_anger():
 
 func idle():
 	fireball_timer.start()
+	attack_timer.start()
 	#disable_bounce_area(false)
 	#disable_damage_area(false)
 
@@ -69,6 +73,26 @@ func idle_loop(delta):
 	var new_position = _initial_position + offset
 	position.x = lerp(position.x, new_position.x, lerp_speed)
 	position.y = lerp(position.y, new_position.y, lerp_speed)
+
+func chomp():
+	invincible = true
+	disable_bounce_area()
+	disable_damage_area()
+	
+	anim_player.play("chomp_split")
+	yield(anim_player, "animation_finished")
+	
+	tween.interpolate_property(self, "position", position, player.position, 1, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
+	tween.start()
+	yield(tween, "tween_all_completed")
+	
+	anim_player.play("chomp_smash")
+	yield(anim_player, "animation_finished")
+	
+	idle_animation()
+	invincible = false
+	disable_bounce_area(false)
+	disable_damage_area(false)
 
 func shoot_eye_fireballs(fireball_packed_scene = fireball_scene):
 	Global.camera_shake(50, 0.7)
@@ -87,6 +111,7 @@ func squished():
 	disable_bounce_area()
 	disable_damage_area()
 	invincible = true
+	hurt = true
 	fireball_hits = 0
 	sfx.play("Squish")
 	sfx.play("Squish2")
@@ -109,8 +134,8 @@ func fake_death_loop(delta):
 	position += velocity * delta
 
 func update_sprite():
-	modulate.a = 0.5 if invincible else 1
-	aura.visible = !invincible
+	modulate.a = 0.5 if (invincible and hurt) else 1
+	aura.visible = !(invincible and hurt)
 
 func be_bounced_upon(body):
 	if body.is_in_group("players"):
@@ -151,6 +176,7 @@ func commence_phase_two():
 	health = max_health_phase_two
 	phase = 2
 	invincible = false
+	hurt = false
 	disable_bounce_area(false)
 	disable_damage_area(false)
 	state_machine.set_state("idle")
@@ -162,6 +188,7 @@ func set_invincible(time = invincible_time):
 
 func _on_InvincibleTimer_timeout():
 	invincible = false
+	hurt = false
 	disable_bounce_area(false)
 	disable_damage_area(false)
 
@@ -209,3 +236,11 @@ func phase_two_transition():
 	var pos_y = _initial_position.y - Global.TILE_SIZE * 4
 	tween.interpolate_property(self, "position:y", position.y, pos_y, 6, Tween.TRANS_SINE, Tween.EASE_OUT)
 	tween.start()
+
+func _on_AttackTimer_timeout():
+	if state_machine.state == "idle":
+		ai.execute_random_attack()
+
+func idle_animation():
+	if phase == 1: anim_player.play("idle")
+	else: anim_player.play("phase_two")

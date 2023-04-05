@@ -258,7 +258,6 @@ tracks/9/keys = {
 
 [sub_resource type="Animation" id=19]
 resource_name = "chomp_smash"
-length = 0.95
 tracks/0/type = "value"
 tracks/0/path = NodePath("Body:animation")
 tracks/0/interp = 1
@@ -282,6 +281,18 @@ tracks/1/keys = {
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
 "values": [ "empty", "chomp_recover" ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath(".:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 0, 1 ),
+"update": 0,
+"values": [ Color( 0.607843, 0.607843, 0.607843, 1 ), Color( 1, 1, 1, 1 ) ]
 }
 
 [sub_resource type="Animation" id=20]
@@ -310,6 +321,18 @@ tracks/1/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 1,
 "values": [ "empty" ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath(".:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 0.607843, 0.607843, 0.607843, 1 ) ]
 }
 
 [sub_resource type="Animation" id=13]
@@ -802,14 +825,13 @@ texture = ExtResource( 4 )
 modulate = Color( 0.607843, 0.607843, 0.607843, 1 )
 z_index = -5
 frames = SubResource( 6 )
-animation = "empty"
+animation = "chomp_recover"
 playing = true
 
 [node name="Body" type="AnimatedSprite" parent="."]
 material = ExtResource( 2 )
 frames = SubResource( 1 )
-animation = "chomp_split"
-frame = 6
+animation = "chomp_recover"
 playing = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -900,7 +922,12 @@ rect = Rect2( -128, -128, 256, 256 )
 
 [node name="Tween" type="Tween" parent="."]
 
+[node name="AttackTimer" type="Timer" parent="."]
+process_mode = 0
+one_shot = true
+
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
 [connection signal="timeout" from="InvincibleTimer" to="." method="_on_InvincibleTimer_timeout"]
 [connection signal="timeout" from="FireballTimer" to="." method="_on_FireballTimer_timeout"]
 [connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]
+[connection signal="timeout" from="AttackTimer" to="." method="_on_AttackTimer_timeout"]
