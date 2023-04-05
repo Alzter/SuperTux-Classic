@@ -1,4 +1,4 @@
-[gd_scene load_steps=60 format=2]
+[gd_scene load_steps=62 format=2]
 
 [ext_resource path="res://images/bosses/grumbel/body/idle.png" type="Texture" id=1]
 [ext_resource path="res://scenes/shaders/Grumbel.tres" type="Material" id=2]
@@ -40,6 +40,8 @@
 [ext_resource path="res://images/bosses/grumbel/body/chomp_smash1.png" type="Texture" id=38]
 [ext_resource path="res://images/bosses/grumbel/cape/chomp_recover.png" type="Texture" id=39]
 [ext_resource path="res://images/bosses/grumbel/body/chomp_recover.png" type="Texture" id=40]
+[ext_resource path="res://sounds/bosses/grumbel/chomp.wav" type="AudioStream" id=41]
+[ext_resource path="res://sounds/bosses/grumbel/chomp_split.wav" type="AudioStream" id=42]
 
 [sub_resource type="CanvasItemMaterial" id=3]
 blend_mode = 2
@@ -258,6 +260,7 @@ tracks/9/keys = {
 
 [sub_resource type="Animation" id=19]
 resource_name = "chomp_smash"
+length = 0.9
 tracks/0/type = "value"
 tracks/0/path = NodePath("Body:animation")
 tracks/0/interp = 1
@@ -265,7 +268,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.9 ),
+"times": PoolRealArray( 0, 0.8 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
 "values": [ "chomp_smash", "chomp_recover" ]
@@ -277,7 +280,7 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.9 ),
+"times": PoolRealArray( 0, 0.8 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
 "values": [ "empty", "chomp_recover" ]
@@ -294,10 +297,22 @@ tracks/2/keys = {
 "update": 0,
 "values": [ Color( 0.607843, 0.607843, 0.607843, 1 ), Color( 1, 1, 1, 1 ) ]
 }
+tracks/3/type = "value"
+tracks/3/path = NodePath("SFX/Chomp:playing")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0.2 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
 
 [sub_resource type="Animation" id=20]
 resource_name = "chomp_split"
-length = 0.75
+length = 0.3
 tracks/0/type = "value"
 tracks/0/path = NodePath("Body:animation")
 tracks/0/interp = 1
@@ -333,6 +348,18 @@ tracks/2/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 0,
 "values": [ Color( 0.607843, 0.607843, 0.607843, 1 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("SFX/Split:playing")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
 }
 
 [sub_resource type="Animation" id=13]
@@ -825,13 +852,14 @@ texture = ExtResource( 4 )
 modulate = Color( 0.607843, 0.607843, 0.607843, 1 )
 z_index = -5
 frames = SubResource( 6 )
-animation = "chomp_recover"
+animation = "empty"
 playing = true
 
 [node name="Body" type="AnimatedSprite" parent="."]
 material = ExtResource( 2 )
 frames = SubResource( 1 )
-animation = "chomp_recover"
+animation = "chomp_smash"
+frame = 8
 playing = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -896,6 +924,14 @@ bus = "Sounds"
 [node name="FakeDie" type="AudioStreamPlayer" parent="SFX"]
 stream = ExtResource( 27 )
 volume_db = 1.0
+
+[node name="Chomp" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource( 41 )
+volume_db = -4.0
+
+[node name="Split" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource( 42 )
+volume_db = -3.0
 
 [node name="InvincibleTimer" type="Timer" parent="."]
 process_mode = 0
