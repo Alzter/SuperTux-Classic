@@ -855,13 +855,13 @@ texture = ExtResource( 4 )
 modulate = Color( 0.607843, 0.607843, 0.607843, 1 )
 z_index = -5
 frames = SubResource( 6 )
-animation = "chomp_recover"
+animation = "idle"
 playing = true
 
 [node name="Body" type="AnimatedSprite" parent="."]
 material = ExtResource( 2 )
 frames = SubResource( 1 )
-animation = "chomp_recover"
+animation = "idle"
 playing = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

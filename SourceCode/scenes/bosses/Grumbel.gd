@@ -2,6 +2,9 @@ extends KinematicBody2D
 
 export var phase = 1
 
+export var attack_timer_phase_1 = [6,12]
+export var attack_timer_phase_2 = [1,5]
+
 export var invincible_time = 2.0
 export var fireballs_per_hit = 3
 
@@ -29,6 +32,8 @@ onready var chomp_hitbox = $ChompHitbox
 
 onready var health = max_health
 onready var tween = $Tween
+
+onready var rng = RandomNumberGenerator.new()
 
 var _initial_position = Vector2()
 var velocity = Vector2()
@@ -59,9 +64,15 @@ func set_anger():
 
 func idle():
 	fireball_timer.start()
-	attack_timer.start()
+	set_attack_timer()
 	#disable_bounce_area(false)
 	#disable_damage_area(false)
+
+func set_attack_timer():
+	var attack_time_min_max = attack_timer_phase_1 if phase == 1 else attack_timer_phase_2
+	var attack_time = rng.randf_range(attack_time_min_max[0], attack_time_min_max[1])
+	attack_time *= (1 - anger * 0.75)
+	attack_timer.start(attack_time)
 
 func idle_loop(delta):
 	var move_speed = 3 + anger * 1.5
