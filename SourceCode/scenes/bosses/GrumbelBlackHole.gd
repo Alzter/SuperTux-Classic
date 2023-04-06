@@ -4,8 +4,8 @@ onready var hitbox = $CollisionShape2D
 onready var tween = $Tween
 
 export var master_pull_strength = 1.0
-export var pull_strength = Vector2(200, 300)
-export var resist_pull_strength = Vector2(2, 100)
+export var pull_strength = Vector2(400, 200)
+export var resist_pull_strength = Vector2(2, 200)
 
 onready var sprite = $Sprite
 
@@ -20,7 +20,7 @@ func appear():
 
 func dissipate():
 	tween.stop_all()
-	tween.interpolate_property(hitbox.shape, "radius", hitbox.shape.radius, 0, 0.25, Tween.TRANS_SINE, Tween.EASE_IN)
+	tween.interpolate_property(hitbox.shape, "radius", hitbox.shape.radius, 1, 0.25, Tween.TRANS_SINE, Tween.EASE_IN)
 	tween.start()
 	yield(tween, "tween_completed")
 	queue_free()
@@ -44,6 +44,8 @@ func _process(delta):
 			pull_speed *= master_pull_strength
 			
 			var pull_velocity = pull_direction * pull_factor * pull_speed
+			
+			pull_velocity.y = clamp(pull_velocity.y, -Global.gravity, Global.gravity)
 			
 			#body.position += pull_velocity
 			body.velocity += pull_velocity

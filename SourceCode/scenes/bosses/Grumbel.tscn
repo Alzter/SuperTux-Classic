@@ -67,14 +67,14 @@
 min_value = -1.0
 _data = [ Vector2( 0, 0 ), 0.0, 1.44689, 0, 1, Vector2( 0.0753968, 0.109091 ), 0.0, 0.0, 0, 0, Vector2( 0.162698, -0.145455 ), 0.0, 0.0, 0, 0, Vector2( 0.3, 0 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 1, 0 ]
 
-[sub_resource type="CurveTexture" id=28]
+[sub_resource type="CurveTexture" id=30]
 curve = SubResource( 27 )
 
 [sub_resource type="ShaderMaterial" id=29]
 shader = ExtResource( 61 )
 shader_param/strength = 0.1
 shader_param/curve_scale = 1.0
-shader_param/curve = SubResource( 28 )
+shader_param/curve = SubResource( 30 )
 
 [sub_resource type="CanvasItemMaterial" id=3]
 blend_mode = 2
@@ -1292,6 +1292,8 @@ shape = SubResource( 21 )
 
 [node name="BlackHole" type="Particles2D" parent="."]
 material = ExtResource( 2 )
+z_index = 400
+z_as_relative = false
 emitting = false
 amount = 50
 lifetime = 0.8

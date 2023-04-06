@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://scenes/bosses/GrumbelBlackHole.gd" type="Script" id=1]
 [ext_resource path="res://scenes/master/damage_area.tscn" type="PackedScene" id=2]
@@ -12,16 +12,45 @@ radius = 150.0
 radius = 42.0
 
 [sub_resource type="CanvasItemMaterial" id=3]
-blend_mode = 1
+blend_mode = 2
 
 [sub_resource type="CanvasItemMaterial" id=4]
 blend_mode = 2
+
+[sub_resource type="Shader" id=5]
+code = "shader_type canvas_item;
+
+uniform vec2 center = vec2(0.5,0.5);
+uniform float force;
+uniform float size = 0.1;
+
+void fragment() {
+	float ratio = SCREEN_PIXEL_SIZE.x / SCREEN_PIXEL_SIZE.y;
+	//vec2 scaledUV = ( SCREEN_UV - vec2(0.5, 0.0) ) / vec2(ratio, 1.0) + vec2(0.5,0.0);
+	
+	vec2 disp = normalize(UV - center) * force / ratio; // Displacement vector
+	//COLOR = vec4(UV - disp, 0.0, 1.0);
+	COLOR = texture(SCREEN_TEXTURE, SCREEN_UV - disp);
+	
+	float mask = step(size, length(UV - center));
+	COLOR.rgb = vec3(mask);
+}"
+
+[sub_resource type="ShaderMaterial" id=6]
+shader = SubResource( 5 )
+shader_param/center = Vector2( 0.5, 0.5 )
+shader_param/force = 0.1
+shader_param/size = 0.1
 
 [node name="BlackHole" type="Area2D"]
 z_index = 20
 collision_layer = 0
 collision_mask = 2
 script = ExtResource( 1 )
+
+[node name="BackBufferCopy" type="BackBufferCopy" parent="."]
+copy_mode = 2
+rect = Rect2( -1500, -1500, 3000, 3000 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
@@ -35,11 +64,22 @@ shape = SubResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
 material = SubResource( 3 )
+z_as_relative = false
 texture = ExtResource( 3 )
 
 [node name="Center" type="Sprite" parent="."]
 modulate = Color( 0, 0.172549, 0.788235, 1 )
 material = SubResource( 4 )
-z_index = 999
 z_as_relative = false
 texture = ExtResource( 4 )
+
+[node name="Shockwaves" type="ColorRect" parent="."]
+material = SubResource( 6 )
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -1500.0
+margin_top = -1500.0
+margin_right = 1500.0
+margin_bottom = 1500.0
