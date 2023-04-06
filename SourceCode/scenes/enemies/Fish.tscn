@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://scenes/enemies/badguy.gd" type="Script" id=1]
 [ext_resource path="res://scenes/enemies/badguy_sm.gd" type="Script" id=2]
@@ -14,9 +14,15 @@
 [ext_resource path="res://images/enemies/fish/squished.png" type="Texture" id=12]
 [ext_resource path="res://scenes/master/bounce_area.tscn" type="PackedScene" id=13]
 [ext_resource path="res://sounds/enemies/squish.wav" type="AudioStream" id=14]
+[ext_resource path="res://scenes/particles/WaterSplash.tres" type="Material" id=15]
 
 [sub_resource type="SpriteFrames" id=6]
 animations = [ {
+"frames": [ ExtResource( 12 ) ],
+"loop": true,
+"name": "squished",
+"speed": 5.0
+}, {
 "frames": [ ExtResource( 5 ) ],
 "loop": true,
 "name": "fall",
@@ -31,11 +37,6 @@ animations = [ {
 "loop": true,
 "name": "bounce_up",
 "speed": 10.0
-}, {
-"frames": [ ExtResource( 12 ) ],
-"loop": true,
-"name": "squished",
-"speed": 5.0
 } ]
 
 [sub_resource type="RectangleShape2D" id=14]
@@ -169,21 +170,6 @@ particles_anim_h_frames = 5
 particles_anim_v_frames = 1
 particles_anim_loop = false
 
-[sub_resource type="Gradient" id=12]
-colors = PoolColorArray( 1, 1, 1, 1, 0.44165, 0.589296, 0.84375, 1 )
-
-[sub_resource type="GradientTexture" id=13]
-gradient = SubResource( 12 )
-
-[sub_resource type="ParticlesMaterial" id=11]
-flag_disable_z = true
-gravity = Vector3( 0, 0, 0 )
-orbit_velocity = 0.0
-orbit_velocity_random = 0.0
-color_ramp = SubResource( 13 )
-anim_speed = 1.0
-anim_offset = 0.1
-
 [sub_resource type="RectangleShape2D" id=15]
 extents = Vector2( 18, 11 )
 
@@ -273,7 +259,7 @@ amount = 1
 one_shot = true
 speed_scale = 4.0
 local_coords = false
-process_material = SubResource( 11 )
+process_material = ExtResource( 15 )
 texture = ExtResource( 9 )
 
 [node name="BounceArea" parent="." instance=ExtResource( 13 )]

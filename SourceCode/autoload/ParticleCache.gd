@@ -30,6 +30,7 @@ var InvincibleParticlesTrail = preload("res://scenes/particles/" + "InvinciblePa
 var SnowfallSmall = preload("res://scenes/particles/" + "SnowfallSmall" + ".tres")
 var Rainfall = preload("res://scenes/particles/" + "Rainfall" + ".tres")
 var Clouds = preload("res://scenes/particles/" + "Clouds" + ".tres")
+var WaterSplash = preload("res://scenes/particles/" + "WaterSplash" + ".tres")
 
 var materials = [
 	BrickSmash,
@@ -38,7 +39,8 @@ var materials = [
 	InvincibleParticlesTrail,
 	SnowfallSmall,
 	Rainfall,
-	Clouds
+	Clouds,
+	WaterSplash
 ]
 
 func _ready(): # Make all of the game's particles emit once so they stay loaded
