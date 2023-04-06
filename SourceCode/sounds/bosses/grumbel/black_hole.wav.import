@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/black_hole.wav-0971518a323fcc1994aca6b5c3294683.sample"
+
+[deps]
+
+source_file="res://sounds/bosses/grumbel/black_hole.wav"
+dest_files=[ "res://.import/black_hole.wav-0971518a323fcc1994aca6b5c3294683.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=1

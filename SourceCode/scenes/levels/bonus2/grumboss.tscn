@@ -312,7 +312,6 @@ anims/phase_two_transition = SubResource( 4 )
 
 [node name="Grumbel" parent="Script" instance=ExtResource( 4 )]
 position = Vector2( 320, 256 )
-attack_timer_phase_1 = [ 1, 1 ]
 
 [node name="Camera2D" type="Camera2D" parent="."]
 pause_mode = 2
