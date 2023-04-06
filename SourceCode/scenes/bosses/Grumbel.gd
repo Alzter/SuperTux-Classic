@@ -53,6 +53,8 @@ var player = null
 
 signal fake_death
 signal phase_two
+signal defeated
+signal is_idle
 
 func _ready():
 	_initial_position = position
@@ -60,14 +62,19 @@ func _ready():
 
 func set_anger():
 	var max_hp = max_health if phase == 1 else max_health_phase_two
-	anger = abs(health - max_hp) * (1.0 / (max_hp - 1.0))
+	
+	if max_hp == 1: anger = 1
+	else: anger = abs(health - max_hp) * (1.0 / (max_hp - 1.0))
+	
 	if phase == 1: anger *= 0.8
 	else: anger += 0.5
+	
 	anger = clamp(anger, 0, 1)
 	# Anger is 0 when grumbel is on max health, and 1 when grumbel is about to die
 	# The lower health grumbel has, the angrier he is
 
 func idle():
+	emit_signal("is_idle")
 	fireball_timer.start()
 	set_attack_timer()
 	#disable_bounce_area(false)
@@ -141,6 +148,8 @@ func chomp():
 	Global.camera_shake(30, 0.7)
 	if phase == 1:
 		yield(get_tree().create_timer(0.5), "timeout")
+	else:
+		yield(get_tree().create_timer(0.1), "timeout")
 	#yield(anim_player, "animation_finished")
 	
 	var chomp_time = 1 - anger * 0.4 - int(phase == 2) * 0.25
@@ -158,6 +167,8 @@ func chomp():
 	disable_damage_area(false)
 	
 	yield(anim_player, "animation_finished")
+	
+	if state_machine.state != "chomp": return
 	
 	idle_animation()
 	yield(get_tree(), "idle_frame")
@@ -194,6 +205,7 @@ func squished():
 	spawn_powerup()
 
 func fake_death():
+	invincible = true
 	disable_bounce_area()
 	disable_damage_area()
 	sfx.play("Squish")
@@ -201,6 +213,31 @@ func fake_death():
 	velocity = Vector2.ZERO
 	emit_signal("fake_death")
 	Music.pitch_slide_down()
+
+func defeated():
+	anim_player.stop()
+	anim_player.play("defeated")
+	clear_all_enemies()
+	
+	emit_signal("defeated")
+	
+	invincible = true
+	damage_area.queue_free()
+	bounce_area.queue_free()
+	
+	pause_mode = PAUSE_MODE_PROCESS
+	Scoreboard.hide()
+	Global.can_pause = false
+	Music.stop_all()
+	
+	var player = Global.player
+	player.can_die = false
+	
+	sfx.play("Squish2")
+	sfx.play("KnockOut")
+	
+	yield(Global.hitstop(2, 100, 0.99), "completed")
+
 
 func fake_death_loop(delta):
 	velocity.x = 0
@@ -223,7 +260,7 @@ func get_hit():
 		if phase == 1:
 			state_machine.set_state("fake_death")
 		else:
-			queue_free()
+			state_machine.set_state("defeated")
 	else:
 		state_machine.set_state("squished")
 
@@ -241,8 +278,9 @@ func disable_damage_area( disabled = true ):
 func _on_AnimationPlayer_animation_finished(anim_name):
 	match anim_name:
 		"squished":
-			state_machine.set_state("idle")
-			hurt = true
+			if state_machine.state == "squished":
+				state_machine.set_state("idle")
+				hurt = true
 		"angry":
 			commence_phase_two()
 
@@ -331,3 +369,8 @@ func enable(enable = true, wait_time = 1):
 		yield(get_tree().create_timer(wait_time), "timeout")
 		if state_machine.state == "waiting":
 			state_machine.set_state("idle")
+
+func clear_all_enemies():
+	for node in Global.current_scene.get_children():
+		if node.is_in_group("enemies") or node.is_in_group("fireballs"):
+			node.queue_free()

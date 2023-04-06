@@ -108,11 +108,6 @@ animations = [ {
 "name": "fireball",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 19 ) ],
-"loop": true,
-"name": "iceblock",
-"speed": 5.0
-}, {
 "frames": [ ExtResource( 18 ) ],
 "loop": true,
 "name": "firecharge",
@@ -121,6 +116,11 @@ animations = [ {
 "frames": [ ExtResource( 21 ) ],
 "loop": true,
 "name": "knockout",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 19 ) ],
+"loop": true,
+"name": "iceblock",
 "speed": 5.0
 } ]
 

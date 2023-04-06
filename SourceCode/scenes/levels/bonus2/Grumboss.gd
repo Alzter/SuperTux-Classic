@@ -8,6 +8,7 @@ onready var sfx = $SFX
 func _ready():
 	grumbel.connect("fake_death", self, "phase_two_transition")
 	grumbel.connect("phase_two", self, "phase_two")
+	grumbel.connect("defeated", self, "defeated")
 	
 	yield(Global, "level_ready")
 	
@@ -65,3 +66,7 @@ func phase_two_transition():
 
 func phase_two():
 	anim_player.play("phase_two")
+
+func defeated():
+	pause_mode = Node.PAUSE_MODE_PROCESS
+	anim_player.play("defeated")

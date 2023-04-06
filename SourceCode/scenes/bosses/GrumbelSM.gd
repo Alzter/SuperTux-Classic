@@ -23,6 +23,7 @@ func _ready():
 	add_state("squished")
 	add_state("fake_death")
 	add_state("phase_two_transition")
+	add_state("defeated")
 	
 	# ATTACKS
 	add_state("chomp")
