@@ -310,6 +310,7 @@ func phase_two_transition():
 func _on_AttackTimer_timeout():
 	if state_machine.state == "idle":
 		ai.execute_random_attack()
+		set_attack_timer()
 
 func idle_animation():
 	if phase == 1: anim_player.play("idle")

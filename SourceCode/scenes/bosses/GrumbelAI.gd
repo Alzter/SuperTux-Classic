@@ -26,6 +26,8 @@ const ATTACKS = [
 	
 ]
 
+const UNLIKELY_ATTACKS = ["black_hole"]
+
 var movelist = []
 var current_attack = null
 
@@ -42,6 +44,12 @@ func execute_random_attack():
 	randomize()
 	current_attack = rand_range(0, movelist.size())
 	current_attack = movelist[current_attack]
+	
+	var rng = RandomNumberGenerator.new()
+	rng.randomize()
+	
+	if current_attack in UNLIKELY_ATTACKS and rng.randi_range(1, 3) != 1:
+		return
 	
 	# Then remove it from the array so we can't use it again
 	# until we've run out of attacks

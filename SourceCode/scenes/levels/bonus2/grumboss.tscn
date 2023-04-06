@@ -506,6 +506,7 @@ expand = true
 stretch_mode = 2
 
 [node name="Script" type="Node2D" parent="."]
+pause_mode = 1
 script = ExtResource( 7 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Script"]
