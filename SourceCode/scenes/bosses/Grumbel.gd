@@ -99,9 +99,11 @@ func black_hole():
 	anim_player.play("black_hole_attack")
 	yield(get_tree().create_timer(0.25), "timeout")
 	
-	instance_node(black_hole_scene, global_position)
+	var black_hole = instance_node(black_hole_scene, global_position)
 	
 	yield(get_tree().create_timer(2), "timeout")
+	
+	black_hole.dissipate()
 	
 	anim_player.play("black_hole_end")
 	yield(anim_player, "animation_finished")

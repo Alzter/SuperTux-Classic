@@ -309,7 +309,7 @@ anims/phase_two = SubResource( 11 )
 anims/phase_two_transition = SubResource( 4 )
 
 [node name="BlackHole2" parent="Script" instance=ExtResource( 12 )]
-position = Vector2( 267, 318 )
+position = Vector2( 427, 354 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
 pause_mode = 2
