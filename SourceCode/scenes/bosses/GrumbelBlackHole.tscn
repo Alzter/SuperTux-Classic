@@ -1,9 +1,13 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://scenes/bosses/GrumbelBlackHole.gd" type="Script" id=1]
+[ext_resource path="res://scenes/master/damage_area.tscn" type="PackedScene" id=2]
 
 [sub_resource type="CircleShape2D" id=1]
-radius = 300.0
+radius = 400.0
+
+[sub_resource type="CircleShape2D" id=2]
+radius = 42.0
 
 [node name="BlackHole" type="Area2D"]
 collision_layer = 0
@@ -12,3 +16,8 @@ script = ExtResource( 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
+
+[node name="DamageArea" parent="." instance=ExtResource( 2 )]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DamageArea"]
+shape = SubResource( 2 )
