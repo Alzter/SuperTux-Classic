@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=2]
+[gd_scene load_steps=34 format=2]
 
 [ext_resource path="res://scenes/shaders/Overlay.gdshader" type="Shader" id=1]
 [ext_resource path="res://scenes/master/Camera.gd" type="Script" id=2]
@@ -18,33 +18,34 @@
 [ext_resource path="res://sounds/bosses/grumbel/statue_rumbling.wav" type="AudioStream" id=16]
 [ext_resource path="res://sounds/enemies/explode.wav" type="AudioStream" id=17]
 [ext_resource path="res://sounds/bosses/grumbel/chomp.wav" type="AudioStream" id=18]
+[ext_resource path="res://images/background/rainbow_static.png" type="Texture" id=19]
 
 [sub_resource type="CanvasItemMaterial" id=2]
 blend_mode = 3
 
-[sub_resource type="ShaderMaterial" id=16]
-shader = ExtResource( 12 )
-shader_param/rainbow_speed = 1.0
-shader_param/noise_strength = 0.0
-shader_param/brightness_add = -0.2
-shader_param/saturation = 1.0
-shader_param/noise_shimmer_speed = 100.0
-shader_param/noise_permanent = true
-shader_param/color_shimmer_strength = 1.0
-shader_param/move_direction = Vector2( 1, 1 )
-shader_param/move_speed = 0.2
-
 [sub_resource type="ShaderMaterial" id=6]
 shader = ExtResource( 12 )
 shader_param/rainbow_speed = 1.0
-shader_param/noise_strength = 1.0
-shader_param/brightness_add = 1.0
+shader_param/noise_strength = 0.0
+shader_param/brightness_add = -0.196
 shader_param/saturation = 1.0
 shader_param/noise_shimmer_speed = 1.0
 shader_param/noise_permanent = false
 shader_param/color_shimmer_strength = 0.0
 shader_param/move_direction = Vector2( 1, 1 )
-shader_param/move_speed = 0.2
+shader_param/move_speed = 1.0
+
+[sub_resource type="ShaderMaterial" id=17]
+shader = ExtResource( 12 )
+shader_param/rainbow_speed = 4.0
+shader_param/noise_strength = 0.75
+shader_param/brightness_add = 1.0
+shader_param/saturation = 5.0
+shader_param/noise_shimmer_speed = 0.0
+shader_param/noise_permanent = false
+shader_param/color_shimmer_strength = 0.0
+shader_param/move_direction = Vector2( 1, 1 )
+shader_param/move_speed = 10.0
 
 [sub_resource type="ShaderMaterial" id=10]
 shader = ExtResource( 1 )
@@ -120,6 +121,18 @@ tracks/5/loop_wrap = true
 tracks/5/imported = false
 tracks/5/enabled = true
 tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("Static/Static:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
@@ -287,6 +300,30 @@ tracks/8/keys = {
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
 "values": [ 1.0, 3.0 ]
+}
+tracks/9/type = "value"
+tracks/9/path = NodePath("Static/Static:visible")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/10/type = "value"
+tracks/10/path = NodePath("Static/Static:modulate")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/keys = {
+"times": PoolRealArray( 0, 4.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 0, 0 ), Color( 1, 1, 1, 1 ) ]
 }
 
 [sub_resource type="Animation" id=12]
@@ -464,6 +501,18 @@ tracks/6/keys = {
 "update": 0,
 "values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
 }
+
+[sub_resource type="ShaderMaterial" id=16]
+shader = ExtResource( 12 )
+shader_param/rainbow_speed = 1.0
+shader_param/noise_strength = 0.0
+shader_param/brightness_add = -0.2
+shader_param/saturation = 1.0
+shader_param/noise_shimmer_speed = 100.0
+shader_param/noise_permanent = true
+shader_param/color_shimmer_strength = 1.0
+shader_param/move_direction = Vector2( 1, 1 )
+shader_param/move_speed = 0.2
 
 [sub_resource type="ShaderMaterial" id=9]
 shader = ExtResource( 12 )
@@ -658,12 +707,12 @@ anchor_bottom = 1.0
 margin_right = 99359.0
 margin_bottom = 99519.0
 rect_min_size = Vector2( 99999, 99999 )
-color = Color( 1, 0, 0, 1 )
 
 [node name="Flash" type="ParallaxBackground" parent="."]
 layer = 100
 
 [node name="Flash" type="ColorRect" parent="Flash"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_right = 99359.0
@@ -675,11 +724,25 @@ color = Color( 1, 1, 1, 0 )
 layer = -5
 
 [node name="Rainbow" type="TextureRect" parent="RainbowBG"]
+visible = false
 modulate = Color( 0.364706, 0.364706, 0.364706, 1 )
-material = SubResource( 16 )
+material = SubResource( 6 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 texture = ExtResource( 11 )
+expand = true
+stretch_mode = 2
+
+[node name="Static" type="ParallaxBackground" parent="."]
+layer = 100
+
+[node name="Static" type="TextureRect" parent="Static"]
+visible = false
+modulate = Color( 0, 0, 0, 0 )
+material = SubResource( 17 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 19 )
 expand = true
 stretch_mode = 2
 
@@ -747,7 +810,7 @@ script = ExtResource( 2 )
 layer = 0
 
 [node name="Shader" type="Node2D" parent="."]
-material = SubResource( 9 )
+material = SubResource( 10 )
 z_index = -10
 
 [node name="TileMap" parent="Shader" instance=ExtResource( 8 )]

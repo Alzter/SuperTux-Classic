@@ -9,6 +9,7 @@ func _ready():
 	grumbel.connect("fake_death", self, "phase_two_transition")
 	grumbel.connect("phase_two", self, "phase_two")
 	grumbel.connect("defeated", self, "defeated")
+	grumbel.connect("dying", self, "dying")
 	
 	yield(Global, "level_ready")
 	
@@ -70,3 +71,6 @@ func phase_two():
 func defeated():
 	pause_mode = Node.PAUSE_MODE_PROCESS
 	anim_player.play("defeated")
+
+func dying():
+	anim_player.play("dying")
