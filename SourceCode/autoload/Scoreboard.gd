@@ -42,6 +42,7 @@ onready var game_over_screen = $Control/GameOverScreen
 onready var sfx = $SFX
 onready var message_text_object = $Message
 
+var number_of_deaths = 0
 var level_timer_enabled = false
 var tick_time = 999
 var message_text = "" setget update_message_text

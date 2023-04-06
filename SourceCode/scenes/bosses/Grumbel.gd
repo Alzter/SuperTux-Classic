@@ -1,5 +1,7 @@
 extends KinematicBody2D
 
+export var enabled = true
+
 export var phase = 1
 
 export var attack_timer_phase_1 = [6,12]
@@ -311,3 +313,9 @@ func _on_AttackTimer_timeout():
 func idle_animation():
 	if phase == 1: anim_player.play("idle")
 	else: anim_player.play("phase_two")
+
+func enable():
+	enabled = true
+	visible = true
+	yield(get_tree().create_timer(1), "timeout")
+	state_machine.set_state("idle")

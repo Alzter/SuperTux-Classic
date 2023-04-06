@@ -33,9 +33,11 @@ func _ready():
 	host.player = Global.player
 	
 	yield(get_tree().create_timer(1), "timeout")
-	call_deferred("set_state", "idle")
 	
-	if host.phase == 2: host.commence_phase_two()
+	if host.enabled:
+		call_deferred("set_state", "idle")
+		
+		if host.phase == 2: host.commence_phase_two()
 
 func _state_logic(delta):
 	host.set_anger()

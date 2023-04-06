@@ -61,6 +61,8 @@ func goto_level(path, reset_checkpoint = false):
 	if path != current_level or reset_checkpoint:
 		spawn_position = null
 	
+	if path != current_level: Scoreboard.number_of_deaths = 0
+	
 	goto_scene(path)
 
 func goto_title_screen():
