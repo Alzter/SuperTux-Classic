@@ -34,6 +34,7 @@ onready var health = max_health
 onready var tween = $Tween
 
 onready var rng = RandomNumberGenerator.new()
+onready var sprite = $Control
 
 var _initial_position = Vector2()
 var velocity = Vector2()
@@ -141,7 +142,6 @@ func squished():
 	disable_bounce_area()
 	disable_damage_area()
 	invincible = true
-	hurt = true
 	fireball_hits = 0
 	sfx.play("Squish")
 	sfx.play("Squish2")
@@ -164,7 +164,7 @@ func fake_death_loop(delta):
 	position += velocity * delta
 
 func update_sprite():
-	modulate.a = 0.5 if (invincible and hurt) else 1
+	sprite.modulate.a = 0.5 if (invincible and hurt) else 1
 	aura.visible = !(invincible and hurt)
 
 func be_bounced_upon(body):
@@ -198,6 +198,7 @@ func _on_AnimationPlayer_animation_finished(anim_name):
 	match anim_name:
 		"squished":
 			state_machine.set_state("idle")
+			hurt = true
 		"angry":
 			commence_phase_two()
 

@@ -62,6 +62,19 @@
 [ext_resource path="res://scenes/particles/BlackHole.tres" type="Material" id=60]
 [ext_resource path="res://scenes/shaders/BlackHoleDistortion.tres" type="Shader" id=61]
 
+[sub_resource type="Curve" id=27]
+min_value = -1.0
+_data = [ Vector2( 0, 0 ), 0.0, 1.44689, 0, 1, Vector2( 0.0753968, 0.109091 ), 0.0, 0.0, 0, 0, Vector2( 0.162698, -0.145455 ), 0.0, 0.0, 0, 0, Vector2( 0.3, 0 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 1, 0 ]
+
+[sub_resource type="CurveTexture" id=28]
+curve = SubResource( 27 )
+
+[sub_resource type="ShaderMaterial" id=26]
+shader = ExtResource( 61 )
+shader_param/strength = 0.1
+shader_param/curve_scale = 1.0
+shader_param/curve = SubResource( 28 )
+
 [sub_resource type="CanvasItemMaterial" id=3]
 blend_mode = 2
 
@@ -107,15 +120,6 @@ animations = [ {
 "name": "black_hole_attack",
 "speed": 15.0
 } ]
-
-[sub_resource type="ShaderMaterial" id=23]
-shader = ExtResource( 11 )
-shader_param/rainbow_speed = 3.0
-shader_param/displacement_strength = 0.0
-shader_param/noise_strength = 1.0
-shader_param/brightness_add = 0.25
-shader_param/noise_shimmer_speed = 100.0
-shader_param/color_shimmer_strength = 1.0
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -201,7 +205,7 @@ shader_param/color_shimmer_strength = 2.0
 resource_name = "angry"
 length = 6.0
 tracks/0/type = "value"
-tracks/0/path = NodePath("Body:animation")
+tracks/0/path = NodePath("Control/Body:animation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -213,7 +217,7 @@ tracks/0/keys = {
 "values": [ "idle" ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("Body:material")
+tracks/1/path = NodePath("Control/Body:material")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -237,7 +241,7 @@ tracks/2/keys = {
 "values": [ true ]
 }
 tracks/3/type = "value"
-tracks/3/path = NodePath("Cape:animation")
+tracks/3/path = NodePath("Control/Cape:animation")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
@@ -249,7 +253,7 @@ tracks/3/keys = {
 "values": [ "idle" ]
 }
 tracks/4/type = "value"
-tracks/4/path = NodePath(".:modulate")
+tracks/4/path = NodePath("Aura:modulate")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/imported = false
@@ -261,7 +265,7 @@ tracks/4/keys = {
 "values": [ Color( 1, 1, 1, 1 ) ]
 }
 tracks/5/type = "value"
-tracks/5/path = NodePath("Aura:modulate")
+tracks/5/path = NodePath("Control/Body:flip_v")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/imported = false
@@ -269,11 +273,11 @@ tracks/5/enabled = true
 tracks/5/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Color( 1, 1, 1, 1 ) ]
+"update": 1,
+"values": [ false ]
 }
 tracks/6/type = "value"
-tracks/6/path = NodePath("Body:flip_v")
+tracks/6/path = NodePath("Control/Cape:flip_v")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/imported = false
@@ -285,31 +289,31 @@ tracks/6/keys = {
 "values": [ false ]
 }
 tracks/7/type = "value"
-tracks/7/path = NodePath("Cape:flip_v")
+tracks/7/path = NodePath("Control/Cape:modulate")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/imported = false
 tracks/7/enabled = true
 tracks/7/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ false ]
-}
-tracks/8/type = "value"
-tracks/8/path = NodePath("Cape:modulate")
-tracks/8/interp = 1
-tracks/8/loop_wrap = true
-tracks/8/imported = false
-tracks/8/enabled = true
-tracks/8/keys = {
 "times": PoolRealArray( 0, 4.3 ),
 "transitions": PoolRealArray( 3.4822, 1 ),
 "update": 0,
 "values": [ Color( 0, 0, 0, 1 ), Color( 1, 1, 1, 1 ) ]
 }
+tracks/8/type = "value"
+tracks/8/path = NodePath(".:z_index")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ -10 ]
+}
 tracks/9/type = "value"
-tracks/9/path = NodePath(".:z_index")
+tracks/9/path = NodePath("DistortionShader:visible")
 tracks/9/interp = 1
 tracks/9/loop_wrap = true
 tracks/9/imported = false
@@ -318,14 +322,23 @@ tracks/9/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ -10 ]
+"values": [ false ]
 }
+
+[sub_resource type="ShaderMaterial" id=23]
+shader = ExtResource( 11 )
+shader_param/rainbow_speed = 3.0
+shader_param/displacement_strength = 0.0
+shader_param/noise_strength = 1.0
+shader_param/brightness_add = 0.25
+shader_param/noise_shimmer_speed = 100.0
+shader_param/color_shimmer_strength = 1.0
 
 [sub_resource type="Animation" id=24]
 resource_name = "black_hole_attack"
 length = 0.3
 tracks/0/type = "value"
-tracks/0/path = NodePath("Body:animation")
+tracks/0/path = NodePath("Control/Body:animation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -337,7 +350,7 @@ tracks/0/keys = {
 "values": [ "black_hole_attack", "black_hole_loop" ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("Cape:animation")
+tracks/1/path = NodePath("Control/Cape:animation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -349,36 +362,24 @@ tracks/1/keys = {
 "values": [ "black_hole_attack" ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath(".:modulate")
+tracks/2/path = NodePath("Control/Body:material")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Color( 1, 1, 1, 1 ) ]
-}
-tracks/3/type = "value"
-tracks/3/path = NodePath("Body:material")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/keys = {
 "times": PoolRealArray( 0, 0.2 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
 "values": [ ExtResource( 2 ), SubResource( 23 ) ]
 }
-tracks/4/type = "value"
-tracks/4/path = NodePath("BlackHole:emitting")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/keys = {
+tracks/3/type = "value"
+tracks/3/path = NodePath("BlackHole:emitting")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
 "times": PoolRealArray( 0, 0.1 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
@@ -389,7 +390,7 @@ tracks/4/keys = {
 resource_name = "black_hole_charge"
 length = 0.2
 tracks/0/type = "value"
-tracks/0/path = NodePath("Body:animation")
+tracks/0/path = NodePath("Control/Body:animation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -401,7 +402,7 @@ tracks/0/keys = {
 "values": [ "black_hole_charge" ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("Cape:animation")
+tracks/1/path = NodePath("Control/Cape:animation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -413,24 +414,12 @@ tracks/1/keys = {
 "values": [ "black_hole_charge" ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath(".:modulate")
+tracks/2/path = NodePath("Control/Body:material")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Color( 1, 1, 1, 1 ) ]
-}
-tracks/3/type = "value"
-tracks/3/path = NodePath("Body:material")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
@@ -441,7 +430,7 @@ tracks/3/keys = {
 resource_name = "black_hole_end"
 length = 0.5
 tracks/0/type = "value"
-tracks/0/path = NodePath("Body:animation")
+tracks/0/path = NodePath("Control/Body:animation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -453,7 +442,7 @@ tracks/0/keys = {
 "values": [ "black_hole_end" ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("Cape:animation")
+tracks/1/path = NodePath("Control/Cape:animation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -465,36 +454,24 @@ tracks/1/keys = {
 "values": [ "black_hole_end" ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath(".:modulate")
+tracks/2/path = NodePath("Control/Body:material")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Color( 1, 1, 1, 1 ) ]
-}
-tracks/3/type = "value"
-tracks/3/path = NodePath("Body:material")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/keys = {
 "times": PoolRealArray( 0.2 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
 "values": [ ExtResource( 2 ) ]
 }
-tracks/4/type = "value"
-tracks/4/path = NodePath("BlackHole:emitting")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/keys = {
+tracks/3/type = "value"
+tracks/3/path = NodePath("BlackHole:emitting")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
@@ -505,7 +482,7 @@ tracks/4/keys = {
 resource_name = "chomp_smash"
 length = 0.9
 tracks/0/type = "value"
-tracks/0/path = NodePath("Body:animation")
+tracks/0/path = NodePath("Control/Body:animation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -517,7 +494,7 @@ tracks/0/keys = {
 "values": [ "chomp_smash", "chomp_recover" ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("Cape:animation")
+tracks/1/path = NodePath("Control/Cape:animation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -529,35 +506,35 @@ tracks/1/keys = {
 "values": [ "empty", "chomp_recover" ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath(".:modulate")
+tracks/2/path = NodePath("SFX/Chomp:playing")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0, 0.2 ),
-"transitions": PoolRealArray( 0, 1 ),
-"update": 0,
-"values": [ Color( 0.607843, 0.607843, 0.607843, 1 ), Color( 1, 1, 1, 1 ) ]
+"times": PoolRealArray( 0.2 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
 }
 tracks/3/type = "value"
-tracks/3/path = NodePath("SFX/Chomp:playing")
+tracks/3/path = NodePath("Control:modulate")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"times": PoolRealArray( 0.2 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ true ]
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 0.607843, 0.607843, 0.607843, 1 ), Color( 1, 1, 1, 1 ) ]
 }
 
 [sub_resource type="Animation" id=20]
 resource_name = "chomp_split"
 length = 0.3
 tracks/0/type = "value"
-tracks/0/path = NodePath("Body:animation")
+tracks/0/path = NodePath("Control/Body:animation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -569,7 +546,7 @@ tracks/0/keys = {
 "values": [ "chomp_split" ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("Cape:animation")
+tracks/1/path = NodePath("Control/Cape:animation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -581,7 +558,7 @@ tracks/1/keys = {
 "values": [ "empty" ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath(".:modulate")
+tracks/2/path = NodePath("SFX/Split:playing")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
@@ -589,11 +566,11 @@ tracks/2/enabled = true
 tracks/2/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Color( 0.607843, 0.607843, 0.607843, 1 ) ]
+"update": 1,
+"values": [ true ]
 }
 tracks/3/type = "value"
-tracks/3/path = NodePath("SFX/Split:playing")
+tracks/3/path = NodePath("Control:modulate")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
@@ -601,15 +578,15 @@ tracks/3/enabled = true
 tracks/3/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ true ]
+"update": 0,
+"values": [ Color( 0.607843, 0.607843, 0.607843, 1 ) ]
 }
 
 [sub_resource type="Animation" id=13]
 resource_name = "fake_death"
 length = 0.001
 tracks/0/type = "value"
-tracks/0/path = NodePath("Body:animation")
+tracks/0/path = NodePath("Control/Body:animation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -621,7 +598,7 @@ tracks/0/keys = {
 "values": [ "idle" ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("Body:material")
+tracks/1/path = NodePath("Control/Body:material")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -645,7 +622,7 @@ tracks/2/keys = {
 "values": [ true ]
 }
 tracks/3/type = "value"
-tracks/3/path = NodePath("Cape:animation")
+tracks/3/path = NodePath("Control/Cape:animation")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
@@ -681,7 +658,7 @@ tracks/5/keys = {
 "values": [ Color( 1, 1, 1, 1 ) ]
 }
 tracks/6/type = "value"
-tracks/6/path = NodePath("Body:flip_v")
+tracks/6/path = NodePath("Control/Body:flip_v")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/imported = false
@@ -693,7 +670,7 @@ tracks/6/keys = {
 "values": [ true ]
 }
 tracks/7/type = "value"
-tracks/7/path = NodePath("Cape:flip_v")
+tracks/7/path = NodePath("Control/Cape:flip_v")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/imported = false
@@ -709,7 +686,7 @@ tracks/7/keys = {
 resource_name = "idle"
 length = 0.001
 tracks/0/type = "value"
-tracks/0/path = NodePath("Body:animation")
+tracks/0/path = NodePath("Control/Body:animation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -721,7 +698,7 @@ tracks/0/keys = {
 "values": [ "idle" ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("Body:material")
+tracks/1/path = NodePath("Control/Body:material")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -745,7 +722,7 @@ tracks/2/keys = {
 "values": [ true ]
 }
 tracks/3/type = "value"
-tracks/3/path = NodePath("Cape:animation")
+tracks/3/path = NodePath("Control/Cape:animation")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
@@ -757,7 +734,7 @@ tracks/3/keys = {
 "values": [ "idle" ]
 }
 tracks/4/type = "value"
-tracks/4/path = NodePath(".:modulate")
+tracks/4/path = NodePath("Aura:modulate")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/imported = false
@@ -769,7 +746,7 @@ tracks/4/keys = {
 "values": [ Color( 1, 1, 1, 1 ) ]
 }
 tracks/5/type = "value"
-tracks/5/path = NodePath("Aura:modulate")
+tracks/5/path = NodePath("Control/Body:flip_v")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/imported = false
@@ -777,11 +754,11 @@ tracks/5/enabled = true
 tracks/5/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Color( 1, 1, 1, 1 ) ]
+"update": 1,
+"values": [ false ]
 }
 tracks/6/type = "value"
-tracks/6/path = NodePath("Body:flip_v")
+tracks/6/path = NodePath("Control/Cape:flip_v")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/imported = false
@@ -793,7 +770,7 @@ tracks/6/keys = {
 "values": [ false ]
 }
 tracks/7/type = "value"
-tracks/7/path = NodePath("Cape:flip_v")
+tracks/7/path = NodePath("Control/Cape:modulate")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/imported = false
@@ -801,11 +778,11 @@ tracks/7/enabled = true
 tracks/7/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ false ]
+"update": 0,
+"values": [ Color( 0.607843, 0.607843, 0.607843, 1 ) ]
 }
 tracks/8/type = "value"
-tracks/8/path = NodePath("Cape:modulate")
+tracks/8/path = NodePath(".:z_index")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/imported = false
@@ -813,11 +790,11 @@ tracks/8/enabled = true
 tracks/8/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Color( 0.607843, 0.607843, 0.607843, 1 ) ]
+"update": 1,
+"values": [ 0 ]
 }
 tracks/9/type = "value"
-tracks/9/path = NodePath(".:z_index")
+tracks/9/path = NodePath("BlackHole:emitting")
 tracks/9/interp = 1
 tracks/9/loop_wrap = true
 tracks/9/imported = false
@@ -826,10 +803,10 @@ tracks/9/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ 0 ]
+"values": [ false ]
 }
 tracks/10/type = "value"
-tracks/10/path = NodePath("BlackHole:emitting")
+tracks/10/path = NodePath("Control:modulate")
 tracks/10/interp = 1
 tracks/10/loop_wrap = true
 tracks/10/imported = false
@@ -837,15 +814,27 @@ tracks/10/enabled = true
 tracks/10/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+tracks/11/type = "value"
+tracks/11/path = NodePath("DistortionShader:visible")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ false ]
+"values": [ true ]
 }
 
 [sub_resource type="Animation" id=14]
 resource_name = "phase_two"
 length = 0.001
 tracks/0/type = "value"
-tracks/0/path = NodePath("Body:animation")
+tracks/0/path = NodePath("Control/Body:animation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -857,7 +846,7 @@ tracks/0/keys = {
 "values": [ "idle" ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("Body:material")
+tracks/1/path = NodePath("Control/Body:material")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -881,7 +870,7 @@ tracks/2/keys = {
 "values": [ true ]
 }
 tracks/3/type = "value"
-tracks/3/path = NodePath("Cape:animation")
+tracks/3/path = NodePath("Control/Cape:animation")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
@@ -893,7 +882,7 @@ tracks/3/keys = {
 "values": [ "idle" ]
 }
 tracks/4/type = "value"
-tracks/4/path = NodePath(".:modulate")
+tracks/4/path = NodePath("Aura:modulate")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/imported = false
@@ -905,7 +894,7 @@ tracks/4/keys = {
 "values": [ Color( 1, 1, 1, 1 ) ]
 }
 tracks/5/type = "value"
-tracks/5/path = NodePath("Aura:modulate")
+tracks/5/path = NodePath("Control/Body:flip_v")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/imported = false
@@ -913,11 +902,11 @@ tracks/5/enabled = true
 tracks/5/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Color( 1, 1, 1, 1 ) ]
+"update": 1,
+"values": [ false ]
 }
 tracks/6/type = "value"
-tracks/6/path = NodePath("Body:flip_v")
+tracks/6/path = NodePath("Control/Cape:flip_v")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/imported = false
@@ -929,7 +918,7 @@ tracks/6/keys = {
 "values": [ false ]
 }
 tracks/7/type = "value"
-tracks/7/path = NodePath("Cape:flip_v")
+tracks/7/path = NodePath("Control/Cape:modulate")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/imported = false
@@ -937,11 +926,11 @@ tracks/7/enabled = true
 tracks/7/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ false ]
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
 }
 tracks/8/type = "value"
-tracks/8/path = NodePath("Cape:modulate")
+tracks/8/path = NodePath(".:z_index")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/imported = false
@@ -949,11 +938,11 @@ tracks/8/enabled = true
 tracks/8/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Color( 1, 1, 1, 1 ) ]
+"update": 1,
+"values": [ 0 ]
 }
 tracks/9/type = "value"
-tracks/9/path = NodePath(".:z_index")
+tracks/9/path = NodePath("DistortionShader:visible")
 tracks/9/interp = 1
 tracks/9/loop_wrap = true
 tracks/9/imported = false
@@ -962,7 +951,7 @@ tracks/9/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ 0 ]
+"values": [ false ]
 }
 
 [sub_resource type="ShaderMaterial" id=7]
@@ -979,7 +968,7 @@ resource_name = "squished"
 length = 0.8
 step = 0.05
 tracks/0/type = "value"
-tracks/0/path = NodePath("Cape:animation")
+tracks/0/path = NodePath("Control/Cape:animation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -991,7 +980,7 @@ tracks/0/keys = {
 "values": [ "squished", "squishrecover" ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("Body:animation")
+tracks/1/path = NodePath("Control/Body:animation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -1003,7 +992,7 @@ tracks/1/keys = {
 "values": [ "squished", "squishrecover" ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("Body:material")
+tracks/2/path = NodePath("Control/Body:material")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
@@ -1015,35 +1004,35 @@ tracks/2/keys = {
 "values": [ SubResource( 7 ), ExtResource( 2 ) ]
 }
 tracks/3/type = "value"
-tracks/3/path = NodePath(".:modulate")
+tracks/3/path = NodePath("Aura:modulate")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"times": PoolRealArray( 0, 0.2, 0.35, 0.55 ),
-"transitions": PoolRealArray( 0, 0, 0.5, 1 ),
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Color( 1, 1, 1, 1 ), Color( 1, 0, 0, 1 ), Color( 1, 0, 0, 1 ), Color( 1, 1, 1, 1 ) ]
+"values": [ Color( 1, 1, 1, 0 ) ]
 }
 tracks/4/type = "value"
-tracks/4/path = NodePath("Aura:modulate")
+tracks/4/path = NodePath("Control:modulate")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/imported = false
 tracks/4/enabled = true
 tracks/4/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PoolRealArray( 0, 0.2, 0.35, 0.55 ),
+"transitions": PoolRealArray( 0, 1, 0.5, 1 ),
 "update": 0,
-"values": [ Color( 1, 1, 1, 0 ) ]
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 0, 0, 1 ), Color( 1, 0, 0, 1 ), Color( 1, 1, 1, 1 ) ]
 }
 
 [sub_resource type="Animation" id=11]
 resource_name = "default"
 length = 0.001
 tracks/0/type = "value"
-tracks/0/path = NodePath(".:modulate")
+tracks/0/path = NodePath("Control:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -1060,7 +1049,7 @@ resource_name = "firehit"
 length = 0.25
 step = 0.05
 tracks/0/type = "value"
-tracks/0/path = NodePath(".:modulate")
+tracks/0/path = NodePath("Control:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -1084,19 +1073,6 @@ extents = Vector2( 32, 42 )
 [sub_resource type="RectangleShape2D" id=21]
 extents = Vector2( 76, 48 )
 
-[sub_resource type="Curve" id=27]
-min_value = -1.0
-_data = [ Vector2( 0, 0 ), 0.0, 21.2303, 0, 1, Vector2( 0.0265487, 0.563636 ), 0.0, 0.0, 0, 0, Vector2( 0.0707965, -0.6 ), 0.0, 0.0, 0, 0, Vector2( 0.108076, -0.0181818 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0203849, 0.0, 1, 0 ]
-
-[sub_resource type="CurveTexture" id=28]
-curve = SubResource( 27 )
-
-[sub_resource type="ShaderMaterial" id=26]
-shader = ExtResource( 61 )
-shader_param/strength = 1.0
-shader_param/curve_scale = 1.713
-shader_param/curve = SubResource( 28 )
-
 [node name="Grumbel" type="KinematicBody2D"]
 collision_layer = 4
 collision_mask = 0
@@ -1105,6 +1081,17 @@ invincible_time = 1.0
 fireball_scene = ExtResource( 24 )
 powerup_small_scene = ExtResource( 25 )
 powerup_big_scene = ExtResource( 26 )
+
+[node name="DistortionShader" type="ColorRect" parent="."]
+material = SubResource( 26 )
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -250.0
+margin_top = -250.0
+margin_right = 250.0
+margin_bottom = 250.0
 
 [node name="StateMachine" type="Node" parent="."]
 script = ExtResource( 17 )
@@ -1119,18 +1106,22 @@ scale = Vector2( 2, 2 )
 z_index = -50
 texture = ExtResource( 4 )
 
-[node name="Cape" type="AnimatedSprite" parent="."]
+[node name="Control" type="Control" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+
+[node name="Cape" type="AnimatedSprite" parent="Control"]
 modulate = Color( 0.607843, 0.607843, 0.607843, 1 )
-z_index = -5
 frames = SubResource( 6 )
-animation = "black_hole_attack"
-frame = 1
+animation = "idle"
 playing = true
 
-[node name="Body" type="AnimatedSprite" parent="."]
-material = SubResource( 23 )
+[node name="Body" type="AnimatedSprite" parent="Control"]
+material = ExtResource( 2 )
 frames = SubResource( 1 )
-animation = "black_hole_loop"
+animation = "idle"
 playing = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -1247,13 +1238,15 @@ shape = SubResource( 21 )
 
 [node name="BlackHole" type="Particles2D" parent="."]
 material = ExtResource( 2 )
+emitting = false
 amount = 50
 lifetime = 0.8
 speed_scale = 3.0
 process_material = ExtResource( 60 )
 texture = ExtResource( 59 )
 
-[node name="DistortionShader" type="ColorRect" parent="."]
+[node name="BlackHoleDistortion" type="ColorRect" parent="."]
+visible = false
 material = SubResource( 26 )
 anchor_left = 0.5
 anchor_top = 0.5
