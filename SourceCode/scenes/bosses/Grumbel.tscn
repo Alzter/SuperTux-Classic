@@ -1,4 +1,4 @@
-[gd_scene load_steps=85 format=2]
+[gd_scene load_steps=89 format=2]
 
 [ext_resource path="res://images/bosses/grumbel/body/idle.png" type="Texture" id=1]
 [ext_resource path="res://scenes/shaders/Grumbel.tres" type="Material" id=2]
@@ -60,6 +60,7 @@
 [ext_resource path="res://images/bosses/grumbel/body/black_hole_attack6.png" type="Texture" id=58]
 [ext_resource path="res://images/particles/black_hole.png" type="Texture" id=59]
 [ext_resource path="res://scenes/particles/BlackHole.tres" type="Material" id=60]
+[ext_resource path="res://scenes/shaders/BlackHoleDistortion.tres" type="Shader" id=61]
 
 [sub_resource type="CanvasItemMaterial" id=3]
 blend_mode = 2
@@ -106,6 +107,28 @@ animations = [ {
 "name": "black_hole_attack",
 "speed": 15.0
 } ]
+
+[sub_resource type="Curve" id=27]
+min_value = -1.0
+_data = [ Vector2( 0, 0 ), 0.0, -0.181283, 0, 1, Vector2( 0.100295, -0.0181818 ), 0.0, 0.0, 0, 0, Vector2( 0.20944, -0.0181818 ), 5.74339, 5.74339, 0, 0, Vector2( 0.466077, 0.00454545 ), 0.0885579, 0.0, 1, 0 ]
+
+[sub_resource type="CurveTexture" id=28]
+curve = SubResource( 27 )
+
+[sub_resource type="ShaderMaterial" id=26]
+shader = ExtResource( 61 )
+shader_param/strength = 1.0
+shader_param/curve_scale = 2.0
+shader_param/curve = SubResource( 28 )
+
+[sub_resource type="ShaderMaterial" id=23]
+shader = ExtResource( 11 )
+shader_param/rainbow_speed = 3.0
+shader_param/displacement_strength = 0.0
+shader_param/noise_strength = 1.0
+shader_param/brightness_add = 0.25
+shader_param/noise_shimmer_speed = 100.0
+shader_param/color_shimmer_strength = 1.0
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -310,15 +333,6 @@ tracks/9/keys = {
 "update": 1,
 "values": [ -10 ]
 }
-
-[sub_resource type="ShaderMaterial" id=23]
-shader = ExtResource( 11 )
-shader_param/rainbow_speed = 3.0
-shader_param/displacement_strength = 0.0
-shader_param/noise_strength = 1.0
-shader_param/brightness_add = 0.25
-shader_param/noise_shimmer_speed = 100.0
-shader_param/color_shimmer_strength = 1.0
 
 [sub_resource type="Animation" id=24]
 resource_name = "black_hole_attack"
@@ -1109,13 +1123,26 @@ texture = ExtResource( 4 )
 modulate = Color( 0.607843, 0.607843, 0.607843, 1 )
 z_index = -5
 frames = SubResource( 6 )
-animation = "idle"
+animation = "black_hole_attack"
+frame = 1
 playing = true
 
+[node name="DistortionShader" type="ColorRect" parent="."]
+material = SubResource( 26 )
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -250.0
+margin_top = -250.0
+margin_right = 250.0
+margin_bottom = 250.0
+
 [node name="Body" type="AnimatedSprite" parent="."]
-material = ExtResource( 2 )
+material = SubResource( 23 )
 frames = SubResource( 1 )
-animation = "idle"
+animation = "black_hole_loop"
+frame = 1
 playing = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -1232,7 +1259,6 @@ shape = SubResource( 21 )
 
 [node name="BlackHole" type="Particles2D" parent="."]
 material = ExtResource( 2 )
-emitting = false
 amount = 50
 lifetime = 0.8
 speed_scale = 3.0
