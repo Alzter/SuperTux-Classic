@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://scenes/shaders/Overlay.gdshader" type="Shader" id=1]
 [ext_resource path="res://scenes/master/Camera.gd" type="Script" id=2]
@@ -12,6 +12,7 @@
 [ext_resource path="res://scenes/master/Ambience.tscn" type="PackedScene" id=10]
 [ext_resource path="res://images/background/rainbow.png" type="Texture" id=11]
 [ext_resource path="res://scenes/shaders/GrumbelBackground.tres" type="Shader" id=12]
+[ext_resource path="res://scenes/shaders/Shockwave.tres" type="Shader" id=13]
 
 [sub_resource type="CanvasItemMaterial" id=2]
 blend_mode = 3
@@ -269,6 +270,12 @@ tracks/5/keys = {
 "values": [ SubResource( 10 ), SubResource( 9 ) ]
 }
 
+[sub_resource type="ShaderMaterial" id=12]
+shader = ExtResource( 13 )
+shader_param/center = Vector2( 0.5, 0.5 )
+shader_param/force = 0.1
+shader_param/size = 0.1
+
 [node name="Level" type="Node2D"]
 script = ExtResource( 3 )
 level_title = "Mustn't Grumbel"
@@ -341,3 +348,14 @@ volume_db = -5.0
 [node name="CastleBG" parent="." instance=ExtResource( 5 )]
 offset = Vector2( 0, -35 )
 transform = Transform2D( 1, 0, 0, 1, 0, -35 )
+
+[node name="Shockwaves" type="ColorRect" parent="."]
+material = SubResource( 12 )
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -390.0
+margin_top = -1139.0
+margin_right = 2610.0
+margin_bottom = 1861.0
