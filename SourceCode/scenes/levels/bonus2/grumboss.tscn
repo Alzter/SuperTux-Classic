@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=2]
+[gd_scene load_steps=32 format=2]
 
 [ext_resource path="res://scenes/shaders/Overlay.gdshader" type="Shader" id=1]
 [ext_resource path="res://scenes/master/Camera.gd" type="Script" id=2]
@@ -21,6 +21,18 @@
 
 [sub_resource type="CanvasItemMaterial" id=2]
 blend_mode = 3
+
+[sub_resource type="ShaderMaterial" id=16]
+shader = ExtResource( 12 )
+shader_param/rainbow_speed = 1.0
+shader_param/noise_strength = 0.0
+shader_param/brightness_add = -0.2
+shader_param/saturation = 1.0
+shader_param/noise_shimmer_speed = 100.0
+shader_param/noise_permanent = true
+shader_param/color_shimmer_strength = 1.0
+shader_param/move_direction = Vector2( 1, 1 )
+shader_param/move_speed = 0.2
 
 [sub_resource type="ShaderMaterial" id=6]
 shader = ExtResource( 12 )
@@ -139,6 +151,142 @@ tracks/1/keys = {
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
 "values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Shader:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 0.341176, 0.341176, 0.341176, 1 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("RainbowBG/Rainbow:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 0.0745098, 0.0745098, 0.0745098, 1 ) ]
+}
+
+[sub_resource type="Animation" id=15]
+resource_name = "dying"
+length = 10.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("Flash/Flash:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Flash/Flash:color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1, 3.4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Shader:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 0.341176, 0.341176, 0.341176, 1 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("RainbowBG/Rainbow:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 0.0745098, 0.0745098, 0.0745098, 1 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("RainbowBG/Rainbow:material:shader_param/noise_strength")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 1, 3.4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 0.0, 1.0 ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("Shader:material:shader_param/brightness_add")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 3.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ -0.2, 0.5 ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("RainbowBG/Rainbow:material:shader_param/move_speed")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 1.0 ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("RainbowBG/Rainbow:material:shader_param/brightness_add")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ -0.196, 0.2 ]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath("RainbowBG/Rainbow:material:shader_param/saturation")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 1.0, 3.0 ]
 }
 
 [sub_resource type="Animation" id=12]
@@ -317,18 +465,6 @@ tracks/6/keys = {
 "values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
 }
 
-[sub_resource type="ShaderMaterial" id=7]
-shader = ExtResource( 12 )
-shader_param/rainbow_speed = 1.0
-shader_param/noise_strength = 0.0
-shader_param/brightness_add = -0.196
-shader_param/saturation = 1.0
-shader_param/noise_shimmer_speed = 100.0
-shader_param/noise_permanent = true
-shader_param/color_shimmer_strength = 1.0
-shader_param/move_direction = Vector2( 1, 1 )
-shader_param/move_speed = 0.2
-
 [sub_resource type="ShaderMaterial" id=9]
 shader = ExtResource( 12 )
 shader_param/rainbow_speed = 1.0
@@ -402,7 +538,7 @@ tracks/4/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ SubResource( 7 ) ]
+"values": [ SubResource( 16 ) ]
 }
 tracks/5/type = "value"
 tracks/5/path = NodePath("Shader:material")
@@ -416,6 +552,18 @@ tracks/5/keys = {
 "update": 1,
 "values": [ SubResource( 9 ) ]
 }
+
+[sub_resource type="ShaderMaterial" id=7]
+shader = ExtResource( 12 )
+shader_param/rainbow_speed = 1.0
+shader_param/noise_strength = 0.0
+shader_param/brightness_add = -0.196
+shader_param/saturation = 1.0
+shader_param/noise_shimmer_speed = 100.0
+shader_param/noise_permanent = true
+shader_param/color_shimmer_strength = 1.0
+shader_param/move_direction = Vector2( 1, 1 )
+shader_param/move_speed = 1.0
 
 [sub_resource type="Animation" id=4]
 resource_name = "phase_two_transition"
@@ -510,25 +658,25 @@ anchor_bottom = 1.0
 margin_right = 99359.0
 margin_bottom = 99519.0
 rect_min_size = Vector2( 99999, 99999 )
+color = Color( 1, 0, 0, 1 )
 
 [node name="Flash" type="ParallaxBackground" parent="."]
 layer = 100
 
 [node name="Flash" type="ColorRect" parent="Flash"]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_right = 99359.0
 margin_bottom = 99519.0
 rect_min_size = Vector2( 99999, 99999 )
+color = Color( 1, 1, 1, 0 )
 
 [node name="RainbowBG" type="ParallaxBackground" parent="."]
 layer = -5
 
 [node name="Rainbow" type="TextureRect" parent="RainbowBG"]
-visible = false
 modulate = Color( 0.364706, 0.364706, 0.364706, 1 )
-material = SubResource( 6 )
+material = SubResource( 16 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 texture = ExtResource( 11 )
@@ -544,6 +692,7 @@ root_node = NodePath("../..")
 autoplay = "default"
 anims/default = SubResource( 3 )
 anims/defeated = SubResource( 14 )
+anims/dying = SubResource( 15 )
 anims/flash_in = SubResource( 12 )
 anims/flash_out = SubResource( 13 )
 anims/phase_two = SubResource( 11 )
@@ -598,7 +747,7 @@ script = ExtResource( 2 )
 layer = 0
 
 [node name="Shader" type="Node2D" parent="."]
-material = SubResource( 10 )
+material = SubResource( 9 )
 z_index = -10
 
 [node name="TileMap" parent="Shader" instance=ExtResource( 8 )]

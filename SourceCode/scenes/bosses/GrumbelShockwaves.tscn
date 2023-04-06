@@ -1,0 +1,76 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://scenes/shaders/Shockwave.tres" type="Shader" id=1]
+
+[sub_resource type="ShaderMaterial" id=6]
+shader = ExtResource( 1 )
+shader_param/center = Vector2( 0.5, 0.5 )
+shader_param/force = -0.0259961
+shader_param/size = 0.0519923
+shader_param/thickness = -0.1
+
+[sub_resource type="Animation" id=8]
+resource_name = "loop"
+length = 0.2
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Shockwaves:material:shader_param/size")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.2, 0.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Shockwaves:material:shader_param/force")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ -0.1, 0.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Shockwaves:material:shader_param/thickness")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ -0.1 ]
+}
+
+[node name="Shockwaves" type="Area2D"]
+z_index = 20
+collision_layer = 0
+collision_mask = 2
+
+[node name="BackBufferCopy" type="BackBufferCopy" parent="."]
+copy_mode = 2
+rect = Rect2( -750, -750, 1500, 1500 )
+
+[node name="Shockwaves" type="ColorRect" parent="."]
+material = SubResource( 6 )
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -750.0
+margin_top = -750.0
+margin_right = 750.0
+margin_bottom = 750.0
+
+[node name="ShockwaveAnim" type="AnimationPlayer" parent="."]
+anims/loop = SubResource( 8 )
+
+[connection signal="animation_finished" from="ShockwaveAnim" to="." method="_on_ShockwaveAnim_animation_finished"]

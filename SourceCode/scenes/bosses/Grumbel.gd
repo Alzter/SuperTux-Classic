@@ -15,6 +15,7 @@ export var max_health_phase_two = 8
 
 export var fireball_scene : PackedScene
 export var black_hole_scene : PackedScene
+export var shockwave_scene : PackedScene
 export var powerup_small_scene : PackedScene
 export var powerup_big_scene : PackedScene
 
@@ -54,6 +55,7 @@ var player = null
 signal fake_death
 signal phase_two
 signal defeated
+signal dying
 signal is_idle
 
 func _ready():
@@ -222,8 +224,8 @@ func defeated():
 	emit_signal("defeated")
 	
 	invincible = true
-	damage_area.queue_free()
-	bounce_area.queue_free()
+	disable_bounce_area()
+	disable_damage_area()
 	
 	pause_mode = PAUSE_MODE_PROCESS
 	Scoreboard.hide()
@@ -237,7 +239,30 @@ func defeated():
 	sfx.play("KnockOut")
 	
 	yield(Global.hitstop(2, 100, 0.99), "completed")
+	die()
 
+func die():
+	emit_signal("dying")
+	anim_player.play("dying")
+	sfx.play("Dying")
+	instance_node(shockwave_scene, _initial_position)
+	
+	var shake = 10
+	var rng = RandomNumberGenerator.new()
+	
+	while (anim_player.is_playing()):
+		Global.camera_shake(shake, 0.9)
+		shake += 1
+		position.x = lerp(position.x, _initial_position.x, 0.04)
+		position.y = lerp(position.y, _initial_position.y, 0.04)
+		
+		var grumb_shake = shake * 0.05
+		rng.randomize()
+		position.x += rng.randf_range(-grumb_shake, grumb_shake)
+		rng.randomize()
+		position.y += rng.randf_range(-grumb_shake, grumb_shake)
+		
+		yield(get_tree(), "idle_frame")
 
 func fake_death_loop(delta):
 	velocity.x = 0
@@ -266,12 +291,14 @@ func get_hit():
 
 func disable_bounce_area( disabled = true ):
 	if bounce_area != null:
+		if !is_instance_valid(bounce_area): return
 		for child in bounce_area.get_children():
 			child.set_deferred("disabled", disabled)
 
 func disable_damage_area( disabled = true ):
 	#set_collision_layer_bit(2, !disabled)
 	if damage_area != null:
+		if !is_instance_valid(damage_area): return
 		for child in damage_area.get_children():
 			child.set_deferred("disabled", disabled)
 
