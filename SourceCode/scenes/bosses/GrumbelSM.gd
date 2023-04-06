@@ -35,7 +35,7 @@ func _ready():
 	yield(get_tree().create_timer(1), "timeout")
 	
 	if host.enabled:
-		call_deferred("set_state", "idle")
+		host.enable()
 		
 		if host.phase == 2: host.commence_phase_two()
 

@@ -56,6 +56,7 @@ signal phase_two
 
 func _ready():
 	_initial_position = position
+	enable(enabled)
 
 func set_anger():
 	var max_hp = max_health if phase == 1 else max_health_phase_two
@@ -314,8 +315,12 @@ func idle_animation():
 	if phase == 1: anim_player.play("idle")
 	else: anim_player.play("phase_two")
 
-func enable():
-	enabled = true
-	visible = true
-	yield(get_tree().create_timer(1), "timeout")
-	state_machine.set_state("idle")
+func enable(enable = true):
+	enabled = enable
+	visible = enabled
+	disable_bounce_area(!enabled)
+	disable_damage_area(!enabled)
+	invincible = !enabled
+	if enabled:
+		yield(get_tree().create_timer(1), "timeout")
+		state_machine.set_state("idle")

@@ -29,7 +29,7 @@ onready var extro_level = WorldmapManager.extro_level
 export var is_worldmap = false
 export var level_title = ""
 export var level_author = ""
-export var music = "ChipDisko"
+export var music = ""
 export var particle_system = ""
 export var uses_timer = true
 export var time = 300
@@ -86,7 +86,10 @@ func _ready():
 		Scoreboard.set_level_timer(time)
 	
 	# And play the level music!
-	Music.play(music)
+	if music == "" or !music:
+		Music.stop_all()
+	else:
+		Music.play(music)
 	
 	emit_signal("level_ready")
 

@@ -274,7 +274,6 @@ tracks/5/keys = {
 script = ExtResource( 3 )
 level_title = "Mustn't Grumbel"
 level_author = "Alexander Small"
-music = "Prophecy"
 uses_timer = false
 starting_powerup = 2
 
