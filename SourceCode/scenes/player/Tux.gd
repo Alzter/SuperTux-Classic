@@ -150,7 +150,8 @@ func apply_movement(delta, solid = true):
 				var collision = move_and_collide(distance)
 				if collision:
 					# Crush Tux if he is stuck and cannot be pushed into the camera boundaries
-					if collision.get_normal() == kill_normal: die()
+					if collision.get_normal() == kill_normal:
+						die()
 			
 			#position.x = clamp(position.x, left_camera_boundary, right_camera_boundary)
 			
@@ -510,6 +511,7 @@ func _on_VisibilityNotifier2D_screen_exited():
 		return
 	
 	if state_machine.state != "dead":
+		print("Out of bounds death")
 		die()
 	else:
 		if Scoreboard.lives == -1:

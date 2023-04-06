@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=2]
+[gd_scene load_steps=33 format=2]
 
 [ext_resource path="res://scenes/shaders/Overlay.gdshader" type="Shader" id=1]
 [ext_resource path="res://scenes/master/Camera.gd" type="Script" id=2]
@@ -602,18 +602,6 @@ tracks/5/keys = {
 "values": [ SubResource( 9 ) ]
 }
 
-[sub_resource type="ShaderMaterial" id=7]
-shader = ExtResource( 12 )
-shader_param/rainbow_speed = 1.0
-shader_param/noise_strength = 0.0
-shader_param/brightness_add = -0.196
-shader_param/saturation = 1.0
-shader_param/noise_shimmer_speed = 100.0
-shader_param/noise_permanent = true
-shader_param/color_shimmer_strength = 1.0
-shader_param/move_direction = Vector2( 1, 1 )
-shader_param/move_speed = 1.0
-
 [sub_resource type="Animation" id=4]
 resource_name = "phase_two_transition"
 length = 8.0
@@ -660,10 +648,10 @@ tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"times": PoolRealArray( 0, 4, 6 ),
-"transitions": PoolRealArray( 1, 2, 1 ),
+"times": PoolRealArray( 0, 2, 4, 6 ),
+"transitions": PoolRealArray( 1, 1, 2, 1 ),
 "update": 0,
-"values": [ Color( 0.0500001, 0.0500001, 0.0500001, 1 ), Color( 0, 0, 0, 1 ), Color( 0.364706, 0.364706, 0.364706, 1 ) ]
+"values": [ Color( 0.0500001, 0.0500001, 0.0500001, 1 ), Color( 0.0235294, 0.0235294, 0.0235294, 0 ), Color( 0, 0, 0, 1 ), Color( 0.364706, 0.364706, 0.364706, 1 ) ]
 }
 tracks/4/type = "value"
 tracks/4/path = NodePath("RainbowBG/Rainbow:material")
@@ -675,7 +663,7 @@ tracks/4/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ SubResource( 7 ) ]
+"values": [ SubResource( 16 ) ]
 }
 tracks/5/type = "value"
 tracks/5/path = NodePath("Shader:material")
@@ -725,6 +713,7 @@ layer = -5
 
 [node name="Rainbow" type="TextureRect" parent="RainbowBG"]
 visible = false
+modulate = Color( 0.0500001, 0.0500001, 0.0500001, 1 )
 material = SubResource( 6 )
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -764,6 +753,7 @@ anims/phase_two_transition = SubResource( 4 )
 visible = false
 position = Vector2( 320, 256 )
 enabled = false
+phase = 2
 
 [node name="Statue" type="Sprite" parent="Script"]
 position = Vector2( 320, 305 )

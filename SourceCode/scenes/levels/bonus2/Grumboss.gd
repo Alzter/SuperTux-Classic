@@ -21,14 +21,14 @@ func _ready():
 func spawn_grumbel(wait_time = 1):
 	grumbel.enable(true, wait_time)
 	statue.hide()
-	yield(get_tree().create_timer(wait_time), "timeout")
+	yield(get_tree().create_timer(wait_time, false), "timeout")
 	if grumbel.phase == 2:
 		anim_player.play("phase_two")
 	else: Music.play("Prophecy")
 
 func statue_intro():
-	yield(get_tree().create_timer(1), "timeout")
-	var timer = get_tree().create_timer(2)
+	yield(get_tree().create_timer(1, false), "timeout")
+	var timer = get_tree().create_timer(2, false)
 	var shake = 0.05
 	sfx.play("Rumbling")
 	sfx.play("Rumbling2")
@@ -56,7 +56,7 @@ func statue_intro():
 	sfx.stop("Rumbling")
 	sfx.stop("Rumbling2")
 	
-	yield(get_tree().create_timer(2), "timeout")
+	yield(get_tree().create_timer(2, false), "timeout")
 	
 	spawn_grumbel(2)
 	anim_player.play("flash_out")
