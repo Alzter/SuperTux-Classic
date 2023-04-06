@@ -315,13 +315,13 @@ func idle_animation():
 	if phase == 1: anim_player.play("idle")
 	else: anim_player.play("phase_two")
 
-func enable(enable = true):
+func enable(enable = true, wait_time = 1):
 	enabled = enable
 	visible = enabled
 	disable_bounce_area(!enabled)
 	disable_damage_area(!enabled)
 	invincible = !enabled
 	if enabled:
-		yield(get_tree().create_timer(1), "timeout")
+		yield(get_tree().create_timer(wait_time), "timeout")
 		if state_machine.state == "waiting":
 			state_machine.set_state("idle")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=2]
+[gd_scene load_steps=29 format=2]
 
 [ext_resource path="res://scenes/shaders/Overlay.gdshader" type="Shader" id=1]
 [ext_resource path="res://scenes/master/Camera.gd" type="Script" id=2]
@@ -16,6 +16,8 @@
 [ext_resource path="res://scenes/master/SFX.gd" type="Script" id=14]
 [ext_resource path="res://sounds/enemies/stalactite_crack.wav" type="AudioStream" id=15]
 [ext_resource path="res://sounds/bosses/grumbel/statue_rumbling.wav" type="AudioStream" id=16]
+[ext_resource path="res://sounds/enemies/explode.wav" type="AudioStream" id=17]
+[ext_resource path="res://sounds/bosses/grumbel/chomp.wav" type="AudioStream" id=18]
 
 [sub_resource type="CanvasItemMaterial" id=2]
 blend_mode = 3
@@ -97,6 +99,194 @@ tracks/4/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 1,
 "values": [ SubResource( 10 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("Flash/Flash:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+
+[sub_resource type="Animation" id=12]
+resource_name = "flash_in"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath("Darken/ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Shader:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("RainbowBG/Rainbow:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("RainbowBG/Rainbow:material")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ SubResource( 6 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Shader:material")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ SubResource( 10 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("Flash/Flash:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("Flash/Flash:color")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=13]
+resource_name = "flash_out"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath("Darken/ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Shader:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("RainbowBG/Rainbow:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("RainbowBG/Rainbow:material")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ SubResource( 6 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Shader:material")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ SubResource( 10 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("Flash/Flash:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("Flash/Flash:color")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
 }
 
 [sub_resource type="ShaderMaterial" id=7]
@@ -291,6 +481,18 @@ margin_right = 99359.0
 margin_bottom = 99519.0
 rect_min_size = Vector2( 99999, 99999 )
 
+[node name="Flash" type="ParallaxBackground" parent="."]
+layer = 100
+
+[node name="Flash" type="ColorRect" parent="Flash"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = 99359.0
+margin_bottom = 99519.0
+rect_min_size = Vector2( 99999, 99999 )
+color = Color( 1, 1, 1, 0 )
+
 [node name="RainbowBG" type="ParallaxBackground" parent="."]
 layer = -5
 
@@ -310,6 +512,8 @@ script = ExtResource( 7 )
 root_node = NodePath("../..")
 autoplay = "default"
 anims/default = SubResource( 3 )
+anims/flash_in = SubResource( 12 )
+anims/flash_out = SubResource( 13 )
 anims/phase_two = SubResource( 11 )
 anims/phase_two_transition = SubResource( 4 )
 
@@ -334,6 +538,20 @@ pitch_scale = 0.25
 stream = ExtResource( 16 )
 volume_db = -3.0
 pitch_scale = 2.0
+
+[node name="Explosion" type="AudioStreamPlayer" parent="Script/SFX"]
+stream = ExtResource( 18 )
+volume_db = -6.0
+pitch_scale = 0.8
+
+[node name="Explosion2" type="AudioStreamPlayer" parent="Script/SFX"]
+stream = ExtResource( 17 )
+volume_db = -6.0
+pitch_scale = 0.5
+
+[node name="Explosion3" type="AudioStreamPlayer" parent="Script/SFX"]
+stream = ExtResource( 17 )
+volume_db = 1.0
 
 [node name="Camera2D" type="Camera2D" parent="."]
 pause_mode = 2

@@ -12,11 +12,15 @@ func _ready():
 	yield(Global, "level_ready")
 	
 	if Scoreboard.number_of_deaths > 0:
-		grumbel.enable(true)
-		statue.hide()
-		Music.play("Prophecy")
+		spawn_grumbel(0.1)
 	else:
 		statue_intro()
+
+func spawn_grumbel(wait_time = 1):
+	grumbel.enable(true, wait_time)
+	statue.hide()
+	yield(get_tree().create_timer(wait_time), "timeout")
+	Music.play("Prophecy")
 
 func statue_intro():
 	yield(get_tree().create_timer(1), "timeout")
@@ -25,12 +29,34 @@ func statue_intro():
 	sfx.play("Rumbling")
 	sfx.play("Rumbling2")
 	while timer.time_left > 0:
+		Global.camera_shake(shake * 2, 0.5)
 		shake += 0.1
 		statue.offset.x = sin(shake * shake) * shake
 		yield(get_tree(), "idle_frame")
 		yield(get_tree(), "idle_frame")
+	
+	statue.offset.x = 0
+	anim_player.play("flash_in")
+	
+	while anim_player.is_playing():
+		Global.camera_shake(shake * 2, 0.5)
+		shake += 1
+		statue.offset.x = sin(shake * shake) * shake
+		yield(get_tree(), "idle_frame")
+		yield(get_tree(), "idle_frame")
+	
+	sfx.play("Explosion")
+	sfx.play("Explosion2")
+	sfx.play("Explosion3")
+	
 	sfx.stop("Rumbling")
 	sfx.stop("Rumbling2")
+	
+	yield(get_tree().create_timer(2), "timeout")
+	
+	spawn_grumbel(2)
+	anim_player.play("flash_out")
+	yield(anim_player, "animation_finished")
 
 func phase_two_transition():
 	anim_player.play("phase_two_transition")
