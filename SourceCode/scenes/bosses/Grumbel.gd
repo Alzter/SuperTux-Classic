@@ -147,6 +147,9 @@ func chomp():
 	
 	anim_player.play("chomp_split")
 	yield(get_tree().create_timer(0.25, false), "timeout")
+	
+	if state_machine.state != "chomp": return
+	
 	Global.camera_shake(30, 0.7)
 	if phase == 1:
 		yield(get_tree().create_timer(0.5, false), "timeout")
@@ -154,14 +157,21 @@ func chomp():
 		yield(get_tree().create_timer(0.1, false), "timeout")
 	#yield(anim_player, "animation_finished")
 	
+	if state_machine.state != "chomp": return
+	
 	var chomp_time = 1 - anger * 0.4 - int(phase == 2) * 0.25
 	
 	tween.interpolate_property(self, "position", position, player.position, chomp_time, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
 	tween.start()
 	yield(get_tree().create_timer(chomp_time * 0.75, false), "timeout")
 	
+	if state_machine.state != "chomp": return
+	
 	anim_player.play("chomp_smash")
 	yield(get_tree().create_timer(0.2, false), "timeout")
+	
+	if state_machine.state != "chomp": return
+	
 	Global.camera_shake(50, 0.7)
 	chomp_kill_player()
 	invincible = false
@@ -176,7 +186,6 @@ func chomp():
 	yield(get_tree(), "idle_frame")
 
 func chomp_kill_player():
-	print("Chomp Kill")
 	for body in chomp_hitbox.get_overlapping_bodies():
 		if body.is_in_group("players"):
 			if !body.invincible:
@@ -255,6 +264,7 @@ func die():
 		
 		Global.camera_shake(shake, 0.9)
 		shake += 1
+		shake = min(shake, 100)
 		position.x = lerp(position.x, _initial_position.x, 0.04)
 		position.y = lerp(position.y, _initial_position.y, 0.04)
 		

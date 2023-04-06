@@ -26,7 +26,7 @@ blend_mode = 3
 [sub_resource type="ShaderMaterial" id=6]
 shader = ExtResource( 12 )
 shader_param/rainbow_speed = 1.0
-shader_param/noise_strength = 0.916667
+shader_param/noise_strength = 1.0
 shader_param/brightness_add = 0.2
 shader_param/saturation = 3.0
 shader_param/noise_shimmer_speed = 1.0
@@ -212,10 +212,10 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 1, 3.4 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
+"times": PoolRealArray( 0, 1, 3.4, 6.1, 7 ),
+"transitions": PoolRealArray( 1, 1, 1, 2, 1 ),
 "update": 0,
-"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 0, 0, 0, 1 ) ]
 }
 tracks/2/type = "value"
 tracks/2/path = NodePath("Shader:modulate")
@@ -703,17 +703,14 @@ layer = 100
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_right = 99359.0
-margin_bottom = 99519.0
 rect_min_size = Vector2( 99999, 99999 )
-color = Color( 1, 1, 1, 0.916667 )
+color = Color( 0, 0, 0, 1 )
 
 [node name="RainbowBG" type="ParallaxBackground" parent="."]
 layer = -5
 
 [node name="Rainbow" type="TextureRect" parent="RainbowBG"]
 visible = false
-modulate = Color( 0.0500001, 0.0500001, 0.0500001, 1 )
 material = SubResource( 6 )
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -726,7 +723,7 @@ layer = 100
 
 [node name="Static" type="TextureRect" parent="Static"]
 visible = false
-modulate = Color( 0.914286, 0.914286, 0.914286, 0.914286 )
+modulate = Color( 1, 1, 1, 0 )
 material = SubResource( 17 )
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -753,11 +750,13 @@ anims/phase_two_transition = SubResource( 4 )
 visible = false
 position = Vector2( 320, 256 )
 enabled = false
-phase = 2
 
 [node name="Statue" type="Sprite" parent="Script"]
 position = Vector2( 320, 305 )
 texture = ExtResource( 13 )
+
+[node name="Ambience" parent="Script" instance=ExtResource( 10 )]
+volume_db = -5.0
 
 [node name="SFX" type="Node2D" parent="Script"]
 script = ExtResource( 14 )
@@ -807,9 +806,8 @@ tile_data = PoolIntArray( -262158, 71, 0, -262157, 71, 0, -262156, 71, 0, -26215
 [node name="ObjectMap" parent="." instance=ExtResource( 9 )]
 tile_data = PoolIntArray( 786436, 5, 0 )
 
-[node name="Ambience" parent="." instance=ExtResource( 10 )]
-volume_db = -5.0
-
 [node name="CastleBG" parent="." instance=ExtResource( 5 )]
 offset = Vector2( 0, -35 )
 transform = Transform2D( 1, 0, 0, 1, 0, -35 )
+
+[connection signal="animation_finished" from="Script/AnimationPlayer" to="Script" method="_on_AnimationPlayer_animation_finished"]

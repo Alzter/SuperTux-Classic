@@ -511,7 +511,6 @@ func _on_VisibilityNotifier2D_screen_exited():
 		return
 	
 	if state_machine.state != "dead":
-		print("Out of bounds death")
 		die()
 	else:
 		if Scoreboard.lives == -1:

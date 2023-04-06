@@ -4,6 +4,7 @@ onready var grumbel = $Grumbel
 onready var anim_player = $AnimationPlayer
 onready var statue = $Statue
 onready var sfx = $SFX
+onready var ambience = $Ambience
 
 func _ready():
 	grumbel.connect("fake_death", self, "phase_two_transition")
@@ -69,8 +70,13 @@ func phase_two():
 	anim_player.play("phase_two")
 
 func defeated():
+	ambience.stop()
 	pause_mode = Node.PAUSE_MODE_PROCESS
 	anim_player.play("defeated")
 
 func dying():
 	anim_player.play("dying")
+
+func _on_AnimationPlayer_animation_finished(anim_name):
+	if anim_name == "dying":
+		Global.level_completed()
