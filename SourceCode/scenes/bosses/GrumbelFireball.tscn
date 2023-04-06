@@ -169,10 +169,11 @@ script = ExtResource( 4 )
 
 [node name="Dissipate" type="AudioStreamPlayer2D" parent="SFX"]
 stream = ExtResource( 7 )
+volume_db = -10.0
 
 [node name="Dissipate2" type="AudioStreamPlayer2D" parent="SFX"]
 stream = ExtResource( 8 )
-volume_db = -5.0
+volume_db = -10.0
 pitch_scale = 0.7
 
 [node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
@@ -198,7 +199,6 @@ material = SubResource( 12 )
 scale = Vector2( 2, 2 )
 z_index = 1
 frames = SubResource( 13 )
-frame = 1
 playing = true
 offset = Vector2( 0, -2 )
 
@@ -212,6 +212,7 @@ rect_scale = Vector2( 2, 2 )
 material = SubResource( 15 )
 z_index = 4096
 frames = SubResource( 16 )
+frame = 1
 playing = true
 offset = Vector2( 0, -2 )
 
@@ -220,7 +221,6 @@ material = SubResource( 15 )
 scale = Vector2( 2, 2 )
 z_index = 4096
 frames = SubResource( 16 )
-frame = 1
 playing = true
 offset = Vector2( 0, -2 )
 
@@ -229,7 +229,6 @@ material = SubResource( 15 )
 scale = Vector2( 4, 4 )
 z_index = 4096
 frames = SubResource( 16 )
-frame = 1
 playing = true
 offset = Vector2( 0, -2 )
 
@@ -239,6 +238,7 @@ material = SubResource( 15 )
 scale = Vector2( 4, 4 )
 z_index = 4096
 frames = SubResource( 16 )
+frame = 1
 playing = true
 offset = Vector2( 0, -2 )
 

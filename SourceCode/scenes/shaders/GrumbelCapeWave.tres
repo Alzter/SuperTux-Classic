@@ -1,0 +1,18 @@
+[gd_resource type="Shader" format=2]
+
+[resource]
+code = "shader_type canvas_item;
+render_mode blend_mix;
+
+uniform vec2 wave_strength = vec2(0.05, 0.06);
+uniform vec2 wave_amplitude = vec2(4f, 20f);
+uniform vec2 wave_speed = vec2(5f, 10f);
+
+void fragment() {
+	vec2 disp;
+	disp.x = sin((UV.y * wave_amplitude.x) + TIME * wave_speed.x) * wave_strength.x;
+	disp.y = sin((UV.x * wave_amplitude.y * -1f) + TIME * wave_speed.y) * wave_strength.y;
+	disp *= 1f - UV.y;
+	vec2 uv = UV + disp;
+	COLOR = texture(TEXTURE, uv);
+}"

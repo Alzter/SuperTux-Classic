@@ -1,4 +1,4 @@
-[gd_scene load_steps=101 format=2]
+[gd_scene load_steps=103 format=2]
 
 [ext_resource path="res://images/bosses/grumbel/body/idle.png" type="Texture" id=1]
 [ext_resource path="res://scenes/shaders/Grumbel.tres" type="Material" id=2]
@@ -66,6 +66,7 @@
 [ext_resource path="res://sounds/bosses/grumbel/black_hole_charge.wav" type="AudioStream" id=64]
 [ext_resource path="res://scenes/shaders/Shockwave.tres" type="Shader" id=65]
 [ext_resource path="res://scenes/bosses/GrumbelShockwaves.tscn" type="PackedScene" id=66]
+[ext_resource path="res://scenes/shaders/GrumbelCapeWave.tres" type="Shader" id=67]
 
 [sub_resource type="Curve" id=27]
 min_value = -1.0
@@ -82,6 +83,12 @@ shader_param/curve = SubResource( 30 )
 
 [sub_resource type="CanvasItemMaterial" id=3]
 blend_mode = 2
+
+[sub_resource type="ShaderMaterial" id=38]
+shader = ExtResource( 67 )
+shader_param/wave_strength = Vector2( 0.05, 0.06 )
+shader_param/wave_amplitude = Vector2( 4, 20 )
+shader_param/wave_speed = Vector2( 5, 10 )
 
 [sub_resource type="SpriteFrames" id=6]
 animations = [ {
@@ -1701,15 +1708,15 @@ anchor_bottom = 0.5
 
 [node name="Cape" type="AnimatedSprite" parent="Control"]
 modulate = Color( 0.607843, 0.607843, 0.607843, 1 )
+material = SubResource( 38 )
 frames = SubResource( 6 )
-animation = "empty"
+animation = "idle"
 playing = true
 
 [node name="Body" type="AnimatedSprite" parent="Control"]
 material = ExtResource( 2 )
 frames = SubResource( 1 )
-animation = "chomp_smash"
-frame = 8
+animation = "idle"
 playing = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -1772,28 +1779,28 @@ bus = "Sounds"
 
 [node name="Fireball" type="AudioStreamPlayer2D" parent="SFX"]
 stream = ExtResource( 20 )
-volume_db = 6.0
+volume_db = -1.0
 pitch_scale = 1.5
 bus = "Sounds"
 
 [node name="FakeDie" type="AudioStreamPlayer" parent="SFX"]
 stream = ExtResource( 27 )
-volume_db = 1.0
 
 [node name="Chomp" type="AudioStreamPlayer2D" parent="SFX"]
 stream = ExtResource( 41 )
-volume_db = 3.0
+volume_db = 1.0
 
 [node name="Split" type="AudioStreamPlayer2D" parent="SFX"]
 stream = ExtResource( 42 )
-volume_db = 2.0
 
 [node name="BlackHole" type="AudioStreamPlayer2D" parent="SFX"]
 stream = ExtResource( 63 )
+volume_db = -3.0
 pitch_scale = 1.25
 
 [node name="BlackHoleCharge" type="AudioStreamPlayer2D" parent="SFX"]
 stream = ExtResource( 64 )
+volume_db = -3.0
 
 [node name="KnockOut" type="AudioStreamPlayer" parent="SFX"]
 stream = ExtResource( 20 )

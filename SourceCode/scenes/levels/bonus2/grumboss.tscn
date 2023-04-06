@@ -763,27 +763,26 @@ script = ExtResource( 14 )
 
 [node name="Rumbling" type="AudioStreamPlayer" parent="Script/SFX"]
 stream = ExtResource( 15 )
-volume_db = 4.0
-pitch_scale = 0.25
+pitch_scale = 0.4
 
 [node name="Rumbling2" type="AudioStreamPlayer" parent="Script/SFX"]
 stream = ExtResource( 16 )
-volume_db = -3.0
+volume_db = -10.0
 pitch_scale = 2.0
 
 [node name="Explosion" type="AudioStreamPlayer" parent="Script/SFX"]
 stream = ExtResource( 18 )
-volume_db = -6.0
+volume_db = -10.0
 pitch_scale = 0.8
 
 [node name="Explosion2" type="AudioStreamPlayer" parent="Script/SFX"]
 stream = ExtResource( 17 )
-volume_db = -6.0
+volume_db = -10.0
 pitch_scale = 0.5
 
 [node name="Explosion3" type="AudioStreamPlayer" parent="Script/SFX"]
 stream = ExtResource( 17 )
-volume_db = 1.0
+volume_db = -8.0
 
 [node name="Camera2D" type="Camera2D" parent="."]
 pause_mode = 2
