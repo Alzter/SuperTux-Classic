@@ -105,7 +105,7 @@ func black_hole():
 	var black_hole = instance_node(black_hole_scene, global_position)
 	
 	var black_hole_time = 3.0 - anger * 1
-	var black_hole_size = 300.0 + anger * 170.0
+	var black_hole_size = 300.0 + anger * 100.0
 	
 	black_hole.appear(black_hole_time, black_hole_size)
 	

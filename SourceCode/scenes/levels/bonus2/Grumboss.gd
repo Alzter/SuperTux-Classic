@@ -11,7 +11,7 @@ func _ready():
 	
 	yield(Global, "level_ready")
 	
-	if Scoreboard.number_of_deaths > 0:
+	if Scoreboard.number_of_deaths > 0 or grumbel.phase == 2:
 		spawn_grumbel(0.1)
 	else:
 		statue_intro()
@@ -20,7 +20,9 @@ func spawn_grumbel(wait_time = 1):
 	grumbel.enable(true, wait_time)
 	statue.hide()
 	yield(get_tree().create_timer(wait_time), "timeout")
-	Music.play("Prophecy")
+	if grumbel.phase == 2:
+		anim_player.play("phase_two")
+	else: Music.play("Prophecy")
 
 func statue_intro():
 	yield(get_tree().create_timer(1), "timeout")

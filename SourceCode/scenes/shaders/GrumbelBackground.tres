@@ -2,12 +2,13 @@
 
 [resource]
 code = "shader_type canvas_item;
-render_mode blend_sub;
+render_mode blend_mix;
 
 
 uniform float rainbow_speed : hint_range(-10,10) = 1.0;
 uniform float noise_strength : hint_range(0, 10.0) = 0.75;
 uniform float brightness_add : hint_range(-10.0, 10.0) = 0;
+uniform float saturation : hint_range(0.0, 5.0) = 1.0;
 uniform float noise_shimmer_speed = 100.0;
 uniform bool noise_permanent = false;
 uniform float color_shimmer_strength = 1.0;
@@ -34,6 +35,8 @@ void fragment() {
 		float d = q.x - min(q.w, q.y);
 		float e = 1.0e-10;
 		color_hsv=vec3(abs(q.z + (q.w - q.y) / (6.0 * d + e)), d / (q.x + e), q.x);
+		
+		color_hsv.y *= saturation;
 	}
 	
 	float Shift_Hue = TIME * rainbow_speed;
