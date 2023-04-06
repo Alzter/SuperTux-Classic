@@ -1244,16 +1244,16 @@ shape = SubResource( 10 )
 [node name="SFX" type="Node2D" parent="."]
 script = ExtResource( 19 )
 
-[node name="Squish" type="AudioStreamPlayer" parent="SFX"]
+[node name="Squish" type="AudioStreamPlayer2D" parent="SFX"]
 stream = ExtResource( 21 )
 volume_db = 1.0
 
-[node name="Squish2" type="AudioStreamPlayer" parent="SFX"]
+[node name="Squish2" type="AudioStreamPlayer2D" parent="SFX"]
 stream = ExtResource( 23 )
 volume_db = -3.0
 pitch_scale = 0.8
 
-[node name="FireHurt" type="AudioStreamPlayer" parent="SFX"]
+[node name="FireHurt" type="AudioStreamPlayer2D" parent="SFX"]
 stream = ExtResource( 22 )
 volume_db = -8.0
 bus = "Sounds"
@@ -1264,23 +1264,23 @@ volume_db = 6.0
 pitch_scale = 1.5
 bus = "Sounds"
 
-[node name="FakeDie" type="AudioStreamPlayer" parent="SFX"]
+[node name="FakeDie" type="AudioStreamPlayer2D" parent="SFX"]
 stream = ExtResource( 27 )
 volume_db = 1.0
 
-[node name="Chomp" type="AudioStreamPlayer" parent="SFX"]
+[node name="Chomp" type="AudioStreamPlayer2D" parent="SFX"]
 stream = ExtResource( 41 )
 volume_db = 1.0
 
-[node name="Split" type="AudioStreamPlayer" parent="SFX"]
+[node name="Split" type="AudioStreamPlayer2D" parent="SFX"]
 stream = ExtResource( 42 )
 volume_db = -1.0
 
-[node name="BlackHole" type="AudioStreamPlayer" parent="SFX"]
+[node name="BlackHole" type="AudioStreamPlayer2D" parent="SFX"]
 stream = ExtResource( 63 )
 pitch_scale = 1.25
 
-[node name="BlackHoleCharge" type="AudioStreamPlayer" parent="SFX"]
+[node name="BlackHoleCharge" type="AudioStreamPlayer2D" parent="SFX"]
 stream = ExtResource( 64 )
 
 [node name="InvincibleTimer" type="Timer" parent="."]
