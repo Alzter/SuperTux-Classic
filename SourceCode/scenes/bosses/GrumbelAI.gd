@@ -22,6 +22,7 @@ onready var state_machine = host.get_node("StateMachine")
 
 const ATTACKS = [
 	"chomp",
+	"chomp",
 	"black_hole",
 	
 ]
@@ -48,7 +49,7 @@ func execute_random_attack():
 	var rng = RandomNumberGenerator.new()
 	rng.randomize()
 	
-	if current_attack in UNLIKELY_ATTACKS and rng.randi_range(1, 3) != 1:
+	if current_attack in UNLIKELY_ATTACKS and rng.randi_range(1, 5) != 1:
 		return
 	
 	# Then remove it from the array so we can't use it again
