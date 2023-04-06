@@ -5,8 +5,8 @@
 [sub_resource type="ShaderMaterial" id=6]
 shader = ExtResource( 1 )
 shader_param/center = Vector2( 0.5, 0.5 )
-shader_param/force = 0.5
-shader_param/size = 0.0
+shader_param/force = 0.1
+shader_param/size = 0.4
 shader_param/thickness = -0.1
 shader_param/brightness = 0.3
 

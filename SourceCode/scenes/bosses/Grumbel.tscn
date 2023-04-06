@@ -1,4 +1,4 @@
-[gd_scene load_steps=103 format=2]
+[gd_scene load_steps=104 format=2]
 
 [ext_resource path="res://images/bosses/grumbel/body/idle.png" type="Texture" id=1]
 [ext_resource path="res://scenes/shaders/Grumbel.tres" type="Material" id=2]
@@ -67,6 +67,7 @@
 [ext_resource path="res://scenes/shaders/Shockwave.tres" type="Shader" id=65]
 [ext_resource path="res://scenes/bosses/GrumbelShockwaves.tscn" type="PackedScene" id=66]
 [ext_resource path="res://scenes/shaders/GrumbelCapeWave.tres" type="Shader" id=67]
+[ext_resource path="res://scenes/shaders/GrumbelCape.tres" type="Material" id=68]
 
 [sub_resource type="Curve" id=27]
 min_value = -1.0
@@ -83,12 +84,6 @@ shader_param/curve = SubResource( 30 )
 
 [sub_resource type="CanvasItemMaterial" id=3]
 blend_mode = 2
-
-[sub_resource type="ShaderMaterial" id=38]
-shader = ExtResource( 67 )
-shader_param/wave_strength = Vector2( 0.05, 0.06 )
-shader_param/wave_amplitude = Vector2( 4, 20 )
-shader_param/wave_speed = Vector2( 5, 10 )
 
 [sub_resource type="SpriteFrames" id=6]
 animations = [ {
@@ -346,6 +341,18 @@ tracks/9/keys = {
 "update": 1,
 "values": [ false ]
 }
+tracks/10/type = "value"
+tracks/10/path = NodePath("Control/Cape:material")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 68 ) ]
+}
 
 [sub_resource type="ShaderMaterial" id=23]
 shader = ExtResource( 11 )
@@ -483,6 +490,18 @@ tracks/3/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 1,
 "values": [ true ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Control/Cape:material")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ null ]
 }
 
 [sub_resource type="Animation" id=25]
@@ -1192,6 +1211,18 @@ tracks/7/keys = {
 "update": 1,
 "values": [ true ]
 }
+tracks/8/type = "value"
+tracks/8/path = NodePath("Control/Cape:material")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ null ]
+}
 
 [sub_resource type="Animation" id=4]
 resource_name = "idle"
@@ -1376,6 +1407,24 @@ tracks/14/keys = {
 "update": 1,
 "values": [ false ]
 }
+tracks/15/type = "value"
+tracks/15/path = NodePath("Control/Cape:material")
+tracks/15/interp = 1
+tracks/15/loop_wrap = true
+tracks/15/imported = false
+tracks/15/enabled = true
+tracks/15/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 68 ) ]
+}
+
+[sub_resource type="ShaderMaterial" id=38]
+shader = ExtResource( 67 )
+shader_param/wave_strength = Vector2( 0.05, 0.03 )
+shader_param/wave_amplitude = Vector2( 20, 20 )
+shader_param/wave_speed = Vector2( 20, 20 )
 
 [sub_resource type="Animation" id=14]
 resource_name = "phase_two"
@@ -1512,6 +1561,18 @@ tracks/10/keys = {
 "update": 0,
 "values": [ Vector2( 1, 1 ) ]
 }
+tracks/11/type = "value"
+tracks/11/path = NodePath("Control/Cape:material")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ SubResource( 38 ) ]
+}
 
 [sub_resource type="ShaderMaterial" id=7]
 shader = ExtResource( 11 )
@@ -1609,6 +1670,18 @@ tracks/6/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 0,
 "values": [ Vector2( 1, 1 ) ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("Control/Cape:material")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ null ]
 }
 
 [sub_resource type="Animation" id=11]
@@ -1708,7 +1781,7 @@ anchor_bottom = 0.5
 
 [node name="Cape" type="AnimatedSprite" parent="Control"]
 modulate = Color( 0.607843, 0.607843, 0.607843, 1 )
-material = SubResource( 38 )
+material = ExtResource( 68 )
 frames = SubResource( 6 )
 animation = "idle"
 playing = true
