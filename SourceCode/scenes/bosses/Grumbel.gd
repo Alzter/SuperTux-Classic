@@ -12,6 +12,7 @@ export var max_health = 5
 export var max_health_phase_two = 8
 
 export var fireball_scene : PackedScene
+export var black_hole_scene : PackedScene
 export var powerup_small_scene : PackedScene
 export var powerup_big_scene : PackedScene
 
@@ -86,6 +87,31 @@ func idle_loop(delta):
 	var new_position = _initial_position + offset
 	position.x = lerp(position.x, new_position.x, lerp_speed)
 	position.y = lerp(position.y, new_position.y, lerp_speed)
+
+func black_hole():
+	invincible = true
+	disable_bounce_area()
+	disable_damage_area()
+	
+	anim_player.play("black_hole_charge")
+	yield(get_tree().create_timer(0.25), "timeout")
+	
+	anim_player.play("black_hole_attack")
+	yield(get_tree().create_timer(0.25), "timeout")
+	
+	instance_node(black_hole_scene, global_position)
+	
+	yield(get_tree().create_timer(2), "timeout")
+	
+	anim_player.play("black_hole_end")
+	yield(anim_player, "animation_finished")
+	
+	invincible = false
+	disable_bounce_area(false)
+	disable_damage_area(false)
+	idle_animation()
+	
+	yield(get_tree(), "idle_frame")
 
 func chomp():
 	invincible = true

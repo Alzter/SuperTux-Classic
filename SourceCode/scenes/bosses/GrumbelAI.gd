@@ -22,6 +22,7 @@ onready var state_machine = host.get_node("StateMachine")
 
 const ATTACKS = [
 	"chomp",
+	"black_hole",
 	
 ]
 

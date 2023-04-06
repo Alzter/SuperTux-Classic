@@ -1,4 +1,4 @@
-[gd_scene load_steps=89 format=2]
+[gd_scene load_steps=90 format=2]
 
 [ext_resource path="res://images/bosses/grumbel/body/idle.png" type="Texture" id=1]
 [ext_resource path="res://scenes/shaders/Grumbel.tres" type="Material" id=2]
@@ -61,6 +61,7 @@
 [ext_resource path="res://images/particles/black_hole.png" type="Texture" id=59]
 [ext_resource path="res://scenes/particles/BlackHole.tres" type="Material" id=60]
 [ext_resource path="res://scenes/shaders/BlackHoleDistortion.tres" type="Shader" id=61]
+[ext_resource path="res://scenes/bosses/GrumbelBlackHole.tscn" type="PackedScene" id=62]
 
 [sub_resource type="Curve" id=27]
 min_value = -1.0
@@ -69,7 +70,7 @@ _data = [ Vector2( 0, 0 ), 0.0, 1.44689, 0, 1, Vector2( 0.0753968, 0.109091 ), 0
 [sub_resource type="CurveTexture" id=28]
 curve = SubResource( 27 )
 
-[sub_resource type="ShaderMaterial" id=26]
+[sub_resource type="ShaderMaterial" id=29]
 shader = ExtResource( 61 )
 shader_param/strength = 0.1
 shader_param/curve_scale = 1.0
@@ -337,6 +338,7 @@ shader_param/color_shimmer_strength = 1.0
 [sub_resource type="Animation" id=24]
 resource_name = "black_hole_attack"
 length = 0.3
+step = 0.05
 tracks/0/type = "value"
 tracks/0/path = NodePath("Control/Body:animation")
 tracks/0/interp = 1
@@ -384,6 +386,18 @@ tracks/3/keys = {
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
 "values": [ false, true ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Control:rect_scale")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.2, 0.25 ),
+"transitions": PoolRealArray( 0, -2, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1, 1 ), Vector2( 1.5, 1.5 ) ]
 }
 
 [sub_resource type="Animation" id=22]
@@ -476,6 +490,18 @@ tracks/3/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 1,
 "values": [ false ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Control:rect_scale")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 0, 1 ),
+"update": 0,
+"values": [ Vector2( 1.5, 1.5 ), Vector2( 1, 1 ) ]
 }
 
 [sub_resource type="Animation" id=19]
@@ -829,6 +855,18 @@ tracks/11/keys = {
 "update": 1,
 "values": [ true ]
 }
+tracks/12/type = "value"
+tracks/12/path = NodePath("Control:rect_scale")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ) ]
+}
 
 [sub_resource type="Animation" id=14]
 resource_name = "phase_two"
@@ -952,6 +990,18 @@ tracks/9/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 1,
 "values": [ false ]
+}
+tracks/10/type = "value"
+tracks/10/path = NodePath("Control:rect_scale")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ) ]
 }
 
 [sub_resource type="ShaderMaterial" id=7]
@@ -1079,11 +1129,13 @@ collision_mask = 0
 script = ExtResource( 18 )
 invincible_time = 1.0
 fireball_scene = ExtResource( 24 )
+black_hole_scene = ExtResource( 62 )
 powerup_small_scene = ExtResource( 25 )
 powerup_big_scene = ExtResource( 26 )
 
 [node name="DistortionShader" type="ColorRect" parent="."]
-material = SubResource( 26 )
+modulate = Color( 1, 1, 1, 0.501961 )
+material = SubResource( 29 )
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -1115,13 +1167,15 @@ anchor_bottom = 0.5
 [node name="Cape" type="AnimatedSprite" parent="Control"]
 modulate = Color( 0.607843, 0.607843, 0.607843, 1 )
 frames = SubResource( 6 )
-animation = "idle"
+animation = "black_hole_end"
+frame = 3
 playing = true
 
 [node name="Body" type="AnimatedSprite" parent="Control"]
 material = ExtResource( 2 )
 frames = SubResource( 1 )
-animation = "idle"
+animation = "black_hole_end"
+frame = 3
 playing = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -1244,18 +1298,6 @@ lifetime = 0.8
 speed_scale = 3.0
 process_material = ExtResource( 60 )
 texture = ExtResource( 59 )
-
-[node name="BlackHoleDistortion" type="ColorRect" parent="."]
-visible = false
-material = SubResource( 26 )
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -250.0
-margin_top = -250.0
-margin_right = 250.0
-margin_bottom = 250.0
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
 [connection signal="timeout" from="InvincibleTimer" to="." method="_on_InvincibleTimer_timeout"]

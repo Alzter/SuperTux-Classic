@@ -25,6 +25,7 @@ func _ready():
 	
 	# ATTACKS
 	add_state("chomp")
+	add_state("black_hole")
 	
 	# Don't do anything until the level title card is gone
 	yield(Global, "level_ready")
