@@ -7,12 +7,16 @@ export var master_pull_strength = 1.0
 export var pull_strength = Vector2(200, 300)
 export var resist_pull_strength = Vector2(2, 100)
 
+onready var sprite = $Sprite
+
 func _ready():
 	appear()
 
 func appear():
-	tween.interpolate_property(hitbox.shape, "radius", 0, 300, 3, Tween.TRANS_SINE, Tween.EASE_OUT)
+	tween.interpolate_property(hitbox.shape, "radius", 42, 400, 3, Tween.TRANS_SINE, Tween.EASE_OUT)
 	tween.start()
+	hitbox.shape.radius = 42
+	update_sprite()
 
 func dissipate():
 	tween.stop_all()
@@ -44,3 +48,10 @@ func _process(delta):
 			#body.position += pull_velocity
 			body.velocity += pull_velocity
 			body.grounded = false
+	
+	update_sprite()
+
+func update_sprite():
+	var scale = (hitbox.shape.radius / 300.0) * 2
+	scale = Vector2(scale, scale)
+	sprite.scale = scale
