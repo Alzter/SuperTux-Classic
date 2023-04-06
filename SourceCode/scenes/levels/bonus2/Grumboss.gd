@@ -11,7 +11,7 @@ func _ready():
 	
 	yield(Global, "level_ready")
 	
-	if Scoreboard.number_of_deaths > 0 or grumbel.phase == 2:
+	if Scoreboard.number_of_deaths > 0 or grumbel.phase == 2 or grumbel.enabled:
 		spawn_grumbel(0.1)
 	else:
 		statue_intro()

@@ -97,15 +97,20 @@ func black_hole():
 	disable_damage_area()
 	
 	anim_player.play("black_hole_charge")
-	yield(get_tree().create_timer(0.25), "timeout")
+	var charge_time = 0.25 - anger * 0.1
+	yield(get_tree().create_timer(charge_time), "timeout")
+	
+	if state_machine.state != "black_hole": return
 	
 	anim_player.play("black_hole_attack")
 	yield(get_tree().create_timer(0.25), "timeout")
 	
+	if state_machine.state != "black_hole": return
+	
 	var black_hole = instance_node(black_hole_scene, global_position)
 	
-	var black_hole_time = 3.0 - anger * 1
-	var black_hole_size = 300.0 + anger * 100.0
+	var black_hole_time = 3.0 - anger * 1.5
+	var black_hole_size = 200.0 + anger * 200.0
 	
 	black_hole.appear(black_hole_time, black_hole_size)
 	

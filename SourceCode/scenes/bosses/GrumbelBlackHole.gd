@@ -4,8 +4,8 @@ onready var hitbox = $CollisionShape2D
 onready var tween = $Tween
 
 export var master_pull_strength = 1.0
-export var pull_strength = Vector2(400, 200)
-export var resist_pull_strength = Vector2(2, 200)
+export var pull_strength = Vector2(300, 150)
+export var resist_pull_strength = Vector2(2, 150)
 
 onready var sprite = $Sprite
 onready var shockwave_anim = $ShockwaveAnim

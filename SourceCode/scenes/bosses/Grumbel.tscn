@@ -1103,6 +1103,30 @@ tracks/4/keys = {
 "update": 0,
 "values": [ Color( 1, 1, 1, 1 ), Color( 1, 0, 0, 1 ), Color( 1, 0, 0, 1 ), Color( 1, 1, 1, 1 ) ]
 }
+tracks/5/type = "value"
+tracks/5/path = NodePath("BlackHole:emitting")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("Control:rect_scale")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ) ]
+}
 
 [sub_resource type="Animation" id=11]
 resource_name = "default"
@@ -1178,6 +1202,7 @@ script = ExtResource( 17 )
 script = ExtResource( 16 )
 
 [node name="Aura" type="Sprite" parent="."]
+modulate = Color( 1, 1, 1, 0 )
 material = SubResource( 3 )
 position = Vector2( 0, -16 )
 scale = Vector2( 2, 2 )
@@ -1193,13 +1218,13 @@ anchor_bottom = 0.5
 [node name="Cape" type="AnimatedSprite" parent="Control"]
 modulate = Color( 0.607843, 0.607843, 0.607843, 1 )
 frames = SubResource( 6 )
-animation = "idle"
+animation = "squishrecover"
 playing = true
 
 [node name="Body" type="AnimatedSprite" parent="Control"]
 material = ExtResource( 2 )
 frames = SubResource( 1 )
-animation = "idle"
+animation = "squishrecover"
 playing = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
