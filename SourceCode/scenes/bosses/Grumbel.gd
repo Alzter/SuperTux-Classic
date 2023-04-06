@@ -245,12 +245,13 @@ func die():
 	emit_signal("dying")
 	anim_player.play("dying")
 	sfx.play("Dying")
-	instance_node(shockwave_scene, _initial_position)
 	
 	var shake = 10
 	var rng = RandomNumberGenerator.new()
 	
 	while (anim_player.is_playing()):
+		if shake == 30: instance_node(shockwave_scene, _initial_position)
+		
 		Global.camera_shake(shake, 0.9)
 		shake += 1
 		position.x = lerp(position.x, _initial_position.x, 0.04)

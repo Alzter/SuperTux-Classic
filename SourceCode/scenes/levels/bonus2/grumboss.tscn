@@ -26,9 +26,9 @@ blend_mode = 3
 [sub_resource type="ShaderMaterial" id=6]
 shader = ExtResource( 12 )
 shader_param/rainbow_speed = 1.0
-shader_param/noise_strength = 0.0
-shader_param/brightness_add = -0.196
-shader_param/saturation = 1.0
+shader_param/noise_strength = 0.916667
+shader_param/brightness_add = 0.2
+shader_param/saturation = 3.0
 shader_param/noise_shimmer_speed = 1.0
 shader_param/noise_permanent = false
 shader_param/color_shimmer_strength = 0.0
@@ -320,10 +320,10 @@ tracks/10/loop_wrap = true
 tracks/10/imported = false
 tracks/10/enabled = true
 tracks/10/keys = {
-"times": PoolRealArray( 0, 4.4 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PoolRealArray( 0, 3.5, 5.4 ),
+"transitions": PoolRealArray( 1, 0.5, 1 ),
 "update": 0,
-"values": [ Color( 0, 0, 0, 0 ), Color( 1, 1, 1, 1 ) ]
+"values": [ Color( 0, 0, 0, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
 }
 
 [sub_resource type="Animation" id=12]
@@ -718,14 +718,13 @@ anchor_bottom = 1.0
 margin_right = 99359.0
 margin_bottom = 99519.0
 rect_min_size = Vector2( 99999, 99999 )
-color = Color( 1, 1, 1, 0 )
+color = Color( 1, 1, 1, 0.916667 )
 
 [node name="RainbowBG" type="ParallaxBackground" parent="."]
 layer = -5
 
 [node name="Rainbow" type="TextureRect" parent="RainbowBG"]
 visible = false
-modulate = Color( 0.364706, 0.364706, 0.364706, 1 )
 material = SubResource( 6 )
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -738,7 +737,7 @@ layer = 100
 
 [node name="Static" type="TextureRect" parent="Static"]
 visible = false
-modulate = Color( 0, 0, 0, 0 )
+modulate = Color( 0.914286, 0.914286, 0.914286, 0.914286 )
 material = SubResource( 17 )
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -765,8 +764,6 @@ anims/phase_two_transition = SubResource( 4 )
 visible = false
 position = Vector2( 320, 256 )
 enabled = false
-phase = 2
-max_health_phase_two = 1
 
 [node name="Statue" type="Sprite" parent="Script"]
 position = Vector2( 320, 305 )

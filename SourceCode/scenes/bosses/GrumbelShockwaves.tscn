@@ -5,14 +5,14 @@
 [sub_resource type="ShaderMaterial" id=6]
 shader = ExtResource( 1 )
 shader_param/center = Vector2( 0.5, 0.5 )
-shader_param/force = 0.0957427
-shader_param/size = 0.347343
-shader_param/thickness = -0.0875605
-shader_param/brightness = 0.4
+shader_param/force = 0.1
+shader_param/size = 0.4
+shader_param/thickness = -0.1
+shader_param/brightness = 0.3
 
 [sub_resource type="Animation" id=8]
 resource_name = "loop"
-length = 0.4
+length = 0.2
 loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("Shockwaves:material:shader_param/size")
@@ -21,10 +21,10 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.2, 0.4 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 2, 1 ),
 "update": 0,
-"values": [ 0.0, 0.0, 0.4 ]
+"values": [ 0.0, 0.4 ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("Shockwaves:material:shader_param/force")
@@ -33,10 +33,10 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.4 ),
+"times": PoolRealArray( 0, 0.2 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ 0.0, 0.1 ]
+"values": [ 0.5, 0.1 ]
 }
 tracks/2/type = "value"
 tracks/2/path = NodePath("Shockwaves:material:shader_param/thickness")
@@ -45,10 +45,10 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0, 0.4 ),
+"times": PoolRealArray( 0, 0.2 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ 0.0, -0.1 ]
+"values": [ -0.1, -0.1 ]
 }
 
 [node name="Shockwaves" type="Area2D"]
