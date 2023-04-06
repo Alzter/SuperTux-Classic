@@ -13,10 +13,8 @@ onready var shockwave_anim = $ShockwaveAnim
 export var appear_size = 400.0
 export var appear_time = 3.0
 
-func _ready():
-	appear()
-
-func appear(size = appear_size, time = appear_time):
+func appear(time = appear_time, size = appear_size):
+	shockwave_anim.play("appear")
 	tween.interpolate_property(hitbox.shape, "radius", 42, size, time, Tween.TRANS_SINE, Tween.EASE_OUT)
 	tween.start()
 	hitbox.shape.radius = 42

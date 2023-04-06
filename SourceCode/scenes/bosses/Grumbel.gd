@@ -101,7 +101,12 @@ func black_hole():
 	
 	var black_hole = instance_node(black_hole_scene, global_position)
 	
-	yield(get_tree().create_timer(2), "timeout")
+	var black_hole_time = 3.0 - anger * 1
+	var black_hole_size = 300.0 + anger * 170.0
+	
+	black_hole.appear(black_hole_time, black_hole_size)
+	
+	yield(get_tree().create_timer(black_hole_time - 0.5), "timeout")
 	
 	black_hole.dissipate()
 	

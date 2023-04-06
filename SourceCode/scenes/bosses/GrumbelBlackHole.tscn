@@ -24,7 +24,7 @@ curve = SubResource( 10 )
 [sub_resource type="ShaderMaterial" id=12]
 shader = ExtResource( 6 )
 shader_param/strength = 1.0
-shader_param/curve_scale = 2.0
+shader_param/curve_scale = 5.0
 shader_param/curve = SubResource( 11 )
 
 [sub_resource type="CircleShape2D" id=1]
@@ -244,7 +244,7 @@ z_as_relative = false
 texture = ExtResource( 4 )
 
 [node name="ShockwaveAnim" type="AnimationPlayer" parent="."]
-autoplay = "appear"
+autoplay = "stop"
 anims/appear = SubResource( 7 )
 anims/loop = SubResource( 8 )
 anims/stop = SubResource( 9 )
