@@ -23,31 +23,35 @@
 
 extends CanvasLayer
 
-var BrickSmash = preload("res://scenes/particles/" + "BrickSmash" + ".tres")
-var InvincibleParticlesBig = preload("res://scenes/particles/" + "InvincibleParticlesBig" + ".tres")
-var InvincibleParticlesSmall = preload("res://scenes/particles/" + "InvincibleParticlesSmall" + ".tres")
-var InvincibleParticlesTrail = preload("res://scenes/particles/" + "InvincibleParticlesTrail" + ".tres")
-var SnowfallSmall = preload("res://scenes/particles/" + "SnowfallSmall" + ".tres")
-var Rainfall = preload("res://scenes/particles/" + "Rainfall" + ".tres")
-var Clouds = preload("res://scenes/particles/" + "Clouds" + ".tres")
-var WaterSplash = preload("res://scenes/particles/" + "WaterSplash" + ".tres")
-
-var materials = [
-	BrickSmash,
-	InvincibleParticlesBig,
-	InvincibleParticlesSmall,
-	InvincibleParticlesTrail,
-	SnowfallSmall,
-	Rainfall,
-	Clouds,
-	WaterSplash
-]
+var particles_dir = "res://scenes/particles/"
 
 func _ready(): # Make all of the game's particles emit once so they stay loaded
-	for material in materials:
+	var particle_files = list_files_in_directory(particles_dir)
+	for particle_file in particle_files:
+		var path = particles_dir + particle_file
+		var particle = load(path)
 		var particles_instance = Particles2D.new()
-		particles_instance.set_process_material(material)
+		particles_instance.set_process_material(particle)
 		particles_instance.set_one_shot(true)
 		particles_instance.set_emitting(true)
 		particles_instance.modulate = Color(0,0,0,0) # Make them invisible so we don't actually see them
 		self.add_child(particles_instance)
+		particles_instance.position = Vector2(320,240)
+		
+
+func list_files_in_directory(path):
+	var files = []
+	var dir = Directory.new()
+	dir.open(path)
+	dir.list_dir_begin()
+
+	while true:
+		var file = dir.get_next()
+		if file == "":
+			break
+		elif not file.begins_with("."):
+			files.append(file)
+
+	dir.list_dir_end()
+
+	return files

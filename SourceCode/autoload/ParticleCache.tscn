@@ -3,4 +3,5 @@
 [ext_resource path="res://autoload/ParticleCache.gd" type="Script" id=1]
 
 [node name="ParticleCache" type="CanvasLayer"]
+layer = 128
 script = ExtResource( 1 )
