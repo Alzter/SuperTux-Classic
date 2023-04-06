@@ -108,19 +108,6 @@ animations = [ {
 "speed": 15.0
 } ]
 
-[sub_resource type="Curve" id=27]
-min_value = -1.0
-_data = [ Vector2( 0, 0 ), 0.0, -0.181283, 0, 1, Vector2( 0.100295, -0.0181818 ), 0.0, 0.0, 0, 0, Vector2( 0.20944, -0.0181818 ), 5.74339, 5.74339, 0, 0, Vector2( 0.466077, 0.00454545 ), 0.0885579, 0.0, 1, 0 ]
-
-[sub_resource type="CurveTexture" id=28]
-curve = SubResource( 27 )
-
-[sub_resource type="ShaderMaterial" id=26]
-shader = ExtResource( 61 )
-shader_param/strength = 1.0
-shader_param/curve_scale = 2.0
-shader_param/curve = SubResource( 28 )
-
 [sub_resource type="ShaderMaterial" id=23]
 shader = ExtResource( 11 )
 shader_param/rainbow_speed = 3.0
@@ -1097,6 +1084,19 @@ extents = Vector2( 32, 42 )
 [sub_resource type="RectangleShape2D" id=21]
 extents = Vector2( 76, 48 )
 
+[sub_resource type="Curve" id=27]
+min_value = -1.0
+_data = [ Vector2( 0, 0 ), 0.0, 21.2303, 0, 1, Vector2( 0.0265487, 0.563636 ), 0.0, 0.0, 0, 0, Vector2( 0.0707965, -0.6 ), 0.0, 0.0, 0, 0, Vector2( 0.108076, -0.0181818 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0203849, 0.0, 1, 0 ]
+
+[sub_resource type="CurveTexture" id=28]
+curve = SubResource( 27 )
+
+[sub_resource type="ShaderMaterial" id=26]
+shader = ExtResource( 61 )
+shader_param/strength = 1.0
+shader_param/curve_scale = 1.713
+shader_param/curve = SubResource( 28 )
+
 [node name="Grumbel" type="KinematicBody2D"]
 collision_layer = 4
 collision_mask = 0
@@ -1127,22 +1127,10 @@ animation = "black_hole_attack"
 frame = 1
 playing = true
 
-[node name="DistortionShader" type="ColorRect" parent="."]
-material = SubResource( 26 )
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -250.0
-margin_top = -250.0
-margin_right = 250.0
-margin_bottom = 250.0
-
 [node name="Body" type="AnimatedSprite" parent="."]
 material = SubResource( 23 )
 frames = SubResource( 1 )
 animation = "black_hole_loop"
-frame = 1
 playing = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -1264,6 +1252,17 @@ lifetime = 0.8
 speed_scale = 3.0
 process_material = ExtResource( 60 )
 texture = ExtResource( 59 )
+
+[node name="DistortionShader" type="ColorRect" parent="."]
+material = SubResource( 26 )
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -250.0
+margin_top = -250.0
+margin_right = 250.0
+margin_bottom = 250.0
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
 [connection signal="timeout" from="InvincibleTimer" to="." method="_on_InvincibleTimer_timeout"]
