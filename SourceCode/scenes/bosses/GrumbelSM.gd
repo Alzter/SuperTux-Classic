@@ -18,6 +18,7 @@
 extends StateMachine
 
 func _ready():
+	add_state("waiting")
 	add_state("idle")
 	add_state("squished")
 	add_state("fake_death")
@@ -31,6 +32,7 @@ func _ready():
 	yield(Global, "level_ready")
 	
 	host.player = Global.player
+	call_deferred("set_state", "waiting")
 	
 	yield(get_tree().create_timer(1), "timeout")
 	

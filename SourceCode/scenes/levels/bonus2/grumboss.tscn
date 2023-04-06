@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://scenes/shaders/Overlay.gdshader" type="Shader" id=1]
 [ext_resource path="res://scenes/master/Camera.gd" type="Script" id=2]
@@ -13,6 +13,9 @@
 [ext_resource path="res://images/background/rainbow.png" type="Texture" id=11]
 [ext_resource path="res://scenes/shaders/GrumbelBackground.tres" type="Shader" id=12]
 [ext_resource path="res://images/bosses/grumbel/statue.png" type="Texture" id=13]
+[ext_resource path="res://scenes/master/SFX.gd" type="Script" id=14]
+[ext_resource path="res://sounds/enemies/stalactite_crack.wav" type="AudioStream" id=15]
+[ext_resource path="res://sounds/bosses/grumbel/statue_rumbling.wav" type="AudioStream" id=16]
 
 [sub_resource type="CanvasItemMaterial" id=2]
 blend_mode = 3
@@ -318,6 +321,19 @@ enabled = false
 [node name="Statue" type="Sprite" parent="Script"]
 position = Vector2( 320, 305 )
 texture = ExtResource( 13 )
+
+[node name="SFX" type="Node2D" parent="Script"]
+script = ExtResource( 14 )
+
+[node name="Rumbling" type="AudioStreamPlayer" parent="Script/SFX"]
+stream = ExtResource( 15 )
+volume_db = 4.0
+pitch_scale = 0.25
+
+[node name="Rumbling2" type="AudioStreamPlayer" parent="Script/SFX"]
+stream = ExtResource( 16 )
+volume_db = -3.0
+pitch_scale = 2.0
 
 [node name="Camera2D" type="Camera2D" parent="."]
 pause_mode = 2

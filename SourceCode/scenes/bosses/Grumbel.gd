@@ -323,4 +323,5 @@ func enable(enable = true):
 	invincible = !enabled
 	if enabled:
 		yield(get_tree().create_timer(1), "timeout")
-		state_machine.set_state("idle")
+		if state_machine.state == "waiting":
+			state_machine.set_state("idle")
