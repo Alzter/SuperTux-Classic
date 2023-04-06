@@ -106,10 +106,13 @@ func black_hole():
 	black_hole.dissipate()
 	
 	anim_player.play("black_hole_end")
-	yield(anim_player, "animation_finished")
+	yield(get_tree().create_timer(0.25), "timeout")
 	
 	invincible = false
 	disable_bounce_area(false)
+	
+	yield(anim_player, "animation_finished")
+	
 	disable_damage_area(false)
 	idle_animation()
 	

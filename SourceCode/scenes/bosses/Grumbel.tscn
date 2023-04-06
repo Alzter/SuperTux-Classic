@@ -1124,6 +1124,7 @@ extents = Vector2( 32, 42 )
 extents = Vector2( 76, 48 )
 
 [node name="Grumbel" type="KinematicBody2D"]
+z_index = -10
 collision_layer = 4
 collision_mask = 0
 script = ExtResource( 18 )
@@ -1134,6 +1135,7 @@ powerup_small_scene = ExtResource( 25 )
 powerup_big_scene = ExtResource( 26 )
 
 [node name="DistortionShader" type="ColorRect" parent="."]
+visible = false
 modulate = Color( 1, 1, 1, 0.501961 )
 material = SubResource( 29 )
 anchor_left = 0.5
@@ -1165,7 +1167,7 @@ anchor_right = 0.5
 anchor_bottom = 0.5
 
 [node name="Cape" type="AnimatedSprite" parent="Control"]
-modulate = Color( 0.607843, 0.607843, 0.607843, 1 )
+modulate = Color( 0, 0, 0, 1 )
 frames = SubResource( 6 )
 animation = "black_hole_end"
 frame = 3

@@ -8,17 +8,23 @@ export var pull_strength = Vector2(400, 200)
 export var resist_pull_strength = Vector2(2, 200)
 
 onready var sprite = $Sprite
+onready var shockwave_anim = $ShockwaveAnim
+
+export var appear_size = 400.0
+export var appear_time = 3.0
 
 func _ready():
 	appear()
 
-func appear():
-	tween.interpolate_property(hitbox.shape, "radius", 42, 400, 3, Tween.TRANS_SINE, Tween.EASE_OUT)
+func appear(size = appear_size, time = appear_time):
+	tween.interpolate_property(hitbox.shape, "radius", 42, size, time, Tween.TRANS_SINE, Tween.EASE_OUT)
 	tween.start()
 	hitbox.shape.radius = 42
 	update_sprite()
 
 func dissipate():
+	shockwave_anim.stop()
+	shockwave_anim.play("stop")
 	tween.stop_all()
 	tween.interpolate_property(hitbox.shape, "radius", hitbox.shape.radius, 1, 0.25, Tween.TRANS_SINE, Tween.EASE_IN)
 	tween.start()
@@ -57,3 +63,8 @@ func update_sprite():
 	var scale = (hitbox.shape.radius / 300.0) * 2
 	scale = Vector2(scale, scale)
 	sprite.scale = scale
+
+
+func _on_ShockwaveAnim_animation_finished(anim_name):
+	if anim_name == "appear":
+		shockwave_anim.play("loop")
