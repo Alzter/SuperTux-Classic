@@ -27,14 +27,14 @@ var special_songs = [
 	"Invincible"
 ]
 
-func play(song, keep_other_songs = false):
+func play(song, keep_other_songs = false, from_position = 0.0):
 	if !keep_other_songs: stop_all()
 	if has_node(song):
 		var s = get_node(song)
 		if s != null:
 			s.pitch_scale = 1
 			s.bus = "Music"
-			s.play()
+			s.play(from_position)
 			
 			# This is here because we don't ever want the Invincible star theme to go into our
 			# previous songs list, because if it did then we wouldn't know what song to
@@ -67,7 +67,7 @@ func speed_up():
 
 func pitch_slide_down():
 	if current_song_node != null:
-		tween.interpolate_property(current_song_node, "pitch_scale", 1, 0.1, 2, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+		tween.interpolate_property(current_song_node, "pitch_scale", 1, 0.05, 3, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 		tween.start()
 
 func pitch_slide_up():

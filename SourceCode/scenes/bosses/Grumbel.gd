@@ -77,7 +77,7 @@ func set_anger():
 
 func idle():
 	emit_signal("is_idle")
-	fireball_timer.start()
+	start_fireball_timer()
 	set_attack_timer()
 	#disable_bounce_area(false)
 	#disable_damage_area(false)
@@ -224,7 +224,6 @@ func fake_death():
 	sfx.play("FakeDie")
 	velocity = Vector2.ZERO
 	emit_signal("fake_death")
-	Music.pitch_slide_down()
 
 func defeated():
 	anim_player.stop()
@@ -324,7 +323,6 @@ func _on_AnimationPlayer_animation_finished(anim_name):
 			commence_phase_two()
 
 func commence_phase_two():
-	Music.play("BossAttack07")
 	health = max_health_phase_two
 	phase = 2
 	invincible = false
@@ -362,7 +360,11 @@ func fireball_hit():
 func _on_FireballTimer_timeout():
 	if state_machine.state == "idle":
 		if !invincible: shoot_eye_fireballs()
-		fireball_timer.start(3 - anger * 3)
+		start_fireball_timer()
+
+func start_fireball_timer():
+	fireball_timer.stop()
+	fireball_timer.start(3 - anger * 3)
 
 func spawn_powerup():
 	if player == null: return

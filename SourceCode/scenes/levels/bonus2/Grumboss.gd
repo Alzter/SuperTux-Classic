@@ -64,10 +64,13 @@ func statue_intro():
 	yield(anim_player, "animation_finished")
 
 func phase_two_transition():
+	ambience.stop()
 	anim_player.play("phase_two_transition")
+	Music.pitch_slide_down()
 
 func phase_two():
 	anim_player.play("phase_two")
+	Music.play("Prophecy", false, 30.74)
 
 func defeated():
 	ambience.stop()
