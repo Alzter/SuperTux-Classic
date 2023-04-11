@@ -62,7 +62,7 @@ stream = ExtResource( 4 )
 
 [node name="Scary" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 20 )
-volume_db = 3.0
+volume_db = 5.0
 
 [node name="Cave" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 3 )

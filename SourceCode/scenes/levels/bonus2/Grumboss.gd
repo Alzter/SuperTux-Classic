@@ -15,7 +15,8 @@ var evil_messages = [
 	"USELESS",
 	"REDUNDANT",
 	"DEFECTIVE",
-	"FUNCTION NEEDS DEPRECATING",
+	"DEPRECATED",
+	"DEPRECIATING",
 	"DELETE",
 	"DECOMPILE",
 	"UNNECESSARY",
@@ -27,6 +28,8 @@ var evil_messages = [
 	"LIFELESS",
 	"STALE",
 	"DULL",
+	"NULL",
+	"FATAL",
 	"Tux.kill(true)",
 ]
 
@@ -122,11 +125,12 @@ func statue_intro():
 	
 	yield(get_tree().create_timer(1, false), "timeout")
 	
-	sfx.play("Glitch1")
-	sfx.play("Static")
-	yield(call("evil_text_message", "I WILL DEPRECATE YOU", 1, Color(1,0,0), Color(1,0,0,0.2)), "completed")
-	sfx.stop("Glitch1")
-	sfx.stop("Static")
+	if grumbel.state_machine.state == "waiting": 
+		sfx.play("Glitch1")
+		sfx.play("Static")
+		yield(call("evil_text_message", "I WILL DEPRECATE YOU", 1, Color(1,0,0), Color(1,0,0,0.2)), "completed")
+		sfx.stop("Glitch1")
+		sfx.stop("Static")
 
 func phase_two_transition():
 	ambience.stop()
@@ -135,7 +139,8 @@ func phase_two_transition():
 
 func phase_two():
 	anim_player.play("phase_two")
-	Music.play("Prophecy", false, 30.74)
+	Music.play("Prophecy", false, 30.7)
+	grumbel_sanity_effect()
 
 func defeated():
 	ambience.stop()
@@ -183,16 +188,49 @@ func random_glitch_noise():
 	var sound = "Glitch" + str(rng.randi_range(1,4))
 	
 	var sound_node = sfx.get_node(sound)
-	sound_node.volume_db = rng.randf_range(7, -10)
+	sound_node.volume_db = rng.randf_range(10, -10)
 	sound_node.pitch_scale = rng.randf_range(0.75, 3)
 	
 	sfx.play(sound)
 	
-	yield(get_tree().create_timer(rng.randf_range(0.1, 3)), "timeout")
+	yield(get_tree().create_timer(rng.randf_range(0.25, 0.75)), "timeout")
 	sfx.stop(sound)
 
 func dying():
+	Music.play("Prophecy", false, 19.5)
+	Music.pitch_slide_up()
+	
 	anim_player.play("dying")
+	yield(get_tree().create_timer(1), "timeout")
+	yield(call("cry_out_in_despair", 0.3), "completed")
+	yield(get_tree().create_timer(0.1), "timeout")
+	yield(call("cry_out_in_despair", 0.1), "completed")
+	yield(get_tree().create_timer(0.4), "timeout")
+	yield(call("cry_out_in_despair", 0.1), "completed")
+	yield(get_tree().create_timer(0.05), "timeout")
+	
+	var i = 20
+	var time = 0.2
+	var brightness = 0
+	
+	Music.pitch_slide_down()
+	
+	while(i > 0):
+		i -= 1
+		time *= 0.9
+		brightness += 0.1
+		yield(call("cry_out_in_despair", time, brightness), "completed")
+		yield(get_tree().create_timer(time), "timeout")
+	sfx.stop("Static")
+	Music.stop_all()
+
+# Grumbel says "NO" as he dies
+func cry_out_in_despair(message_time : float, brightness = 0):
+	evil_text.modulate.a = 1 - brightness * 0.5
+	sfx.play("Static")
+	yield(call("evil_text_message", "NO", message_time, Color(1,brightness,brightness), Color(1,0,0,0.1)), "completed")
+	yield(get_tree(), "idle_frame")
+	sfx.stop("Static")
 
 func _on_AnimationPlayer_animation_finished(anim_name):
 	if anim_name == "dying":
