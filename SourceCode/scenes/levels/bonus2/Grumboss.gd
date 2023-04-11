@@ -9,12 +9,15 @@ onready var evil_text = $EvilText/Control
 onready var evil_text_label = $EvilText/Control/Label
 onready var evil_text_static = $EvilText/Control/Static
 onready var rng = RandomNumberGenerator.new()
+onready var sanity_effect_animation = $SanityEffects
 
 var evil_messages = [
 	"USELESS",
 	"REDUNDANT",
 	"DEFECTIVE",
-	"NEEDS DEPRECATING",
+	"FUNCTION NEEDS DEPRECATING",
+	"DELETE",
+	"DECOMPILE",
 	"UNNECESSARY",
 	"TRASH",
 	"KILL",
@@ -54,7 +57,7 @@ func statue_intro():
 	
 	sfx.play("Static")
 	sfx.play("Glitch2")
-	yield(call("evil_text_message", "UNNECESSARY", 0.6), "completed")
+	yield(call("evil_text_message", "UNNECESSARY", 2, Color(1,1,0), Color(1,1,1,0.1)), "completed")
 	sfx.stop("Glitch2")
 	sfx.stop("Static")
 	
@@ -140,20 +143,43 @@ func defeated():
 	anim_player.play("defeated")
 
 func hurt():
+	# When getting hit in phase 2, grumbel creates sanity effects
 	if grumbel.phase == 2:
 		rng.randomize()
 		
-		# Get a random evil message from the evil message array
-		var message = rng.randi_range(0, evil_messages.size() - 1)
-		message = evil_messages[message]
+		# 50% chance of displaying angry message on the screen for a fraction of a second
+		if rng.randi_range(0,1) == 1:
+			# Get a random evil message from the evil message array
+			var message = rng.randi_range(0, evil_messages.size() - 1)
+			message = evil_messages[message]
+			
+			var sound = "Glitch" + str(rng.randi_range(1,3))
+			
+			sfx.play("Static")
+			sfx.play(sound)
+			yield(call("evil_text_message", message, 0.05, Color(1,1,1), Color(1,0,0,0.1)), "completed")
+			sfx.stop(sound)
+			sfx.stop("Static")
 		
-		var sound = "Glitch" + str(rng.randi_range(1,3))
-		
-		sfx.play("Static")
-		sfx.play(sound)
-		yield(call("evil_text_message", message, 0.1, Color(1,1,1), Color(1,0,0,0.25)), "completed")
-		sfx.stop(sound)
-		sfx.stop("Static")
+		# 50% chance of displaying grumbel on the entire screen
+		else:
+			grumbel_sanity_effect()
+
+func grumbel_sanity_effect():
+	rng.randomize()
+	var sound = "Glitch" + str(rng.randi_range(1,3))
+	sfx.play(sound)
+	
+	rng.randomize()
+	var speed = rng.randf_range(0.25, 1)
+	
+	sanity_effect_animation.play("sanity_effect", -1, speed)
+	yield(get_tree(), "idle_frame")
+	
+	yield(get_tree().create_timer(0.5), "timeout")
+	sfx.stop(sound)
+	
+	yield(sanity_effect_animation, "animation_finished")
 
 func dying():
 	anim_player.play("dying")
