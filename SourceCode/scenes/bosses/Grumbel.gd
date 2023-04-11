@@ -57,6 +57,7 @@ signal phase_two
 signal defeated
 signal dying
 signal is_idle
+signal hurt
 
 func _ready():
 	_initial_position = position
@@ -215,6 +216,7 @@ func squished():
 	Global.camera_shake(80, 0.92)
 	fire_hit_anim.play("default")
 	spawn_powerup()
+	emit_signal("hurt")
 
 func fake_death():
 	invincible = true

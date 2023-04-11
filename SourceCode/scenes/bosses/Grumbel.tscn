@@ -1,4 +1,4 @@
-[gd_scene load_steps=104 format=2]
+[gd_scene load_steps=105 format=2]
 
 [ext_resource path="res://images/bosses/grumbel/body/idle.png" type="Texture" id=1]
 [ext_resource path="res://scenes/shaders/Grumbel.tres" type="Material" id=2]
@@ -102,9 +102,9 @@ animations = [ {
 "name": "squished",
 "speed": 15.0
 }, {
-"frames": [ ExtResource( 39 ) ],
+"frames": [  ],
 "loop": true,
-"name": "chomp_recover",
+"name": "defeated",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 13 ) ],
@@ -117,19 +117,19 @@ animations = [ {
 "name": "black_hole_charge",
 "speed": 12.0
 }, {
-"frames": [ ExtResource( 55 ), ExtResource( 55 ), ExtResource( 49 ), ExtResource( 56 ) ],
-"loop": false,
-"name": "black_hole_end",
-"speed": 15.0
-}, {
 "frames": [ ExtResource( 49 ), ExtResource( 55 ) ],
 "loop": false,
 "name": "black_hole_attack",
 "speed": 15.0
 }, {
-"frames": [  ],
+"frames": [ ExtResource( 55 ), ExtResource( 55 ), ExtResource( 49 ), ExtResource( 56 ) ],
+"loop": false,
+"name": "black_hole_end",
+"speed": 15.0
+}, {
+"frames": [ ExtResource( 39 ) ],
 "loop": true,
-"name": "defeated",
+"name": "chomp_recover",
 "speed": 5.0
 } ]
 
@@ -145,15 +145,10 @@ animations = [ {
 "name": "squished",
 "speed": 15.0
 }, {
-"frames": [ ExtResource( 40 ) ],
+"frames": [ ExtResource( 47 ) ],
 "loop": true,
-"name": "chomp_recover",
+"name": "defeated",
 "speed": 5.0
-}, {
-"frames": [ ExtResource( 35 ), ExtResource( 36 ), ExtResource( 35 ), ExtResource( 35 ), ExtResource( 33 ), ExtResource( 29 ), ExtResource( 34 ) ],
-"loop": false,
-"name": "chomp_split",
-"speed": 15.0
 }, {
 "frames": [ ExtResource( 12 ) ],
 "loop": true,
@@ -165,30 +160,35 @@ animations = [ {
 "name": "black_hole_charge",
 "speed": 12.0
 }, {
-"frames": [ ExtResource( 54 ), ExtResource( 58 ) ],
-"loop": true,
-"name": "black_hole_loop",
-"speed": 20.0
+"frames": [ ExtResource( 46 ), ExtResource( 47 ), ExtResource( 50 ), ExtResource( 53 ), ExtResource( 54 ) ],
+"loop": false,
+"name": "black_hole_attack",
+"speed": 15.0
 }, {
 "frames": [ ExtResource( 50 ), ExtResource( 47 ), ExtResource( 46 ), ExtResource( 44 ) ],
 "loop": false,
 "name": "black_hole_end",
 "speed": 15.0
 }, {
-"frames": [ ExtResource( 46 ), ExtResource( 47 ), ExtResource( 50 ), ExtResource( 53 ), ExtResource( 54 ) ],
+"frames": [ ExtResource( 40 ) ],
+"loop": true,
+"name": "chomp_recover",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 35 ), ExtResource( 36 ), ExtResource( 35 ), ExtResource( 35 ), ExtResource( 33 ), ExtResource( 29 ), ExtResource( 34 ) ],
 "loop": false,
-"name": "black_hole_attack",
+"name": "chomp_split",
 "speed": 15.0
+}, {
+"frames": [ ExtResource( 54 ), ExtResource( 58 ) ],
+"loop": true,
+"name": "black_hole_loop",
+"speed": 20.0
 }, {
 "frames": [ ExtResource( 38 ), ExtResource( 38 ), ExtResource( 38 ), ExtResource( 37 ), ExtResource( 30 ), ExtResource( 31 ), ExtResource( 31 ), ExtResource( 31 ), ExtResource( 32 ) ],
 "loop": false,
 "name": "chomp_smash",
 "speed": 20.0
-}, {
-"frames": [ ExtResource( 47 ) ],
-"loop": true,
-"name": "defeated",
-"speed": 5.0
 } ]
 
 [sub_resource type="ShaderMaterial" id=16]
@@ -354,6 +354,15 @@ tracks/10/keys = {
 "values": [ ExtResource( 68 ) ]
 }
 
+[sub_resource type="ShaderMaterial" id=39]
+shader = ExtResource( 11 )
+shader_param/rainbow_speed = 1.0
+shader_param/displacement_strength = 0.0
+shader_param/noise_strength = 0.3
+shader_param/brightness_add = 0.0
+shader_param/noise_shimmer_speed = 100.0
+shader_param/color_shimmer_strength = 0.0
+
 [sub_resource type="ShaderMaterial" id=23]
 shader = ExtResource( 11 )
 shader_param/rainbow_speed = 3.0
@@ -401,7 +410,7 @@ tracks/2/keys = {
 "times": PoolRealArray( 0, 0.2 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ ExtResource( 2 ), SubResource( 23 ) ]
+"values": [ SubResource( 39 ), SubResource( 23 ) ]
 }
 tracks/3/type = "value"
 tracks/3/path = NodePath("BlackHole:emitting")
@@ -477,7 +486,7 @@ tracks/2/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ ExtResource( 2 ) ]
+"values": [ SubResource( 39 ) ]
 }
 tracks/3/type = "value"
 tracks/3/path = NodePath("SFX/BlackHoleCharge:playing")
@@ -541,7 +550,7 @@ tracks/2/keys = {
 "times": PoolRealArray( 0.2 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ ExtResource( 2 ) ]
+"values": [ SubResource( 39 ) ]
 }
 tracks/3/type = "value"
 tracks/3/path = NodePath("BlackHole:emitting")
@@ -1137,7 +1146,7 @@ tracks/1/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ ExtResource( 2 ) ]
+"values": [ SubResource( 39 ) ]
 }
 tracks/2/type = "value"
 tracks/2/path = NodePath("Aura:visible")
@@ -1249,7 +1258,7 @@ tracks/1/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ ExtResource( 2 ) ]
+"values": [ SubResource( 39 ) ]
 }
 tracks/2/type = "value"
 tracks/2/path = NodePath("Aura:visible")
@@ -1621,7 +1630,7 @@ tracks/2/keys = {
 "times": PoolRealArray( 0, 0.75 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ SubResource( 7 ), ExtResource( 2 ) ]
+"values": [ SubResource( 7 ), SubResource( 39 ) ]
 }
 tracks/3/type = "value"
 tracks/3/path = NodePath("Aura:modulate")

@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/glitching_2.wav-a9374060931c65ccc0069691819e92fc.sample"
+
+[deps]
+
+source_file="res://sounds/bosses/grumbel/glitching_2.wav"
+dest_files=[ "res://.import/glitching_2.wav-a9374060931c65ccc0069691819e92fc.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=true
+compress/mode=1

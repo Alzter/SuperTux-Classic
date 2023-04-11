@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/static.mp3-7b21f89a6b12c354b119d57fce9d1f0d.mp3str"
+
+[deps]
+
+source_file="res://sounds/bosses/grumbel/static.mp3"
+dest_files=[ "res://.import/static.mp3-7b21f89a6b12c354b119d57fce9d1f0d.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

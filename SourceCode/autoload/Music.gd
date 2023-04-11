@@ -67,7 +67,7 @@ func speed_up():
 
 func pitch_slide_down():
 	if current_song_node != null:
-		tween.interpolate_property(current_song_node, "pitch_scale", 1, 0.05, 3, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+		tween.interpolate_property(current_song_node, "pitch_scale", 1, 0.1, 2, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 		tween.start()
 
 func pitch_slide_up():

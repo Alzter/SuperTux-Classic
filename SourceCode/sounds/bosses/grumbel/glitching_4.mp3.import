@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/glitching_4.mp3-be822c4e1e8f53cf83c4556fb9764f7b.mp3str"
+
+[deps]
+
+source_file="res://sounds/bosses/grumbel/glitching_4.mp3"
+dest_files=[ "res://.import/glitching_4.mp3-be822c4e1e8f53cf83c4556fb9764f7b.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

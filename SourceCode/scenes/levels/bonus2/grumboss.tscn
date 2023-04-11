@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=2]
+[gd_scene load_steps=40 format=2]
 
 [ext_resource path="res://scenes/shaders/Overlay.gdshader" type="Shader" id=1]
 [ext_resource path="res://scenes/master/Camera.gd" type="Script" id=2]
@@ -19,6 +19,13 @@
 [ext_resource path="res://sounds/enemies/explode.wav" type="AudioStream" id=17]
 [ext_resource path="res://sounds/bosses/grumbel/chomp.wav" type="AudioStream" id=18]
 [ext_resource path="res://images/background/rainbow_static.png" type="Texture" id=19]
+[ext_resource path="res://theme/default_theme.tres" type="Theme" id=20]
+[ext_resource path="res://sounds/bosses/grumbel/glitching_1.wav" type="AudioStream" id=21]
+[ext_resource path="res://sounds/bosses/grumbel/glitching_2.wav" type="AudioStream" id=22]
+[ext_resource path="res://sounds/bosses/grumbel/glitching_3.wav" type="AudioStream" id=23]
+[ext_resource path="res://sounds/bosses/grumbel/static.mp3" type="AudioStream" id=24]
+[ext_resource path="res://theme/FontCreditsBig.tres" type="DynamicFont" id=25]
+[ext_resource path="res://sounds/bosses/grumbel/glitching_4.mp3" type="AudioStream" id=26]
 
 [sub_resource type="CanvasItemMaterial" id=2]
 blend_mode = 3
@@ -133,6 +140,18 @@ tracks/6/loop_wrap = true
 tracks/6/imported = false
 tracks/6/enabled = true
 tracks/6/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("Script/EvilText/Control:visible")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
@@ -736,6 +755,38 @@ stretch_mode = 2
 pause_mode = 1
 script = ExtResource( 7 )
 
+[node name="EvilText" type="CanvasLayer" parent="Script"]
+layer = 128
+
+[node name="Control" type="Control" parent="Script/EvilText"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 20 )
+
+[node name="ColorRect" type="ColorRect" parent="Script/EvilText/Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 1 )
+
+[node name="Static" type="TextureRect" parent="Script/EvilText/Control"]
+modulate = Color( 1, 1, 1, 0.192157 )
+material = SubResource( 17 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 19 )
+expand = true
+stretch_mode = 2
+
+[node name="Label" type="Label" parent="Script/EvilText/Control"]
+modulate = Color( 1, 1, 0, 1 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_fonts/font = ExtResource( 25 )
+text = "UNNECESSARY"
+align = 1
+valign = 1
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Script"]
 root_node = NodePath("../..")
 autoplay = "default"
@@ -761,6 +812,25 @@ volume_db = -5.0
 
 [node name="SFX" type="Node2D" parent="Script"]
 script = ExtResource( 14 )
+
+[node name="Glitch1" type="AudioStreamPlayer" parent="Script/SFX"]
+stream = ExtResource( 21 )
+pitch_scale = 0.4
+
+[node name="Glitch2" type="AudioStreamPlayer" parent="Script/SFX"]
+stream = ExtResource( 22 )
+pitch_scale = 0.5
+
+[node name="Glitch3" type="AudioStreamPlayer" parent="Script/SFX"]
+stream = ExtResource( 23 )
+
+[node name="Glitch4" type="AudioStreamPlayer" parent="Script/SFX"]
+stream = ExtResource( 26 )
+volume_db = 2.0
+
+[node name="Static" type="AudioStreamPlayer" parent="Script/SFX"]
+stream = ExtResource( 24 )
+volume_db = -10.0
 
 [node name="Rumbling" type="AudioStreamPlayer" parent="Script/SFX"]
 stream = ExtResource( 15 )
