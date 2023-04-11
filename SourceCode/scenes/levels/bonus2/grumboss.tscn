@@ -56,34 +56,6 @@ shader_param/color_shimmer_strength = 0.0
 shader_param/move_direction = Vector2( 1, 1 )
 shader_param/move_speed = 10.0
 
-[sub_resource type="Animation" id=18]
-resource_name = "default"
-length = 0.001
-tracks/0/type = "value"
-tracks/0/path = NodePath("Control:visible")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ false ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("Control:modulate")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Color( 1, 1, 1, 1 ) ]
-}
-
 [sub_resource type="Animation" id=19]
 resource_name = "sanity_effect"
 length = 4.0
@@ -107,10 +79,10 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.1, 0.3 ),
-"transitions": PoolRealArray( 0, 1, 1 ),
+"times": PoolRealArray( 0, 0.65 ),
+"transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0.75 ), Color( 1, 1, 1, 0 ) ]
+"values": [ Color( 1, 1, 1, 0.247059 ), Color( 1, 1, 1, 0 ) ]
 }
 tracks/2/type = "value"
 tracks/2/path = NodePath("Control/Static:modulate")
@@ -146,7 +118,7 @@ tracks/4/keys = {
 "times": PoolRealArray( 0, 3.9, 4 ),
 "transitions": PoolRealArray( 4.28709, 1, 1 ),
 "update": 0,
-"values": [ -8.0, -60.0, -10.0 ]
+"values": [ -12.0, -60.0, -10.0 ]
 }
 tracks/5/type = "value"
 tracks/5/path = NodePath("Control/GRUMBEL:material:shader_param/brightness_add")
@@ -155,10 +127,63 @@ tracks/5/loop_wrap = true
 tracks/5/imported = false
 tracks/5/enabled = true
 tracks/5/keys = {
-"times": PoolRealArray( 0, 0.1, 0.15 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.25, 0.4 ),
+"transitions": PoolRealArray( 0, 1, 1 ),
 "update": 0,
 "values": [ 2.0, 0.5, -1.0 ]
+}
+
+[sub_resource type="Animation" id=18]
+resource_name = "stop"
+length = 0.1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("Control:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Control:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("../SFX/Static:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("../SFX/Static:volume_db")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0.05 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ -10.0 ]
 }
 
 [sub_resource type="ShaderMaterial" id=20]
@@ -903,9 +928,9 @@ valign = 1
 
 [node name="SanityEffects" type="AnimationPlayer" parent="Script"]
 root_node = NodePath("../SanityEffect")
-autoplay = "default"
-anims/default = SubResource( 18 )
+autoplay = "stop"
 anims/sanity_effect = SubResource( 19 )
+anims/stop = SubResource( 18 )
 
 [node name="SanityEffect" type="CanvasLayer" parent="Script"]
 layer = 128

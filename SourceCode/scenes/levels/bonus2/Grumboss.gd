@@ -146,6 +146,8 @@ func defeated():
 	ambience.stop()
 	pause_mode = Node.PAUSE_MODE_PROCESS
 	anim_player.play("defeated")
+	sanity_effect_animation.stop()
+	sanity_effect_animation.play("stop")
 
 func hurt():
 	# When getting hit in phase 2, grumbel creates sanity effects
@@ -218,7 +220,7 @@ func dying():
 	while(i > 0):
 		i -= 1
 		time *= 0.9
-		brightness += 0.1
+		brightness += 0.125
 		yield(call("cry_out_in_despair", time, brightness), "completed")
 		yield(get_tree().create_timer(time), "timeout")
 	sfx.stop("Static")
@@ -228,7 +230,7 @@ func dying():
 func cry_out_in_despair(message_time : float, brightness = 0):
 	evil_text.modulate.a = 1 - brightness * 0.5
 	sfx.play("Static")
-	yield(call("evil_text_message", "NO", message_time, Color(1,brightness,brightness), Color(1,0,0,0.1)), "completed")
+	yield(call("evil_text_message", "NO", message_time, Color(1,1,1,1), Color(brightness + 0.5,0,0,1 - brightness)), "completed")
 	yield(get_tree(), "idle_frame")
 	sfx.stop("Static")
 
