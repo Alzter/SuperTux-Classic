@@ -56,11 +56,11 @@ func spawn_grumbel(wait_time = 1):
 	else: Music.play("Prophecy")
 
 func statue_intro():
-	yield(get_tree().create_timer(2, false), "timeout")
+	yield(get_tree().create_timer(1, false), "timeout")
 	
 	sfx.play("Static")
 	sfx.play("Glitch2")
-	yield(call("evil_text_message", "UNNECESSARY", 2, Color(1,1,0), Color(1,1,1,0.1)), "completed")
+	yield(call("evil_text_message", "UNNECESSARY", 0.2, Color(1,1,0), Color(1,1,1,0.1)), "completed")
 	sfx.stop("Glitch2")
 	sfx.stop("Static")
 	

@@ -82,7 +82,7 @@ tracks/1/keys = {
 "times": PoolRealArray( 0, 0.9 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ Color( 1, 1, 1, 0.235294 ), Color( 1, 1, 1, 0 ) ]
+"values": [ Color( 1, 1, 1, 0.109804 ), Color( 1, 1, 1, 0 ) ]
 }
 tracks/2/type = "value"
 tracks/2/path = NodePath("Control/Static:modulate")
@@ -91,10 +91,10 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0, 4 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PoolRealArray( 0, 0.85, 4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
-"values": [ Color( 1, 1, 1, 0.121569 ), Color( 1, 1, 1, 0 ) ]
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0.0942157 ), Color( 1, 1, 1, 0 ) ]
 }
 tracks/3/type = "value"
 tracks/3/path = NodePath("../SFX/Static:playing")
@@ -951,7 +951,7 @@ expand = true
 stretch_mode = 7
 
 [node name="Static" type="TextureRect" parent="Script/SanityEffect/Control"]
-modulate = Color( 1, 1, 1, 0.0022618 )
+modulate = Color( 1, 1, 1, 0.0504242 )
 material = SubResource( 17 )
 anchor_right = 0.5
 anchor_bottom = 0.5
