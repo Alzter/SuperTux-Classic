@@ -79,10 +79,10 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.65 ),
+"times": PoolRealArray( 0, 0.9 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ Color( 1, 1, 1, 0.247059 ), Color( 1, 1, 1, 0 ) ]
+"values": [ Color( 1, 1, 1, 0.235294 ), Color( 1, 1, 1, 0 ) ]
 }
 tracks/2/type = "value"
 tracks/2/path = NodePath("Control/Static:modulate")
@@ -127,10 +127,10 @@ tracks/5/loop_wrap = true
 tracks/5/imported = false
 tracks/5/enabled = true
 tracks/5/keys = {
-"times": PoolRealArray( 0, 0.25, 0.4 ),
+"times": PoolRealArray( 0, 0.15, 0.45 ),
 "transitions": PoolRealArray( 0, 1, 1 ),
 "update": 0,
-"values": [ 2.0, 0.5, -1.0 ]
+"values": [ 2.0, 0.5, -2.0 ]
 }
 
 [sub_resource type="Animation" id=18]
@@ -191,7 +191,7 @@ shader = ExtResource( 27 )
 shader_param/rainbow_speed = 3.0
 shader_param/displacement_strength = 1.0
 shader_param/noise_strength = 1.0
-shader_param/brightness_add = -1.0
+shader_param/brightness_add = -2.0
 shader_param/noise_shimmer_speed = 100.0
 shader_param/color_shimmer_strength = 0.0
 
@@ -951,7 +951,7 @@ expand = true
 stretch_mode = 7
 
 [node name="Static" type="TextureRect" parent="Script/SanityEffect/Control"]
-modulate = Color( 1, 1, 1, 0 )
+modulate = Color( 1, 1, 1, 0.0022618 )
 material = SubResource( 17 )
 anchor_right = 0.5
 anchor_bottom = 0.5
@@ -975,8 +975,6 @@ anims/phase_two_transition = SubResource( 4 )
 visible = false
 position = Vector2( 320, 256 )
 enabled = false
-phase = 2
-max_health_phase_two = 1
 
 [node name="Statue" type="Sprite" parent="Script"]
 position = Vector2( 320, 305 )

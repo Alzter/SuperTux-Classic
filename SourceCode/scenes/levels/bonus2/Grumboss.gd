@@ -56,7 +56,7 @@ func spawn_grumbel(wait_time = 1):
 	else: Music.play("Prophecy")
 
 func statue_intro():
-	yield(get_tree().create_timer(1, false), "timeout")
+	yield(get_tree().create_timer(2, false), "timeout")
 	
 	sfx.play("Static")
 	sfx.play("Glitch2")
@@ -143,6 +143,7 @@ func phase_two():
 	grumbel_sanity_effect()
 
 func defeated():
+	sfx.stop_all()
 	ambience.stop()
 	pause_mode = Node.PAUSE_MODE_PROCESS
 	anim_player.play("defeated")
@@ -151,6 +152,7 @@ func defeated():
 
 func hurt():
 	# When getting hit in phase 2, grumbel creates sanity effects
+	sfx.stop_all()
 	if grumbel.phase == 2:
 		random_glitch_noise()
 		

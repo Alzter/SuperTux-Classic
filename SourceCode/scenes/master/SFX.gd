@@ -42,3 +42,7 @@ func stop(sound_to_stop):
 		var s = get_node(sound_to_stop)
 		if s:
 			s.stop()
+
+func stop_all():
+	for child in get_children():
+		child.stop()
