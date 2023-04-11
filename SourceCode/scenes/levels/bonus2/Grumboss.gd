@@ -145,6 +145,8 @@ func defeated():
 func hurt():
 	# When getting hit in phase 2, grumbel creates sanity effects
 	if grumbel.phase == 2:
+		random_glitch_noise()
+		
 		rng.randomize()
 		
 		# 50% chance of displaying angry message on the screen for a fraction of a second
@@ -167,19 +169,27 @@ func hurt():
 
 func grumbel_sanity_effect():
 	rng.randomize()
-	var sound = "Glitch" + str(rng.randi_range(1,3))
-	sfx.play(sound)
 	
-	rng.randomize()
 	var speed = rng.randf_range(0.25, 1)
 	
 	sanity_effect_animation.play("sanity_effect", -1, speed)
 	yield(get_tree(), "idle_frame")
 	
-	yield(get_tree().create_timer(0.5), "timeout")
-	sfx.stop(sound)
 	
 	yield(sanity_effect_animation, "animation_finished")
+
+func random_glitch_noise():
+	rng.randomize()
+	var sound = "Glitch" + str(rng.randi_range(1,4))
+	
+	var sound_node = sfx.get_node(sound)
+	sound_node.volume_db = rng.randf_range(7, -10)
+	sound_node.pitch_scale = rng.randf_range(0.75, 3)
+	
+	sfx.play(sound)
+	
+	yield(get_tree().create_timer(rng.randf_range(0.1, 3)), "timeout")
+	sfx.stop(sound)
 
 func dying():
 	anim_player.play("dying")
