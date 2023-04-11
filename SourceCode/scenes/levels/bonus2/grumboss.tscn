@@ -118,7 +118,7 @@ tracks/4/keys = {
 "times": PoolRealArray( 0, 3.9, 4 ),
 "transitions": PoolRealArray( 4.28709, 1, 1 ),
 "update": 0,
-"values": [ -12.0, -60.0, -10.0 ]
+"values": [ -18.0, -60.0, -10.0 ]
 }
 tracks/5/type = "value"
 tracks/5/path = NodePath("Control/GRUMBEL:material:shader_param/brightness_add")
@@ -951,7 +951,7 @@ expand = true
 stretch_mode = 7
 
 [node name="Static" type="TextureRect" parent="Script/SanityEffect/Control"]
-modulate = Color( 1, 1, 1, 0.0504242 )
+modulate = Color( 1, 1, 1, 0.0583743 )
 material = SubResource( 17 )
 anchor_right = 0.5
 anchor_bottom = 0.5
