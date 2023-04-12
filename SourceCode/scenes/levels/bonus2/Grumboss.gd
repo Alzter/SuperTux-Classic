@@ -16,21 +16,16 @@ var evil_messages = [
 	"REDUNDANT",
 	"DEFECTIVE",
 	"DEPRECATED",
-	"DEPRECIATING",
 	"DELETE",
 	"DECOMPILE",
 	"UNNECESSARY",
 	"TRASH",
-	"KILL",
-	"MESS",
-	"UGLY",
 	"WORTHLESS",
 	"LIFELESS",
-	"STALE",
-	"DULL",
 	"NULL",
 	"FATAL",
-	"Tux.kill(true)",
+	"Tux.kill(true);",
+	"SCRAP"
 ]
 
 func _ready():
@@ -56,11 +51,11 @@ func spawn_grumbel(wait_time = 1):
 	else: Music.play("Prophecy")
 
 func statue_intro():
-	yield(get_tree().create_timer(1, false), "timeout")
+	yield(get_tree().create_timer(2, false), "timeout")
 	
 	sfx.play("Static")
 	sfx.play("Glitch2")
-	yield(call("evil_text_message", "UNNECESSARY", 0.2, Color(1,1,0), Color(1,1,1,0.1)), "completed")
+	yield(call("evil_text_message", "UNNECESSARY", 2, Color(1,1,0), Color(1,1,1,0.1)), "completed")
 	sfx.stop("Glitch2")
 	sfx.stop("Static")
 	
@@ -139,8 +134,8 @@ func phase_two_transition():
 
 func phase_two():
 	anim_player.play("phase_two")
-	Music.play("Prophecy", false, 30.7)
-	grumbel_sanity_effect()
+	Music.play("Prophecy", false, 30)
+	Music.pitch_slide_up()
 
 func defeated():
 	sfx.stop_all()
@@ -151,9 +146,10 @@ func defeated():
 	sanity_effect_animation.play("stop")
 
 func hurt():
-	# When getting hit in phase 2, grumbel creates sanity effects
 	sfx.stop_all()
-	if grumbel.phase == 2:
+	
+	# When getting hit in phase 2, grumbel creates sanity effects if lower than half HP
+	if grumbel.phase == 2 and grumbel.health <= grumbel.max_health_phase_two * 0.5:
 		random_glitch_noise()
 		
 		rng.randomize()
