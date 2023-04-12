@@ -2,8 +2,6 @@
 //
 // Do not remove/modify comments ending with BEGIN/END, they are used to inject
 // addon-specific configuration.
-apply from: 'config.gradle'
-
 buildscript {
     apply from: 'config.gradle'
 
@@ -14,14 +12,19 @@ buildscript {
 //CHUNK_BUILDSCRIPT_REPOSITORIES_END
     }
     dependencies {
-        classpath "com.android.tools.build:gradle:$versions.androidGradlePlugin"
+        classpath libraries.androidGradlePlugin
         classpath libraries.kotlinGradlePlugin
 //CHUNK_BUILDSCRIPT_DEPENDENCIES_BEGIN
 //CHUNK_BUILDSCRIPT_DEPENDENCIES_END
     }
 }
 
-apply plugin: 'com.android.application'
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+}
+
+apply from: 'config.gradle'
 
 allprojects {
     repositories {
@@ -42,6 +45,11 @@ allprojects {
     }
 }
 
+configurations {
+    // Initializes a placeholder for the devImplementation dependency configuration.
+    devImplementation {}
+}
+
 dependencies {
     implementation libraries.kotlinStdLib
     implementation libraries.androidxFragment
@@ -54,6 +62,7 @@ dependencies {
         // Custom build mode. In this scenario this project is the only one around and the Godot
         // library is available through the pre-generated godot-lib.*.aar android archive files.
         debugImplementation fileTree(dir: 'libs/debug', include: ['*.jar', '*.aar'])
+        devImplementation fileTree(dir: 'libs/dev', include: ['*.jar', '*.aar'])
         releaseImplementation fileTree(dir: 'libs/release', include: ['*.jar', '*.aar'])
     }
 
@@ -78,10 +87,15 @@ dependencies {
 android {
     compileSdkVersion versions.compileSdk
     buildToolsVersion versions.buildTools
+    ndkVersion versions.ndkVersion
 
     compileOptions {
         sourceCompatibility versions.javaVersion
         targetCompatibility versions.javaVersion
+    }
+
+    kotlinOptions {
+        jvmTarget = versions.javaVersion
     }
 
     assetPacks = [":assetPacks:installTime"]
@@ -105,6 +119,8 @@ android {
         versionName getExportVersionName()
         minSdkVersion getExportMinSdkVersion()
         targetSdkVersion getExportTargetSdkVersion()
+
+        missingDimensionStrategy 'products', 'template'
 //CHUNK_ANDROID_DEFAULTCONFIG_BEGIN
 //CHUNK_ANDROID_DEFAULTCONFIG_END
     }
@@ -160,6 +176,18 @@ android {
             }
         }
 
+        dev {
+            initWith debug
+            // Signing and zip-aligning are skipped for prebuilt builds, but
+            // performed for custom builds.
+            zipAlignEnabled shouldZipAlign()
+            if (shouldSign()) {
+                signingConfig signingConfigs.debug
+            } else {
+                signingConfig null
+            }
+        }
+
         release {
             // Signing and zip-aligning are skipped for prebuilt builds, but
             // performed for custom builds.
@@ -201,6 +229,11 @@ android {
 //DIR_JNI_DEBUG_BEGIN
 //DIR_JNI_DEBUG_END
         ]
+        dev.jniLibs.srcDirs = [
+            'libs/dev'
+//DIR_JNI_DEV_BEGIN
+//DIR_JNI_DEV_END
+        ]
         release.jniLibs.srcDirs = [
             'libs/release'
 //DIR_JNI_RELEASE_BEGIN
@@ -221,6 +254,12 @@ task copyAndRenameDebugApk(type: Copy) {
     rename "android_debug.apk", getExportFilename()
 }
 
+task copyAndRenameDevApk(type: Copy) {
+    from "$buildDir/outputs/apk/dev/android_dev.apk"
+    into getExportPath()
+    rename "android_dev.apk", getExportFilename()
+}
+
 task copyAndRenameReleaseApk(type: Copy) {
     from "$buildDir/outputs/apk/release/android_release.apk"
     into getExportPath()
@@ -231,6 +270,12 @@ task copyAndRenameDebugAab(type: Copy) {
     from "$buildDir/outputs/bundle/debug/build-debug.aab"
     into getExportPath()
     rename "build-debug.aab", getExportFilename()
+}
+
+task copyAndRenameDevAab(type: Copy) {
+    from "$buildDir/outputs/bundle/dev/build-dev.aab"
+    into getExportPath()
+    rename "build-dev.aab", getExportFilename()
 }
 
 task copyAndRenameReleaseAab(type: Copy) {

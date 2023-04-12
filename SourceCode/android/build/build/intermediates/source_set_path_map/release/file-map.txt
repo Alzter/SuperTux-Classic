@@ -1,0 +1,14 @@
+com.godot.game-core-1.2.0-0 C:\Users\Alex\.gradle\caches\transforms-3\086694f904f7332915774462ffe124fb\transformed\core-1.2.0\res
+com.godot.game-jetified-godot-lib.release-1 C:\Users\Alex\.gradle\caches\transforms-3\0fa57c0f6a5b656a5e020e48cde123e3\transformed\jetified-godot-lib.release\res
+com.godot.game-fragment-1.3.6-2 C:\Users\Alex\.gradle\caches\transforms-3\3988ca109072542b599ce7e9be34dfe8\transformed\fragment-1.3.6\res
+com.godot.game-lifecycle-viewmodel-2.3.1-3 C:\Users\Alex\.gradle\caches\transforms-3\4c067594c7a5fabbdbbd7fb61251b4dc\transformed\lifecycle-viewmodel-2.3.1\res
+com.godot.game-lifecycle-runtime-2.3.1-4 C:\Users\Alex\.gradle\caches\transforms-3\4de22f91c9f03c3f0301e54427d6d2cd\transformed\lifecycle-runtime-2.3.1\res
+com.godot.game-jetified-savedstate-1.1.0-5 C:\Users\Alex\.gradle\caches\transforms-3\81dae0f1b920881bd1ae25fcb0dead09\transformed\jetified-savedstate-1.1.0\res
+com.godot.game-pngs-6 C:\Users\Alex\SuperTux-Classic\SourceCode\android\build\build\generated\res\pngs\release
+com.godot.game-resValues-7 C:\Users\Alex\SuperTux-Classic\SourceCode\android\build\build\generated\res\resValues\release
+com.godot.game-rs-8 C:\Users\Alex\SuperTux-Classic\SourceCode\android\build\build\generated\res\rs\release
+com.godot.game-mergeReleaseResources-9 C:\Users\Alex\SuperTux-Classic\SourceCode\android\build\build\intermediates\incremental\release\mergeReleaseResources\merged.dir
+com.godot.game-mergeReleaseResources-10 C:\Users\Alex\SuperTux-Classic\SourceCode\android\build\build\intermediates\incremental\release\mergeReleaseResources\stripped.dir
+com.godot.game-merged_res-11 C:\Users\Alex\SuperTux-Classic\SourceCode\android\build\build\intermediates\merged_res\release
+com.godot.game-build-12 C:\Users\Alex\SuperTux-Classic\SourceCode\android\build\res
+com.godot.game-release-13 C:\Users\Alex\SuperTux-Classic\SourceCode\android\build\src\release\res

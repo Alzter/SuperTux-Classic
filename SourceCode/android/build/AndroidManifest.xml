@@ -27,7 +27,6 @@
     <!-- Any tag in this line after android:icon will be erased when doing custom builds. -->
     <!-- If you want to add tags manually, do before it. -->
     <!-- WARNING: This should stay on a single line until the parsing code is improved. See GH-32414. -->
-    <!-- TODO: Remove the 'requestLegacyExternalStorage' attribute when https://github.com/godotengine/godot/issues/38913 is resolved -->
     <application android:label="@string/godot_project_name_string" android:allowBackup="false" android:isGame="true" android:hasFragileUserData="false" android:requestLegacyExternalStorage="false" tools:ignore="GoogleAppIndexingWarning" android:icon="@mipmap/icon">
 
         <!-- Records the version of the Godot editor used for building -->
@@ -50,6 +49,13 @@
             android:name="xr_hand_tracking_metadata_name"
             android:value="xr_hand_tracking_metadata_value"/>
 
+        <!-- XR hand tracking version -->
+        <!-- This is modified by the exporter based on the selected xr mode. DO NOT CHANGE the values here. -->
+        <!-- Removed at export time if the xr mode is not VR or hand tracking is disabled. -->
+        <meta-data
+            android:name="xr_hand_tracking_version_name"
+            android:value="xr_hand_tracking_version_value"/>
+
         <!-- Supported Meta devices -->
         <!-- This is removed by the exporter if the xr mode is not VR. -->
         <meta-data
@@ -62,6 +68,7 @@
             android:theme="@style/GodotAppSplashTheme"
             android:launchMode="singleTask"
             android:excludeFromRecents="false"
+            android:exported="true"
             android:screenOrientation="landscape"
             android:configChanges="orientation|keyboardHidden|screenSize|smallestScreenSize|density|keyboard|navigation|screenLayout|uiMode"
             android:resizeableActivity="false"
