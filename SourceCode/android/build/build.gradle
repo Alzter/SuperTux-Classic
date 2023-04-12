@@ -14,7 +14,7 @@ buildscript {
 //CHUNK_BUILDSCRIPT_REPOSITORIES_END
     }
     dependencies {
-        classpath libraries.androidGradlePlugin
+        classpath "com.android.tools.build:gradle:$versions.androidGradlePlugin"
         classpath libraries.kotlinGradlePlugin
 //CHUNK_BUILDSCRIPT_DEPENDENCIES_BEGIN
 //CHUNK_BUILDSCRIPT_DEPENDENCIES_END
