@@ -975,6 +975,7 @@ anims/phase_two_transition = SubResource( 4 )
 visible = false
 position = Vector2( 320, 256 )
 enabled = false
+phase = 2
 
 [node name="Statue" type="Sprite" parent="Script"]
 position = Vector2( 320, 305 )
@@ -985,6 +986,11 @@ volume_db = -5.0
 
 [node name="SFX" type="Node2D" parent="Script"]
 script = ExtResource( 14 )
+
+[node name="SanityEffect" type="AudioStreamPlayer" parent="Script/SFX"]
+stream = ExtResource( 17 )
+volume_db = -6.0
+pitch_scale = 0.4
 
 [node name="Glitch1" type="AudioStreamPlayer" parent="Script/SFX"]
 stream = ExtResource( 21 )

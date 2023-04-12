@@ -327,6 +327,7 @@ func _on_AnimationPlayer_animation_finished(anim_name):
 func commence_phase_two():
 	health = max_health_phase_two
 	phase = 2
+	fireball_hits = 0
 	invincible = false
 	hurt = false
 	disable_bounce_area(false)
