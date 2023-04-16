@@ -1,4 +1,6 @@
 # SuperTux Classic
+![image](https://user-images.githubusercontent.com/22513909/232307779-84da1d99-af0f-436a-a86e-2a59a986bb5b.png)
+
 A **remake of SuperTux Milestone 1** (versions 0.1.0 - 0.1.4) created from the ground up in **Godot v3.4.4**!
 
 ## Downloads
