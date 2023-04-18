@@ -45,8 +45,8 @@ void fragment() {
 	
 	float noise = tan(round(UV.x / TEXTURE_PIXEL_SIZE.x));
 	noise += sin(round(UV.y / TEXTURE_PIXEL_SIZE.y));
-	noise = mod(noise * 200f, 30);
-	noise /= sin(TIME * 20.0f) * 1.0f;
+	noise = mod(noise * 200.0, 30);
+	noise /= sin(TIME * 20.0) * 1.0f;
 	float noise_power = abs(sin(TIME * noise_shimmer_speed)) * noise_strength;
 	if (noise_permanent) { noise_power = noise_strength }
 	noise *= noise_power;

@@ -15,13 +15,13 @@ void fragment() {
 	
 	vec2 uv = UV;
 	
-	float displace = (TIME + (UV.x / UV.y)) * 10f;
+	float displace = (TIME + (UV.x / UV.y)) * 10.0;
 	displace = mod(displace, 2.0f);
 	displace = round(sin(displace)) * TEXTURE_PIXEL_SIZE.x;
 	
 	//float displace = sin((TIME + (UV.x / UV.y)) * 10f) * TEXTURE_PIXEL_SIZE.x;
 	uv.x += displace * displacement_strength;
-	uv.y += displace * -1f * displacement_strength;
+	uv.y += displace * -1.0 * displacement_strength;
 	
 	vec4 texture_color = texture(TEXTURE, uv);
 	input_color = texture_color.rgb;
@@ -44,8 +44,8 @@ void fragment() {
 	
 	float noise = tan(round(UV.x / TEXTURE_PIXEL_SIZE.x));
 	noise += sin(round(UV.y / TEXTURE_PIXEL_SIZE.y));
-	noise = mod(noise * 200f, 30);
-	noise /= sin(TIME * 20.0f) * 1.0f;
+	noise = mod(noise * 200.0, 30);
+	noise /= sin(TIME * 20.0) * 1.0f;
 	float noise_power = abs(sin(TIME * noise_shimmer_speed)) * noise_strength;
 	noise *= noise_power;
 	
