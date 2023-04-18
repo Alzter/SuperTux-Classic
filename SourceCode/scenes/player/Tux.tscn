@@ -58,22 +58,22 @@ shader_param/overlay_color = Plane( 0.5, 0.5, 0.5, 0.5 )
 animations = [ {
 "frames": [ ExtResource( 48 ) ],
 "loop": true,
-"name": "idle",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 48 ) ],
-"loop": true,
-"name": "skid",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 48 ) ],
-"loop": true,
 "name": "fall",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 48 ) ],
+"loop": true,
+"name": "idle",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 49 ) ],
 "loop": true,
 "name": "jump",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 48 ) ],
+"loop": true,
+"name": "skid",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 48 ) ],
@@ -97,19 +97,14 @@ animations = [ {
 
 [sub_resource type="SpriteFrames" id=2]
 animations = [ {
-"frames": [ ExtResource( 15 ) ],
+"frames": [ ExtResource( 23 ), ExtResource( 27 ) ],
 "loop": true,
-"name": "idle",
-"speed": 5.0
+"name": "dead",
+"speed": 10.0
 }, {
 "frames": [ ExtResource( 15 ) ],
 "loop": true,
 "name": "duck",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 31 ) ],
-"loop": true,
-"name": "skid",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 19 ) ],
@@ -117,20 +112,15 @@ animations = [ {
 "name": "fall",
 "speed": 5.0
 }, {
+"frames": [ ExtResource( 15 ) ],
+"loop": true,
+"name": "idle",
+"speed": 5.0
+}, {
 "frames": [ ExtResource( 19 ) ],
 "loop": true,
 "name": "jump",
 "speed": 5.0
-}, {
-"frames": [ ExtResource( 18 ), ExtResource( 17 ), ExtResource( 21 ), ExtResource( 24 ), ExtResource( 26 ), ExtResource( 22 ), ExtResource( 20 ), ExtResource( 25 ) ],
-"loop": true,
-"name": "walk",
-"speed": 15.0
-}, {
-"frames": [ ExtResource( 23 ), ExtResource( 27 ) ],
-"loop": true,
-"name": "dead",
-"speed": 10.0
 }, {
 "frames": [ ExtResource( 16 ) ],
 "loop": true,
@@ -141,23 +131,23 @@ animations = [ {
 "loop": true,
 "name": "riding",
 "speed": 5.0
+}, {
+"frames": [ ExtResource( 31 ) ],
+"loop": true,
+"name": "skid",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 18 ), ExtResource( 17 ), ExtResource( 21 ), ExtResource( 24 ), ExtResource( 26 ), ExtResource( 22 ), ExtResource( 20 ), ExtResource( 25 ) ],
+"loop": true,
+"name": "walk",
+"speed": 15.0
 } ]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
-"frames": [ ExtResource( 6 ) ],
-"loop": true,
-"name": "idle",
-"speed": 5.0
-}, {
 "frames": [ ExtResource( 14 ) ],
 "loop": true,
 "name": "duck",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 4 ) ],
-"loop": true,
-"name": "skid",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 5 ) ],
@@ -165,15 +155,15 @@ animations = [ {
 "name": "fall",
 "speed": 5.0
 }, {
+"frames": [ ExtResource( 6 ) ],
+"loop": true,
+"name": "idle",
+"speed": 5.0
+}, {
 "frames": [ ExtResource( 5 ) ],
 "loop": true,
 "name": "jump",
 "speed": 5.0
-}, {
-"frames": [ ExtResource( 7 ), ExtResource( 12 ), ExtResource( 8 ), ExtResource( 9 ), ExtResource( 10 ), ExtResource( 11 ) ],
-"loop": true,
-"name": "walk",
-"speed": 10.0
 }, {
 "frames": [ ExtResource( 13 ) ],
 "loop": true,
@@ -184,6 +174,16 @@ animations = [ {
 "loop": true,
 "name": "riding",
 "speed": 5.0
+}, {
+"frames": [ ExtResource( 4 ) ],
+"loop": true,
+"name": "skid",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 7 ), ExtResource( 12 ), ExtResource( 8 ), ExtResource( 9 ), ExtResource( 10 ), ExtResource( 11 ) ],
+"loop": true,
+"name": "walk",
+"speed": 10.0
 } ]
 
 [sub_resource type="Animation" id=11]
@@ -396,7 +396,7 @@ playing = true
 use_parent_material = true
 z_index = 1
 frames = SubResource( 1 )
-animation = "riding"
+animation = "idle"
 playing = true
 offset = Vector2( 0, -12 )
 
