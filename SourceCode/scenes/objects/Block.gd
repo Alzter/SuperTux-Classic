@@ -100,8 +100,9 @@ func _brick_smash():
 func _process(delta):
 	global_position += velocity * delta
 	velocity *= 0.8
-	global_position.x = lerp(global_position.x, initial_position.x, 0.1)
-	global_position.y = lerp(global_position.y, initial_position.y, 0.1)
+	var lerp_speed = 0.1 * delta * 60
+	global_position.x = lerp(global_position.x, initial_position.x, lerp_speed)
+	global_position.y = lerp(global_position.y, initial_position.y, lerp_speed)
 	
 	if invisible:
 		invisible_shimmer()
