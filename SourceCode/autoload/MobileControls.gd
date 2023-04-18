@@ -74,7 +74,7 @@ func _input(event):
 func _physics_process(delta):
 	if !is_using_mobile: return
 	
-	var enabled = Scoreboard.visible and !get_tree().paused
+	var enabled = Scoreboard.score_visible and !get_tree().paused
 	mobile_controls.visible = enabled
 	if !enabled: return
 	
