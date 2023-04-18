@@ -32,6 +32,8 @@ var controls = ["jump", "run", "move_left", "move_right", "move_up", "duck"]
 
 var can_pause = false
 
+var privacy_policy_url = "https://github.com/Alzter/SuperTux-Classic/blob/main/PRIVACYPOLICY.md"
+
 signal level_loaded
 signal player_loaded
 signal level_ready # EMITS AFTER THE LEVEL TITLE CARD HAS DISAPPEARED

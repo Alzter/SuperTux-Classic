@@ -6,6 +6,7 @@ onready var volume_music_slider = $Panel/VBoxContainer/MusicVolume/VolumeMusic
 onready var volume_sfx_slider = $Panel/VBoxContainer/SFXVolume/VolumeSFX
 onready var volume_ambience_slider = $Panel/VBoxContainer/AmbienceVolume/VolumeAmbience
 onready var controls_button = $Panel/VBoxContainer/Controls
+onready var privacy_policy_button = $Panel/VBoxContainer/PrivacyPolicy
 onready var done_button = $ControlsMenu/Panel/Done
 
 onready var options_menu = $Panel
@@ -77,3 +78,10 @@ func _on_Done_mouse_entered():
 
 func _on_ControlsMenu_popup_hide():
 	options_menu.modulate.a = 1
+
+
+func _on_PrivacyPolicy_pressed():
+	OS.shell_open(Global.privacy_policy_url)
+
+func _on_PrivacyPolicy_mouse_entered():
+	privacy_policy_button.grab_focus()
