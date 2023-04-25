@@ -40,7 +40,6 @@ SaveManager="*res://autoload/SaveManager.gd"
 ResolutionManager="*res://autoload/ResolutionManager.gd"
 WorldmapManager="*res://autoload/WorldmapManager.gd"
 MobileControls="*res://autoload/MobileControls.tscn"
-ResolutionDebugger="*res://autoload/ResolutionDebugger.tscn"
 
 [display]
 

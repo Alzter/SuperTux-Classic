@@ -73,7 +73,7 @@ margin_right = 125.0
 margin_bottom = -2.0
 custom_colors/font_color = Color( 0.992157, 1, 0, 1 )
 custom_fonts/font = ExtResource( 5 )
-text = "Release v0.3.3"
+text = "Release v0.3.4"
 valign = 2
 
 [node name="Menu" type="Control" parent="TitleContent"]
@@ -97,29 +97,29 @@ __meta__ = {
 }
 
 [node name="StartGame" parent="TitleContent/Menu/VBoxContainer" instance=ExtResource( 9 )]
-margin_top = 1.0
-margin_bottom = 31.0
+margin_top = 0.0
+margin_bottom = 30.0
 text = "Start Game"
 
 [node name="BonusLevels" type="Button" parent="TitleContent/Menu/VBoxContainer"]
-margin_top = 36.0
+margin_top = 35.0
 margin_right = 350.0
-margin_bottom = 66.0
+margin_bottom = 65.0
 focus_neighbour_bottom = NodePath("../Options")
 text = "Bonus Levels"
 
 [node name="Options" type="Button" parent="TitleContent/Menu/VBoxContainer"]
-margin_top = 71.0
+margin_top = 70.0
 margin_right = 350.0
-margin_bottom = 101.0
+margin_bottom = 100.0
 focus_neighbour_top = NodePath("../BonusLevels")
 focus_neighbour_bottom = NodePath("../Credits")
 text = "Options"
 
 [node name="Credits" type="Button" parent="TitleContent/Menu/VBoxContainer"]
-margin_top = 106.0
+margin_top = 105.0
 margin_right = 350.0
-margin_bottom = 136.0
+margin_bottom = 135.0
 focus_neighbour_top = NodePath("../Options")
 focus_neighbour_bottom = NodePath("../Quit")
 text = "Credits"
@@ -139,9 +139,9 @@ margin_bottom = 170.0
 text = "Boss Battle (DEBUG)"
 
 [node name="Quit" type="Button" parent="TitleContent/Menu/VBoxContainer"]
-margin_top = 141.0
+margin_top = 140.0
 margin_right = 350.0
-margin_bottom = 171.0
+margin_bottom = 170.0
 focus_neighbour_top = NodePath("../Credits")
 text = "Quit Game"
 
