@@ -1,0 +1,28 @@
+<lint-module
+    format="1"
+    dir="C:\Users\Alex\SuperTux-Classic\SourceCode\android\build"
+    name=":"
+    type="APP"
+    maven=":build:"
+    gradle="7.2.1"
+    buildFolder="build"
+    bootClassPath="C:\Users\Alex\AppData\Local\Android\Sdk\platforms\android-32\android.jar;C:\Users\Alex\AppData\Local\Android\Sdk\build-tools\32.0.0\core-lambda-stubs.jar"
+    javaSourceLevel="11"
+    compileTarget="android-32"
+    neverShrinking="true">
+  <lintOptions
+      disable="MissingTranslation,UnusedResources"
+      absolutePaths="true"
+      checkReleaseBuilds="true"
+      explainIssues="true">
+    <severities>
+      <severity
+        id="MissingTranslation"
+        severity="IGNORE" />
+      <severity
+        id="UnusedResources"
+        severity="IGNORE" />
+    </severities>
+  </lintOptions>
+  <variant name="release"/>
+</lint-module>

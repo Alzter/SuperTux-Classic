@@ -87,6 +87,31 @@ blend_mode = 2
 
 [sub_resource type="SpriteFrames" id=6]
 animations = [ {
+"frames": [ ExtResource( 49 ), ExtResource( 55 ) ],
+"loop": false,
+"name": "black_hole_attack",
+"speed": 15.0
+}, {
+"frames": [ ExtResource( 56 ), ExtResource( 45 ), ExtResource( 52 ), ExtResource( 48 ) ],
+"loop": false,
+"name": "black_hole_charge",
+"speed": 12.0
+}, {
+"frames": [ ExtResource( 55 ), ExtResource( 55 ), ExtResource( 49 ), ExtResource( 56 ) ],
+"loop": false,
+"name": "black_hole_end",
+"speed": 15.0
+}, {
+"frames": [ ExtResource( 39 ) ],
+"loop": true,
+"name": "chomp_recover",
+"speed": 5.0
+}, {
+"frames": [  ],
+"loop": true,
+"name": "defeated",
+"speed": 5.0
+}, {
 "frames": [  ],
 "loop": true,
 "name": "empty",
@@ -102,39 +127,54 @@ animations = [ {
 "name": "squished",
 "speed": 15.0
 }, {
-"frames": [  ],
-"loop": true,
-"name": "defeated",
-"speed": 5.0
-}, {
 "frames": [ ExtResource( 13 ) ],
 "loop": true,
 "name": "squishrecover",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 56 ), ExtResource( 45 ), ExtResource( 52 ), ExtResource( 48 ) ],
-"loop": false,
-"name": "black_hole_charge",
-"speed": 12.0
-}, {
-"frames": [ ExtResource( 49 ), ExtResource( 55 ) ],
-"loop": false,
-"name": "black_hole_attack",
-"speed": 15.0
-}, {
-"frames": [ ExtResource( 55 ), ExtResource( 55 ), ExtResource( 49 ), ExtResource( 56 ) ],
-"loop": false,
-"name": "black_hole_end",
-"speed": 15.0
-}, {
-"frames": [ ExtResource( 39 ) ],
-"loop": true,
-"name": "chomp_recover",
 "speed": 5.0
 } ]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
+"frames": [ ExtResource( 46 ), ExtResource( 47 ), ExtResource( 50 ), ExtResource( 53 ), ExtResource( 54 ) ],
+"loop": false,
+"name": "black_hole_attack",
+"speed": 15.0
+}, {
+"frames": [ ExtResource( 44 ), ExtResource( 43 ), ExtResource( 51 ), ExtResource( 57 ) ],
+"loop": false,
+"name": "black_hole_charge",
+"speed": 12.0
+}, {
+"frames": [ ExtResource( 50 ), ExtResource( 47 ), ExtResource( 46 ), ExtResource( 44 ) ],
+"loop": false,
+"name": "black_hole_end",
+"speed": 15.0
+}, {
+"frames": [ ExtResource( 54 ), ExtResource( 58 ) ],
+"loop": true,
+"name": "black_hole_loop",
+"speed": 20.0
+}, {
+"frames": [ ExtResource( 40 ) ],
+"loop": true,
+"name": "chomp_recover",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 38 ), ExtResource( 38 ), ExtResource( 38 ), ExtResource( 37 ), ExtResource( 30 ), ExtResource( 31 ), ExtResource( 31 ), ExtResource( 31 ), ExtResource( 32 ) ],
+"loop": false,
+"name": "chomp_smash",
+"speed": 20.0
+}, {
+"frames": [ ExtResource( 35 ), ExtResource( 36 ), ExtResource( 35 ), ExtResource( 35 ), ExtResource( 33 ), ExtResource( 29 ), ExtResource( 34 ) ],
+"loop": false,
+"name": "chomp_split",
+"speed": 15.0
+}, {
+"frames": [ ExtResource( 47 ) ],
+"loop": true,
+"name": "defeated",
+"speed": 5.0
+}, {
 "frames": [ ExtResource( 1 ) ],
 "loop": true,
 "name": "idle",
@@ -145,50 +185,10 @@ animations = [ {
 "name": "squished",
 "speed": 15.0
 }, {
-"frames": [ ExtResource( 47 ) ],
-"loop": true,
-"name": "defeated",
-"speed": 5.0
-}, {
 "frames": [ ExtResource( 12 ) ],
 "loop": true,
 "name": "squishrecover",
 "speed": 5.0
-}, {
-"frames": [ ExtResource( 44 ), ExtResource( 43 ), ExtResource( 51 ), ExtResource( 57 ) ],
-"loop": false,
-"name": "black_hole_charge",
-"speed": 12.0
-}, {
-"frames": [ ExtResource( 46 ), ExtResource( 47 ), ExtResource( 50 ), ExtResource( 53 ), ExtResource( 54 ) ],
-"loop": false,
-"name": "black_hole_attack",
-"speed": 15.0
-}, {
-"frames": [ ExtResource( 50 ), ExtResource( 47 ), ExtResource( 46 ), ExtResource( 44 ) ],
-"loop": false,
-"name": "black_hole_end",
-"speed": 15.0
-}, {
-"frames": [ ExtResource( 40 ) ],
-"loop": true,
-"name": "chomp_recover",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 35 ), ExtResource( 36 ), ExtResource( 35 ), ExtResource( 35 ), ExtResource( 33 ), ExtResource( 29 ), ExtResource( 34 ) ],
-"loop": false,
-"name": "chomp_split",
-"speed": 15.0
-}, {
-"frames": [ ExtResource( 54 ), ExtResource( 58 ) ],
-"loop": true,
-"name": "black_hole_loop",
-"speed": 20.0
-}, {
-"frames": [ ExtResource( 38 ), ExtResource( 38 ), ExtResource( 38 ), ExtResource( 37 ), ExtResource( 30 ), ExtResource( 31 ), ExtResource( 31 ), ExtResource( 31 ), ExtResource( 32 ) ],
-"loop": false,
-"name": "chomp_smash",
-"speed": 20.0
 } ]
 
 [sub_resource type="ShaderMaterial" id=16]
