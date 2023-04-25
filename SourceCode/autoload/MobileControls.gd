@@ -41,10 +41,13 @@ func _ready():
 	window_resized()
 
 func window_resized():
-	var scale = max(ResolutionManager.window_resolution.x, ResolutionManager.window_resolution.y)
-	scale /= 640
-	scale *= 0.5
-	scale += 0.5
+	var scale = max(ResolutionManager.window_size.x, ResolutionManager.window_size.y)
+	
+	var scale_power = 0.5
+	
+	scale /= 640 * ResolutionManager.screen_shrink
+	scale *= scale_power
+	scale += 1 - scale_power
 	
 	update_mobile_controls_scale(scale)
 
