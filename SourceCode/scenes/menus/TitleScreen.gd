@@ -47,7 +47,7 @@ func _ready():
 	# inside of the browser (on HTML5) or on mobile devices
 	var is_on_mobile = OS.has_feature("mobile")
 	var is_on_browser = OS.has_feature("HTML5")
-	quit_button.visible = !is_on_browser and !is_on_mobile and !MobileControls.is_using_mobile
+	quit_button.visible = !is_on_browser
 	
 	start_game_button.grab_focus()
 
