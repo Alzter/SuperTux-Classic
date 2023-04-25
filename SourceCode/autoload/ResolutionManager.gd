@@ -20,7 +20,8 @@ extends Node
 var min_size = Vector2.ZERO
 
 # If viewport is higher than this size, double the resolution
-var ratio_size = Vector2(500, 400)
+var ratio_size = Vector2(500, 480)
+var ratio_size_mobile = Vector2(500, 400) # The ratio size is different on mobile devices
 
 var screen_shrink = 1
 var window_size = null
@@ -33,11 +34,13 @@ func _ready():
 	window_resized()
 
 func window_resized():
+	var ratio = ratio_size_mobile if OS.has_feature("mobile") else ratio_size
+	
 	window_size = get_viewport().size
 	var pixel_ratio = Vector2.ONE
 	
-	pixel_ratio.x = floor(window_size.x / ratio_size.x)
-	pixel_ratio.y = floor(window_size.y / ratio_size.y)
+	pixel_ratio.x = floor(window_size.x / ratio.x)
+	pixel_ratio.y = floor(window_size.y / ratio.y)
 	
 	var pixel_size = min(pixel_ratio.x, pixel_ratio.y)
 	pixel_size = max(pixel_size, 1)
