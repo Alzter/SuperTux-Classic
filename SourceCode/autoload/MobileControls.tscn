@@ -44,47 +44,65 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 theme = ExtResource( 2 )
 
-[node name="Joystick" type="Control" parent="Control"]
+[node name="JoystickScale" type="Control" parent="Control"]
 anchor_top = 1.0
 anchor_bottom = 1.0
 margin_left = 32.0
-margin_top = -160.0
-margin_right = 160.0
+margin_top = -32.0
+margin_right = 32.0
 margin_bottom = -32.0
 
-[node name="JoystickButton" type="TouchScreenButton" parent="Control/Joystick"]
+[node name="Joystick" type="Control" parent="Control/JoystickScale"]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_top = -128.0
+margin_right = 128.0
+
+[node name="JoystickButton" type="TouchScreenButton" parent="Control/JoystickScale/Joystick"]
 normal = ExtResource( 3 )
 shape = SubResource( 4 )
 
-[node name="Stick" type="AnimatedSprite" parent="Control/Joystick"]
+[node name="Stick" type="AnimatedSprite" parent="Control/JoystickScale/Joystick"]
+position = Vector2( 64, 64 )
 frames = SubResource( 3 )
 
-[node name="Jump" type="Control" parent="Control"]
+[node name="ButtonsScale" type="Control" parent="Control"]
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -160.0
-margin_top = -160.0
+margin_left = -32.0
+margin_top = -32.0
 margin_right = -32.0
 margin_bottom = -32.0
+grow_horizontal = 0
+grow_vertical = 0
 
-[node name="JumpButton" type="TouchScreenButton" parent="Control/Jump"]
+[node name="Jump" type="Control" parent="Control/ButtonsScale"]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -128.0
+margin_top = -128.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="JumpButton" type="TouchScreenButton" parent="Control/ButtonsScale/Jump"]
 normal = ExtResource( 5 )
 pressed = ExtResource( 8 )
 shape = SubResource( 1 )
 
-[node name="Action" type="Control" parent="Control"]
+[node name="Action" type="Control" parent="Control/ButtonsScale"]
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -160.0
-margin_top = -288.0
-margin_right = -32.0
-margin_bottom = -160.0
+margin_left = -128.0
+margin_top = -256.0
+margin_bottom = -128.0
 
-[node name="ActionButton" type="TouchScreenButton" parent="Control/Action"]
+[node name="ActionButton" type="TouchScreenButton" parent="Control/ButtonsScale/Action"]
 normal = ExtResource( 9 )
 pressed = ExtResource( 10 )
 shape = SubResource( 1 )
@@ -101,8 +119,8 @@ margin_bottom = 57.0
 normal = ExtResource( 4 )
 shape = SubResource( 2 )
 
-[connection signal="pressed" from="Control/Jump/JumpButton" to="." method="_on_JumpButton_pressed"]
-[connection signal="released" from="Control/Jump/JumpButton" to="." method="_on_JumpButton_released"]
-[connection signal="pressed" from="Control/Action/ActionButton" to="." method="_on_ActionButton_pressed"]
-[connection signal="released" from="Control/Action/ActionButton" to="." method="_on_ActionButton_released"]
+[connection signal="pressed" from="Control/ButtonsScale/Jump/JumpButton" to="." method="_on_JumpButton_pressed"]
+[connection signal="released" from="Control/ButtonsScale/Jump/JumpButton" to="." method="_on_JumpButton_released"]
+[connection signal="pressed" from="Control/ButtonsScale/Action/ActionButton" to="." method="_on_ActionButton_pressed"]
+[connection signal="released" from="Control/ButtonsScale/Action/ActionButton" to="." method="_on_ActionButton_released"]
 [connection signal="pressed" from="Control/Pause/PauseButton" to="." method="_on_PauseButton_pressed"]

@@ -17,11 +17,13 @@ var button_just_pressed = false
 var button_just_released = false
 
 onready var mobile_controls = $Control
-onready var joystick_button = $Control/Joystick/JoystickButton
-onready var joystick_container = $Control/Joystick
-onready var joystick_stick = $Control/Joystick/Stick
+onready var joystick_button = $Control/JoystickScale/Joystick/JoystickButton
+onready var joystick_container = $Control/JoystickScale/Joystick
+onready var joystick_stick = $Control/JoystickScale/Joystick/Stick
+onready var scale_joystick = $Control/JoystickScale
+onready var scale_buttons = $Control/ButtonsScale
 
-onready var buttons = [$Control/Jump/JumpButton, $Control/Action/ActionButton]
+onready var buttons = [$Control/ButtonsScale/Jump/JumpButton, $Control/ButtonsScale/Action/ActionButton]
 
 var cardinal_directions = {
 	Vector2.LEFT : "move_left",
@@ -35,6 +37,20 @@ var movement_directions = []
 func _ready():
 	mobile_controls.hide()
 	if OS.has_feature("mobile") or force_mobile_controls: activate_mobile_controls()
+	ResolutionManager.connect("window_resized", self, "window_resized")
+	window_resized()
+
+func window_resized():
+	var scale = max(ResolutionManager.window_resolution.x, ResolutionManager.window_resolution.y)
+	scale /= 640
+	scale *= 0.5
+	scale += 0.5
+	
+	update_mobile_controls_scale(scale)
+
+func update_mobile_controls_scale(ui_scale : float):
+	scale_joystick.rect_scale = Vector2.ONE * ui_scale
+	scale_buttons.rect_scale = Vector2.ONE * ui_scale
 
 func _input(event):
 	if event is InputEventScreenTouch or event is InputEventScreenDrag:
@@ -112,9 +128,14 @@ func clear_directions():
 		movement_directions = []
 
 func get_movement_vector(touch_position, limit = true):
+	var joy_scale = scale_joystick.rect_scale.x
+	
 	var joystick_center_position = joystick_button.global_position + joystick_container.rect_size * 0.5
+	
+	joystick_center_position += Vector2.ONE * 64 * (joy_scale - 1)
+	
 	var position_difference = touch_position - joystick_center_position
-	position_difference *= 2.0 / joystick_container.rect_size.x
+	position_difference *= 2.0 / joystick_container.rect_size.x / joy_scale
 	if position_difference.length() > 1 and limit: position_difference = position_difference.normalized()
 	return position_difference
 
