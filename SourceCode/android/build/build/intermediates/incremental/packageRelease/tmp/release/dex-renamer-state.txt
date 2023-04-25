@@ -1,4 +1,0 @@
-#Tue Apr 25 19:14:52 AEST 2023
-base.0=C\:\\Users\\Alex\\SuperTux-Classic\\SourceCode\\android\\build\\build\\intermediates\\dex\\release\\mergeDexRelease\\classes.dex
-renamed.0=classes.dex
-path.0=classes.dex
