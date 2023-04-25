@@ -41,7 +41,7 @@ func _ready():
 	window_resized()
 
 func window_resized():
-	var scale = max(ResolutionManager.window_size.x, ResolutionManager.window_size.y)
+	var scale = ResolutionManager.window_size.x
 	
 	var scale_power = 0.5
 	

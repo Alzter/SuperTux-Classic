@@ -47,16 +47,14 @@ theme = ExtResource( 2 )
 [node name="JoystickScale" type="Control" parent="Control"]
 anchor_top = 1.0
 anchor_bottom = 1.0
-margin_left = 32.0
-margin_top = -32.0
-margin_right = 32.0
-margin_bottom = -32.0
 
 [node name="Joystick" type="Control" parent="Control/JoystickScale"]
 anchor_top = 1.0
 anchor_bottom = 1.0
-margin_top = -128.0
-margin_right = 128.0
+margin_left = 32.0
+margin_top = -160.0
+margin_right = 160.0
+margin_bottom = -32.0
 
 [node name="JoystickButton" type="TouchScreenButton" parent="Control/JoystickScale/Joystick"]
 normal = ExtResource( 3 )
@@ -71,10 +69,6 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -32.0
-margin_top = -32.0
-margin_right = -32.0
-margin_bottom = -32.0
 grow_horizontal = 0
 grow_vertical = 0
 
@@ -83,8 +77,10 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -128.0
-margin_top = -128.0
+margin_left = -160.0
+margin_top = -160.0
+margin_right = -32.0
+margin_bottom = -32.0
 grow_horizontal = 0
 grow_vertical = 0
 
@@ -98,9 +94,10 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -128.0
-margin_top = -256.0
-margin_bottom = -128.0
+margin_left = -160.0
+margin_top = -288.0
+margin_right = -32.0
+margin_bottom = -160.0
 
 [node name="ActionButton" type="TouchScreenButton" parent="Control/ButtonsScale/Action"]
 normal = ExtResource( 9 )
