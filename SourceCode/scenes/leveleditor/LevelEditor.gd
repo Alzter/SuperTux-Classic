@@ -117,8 +117,12 @@ func set_ui_scale(scale):
 func _on_EditToggle_pressed():
 	toggle_edit_mode()
 
+# The Editor UI shrinks on smaller displays
 func window_resized():
-	var scale = min(ResolutionManager.window_size.x / 1000.0, ResolutionManager.window_size.y / 500.0)
-	print(scale)
+	# The Editor UI gets smaller when the screen resolution is lower than this
+	var target_resolution = Vector2(1000, 500)
+	var scale = min(ResolutionManager.window_size.x / target_resolution.x, ResolutionManager.window_size.y / target_resolution.y)
 	scale = min(scale, 1)
+	scale /= ResolutionManager.screen_shrink # Make editor UI immune to magnification
+	print(scale)
 	set_ui_scale(scale)
