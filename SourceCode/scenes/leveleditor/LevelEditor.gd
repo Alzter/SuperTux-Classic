@@ -1,9 +1,11 @@
-extends Control
+extends Node
 
 export var level_to_load = "res://scenes/levels/world1/level1.tscn"
 
 export var cache_level_directory = "user://leveleditor/"
 export var cache_level_filename = "cache.tscn"
+
+onready var ui = get_node_or_null("UI")
 
 onready var cache_level_path = cache_level_directory + cache_level_filename
 
@@ -15,8 +17,6 @@ var selected_object = null
 
 func _ready():
 	Scoreboard.hide()
-	
-	#get_tree().paused = true
 	
 	load_level_from_path(level_to_load)
 	
@@ -39,12 +39,14 @@ func _ready():
 func enter_play_mode():
 	if !level: return
 	create_level_cache()
+	if ui: ui.hide()
 	level.start_level(false)
 
 func enter_edit_mode():
 	if !level: return
-	Scoreboard.hide()
 	load_level_from_path(cache_level_path)
+	Scoreboard.hide()
+	if ui: ui.show()
 
 # ===================================================================================
 # Tile placement

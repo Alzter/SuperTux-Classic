@@ -3,7 +3,13 @@
 [ext_resource path="res://scenes/leveleditor/LevelEditor.gd" type="Script" id=2]
 
 [node name="LevelEditor" type="Control"]
-anchor_right = 1.0
-anchor_bottom = 1.0
 script = ExtResource( 2 )
 level_to_load = "res://scenes/leveleditor/samplelevel.tscn"
+
+[node name="UI" type="CanvasLayer" parent="."]
+layer = 128
+
+[node name="ColorRect" type="ColorRect" parent="UI"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 1, 1, 1, 0.501961 )
