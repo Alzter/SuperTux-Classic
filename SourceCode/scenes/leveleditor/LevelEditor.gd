@@ -5,7 +5,8 @@ export var level_to_load = "res://scenes/levels/world1/level1.tscn"
 export var cache_level_directory = "user://leveleditor/"
 export var cache_level_filename = "cache.tscn"
 
-onready var ui = get_node_or_null("UI")
+onready var ui_scale = get_node_or_null("UI/Scale")
+onready var ui_editor = get_node_or_null("UI/Scale/EditorUI")
 
 onready var cache_level_path = cache_level_directory + cache_level_filename
 
@@ -19,6 +20,8 @@ var edit_mode = true
 
 func _ready():
 	Scoreboard.hide()
+	ResolutionManager.connect("window_resized", self, "window_resized")
+	window_resized()
 	
 	load_level_from_path(level_to_load)
 	
@@ -42,7 +45,7 @@ func toggle_edit_mode():
 func enter_play_mode():
 	if !level: return
 	create_level_cache()
-	if ui: ui.hide()
+	if ui_editor: ui_editor.hide()
 	level.start_level(false)
 	edit_mode = false
 
@@ -50,8 +53,9 @@ func enter_edit_mode():
 	if !level: return
 	load_level_from_path(cache_level_path)
 	Scoreboard.hide()
-	if ui: ui.show()
+	if ui_editor: ui_editor.show()
 	edit_mode = true
+	Music.stop_all()
 
 # ===================================================================================
 # Tile placement
@@ -105,6 +109,16 @@ func create_level_cache():
 	dir.make_dir_recursive(cache_level_directory)
 	Global.save_node_to_directory(level, cache_level_path)
 
+func set_ui_scale(scale):
+	ui_scale.rect_scale = Vector2.ONE * scale
+	ui_scale.anchor_bottom = 1 / scale
+	ui_scale.anchor_right = 1 / scale
 
 func _on_EditToggle_pressed():
 	toggle_edit_mode()
+
+func window_resized():
+	var scale = min(ResolutionManager.window_size.x / 1000.0, ResolutionManager.window_size.y / 500.0)
+	print(scale)
+	scale = min(scale, 1)
+	set_ui_scale(scale)
