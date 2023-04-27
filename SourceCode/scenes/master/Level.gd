@@ -44,7 +44,6 @@ onready var custom_camera = get_node_or_null("Camera2D")
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	if self == Global.current_scene:
-		activate_objectmaps()
 		start_level()
 
 func activate_objectmaps():
@@ -53,7 +52,8 @@ func activate_objectmaps():
 			if node.has_method("tiles_to_objects"):
 				node.tiles_to_objects()
 
-func start_level():
+func start_level(show_level_title_card = true):
+	activate_objectmaps()
 	ResolutionManager.connect("window_resized", self, "window_resized")
 	Scoreboard.show()
 	WorldmapManager.is_level_worldmap = is_worldmap
@@ -74,7 +74,7 @@ func start_level():
 	else: Scoreboard.disable_level_timer()
 	
 	# Display the level title card and wait until it disappears
-	if !is_worldmap: yield(_level_title_card(), "completed")
+	if !is_worldmap and show_level_title_card: yield(_level_title_card(), "completed")
 	else:
 		Global.emit_signal("level_ready")
 	

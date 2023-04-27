@@ -9,7 +9,9 @@ var object_map = null
 var selected_object = null
 
 func _ready():
-	get_tree().paused = true
+	#get_tree().paused = true
+	Scoreboard.hide()
+	
 	load_level_from_path(level_to_load)
 	
 	var tile = 10
@@ -19,6 +21,13 @@ func _ready():
 	
 	var tile_rect = Rect2(Vector2(4,4), Vector2(4,4))
 	fill_tile_rect(tilemap, tile_rect, tile)
+	
+	yield(get_tree().create_timer(1), "timeout")
+	
+	enter_play_mode()
+
+func enter_play_mode():
+	level.start_level(false)
 
 # ===================================================================================
 # Tile placement
