@@ -11,6 +11,8 @@ onready var ui_scale = $UI/Scale
 onready var ui_editor = $UI/Scale/EditorUI
 onready var layers_container = $UI/Scale/EditorUI/LayersPanelOffset/LayersPanel/ScrollContainer/LayersContainer
 
+onready var grid = $TilemapGrid
+
 onready var cache_level_path = cache_level_directory + cache_level_filename
 
 var level = null
@@ -105,11 +107,11 @@ func initialise_level(level_object):
 	level = level_object
 	level_objects = level_object.get_children()
 	
-	populate_layers_panel(level_objects)
+	update_layers_panel(level_objects)
 	
 	object_map = null
 	for node in level_objects:
-		if node.is_in_group("objectmaps"):
+		if is_objectmap(node):
 			object_map = node
 			break
 		
@@ -126,7 +128,7 @@ func create_level_cache():
 	update_tilemap_opacity()
 
 # Fills the layers panel with all layers in the current level
-func populate_layers_panel(level_objects):
+func update_layers_panel(level_objects):
 	if !layers_container: return
 	
 	for layer in layers_container.get_children():
@@ -134,7 +136,7 @@ func populate_layers_panel(level_objects):
 		layer.free()
 	
 	for node in level_objects:
-		#if node.is_in_group("objectmaps"): continue
+		if is_objectmap(node): continue
 		var button = layer_button_scene.instance()
 		layers_container.add_child(button)
 		button.text = node.name
@@ -173,10 +175,14 @@ func update_selected_object(new_value):
 		button.disabled = button.layer_object == selected_object
 	
 	update_tilemap_opacity()
+	
+	if is_tilemap(selected_object):
+		grid.selected_tilemap = selected_object
+	else: grid.selected_tilemap = null
 
 func update_tilemap_opacity():
 	if selected_object and edit_mode:
-		if selected_object is TileMap:
+		if is_tilemap(selected_object):
 			make_non_selected_tilemaps_transparent()
 		else:
 			make_all_tilemaps_opaque()
@@ -186,7 +192,7 @@ func update_tilemap_opacity():
 func make_non_selected_tilemaps_transparent():
 	for child in level_objects:
 		if !is_instance_valid(child): continue
-		if child is TileMap:
+		if is_tilemap(child):
 			if selected_object != child:
 				child.modulate.a = 0.25
 			else: child.modulate.a = 1
@@ -194,5 +200,11 @@ func make_non_selected_tilemaps_transparent():
 func make_all_tilemaps_opaque():
 	for child in level_objects:
 		if !is_instance_valid(child): continue
-		if child is TileMap:
+		if is_tilemap(child):
 			child.modulate.a = 1
+
+func is_tilemap(node):
+	return node is TileMap and not node.is_in_group("objectmaps")
+
+func is_objectmap(node):
+	return node is TileMap and node.is_in_group("objectmaps")

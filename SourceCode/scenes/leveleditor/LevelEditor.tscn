@@ -1,9 +1,10 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://theme/default_theme.tres" type="Theme" id=1]
 [ext_resource path="res://scenes/leveleditor/LevelEditor.gd" type="Script" id=2]
 [ext_resource path="res://scenes/leveleditor/RetractablePanel.gd" type="Script" id=3]
 [ext_resource path="res://scenes/leveleditor/LayerButton.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scenes/leveleditor/TilemapGrid.gd" type="Script" id=5]
 
 [sub_resource type="Animation" id=1]
 resource_name = "default"
@@ -106,6 +107,11 @@ theme = ExtResource( 1 )
 script = ExtResource( 2 )
 level_to_load = "res://scenes/leveleditor/samplelevel.tscn"
 layer_button_scene = ExtResource( 4 )
+
+[node name="TilemapGrid" type="Node2D" parent="."]
+z_index = 999
+z_as_relative = false
+script = ExtResource( 5 )
 
 [node name="UI" type="CanvasLayer" parent="."]
 layer = 128
