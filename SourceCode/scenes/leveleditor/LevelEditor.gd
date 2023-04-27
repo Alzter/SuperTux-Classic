@@ -127,6 +127,8 @@ func populate_layers_panel(level_objects):
 		var button = layer_button_scene.instance()
 		layers_container.add_child(button)
 		button.text = node.name
+		button.layer_object = node
+		button.connect("layer_button_pressed", self, "layer_button_pressed")
 
 # ====================================================================================
 # Editor UI
@@ -147,3 +149,9 @@ func set_ui_scale(scale):
 	ui_scale.rect_scale = Vector2.ONE * scale
 	ui_scale.anchor_bottom = 1 / scale
 	ui_scale.anchor_right = 1 / scale
+
+func layer_button_pressed(button_node, layer_object):
+	selected_object = layer_object
+	
+	for button in layers_container.get_children():
+		button.disabled = button.layer_object == selected_object
