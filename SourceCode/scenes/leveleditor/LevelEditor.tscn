@@ -109,13 +109,13 @@ script = ExtResource( 2 )
 level_to_load = "res://scenes/leveleditor/samplelevel.tscn"
 layer_button_scene = ExtResource( 4 )
 
-[node name="TilemapFunctions" type="Node2D" parent="."]
+[node name="TileFunctions" type="Node2D" parent="."]
 z_index = 4096
 z_as_relative = false
 script = ExtResource( 5 )
 grid_color = Color( 0, 0, 0, 0.25 )
 
-[node name="SelectedTile" type="Sprite" parent="TilemapFunctions"]
+[node name="SelectedTile" type="Sprite" parent="TileFunctions"]
 texture = ExtResource( 6 )
 
 [node name="UI" type="CanvasLayer" parent="."]

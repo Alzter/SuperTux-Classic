@@ -11,7 +11,7 @@ onready var ui_scale = $UI/Scale
 onready var ui_editor = $UI/Scale/EditorUI
 onready var layers_container = $UI/Scale/EditorUI/LayersPanelOffset/LayersPanel/ScrollContainer/LayersContainer
 
-onready var tilemap_functions = $TilemapFunctions
+onready var tile_functions = $TileFunctions
 
 onready var cache_level_path = cache_level_directory + cache_level_filename
 
@@ -180,8 +180,8 @@ func update_selected_object(new_value):
 	update_tilemap_opacity()
 	
 	if is_tilemap(selected_object):
-		tilemap_functions.selected_tilemap = selected_object
-	else: tilemap_functions.selected_tilemap = null
+		tile_functions.selected_tilemap = selected_object
+	else: tile_functions.selected_tilemap = null
 
 func update_tilemap_opacity():
 	if selected_object and edit_mode:

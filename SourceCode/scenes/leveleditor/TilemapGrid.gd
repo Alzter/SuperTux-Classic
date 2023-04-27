@@ -1,9 +1,10 @@
 extends Node2D
 
-onready var tile_selection = $SelectedTile
+# This node is responsible for all tilemap functions,
+# including placing and erasing tiles from the tilemap,
+# displaying a grid for the currently selected tilemap, etc.
 
-# Draws a grid for the currently selected tilemap,
-# and sets the currently selected tile in the editor.
+onready var tile_selection = $SelectedTile
 
 export var grid_color = Color(0,0,0,0.5)
 var selected_tilemap = null
@@ -19,8 +20,11 @@ func _process(delta):
 		var mouse_pos = get_global_mouse_position()
 		selected_tile_position = selected_tilemap.world_to_map(mouse_pos)
 		
+		tile_selection.show()
 		tile_selection.position = selected_tilemap.map_to_world(selected_tile_position)
 		tile_selection.position += selected_tilemap.cell_size * 0.5
+	else:
+		tile_selection.hide()
 
 # Don't ask me how this works. Don't ask me why this works.
 
