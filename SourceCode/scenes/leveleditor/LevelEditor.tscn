@@ -1,8 +1,10 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
+[ext_resource path="res://theme/default_theme.tres" type="Theme" id=1]
 [ext_resource path="res://scenes/leveleditor/LevelEditor.gd" type="Script" id=2]
 
 [node name="LevelEditor" type="Control"]
+theme = ExtResource( 1 )
 script = ExtResource( 2 )
 level_to_load = "res://scenes/leveleditor/samplelevel.tscn"
 
@@ -13,3 +15,18 @@ layer = 128
 anchor_right = 1.0
 anchor_bottom = 1.0
 color = Color( 1, 1, 1, 0.501961 )
+
+[node name="UIPermanent" type="CanvasLayer" parent="."]
+layer = 128
+
+[node name="EditToggle" type="Button" parent="UIPermanent"]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -324.0
+margin_top = -133.0
+theme = ExtResource( 1 )
+text = "Toggle Play/Edit Mode"
+
+[connection signal="pressed" from="UIPermanent/EditToggle" to="." method="_on_EditToggle_pressed"]

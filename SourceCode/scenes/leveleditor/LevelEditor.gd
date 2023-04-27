@@ -15,6 +15,8 @@ var object_map = null
 
 var selected_object = null
 
+var edit_mode = true
+
 func _ready():
 	Scoreboard.hide()
 	
@@ -27,26 +29,29 @@ func _ready():
 	
 	var tile_rect = Rect2(Vector2(4,4), Vector2(4,4))
 	fill_tile_rect(tilemap, tile_rect, tile)
-	
-	yield(get_tree().create_timer(1), "timeout")
-	
-	enter_play_mode()
-	
-	yield(get_tree().create_timer(3), "timeout")
-	
-	enter_edit_mode()
+
+# =================================================================
+# Toggle Edit Mode
+
+func toggle_edit_mode():
+	if edit_mode:
+		enter_play_mode()
+	else:
+		enter_edit_mode()
 
 func enter_play_mode():
 	if !level: return
 	create_level_cache()
 	if ui: ui.hide()
 	level.start_level(false)
+	edit_mode = false
 
 func enter_edit_mode():
 	if !level: return
 	load_level_from_path(cache_level_path)
 	Scoreboard.hide()
 	if ui: ui.show()
+	edit_mode = true
 
 # ===================================================================================
 # Tile placement
@@ -99,3 +104,7 @@ func create_level_cache():
 	var dir = Directory.new()
 	dir.make_dir_recursive(cache_level_directory)
 	Global.save_node_to_directory(level, cache_level_path)
+
+
+func _on_EditToggle_pressed():
+	toggle_edit_mode()
