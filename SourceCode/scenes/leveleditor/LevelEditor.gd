@@ -2,6 +2,11 @@ extends Control
 
 export var level_to_load = "res://scenes/levels/world1/level1.tscn"
 
+export var cache_level_directory = "user://leveleditor/"
+export var cache_level_filename = "cache.tscn"
+
+onready var cache_level_path = cache_level_directory + cache_level_filename
+
 var level = null
 var level_objects = null
 var object_map = null
@@ -9,8 +14,9 @@ var object_map = null
 var selected_object = null
 
 func _ready():
-	#get_tree().paused = true
 	Scoreboard.hide()
+	
+	#get_tree().paused = true
 	
 	load_level_from_path(level_to_load)
 	
@@ -25,9 +31,20 @@ func _ready():
 	yield(get_tree().create_timer(1), "timeout")
 	
 	enter_play_mode()
+	
+	yield(get_tree().create_timer(3), "timeout")
+	
+	enter_edit_mode()
 
 func enter_play_mode():
+	if !level: return
+	create_level_cache()
 	level.start_level(false)
+
+func enter_edit_mode():
+	if !level: return
+	Scoreboard.hide()
+	load_level_from_path(cache_level_path)
 
 # ===================================================================================
 # Tile placement
@@ -60,6 +77,10 @@ func load_level_from_path(level_path: String):
 	load_level_from_object(level_object)
 
 func load_level_from_object(level_object: Node2D):
+	if level:
+		level.queue_free()
+		yield(level, "tree_exited")
+	
 	add_child(level_object)
 	level_object.set_owner(self)
 	update_level_variables(level_object)
@@ -72,3 +93,8 @@ func update_level_variables(level_object):
 		if node.is_in_group("objectmaps"):
 			object_map = node
 			return
+
+func create_level_cache():
+	var dir = Directory.new()
+	dir.make_dir_recursive(cache_level_directory)
+	Global.save_node_to_directory(level, cache_level_path)

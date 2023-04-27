@@ -78,7 +78,7 @@
 extends Node2D
 
 export var level_data = ""
-export var export_file_path = "IMPORTS/Level.tscn"
+export var export_file_path = "res://IMPORTS/Level.tscn"
 export var default_tile = "Placeholder"
 
 # EXPAND TILEMAPS: If this option is enabled for a tilemap,

@@ -166,3 +166,12 @@ func apply_options(options_data : Dictionary):
 func level_completed():
 	if current_scene.has_method("level_complete"):
 		current_scene.level_complete()
+
+func save_node_to_directory(node : Node, dir : String):
+	for child in node.get_children():
+		child.owner = node
+		for baby in child.get_children():
+			baby.owner = node
+	var packed_scene = PackedScene.new()
+	packed_scene.pack(node)
+	ResourceSaver.save(dir, packed_scene)
