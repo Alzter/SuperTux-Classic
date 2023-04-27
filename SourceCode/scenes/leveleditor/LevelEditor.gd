@@ -5,8 +5,11 @@ export var level_to_load = "res://scenes/levels/world1/level1.tscn"
 export var cache_level_directory = "user://leveleditor/"
 export var cache_level_filename = "cache.tscn"
 
-onready var ui_scale = get_node_or_null("UI/Scale")
-onready var ui_editor = get_node_or_null("UI/Scale/EditorUI")
+export var layer_button_scene : PackedScene
+
+onready var ui_scale = $UI/Scale
+onready var ui_editor = $UI/Scale/EditorUI
+onready var layers_container = $UI/Scale/EditorUI/LayersPanelOffset/LayersPanel/LayersContainer
 
 onready var cache_level_path = cache_level_directory + cache_level_filename
 
@@ -94,21 +97,39 @@ func load_level_from_object(level_object: Node2D):
 	
 	add_child(level_object)
 	level_object.set_owner(self)
-	update_level_variables(level_object)
+	initialise_level(level_object)
 
-func update_level_variables(level_object):
+func initialise_level(level_object):
 	level = level_object
 	level_objects = level_object.get_children()
 	object_map = null
 	for node in level_objects:
 		if node.is_in_group("objectmaps"):
 			object_map = node
-			return
+			break
+	populate_layers_panel(level_objects)
 
 func create_level_cache():
 	var dir = Directory.new()
 	dir.make_dir_recursive(cache_level_directory)
 	Global.save_node_to_directory(level, cache_level_path)
+
+# Fills the layers panel with all layers in the current level
+func populate_layers_panel(level_objects):
+	if !layers_container: return
+	
+	for layer in layers_container.get_children():
+		layers_container.remove_child(layer)
+		layer.free()
+	
+	for node in level_objects:
+		if node.is_in_group("objectmaps"): continue
+		var button = layer_button_scene.instance()
+		layers_container.add_child(button)
+		button.text = node.name
+
+# ====================================================================================
+# Editor UI
 
 func _on_EditToggle_pressed():
 	toggle_edit_mode()

@@ -1,8 +1,9 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://theme/default_theme.tres" type="Theme" id=1]
 [ext_resource path="res://scenes/leveleditor/LevelEditor.gd" type="Script" id=2]
 [ext_resource path="res://scenes/leveleditor/RetractablePanel.gd" type="Script" id=3]
+[ext_resource path="res://scenes/leveleditor/LayerButton.tscn" type="PackedScene" id=4]
 
 [sub_resource type="Animation" id=1]
 resource_name = "default"
@@ -104,6 +105,7 @@ tracks/0/keys = {
 theme = ExtResource( 1 )
 script = ExtResource( 2 )
 level_to_load = "res://scenes/leveleditor/samplelevel.tscn"
+layer_button_scene = ExtResource( 4 )
 
 [node name="UI" type="CanvasLayer" parent="."]
 layer = 128
@@ -143,19 +145,23 @@ margin_right = 109.0
 margin_bottom = -2.0
 focus_mode = 0
 
-[node name="HBoxContainer" type="HBoxContainer" parent="UI/Scale/EditorUI/LayersPanelOffset/LayersPanel"]
+[node name="AddLayerButton" type="Button" parent="UI/Scale/EditorUI/LayersPanelOffset/LayersPanel"]
+margin_left = 9.0
+margin_top = 6.0
+margin_right = 75.0
+margin_bottom = 112.0
+focus_mode = 0
+text = "+"
+
+[node name="LayersContainer" type="HBoxContainer" parent="UI/Scale/EditorUI/LayersPanelOffset/LayersPanel"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_left = 89.0
 margin_top = 12.0
+margin_right = -13.0
 margin_bottom = -12.0
+custom_constants/separation = 15
 alignment = 1
-
-[node name="LayerButton" type="Button" parent="UI/Scale/EditorUI/LayersPanelOffset/LayersPanel/HBoxContainer"]
-margin_left = 487.0
-margin_right = 567.0
-margin_bottom = 96.0
-rect_min_size = Vector2( 80, 0 )
-focus_mode = 0
 
 [node name="TilesPanelOffset" type="Control" parent="UI/Scale/EditorUI"]
 anchor_right = 1.0
@@ -196,6 +202,5 @@ theme = ExtResource( 1 )
 text = "PLAY"
 
 [connection signal="pressed" from="UI/Scale/EditorUI/LayersPanelOffset/LayersPanel/RetractTab" to="UI/Scale/EditorUI/LayersPanelOffset" method="_on_RetractTab_pressed"]
-[connection signal="pressed" from="UI/Scale/EditorUI/LayersPanelOffset/LayersPanel/HBoxContainer/LayerButton" to="UI/Scale/EditorUI/LayersPanelOffset" method="_on_LayerButton_pressed"]
 [connection signal="pressed" from="UI/Scale/EditorUI/TilesPanelOffset/TilesPanel/RetractTab" to="UI/Scale/EditorUI/TilesPanelOffset" method="_on_RetractTab_pressed"]
 [connection signal="pressed" from="UI/Scale/EditToggle" to="." method="_on_EditToggle_pressed"]

@@ -1,0 +1,9 @@
+[gd_scene format=2]
+
+[node name="LayerButton" type="Button"]
+margin_left = 474.0
+margin_right = 586.0
+margin_bottom = 96.0
+rect_min_size = Vector2( 80, 0 )
+focus_mode = 0
+text = "TileMap"
