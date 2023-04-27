@@ -208,12 +208,20 @@ func set_current_level_dot(new_value, sound = true):
 	Scoreboard.clear_message()
 	
 	if new_value:
+		var level_name: String
+		
 		if current_level_dot.level_file_path != "":
-			var level_name = load(current_level_dot.level_file_path).instance().level_title
-			Scoreboard.display_message(level_name)
+			if not Global.cached_level_names.has(current_level_dot.level_file_path):
+				print(current_level_dot.level_file_path)
+				var scene_instance = load(current_level_dot.level_file_path).instance()
+				level_name = scene_instance.level_title
+				scene_instance.queue_free()
+				Global.cached_level_names[current_level_dot.level_file_path] = level_name
+			else:
+				level_name = Global.cached_level_names[current_level_dot.level_file_path]
 		elif current_level_dot.message != "":
 			Scoreboard.display_message(current_level_dot.message)
-		
+		Scoreboard.display_message(level_name)
 		if sound: sfx.play("LevelDot")
 
 func update_sprite():

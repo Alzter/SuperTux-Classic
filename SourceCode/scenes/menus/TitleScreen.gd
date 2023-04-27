@@ -31,10 +31,13 @@ onready var quit_button = $TitleContent/Menu/VBoxContainer/Quit
 onready var new_game_warning = $TitleContent/Menu/NewGameWarning
 onready var options_menu = $OptionsMenu
 onready var bonus_levels_menu = $BonusLevelsMenu
+onready var contrib_menu = $ContribMenu
 
 export var default_world = "world1"
 
 func _ready():
+	Global.current_contrib = ""
+	Global.in_contrib = false
 	Music.play("Title")
 	Scoreboard.hide()
 	WorldmapManager.reset()
@@ -52,7 +55,9 @@ func _ready():
 	start_game_button.grab_focus()
 
 func _on_NewGame_pressed():
-	if SaveManager.has_savefile(default_world):
+	Global.current_contrib = ""
+	Global.in_contrib = false
+	if SaveManager.has_savefile():
 		new_game_warning.popup_centered()
 	else: SaveManager.new_game(intro_scene)
 
@@ -60,7 +65,16 @@ func _on_NewGameWarning_confirmed():
 	SaveManager.new_game(intro_scene)
 
 func _on_LoadGame_pressed():
-	SaveManager.load_game(default_world)
+	Global.current_contrib = ""
+	Global.in_contrib = false
+	SaveManager.load_game()
+	
+	Global.in_contrib = false
+
+func _on_ContribPacks_pressed():
+	title_content.hide()
+	contrib_menu.popup()
+	Global.in_contrib = true
 
 func _on_LevelSelectDebug_pressed():
 	$FileDialog.popup()
@@ -105,5 +119,13 @@ func _on_BonusLevels_pressed():
 	bonus_levels_menu.popup()
 
 func _on_BonusLevelsMenu_popup_hide():
-	title_content.show()
-	bonus_levels_button.grab_focus()
+	if contrib_menu.visible == false:
+		title_content.show()
+		bonus_levels_button.grab_focus()
+
+func _on_ContribMenu_about_to_show():
+	bonus_levels_menu.hide()
+	contrib_menu.popup()
+
+func _on_ContribMenu_popup_hide():
+	bonus_levels_menu.popup()

@@ -6,7 +6,6 @@
 [ext_resource path="res://scenes/menus/WorldButton.tscn" type="PackedScene" id=4]
 
 [node name="BonusLevelsMenu" type="Popup"]
-visible = true
 anchor_right = 1.0
 anchor_bottom = 1.0
 theme = ExtResource( 1 )
@@ -42,17 +41,25 @@ __meta__ = {
 }
 
 [node name="Bonus1" parent="Panel/VBoxContainer" instance=ExtResource( 4 )]
+margin_top = 148.0
+margin_bottom = 178.0
 disabled = true
 text = "Bonus Island I"
 world_to_load = "bonus1"
 initial_scene_for_world = "res://scenes/levels/bonus1/worldmap.tscn"
 
 [node name="Bonus2" parent="Panel/VBoxContainer" instance=ExtResource( 4 )]
-margin_top = 215.0
-margin_bottom = 245.0
+margin_top = 193.0
+margin_bottom = 223.0
 text = "Bonus Island II"
 world_to_load = "bonus2"
 initial_scene_for_world = "res://scenes/levels/bonus2/worldmap.tscn"
+
+[node name="Contrib" parent="Panel/VBoxContainer" instance=ExtResource( 4 )]
+margin_top = 238.0
+margin_bottom = 268.0
+text = "Contrib Packs"
+script = null
 
 [node name="Back" type="Button" parent="Panel"]
 anchor_left = 0.5
@@ -67,5 +74,6 @@ text = "Back"
 
 [connection signal="about_to_show" from="." to="." method="_on_OptionsMenu_about_to_show"]
 [connection signal="popup_hide" from="." to="." method="_on_OptionsMenu_popup_hide"]
+[connection signal="pressed" from="Panel/VBoxContainer/Contrib" to="." method="_on_Contrib_pressed"]
 [connection signal="mouse_entered" from="Panel/Back" to="." method="_on_Back_mouse_entered"]
 [connection signal="pressed" from="Panel/Back" to="." method="_on_Back_pressed"]
