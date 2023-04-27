@@ -20,6 +20,7 @@ var edit_mode = true
 
 func _ready():
 	Scoreboard.hide()
+	Music.stop_all()
 	ResolutionManager.connect("window_resized", self, "window_resized")
 	window_resized()
 	
@@ -109,11 +110,6 @@ func create_level_cache():
 	dir.make_dir_recursive(cache_level_directory)
 	Global.save_node_to_directory(level, cache_level_path)
 
-func set_ui_scale(scale):
-	ui_scale.rect_scale = Vector2.ONE * scale
-	ui_scale.anchor_bottom = 1 / scale
-	ui_scale.anchor_right = 1 / scale
-
 func _on_EditToggle_pressed():
 	toggle_edit_mode()
 
@@ -124,5 +120,9 @@ func window_resized():
 	var scale = min(ResolutionManager.window_size.x / target_resolution.x, ResolutionManager.window_size.y / target_resolution.y)
 	scale = min(scale, 1)
 	scale /= ResolutionManager.screen_shrink # Make editor UI immune to magnification
-	print(scale)
 	set_ui_scale(scale)
+
+func set_ui_scale(scale):
+	ui_scale.rect_scale = Vector2.ONE * scale
+	ui_scale.anchor_bottom = 1 / scale
+	ui_scale.anchor_right = 1 / scale

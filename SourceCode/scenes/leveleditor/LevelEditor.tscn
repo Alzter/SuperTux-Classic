@@ -56,7 +56,7 @@ tracks/0/keys = {
 resource_name = "default"
 length = 0.001
 tracks/0/type = "value"
-tracks/0/path = NodePath("../TilesOffset:rect_position")
+tracks/0/path = NodePath("../TilesPanelOffset:rect_position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -72,7 +72,7 @@ tracks/0/keys = {
 resource_name = "expand"
 length = 0.1
 tracks/0/type = "value"
-tracks/0/path = NodePath("../TilesOffset:rect_position")
+tracks/0/path = NodePath("../TilesPanelOffset:rect_position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -88,7 +88,7 @@ tracks/0/keys = {
 resource_name = "retract"
 length = 0.1
 tracks/0/type = "value"
-tracks/0/path = NodePath("../TilesOffset:rect_position")
+tracks/0/path = NodePath("../TilesPanelOffset:rect_position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -120,8 +120,6 @@ anchor_bottom = 1.0
 [node name="LayersPanelOffset" type="Control" parent="UI/Scale/EditorUI"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_top = 120.0
-margin_bottom = 120.0
 mouse_filter = 2
 script = ExtResource( 3 )
 
@@ -159,20 +157,20 @@ margin_bottom = 96.0
 rect_min_size = Vector2( 80, 0 )
 focus_mode = 0
 
-[node name="TilesOffset" type="Control" parent="UI/Scale/EditorUI"]
+[node name="TilesPanelOffset" type="Control" parent="UI/Scale/EditorUI"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
 script = ExtResource( 3 )
 
-[node name="RetractAnimation" type="AnimationPlayer" parent="UI/Scale/EditorUI/TilesOffset"]
+[node name="RetractAnimation" type="AnimationPlayer" parent="UI/Scale/EditorUI/TilesPanelOffset"]
 root_node = NodePath("../../LayersPanelOffset")
 autoplay = "default"
 anims/default = SubResource( 4 )
 anims/expand = SubResource( 5 )
 anims/retract = SubResource( 6 )
 
-[node name="TilesPanel" type="ColorRect" parent="UI/Scale/EditorUI/TilesOffset"]
+[node name="TilesPanel" type="ColorRect" parent="UI/Scale/EditorUI/TilesPanelOffset"]
 anchor_left = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -180,7 +178,7 @@ margin_left = -225.0
 margin_bottom = -120.0
 color = Color( 0, 0, 0, 0.392157 )
 
-[node name="RetractTab" type="Button" parent="UI/Scale/EditorUI/TilesOffset/TilesPanel"]
+[node name="RetractTab" type="Button" parent="UI/Scale/EditorUI/TilesPanelOffset/TilesPanel"]
 margin_left = -43.0
 margin_top = 1.0
 margin_bottom = 97.0
@@ -199,5 +197,5 @@ text = "PLAY"
 
 [connection signal="pressed" from="UI/Scale/EditorUI/LayersPanelOffset/LayersPanel/RetractTab" to="UI/Scale/EditorUI/LayersPanelOffset" method="_on_RetractTab_pressed"]
 [connection signal="pressed" from="UI/Scale/EditorUI/LayersPanelOffset/LayersPanel/HBoxContainer/LayerButton" to="UI/Scale/EditorUI/LayersPanelOffset" method="_on_LayerButton_pressed"]
-[connection signal="pressed" from="UI/Scale/EditorUI/TilesOffset/TilesPanel/RetractTab" to="UI/Scale/EditorUI/TilesOffset" method="_on_RetractTab_pressed"]
+[connection signal="pressed" from="UI/Scale/EditorUI/TilesPanelOffset/TilesPanel/RetractTab" to="UI/Scale/EditorUI/TilesPanelOffset" method="_on_RetractTab_pressed"]
 [connection signal="pressed" from="UI/Scale/EditToggle" to="." method="_on_EditToggle_pressed"]

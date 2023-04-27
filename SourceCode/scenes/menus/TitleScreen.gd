@@ -20,11 +20,13 @@ extends Control
 export var intro_scene = ""
 export var options_scene = ""
 export var credits_scene = ""
+export var level_editor_scene = ""
 onready var title_content = $TitleContent
 
 onready var start_game_button = $TitleContent/Menu/VBoxContainer/StartGame
 onready var bonus_levels_button = $TitleContent/Menu/VBoxContainer/BonusLevels
 onready var options_button = $TitleContent/Menu/VBoxContainer/Options
+onready var level_editor_button = $TitleContent/Menu/VBoxContainer/LevelEditor
 onready var credits_button = $TitleContent/Menu/VBoxContainer/Credits
 onready var quit_button = $TitleContent/Menu/VBoxContainer/Quit
 
@@ -107,3 +109,9 @@ func _on_BonusLevels_pressed():
 func _on_BonusLevelsMenu_popup_hide():
 	title_content.show()
 	bonus_levels_button.grab_focus()
+
+func _on_LevelEditor_mouse_entered():
+	level_editor_button.grab_focus()
+
+func _on_LevelEditor_pressed():
+	Global.goto_scene(level_editor_scene)
