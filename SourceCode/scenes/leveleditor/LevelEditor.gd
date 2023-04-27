@@ -55,7 +55,6 @@ func fill_tile_rect(tilemap : TileMap, rect : Rect2, tile_id : int, update_autot
 	for y in rect.size.y:
 		for x in rect.size.x:
 			var tile_coords = rect.position + Vector2(x,y)
-			print(tile_coords)
 			place_tile(tilemap, tile_coords, tile_id, false)
 	
 	if update_autotile:
