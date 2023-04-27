@@ -15,13 +15,24 @@ func _draw():
 	var tilemap = selected_tilemap
 	if !tilemap: return
 	
-	#global_position = tilemap.global_position
 	
 	var tilemap_rect = tilemap.get_used_rect()
 	var tilemap_cell_size = tilemap.cell_size
 	
-	for y in range(0, tilemap_rect.size.y):
-		draw_line(Vector2(0, y * tilemap_cell_size.y), Vector2(tilemap_rect.size.x * tilemap_cell_size.x, y * tilemap_cell_size.y), grid_color)
+	var zoom = Vector2(get_global_transform_with_canvas().x.x, get_global_transform_with_canvas().y.y)
+	
+	var edge_position = get_global_transform_with_canvas().origin * ResolutionManager.screen_shrink / zoom
+	edge_position -= Vector2(fmod(edge_position.x, tilemap_cell_size.x), fmod(edge_position.y, tilemap_cell_size.y))
+	edge_position += tilemap_cell_size
+	
+	global_position = tilemap.global_position
+	
+	print(edge_position)
+	
+	var res = ResolutionManager.window_size
+	
+	for y in range(0, ceil(res.y / tilemap_cell_size.y / zoom.y)):
+		draw_line(Vector2(0, y * tilemap_cell_size.y) - edge_position, Vector2(res.x * tilemap_cell_size.x, y * tilemap_cell_size.y) - edge_position, grid_color)
 
-	for x in range(0, tilemap_rect.size.x):
-		draw_line(Vector2(x * tilemap_cell_size.x, 0), Vector2(x * tilemap_cell_size.x, tilemap_rect.size.y * tilemap_cell_size.y), grid_color)
+	for x in range(0, ceil(res.x / tilemap_cell_size.x / zoom.x)):
+		draw_line(Vector2(x * tilemap_cell_size.x, 0) - edge_position, Vector2(x * tilemap_cell_size.x, res.y * tilemap_cell_size.y) - edge_position, grid_color)

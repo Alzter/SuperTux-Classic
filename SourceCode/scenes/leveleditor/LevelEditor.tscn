@@ -214,6 +214,10 @@ focus_mode = 0
 theme = ExtResource( 1 )
 text = "PLAY"
 
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2( 9999, 9999 )
+current = true
+
 [connection signal="pressed" from="UI/Scale/EditorUI/LayersPanelOffset/LayersPanel/RetractTab" to="UI/Scale/EditorUI/LayersPanelOffset" method="_on_RetractTab_pressed"]
 [connection signal="pressed" from="UI/Scale/EditorUI/TilesPanelOffset/TilesPanel/RetractTab" to="UI/Scale/EditorUI/TilesPanelOffset" method="_on_RetractTab_pressed"]
 [connection signal="pressed" from="UI/Scale/EditToggle" to="." method="_on_EditToggle_pressed"]
