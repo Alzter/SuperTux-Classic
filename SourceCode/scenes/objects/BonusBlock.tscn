@@ -34,24 +34,24 @@ animations = [ {
 "name": "Bonus",
 "speed": 20.0
 }, {
-"frames": [ ExtResource( 15 ) ],
-"loop": true,
-"name": "BrickSnow",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 23 ) ],
-"loop": true,
-"name": "Invisible",
-"speed": 5.0
-}, {
 "frames": [ ExtResource( 14 ) ],
 "loop": true,
 "name": "Brick",
 "speed": 5.0
 }, {
+"frames": [ ExtResource( 15 ) ],
+"loop": true,
+"name": "BrickSnow",
+"speed": 5.0
+}, {
 "frames": [ ExtResource( 13 ) ],
 "loop": true,
 "name": "Empty",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 23 ) ],
+"loop": true,
+"name": "Invisible",
 "speed": 5.0
 } ]
 
@@ -385,7 +385,7 @@ contents_big = ExtResource( 7 )
 material = SubResource( 12 )
 frames = SubResource( 1 )
 animation = "Bonus"
-frame = 7
+frame = 2
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -447,6 +447,7 @@ process_material = ExtResource( 22 )
 texture = SubResource( 8 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+pause_mode = 2
 autoplay = "default"
 anims/coin = SubResource( 11 )
 anims/default = SubResource( 9 )

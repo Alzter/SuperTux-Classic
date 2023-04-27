@@ -197,3 +197,12 @@ func register_contrib_pack(dir_name: String) -> bool:
 		contrib_data[dir_name] = file
 		return true
 	return false
+  
+func save_node_to_directory(node : Node, dir : String):
+	for child in node.get_children():
+		child.owner = node
+		for baby in child.get_children():
+			baby.owner = node
+	var packed_scene = PackedScene.new()
+	packed_scene.pack(node)
+	ResourceSaver.save(dir, packed_scene)

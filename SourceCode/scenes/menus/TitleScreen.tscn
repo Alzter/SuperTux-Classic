@@ -22,6 +22,7 @@ script = ExtResource( 2 )
 intro_scene = "res://scenes/levels/world1/intro.tscn"
 options_scene = "res://scenes/menus/Options.tscn"
 credits_scene = "res://scenes/menus/Credits.tscn"
+level_editor_scene = "res://scenes/leveleditor/LevelEditor.tscn"
 
 [node name="TitleContent" type="Control" parent="."]
 anchor_right = 1.0
@@ -98,30 +99,38 @@ __meta__ = {
 }
 
 [node name="StartGame" parent="TitleContent/Menu/VBoxContainer" instance=ExtResource( 9 )]
-margin_top = 1.0
-margin_bottom = 31.0
+margin_top = 0.0
+margin_bottom = 30.0
 text = "Start Game"
 
 [node name="BonusLevels" type="Button" parent="TitleContent/Menu/VBoxContainer"]
-margin_top = 36.0
+margin_top = 35.0
 margin_right = 350.0
-margin_bottom = 66.0
+margin_bottom = 65.0
 focus_neighbour_bottom = NodePath("../Options")
 text = "Bonus Levels"
 
 [node name="Options" type="Button" parent="TitleContent/Menu/VBoxContainer"]
-margin_top = 71.0
+margin_top = 70.0
 margin_right = 350.0
-margin_bottom = 101.0
+margin_bottom = 100.0
 focus_neighbour_top = NodePath("../BonusLevels")
-focus_neighbour_bottom = NodePath("../Credits")
+focus_neighbour_bottom = NodePath("../LevelEditor")
 text = "Options"
 
-[node name="Credits" type="Button" parent="TitleContent/Menu/VBoxContainer"]
-margin_top = 106.0
+[node name="LevelEditor" type="Button" parent="TitleContent/Menu/VBoxContainer"]
+margin_top = 105.0
 margin_right = 350.0
-margin_bottom = 136.0
+margin_bottom = 135.0
 focus_neighbour_top = NodePath("../Options")
+focus_neighbour_bottom = NodePath("../Credits")
+text = "Level Editor"
+
+[node name="Credits" type="Button" parent="TitleContent/Menu/VBoxContainer"]
+margin_top = 140.0
+margin_right = 350.0
+margin_bottom = 170.0
+focus_neighbour_top = NodePath("../LevelEditor")
 focus_neighbour_bottom = NodePath("../Quit")
 text = "Credits"
 
@@ -140,9 +149,9 @@ margin_bottom = 170.0
 text = "Boss Battle (DEBUG)"
 
 [node name="Quit" type="Button" parent="TitleContent/Menu/VBoxContainer"]
-margin_top = 141.0
+margin_top = 175.0
 margin_right = 350.0
-margin_bottom = 171.0
+margin_bottom = 205.0
 focus_neighbour_top = NodePath("../Credits")
 text = "Quit Game"
 
@@ -207,6 +216,8 @@ mode = 0
 [connection signal="pressed" from="TitleContent/Menu/VBoxContainer/BonusLevels" to="." method="_on_BonusLevels_pressed"]
 [connection signal="mouse_entered" from="TitleContent/Menu/VBoxContainer/Options" to="." method="_on_Options_mouse_entered"]
 [connection signal="pressed" from="TitleContent/Menu/VBoxContainer/Options" to="." method="_on_Options_pressed"]
+[connection signal="mouse_entered" from="TitleContent/Menu/VBoxContainer/LevelEditor" to="." method="_on_LevelEditor_mouse_entered"]
+[connection signal="pressed" from="TitleContent/Menu/VBoxContainer/LevelEditor" to="." method="_on_LevelEditor_pressed"]
 [connection signal="mouse_entered" from="TitleContent/Menu/VBoxContainer/Credits" to="." method="_on_Credits_mouse_entered"]
 [connection signal="pressed" from="TitleContent/Menu/VBoxContainer/Credits" to="." method="_on_Credits_pressed"]
 [connection signal="pressed" from="TitleContent/Menu/VBoxContainer/LevelSelectDebug" to="." method="_on_LevelSelectDebug_pressed"]

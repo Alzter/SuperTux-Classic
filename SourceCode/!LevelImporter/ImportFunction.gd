@@ -18,13 +18,7 @@
 extends Node
 
 func save_node_to_directory(node, dir):
-	for child in node.get_children():
-		child.owner = node
-		for baby in child.get_children():
-			baby.owner = node
-	var packed_scene = PackedScene.new()
-	packed_scene.pack(node)
-	ResourceSaver.save("res://" + str(dir), packed_scene)
+	Global.save_node_to_directory(node,dir)
 
 func get_tile_id_from_name(tile_name, tilemap_to_use):
 	var tile = tilemap_to_use.tile_set.find_tile_by_name(tile_name)

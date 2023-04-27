@@ -17,7 +17,7 @@
 
 extends Node2D
 
-export var output_directory = "IMPORTS/Level.tscn"
+export var output_directory = "res://IMPORTS/Level.tscn"
 
 onready var tilemap = null
 onready var import = null
