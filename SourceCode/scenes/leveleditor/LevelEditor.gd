@@ -31,14 +31,6 @@ func _ready():
 	window_resized()
 	
 	load_level_from_path(level_to_load)
-	
-	var tile = 10
-	
-	var tilemap = level_objects[2]
-	place_tile(tilemap, Vector2(7,11), tile)
-	
-	var tile_rect = Rect2(Vector2(4,4), Vector2(4,4))
-	fill_tile_rect(tilemap, tile_rect, tile)
 
 func _process(delta):
 	if !level: return
@@ -67,28 +59,6 @@ func enter_edit_mode():
 	Scoreboard.hide()
 	if ui_editor: ui_editor.show()
 	Music.stop_all()
-
-# ===================================================================================
-# Tile placement
-
-func fill_tile_rect(tilemap : TileMap, rect : Rect2, tile_id : int, update_autotile = true):
-	for y in rect.size.y:
-		for x in rect.size.x:
-			var tile_coords = rect.position + Vector2(x,y)
-			place_tile(tilemap, tile_coords, tile_id, false)
-	
-	if update_autotile:
-		tilemap.update_bitmask_region(rect.position, rect.end)
-
-func erase_tile_rect(tilemap : TileMap, rect : Rect2, update_autotile = true):
-	fill_tile_rect(tilemap, rect, -1, update_autotile)
-
-func place_tile(tilemap : TileMap, tile_position : Vector2, tile_id : int, update_autotile = true):
-	tilemap.set_cellv(tile_position, tile_id)
-	if update_autotile: tilemap.update_bitmask_area(tile_position)
-
-func erase_tile(tilemap : TileMap, tile_position : Vector2, update_autotile = true):
-	place_tile(tilemap, tile_position, -1, update_autotile)
 
 # ==================================================================================
 # Level loading

@@ -17,17 +17,50 @@ func _process(delta):
 	update()
 	
 	if selected_tilemap:
-		var mouse_pos = get_global_mouse_position()
-		selected_tile_position = selected_tilemap.world_to_map(mouse_pos)
-		
 		tile_selection.show()
-		tile_selection.position = selected_tilemap.map_to_world(selected_tile_position)
-		tile_selection.position += selected_tilemap.cell_size * 0.5
+		update_selected_tile()
 	else:
 		tile_selection.hide()
 
-# Don't ask me how this works. Don't ask me why this works.
+func update_selected_tile():
+	var mouse_pos = get_global_mouse_position()
+	selected_tile_position = selected_tilemap.world_to_map(mouse_pos)
+	tile_selection.position = selected_tilemap.map_to_world(selected_tile_position)
+	tile_selection.position += selected_tilemap.cell_size * 0.5
 
+func _input(event):
+	if selected_tilemap:
+		if event is InputEventMouseButton:
+			if event.button_index == BUTTON_LEFT and event.pressed:
+				place_tile(selected_tilemap, selected_tile_position, 10)
+
+# ===================================================================================
+# Tile placement
+
+func place_tile(tilemap : TileMap, tile_position : Vector2, tile_id : int, update_autotile = true):
+	tilemap.set_cellv(tile_position, tile_id)
+	if update_autotile: tilemap.update_bitmask_area(tile_position)
+
+func erase_tile(tilemap : TileMap, tile_position : Vector2, update_autotile = true):
+	place_tile(tilemap, tile_position, -1, update_autotile)
+
+func fill_tile_rect(tilemap : TileMap, rect : Rect2, tile_id : int, update_autotile = true):
+	for y in rect.size.y:
+		for x in rect.size.x:
+			var tile_coords = rect.position + Vector2(x,y)
+			place_tile(tilemap, tile_coords, tile_id, false)
+	
+	if update_autotile:
+		tilemap.update_bitmask_region(rect.position, rect.end)
+
+func erase_tile_rect(tilemap : TileMap, rect : Rect2, update_autotile = true):
+	fill_tile_rect(tilemap, rect, -1, update_autotile)
+
+
+# =================================================================================
+# DRAW GRID
+
+# Draws a tile grid if a tilemap is selected.
 func _draw():
 	var tilemap = selected_tilemap
 	if !tilemap: return
