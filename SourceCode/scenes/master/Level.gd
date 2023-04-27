@@ -44,7 +44,14 @@ onready var custom_camera = get_node_or_null("Camera2D")
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	if self == Global.current_scene:
+		activate_objectmaps()
 		start_level()
+
+func activate_objectmaps():
+	for node in get_children():
+		if node.is_in_group("objectmaps"):
+			if node.has_method("tiles_to_objects"):
+				node.tiles_to_objects()
 
 func start_level():
 	ResolutionManager.connect("window_resized", self, "window_resized")
