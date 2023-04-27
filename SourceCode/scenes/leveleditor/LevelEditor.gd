@@ -9,7 +9,7 @@ export var layer_button_scene : PackedScene
 
 onready var ui_scale = $UI/Scale
 onready var ui_editor = $UI/Scale/EditorUI
-onready var layers_container = $UI/Scale/EditorUI/LayersPanelOffset/LayersPanel/LayersContainer
+onready var layers_container = $UI/Scale/EditorUI/LayersPanelOffset/LayersPanel/ScrollContainer/LayersContainer
 
 onready var cache_level_path = cache_level_directory + cache_level_filename
 

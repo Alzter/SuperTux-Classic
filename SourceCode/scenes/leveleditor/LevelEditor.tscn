@@ -153,13 +153,20 @@ margin_bottom = 112.0
 focus_mode = 0
 text = "+"
 
-[node name="LayersContainer" type="HBoxContainer" parent="UI/Scale/EditorUI/LayersPanelOffset/LayersPanel"]
+[node name="ScrollContainer" type="ScrollContainer" parent="UI/Scale/EditorUI/LayersPanelOffset/LayersPanel"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 89.0
-margin_top = 12.0
+margin_top = 10.0
 margin_right = -13.0
-margin_bottom = -12.0
+margin_bottom = -10.0
+scroll_vertical_enabled = false
+
+[node name="LayersContainer" type="HBoxContainer" parent="UI/Scale/EditorUI/LayersPanelOffset/LayersPanel/ScrollContainer"]
+margin_right = 953.0
+margin_bottom = 100.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
 custom_constants/separation = 15
 alignment = 1
 
