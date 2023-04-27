@@ -43,6 +43,10 @@ onready var custom_camera = get_node_or_null("Camera2D")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	if self == Global.current_scene:
+		start_level()
+
+func start_level():
 	ResolutionManager.connect("window_resized", self, "window_resized")
 	Scoreboard.show()
 	WorldmapManager.is_level_worldmap = is_worldmap

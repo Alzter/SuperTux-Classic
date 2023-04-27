@@ -74,7 +74,9 @@ var tile_entities = {
 var entity_offset = Vector2(16, 16)
 
 func _ready():
-	if !enabled: return
+	tiles_to_objects()
+
+func tiles_to_objects():
 	# Iterate through all used Tile IDS
 	for id in tile_ids:
 		var tile_name = tile_set.tile_get_name(id)
