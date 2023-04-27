@@ -17,7 +17,8 @@ var level = null
 var level_objects = null
 var object_map = null
 
-var selected_object = null
+var selected_object = null setget update_selected_object
+var selected_object_name = ""
 
 var edit_mode = true
 
@@ -45,20 +46,21 @@ func toggle_edit_mode():
 		enter_play_mode()
 	else:
 		enter_edit_mode()
+	edit_mode = !edit_mode
+	update_tilemap_opacity()
 
 func enter_play_mode():
+	self.selected_object = null
 	if !level: return
 	create_level_cache()
 	if ui_editor: ui_editor.hide()
 	level.start_level(false)
-	edit_mode = false
 
 func enter_edit_mode():
 	if !level: return
 	load_level_from_path(cache_level_path)
 	Scoreboard.hide()
 	if ui_editor: ui_editor.show()
-	edit_mode = true
 	Music.stop_all()
 
 # ===================================================================================
@@ -102,17 +104,26 @@ func load_level_from_object(level_object: Node2D):
 func initialise_level(level_object):
 	level = level_object
 	level_objects = level_object.get_children()
+	
+	populate_layers_panel(level_objects)
+	
 	object_map = null
 	for node in level_objects:
 		if node.is_in_group("objectmaps"):
 			object_map = node
 			break
-	populate_layers_panel(level_objects)
+		
+		if node.name == selected_object_name:
+			self.selected_object = node
+	
+	update_tilemap_opacity()
 
 func create_level_cache():
+	make_all_tilemaps_opaque()
 	var dir = Directory.new()
 	dir.make_dir_recursive(cache_level_directory)
 	Global.save_node_to_directory(level, cache_level_path)
+	update_tilemap_opacity()
 
 # Fills the layers panel with all layers in the current level
 func populate_layers_panel(level_objects):
@@ -123,7 +134,7 @@ func populate_layers_panel(level_objects):
 		layer.free()
 	
 	for node in level_objects:
-		if node.is_in_group("objectmaps"): continue
+		#if node.is_in_group("objectmaps"): continue
 		var button = layer_button_scene.instance()
 		layers_container.add_child(button)
 		button.text = node.name
@@ -151,7 +162,37 @@ func set_ui_scale(scale):
 	ui_scale.anchor_right = 1 / scale
 
 func layer_button_pressed(button_node, layer_object):
-	selected_object = layer_object
+	self.selected_object = layer_object
+
+func update_selected_object(new_value):
+	selected_object = new_value
+	if selected_object:
+		selected_object_name = selected_object.name
 	
 	for button in layers_container.get_children():
 		button.disabled = button.layer_object == selected_object
+	
+	update_tilemap_opacity()
+
+func update_tilemap_opacity():
+	if selected_object and edit_mode:
+		if selected_object is TileMap:
+			make_non_selected_tilemaps_transparent()
+		else:
+			make_all_tilemaps_opaque()
+	else:
+		make_all_tilemaps_opaque()
+
+func make_non_selected_tilemaps_transparent():
+	for child in level_objects:
+		if !is_instance_valid(child): continue
+		if child is TileMap:
+			if selected_object != child:
+				child.modulate.a = 0.25
+			else: child.modulate.a = 1
+
+func make_all_tilemaps_opaque():
+	for child in level_objects:
+		if !is_instance_valid(child): continue
+		if child is TileMap:
+			child.modulate.a = 1

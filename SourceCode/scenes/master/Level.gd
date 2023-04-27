@@ -41,6 +41,8 @@ export var worldmap_player_object : PackedScene
 
 onready var custom_camera = get_node_or_null("Camera2D")
 
+signal level_ready
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	if self == Global.current_scene:
