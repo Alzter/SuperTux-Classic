@@ -5,13 +5,14 @@ export var level_to_load = "res://scenes/levels/world1/level1.tscn"
 export var cache_level_directory = "user://leveleditor/"
 export var cache_level_filename = "cache.tscn"
 
-export var layer_button_scene : PackedScene
+onready var tile_functions = $TileFunctions
+onready var editor_camera = $EditorCamera
 
 onready var ui_scale = $UI/Scale
 onready var ui_editor = $UI/Scale/EditorUI
 onready var layers_container = $UI/Scale/EditorUI/LayersPanelOffset/LayersPanel/ScrollContainer/LayersContainer
 
-onready var tile_functions = $TileFunctions
+export var layer_button_scene : PackedScene
 
 onready var cache_level_path = cache_level_directory + cache_level_filename
 
@@ -47,6 +48,7 @@ func toggle_edit_mode():
 	update_tilemap_opacity()
 
 func enter_play_mode():
+	editor_camera.current = false
 	self.selected_object = null
 	if !level: return
 	create_level_cache()
@@ -54,6 +56,10 @@ func enter_play_mode():
 	level.start_level(false)
 
 func enter_edit_mode():
+	if Global.player:
+		editor_camera.position = Global.player.global_position
+	editor_camera.current = true
+	
 	if !level: return
 	load_level_from_path(cache_level_path)
 	Scoreboard.hide()

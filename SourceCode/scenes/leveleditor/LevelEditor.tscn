@@ -109,6 +109,12 @@ script = ExtResource( 2 )
 level_to_load = "res://scenes/leveleditor/samplelevel.tscn"
 layer_button_scene = ExtResource( 4 )
 
+[node name="EditorCamera" type="Camera2D" parent="."]
+offset = Vector2( 32, 0 )
+limit_left = 0
+limit_top = 0
+limit_bottom = 480
+
 [node name="TileFunctions" type="Node2D" parent="."]
 z_index = 4096
 z_as_relative = false
@@ -218,9 +224,6 @@ margin_top = -119.0
 focus_mode = 0
 theme = ExtResource( 1 )
 text = "PLAY"
-
-[node name="Camera2D" type="Camera2D" parent="."]
-current = true
 
 [connection signal="pressed" from="UI/Scale/EditorUI/LayersPanelOffset/LayersPanel/RetractTab" to="UI/Scale/EditorUI/LayersPanelOffset" method="_on_RetractTab_pressed"]
 [connection signal="pressed" from="UI/Scale/EditorUI/TilesPanelOffset/TilesPanel/RetractTab" to="UI/Scale/EditorUI/TilesPanelOffset" method="_on_RetractTab_pressed"]
