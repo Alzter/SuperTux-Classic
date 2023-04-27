@@ -1,6 +1,6 @@
 extends Control
 
-onready var level_to_load = "res://scenes/levels/world1/level1.tscn"
+export var level_to_load = "res://scenes/levels/world1/level1.tscn"
 
 var level = null
 var level_objects = null
@@ -14,13 +14,25 @@ func _ready():
 	
 	var tilemap = level_objects[2]
 	place_tile(tilemap, Vector2(7,11), 10)
+	
+	var tile_rect = Rect2(Vector2(4,4), Vector2(4,4))
+	fill_tile_rect(tilemap, tile_rect, 10)
 
-func place_tile(tilemap : TileMap, tile_position : Vector2, tile_id : int):
+# ===================================================================================
+# Tile placement
+
+func fill_tile_rect(tilemap : TileMap, rect : Rect2, tile_id : int, update_autotile = true):
+	place_tile(tilemap, rect.position, tile_id)
+
+func place_tile(tilemap : TileMap, tile_position : Vector2, tile_id : int, update_autotile = true):
 	tilemap.set_cellv(tile_position, tile_id)
-	tilemap.update_bitmask_area(tile_position)
+	if update_autotile: tilemap.update_bitmask_area(tile_position)
 
 func erase_tile(tilemap : TileMap, tile_position : Vector2):
 	place_tile(tilemap, tile_position, -1)
+
+# ==================================================================================
+# Level loading
 
 func load_level_from_path(level_path: String):
 	var level_object = load(level_path).instance()

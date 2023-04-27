@@ -385,6 +385,7 @@ contents_big = ExtResource( 7 )
 material = SubResource( 12 )
 frames = SubResource( 1 )
 animation = "Bonus"
+frame = 7
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -446,6 +447,7 @@ process_material = ExtResource( 22 )
 texture = SubResource( 8 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+pause_mode = 2
 autoplay = "default"
 anims/coin = SubResource( 11 )
 anims/default = SubResource( 9 )
