@@ -1,20 +1,32 @@
 extends Node2D
 
-# Draws a grid for the currently selected tilemap
+onready var tile_selection = $SelectedTile
+
+# Draws a grid for the currently selected tilemap,
+# and sets the currently selected tile in the editor.
 
 export var grid_color = Color(0,0,0,0.5)
 var selected_tilemap = null
+var selected_tile_position = Vector2()
 
 func _ready():
 	set_process(true)
 
 func _process(delta):
 	update()
+	
+	if selected_tilemap:
+		var mouse_pos = get_global_mouse_position()
+		selected_tile_position = selected_tilemap.world_to_map(mouse_pos)
+		
+		tile_selection.position = selected_tilemap.map_to_world(selected_tile_position)
+		tile_selection.position += selected_tilemap.cell_size * 0.5
+
+# Don't ask me how this works. Don't ask me why this works.
 
 func _draw():
 	var tilemap = selected_tilemap
 	if !tilemap: return
-	
 	
 	var tilemap_rect = tilemap.get_used_rect()
 	var tilemap_cell_size = tilemap.cell_size
@@ -26,8 +38,6 @@ func _draw():
 	edge_position += tilemap_cell_size
 	
 	global_position = tilemap.global_position
-	
-	print(edge_position)
 	
 	var res = ResolutionManager.window_size
 	

@@ -1,4 +1,4 @@
-extends Node
+extends Control
 
 export var level_to_load = "res://scenes/levels/world1/level1.tscn"
 
@@ -11,7 +11,7 @@ onready var ui_scale = $UI/Scale
 onready var ui_editor = $UI/Scale/EditorUI
 onready var layers_container = $UI/Scale/EditorUI/LayersPanelOffset/LayersPanel/ScrollContainer/LayersContainer
 
-onready var grid = $TilemapGrid
+onready var tilemap_functions = $TilemapFunctions
 
 onready var cache_level_path = cache_level_directory + cache_level_filename
 
@@ -39,6 +39,9 @@ func _ready():
 	
 	var tile_rect = Rect2(Vector2(4,4), Vector2(4,4))
 	fill_tile_rect(tilemap, tile_rect, tile)
+
+func _process(delta):
+	if !level: return
 
 # =================================================================
 # Toggle Edit Mode
@@ -177,8 +180,8 @@ func update_selected_object(new_value):
 	update_tilemap_opacity()
 	
 	if is_tilemap(selected_object):
-		grid.selected_tilemap = selected_object
-	else: grid.selected_tilemap = null
+		tilemap_functions.selected_tilemap = selected_object
+	else: tilemap_functions.selected_tilemap = null
 
 func update_tilemap_opacity():
 	if selected_object and edit_mode:
