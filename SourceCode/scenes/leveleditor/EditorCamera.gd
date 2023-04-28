@@ -1,6 +1,6 @@
 extends Camera2D
 
-export var move_speed = 15.0
+export var move_speed = 128.0
 export var mouse_drag_strength = 1.0
 export var zoom_speed = 0.1
 
@@ -34,6 +34,7 @@ func camera_to_player_position(player : KinematicBody2D):
 	
 	position = player.position
 	position.y = limit_top + ResolutionManager.window_resolution.y * 0.5
+	zoom = Vector2.ONE
 
 func _process(delta):
 	var cam_zoom = Vector2(get_global_transform_with_canvas().x.x, get_global_transform_with_canvas().y.y)
@@ -47,7 +48,7 @@ func _process(delta):
 	var edge_top = limit_top + ResolutionManager.window_resolution.y * 0.5 * zoom.y
 	var edge_left = limit_left + ResolutionManager.window_resolution.x * 0.5 * zoom.x
 	
-	velocity += mouse_motion / cam_zoom * 1.0
+	velocity += mouse_motion / cam_zoom * 2.0
 	
 	position += velocity * delta * 60
 	
