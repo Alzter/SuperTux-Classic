@@ -60,8 +60,8 @@ func enter_play_mode():
 	level.start_level(false)
 
 func enter_edit_mode():
-	if Global.player:
-		editor_camera.camera_to_player_position(Global.player)
+	if level and Global.player:
+		editor_camera.camera_to_player_position(Global.player, level.is_worldmap)
 	editor_camera.current = true
 	
 	if !level: return

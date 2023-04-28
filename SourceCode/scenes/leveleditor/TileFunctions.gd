@@ -24,8 +24,6 @@ func update_level_boundaries(level : Node2D):
 	level_boundaries = Rect2(Vector2.ZERO, Vector2.ONE * 999999999999999)
 	if !level.is_worldmap:
 		level_boundaries.end.y = level.level_height
-	
-	print(level_boundaries)
 
 func _process(delta):
 	update()

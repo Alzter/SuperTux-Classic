@@ -39,6 +39,7 @@ var stop_tiles = [186]
 
 # Set the player camera boundaries to the boundaries of the largest tilemap
 func _ready():
+	Global.player = self
 	ResolutionManager.connect("window_resized", self, "window_resized")
 	window_resized()
 	if tilemaps == []: push_error("Worldmap player node cannot access any tilemaps in the worldmap")

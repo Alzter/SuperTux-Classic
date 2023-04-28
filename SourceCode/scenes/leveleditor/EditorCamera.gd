@@ -33,11 +33,11 @@ func _input(event):
 		if dragging_camera:
 			mouse_motion = event.relative * -1 * mouse_drag_strength
 
-func camera_to_player_position(player : KinematicBody2D):
+func camera_to_player_position(player : Node2D, worldmap = false):
 	if !player: return
 	
 	position = player.position
-	position.y = limit_top + ResolutionManager.window_resolution.y * 0.5
+	if !worldmap: position.y = limit_top + ResolutionManager.window_resolution.y * 0.5
 	zoom = Vector2.ONE
 
 func _process(delta):
