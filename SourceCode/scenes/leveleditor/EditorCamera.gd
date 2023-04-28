@@ -1,6 +1,6 @@
 extends Camera2D
 
-export var move_speed = 128.0
+export var move_speed = 32.0
 export var mouse_drag_strength = 1.0
 export var zoom_speed = 0.1
 
@@ -52,9 +52,9 @@ func _process(delta):
 	var edge_top = limit_top + ResolutionManager.window_resolution.y * 0.5 * zoom.y
 	var edge_left = limit_left + ResolutionManager.window_resolution.x * 0.5 * zoom.x
 	
-	velocity += mouse_motion / cam_zoom * 2.0
+	velocity += mouse_motion / cam_zoom
 	
-	position += velocity * delta * 60
+	position += velocity
 	
 	position.x = max(position.x, edge_left)
 	position.y = clamp(position.y, edge_top, limit_bottom)

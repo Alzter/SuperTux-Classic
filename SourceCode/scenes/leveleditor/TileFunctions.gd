@@ -55,19 +55,25 @@ func _input(event):
 # ===================================================================================
 # Tile placement
 
-func place_tile(tilemap : TileMap, tile_position : Vector2, tile_id : int, update_autotile = true):
-	if !is_tile_position_legal(tile_position): return
+func place_tile(tilemap : TileMap, tile_position : Vector2, tile_id : int, update_autotile = true, ignore_bounds = false):
+	if !is_tile_position_legal(tile_position) and !ignore_bounds: return
 	tilemap.set_cellv(tile_position, tile_id)
 	if update_autotile: tilemap.update_bitmask_area(tile_position)
+	
+	# EDGE TILE HANDLING
+	# If we draw a tile at the bottom of the tilemap, automatically fill it
+	if tile_position.y == level_boundaries.end.y - 1:
+		var fill_rect = Rect2(tile_position + Vector2.DOWN, Vector2(1, 30))
+		fill_tile_rect(tilemap, fill_rect, tile_id, true, true)
 
 func erase_tile(tilemap : TileMap, tile_position : Vector2, update_autotile = true):
 	place_tile(tilemap, tile_position, -1, update_autotile)
 
-func fill_tile_rect(tilemap : TileMap, rect : Rect2, tile_id : int, update_autotile = true):
+func fill_tile_rect(tilemap : TileMap, rect : Rect2, tile_id : int, update_autotile = true, ignore_bounds = false):
 	for y in rect.size.y:
 		for x in rect.size.x:
 			var tile_coords = rect.position + Vector2(x,y)
-			place_tile(tilemap, tile_coords, tile_id, false)
+			place_tile(tilemap, tile_coords, tile_id, false, ignore_bounds)
 	
 	if update_autotile:
 		tilemap.update_bitmask_region(rect.position, rect.end)
