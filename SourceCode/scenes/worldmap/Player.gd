@@ -70,6 +70,7 @@ func _process(delta):
 	if tilemaps == []: push_error("Worldmap player node cannot access any tilemaps in the worldmap")
 	
 	for t in tilemaps:
+		if !is_instance_valid(t): continue # Thanks for that.
 		var tilemap : TileMap = t
 		var tile_position = tilemap.world_to_map(position)
 		var occupied_tile_id = tilemap.get_cellv(tile_position) # The ID of the tile the player is standing on.
