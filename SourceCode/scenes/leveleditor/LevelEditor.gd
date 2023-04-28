@@ -57,7 +57,7 @@ func enter_play_mode():
 
 func enter_edit_mode():
 	if Global.player:
-		editor_camera.position = Global.player.global_position
+		editor_camera.camera_to_player_position(Global.player)
 	editor_camera.current = true
 	
 	if !level: return
