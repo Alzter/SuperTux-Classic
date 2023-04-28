@@ -193,5 +193,4 @@ func is_objectmap(node):
 	return node is TileMap and node.is_in_group("objectmaps")
 
 func set_camera_drag(is_dragging = true):
-	print(is_dragging)
 	can_place_tiles = !is_dragging
