@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://theme/default_theme.tres" type="Theme" id=1]
 [ext_resource path="res://scenes/leveleditor/LevelEditor.gd" type="Script" id=2]
@@ -7,6 +7,8 @@
 [ext_resource path="res://scenes/leveleditor/TileFunctions.gd" type="Script" id=5]
 [ext_resource path="res://images/editor/GridCursor.png" type="Texture" id=6]
 [ext_resource path="res://scenes/leveleditor/EditorCamera.gd" type="Script" id=7]
+[ext_resource path="res://scenes/leveleditor/TileButton.tscn" type="PackedScene" id=8]
+[ext_resource path="res://scenes/leveleditor/TilesContainer.gd" type="Script" id=9]
 
 [sub_resource type="Animation" id=1]
 resource_name = "default"
@@ -216,6 +218,22 @@ margin_left = -43.0
 margin_top = 1.0
 margin_bottom = 97.0
 focus_mode = 0
+
+[node name="ScrollContainer" type="ScrollContainer" parent="UI/Scale/EditorUI/TilesPanelOffset/TilesPanel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 16.0
+margin_top = 16.0
+margin_right = -16.0
+margin_bottom = -16.0
+scroll_horizontal_enabled = false
+
+[node name="TilesContainer" type="GridContainer" parent="UI/Scale/EditorUI/TilesPanelOffset/TilesPanel/ScrollContainer"]
+margin_right = 193.0
+size_flags_horizontal = 3
+columns = 4
+script = ExtResource( 9 )
+tile_button_scene = ExtResource( 8 )
 
 [node name="EditToggle" type="Button" parent="UI/Scale"]
 anchor_left = 1.0

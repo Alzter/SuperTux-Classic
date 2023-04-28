@@ -10,6 +10,7 @@ onready var editor_camera = $EditorCamera
 
 onready var ui_scale = $UI/Scale
 onready var ui_editor = $UI/Scale/EditorUI
+onready var tiles_container = $UI/Scale/EditorUI/TilesPanelOffset/TilesPanel/ScrollContainer/TilesContainer
 onready var layers_container = $UI/Scale/EditorUI/LayersPanelOffset/LayersPanel/ScrollContainer/LayersContainer
 
 export var layer_button_scene : PackedScene
@@ -162,7 +163,10 @@ func update_selected_object(new_value):
 	
 	if is_tilemap(selected_object):
 		tile_functions.selected_tilemap = selected_object
-	else: tile_functions.selected_tilemap = null
+		tiles_container.show_tiles_from_tilemap(selected_object)
+	else:
+		tile_functions.selected_tilemap = null
+		tiles_container.empty_tiles()
 
 func update_tilemap_opacity():
 	if selected_object and edit_mode:
