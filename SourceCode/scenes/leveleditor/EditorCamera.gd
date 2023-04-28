@@ -17,11 +17,15 @@ func _input(event):
 		emit_signal("set_camera_drag", dragging_camera)
 		if !dragging_camera: mouse_motion = Vector2.ZERO
 	
-	if event.is_action_pressed("editor_zoom_in"):
-		zoom -= Vector2.ONE * zoom_speed
+	if event.is_action_pressed("editor_zoom_in") or event.is_action_pressed("editor_zoom_out"):
+		var zoom_factor = 1 if event.is_action_pressed("editor_zoom_in") else -1
+		zoom -= Vector2.ONE * zoom_speed * zoom_factor
+		
+		var mouse_pos = get_viewport().get_mouse_position()
+		var mouse_pos_relative_to_center_of_screen = mouse_pos - ResolutionManager.window_resolution * Vector2(0.5,0.5)
+		
+		position += (mouse_pos_relative_to_center_of_screen * zoom_factor) * zoom_speed
 	
-	if event.is_action_pressed("editor_zoom_out"):
-		zoom += Vector2.ONE * zoom_speed
 	
 	# If a mouse movement is detected and we are in camera drag mode,
 	# move the camera by the mouse's relative movement * the specified mouse drag strength

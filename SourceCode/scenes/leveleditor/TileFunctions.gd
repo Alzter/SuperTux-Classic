@@ -79,7 +79,7 @@ func _draw():
 	
 	var zoom = Vector2(get_global_transform_with_canvas().x.x, get_global_transform_with_canvas().y.y)
 	
-	var edge_position = get_global_transform_with_canvas().origin * ResolutionManager.screen_shrink / zoom
+	var edge_position = get_global_transform_with_canvas().origin / zoom
 	edge_position -= Vector2(fmod(edge_position.x, tilemap_cell_size.x), fmod(edge_position.y, tilemap_cell_size.y))
 	edge_position += tilemap_cell_size
 	
