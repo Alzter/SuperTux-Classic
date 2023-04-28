@@ -1,11 +1,26 @@
 extends Camera2D
 
-export var move_speed = 15
+export var move_speed = 15.0
+export var mouse_drag_strength = 1.0
 
+signal set_camera_drag(is_dragging)
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
+var mouse_motion = Vector2.ZERO
+var dragging_camera = false
+
+func _input(event):
+	# If we press the spacebar, enable camera drag mode.
+	# This allows the camera to be moved by moving the mouse.
+	if event.is_action("editor_move_camera"):
+		dragging_camera = event.is_action_pressed("editor_move_camera", true)
+		emit_signal("set_camera_drag", dragging_camera)
+		if !dragging_camera: mouse_motion = Vector2.ZERO
+	
+	# If a mouse movement is detected and we are in camera drag mode,
+	# move the camera by the mouse's relative movement * the specified mouse drag strength
+	if event is InputEventMouseMotion:
+		if dragging_camera:
+			mouse_motion = event.relative * -1 * mouse_drag_strength
 
 func camera_to_player_position(player : KinematicBody2D):
 	if !player: return
@@ -22,7 +37,8 @@ func _process(delta):
 	
 	var edge_top = limit_top + ResolutionManager.window_resolution.y * 0.5
 	var edge_left = limit_left + ResolutionManager.window_resolution.x * 0.5
-	print(edge_top)
+	
+	velocity += mouse_motion
 	
 	position += velocity * delta * 60
 	

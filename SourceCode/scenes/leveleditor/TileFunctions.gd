@@ -13,19 +13,21 @@ var current_tile_id = -1
 
 var placing_tiles = false
 
+var can_place_tiles = true
+
 func _ready():
 	set_process(true)
 
 func _process(delta):
 	update()
 	
-	if selected_tilemap:
+	if selected_tilemap and owner.can_place_tiles:
 		tile_selection.show()
 		update_selected_tile()
 	else:
 		tile_selection.hide()
 	
-	if placing_tiles:
+	if placing_tiles and owner.can_place_tiles:
 		place_tile(selected_tilemap, selected_tile_position, current_tile_id)
 
 func update_selected_tile():
