@@ -102,6 +102,7 @@ func initialise_level(level_object):
 			self.selected_object = node
 	
 	update_tilemap_opacity()
+	tile_functions.update_level_boundaries(level)
 
 func create_level_cache():
 	make_all_tilemaps_opaque()

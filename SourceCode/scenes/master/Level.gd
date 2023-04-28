@@ -38,6 +38,7 @@ export var autoscroll_speed = 0.0
 export var starting_powerup = 0
 export var worldmap_spawn = Vector2()
 export var worldmap_player_object : PackedScene
+export var level_height = 15
 
 onready var custom_camera = get_node_or_null("Camera2D")
 

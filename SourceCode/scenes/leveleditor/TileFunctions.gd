@@ -15,8 +15,17 @@ var placing_tiles = false
 
 var can_place_tiles = true
 
+var level_boundaries = Rect2()
+
 func _ready():
 	set_process(true)
+
+func update_level_boundaries(level : Node2D):
+	level_boundaries = Rect2(Vector2.ZERO, Vector2.ONE * 999999999999999)
+	if !level.is_worldmap:
+		level_boundaries.end.y = level.level_height
+	
+	print(level_boundaries)
 
 func _process(delta):
 	update()
@@ -87,8 +96,14 @@ func _draw():
 	
 	var res = ResolutionManager.window_size
 	
+	var y_end = edge_position.y + level_boundaries.end.y * tilemap_cell_size.y
+	
+	if y_end <= 0: return
+	
 	for y in range(0, ceil(res.y / tilemap_cell_size.y / zoom.y)):
+		var y_global = y - (edge_position.y / tilemap_cell_size.y)
+		if y_global > level_boundaries.end.y: break
 		draw_line(Vector2(0, y * tilemap_cell_size.y) - edge_position, Vector2(res.x * tilemap_cell_size.x, y * tilemap_cell_size.y) - edge_position, grid_color)
-
+	
 	for x in range(0, ceil(res.x / tilemap_cell_size.x / zoom.x)):
-		draw_line(Vector2(x * tilemap_cell_size.x, 0) - edge_position, Vector2(x * tilemap_cell_size.x, res.y * tilemap_cell_size.y) - edge_position, grid_color)
+		draw_line(Vector2(x * tilemap_cell_size.x, 0) - edge_position, Vector2(x * tilemap_cell_size.x, y_end) - edge_position, grid_color)
