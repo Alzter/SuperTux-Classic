@@ -203,8 +203,7 @@ func shoot_eye_fireballs(fireball_packed_scene = fireball_scene):
 func instance_node(packedscene, global_pos):
 	var child = packedscene.instance()
 	child.global_position = global_pos
-	Global.current_scene.add_child(child)
-	return child
+	return Global.add_child_to_level(child, self)
 
 func squished():
 	disable_bounce_area()
@@ -415,6 +414,6 @@ func enable(enable = true, wait_time = 1):
 			state_machine.set_state("idle")
 
 func clear_all_enemies():
-	for node in Global.current_scene.get_children():
+	for node in Global.current_level.get_children():
 		if node.is_in_group("enemies") or node.is_in_group("fireballs"):
 			node.queue_free()

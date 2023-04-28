@@ -20,6 +20,7 @@ extends Node
 var title_screen_scene = "res://scenes/menus/TitleScreen.tscn"
 var current_scene = null
 var current_level = null
+var current_level_path = null
 
 var player = null setget player_set
 var spawn_position = null
@@ -43,7 +44,7 @@ func _ready():
 	self.gravity = 1
 	var root = get_tree().get_root()
 	current_scene = root.get_child(root.get_child_count() - 1)
-	current_level = current_scene.filename
+	current_level_path = current_scene.filename
 	
 	if !SaveManager.does_options_data_exist():
 		create_options_data()
@@ -57,13 +58,13 @@ func _update_gravity(new_value):
 	gravity = new_value * pow(60.0, 2.0) / 3.0
 
 func respawn_player():
-	goto_level(current_level)
+	goto_level(current_level_path)
 
 func goto_level(path, reset_checkpoint = false):
-	if path != current_level or reset_checkpoint:
+	if path != current_level_path or reset_checkpoint:
 		spawn_position = null
 	
-	if path != current_level: Scoreboard.number_of_deaths = 0
+	if path != current_level_path: Scoreboard.number_of_deaths = 0
 	
 	goto_scene(path)
 
@@ -78,6 +79,7 @@ func _deferred_goto_scene(path, loading_level = false):
 	Engine.time_scale = 1;
 	# It is now safe to remove the current scene
 	current_scene.free()
+	current_level = null
 	player = null
 	
 	# Load the new scene.
@@ -88,7 +90,7 @@ func _deferred_goto_scene(path, loading_level = false):
 	
 	# Add it to the active scene, as child of root.
 	get_tree().get_root().add_child(current_scene)
-	current_level = current_scene.filename
+	current_level_path = current_scene.filename
 	
 	get_tree().paused = false
 	emit_signal("level_loaded")
@@ -163,9 +165,19 @@ func apply_options(options_data : Dictionary):
 		AudioServer.set_bus_volume_db(4, options_data["ambience_volume"])
 		AudioServer.set_bus_volume_db(5, options_data["ambience_volume"])
 
+func add_child_to_level(child_scene, owner):
+	if current_level:
+		current_level.add_child(child_scene)
+		child_scene.set_owner(owner)
+		return child_scene
+	else:
+		push_error("Error adding child scene to level - No current level exists!")
+		return null
+
 func level_completed():
-	if current_scene.has_method("level_complete"):
-		current_scene.level_complete()
+	if current_level:
+		if current_level.has_method("level_complete"):
+			current_level.level_complete()
 
 func save_node_to_directory(node : Node, dir : String):
 	for child in node.get_children():

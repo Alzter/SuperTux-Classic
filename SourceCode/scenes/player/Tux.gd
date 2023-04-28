@@ -493,7 +493,7 @@ func shoot_fireball(bullet_to_instance = fireball_scene):
 	var b = bullet_to_instance.instance()
 	b.velocity.x = fireball_speed * facing
 	b.velocity.x += velocity.x * 0.5
-	Global.current_scene.add_child(b)
+	Global.add_child_to_level(b, self)
 	b.global_position = grab_position.global_position
 	sfx.play("Shoot")
 

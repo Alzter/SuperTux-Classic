@@ -212,8 +212,7 @@ func instance_node(packedscene, global_pos):
 	var child = packedscene.instance()
 	child.global_position = global_pos
 	if "facing" in child: child.facing = facing
-	Global.current_scene.add_child(child)
-	return child
+	return Global.add_child_to_level(child, self)
 
 
 
@@ -301,7 +300,7 @@ func fall_off_screen():
 	anim_player.play("knockout")
 
 func clear_all_enemies():
-	for node in Global.current_scene.get_children():
+	for node in Global.current_level.get_children():
 		if node.is_in_group("enemies") or node.is_in_group("fireballs"):
 			node.queue_free()
 
