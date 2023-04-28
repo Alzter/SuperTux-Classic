@@ -107,7 +107,7 @@ tracks/0/keys = {
 [node name="LevelEditor" type="Control"]
 theme = ExtResource( 1 )
 script = ExtResource( 2 )
-level_to_load = "res://scenes/leveleditor/sampleworldmap.tscn"
+level_to_load = "res://scenes/leveleditor/samplelevel.tscn"
 layer_button_scene = ExtResource( 4 )
 
 [node name="EditorCamera" type="Camera2D" parent="."]
