@@ -42,6 +42,7 @@ func _process(delta):
 func update_selected_tile():
 	var mouse_pos = get_global_mouse_position()
 	selected_tile_position = selected_tilemap.world_to_map(mouse_pos)
+	tile_selection.visible = is_tile_position_legal(selected_tile_position)
 	tile_selection.position = selected_tilemap.map_to_world(selected_tile_position)
 	tile_selection.position += selected_tilemap.cell_size * 0.5
 

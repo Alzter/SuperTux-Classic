@@ -113,7 +113,7 @@ layer_button_scene = ExtResource( 4 )
 [node name="EditorCamera" type="Camera2D" parent="."]
 offset = Vector2( 32, 0 )
 current = true
-limit_left = 0
+limit_left = -32
 limit_top = 0
 limit_smoothed = true
 script = ExtResource( 7 )
