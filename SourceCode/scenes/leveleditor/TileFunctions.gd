@@ -56,6 +56,7 @@ func _input(event):
 # Tile placement
 
 func place_tile(tilemap : TileMap, tile_position : Vector2, tile_id : int, update_autotile = true):
+	if !is_tile_position_legal(tile_position): return
 	tilemap.set_cellv(tile_position, tile_id)
 	if update_autotile: tilemap.update_bitmask_area(tile_position)
 
@@ -74,6 +75,8 @@ func fill_tile_rect(tilemap : TileMap, rect : Rect2, tile_id : int, update_autot
 func erase_tile_rect(tilemap : TileMap, rect : Rect2, update_autotile = true):
 	fill_tile_rect(tilemap, rect, -1, update_autotile)
 
+func is_tile_position_legal(tile_position : Vector2):
+	return level_boundaries.has_point(tile_position)
 
 # =================================================================================
 # DRAW GRID
