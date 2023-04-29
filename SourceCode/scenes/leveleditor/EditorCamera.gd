@@ -1,6 +1,6 @@
 extends Camera2D
 
-export var move_speed = 32.0
+export var move_speed = 16.0
 export var mouse_drag_strength = 1.0
 export var zoom_speed = 0.1
 
@@ -44,8 +44,8 @@ func _process(delta):
 	var cam_zoom = Vector2(get_global_transform_with_canvas().x.x, get_global_transform_with_canvas().y.y)
 	
 	var move_dir = Vector2()
-	move_dir.x = int(Input.is_action_pressed("move_right")) - int(Input.is_action_pressed("move_left"))
-	move_dir.y = int(Input.is_action_pressed("duck")) - int(Input.is_action_pressed("move_up"))
+	move_dir.x = int(Input.is_action_pressed("move_right") or Input.is_action_pressed("ui_right")) - int(Input.is_action_pressed("move_left") or Input.is_action_pressed("ui_left"))
+	move_dir.y = int(Input.is_action_pressed("duck") or Input.is_action_pressed("ui_down")) - int(Input.is_action_pressed("move_up") or Input.is_action_pressed("ui_up"))
 	
 	var velocity = move_dir * move_speed
 	
