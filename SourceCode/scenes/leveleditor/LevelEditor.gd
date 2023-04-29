@@ -202,7 +202,5 @@ func is_objectmap(node):
 func set_camera_drag(is_dragging = true):
 	can_place_tiles = !is_dragging
 
-func update_selected_tile(tile_button_node : Control, selected_tile_id : int):
-	print("UPdate")
+func update_selected_tile(selected_tile_id : int):
 	current_tile_id = selected_tile_id
-	print(current_tile_id)
