@@ -49,7 +49,8 @@ func _input(event):
 		if event is InputEventMouseButton:
 			if event.button_index == BUTTON_LEFT or event.button_index == BUTTON_RIGHT:
 				placing_tiles = event.pressed
-				tile_id_to_use = owner.current_tile_id if event.button_index == BUTTON_LEFT else -1
+				var is_erasing = event.button_index == BUTTON_RIGHT or owner.eraser_enabled
+				tile_id_to_use = owner.current_tile_id if !is_erasing else -1
 
 # ===================================================================================
 # Tile placement

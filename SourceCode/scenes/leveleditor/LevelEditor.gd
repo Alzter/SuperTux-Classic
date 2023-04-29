@@ -13,6 +13,12 @@ onready var ui_editor = $UI/Scale/EditorUI
 onready var tiles_container = $UI/Scale/EditorUI/TilesPanelOffset/TilesPanel/ScrollContainer/TilesContainer
 onready var layers_container = $UI/Scale/EditorUI/LayersPanelOffset/LayersPanel/ScrollContainer/LayersContainer
 
+var rect_select_enabled = false setget update_rect_select_enabled
+var eraser_enabled = false setget update_eraser_enabled
+
+onready var button_rect_select = $UI/Scale/EditorUI/TilesPanelOffset/TilesPanel/Buttons/RectSelect
+onready var button_eraser = $UI/Scale/EditorUI/TilesPanelOffset/TilesPanel/Buttons/Eraser
+
 export var layer_button_scene : PackedScene
 
 onready var cache_level_path = cache_level_directory + cache_level_filename
@@ -204,3 +210,17 @@ func set_camera_drag(is_dragging = true):
 
 func update_selected_tile(selected_tile_id : int):
 	current_tile_id = selected_tile_id
+
+func _on_Eraser_toggled(button_pressed):
+	eraser_enabled = button_pressed
+	emit_signal("eraser_toggled", button_pressed)
+
+func _on_RectSelect_toggled(button_pressed):
+	rect_select_enabled = button_pressed
+	emit_signal("rect_select_toggled", button_pressed)
+
+func update_rect_select_enabled(new_value):
+	button_rect_select.pressed = new_value
+
+func update_eraser_enabled(new_value):
+	button_eraser.pressed = new_value
