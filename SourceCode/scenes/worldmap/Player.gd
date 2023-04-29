@@ -212,7 +212,6 @@ func set_current_level_dot(new_value, sound = true):
 		
 		if current_level_dot.level_file_path != "":
 			if not Global.cached_level_names.has(current_level_dot.level_file_path):
-				print(current_level_dot.level_file_path)
 				var scene_instance = load(current_level_dot.level_file_path).instance()
 				level_name = scene_instance.level_title
 				scene_instance.queue_free()

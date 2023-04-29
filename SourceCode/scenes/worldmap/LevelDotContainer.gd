@@ -10,7 +10,6 @@ func _ready():
 					if not new_path.begins_with("user://"):
 						new_path = "user://contrib/" + Global.current_contrib + "/" + new_path
 					leveldot.level_file_path = new_path
-				print(leveldot.level_file_path)
 				leveldot.level_cleared = true
 		return
 	
@@ -21,6 +20,5 @@ func _ready():
 				if not new_path.begins_with("user://"):
 					new_path = "user://contrib/" + Global.current_contrib + "/" + new_path
 				leveldot.level_file_path = new_path
-			print(leveldot.level_file_path)
 			if WorldmapManager.cleared_levels.has(leveldot.level_file_path):
 				leveldot.level_cleared = true
