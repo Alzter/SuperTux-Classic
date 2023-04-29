@@ -7,12 +7,17 @@ extends Node2D
 onready var tile_selection = $SelectedTile
 
 export var grid_color = Color(0,0,0,0.5)
+export var rect_select_add_color = Color(0.1, 1, 0.1, 0.5)
+export var rect_select_erase_color = Color(1, 0.1, 0.1, 0.5)
+
 var selected_tilemap = null
 var selected_tile_position = Vector2()
 var tile_id_to_use = -1
 
 var placing_tiles = false
 var placing_rectangle_fill = false # If the user is making a rectangular fill of tiles
+var is_erasing = false
+
 var rect_fill_origin = Vector2()
 
 var can_place_tiles = true
@@ -37,9 +42,11 @@ func _process(delta):
 	if owner.can_place_tiles:
 		
 		if selected_tilemap:
-			tile_selection.show()
 			selected_tile_position = get_selected_tile()
-			update_tile_selected_sprite()
+			
+			if !placing_rectangle_fill:
+				tile_selection.show()
+				update_tile_selected_sprite()
 		
 		if placing_tiles:
 			if placing_rectangle_fill:
@@ -65,10 +72,10 @@ func _input(event):
 				placing_tiles = event.pressed
 				placing_rectangle_fill = false
 				
-				var is_erasing = event.button_index == BUTTON_RIGHT or owner.eraser_enabled
+				is_erasing = event.button_index == BUTTON_RIGHT or owner.eraser_enabled
 				tile_id_to_use = owner.current_tile_id if !is_erasing else -1
 				
-				if owner.rect_select_enabled:
+				if owner.rect_select_enabled and placing_tiles:
 					var rect_start = get_selected_tile()
 					if is_tile_position_legal(rect_start):
 						rect_fill_origin = rect_start
@@ -114,6 +121,13 @@ func _draw():
 	var tilemap = selected_tilemap
 	if !tilemap: return
 	
+	draw_tilemap_grid(tilemap)
+	if placing_rectangle_fill:
+		var rect = Rect2(rect_selection.position * tilemap.cell_size, (rect_selection.size + Vector2.ONE) * tilemap.cell_size)
+		var rect_color = rect_select_erase_color if is_erasing else rect_select_add_color
+		draw_rect(rect, rect_color, true)
+
+func draw_tilemap_grid(tilemap : TileMap):
 	var tilemap_rect = tilemap.get_used_rect()
 	var tilemap_cell_size = tilemap.cell_size
 	
