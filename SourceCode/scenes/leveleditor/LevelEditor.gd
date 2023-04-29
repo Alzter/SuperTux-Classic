@@ -97,9 +97,9 @@ func initialise_level(level_object):
 	
 	object_map = null
 	for node in level_objects:
-		if is_objectmap(node):
-			object_map = node
-			break
+		#if is_objectmap(node):
+		#	object_map = node
+		#	break
 		
 		if node.name == selected_object_name:
 			self.selected_object = node
@@ -123,7 +123,7 @@ func update_layers_panel(level_objects):
 		layer.free()
 	
 	for node in level_objects:
-		if is_objectmap(node): continue
+		#if is_objectmap(node): continue
 		var button = layer_button_scene.instance()
 		layers_container.add_child(button)
 		button.text = node.name
@@ -194,7 +194,7 @@ func make_all_tilemaps_opaque():
 			child.modulate.a = 1
 
 func is_tilemap(node):
-	return node is TileMap and not node.is_in_group("objectmaps")
+	return node is TileMap# and not node.is_in_group("objectmaps")
 
 func is_objectmap(node):
 	return node is TileMap and node.is_in_group("objectmaps")

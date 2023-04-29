@@ -15,6 +15,7 @@ func show_tiles_from_tilemap(tilemap : TileMap):
 	# If we're already using the tileset, don't repopulatie the tiles container
 	if current_tileset == tileset: return
 	
+	empty_tiles()
 	current_tileset = tileset
 	
 	var tile_ids = tileset.get_tiles_ids()
