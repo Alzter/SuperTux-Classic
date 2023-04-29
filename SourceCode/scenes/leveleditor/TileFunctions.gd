@@ -9,7 +9,7 @@ onready var tile_selection = $SelectedTile
 export var grid_color = Color(0,0,0,0.5)
 var selected_tilemap = null
 var selected_tile_position = Vector2()
-var current_tile_id = -1
+var tile_id_to_use = -1
 
 var placing_tiles = false
 
@@ -35,7 +35,7 @@ func _process(delta):
 		tile_selection.hide()
 	
 	if placing_tiles and owner.can_place_tiles:
-		place_tile(selected_tilemap, selected_tile_position, current_tile_id)
+		place_tile(selected_tilemap, selected_tile_position, tile_id_to_use)
 
 func update_selected_tile():
 	var mouse_pos = get_global_mouse_position()
@@ -49,7 +49,7 @@ func _input(event):
 		if event is InputEventMouseButton:
 			if event.button_index == BUTTON_LEFT or event.button_index == BUTTON_RIGHT:
 				placing_tiles = event.pressed
-				current_tile_id = 10 if event.button_index == BUTTON_LEFT else -1
+				tile_id_to_use = owner.current_tile_id if event.button_index == BUTTON_LEFT else -1
 
 # ===================================================================================
 # Tile placement

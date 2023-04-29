@@ -23,6 +23,7 @@ func show_tiles_from_tilemap(tilemap : TileMap):
 		tile_button.tileset = current_tileset
 		add_child(tile_button)
 		tile_button.set_owner(self)
+		tile_button.connect("tile_button_pressed", self, "update_selected_tile")
 
 # Empties all tiles in the tile container
 func empty_tiles():
@@ -30,3 +31,7 @@ func empty_tiles():
 	
 	for tile_button in get_children():
 		tile_button.queue_free()
+
+func update_selected_tile(tile_button_node : Control, selected_tile_id : int):
+	for tile_button in get_children():
+		tile_button.disabled = tile_button.tile_id == selected_tile_id

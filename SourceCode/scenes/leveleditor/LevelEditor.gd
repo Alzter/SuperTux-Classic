@@ -23,6 +23,7 @@ var object_map = null
 
 var selected_object = null setget update_selected_object
 var selected_object_name = ""
+var current_tile_id = -1 # The ID of the tile the user is currently using
 
 var edit_mode = true
 
@@ -32,6 +33,7 @@ func _ready():
 	Scoreboard.hide()
 	Music.stop_all()
 	ResolutionManager.connect("window_resized", self, "window_resized")
+	tiles_container.connect("update_selected_tile", self, "update_selected_tile")
 	window_resized()
 	
 	editor_camera.connect("set_camera_drag", self, "set_camera_drag")
@@ -199,3 +201,8 @@ func is_objectmap(node):
 
 func set_camera_drag(is_dragging = true):
 	can_place_tiles = !is_dragging
+
+func update_selected_tile(tile_button_node : Control, selected_tile_id : int):
+	print("UPdate")
+	current_tile_id = selected_tile_id
+	print(current_tile_id)
