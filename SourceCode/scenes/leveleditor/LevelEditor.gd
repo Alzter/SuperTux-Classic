@@ -5,6 +5,8 @@ export var level_to_load = "res://scenes/levels/world1/level1.tscn"
 export var cache_level_directory = "user://leveleditor/"
 export var cache_level_filename = "cache.tscn"
 
+export var unselected_tilemap_opacity = 0.3
+
 onready var tile_functions = $TileFunctions
 onready var editor_camera = $EditorCamera
 
@@ -178,7 +180,7 @@ func update_selected_object(new_value):
 
 func update_tilemap_opacity():
 	if selected_object and edit_mode:
-		if is_tilemap(selected_object):
+		if is_tilemap(selected_object) and !is_objectmap(selected_object):
 			make_non_selected_tilemaps_transparent()
 		else:
 			make_all_tilemaps_opaque()
@@ -190,7 +192,7 @@ func make_non_selected_tilemaps_transparent():
 		if !is_instance_valid(child): continue
 		if is_tilemap(child):
 			if selected_object != child:
-				child.modulate.a = 0.25
+				child.modulate.a = unselected_tilemap_opacity
 			else: child.modulate.a = 1
 
 func make_all_tilemaps_opaque():
@@ -224,3 +226,11 @@ func update_rect_select_enabled(new_value):
 
 func update_eraser_enabled(new_value):
 	button_eraser.pressed = new_value
+
+
+func _on_TilesArea_mouse_entered():
+	print("ON")
+
+
+func _on_TilesArea_mouse_exited():
+	print("OFF")

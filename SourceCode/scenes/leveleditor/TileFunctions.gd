@@ -7,8 +7,8 @@ extends Node2D
 onready var tile_selection = $SelectedTile
 
 export var grid_color = Color(0,0,0,0.5)
-export var rect_select_add_color = Color(0.1, 1, 0.1, 0.5)
-export var rect_select_erase_color = Color(1, 0.1, 0.1, 0.5)
+export var rect_select_add_color = Color(0.1, 1, 0.1, 0.4)
+export var rect_select_erase_color = Color(1, 0.1, 0.1, 0.4)
 
 var selected_tilemap = null
 var selected_tile_position = Vector2()
@@ -68,14 +68,15 @@ func _input(event):
 	if selected_tilemap:
 		if event is InputEventMouseButton:
 			if event.button_index == BUTTON_LEFT or event.button_index == BUTTON_RIGHT:
-				
 				placing_tiles = event.pressed
 				placing_rectangle_fill = false
 				
 				is_erasing = event.button_index == BUTTON_RIGHT or owner.eraser_enabled
 				tile_id_to_use = owner.current_tile_id if !is_erasing else -1
 				
-				if owner.rect_select_enabled and placing_tiles:
+				var can_rect_fill = owner.rect_select_enabled or Input.is_action_pressed("editor_rect_select")
+				
+				if can_rect_fill and placing_tiles:
 					var rect_start = get_selected_tile()
 					if is_tile_position_legal(rect_start):
 						rect_fill_origin = rect_start
