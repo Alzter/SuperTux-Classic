@@ -12,10 +12,14 @@ var selected_tile_position = Vector2()
 var tile_id_to_use = -1
 
 var placing_tiles = false
+var placing_rectangle_fill = false # If the user is making a rectangular fill of tiles
+var rect_fill_origin = Vector2()
 
 var can_place_tiles = true
 
 var level_boundaries = Rect2()
+
+var rect_selection = Rect2()
 
 func _ready():
 	set_process(true)
@@ -28,18 +32,27 @@ func update_level_boundaries(level : Node2D):
 func _process(delta):
 	update()
 	
-	if selected_tilemap and owner.can_place_tiles:
-		tile_selection.show()
-		update_selected_tile()
-	else:
-		tile_selection.hide()
+	tile_selection.hide()
 	
-	if placing_tiles and owner.can_place_tiles:
-		place_tile(selected_tilemap, selected_tile_position, tile_id_to_use)
+	if owner.can_place_tiles:
+		
+		if selected_tilemap:
+			tile_selection.show()
+			selected_tile_position = get_selected_tile()
+			update_tile_selected_sprite()
+		
+		if placing_tiles:
+			if placing_rectangle_fill:
+				rect_selection = Rect2(rect_fill_origin, Vector2.ZERO).expand(selected_tile_position)
+				fill_tile_rect(selected_tilemap, rect_selection, tile_id_to_use)
+			else:
+				place_tile(selected_tilemap, selected_tile_position, tile_id_to_use)
 
-func update_selected_tile():
+func get_selected_tile():
 	var mouse_pos = get_global_mouse_position()
-	selected_tile_position = selected_tilemap.world_to_map(mouse_pos)
+	return selected_tilemap.world_to_map(mouse_pos)
+
+func update_tile_selected_sprite():
 	tile_selection.visible = is_tile_position_legal(selected_tile_position)
 	tile_selection.position = selected_tilemap.map_to_world(selected_tile_position)
 	tile_selection.position += selected_tilemap.cell_size * 0.5
@@ -48,9 +61,18 @@ func _input(event):
 	if selected_tilemap:
 		if event is InputEventMouseButton:
 			if event.button_index == BUTTON_LEFT or event.button_index == BUTTON_RIGHT:
+				
 				placing_tiles = event.pressed
+				placing_rectangle_fill = false
+				
 				var is_erasing = event.button_index == BUTTON_RIGHT or owner.eraser_enabled
 				tile_id_to_use = owner.current_tile_id if !is_erasing else -1
+				
+				if owner.rect_select_enabled:
+					var rect_start = get_selected_tile()
+					if is_tile_position_legal(rect_start):
+						rect_fill_origin = rect_start
+						placing_rectangle_fill = true
 
 # ===================================================================================
 # Tile placement
@@ -63,15 +85,15 @@ func place_tile(tilemap : TileMap, tile_position : Vector2, tile_id : int, updat
 	# EDGE TILE HANDLING
 	# If we draw a tile at the bottom of the tilemap, automatically fill it
 	if tile_position.y == level_boundaries.end.y - 1:
-		var fill_rect = Rect2(tile_position + Vector2.DOWN, Vector2(1, 30))
+		var fill_rect = Rect2(tile_position + Vector2.DOWN, Vector2.DOWN * 30)
 		fill_tile_rect(tilemap, fill_rect, tile_id, true, true)
 
 func erase_tile(tilemap : TileMap, tile_position : Vector2, update_autotile = true):
 	place_tile(tilemap, tile_position, -1, update_autotile)
 
 func fill_tile_rect(tilemap : TileMap, rect : Rect2, tile_id : int, update_autotile = true, ignore_bounds = false):
-	for y in rect.size.y:
-		for x in rect.size.x:
+	for y in rect.size.y + 1:
+		for x in rect.size.x + 1:
 			var tile_coords = rect.position + Vector2(x,y)
 			place_tile(tilemap, tile_coords, tile_id, false, ignore_bounds)
 	
