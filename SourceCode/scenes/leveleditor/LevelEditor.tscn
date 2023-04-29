@@ -107,10 +107,19 @@ tracks/0/keys = {
 }
 
 [node name="LevelEditor" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
 theme = ExtResource( 1 )
 script = ExtResource( 2 )
 level_to_load = "res://scenes/leveleditor/samplelevel.tscn"
 layer_button_scene = ExtResource( 4 )
+
+[node name="TileFunctions" type="Node2D" parent="."]
+script = ExtResource( 5 )
+grid_color = Color( 0, 0, 0, 0.25 )
+
+[node name="SelectedTile" type="Sprite" parent="TileFunctions"]
+texture = ExtResource( 6 )
 
 [node name="EditorCamera" type="Camera2D" parent="."]
 offset = Vector2( 32, 0 )
@@ -119,13 +128,6 @@ limit_left = -32
 limit_top = 0
 limit_smoothed = true
 script = ExtResource( 7 )
-
-[node name="TileFunctions" type="Node2D" parent="."]
-script = ExtResource( 5 )
-grid_color = Color( 0, 0, 0, 0.25 )
-
-[node name="SelectedTile" type="Sprite" parent="TileFunctions"]
-texture = ExtResource( 6 )
 
 [node name="UI" type="CanvasLayer" parent="."]
 layer = 128
@@ -136,6 +138,10 @@ anchor_bottom = 1.0
 theme = ExtResource( 1 )
 
 [node name="EditorUI" type="Control" parent="UI/Scale"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="MouseDetector" type="Control" parent="UI/Scale/EditorUI"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 
@@ -271,6 +277,8 @@ focus_mode = 0
 theme = ExtResource( 1 )
 text = "PLAY"
 
+[connection signal="mouse_entered" from="UI/Scale/EditorUI/MouseDetector" to="." method="_on_MouseDetector_mouse_entered"]
+[connection signal="mouse_exited" from="UI/Scale/EditorUI/MouseDetector" to="." method="_on_MouseDetector_mouse_exited"]
 [connection signal="pressed" from="UI/Scale/EditorUI/LayersPanelOffset/LayersPanel/RetractTab" to="UI/Scale/EditorUI/LayersPanelOffset" method="_on_RetractTab_pressed"]
 [connection signal="pressed" from="UI/Scale/EditorUI/TilesPanelOffset/TilesPanel/RetractTab" to="UI/Scale/EditorUI/TilesPanelOffset" method="_on_RetractTab_pressed"]
 [connection signal="toggled" from="UI/Scale/EditorUI/TilesPanelOffset/TilesPanel/Buttons/Eraser" to="." method="_on_Eraser_toggled"]

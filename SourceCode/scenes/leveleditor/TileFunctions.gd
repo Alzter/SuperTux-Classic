@@ -39,7 +39,7 @@ func _process(delta):
 	
 	tile_selection.hide()
 	
-	if owner.can_place_tiles:
+	if owner.can_place_tiles and !owner.mouse_over_ui:
 		
 		if selected_tilemap:
 			selected_tile_position = get_selected_tile()
@@ -65,7 +65,7 @@ func update_tile_selected_sprite():
 	tile_selection.position += selected_tilemap.cell_size * 0.5
 
 func _input(event):
-	if selected_tilemap:
+	if selected_tilemap and !owner.mouse_over_ui:
 		if event is InputEventMouseButton:
 			if event.button_index == BUTTON_LEFT or event.button_index == BUTTON_RIGHT:
 				placing_tiles = event.pressed

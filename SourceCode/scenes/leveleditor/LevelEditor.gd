@@ -37,6 +37,8 @@ var edit_mode = true
 
 var can_place_tiles = true
 
+var mouse_over_ui = false
+
 func _ready():
 	Scoreboard.hide()
 	Music.stop_all()
@@ -227,10 +229,10 @@ func update_rect_select_enabled(new_value):
 func update_eraser_enabled(new_value):
 	button_eraser.pressed = new_value
 
+# When User hovers over the UI
+func _on_MouseDetector_mouse_entered():
+	mouse_over_ui = false
 
-func _on_TilesArea_mouse_entered():
-	print("ON")
-
-
-func _on_TilesArea_mouse_exited():
-	print("OFF")
+# When user stops hovering over the UI
+func _on_MouseDetector_mouse_exited():
+	mouse_over_ui = true
