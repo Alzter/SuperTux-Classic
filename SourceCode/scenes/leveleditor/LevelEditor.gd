@@ -49,6 +49,7 @@ func _ready():
 	editor_camera.connect("set_camera_drag", self, "set_camera_drag")
 	
 	load_level_from_path(level_to_load)
+	
 
 func _process(delta):
 	if !level: return
@@ -65,6 +66,9 @@ func toggle_edit_mode():
 	update_tilemap_opacity()
 
 func enter_play_mode():
+	Scoreboard.reset_player_values(false, false)
+	Global.spawn_position = editor_camera.position
+	
 	editor_camera.current = false
 	self.selected_object = null
 	if !level: return
@@ -73,8 +77,16 @@ func enter_play_mode():
 	level.start_level(false)
 
 func enter_edit_mode():
+	call_deferred("_deferred_enter_edit_mode")
+
+# We should only enter edit mode when it is safe to do so.
+# I.e. don't enter edit mode halfway through the execution of everything
+func _deferred_enter_edit_mode():
+	get_tree().paused = true
 	if level and Global.player:
 		editor_camera.camera_to_player_position(Global.player, level.is_worldmap)
+		Scoreboard.player_initial_state = Global.player.state
+	
 	editor_camera.current = true
 	
 	if !level: return
@@ -82,6 +94,7 @@ func enter_edit_mode():
 	Scoreboard.hide()
 	if ui_editor: ui_editor.show()
 	Music.stop_all()
+	get_tree().paused = false
 
 # ==================================================================================
 # Level loading
@@ -90,10 +103,8 @@ func load_level_from_path(level_path: String):
 	var level_object = load(level_path).instance()
 	load_level_from_object(level_object)
 
-func load_level_from_object(level_object: Node2D):
-	if level:
-		level.queue_free()
-		yield(level, "tree_exited")
+func load_level_from_object(level_object: Node2D, free_level_immediately = false):
+	if level: level.free()
 	
 	add_child(level_object)
 	level_object.set_owner(self)

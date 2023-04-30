@@ -60,7 +60,7 @@ func activate_objectmaps():
 			if node.has_method("tiles_to_objects"):
 				node.tiles_to_objects()
 
-func start_level(show_level_title_card = true):
+func start_level(in_editor = false):
 	activate_objectmaps()
 	ResolutionManager.connect("window_resized", self, "window_resized")
 	Scoreboard.show()
@@ -75,14 +75,14 @@ func start_level(show_level_title_card = true):
 			_create_worldmap_player(worldmap_spawn, worldmap_player_object)
 	
 	# Set the player's starting powerup
-	if Scoreboard.player_initial_state < starting_powerup:
+	if !in_editor and Scoreboard.player_initial_state < starting_powerup:
 		Scoreboard.player_initial_state = starting_powerup
 	
 	if uses_timer: Scoreboard.enable_level_timer(time)
 	else: Scoreboard.disable_level_timer()
 	
 	# Display the level title card and wait until it disappears
-	if !is_worldmap and show_level_title_card: yield(_level_title_card(), "completed")
+	if !is_worldmap and in_editor: yield(_level_title_card(), "completed")
 	else:
 		Global.emit_signal("level_ready")
 	

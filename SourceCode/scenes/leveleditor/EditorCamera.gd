@@ -37,10 +37,12 @@ func camera_to_player_position(player : Node2D, worldmap = false):
 	if !player: return
 	
 	position = player.position
-	if !worldmap: position.y = limit_top + ResolutionManager.window_resolution.y * 0.5
 	zoom = Vector2.ONE
 
 func _process(delta):
+	visible = owner.edit_mode
+	if !owner.edit_mode: return
+	
 	var cam_zoom = Vector2(get_global_transform_with_canvas().x.x, get_global_transform_with_canvas().y.y)
 	
 	var move_dir = Vector2()
@@ -49,8 +51,8 @@ func _process(delta):
 	
 	var velocity = move_dir * move_speed
 	
-	var edge_top = limit_top + ResolutionManager.window_resolution.y * 0.5 * zoom.y
-	var edge_left = limit_left + ResolutionManager.window_resolution.x * 0.5 * zoom.x
+	var edge_top = limit_top# + ResolutionManager.window_resolution.y * 0.5 * zoom.y
+	var edge_left = limit_left# + ResolutionManager.window_resolution.x * 0.5 * zoom.x
 	
 	velocity += mouse_motion / cam_zoom
 	
