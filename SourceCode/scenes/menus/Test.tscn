@@ -39,7 +39,7 @@ custom_constants/separation = 32
 alignment = 1
 
 [node name="NewGame" type="Button" parent="Control/VBoxContainer"]
-margin_top = 54.0
+margin_top = 83.0
 margin_right = 390.0
 margin_bottom = 113.0
 text = "New Game"
@@ -47,5 +47,5 @@ text = "New Game"
 [node name="LoadGame" type="Button" parent="Control/VBoxContainer"]
 margin_top = 145.0
 margin_right = 390.0
-margin_bottom = 204.0
+margin_bottom = 175.0
 text = "Load Game"

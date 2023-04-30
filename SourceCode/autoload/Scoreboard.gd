@@ -112,7 +112,7 @@ func _set_coin_count(new_value):
 		coins = 0
 		self.lives += 1
 
-func _set_lives_count(new_value):
+func _set_lives_count(new_value: int):
 	if new_value > lives: sfx.play("1up")
 	lives = clamp(new_value, -1, 99)
 
