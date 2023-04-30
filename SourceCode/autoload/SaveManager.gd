@@ -183,7 +183,7 @@ func _decapsulate_game_data(data_dictionary):
 	Global.goto_level(worldmap_level)
 
 func delete_save_file(save_path = current_save_directory):
-	var files_to_delete = _list_files_in_directory(current_save_directory)
+	var files_to_delete = Global.list_files_in_directory(current_save_directory)
 	var dir = Directory.new()
 	for file in files_to_delete:
 		dir.remove(file)

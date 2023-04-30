@@ -27,6 +27,8 @@ export var layer_button_scene : PackedScene
 
 onready var cache_level_path = cache_level_directory + cache_level_filename
 
+onready var edit_layer_dialog = $UI/Scale/EditorUI/EditLayerDialog
+
 var level = null
 var level_objects = null setget , _get_level_objects
 var object_map = null
@@ -279,7 +281,7 @@ func get_layer_types():
 	var filename_getter = RegEx.new()
 	filename_getter.compile("(.+).tscn")
 	
-	for file in list_files_in_directory(editor_layers_directory):
+	for file in Global.list_files_in_directory(editor_layers_directory):
 		var file_is_layer = filename_getter.search(file)
 		
 		if file_is_layer:
@@ -288,28 +290,23 @@ func get_layer_types():
 	
 	return types
 
-func list_files_in_directory(path):
-	var files = []
-	var dir = Directory.new()
-	dir.open(path)
-	dir.list_dir_begin()
-
-	while true:
-		var file = dir.get_next()
-		if file == "":
-			break
-		elif not file.begins_with("."):
-			files.append(file)
-
-	dir.list_dir_end()
-
-	return files
-
-func _get_level_objects():
-	return level.get_children()
+# Returns an array of all layer nodes inside the level.
+func _get_level_objects(object_node = level, objects := []):
+	
+	for child in object_node.get_children():
+		
+		# If the object is a shader container, just get all the children of
+		# the shader and ignore the shader node itself.
+		if child.name == "Shader":
+			var child_objects = _get_level_objects(child)
+			objects.append_array(child_objects)
+		else:
+			objects.append(child)
+	
+	return objects
 
 func edit_layer(layer_object : Node):
-	pass
+	edit_layer_dialog.popup()
 
 func delete_layer(layer_object : Node):
 	call_deferred("_deferred_delete_layer", layer_object)

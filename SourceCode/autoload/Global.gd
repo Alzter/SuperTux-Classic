@@ -196,3 +196,28 @@ func save_node_to_directory(node : Node, dir : String):
 	var packed_scene = PackedScene.new()
 	packed_scene.pack(node)
 	ResourceSaver.save(dir, packed_scene)
+
+# Gets ALL children in a node, including children of children.
+func get_all_children(node, array := []):
+	array.push_back(node)
+	for child in node.get_children():
+		if !is_instance_valid(child): continue
+		array = get_all_children(child,array)
+	return array
+
+func list_files_in_directory(path):
+	var files = []
+	var dir = Directory.new()
+	dir.open(path)
+	dir.list_dir_begin()
+
+	while true:
+		var file = dir.get_next()
+		if file == "":
+			break
+		elif not file.begins_with("."):
+			files.append(file)
+
+	dir.list_dir_end()
+
+	return files

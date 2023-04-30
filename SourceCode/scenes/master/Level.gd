@@ -55,7 +55,7 @@ func _ready():
 		start_level()
 
 func activate_objectmaps():
-	for node in get_children():
+	for node in Global.get_all_children(self):
 		if node.is_in_group("objectmaps"):
 			if node.has_method("tiles_to_objects"):
 				node.tiles_to_objects()

@@ -124,7 +124,6 @@ func hide():
 func show(include_lives_count = true):
 	score_visible = true
 	lives_counter.visible = include_lives_count
-	print(include_lives_count)
 	hud_node.show()
 
 func reset_player_values(game_over = false, reset_state = true):
