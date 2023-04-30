@@ -84,6 +84,8 @@ func _state_logic(delta):
 			host.apply_gravity(delta)
 			host.apply_movement(delta, false)
 			return
+		"explode":
+			return
 	
 	host.update_sprite()
 	host.apply_gravity(delta)

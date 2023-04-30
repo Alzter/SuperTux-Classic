@@ -22,10 +22,10 @@ func reset():
 	extro_level = null
 
 func add_current_level_to_cleared_levels():
-	if Global.current_level == null:
+	if Global.current_level_path == null:
 		push_error("Error adding current level to cleared level list - Current level not known")
 	
-	cleared_levels.append(Global.current_level)
+	cleared_levels.append(Global.current_level_path)
 
 func save_progress(level_clear = false, save_game = true):
 	if level_clear:

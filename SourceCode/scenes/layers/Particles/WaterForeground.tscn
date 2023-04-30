@@ -1,12 +1,12 @@
 [gd_scene load_steps=2 format=2]
 
-[ext_resource path="res://scenes/master/TileMap.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scenes/layers/TileMap.tscn" type="PackedScene" id=1]
 
-[node name="WaterBGDark" type="ParallaxBackground"]
-layer = -80
+
+[node name="WaterFG" type="ParallaxBackground"]
+layer = 100
 
 [node name="ParallaxLayer" type="ParallaxLayer" parent="."]
-modulate = Color( 0.631373, 0.54902, 0.54902, 1 )
 motion_scale = Vector2( 1.25, 1 )
 motion_mirroring = Vector2( 1536, 0 )
 

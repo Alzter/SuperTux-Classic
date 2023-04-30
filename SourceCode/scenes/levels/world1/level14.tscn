@@ -1,10 +1,11 @@
 [gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://scenes/master/Level.gd" type="Script" id=1]
-[ext_resource path="res://scenes/master/TileMap.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/layers/TileMap.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/master/ObjectMap.tscn" type="PackedScene" id=3]
-[ext_resource path="res://scenes/backgrounds/SnowMistBackground.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scenes/layers/Background/SnowMistBackground.tscn" type="PackedScene" id=4]
 [ext_resource path="res://scenes/shaders/Overlay.gdshader" type="Shader" id=5]
+
 
 [sub_resource type="CanvasItemMaterial" id=1]
 blend_mode = 1

@@ -38,6 +38,7 @@ export var autoscroll_speed = 0.0
 export var starting_powerup = 0
 export var worldmap_spawn = Vector2()
 export var worldmap_player_object : PackedScene
+export var level_height = 15
 
 onready var custom_camera = get_node_or_null("Camera2D")
 
@@ -45,19 +46,24 @@ signal level_ready
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	Global.current_level = self
+	
+	# Only automatically start levels if the level is the root scene.
+	# This is not the case when we are in the level editor, because
+	# the level is a child of the LevelEditor scene.
 	if self == Global.current_scene:
 		start_level()
 
 func activate_objectmaps():
-	for node in get_children():
+	for node in Global.get_all_children(self):
 		if node.is_in_group("objectmaps"):
 			if node.has_method("tiles_to_objects"):
 				node.tiles_to_objects()
 
-func start_level(show_level_title_card = true):
+func start_level(in_editor = false):
 	activate_objectmaps()
 	ResolutionManager.connect("window_resized", self, "window_resized")
-	Scoreboard.show()
+	Scoreboard.show(!in_editor)
 	WorldmapManager.is_level_worldmap = is_worldmap
 	
 	if !is_worldmap:
@@ -69,19 +75,19 @@ func start_level(show_level_title_card = true):
 			_create_worldmap_player(worldmap_spawn, worldmap_player_object)
 	
 	# Set the player's starting powerup
-	if Scoreboard.player_initial_state < starting_powerup:
+	if !in_editor and Scoreboard.player_initial_state < starting_powerup:
 		Scoreboard.player_initial_state = starting_powerup
 	
 	if uses_timer: Scoreboard.enable_level_timer(time)
 	else: Scoreboard.disable_level_timer()
 	
 	# Display the level title card and wait until it disappears
-	if !is_worldmap and show_level_title_card: yield(_level_title_card(), "completed")
+	if !is_worldmap and !in_editor: yield(_level_title_card(), "completed")
 	else:
 		Global.emit_signal("level_ready")
 	
 	# Then we load the pause menu into the level so you can pause the game
-	_load_pause_menu()
+	_load_pause_menu(in_editor)
 	
 	# If we're using a custom camera, make it override the player's camera
 	# (You can use custom cameras by adding a Camera2D node into the level)
@@ -154,16 +160,18 @@ func _level_title_card():
 	# Then we re-add the player into the level
 	var player = player_node.instance()
 	player.global_position = player_pos
-	Global.current_scene.add_child(player)
+	add_child(player)
+	player.set_owner(self)
 	
 	Global.emit_signal("level_ready")
 	
 	if get_tree() == null: return
 	yield(get_tree(), "idle_frame")
 
-func _load_pause_menu():
+func _load_pause_menu(in_editor = false):
 	var pause_screen_instance = pause_menu.instance()
-	Global.current_scene.add_child(pause_screen_instance)
+	pause_screen_instance.in_editor = in_editor
+	Global.current_level.add_child(pause_screen_instance)
 
 func _create_worldmap_player(position : Vector2, player_object : PackedScene):
 	var player_position = position
@@ -190,8 +198,8 @@ func _create_worldmap_player(position : Vector2, player_object : PackedScene):
 			if is_instance_valid(tilemap):
 				player.tilemaps.append(tilemap)
 	
-	Global.current_scene.add_child(player)
-	player.set_owner(Global.current_scene)
+	add_child(player)
+	player.set_owner(self)
 
 func create_autoscroll_camera():
 	var camera = Camera2D.new()

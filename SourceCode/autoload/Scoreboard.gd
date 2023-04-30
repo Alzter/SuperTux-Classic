@@ -121,14 +121,15 @@ func hide():
 	clear_message()
 	hud_node.hide()
 
-func show():
+func show(include_lives_count = true):
 	score_visible = true
+	lives_counter.visible = include_lives_count
 	hud_node.show()
 
-func reset_player_values(game_over = false):
+func reset_player_values(game_over = false, reset_state = true):
 	coins = initial_coins
 	lives = game_over_lives if game_over else initial_lives
-	player_initial_state = initial_state
+	if reset_state: player_initial_state = initial_state
 
 func game_over():
 	stop_level_timer()

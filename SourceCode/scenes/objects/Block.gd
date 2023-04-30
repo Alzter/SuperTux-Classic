@@ -123,7 +123,7 @@ func _spawn_contents(body, small = true):
 	var pos = global_position - Vector2(0, Global.TILE_SIZE)
 	var object_to_spawn = contents_small if small else contents_big
 	var o = object_to_spawn.instance()
-	Global.current_scene.add_child(o)
+	Global.add_child_to_level(o, self)
 	o.global_position = pos
 	o.facing = facing
 

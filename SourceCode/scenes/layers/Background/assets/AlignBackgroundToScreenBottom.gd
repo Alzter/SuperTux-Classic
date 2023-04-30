@@ -19,6 +19,6 @@ func window_resized():
 		zoom = abs(1 - camera.zoom.y)
 		offset -= 480 * ResolutionManager.window_resolution.y * zoom
 	
-	print(zoom)
+	#print(zoom)
 	if zoom != 0: offset = max(offset, 0)
 	scroll_base_offset.y = offset

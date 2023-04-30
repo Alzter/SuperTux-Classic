@@ -26,7 +26,7 @@ extends CanvasLayer
 var particles_dir = "res://scenes/particles/"
 
 func _ready(): # Make all of the game's particles emit once so they stay loaded
-	var particle_files = list_files_in_directory(particles_dir)
+	var particle_files = Global.list_files_in_directory(particles_dir)
 	for particle_file in particle_files:
 		var path = particles_dir + particle_file
 		var particle = load(path)
@@ -39,19 +39,4 @@ func _ready(): # Make all of the game's particles emit once so they stay loaded
 		particles_instance.position = Vector2(320,240)
 		
 
-func list_files_in_directory(path):
-	var files = []
-	var dir = Directory.new()
-	dir.open(path)
-	dir.list_dir_begin()
 
-	while true:
-		var file = dir.get_next()
-		if file == "":
-			break
-		elif not file.begins_with("."):
-			files.append(file)
-
-	dir.list_dir_end()
-
-	return files

@@ -2,7 +2,7 @@
 
 [ext_resource path="res://images/objects/igloo/IglooFG.png" type="Texture" id=1]
 [ext_resource path="res://images/objects/igloo/IglooBG.png" type="Texture" id=2]
-[ext_resource path="res://scenes/master/TileMap.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/layers/TileMap.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/objects/EndGoalIgloo.gd" type="Script" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]

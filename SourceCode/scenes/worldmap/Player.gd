@@ -39,6 +39,7 @@ var stop_tiles = [186]
 
 # Set the player camera boundaries to the boundaries of the largest tilemap
 func _ready():
+	Global.player = self
 	ResolutionManager.connect("window_resized", self, "window_resized")
 	window_resized()
 	if tilemaps == []: push_error("Worldmap player node cannot access any tilemaps in the worldmap")
@@ -70,6 +71,7 @@ func _process(delta):
 	if tilemaps == []: push_error("Worldmap player node cannot access any tilemaps in the worldmap")
 	
 	for t in tilemaps:
+		if !is_instance_valid(t): continue # Thanks for that.
 		var tilemap : TileMap = t
 		var tile_position = tilemap.world_to_map(position)
 		var occupied_tile_id = tilemap.get_cellv(tile_position) # The ID of the tile the player is standing on.

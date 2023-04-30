@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=16 format=2]
+[gd_resource type="Theme" load_steps=17 format=2]
 
 [ext_resource path="res://theme/FontMedium.tres" type="DynamicFont" id=1]
 [ext_resource path="res://theme/FontButton.tres" type="DynamicFont" id=2]
@@ -80,6 +80,10 @@ shadow_size = 5
 anti_aliasing = false
 anti_aliasing_size = 0.01
 
+[sub_resource type="StyleBoxLine" id=11]
+color = Color( 0, 0, 0, 0.75 )
+thickness = 3
+
 [sub_resource type="StyleBoxFlat" id=9]
 bg_color = Color( 0.298039, 0.298039, 0.298039, 1 )
 border_width_left = 2
@@ -120,11 +124,18 @@ corner_radius_bottom_left = 15
 shadow_color = Color( 0, 0, 0, 0 )
 
 [sub_resource type="StyleBoxFlat" id=10]
-bg_color = Color( 0.164706, 0.188235, 0.356863, 0.819608 )
+bg_color = Color( 0.121569, 0.25098, 0.592157, 0.592157 )
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color( 0, 0, 0, 1 )
 corner_radius_top_left = 8
 corner_radius_top_right = 8
 corner_radius_bottom_right = 8
 corner_radius_bottom_left = 8
+shadow_color = Color( 0, 0, 0, 0.247059 )
+shadow_size = 4
 
 [resource]
 default_font = ExtResource( 1 )
@@ -139,6 +150,8 @@ Button/styles/focus = SubResource( 5 )
 Button/styles/hover = SubResource( 5 )
 Button/styles/normal = SubResource( 3 )
 Button/styles/pressed = SubResource( 6 )
+HSeparator/constants/separation = 30
+HSeparator/styles/separator = SubResource( 11 )
 HSlider/icons/grabber = ExtResource( 5 )
 HSlider/icons/grabber_disabled = ExtResource( 7 )
 HSlider/icons/grabber_highlight = ExtResource( 6 )
@@ -156,6 +169,7 @@ Label/constants/shadow_offset_y = 2
 Label/fonts/font = ExtResource( 1 )
 Label/styles/normal = null
 Panel/styles/panel = SubResource( 10 )
+PopupDialog/styles/panel = SubResource( 10 )
 RichTextLabel/colors/default_color = Color( 1, 1, 1, 1 )
 RichTextLabel/colors/font_color_selected = Color( 0, 0, 0, 1 )
 RichTextLabel/colors/font_color_shadow = Color( 0, 0, 0, 1 )

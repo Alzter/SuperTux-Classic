@@ -2,11 +2,11 @@
 
 [ext_resource path="res://scenes/master/Level.gd" type="Script" id=1]
 [ext_resource path="res://scenes/master/ObjectMap.tscn" type="PackedScene" id=2]
-[ext_resource path="res://scenes/master/TileMap.tscn" type="PackedScene" id=3]
-[ext_resource path="res://scenes/backgrounds/assets/WaterForegroundDark.tscn" type="PackedScene" id=4]
-[ext_resource path="res://scenes/backgrounds/DarkOceanBackground.tscn" type="PackedScene" id=5]
+[ext_resource path="res://scenes/layers/TileMap.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/layers/Particles/WaterForegroundDark.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scenes/layers/Background/DarkOceanBackground.tscn" type="PackedScene" id=5]
 [ext_resource path="res://scenes/shaders/Overlay.gdshader" type="Shader" id=6]
-[ext_resource path="res://scenes/master/Ambience.tscn" type="PackedScene" id=7]
+[ext_resource path="res://scenes/layers/Ambience.tscn" type="PackedScene" id=7]
 [ext_resource path="res://sounds/ambience_loops/AmbienceWaves.mp3" type="AudioStream" id=8]
 
 

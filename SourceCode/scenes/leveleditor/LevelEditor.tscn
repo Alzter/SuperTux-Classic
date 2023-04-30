@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://theme/default_theme.tres" type="Theme" id=1]
 [ext_resource path="res://scenes/leveleditor/LevelEditor.gd" type="Script" id=2]
@@ -6,6 +6,19 @@
 [ext_resource path="res://scenes/leveleditor/LayerButton.tscn" type="PackedScene" id=4]
 [ext_resource path="res://scenes/leveleditor/TileFunctions.gd" type="Script" id=5]
 [ext_resource path="res://images/editor/GridCursor.png" type="Texture" id=6]
+[ext_resource path="res://scenes/leveleditor/EditorCamera.gd" type="Script" id=7]
+[ext_resource path="res://scenes/leveleditor/TileButton.tscn" type="PackedScene" id=8]
+[ext_resource path="res://scenes/leveleditor/TilesContainer.gd" type="Script" id=9]
+[ext_resource path="res://images/player/tux/small/idle.png" type="Texture" id=10]
+[ext_resource path="res://scenes/leveleditor/AddLayerDialog.gd" type="Script" id=11]
+
+[sub_resource type="SpriteFrames" id=7]
+animations = [ {
+"frames": [ ExtResource( 10 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
 
 [sub_resource type="Animation" id=1]
 resource_name = "default"
@@ -104,25 +117,28 @@ tracks/0/keys = {
 }
 
 [node name="LevelEditor" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
 theme = ExtResource( 1 )
 script = ExtResource( 2 )
-level_to_load = "res://scenes/leveleditor/samplelevel.tscn"
 layer_button_scene = ExtResource( 4 )
 
-[node name="EditorCamera" type="Camera2D" parent="."]
-offset = Vector2( 32, 0 )
-limit_left = 0
-limit_top = 0
-limit_bottom = 480
-
 [node name="TileFunctions" type="Node2D" parent="."]
-z_index = 4096
-z_as_relative = false
 script = ExtResource( 5 )
 grid_color = Color( 0, 0, 0, 0.25 )
 
 [node name="SelectedTile" type="Sprite" parent="TileFunctions"]
 texture = ExtResource( 6 )
+
+[node name="EditorCamera" type="Camera2D" parent="."]
+current = true
+limit_left = 0
+limit_top = 0
+limit_smoothed = true
+script = ExtResource( 7 )
+
+[node name="TuxPreview" type="AnimatedSprite" parent="EditorCamera"]
+frames = SubResource( 7 )
 
 [node name="UI" type="CanvasLayer" parent="."]
 layer = 128
@@ -136,11 +152,18 @@ theme = ExtResource( 1 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 
+[node name="MouseDetector" type="Control" parent="UI/Scale/EditorUI"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
 [node name="LayersPanelOffset" type="Control" parent="UI/Scale/EditorUI"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
 script = ExtResource( 3 )
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="RetractAnimation" type="AnimationPlayer" parent="UI/Scale/EditorUI/LayersPanelOffset"]
 autoplay = "default"
@@ -165,7 +188,7 @@ focus_mode = 0
 [node name="AddLayerButton" type="Button" parent="UI/Scale/EditorUI/LayersPanelOffset/LayersPanel"]
 margin_left = 9.0
 margin_top = 6.0
-margin_right = 75.0
+margin_right = 115.0
 margin_bottom = 112.0
 focus_mode = 0
 text = "+"
@@ -173,25 +196,125 @@ text = "+"
 [node name="ScrollContainer" type="ScrollContainer" parent="UI/Scale/EditorUI/LayersPanelOffset/LayersPanel"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 89.0
+margin_left = 131.0
 margin_top = 10.0
 margin_right = -13.0
 margin_bottom = -10.0
 scroll_vertical_enabled = false
 
 [node name="LayersContainer" type="HBoxContainer" parent="UI/Scale/EditorUI/LayersPanelOffset/LayersPanel/ScrollContainer"]
-margin_right = 953.0
+margin_right = 911.0
 margin_bottom = 100.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/separation = 15
 alignment = 1
 
+[node name="AddLayerDialog" type="PopupDialog" parent="UI/Scale/EditorUI/LayersPanelOffset"]
+visible = true
+anchor_bottom = 1.0
+margin_right = 322.0
+margin_bottom = -122.0
+script = ExtResource( 11 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/Scale/EditorUI/LayersPanelOffset/AddLayerDialog"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 9.0
+margin_top = 10.0
+margin_right = -9.0
+margin_bottom = -10.0
+
+[node name="Title" type="Label" parent="UI/Scale/EditorUI/LayersPanelOffset/AddLayerDialog/VBoxContainer"]
+margin_right = 304.0
+margin_bottom = 21.0
+custom_colors/font_color = Color( 1, 1, 0, 1 )
+text = "Add Layer..."
+align = 1
+valign = 1
+
+[node name="HSeparator" type="HSeparator" parent="UI/Scale/EditorUI/LayersPanelOffset/AddLayerDialog/VBoxContainer"]
+margin_top = 25.0
+margin_right = 304.0
+margin_bottom = 55.0
+
+[node name="NameEntry" type="HSplitContainer" parent="UI/Scale/EditorUI/LayersPanelOffset/AddLayerDialog/VBoxContainer"]
+margin_top = 59.0
+margin_right = 304.0
+margin_bottom = 90.0
+
+[node name="Label" type="Label" parent="UI/Scale/EditorUI/LayersPanelOffset/AddLayerDialog/VBoxContainer/NameEntry"]
+margin_top = 5.0
+margin_right = 67.0
+margin_bottom = 26.0
+text = "Name"
+
+[node name="Name" type="LineEdit" parent="UI/Scale/EditorUI/LayersPanelOffset/AddLayerDialog/VBoxContainer/NameEntry"]
+margin_left = 79.0
+margin_right = 304.0
+margin_bottom = 31.0
+
+[node name="ZIndexEntry" type="HSplitContainer" parent="UI/Scale/EditorUI/LayersPanelOffset/AddLayerDialog/VBoxContainer"]
+visible = false
+margin_top = 94.0
+margin_right = 304.0
+margin_bottom = 125.0
+
+[node name="Label" type="Label" parent="UI/Scale/EditorUI/LayersPanelOffset/AddLayerDialog/VBoxContainer/ZIndexEntry"]
+margin_top = 5.0
+margin_right = 104.0
+margin_bottom = 26.0
+text = "Z Index"
+
+[node name="ZIndex" type="SpinBox" parent="UI/Scale/EditorUI/LayersPanelOffset/AddLayerDialog/VBoxContainer/ZIndexEntry"]
+margin_left = 116.0
+margin_right = 304.0
+margin_bottom = 31.0
+
+[node name="TypeEntry" type="HSplitContainer" parent="UI/Scale/EditorUI/LayersPanelOffset/AddLayerDialog/VBoxContainer"]
+margin_top = 94.0
+margin_right = 304.0
+margin_bottom = 123.0
+
+[node name="Label" type="Label" parent="UI/Scale/EditorUI/LayersPanelOffset/AddLayerDialog/VBoxContainer/TypeEntry"]
+margin_top = 4.0
+margin_right = 65.0
+margin_bottom = 25.0
+text = "Type"
+
+[node name="LayerTypes" type="OptionButton" parent="UI/Scale/EditorUI/LayersPanelOffset/AddLayerDialog/VBoxContainer/TypeEntry"]
+margin_left = 77.0
+margin_right = 304.0
+margin_bottom = 29.0
+text = "Tilemap"
+
+[node name="SpaceFiller" type="Control" parent="UI/Scale/EditorUI/LayersPanelOffset/AddLayerDialog/VBoxContainer"]
+margin_top = 127.0
+margin_right = 304.0
+margin_bottom = 498.0
+size_flags_vertical = 3
+
+[node name="HSeparator2" type="HSeparator" parent="UI/Scale/EditorUI/LayersPanelOffset/AddLayerDialog/VBoxContainer"]
+margin_top = 502.0
+margin_right = 304.0
+margin_bottom = 532.0
+
+[node name="AddLayerButton" type="Button" parent="UI/Scale/EditorUI/LayersPanelOffset/AddLayerDialog/VBoxContainer"]
+margin_top = 536.0
+margin_right = 304.0
+margin_bottom = 578.0
+rect_min_size = Vector2( 0, 42 )
+focus_mode = 0
+text = "Add"
+
 [node name="TilesPanelOffset" type="Control" parent="UI/Scale/EditorUI"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
 script = ExtResource( 3 )
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="RetractAnimation" type="AnimationPlayer" parent="UI/Scale/EditorUI/TilesPanelOffset"]
 root_node = NodePath("../../LayersPanelOffset")
@@ -209,10 +332,62 @@ margin_bottom = -120.0
 color = Color( 0, 0, 0, 0.392157 )
 
 [node name="RetractTab" type="Button" parent="UI/Scale/EditorUI/TilesPanelOffset/TilesPanel"]
+visible = false
 margin_left = -43.0
 margin_top = 1.0
 margin_bottom = 97.0
 focus_mode = 0
+
+[node name="Buttons" type="HBoxContainer" parent="UI/Scale/EditorUI/TilesPanelOffset/TilesPanel"]
+anchor_right = 1.0
+margin_left = 16.0
+margin_top = 16.0
+margin_right = -16.0
+margin_bottom = 68.0
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="Eraser" type="Button" parent="UI/Scale/EditorUI/TilesPanelOffset/TilesPanel/Buttons"]
+margin_right = 94.0
+margin_bottom = 52.0
+focus_mode = 0
+size_flags_horizontal = 3
+toggle_mode = true
+text = "Erase"
+
+[node name="RectSelect" type="Button" parent="UI/Scale/EditorUI/TilesPanelOffset/TilesPanel/Buttons"]
+margin_left = 98.0
+margin_right = 193.0
+margin_bottom = 52.0
+focus_mode = 0
+size_flags_horizontal = 3
+toggle_mode = true
+text = "Rect"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="UI/Scale/EditorUI/TilesPanelOffset/TilesPanel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 16.0
+margin_top = 96.0
+margin_right = -16.0
+margin_bottom = -16.0
+scroll_horizontal_enabled = false
+
+[node name="TilesContainer" type="GridContainer" parent="UI/Scale/EditorUI/TilesPanelOffset/TilesPanel/ScrollContainer"]
+margin_right = 193.0
+size_flags_horizontal = 3
+columns = 4
+script = ExtResource( 9 )
+tile_button_scene = ExtResource( 8 )
+
+[node name="EditLayerDialog" type="PopupDialog" parent="UI/Scale/EditorUI"]
+visible = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 457.0
+margin_top = 257.0
+margin_right = -457.0
+margin_bottom = -257.0
 
 [node name="EditToggle" type="Button" parent="UI/Scale"]
 anchor_left = 1.0
@@ -225,6 +400,13 @@ focus_mode = 0
 theme = ExtResource( 1 )
 text = "PLAY"
 
+[connection signal="mouse_entered" from="UI/Scale/EditorUI/MouseDetector" to="." method="_on_MouseDetector_mouse_entered"]
+[connection signal="mouse_exited" from="UI/Scale/EditorUI/MouseDetector" to="." method="_on_MouseDetector_mouse_exited"]
 [connection signal="pressed" from="UI/Scale/EditorUI/LayersPanelOffset/LayersPanel/RetractTab" to="UI/Scale/EditorUI/LayersPanelOffset" method="_on_RetractTab_pressed"]
+[connection signal="pressed" from="UI/Scale/EditorUI/LayersPanelOffset/LayersPanel/AddLayerButton" to="UI/Scale/EditorUI/LayersPanelOffset" method="_on_AddLayerButton_pressed"]
+[connection signal="about_to_show" from="UI/Scale/EditorUI/LayersPanelOffset/AddLayerDialog" to="UI/Scale/EditorUI/LayersPanelOffset/AddLayerDialog" method="_on_AddLayerDialog_about_to_show"]
+[connection signal="pressed" from="UI/Scale/EditorUI/LayersPanelOffset/AddLayerDialog/VBoxContainer/AddLayerButton" to="UI/Scale/EditorUI/LayersPanelOffset/AddLayerDialog" method="_on_AddLayerButton_pressed"]
 [connection signal="pressed" from="UI/Scale/EditorUI/TilesPanelOffset/TilesPanel/RetractTab" to="UI/Scale/EditorUI/TilesPanelOffset" method="_on_RetractTab_pressed"]
+[connection signal="toggled" from="UI/Scale/EditorUI/TilesPanelOffset/TilesPanel/Buttons/Eraser" to="." method="_on_Eraser_toggled"]
+[connection signal="toggled" from="UI/Scale/EditorUI/TilesPanelOffset/TilesPanel/Buttons/RectSelect" to="." method="_on_RectSelect_toggled"]
 [connection signal="pressed" from="UI/Scale/EditToggle" to="." method="_on_EditToggle_pressed"]
