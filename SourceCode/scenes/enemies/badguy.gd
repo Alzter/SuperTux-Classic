@@ -52,6 +52,7 @@ onready var destroy_timer = $DestroyTimer
 onready var water_detector = get_node_or_null("WaterDetector")
 onready var water_rise_timer = get_node_or_null("RiseTimer")
 onready var anim_player = get_node_or_null("AnimationPlayer")
+onready var explosion_sprite = get_node_or_null("Control/Explosion")
 
 # Kinematic Equations
 func _ready():
@@ -185,12 +186,14 @@ func grab_released():
 	get_kicked()
 
 func explode():
+	Global.camera_shake(10, 0.95)
+	velocity = Vector2.ZERO
 	invincible = true
 	sfx.play("Explode")
 	disable_collision(false)
 	disable_bounce_area(true)
 	collide_with_other_enemies(false)
-	$Control/Explosion.visible = true
+	if explosion_sprite: explosion_sprite.visible = true
 	destroy_timer.start()
 	state_machine.set_state("explode")
 
@@ -260,7 +263,13 @@ func _on_DamageArea_body_entered(body):
 		if body.has_method("take_damage"):
 			body.take_damage()
 			if state_machine.state == "kicked": iceblock_ricochet()
-		else: body.die()
+		else:
+			if state_machine.state == "explode":
+				if body.is_in_group("explodes"):
+					if body.has_method("explode"): body.explode()
+				else: body.die()
+			else:
+				body.die()
 
 func _on_DestroyTimer_timeout():
 	call_deferred("queue_free")
