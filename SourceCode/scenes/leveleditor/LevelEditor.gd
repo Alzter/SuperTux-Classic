@@ -41,6 +41,7 @@ var mouse_over_ui = false
 
 func _ready():
 	Global.connect("player_died", self, "enter_edit_mode")
+	Global.connect("level_cleared", self, "enter_edit_mode")
 	Scoreboard.hide()
 	Music.stop_all()
 	ResolutionManager.connect("window_resized", self, "window_resized")

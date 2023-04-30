@@ -41,6 +41,7 @@ signal level_ready # EMITS AFTER THE LEVEL TITLE CARD HAS DISAPPEARED
 signal options_data_created
 
 signal player_died
+signal level_cleared
 
 func _ready():
 	self.gravity = 1
@@ -181,8 +182,11 @@ func add_child_to_level(child_scene, owner):
 
 func level_completed():
 	if current_level:
-		if current_level.has_method("level_complete"):
-			current_level.level_complete()
+		if current_scene == current_level:
+			if current_level.has_method("level_complete"):
+				current_level.level_complete()
+		else:
+			emit_signal("level_cleared")
 
 func save_node_to_directory(node : Node, dir : String):
 	for child in node.get_children():

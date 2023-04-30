@@ -27,12 +27,17 @@ onready var button_options = $Control/CenterContainer/VBoxContainer/Options
 onready var button_abort = $Control/CenterContainer/VBoxContainer/Abort
 onready var button_quit = $Control/CenterContainer/VBoxContainer/Quit
 
+var in_editor = false
+
 var paused = false setget _set_paused
 
 func _ready():
-	if WorldmapManager.is_level_worldmap:
+	if WorldmapManager.is_level_worldmap or in_editor:
 		button_restart.hide()
 		button_abort.hide()
+	
+	if in_editor:
+		button_quit.hide()
 	
 	if WorldmapManager.worldmap_level == null:
 		button_abort.hide()

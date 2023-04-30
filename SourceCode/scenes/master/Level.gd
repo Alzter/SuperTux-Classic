@@ -87,7 +87,7 @@ func start_level(in_editor = false):
 		Global.emit_signal("level_ready")
 	
 	# Then we load the pause menu into the level so you can pause the game
-	_load_pause_menu()
+	_load_pause_menu(in_editor)
 	
 	# If we're using a custom camera, make it override the player's camera
 	# (You can use custom cameras by adding a Camera2D node into the level)
@@ -168,9 +168,10 @@ func _level_title_card():
 	if get_tree() == null: return
 	yield(get_tree(), "idle_frame")
 
-func _load_pause_menu():
+func _load_pause_menu(in_editor = false):
 	var pause_screen_instance = pause_menu.instance()
-	Global.current_scene.add_child(pause_screen_instance)
+	pause_screen_instance.in_editor = in_editor
+	Global.current_level.add_child(pause_screen_instance)
 
 func _create_worldmap_player(position : Vector2, player_object : PackedScene):
 	var player_position = position
