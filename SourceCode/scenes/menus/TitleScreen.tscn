@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://theme/default_theme.tres" type="Theme" id=1]
 [ext_resource path="res://scenes/menus/TitleScreen.gd" type="Script" id=2]
@@ -7,8 +7,9 @@
 [ext_resource path="res://theme/FontSmall.tres" type="DynamicFont" id=5]
 [ext_resource path="res://theme/FontTiny.tres" type="DynamicFont" id=6]
 [ext_resource path="res://scenes/menus/Options.tscn" type="PackedScene" id=7]
-[ext_resource path="res://scenes/menus/BonusLevels.tscn" type="PackedScene" id=8]
+[ext_resource path="res://scenes/menus/Contrib.tscn" type="PackedScene" id=8]
 [ext_resource path="res://scenes/menus/WorldButton.tscn" type="PackedScene" id=9]
+[ext_resource path="res://scenes/menus/BonusLevels.tscn" type="PackedScene" id=10]
 
 [sub_resource type="CanvasItemMaterial" id=1]
 blend_mode = 3
@@ -196,8 +197,9 @@ margin_right = 350.0
 margin_bottom = 30.0
 text = " Delete "
 
-[node name="BonusLevelsMenu" parent="." instance=ExtResource( 8 )]
-visible = false
+[node name="BonusLevelsMenu" parent="." instance=ExtResource( 10 )]
+
+[node name="ContribMenu" parent="." instance=ExtResource( 8 )]
 
 [node name="OptionsMenu" parent="." instance=ExtResource( 7 )]
 
@@ -224,5 +226,7 @@ mode = 0
 [connection signal="pressed" from="TitleContent/Menu/VBoxContainer/Quit" to="." method="_on_Quit_pressed"]
 [connection signal="confirmed" from="TitleContent/Menu/NewGameWarning" to="." method="_on_NewGameWarning_confirmed"]
 [connection signal="popup_hide" from="BonusLevelsMenu" to="." method="_on_BonusLevelsMenu_popup_hide"]
+[connection signal="about_to_show" from="ContribMenu" to="." method="_on_ContribMenu_about_to_show"]
+[connection signal="popup_hide" from="ContribMenu" to="." method="_on_ContribMenu_popup_hide"]
 [connection signal="popup_hide" from="OptionsMenu" to="." method="_on_OptionsMenu_popup_hide"]
 [connection signal="file_selected" from="FileDialog" to="." method="_on_FileDialog_file_selected"]
