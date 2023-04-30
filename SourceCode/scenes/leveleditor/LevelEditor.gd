@@ -40,6 +40,7 @@ var can_place_tiles = true
 var mouse_over_ui = false
 
 func _ready():
+	Global.connect("player_died", self, "enter_edit_mode")
 	Scoreboard.hide()
 	Music.stop_all()
 	ResolutionManager.connect("window_resized", self, "window_resized")
@@ -62,7 +63,6 @@ func toggle_edit_mode():
 		enter_play_mode()
 	else:
 		enter_edit_mode()
-	edit_mode = !edit_mode
 	update_tilemap_opacity()
 
 func enter_play_mode():
@@ -75,6 +75,7 @@ func enter_play_mode():
 	create_level_cache()
 	if ui_editor: ui_editor.hide()
 	level.start_level(false)
+	edit_mode = false
 
 func enter_edit_mode():
 	call_deferred("_deferred_enter_edit_mode")
@@ -95,6 +96,7 @@ func _deferred_enter_edit_mode():
 	if ui_editor: ui_editor.show()
 	Music.stop_all()
 	get_tree().paused = false
+	edit_mode = true
 
 # ==================================================================================
 # Level loading

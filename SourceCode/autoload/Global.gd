@@ -40,6 +40,8 @@ signal player_loaded
 signal level_ready # EMITS AFTER THE LEVEL TITLE CARD HAS DISAPPEARED
 signal options_data_created
 
+signal player_died
+
 func _ready():
 	self.gravity = 1
 	var root = get_tree().get_root()
@@ -58,7 +60,10 @@ func _update_gravity(new_value):
 	gravity = new_value * pow(60.0, 2.0) / 3.0
 
 func respawn_player():
-	goto_level(current_level_path)
+	if current_level == current_scene:
+		goto_level(current_level_path)
+	else:
+		emit_signal("player_died")
 
 func goto_level(path, reset_checkpoint = false):
 	if path != current_level_path or reset_checkpoint:

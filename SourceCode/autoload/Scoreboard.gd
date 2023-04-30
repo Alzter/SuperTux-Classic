@@ -28,7 +28,7 @@ export var game_over_lives = 10 # How many lives we grant the player after getti
 
 onready var coins = initial_coins setget _set_coin_count
 onready var lives : int = initial_lives setget _set_lives_count
-onready var player_initial_state = initial_state setget _set_initial_state # What powerup state Tux has when spawning into the level.
+onready var player_initial_state = initial_state # What powerup state Tux has when spawning into the level.
 
 onready var level_timer = $LEVELTIMER
 onready var hud_node = $Control
@@ -220,7 +220,3 @@ func display_message(message_text):
 
 func clear_message():
 	update_message_text("")
-
-func _set_initial_state(new_value):
-	print("player initial state changed to " + str(new_value))
-	player_initial_state = new_value
