@@ -3,12 +3,12 @@
 [ext_resource path="res://images/background/gradient.png" type="Texture" id=1]
 [ext_resource path="res://images/background/OceanDark.png" type="Texture" id=2]
 [ext_resource path="res://images/background/CloudsDark.png" type="Texture" id=3]
-[ext_resource path="res://scenes/backgrounds/assets/RainParticlesBackground.tscn" type="PackedScene" id=4]
-[ext_resource path="res://scenes/backgrounds/ThunderstormBackground.gd" type="Script" id=5]
+[ext_resource path="res://scenes/layers/Particles/RainLight.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scenes/layers/Background/ThunderstormBackground.gd" type="Script" id=5]
 [ext_resource path="res://scenes/master/SFX.gd" type="Script" id=6]
 [ext_resource path="res://sounds/ambience_loops/lightning.wav" type="AudioStream" id=7]
-[ext_resource path="res://scenes/backgrounds/assets/CloudParticlesDark.tscn" type="PackedScene" id=8]
-[ext_resource path="res://scenes/backgrounds/assets/RainParticles.tscn" type="PackedScene" id=9]
+[ext_resource path="res://scenes/layers/Particles/CloudsDark.tscn" type="PackedScene" id=8]
+[ext_resource path="res://scenes/layers/Particles/Rain.tscn" type="PackedScene" id=9]
 
 [sub_resource type="CanvasItemMaterial" id=2]
 blend_mode = 1

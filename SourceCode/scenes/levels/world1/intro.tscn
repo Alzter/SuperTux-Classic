@@ -2,7 +2,7 @@
 
 [ext_resource path="res://theme/FontCredits.tres" type="DynamicFont" id=1]
 [ext_resource path="res://theme/default_theme.tres" type="Theme" id=3]
-[ext_resource path="res://scenes/backgrounds/IceMountainsBackground.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scenes/layers/Background/IceMountainsBackground.tscn" type="PackedScene" id=4]
 [ext_resource path="res://scenes/menus/TextScroll.gd" type="Script" id=6]
 
 [node name="Intro" type="Control"]

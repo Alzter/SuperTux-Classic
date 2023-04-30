@@ -2,10 +2,10 @@
 
 [ext_resource path="res://scenes/master/ObjectMap.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/layers/TileMap.tscn" type="PackedScene" id=2]
-[ext_resource path="res://scenes/backgrounds/IceMountainsMisty.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/layers/Background/IceMountainsMisty.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/master/Level.gd" type="Script" id=4]
 [ext_resource path="res://scenes/layers/Ambience.tscn" type="PackedScene" id=5]
-[ext_resource path="res://scenes/backgrounds/assets/WaterForeground.tscn" type="PackedScene" id=6]
+[ext_resource path="res://scenes/layers/Particles/WaterForeground.tscn" type="PackedScene" id=6]
 [ext_resource path="res://sounds/ambience_loops/AmbienceWaves.mp3" type="AudioStream" id=7]
 
 [node name="Level" type="Node2D"]
