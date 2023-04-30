@@ -10,6 +10,8 @@ var mouse_motion = Vector2.ZERO
 var dragging_camera = false
 
 func _input(event):
+	if owner.mouse_over_ui: return
+	
 	# If we press the spacebar, enable camera drag mode.
 	# This allows the camera to be moved by moving the mouse.
 	if event.is_action("editor_move_camera"):
