@@ -158,6 +158,8 @@ func update_layers_panel(level_objects):
 		button.text = node.name
 		button.layer_object = node
 		button.connect("layer_button_pressed", self, "layer_button_pressed")
+		button.connect("edit_layer", self, "edit_layer")
+		button.connect("delete_layer", self, "delete_layer")
 
 # ====================================================================================
 # Editor UI
@@ -305,3 +307,15 @@ func list_files_in_directory(path):
 
 func _get_level_objects():
 	return level.get_children()
+
+func edit_layer(layer_object : Node):
+	pass
+
+func delete_layer(layer_object : Node):
+	call_deferred("_deferred_delete_layer", layer_object)
+
+func _deferred_delete_layer(layer_object : Node):
+	if selected_object == layer_object:
+		self.selected_object = null
+	layer_object.free()
+	update_layers_panel(self.level_objects)
