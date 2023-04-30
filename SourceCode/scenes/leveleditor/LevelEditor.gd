@@ -74,7 +74,7 @@ func enter_play_mode():
 	if !level: return
 	create_level_cache()
 	if ui_editor: ui_editor.hide()
-	level.start_level(false)
+	level.start_level(true)
 	edit_mode = false
 
 func enter_edit_mode():

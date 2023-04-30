@@ -63,7 +63,7 @@ func activate_objectmaps():
 func start_level(in_editor = false):
 	activate_objectmaps()
 	ResolutionManager.connect("window_resized", self, "window_resized")
-	Scoreboard.show()
+	Scoreboard.show(!in_editor)
 	WorldmapManager.is_level_worldmap = is_worldmap
 	
 	if !is_worldmap:
@@ -82,7 +82,7 @@ func start_level(in_editor = false):
 	else: Scoreboard.disable_level_timer()
 	
 	# Display the level title card and wait until it disappears
-	if !is_worldmap and in_editor: yield(_level_title_card(), "completed")
+	if !is_worldmap and !in_editor: yield(_level_title_card(), "completed")
 	else:
 		Global.emit_signal("level_ready")
 	
