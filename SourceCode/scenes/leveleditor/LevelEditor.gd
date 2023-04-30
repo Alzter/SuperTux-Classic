@@ -28,7 +28,7 @@ export var layer_button_scene : PackedScene
 onready var cache_level_path = cache_level_directory + cache_level_filename
 
 var level = null
-var level_objects = null
+var level_objects = null setget , _get_level_objects
 var object_map = null
 
 var selected_object = null setget update_selected_object
@@ -41,7 +41,11 @@ var can_place_tiles = true
 
 var mouse_over_ui = false
 
+var layer_types = []
+
 func _ready():
+	layer_types = get_layer_types()
+	
 	Global.connect("player_died", self, "enter_edit_mode")
 	Global.connect("level_cleared", self, "enter_edit_mode")
 	Scoreboard.hide()
@@ -117,12 +121,11 @@ func load_level_from_object(level_object: Node2D, free_level_immediately = false
 
 func initialise_level(level_object):
 	level = level_object
-	level_objects = level_object.get_children()
 	
-	update_layers_panel(level_objects)
+	update_layers_panel(self.level_objects)
 	
 	object_map = null
-	for node in level_objects:
+	for node in self.level_objects:
 		#if is_objectmap(node):
 		#	object_map = node
 		#	break
@@ -206,7 +209,7 @@ func update_tilemap_opacity():
 		make_all_tilemaps_opaque()
 
 func make_non_selected_tilemaps_transparent():
-	for child in level_objects:
+	for child in self.level_objects:
 		if !is_instance_valid(child): continue
 		if is_tilemap(child):
 			if selected_object != child:
@@ -214,7 +217,7 @@ func make_non_selected_tilemaps_transparent():
 			else: child.modulate.a = 1
 
 func make_all_tilemaps_opaque():
-	for child in level_objects:
+	for child in self.level_objects:
 		if !is_instance_valid(child): continue
 		if is_tilemap(child):
 			child.modulate.a = 1
@@ -252,3 +255,53 @@ func _on_MouseDetector_mouse_entered():
 # When user stops hovering over the UI
 func _on_MouseDetector_mouse_exited():
 	mouse_over_ui = true
+
+func add_layer(layer_name : String, layer_type : String):
+	var layer_node_path = editor_layers_directory + layer_type + ".tscn"
+	
+	var file = File.new()
+	if file.file_exists(layer_node_path):
+		var layer_node = load(layer_node_path).instance()
+		layer_node.set_name(layer_name)
+		level.add_child(layer_node)
+		layer_node.set_owner(level)
+		update_layers_panel(self.level_objects)
+	else:
+		push_error("ERROR ADDING LAYER: Layer scene for layer '" + layer_type + "' not found!")
+
+# Returns a string array of all the names of scenes within res://scenes/layers/
+func get_layer_types():
+	var types = []
+	
+	var f = File.new()
+	var filename_getter = RegEx.new()
+	filename_getter.compile("(.+).tscn")
+	
+	for file in list_files_in_directory(editor_layers_directory):
+		var file_is_layer = filename_getter.search(file)
+		
+		if file_is_layer:
+			var file_name = file_is_layer.get_strings()[1]
+			types.append(file_name)
+	
+	return types
+
+func list_files_in_directory(path):
+	var files = []
+	var dir = Directory.new()
+	dir.open(path)
+	dir.list_dir_begin()
+
+	while true:
+		var file = dir.get_next()
+		if file == "":
+			break
+		elif not file.begins_with("."):
+			files.append(file)
+
+	dir.list_dir_end()
+
+	return files
+
+func _get_level_objects():
+	return level.get_children()

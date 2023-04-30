@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://theme/default_theme.tres" type="Theme" id=1]
 [ext_resource path="res://scenes/leveleditor/LevelEditor.gd" type="Script" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://scenes/leveleditor/TileButton.tscn" type="PackedScene" id=8]
 [ext_resource path="res://scenes/leveleditor/TilesContainer.gd" type="Script" id=9]
 [ext_resource path="res://images/player/tux/small/idle.png" type="Texture" id=10]
+[ext_resource path="res://scenes/leveleditor/AddLayerDialog.gd" type="Script" id=11]
 
 [sub_resource type="SpriteFrames" id=7]
 animations = [ {
@@ -188,7 +189,7 @@ focus_mode = 0
 [node name="AddLayerButton" type="Button" parent="UI/Scale/EditorUI/LayersPanelOffset/LayersPanel"]
 margin_left = 9.0
 margin_top = 6.0
-margin_right = 75.0
+margin_right = 115.0
 margin_bottom = 112.0
 focus_mode = 0
 text = "+"
@@ -196,14 +197,14 @@ text = "+"
 [node name="ScrollContainer" type="ScrollContainer" parent="UI/Scale/EditorUI/LayersPanelOffset/LayersPanel"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 89.0
+margin_left = 131.0
 margin_top = 10.0
 margin_right = -13.0
 margin_bottom = -10.0
 scroll_vertical_enabled = false
 
 [node name="LayersContainer" type="HBoxContainer" parent="UI/Scale/EditorUI/LayersPanelOffset/LayersPanel/ScrollContainer"]
-margin_right = 953.0
+margin_right = 911.0
 margin_bottom = 100.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -215,6 +216,7 @@ visible = true
 anchor_bottom = 1.0
 margin_right = 322.0
 margin_bottom = -122.0
+script = ExtResource( 11 )
 
 [node name="VBoxContainer" type="VBoxContainer" parent="UI/Scale/EditorUI/LayersPanelOffset/AddLayerDialog"]
 anchor_right = 1.0
@@ -248,12 +250,13 @@ margin_right = 67.0
 margin_bottom = 26.0
 text = "Name"
 
-[node name="LineEdit" type="LineEdit" parent="UI/Scale/EditorUI/LayersPanelOffset/AddLayerDialog/VBoxContainer/NameEntry"]
+[node name="Name" type="LineEdit" parent="UI/Scale/EditorUI/LayersPanelOffset/AddLayerDialog/VBoxContainer/NameEntry"]
 margin_left = 79.0
 margin_right = 304.0
 margin_bottom = 31.0
 
 [node name="ZIndexEntry" type="HSplitContainer" parent="UI/Scale/EditorUI/LayersPanelOffset/AddLayerDialog/VBoxContainer"]
+visible = false
 margin_top = 94.0
 margin_right = 304.0
 margin_bottom = 125.0
@@ -264,15 +267,15 @@ margin_right = 104.0
 margin_bottom = 26.0
 text = "Z Index"
 
-[node name="SpinBox" type="SpinBox" parent="UI/Scale/EditorUI/LayersPanelOffset/AddLayerDialog/VBoxContainer/ZIndexEntry"]
+[node name="ZIndex" type="SpinBox" parent="UI/Scale/EditorUI/LayersPanelOffset/AddLayerDialog/VBoxContainer/ZIndexEntry"]
 margin_left = 116.0
 margin_right = 304.0
 margin_bottom = 31.0
 
 [node name="TypeEntry" type="HSplitContainer" parent="UI/Scale/EditorUI/LayersPanelOffset/AddLayerDialog/VBoxContainer"]
-margin_top = 129.0
+margin_top = 94.0
 margin_right = 304.0
-margin_bottom = 158.0
+margin_bottom = 123.0
 
 [node name="Label" type="Label" parent="UI/Scale/EditorUI/LayersPanelOffset/AddLayerDialog/VBoxContainer/TypeEntry"]
 margin_top = 4.0
@@ -280,14 +283,14 @@ margin_right = 65.0
 margin_bottom = 25.0
 text = "Type"
 
-[node name="SpinBox" type="OptionButton" parent="UI/Scale/EditorUI/LayersPanelOffset/AddLayerDialog/VBoxContainer/TypeEntry"]
+[node name="LayerTypes" type="OptionButton" parent="UI/Scale/EditorUI/LayersPanelOffset/AddLayerDialog/VBoxContainer/TypeEntry"]
 margin_left = 77.0
 margin_right = 304.0
 margin_bottom = 29.0
 text = "Tilemap"
 
 [node name="SpaceFiller" type="Control" parent="UI/Scale/EditorUI/LayersPanelOffset/AddLayerDialog/VBoxContainer"]
-margin_top = 162.0
+margin_top = 127.0
 margin_right = 304.0
 margin_bottom = 498.0
 size_flags_vertical = 3
@@ -297,11 +300,12 @@ margin_top = 502.0
 margin_right = 304.0
 margin_bottom = 532.0
 
-[node name="Button" type="Button" parent="UI/Scale/EditorUI/LayersPanelOffset/AddLayerDialog/VBoxContainer"]
+[node name="AddLayerButton" type="Button" parent="UI/Scale/EditorUI/LayersPanelOffset/AddLayerDialog/VBoxContainer"]
 margin_top = 536.0
 margin_right = 304.0
 margin_bottom = 578.0
 rect_min_size = Vector2( 0, 42 )
+focus_mode = 0
 text = "Add"
 
 [node name="TilesPanelOffset" type="Control" parent="UI/Scale/EditorUI"]
@@ -392,6 +396,8 @@ text = "PLAY"
 [connection signal="mouse_exited" from="UI/Scale/EditorUI/MouseDetector" to="." method="_on_MouseDetector_mouse_exited"]
 [connection signal="pressed" from="UI/Scale/EditorUI/LayersPanelOffset/LayersPanel/RetractTab" to="UI/Scale/EditorUI/LayersPanelOffset" method="_on_RetractTab_pressed"]
 [connection signal="pressed" from="UI/Scale/EditorUI/LayersPanelOffset/LayersPanel/AddLayerButton" to="UI/Scale/EditorUI/LayersPanelOffset" method="_on_AddLayerButton_pressed"]
+[connection signal="about_to_show" from="UI/Scale/EditorUI/LayersPanelOffset/AddLayerDialog" to="UI/Scale/EditorUI/LayersPanelOffset/AddLayerDialog" method="_on_AddLayerDialog_about_to_show"]
+[connection signal="pressed" from="UI/Scale/EditorUI/LayersPanelOffset/AddLayerDialog/VBoxContainer/AddLayerButton" to="UI/Scale/EditorUI/LayersPanelOffset/AddLayerDialog" method="_on_AddLayerButton_pressed"]
 [connection signal="pressed" from="UI/Scale/EditorUI/TilesPanelOffset/TilesPanel/RetractTab" to="UI/Scale/EditorUI/TilesPanelOffset" method="_on_RetractTab_pressed"]
 [connection signal="toggled" from="UI/Scale/EditorUI/TilesPanelOffset/TilesPanel/Buttons/Eraser" to="." method="_on_Eraser_toggled"]
 [connection signal="toggled" from="UI/Scale/EditorUI/TilesPanelOffset/TilesPanel/Buttons/RectSelect" to="." method="_on_RectSelect_toggled"]
