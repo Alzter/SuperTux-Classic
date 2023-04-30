@@ -28,8 +28,6 @@ const save_file_3 = SAVE_DIR + "file3/"
 const save_file_4 = SAVE_DIR + "file4/"
 const save_file_5 = SAVE_DIR + "file5/"
 
-const contrib_save = SAVE_DIR + "{ct}.dat"
-
 var current_save_directory = save_file_1
 
 signal save_completed
@@ -96,7 +94,7 @@ func save_game(world : String = WorldmapManager.worldmap_name, levels_cleared : 
 		return
 	if save_path == null:
 		push_error("Error saving game: No save path specified")
-		
+	
 	var save_data = _encapsulate_game_data(levels_cleared, worldmap_level, worldmap_position)
 	
 	var dir = Directory.new()
@@ -104,7 +102,7 @@ func save_game(world : String = WorldmapManager.worldmap_name, levels_cleared : 
 		dir.make_dir_recursive(current_save_directory)
 	
 	var file = File.new()
-	var save_state = file.open(save_path if !Global.in_contrib else contrib_save.format({"ct": Global.current_contrib}), file.WRITE)
+	var save_state = file.open(save_path, file.WRITE)
 	
 	if save_state == OK:
 		file.store_var(save_data)

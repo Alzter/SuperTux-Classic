@@ -8,7 +8,7 @@ var is_level_worldmap = false
 
 var extro_level = null
 
-var cleared_levels: Array = []
+var cleared_levels = []
 
 var worldmap_name = null
 
