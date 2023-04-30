@@ -43,6 +43,8 @@ signal options_data_created
 signal player_died
 signal level_cleared
 
+var cached_level_names: Dictionary = {}
+
 func _ready():
 	self.gravity = 1
 	var root = get_tree().get_root()
