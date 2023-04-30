@@ -7,7 +7,3 @@ func _on_Back_mouse_entered():
 	
 func _on_Back_pressed():
 	hide()
-
-func _on_Contrib_pressed():
-	get_parent().contrib_menu.show()
-	self.hide()

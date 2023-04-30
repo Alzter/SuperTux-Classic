@@ -31,10 +31,6 @@ var fireballs_on_screen = 0 setget _change_fireball_count
 
 var controls = ["jump", "run", "move_left", "move_right", "move_up", "duck"]
 
-var in_contrib: bool = false
-var current_contrib: String = ""
-var contrib_data: Dictionary = {}
-
 var can_pause = false
 
 var privacy_policy_url = "https://github.com/Alzter/SuperTux-Classic/blob/main/PRIVACYPOLICY.md"
@@ -62,21 +58,6 @@ func _ready():
 	var options_data : Dictionary = SaveManager.get_options_data()
 	apply_options(options_data)
 	SaveManager.load_current_controls()
-	
-	var dir = Directory.new()
-	
-	dir.open("user://")
-	if !dir.dir_exists("contrib"):
-		dir.make_dir("contrib")
-	else:
-		dir.change_dir("contrib")
-		dir.list_dir_begin(true, true)
-		while true:
-			var current: String = dir.get_next()
-			if current == "":
-				break
-			else:
-				register_contrib_pack(current)
 
 func _update_gravity(new_value):
 	gravity = new_value * pow(60.0, 2.0) / 3.0
@@ -209,16 +190,6 @@ func level_completed():
 		else:
 			emit_signal("level_cleared")
 
-func register_contrib_pack(dir_name: String) -> bool:
-	var dir = Directory.new()
-	
-	if dir.dir_exists("user://contrib/" + dir_name) and dir.file_exists("user://contrib/" + dir_name + "/contrib.data"):
-		var file = ConfigFile.new()
-		file.load("user://contrib/" + dir_name + "/contrib.data")
-		contrib_data[dir_name] = file
-		return true
-	return false
-  
 func save_node_to_directory(node : Node, dir : String):
 	for child in node.get_children():
 		child.owner = node
