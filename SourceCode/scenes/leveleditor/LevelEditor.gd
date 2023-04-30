@@ -7,6 +7,8 @@ export var cache_level_filename = "cache.tscn"
 
 export var unselected_tilemap_opacity = 0.3
 
+export var editor_layers_directory = "res://scenes/layers/"
+
 onready var tile_functions = $TileFunctions
 onready var editor_camera = $EditorCamera
 

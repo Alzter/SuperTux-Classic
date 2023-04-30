@@ -161,6 +161,9 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
 script = ExtResource( 3 )
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="RetractAnimation" type="AnimationPlayer" parent="UI/Scale/EditorUI/LayersPanelOffset"]
 autoplay = "default"
@@ -207,11 +210,108 @@ size_flags_vertical = 3
 custom_constants/separation = 15
 alignment = 1
 
+[node name="AddLayerDialog" type="PopupDialog" parent="UI/Scale/EditorUI/LayersPanelOffset"]
+visible = true
+anchor_bottom = 1.0
+margin_right = 322.0
+margin_bottom = -122.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/Scale/EditorUI/LayersPanelOffset/AddLayerDialog"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 9.0
+margin_top = 10.0
+margin_right = -9.0
+margin_bottom = -10.0
+
+[node name="Title" type="Label" parent="UI/Scale/EditorUI/LayersPanelOffset/AddLayerDialog/VBoxContainer"]
+margin_right = 304.0
+margin_bottom = 21.0
+custom_colors/font_color = Color( 1, 1, 0, 1 )
+text = "Add Layer..."
+align = 1
+valign = 1
+
+[node name="HSeparator" type="HSeparator" parent="UI/Scale/EditorUI/LayersPanelOffset/AddLayerDialog/VBoxContainer"]
+margin_top = 25.0
+margin_right = 304.0
+margin_bottom = 55.0
+
+[node name="NameEntry" type="HSplitContainer" parent="UI/Scale/EditorUI/LayersPanelOffset/AddLayerDialog/VBoxContainer"]
+margin_top = 59.0
+margin_right = 304.0
+margin_bottom = 90.0
+
+[node name="Label" type="Label" parent="UI/Scale/EditorUI/LayersPanelOffset/AddLayerDialog/VBoxContainer/NameEntry"]
+margin_top = 5.0
+margin_right = 67.0
+margin_bottom = 26.0
+text = "Name"
+
+[node name="LineEdit" type="LineEdit" parent="UI/Scale/EditorUI/LayersPanelOffset/AddLayerDialog/VBoxContainer/NameEntry"]
+margin_left = 79.0
+margin_right = 304.0
+margin_bottom = 31.0
+
+[node name="ZIndexEntry" type="HSplitContainer" parent="UI/Scale/EditorUI/LayersPanelOffset/AddLayerDialog/VBoxContainer"]
+margin_top = 94.0
+margin_right = 304.0
+margin_bottom = 125.0
+
+[node name="Label" type="Label" parent="UI/Scale/EditorUI/LayersPanelOffset/AddLayerDialog/VBoxContainer/ZIndexEntry"]
+margin_top = 5.0
+margin_right = 104.0
+margin_bottom = 26.0
+text = "Z Index"
+
+[node name="SpinBox" type="SpinBox" parent="UI/Scale/EditorUI/LayersPanelOffset/AddLayerDialog/VBoxContainer/ZIndexEntry"]
+margin_left = 116.0
+margin_right = 304.0
+margin_bottom = 31.0
+
+[node name="TypeEntry" type="HSplitContainer" parent="UI/Scale/EditorUI/LayersPanelOffset/AddLayerDialog/VBoxContainer"]
+margin_top = 129.0
+margin_right = 304.0
+margin_bottom = 158.0
+
+[node name="Label" type="Label" parent="UI/Scale/EditorUI/LayersPanelOffset/AddLayerDialog/VBoxContainer/TypeEntry"]
+margin_top = 4.0
+margin_right = 65.0
+margin_bottom = 25.0
+text = "Type"
+
+[node name="SpinBox" type="OptionButton" parent="UI/Scale/EditorUI/LayersPanelOffset/AddLayerDialog/VBoxContainer/TypeEntry"]
+margin_left = 77.0
+margin_right = 304.0
+margin_bottom = 29.0
+text = "Tilemap"
+
+[node name="SpaceFiller" type="Control" parent="UI/Scale/EditorUI/LayersPanelOffset/AddLayerDialog/VBoxContainer"]
+margin_top = 162.0
+margin_right = 304.0
+margin_bottom = 498.0
+size_flags_vertical = 3
+
+[node name="HSeparator2" type="HSeparator" parent="UI/Scale/EditorUI/LayersPanelOffset/AddLayerDialog/VBoxContainer"]
+margin_top = 502.0
+margin_right = 304.0
+margin_bottom = 532.0
+
+[node name="Button" type="Button" parent="UI/Scale/EditorUI/LayersPanelOffset/AddLayerDialog/VBoxContainer"]
+margin_top = 536.0
+margin_right = 304.0
+margin_bottom = 578.0
+rect_min_size = Vector2( 0, 42 )
+text = "Add"
+
 [node name="TilesPanelOffset" type="Control" parent="UI/Scale/EditorUI"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
 script = ExtResource( 3 )
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="RetractAnimation" type="AnimationPlayer" parent="UI/Scale/EditorUI/TilesPanelOffset"]
 root_node = NodePath("../../LayersPanelOffset")
@@ -291,6 +391,7 @@ text = "PLAY"
 [connection signal="mouse_entered" from="UI/Scale/EditorUI/MouseDetector" to="." method="_on_MouseDetector_mouse_entered"]
 [connection signal="mouse_exited" from="UI/Scale/EditorUI/MouseDetector" to="." method="_on_MouseDetector_mouse_exited"]
 [connection signal="pressed" from="UI/Scale/EditorUI/LayersPanelOffset/LayersPanel/RetractTab" to="UI/Scale/EditorUI/LayersPanelOffset" method="_on_RetractTab_pressed"]
+[connection signal="pressed" from="UI/Scale/EditorUI/LayersPanelOffset/LayersPanel/AddLayerButton" to="UI/Scale/EditorUI/LayersPanelOffset" method="_on_AddLayerButton_pressed"]
 [connection signal="pressed" from="UI/Scale/EditorUI/TilesPanelOffset/TilesPanel/RetractTab" to="UI/Scale/EditorUI/TilesPanelOffset" method="_on_RetractTab_pressed"]
 [connection signal="toggled" from="UI/Scale/EditorUI/TilesPanelOffset/TilesPanel/Buttons/Eraser" to="." method="_on_Eraser_toggled"]
 [connection signal="toggled" from="UI/Scale/EditorUI/TilesPanelOffset/TilesPanel/Buttons/RectSelect" to="." method="_on_RectSelect_toggled"]
