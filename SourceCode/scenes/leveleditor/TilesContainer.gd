@@ -54,7 +54,7 @@ func empty_tiles():
 	for tile_button in get_children():
 		tile_button.queue_free()
 
-func update_selected_tile(tile_button_node : Control, selected_tile_id : int):
+func update_selected_tile(selected_tile_id : int):
 	emit_signal("update_selected_tile", selected_tile_id)
 	for tile_button in get_children():
 		tile_button.disabled = tile_button.tile_id == selected_tile_id

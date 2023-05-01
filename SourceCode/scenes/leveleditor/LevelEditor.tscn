@@ -347,22 +347,34 @@ margin_bottom = 68.0
 size_flags_horizontal = 3
 alignment = 1
 
+[node name="EyeDropper" type="Button" parent="UI/Scale/EditorUI/TilesPanelOffset/TilesPanel/Buttons"]
+margin_right = 61.0
+margin_bottom = 52.0
+focus_mode = 0
+size_flags_horizontal = 3
+toggle_mode = true
+text = "EyeDropper"
+clip_text = true
+
 [node name="Eraser" type="Button" parent="UI/Scale/EditorUI/TilesPanelOffset/TilesPanel/Buttons"]
-margin_right = 94.0
+margin_left = 65.0
+margin_right = 127.0
 margin_bottom = 52.0
 focus_mode = 0
 size_flags_horizontal = 3
 toggle_mode = true
 text = "Erase"
+clip_text = true
 
 [node name="RectSelect" type="Button" parent="UI/Scale/EditorUI/TilesPanelOffset/TilesPanel/Buttons"]
-margin_left = 98.0
+margin_left = 131.0
 margin_right = 193.0
 margin_bottom = 52.0
 focus_mode = 0
 size_flags_horizontal = 3
 toggle_mode = true
-text = "Rect"
+text = "RectSelect"
+clip_text = true
 
 [node name="ScrollContainer" type="ScrollContainer" parent="UI/Scale/EditorUI/TilesPanelOffset/TilesPanel"]
 anchor_right = 1.0
@@ -407,6 +419,7 @@ text = "PLAY"
 [connection signal="about_to_show" from="UI/Scale/EditorUI/LayersPanelOffset/AddLayerDialog" to="UI/Scale/EditorUI/LayersPanelOffset/AddLayerDialog" method="_on_AddLayerDialog_about_to_show"]
 [connection signal="pressed" from="UI/Scale/EditorUI/LayersPanelOffset/AddLayerDialog/VBoxContainer/AddLayerButton" to="UI/Scale/EditorUI/LayersPanelOffset/AddLayerDialog" method="_on_AddLayerButton_pressed"]
 [connection signal="pressed" from="UI/Scale/EditorUI/TilesPanelOffset/TilesPanel/RetractTab" to="UI/Scale/EditorUI/TilesPanelOffset" method="_on_RetractTab_pressed"]
+[connection signal="toggled" from="UI/Scale/EditorUI/TilesPanelOffset/TilesPanel/Buttons/EyeDropper" to="." method="_on_EyeDropper_toggled"]
 [connection signal="toggled" from="UI/Scale/EditorUI/TilesPanelOffset/TilesPanel/Buttons/Eraser" to="." method="_on_Eraser_toggled"]
 [connection signal="toggled" from="UI/Scale/EditorUI/TilesPanelOffset/TilesPanel/Buttons/RectSelect" to="." method="_on_RectSelect_toggled"]
 [connection signal="pressed" from="UI/Scale/EditToggle" to="." method="_on_EditToggle_pressed"]

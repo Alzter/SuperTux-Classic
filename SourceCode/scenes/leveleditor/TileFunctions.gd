@@ -18,6 +18,8 @@ var placing_tiles = false
 var placing_rectangle_fill = false # If the user is making a rectangular fill of tiles
 var is_erasing = false
 
+var using_eyedropper = false
+
 var rect_fill_origin = Vector2()
 
 var can_place_tiles = true
@@ -44,6 +46,11 @@ func _process(delta):
 		if selected_tilemap:
 			selected_tile_position = get_selected_tile()
 			
+			if using_eyedropper:
+				owner.current_tile_id = selected_tilemap.get_cellv(selected_tile_position)
+				owner.eyedropper_enabled = false
+				using_eyedropper = false
+			
 			if !placing_rectangle_fill:
 				tile_selection.show()
 				update_tile_selected_sprite()
@@ -67,7 +74,9 @@ func update_tile_selected_sprite():
 func _input(event):
 	if selected_tilemap and !owner.mouse_over_ui:
 		if event is InputEventMouseButton:
-			if event.button_index == BUTTON_LEFT or event.button_index == BUTTON_RIGHT:
+			var about_to_use_eyedropper = event.button_index == BUTTON_MIDDLE or owner.eyedropper_enabled
+			
+			if !about_to_use_eyedropper:
 				placing_tiles = event.pressed
 				placing_rectangle_fill = false
 				
@@ -81,6 +90,8 @@ func _input(event):
 					if is_tile_position_legal(rect_start):
 						rect_fill_origin = rect_start
 						placing_rectangle_fill = true
+			else:
+				using_eyedropper = true
 
 # ===================================================================================
 # Tile placement

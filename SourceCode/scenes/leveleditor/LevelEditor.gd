@@ -19,9 +19,11 @@ onready var layers_container = $UI/Scale/EditorUI/LayersPanelOffset/LayersPanel/
 
 var rect_select_enabled = false setget update_rect_select_enabled
 var eraser_enabled = false setget update_eraser_enabled
+var eyedropper_enabled = false setget update_eyedropper_enabled
 
 onready var button_rect_select = $UI/Scale/EditorUI/TilesPanelOffset/TilesPanel/Buttons/RectSelect
 onready var button_eraser = $UI/Scale/EditorUI/TilesPanelOffset/TilesPanel/Buttons/Eraser
+onready var button_eyedropper = $UI/Scale/EditorUI/TilesPanelOffset/TilesPanel/Buttons/EyeDropper
 
 export var layer_button_scene : PackedScene
 
@@ -29,13 +31,17 @@ onready var cache_level_path = cache_level_directory + cache_level_filename
 
 onready var edit_layer_dialog = $UI/Scale/EditorUI/EditLayerDialog
 
+signal eraser_toggled
+signal rect_select_toggled
+signal eyedropper_toggled
+
 var level = null
 var level_objects = null setget , _get_level_objects
 var object_map = null
 
 var selected_object = null setget update_selected_object
 var selected_object_name = ""
-var current_tile_id = -1 # The ID of the tile the user is currently using
+var current_tile_id = -1 setget _update_current_tile_id # The ID of the tile the user is currently using
 
 var edit_mode = true
 
@@ -246,11 +252,18 @@ func _on_RectSelect_toggled(button_pressed):
 	rect_select_enabled = button_pressed
 	emit_signal("rect_select_toggled", button_pressed)
 
+func _on_EyeDropper_toggled(button_pressed):
+	eyedropper_enabled = button_pressed
+	emit_signal("eyedropper_toggled", button_pressed)
+
 func update_rect_select_enabled(new_value):
 	button_rect_select.pressed = new_value
 
 func update_eraser_enabled(new_value):
 	button_eraser.pressed = new_value
+
+func update_eyedropper_enabled(new_value):
+	button_eyedropper.pressed = new_value
 
 # When User hovers over the UI
 func _on_MouseDetector_mouse_entered():
@@ -316,3 +329,7 @@ func _deferred_delete_layer(layer_object : Node):
 		self.selected_object = null
 	layer_object.free()
 	update_layers_panel(self.level_objects)
+
+func _update_current_tile_id(new_value):
+	current_tile_id = new_value
+	tiles_container.update_selected_tile(current_tile_id)

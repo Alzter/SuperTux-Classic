@@ -33,4 +33,4 @@ func update_current_tile_id(new_value):
 		sprite.scale = Vector2.ONE * (Global.TILE_SIZE / rect_size)
 
 func _on_TileButton_pressed():
-	emit_signal("tile_button_pressed", self, tile_id)
+	emit_signal("tile_button_pressed", tile_id)
