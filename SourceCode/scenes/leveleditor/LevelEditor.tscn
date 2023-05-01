@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://theme/default_theme.tres" type="Theme" id=1]
 [ext_resource path="res://scenes/leveleditor/LevelEditor.gd" type="Script" id=2]
@@ -11,6 +11,7 @@
 [ext_resource path="res://scenes/leveleditor/TilesContainer.gd" type="Script" id=9]
 [ext_resource path="res://images/player/tux/small/idle.png" type="Texture" id=10]
 [ext_resource path="res://scenes/leveleditor/AddLayerDialog.gd" type="Script" id=11]
+[ext_resource path="res://scenes/leveleditor/EditLayerDialog.gd" type="Script" id=12]
 
 [sub_resource type="SpriteFrames" id=7]
 animations = [ {
@@ -255,23 +256,6 @@ margin_left = 79.0
 margin_right = 304.0
 margin_bottom = 31.0
 
-[node name="ZIndexEntry" type="HSplitContainer" parent="UI/Scale/EditorUI/LayersPanelOffset/AddLayerDialog/VBoxContainer"]
-visible = false
-margin_top = 94.0
-margin_right = 304.0
-margin_bottom = 125.0
-
-[node name="Label" type="Label" parent="UI/Scale/EditorUI/LayersPanelOffset/AddLayerDialog/VBoxContainer/ZIndexEntry"]
-margin_top = 5.0
-margin_right = 104.0
-margin_bottom = 26.0
-text = "Z Index"
-
-[node name="ZIndex" type="SpinBox" parent="UI/Scale/EditorUI/LayersPanelOffset/AddLayerDialog/VBoxContainer/ZIndexEntry"]
-margin_left = 116.0
-margin_right = 304.0
-margin_bottom = 31.0
-
 [node name="TypeEntry" type="HSplitContainer" parent="UI/Scale/EditorUI/LayersPanelOffset/AddLayerDialog/VBoxContainer"]
 margin_top = 94.0
 margin_right = 304.0
@@ -397,10 +381,51 @@ tile_button_scene = ExtResource( 8 )
 visible = true
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 457.0
-margin_top = 257.0
-margin_right = -457.0
-margin_bottom = -257.0
+margin_left = 392.0
+margin_top = 166.0
+margin_right = -392.0
+margin_bottom = -166.0
+script = ExtResource( 12 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/Scale/EditorUI/EditLayerDialog"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 9.0
+margin_top = 10.0
+margin_right = -9.0
+margin_bottom = -10.0
+
+[node name="Title" type="Label" parent="UI/Scale/EditorUI/EditLayerDialog/VBoxContainer"]
+margin_right = 478.0
+margin_bottom = 21.0
+custom_colors/font_color = Color( 1, 1, 0, 1 )
+text = "Edit Layer..."
+align = 1
+valign = 1
+
+[node name="HSeparator" type="HSeparator" parent="UI/Scale/EditorUI/EditLayerDialog/VBoxContainer"]
+margin_top = 25.0
+margin_right = 478.0
+margin_bottom = 55.0
+
+[node name="SpaceFiller" type="Control" parent="UI/Scale/EditorUI/EditLayerDialog/VBoxContainer"]
+margin_top = 59.0
+margin_right = 478.0
+margin_bottom = 288.0
+size_flags_vertical = 3
+
+[node name="HSeparator2" type="HSeparator" parent="UI/Scale/EditorUI/EditLayerDialog/VBoxContainer"]
+margin_top = 292.0
+margin_right = 478.0
+margin_bottom = 322.0
+
+[node name="ConfirmEditLayer" type="Button" parent="UI/Scale/EditorUI/EditLayerDialog/VBoxContainer"]
+margin_top = 326.0
+margin_right = 478.0
+margin_bottom = 368.0
+rect_min_size = Vector2( 0, 42 )
+focus_mode = 0
+text = "OK"
 
 [node name="EditToggle" type="Button" parent="UI/Scale"]
 anchor_left = 1.0
@@ -423,4 +448,5 @@ text = "PLAY"
 [connection signal="toggled" from="UI/Scale/EditorUI/TilesPanelOffset/TilesPanel/Buttons/EyeDropper" to="." method="_on_EyeDropper_toggled"]
 [connection signal="toggled" from="UI/Scale/EditorUI/TilesPanelOffset/TilesPanel/Buttons/Eraser" to="." method="_on_Eraser_toggled"]
 [connection signal="toggled" from="UI/Scale/EditorUI/TilesPanelOffset/TilesPanel/Buttons/RectSelect" to="." method="_on_RectSelect_toggled"]
+[connection signal="pressed" from="UI/Scale/EditorUI/EditLayerDialog/VBoxContainer/ConfirmEditLayer" to="UI/Scale/EditorUI/EditLayerDialog" method="_on_ConfirmEditLayer_pressed"]
 [connection signal="pressed" from="UI/Scale/EditToggle" to="." method="_on_EditToggle_pressed"]

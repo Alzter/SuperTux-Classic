@@ -1,10 +1,10 @@
 extends PopupDialog
 
 onready var layer_name = $VBoxContainer/NameEntry/Name
-onready var layer_z_index = $VBoxContainer/ZIndexEntry/ZIndex
 onready var layer_type = $VBoxContainer/TypeEntry/LayerTypes
 
 func _on_AddLayerDialog_about_to_show():
+	layer_name.clear()
 	layer_type.clear()
 	for type in owner.layer_types:
 		layer_type.add_item(type)
