@@ -88,6 +88,14 @@ func _input(event):
 func place_tile(tilemap : TileMap, tile_position : Vector2, tile_id : int, update_autotile = true, ignore_bounds = false):
 	if !is_tile_position_legal(tile_position) and !ignore_bounds: return
 	tilemap.set_cellv(tile_position, tile_id)
+	
+	# Tilemaps in STC have custom properties which we use here.
+	if tilemap.is_in_group("stc_tilemaps"):
+		
+		# Tilemaps in STC have some tiles which don't apply autotile rules.
+		# If this tile is one of those, don't apply autotile rules.
+		if !tilemap.get_autotile_status(tile_id): update_autotile = false
+	
 	if update_autotile: tilemap.update_bitmask_area(tile_position)
 	
 	# EDGE TILE HANDLING
@@ -104,6 +112,9 @@ func fill_tile_rect(tilemap : TileMap, rect : Rect2, tile_id : int, update_autot
 		for x in rect.size.x + 1:
 			var tile_coords = rect.position + Vector2(x,y)
 			place_tile(tilemap, tile_coords, tile_id, false, ignore_bounds)
+	
+	if tilemap.is_in_group("stc_tilemaps"):
+		if !tilemap.get_autotile_status(tile_id): update_autotile = false
 	
 	if update_autotile:
 		tilemap.update_bitmask_region(rect.position, rect.end)
