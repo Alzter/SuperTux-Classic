@@ -17,7 +17,6 @@ position = Vector2( 0, 8 )
 shape = SubResource( 6 )
 
 [node name="Sprite" type="Sprite" parent="."]
-visible = false
 texture = ExtResource( 1 )
 
 [connection signal="body_entered" from="." to="." method="_on_Lava_body_entered"]

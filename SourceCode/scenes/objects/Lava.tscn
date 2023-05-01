@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://scenes/objects/Resizable.gd" type="Script" id=1]
+[ext_resource path="res://images/tile_animations/Lava.tres" type="Texture" id=2]
+[ext_resource path="res://scenes/objects/LavaHitbox.gd" type="Script" id=3]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 16, 16 )
+
+[node name="Lava" type="NinePatchRect" groups=["resizable"]]
+margin_right = 32.0
+margin_bottom = 32.0
+texture = ExtResource( 2 )
+region_rect = Rect2( 0, 0, 128, 32 )
+patch_margin_top = 32
+axis_stretch_horizontal = 1
+script = ExtResource( 1 )
+hitbox_size_offset = Vector2( 0, -8 )
+hitbox_position_offset = Vector2( 0, 8 )
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 6
+script = ExtResource( 3 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2( 16, 16 )
+shape = SubResource( 1 )
+
+[connection signal="resized" from="." to="." method="_on_resized"]
+[connection signal="body_entered" from="Area2D" to="Area2D" method="_on_Lava_body_entered"]
