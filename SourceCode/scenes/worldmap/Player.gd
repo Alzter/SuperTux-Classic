@@ -6,7 +6,7 @@ export var tilemaps = []   # An array of all the tilemap objects in the worldmap
 # The node of the level dot the player is currently standing on.
 var current_level_dot = null setget set_current_level_dot
 
-var powerup_state = 0
+var state = 0
 var sprite = null
 
 onready var camera = $Camera2D
@@ -46,7 +46,7 @@ func _ready():
 	
 	_populate_stop_tiles()
 	
-	powerup_state = Scoreboard.player_initial_state
+	state = Scoreboard.player_initial_state
 	update_sprite_state()
 	
 	camera_bounds_to_tilemap_bounds()
@@ -193,7 +193,7 @@ func get_current_level_dot(tilemap = tilemaps[0]):
 			set_current_level_dot(leveldot, false)
 			return
 
-func update_sprite_state(state = powerup_state):
+func update_sprite_state(state = self.state):
 	sprite_big.visible = (state == 0)
 	sprite_small.visible = (state != 0)
 	sprite = sprite_big if (state == 0) else sprite_small
@@ -237,3 +237,10 @@ func window_resized():
 		
 		if tilemap_size.x < window_resolution.x or tilemap_size.y < window_resolution.y:
 			camera.zoom = Vector2(0.5, 0.5)
+
+func set_position(new_value):
+	var grid_pos = new_value / Global.TILE_SIZE
+	grid_pos = Vector2(floor(grid_pos.x), floor(grid_pos.y))
+	
+	var grid_aligned_pos = grid_pos * Global.TILE_SIZE + Vector2.ONE * Global.TILE_SIZE * 0.5
+	.set_position(grid_aligned_pos)

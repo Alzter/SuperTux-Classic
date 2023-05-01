@@ -104,7 +104,7 @@ func _deferred_goto_scene(path, loading_level = false):
 # Triggered once the player loads and executes their _ready() script. Sets the value of player to the player's node.
 func player_set(new_value):
 	player = new_value
-	if spawn_position != null: player.position = spawn_position
+	if spawn_position != null: player.set_position(spawn_position)
 	
 	emit_signal("player_loaded")
 

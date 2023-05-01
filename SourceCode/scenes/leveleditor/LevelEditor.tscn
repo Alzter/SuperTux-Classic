@@ -121,6 +121,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 theme = ExtResource( 1 )
 script = ExtResource( 2 )
+level_to_load = "res://scenes/leveleditor/sampleworldmap.tscn"
 layer_button_scene = ExtResource( 4 )
 
 [node name="TileFunctions" type="Node2D" parent="."]
