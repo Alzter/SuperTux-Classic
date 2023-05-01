@@ -18,7 +18,13 @@ func update_current_tile_id(new_value):
 	sprite.set_texture(tile_texture)
 	
 	if tileset.tile_get_tile_mode(tile_id) == 1:
-		sprite.region_rect.position = tileset.autotile_get_icon_coordinate(tile_id) * Global.TILE_SIZE
+		#print(tileset.tile_get_name(tile_id))
+		
+		var sprite_position = tileset.tile_get_region(tile_id).position
+		sprite_position += tileset.autotile_get_icon_coordinate(tile_id) * Global.TILE_SIZE
+		
+		sprite.region_rect.position = sprite_position
+		
 	else:
 		sprite.region_rect = tileset.tile_get_region(tile_id)
 		
