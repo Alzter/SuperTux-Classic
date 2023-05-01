@@ -98,6 +98,9 @@ func place_tile(tilemap : TileMap, tile_position : Vector2, tile_id : int, updat
 	
 	if update_autotile: tilemap.update_bitmask_area(tile_position)
 	
+	if tilemap.is_in_group("stc_tilemaps"):
+		tilemap.apply_custom_autotile_rules(tile_position)
+	
 	# EDGE TILE HANDLING
 	# If we draw a tile at the bottom of the tilemap, automatically fill it
 	if tile_position.y == level_boundaries.end.y - 1:

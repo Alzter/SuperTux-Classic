@@ -14,9 +14,82 @@ export var ignore_tiles = [
 	"Invisible", "InvisibleUniSolid"
 ]
 
+# These tiles use custom autotiling rules.
+export var custom_autotile_tiles = [
+	'Water1', 'Water2', 'Water3', 'Water4', 'WaterFill',
+	'Lava1', 'Lava2', 'Lava3', 'Lava4', 'LavaFill'
+]
+
 # Returns true if the specified tile applies autotile rules, false if not.
 # Decoration tiles (e.g. Dopefish) don't apply autotile rules, while
 # most main tilesets do.
 func get_autotile_status(tile_id : int):
 	var tile_name = tile_set.tile_get_name(tile_id)
 	return !non_autotile_tiles.has(tile_name)
+
+# Applies custom autotile rules to all tiles inside and adjacent of tile_position.
+func apply_custom_autotile_rules(tile_position : Vector2):
+	
+	# Make a Rect2 containing all the tiles we need to update the bitmask for.
+	var tile_rect = Rect2(tile_position - Vector2.ONE, Vector2.ONE * 2)
+	
+	# Iterate through every tile in this rectangle by updating its tile
+	# based on autotiling rules we establish in the function
+	# called "_apply_custom_autotile_rules_to_tile"
+	for y in tile_rect.size.y + 1:
+		for x in tile_rect.size.x + 1:
+			var tile_coords = tile_rect.position + Vector2(x,y)
+			var tile_id = get_cellv(tile_coords)
+			var tile_name = tile_set.tile_get_name(tile_id)
+			
+			if custom_autotile_tiles.has(tile_name):
+				_apply_custom_autotile_rules_to_tile(tile_coords)
+
+# Applies custom autotile rules for specific tiles, such as water and lava.
+# Godot's autotiling functionality is limited so we have to make custom rules
+# for certain tiles like these.
+func _apply_custom_autotile_rules_to_tile(tile_position : Vector2):
+	var tile_id = get_cellv(tile_position)
+	var tile_to_use = _get_autotile_tile_to_use_at(tile_position, tile_id)
+	
+	if tile_to_use != tile_id:
+		set_cellv(tile_position, tile_to_use)
+
+# Gets the specific tile to use.
+func _get_autotile_tile_to_use_at(tile_position, tile_id):
+	var tile_to_use = tile_id
+	
+	var tile_name = get_tile_name(tile_id)
+	var tile_group = get_tile_group(tile_name)
+	
+	# Water and Lava use custom autotiling rules
+	if ["Lava1", "Water1"].has(tile_group):
+		var tile = "Lava" if tile_group == "Lava1" else "Water"
+		
+		var above_tile = get_cellv(tile_position + Vector2.UP)
+		var above_tile_name = get_tile_name(above_tile)
+		var above_tile_group = get_tile_group(above_tile_name)
+		
+		var liquid_is_on_surface = !["Lava1", "Water1"].has(above_tile_group)
+		
+		if liquid_is_on_surface:
+			var liquid_surface_tile_number = fmod(tile_position.x, 4) + 1
+			tile_to_use = str(tile) + str(liquid_surface_tile_number)
+		else:
+			tile_to_use = tile + "Fill"
+		
+		tile_to_use = tile_set.find_tile_by_name(tile_to_use)
+	
+	return tile_to_use
+
+# Returns the group of a specific tile, or NULL if it is not in a group.
+# E.g.: "WaterFill" is a tile within the group "Water1".
+# "Water1" is the main tile of a group, whilst "WaterFill" is a subtile.
+func get_tile_group(tile_name):
+	for group_name in group_tiles:
+		var tiles_in_group = group_tiles.get(group_name)
+		if tiles_in_group.has(tile_name): return group_name
+	return null
+
+func get_tile_name(tile_id):
+	return tile_set.tile_get_name(tile_id)
