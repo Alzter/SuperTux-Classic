@@ -1,5 +1,13 @@
 extends TileMap
 
+export var editor_params = [
+	"solid", "multiply_color", "overlay_color"
+	]
+
+var solid = get_collision_layer_bit(0) setget _update_solidity
+onready var multiply_color = modulate setget _update_multiply_color
+onready var overlay_color = material.get_shader_param("overlay_color") setget _update_overlay_color
+
 # These tiles won't apply autotile rules in the editor.
 export var non_autotile_tiles = ["SnowDopeFish", "SnowFish"]
 
@@ -93,3 +101,17 @@ func get_tile_group(tile_name):
 
 func get_tile_name(tile_id):
 	return tile_set.tile_get_name(tile_id)
+
+func _update_solidity(new_value):
+	solid = new_value
+	set_collision_layer_bit(0, new_value)
+	set_collision_mask_bit(0, new_value)
+
+func _update_multiply_color(new_value):
+	multiply_color = new_value
+	modulate = multiply_color
+
+func _update_overlay_color(new_value):
+	overlay_color = new_value
+	use_parent_material = false
+	material.set_shader_param("overlay_color", new_value)
