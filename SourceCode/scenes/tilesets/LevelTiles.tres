@@ -713,7 +713,7 @@ points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
 0/texture = ExtResource( 1 )
 0/tex_offset = Vector2( 0, -8 )
 0/modulate = Color( 1, 1, 1, 1 )
-0/region = Rect2( 0, 0, 576, 96 )
+0/region = Rect2( 0, 0, 512, 96 )
 0/tile_mode = 1
 0/autotile/bitmask_mode = 1
 0/autotile/bitmask_flags = [ Vector2( 0, 0 ), 432, Vector2( 0, 1 ), 438, Vector2( 0, 2 ), 54, Vector2( 1, 0 ), 504, Vector2( 1, 1 ), 511, Vector2( 1, 2 ), 63, Vector2( 2, 0 ), 216, Vector2( 2, 1 ), 219, Vector2( 2, 2 ), 27, Vector2( 3, 0 ), 144, Vector2( 3, 1 ), 146, Vector2( 3, 2 ), 18, Vector2( 4, 0 ), 48, Vector2( 4, 1 ), 176, Vector2( 4, 2 ), 50, Vector2( 5, 0 ), 56, Vector2( 5, 1 ), 152, Vector2( 5, 2 ), 26, Vector2( 6, 0 ), 24, Vector2( 6, 1 ), 58, Vector2( 6, 2 ), 178, Vector2( 7, 0 ), 186, Vector2( 7, 1 ), 184, Vector2( 7, 2 ), 154, Vector2( 8, 0 ), 16, Vector2( 8, 1 ), 182, Vector2( 8, 2 ), 434, Vector2( 9, 0 ), 506, Vector2( 9, 1 ), 155, Vector2( 9, 2 ), 218, Vector2( 10, 0 ), 191, Vector2( 10, 1 ), 248, Vector2( 10, 2 ), 59, Vector2( 11, 0 ), 446, Vector2( 11, 1 ), 440, Vector2( 11, 2 ), 62, Vector2( 12, 0 ), 251, Vector2( 12, 1 ), 255, Vector2( 12, 2 ), 507, Vector2( 13, 0 ), 254, Vector2( 13, 1 ), 447, Vector2( 13, 2 ), 510, Vector2( 14, 0 ), 443, Vector2( 14, 1 ), 250, Vector2( 14, 2 ), 190, Vector2( 15, 0 ), 511, Vector2( 15, 1 ), 442, Vector2( 15, 2 ), 187 ]
@@ -1865,7 +1865,7 @@ points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 } ]
 14/z_index = 0
-15/name = "DopeFish"
+15/name = "SnowDopeFish"
 15/texture = ExtResource( 1 )
 15/tex_offset = Vector2( 0, -8 )
 15/modulate = Color( 1, 1, 1, 1 )
@@ -1886,7 +1886,7 @@ points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 } ]
 15/z_index = -4
-16/name = "Fishy"
+16/name = "SnowFish"
 16/texture = ExtResource( 1 )
 16/tex_offset = Vector2( 0, -8 )
 16/modulate = Color( 1, 1, 1, 1 )
