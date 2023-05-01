@@ -53,6 +53,7 @@ tile_data = PoolIntArray( 65534, 0, 3, 191, 0, 0, 192, 0, 1, 193, 0, 1, 194, 0, 
 
 [node name="Water" parent="." instance=ExtResource( 2 )]
 material = SubResource( 6 )
+z_index = -30
 collision_layer = 128
 collision_mask = 128
 
