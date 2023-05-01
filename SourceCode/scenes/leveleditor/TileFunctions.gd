@@ -120,7 +120,10 @@ func fill_tile_rect(tilemap : TileMap, rect : Rect2, tile_id : int, update_autot
 		if !tilemap.get_autotile_status(tile_id): update_autotile = false
 	
 	if update_autotile:
-		tilemap.update_bitmask_region(rect.position, rect.end)
+		if rect.size != Vector2.ZERO:
+			tilemap.update_bitmask_region(rect.position, rect.end)
+		else:
+			tilemap.update_bitmask_area(rect.position)
 
 func erase_tile_rect(tilemap : TileMap, rect : Rect2, update_autotile = true):
 	fill_tile_rect(tilemap, rect, -1, update_autotile)
