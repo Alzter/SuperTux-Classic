@@ -4,8 +4,8 @@ export var editor_params = [
 	"solid", "multiply_color", "overlay_color"
 	]
 
-var solid = get_collision_layer_bit(0) setget _update_solidity
-onready var multiply_color = modulate setget _update_multiply_color
+var solid : bool = get_collision_layer_bit(0) setget _update_solidity
+onready var multiply_color : Color = modulate setget _update_multiply_color
 onready var overlay_color = material.get_shader_param("overlay_color") setget _update_overlay_color
 
 # These tiles won't apply autotile rules in the editor.

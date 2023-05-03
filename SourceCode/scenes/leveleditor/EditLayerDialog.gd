@@ -18,10 +18,11 @@ func _on_EditLayerDialog_about_to_show():
 	if parameters:
 		
 		# FOR EVERY LAYER PARAMETER:
-		for p in parameters:
-			var param_name = var2str(p).replace('"', '')
+		for param_string in parameters:
+			var p = layer_being_edited.get(param_string)
+			var param_name = param_string
 			var param_type = typeof(p)
-			 
+			
 			_create_parameter_editor(layer_being_edited, param_name, param_type)
 
 # Creates a parameter editor object for a parameter.
@@ -32,6 +33,7 @@ func _create_parameter_editor(parameter_owner_object : Node, param_name : String
 	
 	layer_parameters.add_child(param_editor_node)
 	param_editor_node.set_owner(layer_parameters)
+	print(layer_parameters.get_children())
 
 func _on_ConfirmEditLayer_pressed():
 	hide()

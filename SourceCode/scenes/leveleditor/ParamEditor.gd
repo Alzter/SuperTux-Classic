@@ -22,15 +22,16 @@ var param_editor_ui_node = null
 func init(owner_object : Node, param_name : String, param_type : int):
 	parameter_owner_object = owner_object
 	parameter_name = param_name
-	param_type = param_type
+	parameter_type = param_type
 
 func _ready():
 	if !parameter_name or !parameter_type or !parameter_owner_object:
-		push_error("Error creating Parameter Editor.")
+		push_error("Error creating Parameter Editor. Missing parameter name, type, or owner object.")
 		queue_free()
 		return
 	
 	label.text = parameter_name.capitalize()
+	label.show()
 	
 	for ui_node in editor_nodes:
 		ui_node.hide()
@@ -62,6 +63,7 @@ func _ready():
 			param_editor_ui_node = color_edit
 		
 		_: # If the data type is not matched, do not create a parameter editor.
+			push_error(str("ERROR creating layer parameter editor. Unrecognised parameter type: " + str(parameter_type)))
 			queue_free()
 			return
 	
