@@ -319,7 +319,7 @@ func _get_level_objects(object_node = level, objects := []):
 	return objects
 
 func edit_layer(layer_object : Node):
-	edit_layer_dialog.popup()
+	edit_layer_dialog.appear(layer_object)
 
 func delete_layer(layer_object : Node):
 	call_deferred("_deferred_delete_layer", layer_object)
