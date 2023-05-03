@@ -1,0 +1,36 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://theme/default_theme.tres" type="Theme" id=1]
+[ext_resource path="res://scenes/leveleditor/ParamEditor.gd" type="Script" id=2]
+
+[node name="ParamEditor" type="HSplitContainer"]
+margin_right = 466.0
+margin_bottom = 24.0
+theme = ExtResource( 1 )
+script = ExtResource( 2 )
+
+[node name="Label" type="Label" parent="."]
+margin_top = 5.0
+margin_right = 227.0
+margin_bottom = 26.0
+size_flags_horizontal = 3
+text = "Parameter Name"
+valign = 1
+
+[node name="SpinBox" type="SpinBox" parent="."]
+margin_left = 239.0
+margin_right = 466.0
+margin_bottom = 31.0
+size_flags_horizontal = 3
+step = 0.0
+rounded = true
+allow_greater = true
+allow_lesser = true
+
+[node name="ColorPickerButton" type="ColorPickerButton" parent="."]
+visible = false
+margin_left = 239.0
+margin_right = 466.0
+margin_bottom = 29.0
+size_flags_horizontal = 3
+color = Color( 1, 0, 0, 1 )
