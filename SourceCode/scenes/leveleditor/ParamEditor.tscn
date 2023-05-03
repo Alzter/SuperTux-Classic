@@ -10,14 +10,15 @@ theme = ExtResource( 1 )
 script = ExtResource( 2 )
 
 [node name="Label" type="Label" parent="."]
-margin_top = 4.0
-margin_right = 227.0
-margin_bottom = 25.0
+margin_top = 1.0
+margin_right = 466.0
+margin_bottom = 22.0
 size_flags_horizontal = 3
 text = "Parameter Name"
 valign = 1
 
-[node name="LineEdit2" type="LineEdit" parent="."]
+[node name="LineEdit" type="LineEdit" parent="."]
+visible = false
 margin_left = 239.0
 margin_right = 466.0
 margin_bottom = 29.0
@@ -31,7 +32,6 @@ margin_right = 466.0
 margin_bottom = 29.0
 size_flags_horizontal = 3
 step = 0.0
-rounded = true
 allow_greater = true
 allow_lesser = true
 
@@ -43,3 +43,15 @@ margin_bottom = 29.0
 focus_mode = 0
 size_flags_horizontal = 3
 color = Color( 1, 0, 0, 1 )
+
+[node name="CheckBox" type="CheckBox" parent="."]
+visible = false
+margin_left = 442.0
+margin_right = 466.0
+margin_bottom = 29.0
+focus_mode = 0
+
+[connection signal="text_changed" from="LineEdit" to="." method="_on_LineEdit_text_changed"]
+[connection signal="value_changed" from="SpinBox" to="." method="_on_SpinBox_value_changed"]
+[connection signal="color_changed" from="ColorPickerButton" to="." method="_on_ColorPickerButton_color_changed"]
+[connection signal="toggled" from="CheckBox" to="." method="_on_CheckBox_toggled"]

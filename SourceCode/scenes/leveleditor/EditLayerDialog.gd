@@ -2,6 +2,10 @@ extends PopupDialog
 
 var layer_being_edited : Node = null
 
+export var parameter_editor_scene : PackedScene
+
+onready var layer_parameters = $VBoxContainer/PanelContainer/LayerParameters
+
 func appear(layer_to_edit : Node):
 	layer_being_edited = layer_to_edit
 	popup()
@@ -15,15 +19,29 @@ func _on_EditLayerDialog_about_to_show():
 		
 		# FOR EVERY LAYER PARAMETER:
 		for p in parameters:
-			var param_name = var2str(p).replace('"', '').capitalize()
+			var param_name = var2str(p).replace('"', '')
 			var param_type = typeof(p)
-			
-			
-			
-			print(param_name, str(param_type)) 
+			 
+			_create_parameter_editor(layer_being_edited, param_name, param_type)
+
+# Creates a parameter editor object for a parameter.
+func _create_parameter_editor(parameter_owner_object : Node, param_name : String, param_type : int):
+	var param_editor_node = parameter_editor_scene.instance()
+	
+	param_editor_node.init(parameter_owner_object, param_name, param_type)
+	
+	layer_parameters.add_child(param_editor_node)
+	param_editor_node.set_owner(layer_parameters)
 
 func _on_ConfirmEditLayer_pressed():
 	hide()
 
 func _on_EditLayerDialog_popup_hide():
+	call_deferred("_deferred_hide_layer_editor")
+
+# It is now safe to hide the layer editor and delete all parameter editors
+func _deferred_hide_layer_editor():
 	layer_being_edited = null
+	
+	for child in layer_parameters.get_children():
+		child.free()

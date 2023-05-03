@@ -243,23 +243,23 @@ margin_bottom = 55.0
 [node name="NameEntry" type="HSplitContainer" parent="UI/Scale/EditorUI/LayersPanelOffset/AddLayerDialog/VBoxContainer"]
 margin_top = 59.0
 margin_right = 304.0
-margin_bottom = 90.0
+margin_bottom = 88.0
 
 [node name="Label" type="Label" parent="UI/Scale/EditorUI/LayersPanelOffset/AddLayerDialog/VBoxContainer/NameEntry"]
-margin_top = 5.0
+margin_top = 4.0
 margin_right = 67.0
-margin_bottom = 26.0
+margin_bottom = 25.0
 text = "Name"
 
 [node name="Name" type="LineEdit" parent="UI/Scale/EditorUI/LayersPanelOffset/AddLayerDialog/VBoxContainer/NameEntry"]
 margin_left = 79.0
 margin_right = 304.0
-margin_bottom = 31.0
+margin_bottom = 29.0
 
 [node name="TypeEntry" type="HSplitContainer" parent="UI/Scale/EditorUI/LayersPanelOffset/AddLayerDialog/VBoxContainer"]
-margin_top = 94.0
+margin_top = 92.0
 margin_right = 304.0
-margin_bottom = 123.0
+margin_bottom = 121.0
 
 [node name="Label" type="Label" parent="UI/Scale/EditorUI/LayersPanelOffset/AddLayerDialog/VBoxContainer/TypeEntry"]
 margin_top = 4.0
@@ -274,7 +274,7 @@ margin_bottom = 29.0
 text = "Tilemap"
 
 [node name="SpaceFiller" type="Control" parent="UI/Scale/EditorUI/LayersPanelOffset/AddLayerDialog/VBoxContainer"]
-margin_top = 127.0
+margin_top = 125.0
 margin_right = 304.0
 margin_bottom = 498.0
 size_flags_vertical = 3
