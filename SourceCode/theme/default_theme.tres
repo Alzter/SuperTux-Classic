@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=18 format=2]
+[gd_resource type="Theme" load_steps=19 format=2]
 
 [ext_resource path="res://theme/FontMedium.tres" type="DynamicFont" id=1]
 [ext_resource path="res://theme/FontButton.tres" type="DynamicFont" id=2]
@@ -123,6 +123,23 @@ corner_radius_bottom_right = 15
 corner_radius_bottom_left = 15
 shadow_color = Color( 0, 0, 0, 0 )
 
+[sub_resource type="StyleBoxFlat" id=13]
+bg_color = Color( 0.168627, 0.258824, 0.721569, 1 )
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color( 0.113725, 0.305882, 0.552941, 1 )
+border_blend = true
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+shadow_color = Color( 0, 0, 0, 1 )
+shadow_size = 5
+anti_aliasing = false
+anti_aliasing_size = 0.01
+
 [sub_resource type="StyleBoxFlat" id=10]
 bg_color = Color( 0.121569, 0.160784, 0.266667, 1 )
 border_width_left = 2
@@ -142,7 +159,7 @@ content_margin_left = 32.0
 content_margin_right = 32.0
 content_margin_top = 32.0
 content_margin_bottom = 32.0
-bg_color = Color( 0, 0, 0, 0.223529 )
+bg_color = Color( 0, 0, 0, 0.262745 )
 corner_radius_top_left = 8
 corner_radius_top_right = 8
 corner_radius_bottom_right = 8
@@ -179,6 +196,19 @@ Label/constants/shadow_offset_x = 2
 Label/constants/shadow_offset_y = 2
 Label/fonts/font = ExtResource( 1 )
 Label/styles/normal = null
+LineEdit/colors/clear_button_color = Color( 1, 1, 1, 1 )
+LineEdit/colors/clear_button_color_pressed = Color( 0, 0.666667, 1, 1 )
+LineEdit/colors/cursor_color = Color( 1, 1, 1, 1 )
+LineEdit/colors/font_color = Color( 1, 1, 1, 1 )
+LineEdit/colors/font_color_selected = Color( 1, 1, 0, 1 )
+LineEdit/colors/font_color_uneditable = Color( 0.298039, 0.298039, 0.298039, 1 )
+LineEdit/colors/selection_color = Color( 0.0509804, 0.0588235, 0.101961, 1 )
+LineEdit/constants/minimum_spaces = 0
+LineEdit/fonts/font = ExtResource( 1 )
+LineEdit/icons/clear = null
+LineEdit/styles/focus = SubResource( 3 )
+LineEdit/styles/normal = SubResource( 13 )
+LineEdit/styles/read_only = SubResource( 4 )
 Panel/styles/panel = SubResource( 10 )
 PanelContainer/styles/panel = SubResource( 12 )
 PopupDialog/styles/panel = SubResource( 10 )
@@ -199,6 +229,7 @@ RichTextLabel/fonts/mono_font = ExtResource( 1 )
 RichTextLabel/fonts/normal_font = ExtResource( 1 )
 RichTextLabel/styles/focus = null
 RichTextLabel/styles/normal = null
+SpinBox/icons/updown = null
 VSlider/icons/grabber = null
 VSlider/icons/grabber_disabled = null
 VSlider/icons/grabber_highlight = null

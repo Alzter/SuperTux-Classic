@@ -52,12 +52,12 @@ margin_bottom = 281.0
 
 [node name="ParamEditor" parent="VBoxContainer/PanelContainer/LayerParameters" instance=ExtResource( 3 )]
 margin_right = 490.0
-margin_bottom = 31.0
+margin_bottom = 29.0
 
 [node name="ParamEditor2" parent="VBoxContainer/PanelContainer/LayerParameters" instance=ExtResource( 3 )]
-margin_top = 35.0
+margin_top = 33.0
 margin_right = 490.0
-margin_bottom = 66.0
+margin_bottom = 62.0
 
 [node name="HSeparator2" type="HSeparator" parent="VBoxContainer"]
 margin_top = 376.0
