@@ -33,7 +33,7 @@ func _create_parameter_editor(parameter_owner_object : Node, param_name : String
 	
 	layer_parameters.add_child(param_editor_node)
 	param_editor_node.set_owner(layer_parameters)
-	print(layer_parameters.get_children())
+	#print(layer_parameters.get_children())
 
 func _on_ConfirmEditLayer_pressed():
 	hide()
