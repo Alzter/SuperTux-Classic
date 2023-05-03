@@ -6,8 +6,17 @@ export var editor_params = [
 
 var solid : bool = get_collision_layer_bit(0) setget _update_solidity
 onready var multiply_color : Color = modulate setget _update_multiply_color
-onready var overlay_color = material.get_shader_param("overlay_color") setget _update_overlay_color
 
+var overlay_color : Color = Color(0.5,0.5,0.5,0.5) setget _update_overlay_color
+
+func _ready():
+	var overlay = material.get_shader_param("overlay_color")
+	
+	if overlay is Plane:
+		overlay_color = Color(overlay.x, overlay.y, overlay.z, overlay.d)
+	else:
+		overlay_color = overlay
+	
 # These tiles won't apply autotile rules in the editor.
 export var non_autotile_tiles = ["SnowDopeFish", "SnowFish"]
 
@@ -114,4 +123,7 @@ func _update_multiply_color(new_value):
 func _update_overlay_color(new_value):
 	overlay_color = new_value
 	use_parent_material = false
-	material.set_shader_param("overlay_color", new_value)
+	
+	var overlay_plane = Plane(overlay_color.r, overlay_color.g, overlay_color.b, overlay_color.a)
+	
+	material.set_shader_param("overlay_color", overlay_plane)
