@@ -3,9 +3,9 @@ extends Control
 onready var menu_main = $MainMenu
 onready var menu_create_world = $CreateWorldMenu
 
-onready var button_world_create = $Panel/VBoxContainer/WorldCreate
-onready var button_world_open = $Panel/VBoxContainer/WorldOpen
-onready var button_exit = $Panel/VBoxContainer/ExitToMenu
+onready var button_world_create = $MainMenu/VBoxContainer/WorldCreate
+onready var button_world_open = $MainMenu/VBoxContainer/WorldOpen
+onready var button_exit = $MainMenu/VBoxContainer/ExitToMenu
 
 func _ready():
 	Scoreboard.hide()
@@ -14,7 +14,8 @@ func _ready():
 
 
 func _on_WorldCreate_pressed():
-	pass # Replace with function body.
+	menu_main.hide()
+	menu_create_world.popup()
 
 
 func _on_ExitToMenu_pressed():
@@ -31,3 +32,7 @@ func _on_WorldOpen_mouse_entered():
 
 func _on_ExitToMenu_mouse_entered():
 	button_exit.grab_focus()
+
+
+func _on_Back_pressed():
+	pass # Replace with function body.
