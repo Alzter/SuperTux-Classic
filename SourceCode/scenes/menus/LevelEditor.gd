@@ -1,5 +1,8 @@
 extends Control
 
+onready var menu_main = $MainMenu
+onready var menu_create_world = $CreateWorldMenu
+
 onready var button_world_create = $Panel/VBoxContainer/WorldCreate
 onready var button_world_open = $Panel/VBoxContainer/WorldOpen
 onready var button_exit = $Panel/VBoxContainer/ExitToMenu
