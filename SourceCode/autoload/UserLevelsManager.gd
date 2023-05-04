@@ -113,8 +113,22 @@ func create_user_world(world_name : String, author_name : String, create_worldma
 func unload_user_worlds():
 	user_worlds = {}
 
-func get_worldmap_scene_path_for_user_world(world_name : String):
-	pass#if user_worlds.has(world_name):
+func get_worldmap_scene_for_world(world_name : String):
+	return _get_world_parameter(world_name, "worldmap_scene")
+
+func get_initial_scene_for_world(world_name : String):
+	return _get_world_parameter(world_name, "initial_scene")
+
+func _get_world_parameter(world_name : String, parameter : String):
+	if user_worlds == {}: load_user_worlds()
+	
+	if user_worlds.keys().has(world_name):
+		var world_data = user_worlds.get(world_name)
+		
+		if world_data.has(parameter):
+			return world_data.get(parameter)
+	
+	return null
 
 func _create_world_data(world_name : String, author_name : String, worldmap_scene : String = worldmap_file, initial_scene : String = worldmap_file) -> Dictionary:
 	return {
