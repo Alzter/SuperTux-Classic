@@ -23,7 +23,11 @@ func _on_CreateWorldButton_pressed():
 	var created_world = UserLevels.create_user_world(world_name.text, author_name.text)
 	
 	if created_world == OK:
-		pass
+		var world_folder = UserLevels.get_world_folder_from_name(world_name.text)
+		
+		var worldmap_scene_path = UserLevels.get_worldmap_filepath_for_world(world_folder)
+		print(worldmap_scene_path)
+		
 	else:
 		error_dialog.popup()
 

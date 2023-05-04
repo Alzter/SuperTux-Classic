@@ -37,6 +37,7 @@ func _get_user_world_data(dir_name: String) -> bool:
 		if world_data == OK:
 			var data : Dictionary = file.get_var()
 			file.close()
+			
 			user_worlds[dir_name] = data
 			return true
 		else:
@@ -92,7 +93,7 @@ func create_user_world(world_name : String, author_name : String, create_worldma
 				var worldmap_path = world_directory + "/" + worldmap_file
 				
 				var worldmap_success = dir.copy(default_worldmap_level, worldmap_path)
-				if worldmap_success:
+				if worldmap_success == OK:
 					return OK
 					
 				else:
@@ -113,22 +114,48 @@ func create_user_world(world_name : String, author_name : String, create_worldma
 func unload_user_worlds():
 	user_worlds = {}
 
-func get_worldmap_scene_for_world(world_name : String):
-	return _get_world_parameter(world_name, "worldmap_scene")
-
-func get_initial_scene_for_world(world_name : String):
-	return _get_world_parameter(world_name, "initial_scene")
-
-func _get_world_parameter(world_name : String, parameter : String):
-	if user_worlds == {}: load_user_worlds()
+func get_worldmap_filepath_for_world(world_folder : String):
+	var worldmap_file = _get_world_parameter(world_folder, "worldmap_scene")
 	
-	if user_worlds.keys().has(world_name):
-		var world_data = user_worlds.get(world_name)
+	var worldmap_path = user_worlds_directory + world_folder + "/" + worldmap_file
+	return worldmap_path
+
+func get_initial_scene_filepath_for_world(world_folder : String):
+	var initial_scene_file = _get_world_parameter(world_folder, "initial_scene")
+	
+	var initial_scene_path = user_worlds_directory + world_folder + "/" + initial_scene_file
+	return initial_scene_path
+
+func _get_world_parameter(world_folder : String, parameter : String):
+	if user_worlds.size() == 0:
+		load_user_worlds()
+	
+	if user_worlds.keys().has(world_folder):
+		var world_data : Dictionary = user_worlds.get(world_folder)
 		
 		if world_data.has(parameter):
 			return world_data.get(parameter)
 	
 	return null
+
+func get_world_folder_from_name(world_name : String):
+	if user_worlds.size() == 0:
+		load_user_worlds()
+	
+	var worlds_data = user_worlds.keys()
+	
+	for world in worlds_data:
+		
+		var world_data : Dictionary = user_worlds.get(world)
+		
+		if world_data.keys().has("world_name"):
+			if world_data.get("world_name") == world_name:
+				return world
+
+func delete_user_world(world_folder_name : String):
+	var world_folder = user_worlds_directory + world_folder_name
+	var dir = Directory.new()
+	dir.remove(world_folder)
 
 func _create_world_data(world_name : String, author_name : String, worldmap_scene : String = worldmap_file, initial_scene : String = worldmap_file) -> Dictionary:
 	return {
