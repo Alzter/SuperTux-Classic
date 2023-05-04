@@ -112,11 +112,12 @@ func place_tile(tilemap : TileMap, tile_position : Vector2, tile_id : int, updat
 	if tilemap.is_in_group("stc_tilemaps"):
 		tilemap.apply_custom_autotile_rules(tile_position)
 	
-	# EDGE TILE HANDLING
+	# EDGE TILE HANDLING - EXPAND
 	# If we draw a tile at the bottom of the tilemap, automatically fill it
-	if tile_position.y == level_boundaries.end.y - 1:
-		var fill_rect = Rect2(tile_position + Vector2.DOWN, Vector2.DOWN * 30)
-		fill_tile_rect(tilemap, fill_rect, tile_id, true, true)
+	if tilemap.get("expand_on_bottom"):
+		if tile_position.y == level_boundaries.end.y - 1:
+			var fill_rect = Rect2(tile_position + Vector2.DOWN, Vector2.DOWN * 30)
+			fill_tile_rect(tilemap, fill_rect, tile_id, true, true)
 
 func erase_tile(tilemap : TileMap, tile_position : Vector2, update_autotile = true):
 	place_tile(tilemap, tile_position, -1, update_autotile)
