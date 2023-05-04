@@ -9,7 +9,13 @@ onready var multiply_color : Color = modulate setget _update_multiply_color
 
 var overlay_color : Color = Color(0.5,0.5,0.5,0.5) setget _update_overlay_color
 
+var expand_on_bottom = true
+
+export var unique_material = false
+
 func _ready():
+	if unique_material: use_parent_material = false
+	
 	var overlay = material.get_shader_param("overlay_color")
 	
 	if overlay is Plane:
@@ -127,3 +133,4 @@ func _update_overlay_color(new_value):
 	var overlay_plane = Plane(overlay_color.r, overlay_color.g, overlay_color.b, overlay_color.a)
 	
 	material.set_shader_param("overlay_color", overlay_plane)
+	unique_material = true
