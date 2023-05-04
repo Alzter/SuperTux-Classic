@@ -21,7 +21,7 @@ script = ExtResource( 2 )
 intro_scene = "res://scenes/levels/world1/intro.tscn"
 options_scene = "res://scenes/menus/Options.tscn"
 credits_scene = "res://scenes/menus/Credits.tscn"
-level_editor_scene = "res://scenes/menus/LevelEditor.tscn"
+level_editor_scene = "res://scenes/leveleditor/menus/MainMenu.tscn"
 
 [node name="TitleContent" type="Control" parent="."]
 anchor_right = 1.0

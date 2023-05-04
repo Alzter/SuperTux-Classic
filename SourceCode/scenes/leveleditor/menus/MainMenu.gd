@@ -34,5 +34,6 @@ func _on_ExitToMenu_mouse_entered():
 	button_exit.grab_focus()
 
 
-func _on_Back_pressed():
-	pass # Replace with function body.
+func _on_CreateWorldMenu_popup_hide():
+	menu_main.show()
+	button_world_create.grab_focus()
