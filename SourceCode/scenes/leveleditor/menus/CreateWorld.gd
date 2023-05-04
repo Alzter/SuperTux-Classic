@@ -26,8 +26,7 @@ func _on_CreateWorldButton_pressed():
 		var world_folder = UserLevels.get_world_folder_from_name(world_name.text)
 		
 		var worldmap_scene_path = UserLevels.get_worldmap_filepath_for_world(world_folder)
-		print(worldmap_scene_path)
-		
+		Global.load_level_editor(worldmap_scene_path)
 	else:
 		error_dialog.popup()
 

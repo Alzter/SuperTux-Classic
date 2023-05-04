@@ -18,6 +18,8 @@
 extends Node
 
 var title_screen_scene = "res://scenes/menus/TitleScreen.tscn"
+var level_editor_scene = "res://scenes/leveleditor/LevelEditor.tscn"
+
 var current_scene = null
 var current_level = null
 var current_level_path = null
@@ -79,6 +81,7 @@ func goto_title_screen():
 
 func goto_scene(path, loading_level = false):
 	call_deferred("_deferred_goto_scene", path, loading_level)
+	yield(self, "level_loaded")
 
 func _deferred_goto_scene(path, loading_level = false):
 	get_tree().paused = true
@@ -221,3 +224,10 @@ func list_files_in_directory(path):
 	dir.list_dir_end()
 
 	return files
+
+# Horrible jank. Will break easily. JANK IT UP!!
+func load_level_editor(filepath_of_level_to_edit : String):
+	yield(call("goto_scene", level_editor_scene), "completed")
+	
+	var editor = current_scene
+	editor.load_level_from_path(filepath_of_level_to_edit)
