@@ -39,6 +39,7 @@ SaveManager="*res://autoload/SaveManager.gd"
 ResolutionManager="*res://autoload/ResolutionManager.gd"
 WorldmapManager="*res://autoload/WorldmapManager.gd"
 MobileControls="*res://autoload/MobileControls.tscn"
+UserLevels="*res://autoload/UserLevelsManager.gd"
 
 [display]
 
