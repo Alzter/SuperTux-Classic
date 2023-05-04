@@ -33,7 +33,9 @@ func load_user_world_data(dir_name: String) -> bool:
 	
 	return false
 
-func create_user_world(world_name : String, author_name : String) -> bool:
+# Creates a user world.
+# Returns 0 (OK) if creation is successful, else an error code (INT)
+func create_user_world(world_name : String, author_name : String) -> int:
 	# Set the name of the folder the world will be stored in to
 	# the world's name in snake_case.
 	var world_folder_name = world_name.replace(" ", "_").to_lower()
@@ -52,7 +54,7 @@ func create_user_world(world_name : String, author_name : String) -> bool:
 	# don't proceed further so we don't overwrite anything.
 	if dir.dir_exists(world_directory):
 		push_error(str("Error creating user world '" + world_name + "' - World folder already exists!"))
-		return false
+		return ERR_ALREADY_EXISTS
 	else:
 		
 		# Create a folder for the world to reside in.
@@ -72,12 +74,12 @@ func create_user_world(world_name : String, author_name : String) -> bool:
 			
 			file.store_var(world_data)
 			file.close()
-			return true
+			return OK
 		
 		# Otherwise, return an error and exit.
 		else:
 			push_error(str("Error creating User World data file at path: " + str(world_data_file) + ", Error code: " + str(world_data_file)))
-			return false
+			return world_data_file
 
 func _create_world_data(world_name : String, author_name : String, worldmap_scene : String = "worldmap.tscn", initial_scene : String = "worldmap.tscn") -> Dictionary:
 	return {

@@ -1,10 +1,12 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://theme/FontBig.tres" type="DynamicFont" id=1]
 [ext_resource path="res://scenes/leveleditor/menus/CreateWorld.gd" type="Script" id=2]
 [ext_resource path="res://theme/default_theme.tres" type="Theme" id=3]
+[ext_resource path="res://theme/FontGiant.tres" type="DynamicFont" id=4]
 
 [node name="CreateWorldMenu" type="PopupDialog"]
+visible = true
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 20.0
@@ -107,6 +109,63 @@ rect_min_size = Vector2( 0, 50 )
 focus_neighbour_top = NodePath("../CreateWorldButton")
 text = "Back"
 
+[node name="ErrorDialog" type="PopupDialog" parent="."]
+visible = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 54.0
+margin_top = 30.0
+margin_right = -54.0
+margin_bottom = -30.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ErrorDialog"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 64.0
+margin_right = -64.0
+alignment = 1
+
+[node name="Title" type="RichTextLabel" parent="ErrorDialog/VBoxContainer"]
+margin_top = 166.0
+margin_right = 1004.0
+margin_bottom = 260.0
+custom_colors/default_color = Color( 1, 0, 0, 1 )
+custom_fonts/normal_font = ExtResource( 4 )
+bbcode_enabled = true
+bbcode_text = "[shake][center]Error!"
+text = "Error!"
+fit_content_height = true
+
+[node name="HSeparator2" type="HSeparator" parent="ErrorDialog/VBoxContainer"]
+margin_top = 264.0
+margin_right = 1004.0
+margin_bottom = 294.0
+
+[node name="Label" type="Label" parent="ErrorDialog/VBoxContainer"]
+margin_top = 298.0
+margin_right = 1004.0
+margin_bottom = 361.0
+text = "Error creating new world!
+
+The world name may already be taken."
+align = 1
+valign = 1
+autowrap = true
+
+[node name="HSeparator" type="HSeparator" parent="ErrorDialog/VBoxContainer"]
+margin_top = 365.0
+margin_right = 1004.0
+margin_bottom = 395.0
+
+[node name="ErrorEscape" type="Button" parent="ErrorDialog/VBoxContainer"]
+margin_top = 399.0
+margin_right = 1004.0
+margin_bottom = 463.0
+rect_min_size = Vector2( 0, 64 )
+text = "OK"
+
 [connection signal="about_to_show" from="." to="." method="_on_CreateWorldMenu_about_to_show"]
 [connection signal="pressed" from="VBoxContainer/CreateWorldButton" to="." method="_on_CreateWorldButton_pressed"]
 [connection signal="pressed" from="VBoxContainer/Back" to="." method="_on_Back_pressed"]
+[connection signal="about_to_show" from="ErrorDialog" to="." method="_on_ErrorDialog_about_to_show"]
+[connection signal="pressed" from="ErrorDialog/VBoxContainer/ErrorEscape" to="." method="_on_ErrorEscape_pressed"]
