@@ -63,9 +63,6 @@ func _ready():
 	window_resized()
 	
 	editor_camera.connect("set_camera_drag", self, "set_camera_drag")
-	
-	load_level_from_path(level_to_load)
-	
 
 func _process(delta):
 	if !level: return
@@ -74,6 +71,7 @@ func _process(delta):
 # Toggle Edit Mode
 
 func toggle_edit_mode():
+	if !level: return
 	if edit_mode:
 		enter_play_mode()
 	else:
@@ -81,6 +79,7 @@ func toggle_edit_mode():
 	update_tilemap_opacity()
 
 func enter_play_mode():
+	if !level: return
 	Scoreboard.reset_player_values(false, false)
 	Global.spawn_position = editor_camera.position
 	
@@ -93,6 +92,7 @@ func enter_play_mode():
 	edit_mode = false
 
 func enter_edit_mode():
+	if !level: return
 	call_deferred("_deferred_enter_edit_mode")
 
 # We should only enter edit mode when it is safe to do so.
