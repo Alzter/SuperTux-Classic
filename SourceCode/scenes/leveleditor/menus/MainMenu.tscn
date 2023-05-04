@@ -82,7 +82,6 @@ text = "Exit"
 visible = false
 
 [node name="OpenWorldMenu" parent="." instance=ExtResource( 6 )]
-visible = false
 
 [connection signal="mouse_entered" from="MainMenu/VBoxContainer/WorldCreate" to="." method="_on_WorldCreate_mouse_entered"]
 [connection signal="pressed" from="MainMenu/VBoxContainer/WorldCreate" to="." method="_on_WorldCreate_pressed"]
