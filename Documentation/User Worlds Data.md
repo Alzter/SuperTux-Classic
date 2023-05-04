@@ -1,5 +1,8 @@
 # User Worlds Data
-Data for user-made worlds (contrib packs) follows a specified format.<br>
+Every user-made world has a `contrib.data` file inside its world folder which contains information about the world.<br>
+
+The `contrib.data` file follows the following format:<br>
+
 ```
 [contrib]
 name="name"
