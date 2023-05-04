@@ -3,9 +3,9 @@ extends Node
 const user_worlds_directory = "user://contrib/"
 const world_data_file = "contrib.data"
 
-var user_contrib_data: Dictionary = {}
+var user_worlds: Dictionary = {}
 
-func load_user_contrib():
+func load_user_worlds():
 	var dir = Directory.new()
 
 	dir.open("user://")
@@ -28,7 +28,7 @@ func load_user_world_data(dir_name: String) -> bool:
 	if dir.dir_exists("user://contrib/" + dir_name) and dir.file_exists("user://contrib/" + dir_name + "/contrib.data"):
 		var file = ConfigFile.new()
 		file.load("user://contrib/" + dir_name + "/world.data")
-		user_contrib_data[dir_name] = file
+		user_worlds[dir_name] = file
 		return true
 	
 	return false
