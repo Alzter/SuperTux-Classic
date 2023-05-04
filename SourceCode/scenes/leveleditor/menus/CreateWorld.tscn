@@ -6,7 +6,6 @@
 [ext_resource path="res://theme/FontGiant.tres" type="DynamicFont" id=4]
 
 [node name="CreateWorldMenu" type="PopupDialog"]
-visible = true
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 20.0
@@ -164,6 +163,8 @@ rect_min_size = Vector2( 0, 64 )
 text = "OK"
 
 [connection signal="about_to_show" from="." to="." method="_on_CreateWorldMenu_about_to_show"]
+[connection signal="text_changed" from="VBoxContainer/WorldProperties/WorldName/WorldNameEdit" to="." method="_on_WorldNameEdit_text_changed"]
+[connection signal="text_changed" from="VBoxContainer/WorldProperties/AuthorName/AuthorNameEdit" to="." method="_on_AuthorNameEdit_text_changed"]
 [connection signal="pressed" from="VBoxContainer/CreateWorldButton" to="." method="_on_CreateWorldButton_pressed"]
 [connection signal="pressed" from="VBoxContainer/Back" to="." method="_on_Back_pressed"]
 [connection signal="about_to_show" from="ErrorDialog" to="." method="_on_ErrorDialog_about_to_show"]
