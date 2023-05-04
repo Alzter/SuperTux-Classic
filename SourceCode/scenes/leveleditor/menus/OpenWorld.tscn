@@ -58,7 +58,6 @@ margin_top = 284.0
 margin_right = 513.0
 margin_bottom = 334.0
 rect_min_size = Vector2( 0, 50 )
-focus_neighbour_top = NodePath("../ScrollContainer/WorldList")
 focus_neighbour_bottom = NodePath("../Back")
 text = "Open World"
 

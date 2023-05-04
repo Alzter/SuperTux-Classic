@@ -79,13 +79,14 @@ focus_neighbour_top = NodePath("../WorldOpen")
 text = "Exit"
 
 [node name="CreateWorldMenu" parent="." instance=ExtResource( 5 )]
-visible = false
 
 [node name="OpenWorldMenu" parent="." instance=ExtResource( 6 )]
 
 [connection signal="mouse_entered" from="MainMenu/VBoxContainer/WorldCreate" to="." method="_on_WorldCreate_mouse_entered"]
 [connection signal="pressed" from="MainMenu/VBoxContainer/WorldCreate" to="." method="_on_WorldCreate_pressed"]
 [connection signal="mouse_entered" from="MainMenu/VBoxContainer/WorldOpen" to="." method="_on_WorldOpen_mouse_entered"]
+[connection signal="pressed" from="MainMenu/VBoxContainer/WorldOpen" to="." method="_on_WorldOpen_pressed"]
 [connection signal="mouse_entered" from="MainMenu/VBoxContainer/ExitToMenu" to="." method="_on_ExitToMenu_mouse_entered"]
 [connection signal="pressed" from="MainMenu/VBoxContainer/ExitToMenu" to="." method="_on_ExitToMenu_pressed"]
 [connection signal="popup_hide" from="CreateWorldMenu" to="." method="_on_CreateWorldMenu_popup_hide"]
+[connection signal="popup_hide" from="OpenWorldMenu" to="." method="_on_OpenWorldMenu_popup_hide"]
