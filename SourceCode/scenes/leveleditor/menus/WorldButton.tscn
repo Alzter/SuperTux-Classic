@@ -1,0 +1,29 @@
+[gd_scene format=2]
+
+[node name="WorldButton" type="Button"]
+margin_right = 513.0
+margin_bottom = 72.0
+rect_min_size = Vector2( 0, 72 )
+align = 0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 16.0
+margin_top = 16.0
+margin_right = -16.0
+margin_bottom = -16.0
+bbcode_enabled = true
+bbcode_text = "[b]Alzter's World[/b]
+[i]5 Levels"
+text = "Alzter's World
+5 Levels"
+fit_content_height = true
+scroll_active = false
+
+[node name="DeleteWorld" type="Button" parent="."]
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -134.0
+text = "Delete"
