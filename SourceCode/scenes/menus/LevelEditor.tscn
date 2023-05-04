@@ -1,0 +1,83 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://theme/FontBig.tres" type="DynamicFont" id=1]
+[ext_resource path="res://theme/default_theme.tres" type="Theme" id=2]
+[ext_resource path="res://scenes/menus/LevelEditor.gd" type="Script" id=3]
+[ext_resource path="res://scenes/layers/Background/IceMountainsMisty.tscn" type="PackedScene" id=4]
+
+[node name="LevelEditorMenu" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 2 )
+script = ExtResource( 3 )
+
+[node name="IceMistBackground" parent="." instance=ExtResource( 4 )]
+
+[node name="Panel" type="Panel" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 107.0
+margin_top = 60.0
+margin_right = -106.0
+margin_bottom = -60.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 27.0
+margin_top = 26.0
+margin_right = -28.0
+margin_bottom = -25.0
+custom_constants/separation = 15
+
+[node name="Label" type="RichTextLabel" parent="Panel/VBoxContainer"]
+margin_right = 1012.0
+margin_bottom = 30.0
+custom_fonts/normal_font = ExtResource( 1 )
+bbcode_enabled = true
+bbcode_text = "[center][wave]Level Editor"
+text = "Level Editor"
+fit_content_height = true
+
+[node name="HSeparator" type="HSeparator" parent="Panel/VBoxContainer"]
+margin_top = 45.0
+margin_right = 1012.0
+margin_bottom = 55.0
+custom_constants/separation = 10
+
+[node name="WorldCreate" type="Button" parent="Panel/VBoxContainer"]
+margin_top = 70.0
+margin_right = 1012.0
+margin_bottom = 120.0
+rect_min_size = Vector2( 0, 50 )
+focus_neighbour_bottom = NodePath("../WorldOpen")
+text = "Create World"
+
+[node name="WorldOpen" type="Button" parent="Panel/VBoxContainer"]
+margin_top = 135.0
+margin_right = 1012.0
+margin_bottom = 185.0
+rect_min_size = Vector2( 0, 50 )
+focus_neighbour_top = NodePath("../WorldCreate")
+focus_neighbour_bottom = NodePath("../ExitToMenu")
+text = "Open World"
+
+[node name="SpaceFiller" type="Control" parent="Panel/VBoxContainer"]
+margin_top = 200.0
+margin_right = 1012.0
+margin_bottom = 484.0
+size_flags_vertical = 3
+
+[node name="ExitToMenu" type="Button" parent="Panel/VBoxContainer"]
+margin_top = 499.0
+margin_right = 1012.0
+margin_bottom = 549.0
+rect_min_size = Vector2( 0, 50 )
+focus_neighbour_top = NodePath("../WorldOpen")
+text = "Exit"
+
+[connection signal="mouse_entered" from="Panel/VBoxContainer/WorldCreate" to="." method="_on_WorldCreate_mouse_entered"]
+[connection signal="pressed" from="Panel/VBoxContainer/WorldCreate" to="." method="_on_WorldCreate_pressed"]
+[connection signal="mouse_entered" from="Panel/VBoxContainer/WorldOpen" to="." method="_on_WorldOpen_mouse_entered"]
+[connection signal="mouse_entered" from="Panel/VBoxContainer/ExitToMenu" to="." method="_on_ExitToMenu_mouse_entered"]
+[connection signal="pressed" from="Panel/VBoxContainer/ExitToMenu" to="." method="_on_ExitToMenu_pressed"]
