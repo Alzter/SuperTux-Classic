@@ -36,7 +36,7 @@ func load_user_world_data(dir_name: String) -> bool:
 func create_user_world(world_name : String, author_name : String) -> bool:
 	# Set the name of the folder the world will be stored in to
 	# the world's name in snake_case.
-	var world_folder_name = world_name.to_lower().replace(" ", "_")
+	var world_folder_name = world_name.replace(" ", "_").to_lower()
 	
 	# Remove all non alphanumeric characters from the world folder name
 	# to prevent errors creating the directory.
@@ -70,8 +70,8 @@ func create_user_world(world_name : String, author_name : String) -> bool:
 			# Create the world data file.
 			var world_data = _create_world_data(world_name, author_name)
 			
-			world_data_file.store_var(world_data)
-			world_data_file.close()
+			file.store_var(world_data)
+			file.close()
 			return true
 		
 		# Otherwise, return an error and exit.

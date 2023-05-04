@@ -14,4 +14,4 @@ func _on_Back_pressed():
 	hide()
 
 func _on_CreateWorldButton_pressed():
-	pass # Replace with function body.
+	UserLevels.create_user_world(world_name.text, author_name.text)
