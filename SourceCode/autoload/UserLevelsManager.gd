@@ -2,6 +2,9 @@ extends Node
 
 const user_worlds_directory = "user://contrib/"
 const world_data_file = "contrib.data"
+const worldmap_file = "worldmap.tscn"
+
+var default_worldmap_level = "res://scenes/leveleditor/level_templates/worldmap.tscn"
 
 var user_worlds: Dictionary = {}
 
@@ -35,7 +38,7 @@ func load_user_world_data(dir_name: String) -> bool:
 
 # Creates a user world.
 # Returns 0 (OK) if creation is successful, else an error code (INT)
-func create_user_world(world_name : String, author_name : String) -> int:
+func create_user_world(world_name : String, author_name : String, create_worldmap = true) -> int:
 	# Set the name of the folder the world will be stored in to
 	# the world's name in snake_case.
 	var world_folder_name = world_name.replace(" ", "_").to_lower()
@@ -74,6 +77,22 @@ func create_user_world(world_name : String, author_name : String) -> int:
 			
 			file.store_var(world_data)
 			file.close()
+			
+			if create_worldmap:
+				var worldmap_path = world_directory + "/" + worldmap_file
+				
+				var worldmap_success = dir.copy(default_worldmap_level, worldmap_path)
+				if worldmap_success:
+					return OK
+					
+				else:
+					# If we failed creating a worldmap for the world,
+					# remove the entire thing. No use leaving it half-complete.
+					dir.remove(world_directory)
+					
+					push_error(str("Error creating Worldmap file for User World at path: " + str(worldmap_success) + ", Error code: " + str(world_data_file)))
+					return worldmap_success
+			
 			return OK
 		
 		# Otherwise, return an error and exit.
@@ -81,7 +100,7 @@ func create_user_world(world_name : String, author_name : String) -> int:
 			push_error(str("Error creating User World data file at path: " + str(world_data_file) + ", Error code: " + str(world_data_file)))
 			return world_data_file
 
-func _create_world_data(world_name : String, author_name : String, worldmap_scene : String = "worldmap.tscn", initial_scene : String = "worldmap.tscn") -> Dictionary:
+func _create_world_data(world_name : String, author_name : String, worldmap_scene : String = worldmap_file, initial_scene : String = worldmap_file) -> Dictionary:
 	return {
 		"world_name" : world_name,
 		"author_name" : author_name,
