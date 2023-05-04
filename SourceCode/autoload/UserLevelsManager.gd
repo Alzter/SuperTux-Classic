@@ -22,17 +22,27 @@ func load_user_worlds():
 			if current == "":
 				break
 			else:
-				load_user_world_data(current)
+				_get_user_world_data(current)
 
-func load_user_world_data(dir_name: String) -> bool:
+func _get_user_world_data(dir_name: String) -> bool:
 	var dir = Directory.new()
 
 	# If contrib pack data exists for the current user world:
 	if dir.dir_exists("user://contrib/" + dir_name) and dir.file_exists("user://contrib/" + dir_name + "/contrib.data"):
-		var file = ConfigFile.new()
-		file.load("user://contrib/" + dir_name + "/world.data")
-		user_worlds[dir_name] = file
-		return true
+		var world_data_file_path = "user://contrib/" + dir_name + "/contrib.data"
+		
+		var file = File.new()
+		var world_data = file.open(world_data_file_path, File.READ)
+		
+		if world_data == OK:
+			var data : Dictionary = file.get_var()
+			file.close()
+			user_worlds[dir_name] = data
+			return true
+		else:
+			push_error("Error getting user world data in directory: " + str(dir_name))
+			return false
+		
 	
 	return false
 
@@ -99,6 +109,12 @@ func create_user_world(world_name : String, author_name : String, create_worldma
 		else:
 			push_error(str("Error creating User World data file at path: " + str(world_data_file) + ", Error code: " + str(world_data_file)))
 			return world_data_file
+
+func unload_user_worlds():
+	user_worlds = {}
+
+func get_worldmap_scene_path_for_user_world(world_name : String):
+	pass#if user_worlds.has(world_name):
 
 func _create_world_data(world_name : String, author_name : String, worldmap_scene : String = worldmap_file, initial_scene : String = worldmap_file) -> Dictionary:
 	return {

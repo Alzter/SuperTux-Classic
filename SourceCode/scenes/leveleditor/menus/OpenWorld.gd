@@ -6,6 +6,7 @@ onready var back_button = $VBoxContainer/Back
 onready var world_list = $VBoxContainer/ScrollContainer/WorldList
 
 func _on_OpenWorldMenu_about_to_show():
+	UserLevels.load_user_worlds()
 	world_list.show()
 
 func _on_Back_pressed():
