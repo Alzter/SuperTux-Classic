@@ -1,6 +1,7 @@
 extends Node
 
 const user_worlds_directory = "user://contrib/"
+const user_worlds_folder = "contrib/"
 const world_data_file = "contrib.data"
 const worldmap_file = "worldmap.tscn"
 
@@ -9,13 +10,15 @@ var default_worldmap_level = "res://scenes/leveleditor/level_templates/worldmap.
 var user_worlds: Dictionary = {}
 
 func load_user_worlds():
+	unload_user_worlds()
+	
 	var dir = Directory.new()
 
 	dir.open("user://")
-	if !dir.dir_exists("contrib"):
-		dir.make_dir("contrib")
+	if !dir.dir_exists(user_worlds_folder):
+		dir.make_dir(user_worlds_folder)
 	else:
-		dir.change_dir("contrib")
+		dir.change_dir(user_worlds_folder)
 		dir.list_dir_begin(true, true)
 		while true:
 			var current: String = dir.get_next()
@@ -28,8 +31,8 @@ func _get_user_world_data(dir_name: String) -> bool:
 	var dir = Directory.new()
 
 	# If contrib pack data exists for the current user world:
-	if dir.dir_exists("user://contrib/" + dir_name) and dir.file_exists("user://contrib/" + dir_name + "/contrib.data"):
-		var world_data_file_path = "user://contrib/" + dir_name + "/contrib.data"
+	if dir.dir_exists(user_worlds_directory + dir_name) and dir.file_exists(user_worlds_directory + dir_name + "/" + world_data_file):
+		var world_data_file_path = user_worlds_directory + dir_name + "/" + world_data_file
 		
 		var file = File.new()
 		var world_data = file.open(world_data_file_path, File.READ)
@@ -114,13 +117,22 @@ func create_user_world(world_name : String, author_name : String, create_worldma
 func unload_user_worlds():
 	user_worlds = {}
 
-func get_worldmap_filepath_for_world(world_folder : String):
-	var worldmap_file = _get_world_parameter(world_folder, "worldmap_scene")
+func get_world_name(world_folder : String) -> String:
+	return _get_world_parameter(world_folder, "world_name")
+
+func get_world_author(world_folder : String) -> String:
+	return _get_world_parameter(world_folder, "author_name")
+
+func get_worldmap_filename_for_world(world_folder : String) -> String:
+	return _get_world_parameter(world_folder, "worldmap_scene")
+
+func get_worldmap_filepath_for_world(world_folder : String) -> String:
+	var worldmap_file = get_worldmap_filename_for_world(world_folder)
 	
 	var worldmap_path = user_worlds_directory + world_folder + "/" + worldmap_file
 	return worldmap_path
 
-func get_initial_scene_filepath_for_world(world_folder : String):
+func get_initial_scene_filepath_for_world(world_folder : String) -> String:
 	var initial_scene_file = _get_world_parameter(world_folder, "initial_scene")
 	
 	var initial_scene_path = user_worlds_directory + world_folder + "/" + initial_scene_file
@@ -151,6 +163,42 @@ func get_world_folder_from_name(world_name : String):
 		if world_data.keys().has("world_name"):
 			if world_data.get("world_name") == world_name:
 				return world
+
+
+# Returns the file paths for each level in a user world,
+# EXCLUDING the worldmap.
+func get_levels_in_world(world_folder_name : String) -> Array:
+	var dir = Directory.new()
+	var world_folder = user_worlds_folder + world_folder_name
+	
+	var worldmap_file = get_worldmap_filename_for_world(world_folder_name)
+	
+	var levels = []
+	
+	dir.open("user://")
+	if !dir.dir_exists(world_folder):
+		push_error("Error getting levels for world: '" + world_folder_name + "' - world folder not found!")
+		return []
+	
+	dir.change_dir(world_folder)
+	
+	dir.list_dir_begin(true, true)
+	while true:
+		var current: String = dir.get_next()
+		if current == "":
+			break
+		else:
+			if (current.ends_with(".tscn")):
+				if current != worldmap_file:
+					levels.append(current)
+	
+	var level_filepaths = []
+	
+	for level_name in levels:
+		var level_path = user_worlds_directory + world_folder_name + "/" + level_name
+		level_filepaths.append(level_path)
+	
+	return level_filepaths
 
 func delete_user_world(world_folder_name : String):
 	var world_folder = user_worlds_directory + world_folder_name
