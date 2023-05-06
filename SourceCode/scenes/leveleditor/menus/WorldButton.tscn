@@ -1,6 +1,9 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://theme/default_theme.tres" type="Theme" id=1]
+[ext_resource path="res://scenes/leveleditor/menus/WorldButton.gd" type="Script" id=2]
+[ext_resource path="res://theme/FontSmall.tres" type="DynamicFont" id=3]
+[ext_resource path="res://theme/FontButton.tres" type="DynamicFont" id=4]
 
 [node name="WorldButton" type="Button"]
 margin_right = 513.0
@@ -9,21 +12,28 @@ rect_min_size = Vector2( 0, 72 )
 focus_neighbour_right = NodePath("DeleteWorld")
 theme = ExtResource( 1 )
 align = 0
+script = ExtResource( 2 )
 
-[node name="RichTextLabel" type="RichTextLabel" parent="."]
+[node name="Title" type="Label" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 16.0
 margin_top = 16.0
 margin_right = -16.0
 margin_bottom = -16.0
-bbcode_enabled = true
-bbcode_text = "[b]Alzter's World[/b]
-[i]5 Levels"
-text = "Alzter's World
-5 Levels"
-fit_content_height = true
-scroll_active = false
+custom_fonts/font = ExtResource( 4 )
+text = "World Name"
+
+[node name="Subtitle" type="Label" parent="."]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 16.0
+margin_top = -29.0
+margin_right = -16.0
+margin_bottom = -16.0
+custom_fonts/font = ExtResource( 3 )
+text = "SuperTux Team - 0 levels"
 
 [node name="DeleteWorld" type="Button" parent="."]
 anchor_left = 1.0
@@ -32,3 +42,5 @@ anchor_bottom = 1.0
 margin_left = -134.0
 focus_neighbour_left = NodePath("..")
 text = "Delete"
+
+[connection signal="pressed" from="DeleteWorld" to="." method="_on_DeleteWorld_pressed"]
