@@ -11,6 +11,7 @@ margin_bottom = 72.0
 rect_min_size = Vector2( 0, 72 )
 focus_neighbour_right = NodePath("DeleteWorld")
 theme = ExtResource( 1 )
+toggle_mode = true
 align = 0
 script = ExtResource( 2 )
 

@@ -9,6 +9,10 @@ var number_of_levels = 0
 onready var title = $Title
 onready var subtitle = $Subtitle
 
+signal world_selected
+signal world_opened
+signal world_delete_prompt
+
 func init(world_folder_name : String):
 	update_world_folder(world_folder_name)
 
@@ -28,8 +32,10 @@ func update_world_folder(new_value):
 	subtitle.text = world_author + " - " + str(number_of_levels) + " " + levels_text
 
 func _on_WorldButton_pressed():
-	print("World selected" + world_folder_name)
+	pressed = !pressed
+	if pressed: emit_signal("world_opened", world_folder_name)
+	else: emit_signal("world_selected", world_folder_name)
 
 func _on_DeleteWorld_pressed():
-	print("Bring up world delete dialog for " + world_folder_name)
+	emit_signal("world_delete_prompt", world_folder_name)
 
