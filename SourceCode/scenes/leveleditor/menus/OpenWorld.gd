@@ -5,6 +5,8 @@ onready var back_button = $VBoxContainer/Back
 
 onready var world_list = $VBoxContainer/ScrollContainer/WorldList
 
+onready var select_level_dialog = $SelectLevelDialog
+
 export var world_button_scene : PackedScene
 
 var selected_world = ""
@@ -45,14 +47,19 @@ func world_selected(selected_world_folder_name):
 	
 	for button in world_list.get_children():
 		button.pressed = button.world_folder_name == selected_world
-		print(button.pressed)
 		if button.pressed: button.grab_focus()
 
 func _on_OpenWorldButton_pressed():
 	world_opened(selected_world)
 
 func world_opened(selected_world_folder_name):
-	pass
+	hide()
+	select_level_dialog.popup()
 
 func world_delete_prompt(selected_world_folder_name):
 	pass
+
+func _on_SelectLevelDialog_popup_hide():
+	var old_selected_world = selected_world
+	popup()
+	world_selected(old_selected_world)
