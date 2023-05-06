@@ -7,78 +7,56 @@
 
 [sub_resource type="StyleBoxFlat" id=4]
 bg_color = Color( 1, 1, 1, 0.392157 )
-border_width_left = 6
-border_width_top = 6
-border_width_right = 6
-border_width_bottom = 6
 border_color = Color( 0.8, 0.8, 0.8, 0 )
 corner_radius_top_left = 8
 corner_radius_top_right = 8
 corner_radius_bottom_right = 8
 corner_radius_bottom_left = 8
-expand_margin_left = 2.0
-expand_margin_right = 2.0
-expand_margin_top = 2.0
-expand_margin_bottom = 2.0
 shadow_color = Color( 0, 0, 0, 0 )
 shadow_size = 5
 anti_aliasing = false
 anti_aliasing_size = 0.01
 
 [sub_resource type="StyleBoxFlat" id=5]
-bg_color = Color( 0.415686, 0.823529, 1, 0.4 )
-border_width_left = 6
-border_width_top = 6
-border_width_right = 6
-border_width_bottom = 6
-border_color = Color( 1, 1, 1, 1 )
+bg_color = Color( 0.647059, 0.854902, 1, 0.709804 )
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color( 1, 1, 1, 0.666667 )
 corner_radius_top_left = 8
 corner_radius_top_right = 8
 corner_radius_bottom_right = 8
 corner_radius_bottom_left = 8
-expand_margin_left = 2.0
-expand_margin_right = 2.0
-expand_margin_top = 2.0
-expand_margin_bottom = 2.0
-shadow_color = Color( 0, 0, 0, 0 )
+shadow_color = Color( 0, 0, 0, 0.392157 )
 shadow_size = 5
 anti_aliasing = false
 anti_aliasing_size = 0.01
 
 [sub_resource type="StyleBoxFlat" id=2]
-bg_color = Color( 0.117647, 0.627451, 1, 0.196078 )
-border_width_left = 4
-border_width_top = 4
-border_width_right = 4
-border_width_bottom = 4
+bg_color = Color( 1, 1, 1, 0.215686 )
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
 border_color = Color( 1, 1, 0, 1 )
 corner_radius_top_left = 8
 corner_radius_top_right = 8
 corner_radius_bottom_right = 8
 corner_radius_bottom_left = 8
-expand_margin_left = 2.0
-expand_margin_right = 2.0
-expand_margin_top = 2.0
-expand_margin_bottom = 2.0
 shadow_color = Color( 0, 0, 0, 0 )
 shadow_size = 5
 anti_aliasing = false
 anti_aliasing_size = 0.01
 
 [sub_resource type="StyleBoxFlat" id=1]
-bg_color = Color( 0, 0, 0, 0.0117647 )
-border_width_left = 4
-border_width_top = 4
-border_width_right = 4
-border_width_bottom = 4
+bg_color = Color( 0, 0, 0, 0.12549 )
 border_color = Color( 0.8, 0.8, 0.8, 0 )
 border_blend = true
 corner_radius_top_left = 8
 corner_radius_top_right = 8
 corner_radius_bottom_right = 8
 corner_radius_bottom_left = 8
-shadow_color = Color( 0, 0, 0, 0.231373 )
-shadow_size = 5
 anti_aliasing = false
 anti_aliasing_size = 0.01
 

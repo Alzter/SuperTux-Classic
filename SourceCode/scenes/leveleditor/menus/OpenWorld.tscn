@@ -68,6 +68,65 @@ rect_min_size = Vector2( 0, 50 )
 focus_neighbour_top = NodePath("../OpenWorldButton")
 text = "Back"
 
+[node name="SelectLevelDialog" type="PopupDialog" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="SelectLevelDialog"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 43.0
+margin_top = 26.0
+margin_right = -44.0
+margin_bottom = -25.0
+custom_constants/separation = 15
+
+[node name="Label" type="RichTextLabel" parent="SelectLevelDialog/VBoxContainer2"]
+margin_right = 1153.0
+margin_bottom = 30.0
+custom_fonts/normal_font = ExtResource( 1 )
+bbcode_enabled = true
+bbcode_text = "[center][wave]Open a World"
+text = "Open a World"
+fit_content_height = true
+
+[node name="HSeparator" type="HSeparator" parent="SelectLevelDialog/VBoxContainer2"]
+margin_top = 45.0
+margin_right = 1153.0
+margin_bottom = 55.0
+custom_constants/separation = 10
+
+[node name="ScrollContainer" type="ScrollContainer" parent="SelectLevelDialog/VBoxContainer2"]
+margin_top = 70.0
+margin_right = 1153.0
+margin_bottom = 509.0
+size_flags_vertical = 3
+scroll_horizontal_enabled = false
+
+[node name="WorldList" type="VBoxContainer" parent="SelectLevelDialog/VBoxContainer2/ScrollContainer"]
+margin_right = 1153.0
+size_flags_horizontal = 3
+custom_constants/separation = 20
+
+[node name="OpenWorldButton" type="Button" parent="SelectLevelDialog/VBoxContainer2"]
+margin_top = 524.0
+margin_right = 1153.0
+margin_bottom = 574.0
+rect_min_size = Vector2( 0, 50 )
+focus_neighbour_bottom = NodePath("../Back")
+text = "Open World"
+
+[node name="Back" type="Button" parent="SelectLevelDialog/VBoxContainer2"]
+margin_top = 589.0
+margin_right = 1153.0
+margin_bottom = 639.0
+rect_min_size = Vector2( 0, 50 )
+focus_neighbour_top = NodePath("../OpenWorldButton")
+text = "Back"
+
 [connection signal="about_to_show" from="." to="." method="_on_OpenWorldMenu_about_to_show"]
 [connection signal="popup_hide" from="." to="." method="_on_OpenWorldMenu_popup_hide"]
+[connection signal="pressed" from="VBoxContainer/OpenWorldButton" to="." method="_on_OpenWorldButton_pressed"]
 [connection signal="pressed" from="VBoxContainer/Back" to="." method="_on_Back_pressed"]
+[connection signal="pressed" from="SelectLevelDialog/VBoxContainer2/OpenWorldButton" to="." method="_on_OpenWorldButton_pressed"]
+[connection signal="pressed" from="SelectLevelDialog/VBoxContainer2/Back" to="." method="_on_Back_pressed"]

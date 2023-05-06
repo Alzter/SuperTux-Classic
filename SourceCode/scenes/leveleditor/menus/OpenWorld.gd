@@ -48,6 +48,9 @@ func world_selected(selected_world_folder_name):
 		print(button.pressed)
 		if button.pressed: button.grab_focus()
 
+func _on_OpenWorldButton_pressed():
+	world_opened(selected_world)
+
 func world_opened(selected_world_folder_name):
 	pass
 
