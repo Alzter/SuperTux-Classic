@@ -9,26 +9,22 @@ export var world_button_scene : PackedScene
 
 func _on_OpenWorldMenu_about_to_show():
 	UserLevels.load_user_worlds()
-	world_list.show()
+	_clear_world_list()
 	
 	for world in UserLevels.user_worlds:
 		var button = world_button_scene.instance()
 		world_list.add_child(button)
 		button.init(world)
 		button.owner = world_list
-#		var name = UserLevels.get_world_name(world)
-#		var author = UserLevels.get_world_author(world)
-#
-#		var levels = UserLevels.get_levels_in_world(world)
-#		var number_of_levels = levels.size()
-#
-#		print(name)
-#		print(author)
-#		print(number_of_levels)
+	
+	world_list.show()
 
 func _on_Back_pressed():
 	hide()
 
-func _on_OpenWorldMenu_popup_hide():
+func _clear_world_list():
 	for child in world_list.get_children():
 		child.queue_free()
+	
+func _on_OpenWorldMenu_popup_hide():
+	_clear_world_list()

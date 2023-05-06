@@ -51,6 +51,10 @@ scroll_horizontal_enabled = false
 margin_right = 1153.0
 margin_bottom = 72.0
 size_flags_horizontal = 3
+custom_constants/separation = 20
+
+[node name="WorldButton" parent="VBoxContainer/ScrollContainer/WorldList" instance=ExtResource( 3 )]
+margin_right = 1153.0
 
 [node name="OpenWorldButton" type="Button" parent="VBoxContainer"]
 margin_top = 524.0

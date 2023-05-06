@@ -27,5 +27,9 @@ func update_world_folder(new_value):
 	
 	subtitle.text = world_author + " - " + str(number_of_levels) + " " + levels_text
 
+func _on_WorldButton_pressed():
+	print("World selected" + world_folder_name)
+
 func _on_DeleteWorld_pressed():
-	pass # Replace with function body.
+	print("Bring up world delete dialog for " + world_folder_name)
+

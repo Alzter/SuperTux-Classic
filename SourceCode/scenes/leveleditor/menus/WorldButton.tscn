@@ -43,4 +43,5 @@ margin_left = -134.0
 focus_neighbour_left = NodePath("..")
 text = "Delete"
 
+[connection signal="pressed" from="." to="." method="_on_WorldButton_pressed"]
 [connection signal="pressed" from="DeleteWorld" to="." method="_on_DeleteWorld_pressed"]
