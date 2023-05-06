@@ -15,6 +15,7 @@ signal world_delete_prompt
 
 func init(world_folder_name : String):
 	update_world_folder(world_folder_name)
+	_on_WorldButton_toggled(false)
 
 func update_world_folder(new_value):
 	world_folder_name = new_value
@@ -39,3 +40,12 @@ func _on_WorldButton_pressed():
 func _on_DeleteWorld_pressed():
 	emit_signal("world_delete_prompt", world_folder_name)
 
+
+
+func _on_WorldButton_toggled(button_pressed):
+	if button_pressed:
+		title.modulate = Color(1,1,0)
+		subtitle.modulate = Color(1,1,0)
+	else:
+		title.modulate = Color(1,1,1)
+		subtitle.modulate = Color(1,1,1)

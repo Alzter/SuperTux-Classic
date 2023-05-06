@@ -70,5 +70,4 @@ text = "Back"
 
 [connection signal="about_to_show" from="." to="." method="_on_OpenWorldMenu_about_to_show"]
 [connection signal="popup_hide" from="." to="." method="_on_OpenWorldMenu_popup_hide"]
-[connection signal="pressed" from="VBoxContainer/OpenWorldButton" to="." method="_on_CreateWorldButton_pressed"]
 [connection signal="pressed" from="VBoxContainer/Back" to="." method="_on_Back_pressed"]

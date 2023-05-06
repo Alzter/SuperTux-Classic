@@ -1,9 +1,86 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://theme/default_theme.tres" type="Theme" id=1]
 [ext_resource path="res://scenes/leveleditor/menus/WorldButton.gd" type="Script" id=2]
 [ext_resource path="res://theme/FontSmall.tres" type="DynamicFont" id=3]
 [ext_resource path="res://theme/FontButton.tres" type="DynamicFont" id=4]
+
+[sub_resource type="StyleBoxFlat" id=4]
+bg_color = Color( 1, 1, 1, 0.392157 )
+border_width_left = 6
+border_width_top = 6
+border_width_right = 6
+border_width_bottom = 6
+border_color = Color( 0.8, 0.8, 0.8, 0 )
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+expand_margin_left = 2.0
+expand_margin_right = 2.0
+expand_margin_top = 2.0
+expand_margin_bottom = 2.0
+shadow_color = Color( 0, 0, 0, 0 )
+shadow_size = 5
+anti_aliasing = false
+anti_aliasing_size = 0.01
+
+[sub_resource type="StyleBoxFlat" id=5]
+bg_color = Color( 0.415686, 0.823529, 1, 0.4 )
+border_width_left = 6
+border_width_top = 6
+border_width_right = 6
+border_width_bottom = 6
+border_color = Color( 1, 1, 1, 1 )
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+expand_margin_left = 2.0
+expand_margin_right = 2.0
+expand_margin_top = 2.0
+expand_margin_bottom = 2.0
+shadow_color = Color( 0, 0, 0, 0 )
+shadow_size = 5
+anti_aliasing = false
+anti_aliasing_size = 0.01
+
+[sub_resource type="StyleBoxFlat" id=2]
+bg_color = Color( 0.117647, 0.627451, 1, 0.196078 )
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color( 1, 1, 0, 1 )
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+expand_margin_left = 2.0
+expand_margin_right = 2.0
+expand_margin_top = 2.0
+expand_margin_bottom = 2.0
+shadow_color = Color( 0, 0, 0, 0 )
+shadow_size = 5
+anti_aliasing = false
+anti_aliasing_size = 0.01
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0, 0, 0, 0.0117647 )
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color( 0.8, 0.8, 0.8, 0 )
+border_blend = true
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+shadow_color = Color( 0, 0, 0, 0.231373 )
+shadow_size = 5
+anti_aliasing = false
+anti_aliasing_size = 0.01
 
 [node name="WorldButton" type="Button"]
 margin_right = 513.0
@@ -11,6 +88,10 @@ margin_bottom = 72.0
 rect_min_size = Vector2( 0, 72 )
 focus_neighbour_right = NodePath("DeleteWorld")
 theme = ExtResource( 1 )
+custom_styles/hover = SubResource( 4 )
+custom_styles/pressed = SubResource( 5 )
+custom_styles/focus = SubResource( 2 )
+custom_styles/normal = SubResource( 1 )
 toggle_mode = true
 align = 0
 script = ExtResource( 2 )
@@ -45,4 +126,5 @@ focus_neighbour_left = NodePath("..")
 text = "Delete"
 
 [connection signal="pressed" from="." to="." method="_on_WorldButton_pressed"]
+[connection signal="toggled" from="." to="." method="_on_WorldButton_toggled"]
 [connection signal="pressed" from="DeleteWorld" to="." method="_on_DeleteWorld_pressed"]
