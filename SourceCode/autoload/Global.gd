@@ -37,6 +37,8 @@ var can_pause = false
 
 var privacy_policy_url = "https://github.com/Alzter/SuperTux-Classic/blob/main/PRIVACYPOLICY.md"
 
+var level_attributes_cache = {}
+
 signal level_loaded
 signal player_loaded
 signal level_ready # EMITS AFTER THE LEVEL TITLE CARD HAS DISAPPEARED
@@ -233,7 +235,16 @@ func load_level_editor(filepath_of_level_to_edit : String):
 	editor.load_level_from_path(filepath_of_level_to_edit)
 
 func get_level_attribute(level_filepath : String, attribute_to_get : String):
+	var cached_attributes_for_level = level_attributes_cache.get(level_filepath)
+	if cached_attributes_for_level is Dictionary:
+		var cached_attribute = cached_attributes_for_level.get(attribute_to_get)
+		if cached_attribute: return cached_attribute
+	
 	var level_instance = load(level_filepath).instance()
 	var attribute_value = level_instance.get(attribute_to_get)
 	level_instance.queue_free()
+	
+	var attribute = {attribute_to_get : attribute_value}
+	level_attributes_cache[level_filepath] = attribute
+	
 	return attribute_value
