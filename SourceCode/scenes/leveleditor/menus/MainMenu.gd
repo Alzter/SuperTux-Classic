@@ -9,6 +9,7 @@ onready var button_world_open = $MainMenu/VBoxContainer/WorldOpen
 onready var button_exit = $MainMenu/VBoxContainer/ExitToMenu
 
 func _ready():
+	UserLevels.current_world = null
 	Scoreboard.hide()
 	Music.stop_all()
 	button_world_create.grab_focus()
@@ -25,6 +26,7 @@ func _on_WorldOpen_pressed():
 
 
 func _on_ExitToMenu_pressed():
+	UserLevels.current_world = null
 	Global.goto_title_screen()
 
 

@@ -15,7 +15,7 @@ margin_right = -20.0
 margin_bottom = -15.0
 theme = ExtResource( 2 )
 script = ExtResource( 4 )
-world_button_scene = ExtResource( 3 )
+button_scene = ExtResource( 3 )
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 anchor_right = 1.0
@@ -48,7 +48,7 @@ margin_bottom = 509.0
 size_flags_vertical = 3
 scroll_horizontal_enabled = false
 
-[node name="WorldList" type="VBoxContainer" parent="VBoxContainer/ScrollContainer"]
+[node name="ButtonList" type="VBoxContainer" parent="VBoxContainer/ScrollContainer"]
 margin_right = 1153.0
 size_flags_horizontal = 3
 custom_constants/separation = 20

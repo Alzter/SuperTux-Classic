@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://theme/FontBig.tres" type="DynamicFont" id=1]
 [ext_resource path="res://theme/default_theme.tres" type="Theme" id=2]
+[ext_resource path="res://scenes/leveleditor/menus/OpenWorld.gd" type="Script" id=3]
 
 [node name="SelectLevelDialog" type="PopupDialog"]
 anchor_right = 1.0
@@ -11,6 +12,8 @@ margin_top = 15.0
 margin_right = -20.0
 margin_bottom = -15.0
 theme = ExtResource( 2 )
+script = ExtResource( 3 )
+is_level_select = true
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 anchor_right = 1.0
@@ -43,7 +46,7 @@ margin_bottom = 509.0
 size_flags_vertical = 3
 scroll_horizontal_enabled = false
 
-[node name="LevelList" type="VBoxContainer" parent="VBoxContainer/ScrollContainer"]
+[node name="ButtonList" type="VBoxContainer" parent="VBoxContainer/ScrollContainer"]
 margin_right = 1153.0
 size_flags_horizontal = 3
 custom_constants/separation = 20
@@ -63,3 +66,5 @@ margin_bottom = 639.0
 rect_min_size = Vector2( 0, 50 )
 focus_neighbour_top = NodePath("../OpenLevelButton")
 text = "Back"
+
+[connection signal="pressed" from="VBoxContainer/OpenLevelButton" to="." method="_on_OpenLevelButton_pressed"]

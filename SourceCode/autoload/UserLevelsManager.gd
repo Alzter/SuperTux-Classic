@@ -9,6 +9,8 @@ var default_worldmap_level = "res://scenes/leveleditor/level_templates/worldmap.
 
 var user_worlds: Dictionary = {}
 
+var current_world = null
+
 func load_user_worlds():
 	unload_user_worlds()
 	
