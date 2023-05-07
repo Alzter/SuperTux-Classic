@@ -231,3 +231,9 @@ func load_level_editor(filepath_of_level_to_edit : String):
 	
 	var editor = current_scene
 	editor.load_level_from_path(filepath_of_level_to_edit)
+
+func get_level_attribute(level_filepath : String, attribute_to_get : String):
+	var level_instance = load(level_filepath).instance()
+	var attribute_value = level_instance.get(attribute_to_get)
+	level_instance.queue_free()
+	return attribute_value

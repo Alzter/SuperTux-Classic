@@ -212,9 +212,8 @@ func set_current_level_dot(new_value, sound = true):
 	if new_value:
 		
 		if current_level_dot.level_file_path != "":
-			var level_instance = load(current_level_dot.level_file_path).instance()
-			var level_name = level_instance.level_title
-			level_instance.queue_free()
+			var level_path = current_level_dot.level_file_path
+			var level_name = Global.get_level_attribute(level_path, "level_title")
 			Scoreboard.display_message(level_name)
 		
 		elif current_level_dot.message != "":
