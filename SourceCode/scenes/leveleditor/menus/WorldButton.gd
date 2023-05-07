@@ -2,7 +2,8 @@ extends Button
 
 export var is_level = false
 
-export var world_folder_name = "" setget update_world_folder
+export var world_folder_name = "" setget _update_world_folder
+export var level_filepath = "" setget _update_level_filepath
 var world_name = ""
 var world_author = ""
 var world_levels = []
@@ -16,16 +17,24 @@ signal world_opened
 signal world_delete_prompt
 
 func init_level(level_file_path : String):
-	return
+	_update_level_filepath(level_file_path)
 
 func init_world(world_folder_name : String):
-	update_world_folder(world_folder_name)
+	_update_world_folder(world_folder_name)
 
 func _ready():
 	_on_Button_toggled(false)
 
+func _update_level_filepath(new_value):
+	level_filepath = new_value
+	
+	var level_name = Global.get_level_attribute(level_filepath, "level_title")
+	var level_author = Global.get_level_attribute(level_filepath, "level_author")
+	
+	title.text = level_name
+	subtitle.text = level_author
 
-func update_world_folder(new_value):
+func _update_world_folder(new_value):
 	world_folder_name = new_value
 	
 	world_name = UserLevels.get_world_name(world_folder_name)

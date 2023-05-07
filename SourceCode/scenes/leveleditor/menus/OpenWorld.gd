@@ -40,21 +40,16 @@ func _populate_world_list():
 	world_selected(first_world)
 
 func _populate_level_list():
-	print("A")
-	
-	print(UserLevels.current_world)
 	
 	var levels = UserLevels.get_levels_in_world(UserLevels.current_world)
-	
-	print(levels)
 	
 	if levels.size() == 0: return
 	
 	for level in levels:
-		print(level)
 		var button = button_scene.instance()
 		button_list.add_child(button)
 		button.owner = button_list
+		button.init_level(level)
 	
 	return
 
