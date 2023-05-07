@@ -27,6 +27,7 @@ func _on_Menu_about_to_show():
 	else:
 		UserLevels.load_user_worlds()
 		_populate_world_list()
+		open_world_button.disabled = button_list.get_child_count() == 0
 	
 	button_list.show()
 
@@ -133,5 +134,7 @@ func delete_world(world_folder_name):
 	UserLevels.delete_user_world(world_folder_name)
 
 func _on_DeleteWorldDialog_popup_hide():
+	UserLevels.unload_user_worlds()
+	UserLevels.load_user_worlds()
 	_clear_button_list()
 	_populate_world_list()

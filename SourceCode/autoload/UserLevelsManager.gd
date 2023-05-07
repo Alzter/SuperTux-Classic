@@ -203,20 +203,24 @@ func get_levels_in_world(world_folder_name : String) -> Array:
 	return level_filepaths
 
 func delete_user_world(world_folder_name : String):
-	var world_folder = user_worlds_folder + world_folder_name
+	var world_folder = user_worlds_folder + world_folder_name + "/"
 	
 	var dir = Directory.new()
 	dir.open("user://")
 	dir.change_dir(world_folder)
 	
+	# Delete all files in the world
 	dir.list_dir_begin(true, true)
 	while true:
 		var current: String = dir.get_next()
 		if current == "":
 			break
 		else:
+			print(current)
 			dir.remove(current)
-	dir.remove(world_folder)
+	
+	# Delete the world folder
+	dir.remove(user_worlds_directory + world_folder_name)
 
 func _create_world_data(world_name : String, author_name : String, worldmap_scene : String = worldmap_file, initial_scene : String = worldmap_file) -> Dictionary:
 	return {
