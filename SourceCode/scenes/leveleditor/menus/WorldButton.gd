@@ -1,5 +1,7 @@
 extends Button
 
+export var is_level = false
+
 export var world_folder_name = "" setget update_world_folder
 var world_name = ""
 var world_author = ""
@@ -13,9 +15,15 @@ signal world_selected
 signal world_opened
 signal world_delete_prompt
 
-func init(world_folder_name : String):
+func init_level(level_file_path : String):
+	return
+
+func init_world(world_folder_name : String):
 	update_world_folder(world_folder_name)
-	_on_WorldButton_toggled(false)
+
+func _ready():
+	_on_Button_toggled(false)
+
 
 func update_world_folder(new_value):
 	world_folder_name = new_value
@@ -41,8 +49,7 @@ func _on_DeleteWorld_pressed():
 	emit_signal("world_delete_prompt", world_folder_name)
 
 
-
-func _on_WorldButton_toggled(button_pressed):
+func _on_Button_toggled(button_pressed):
 	if button_pressed:
 		title.modulate = Color(1,1,0)
 		subtitle.modulate = Color(1,1,0)

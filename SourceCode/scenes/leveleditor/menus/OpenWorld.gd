@@ -13,13 +13,14 @@ export var button_scene : PackedScene
 
 var selected_world = ""
 
-func _on_OpenWorldMenu_about_to_show():
+func _on_Menu_about_to_show():
 	selected_world = ""
-	UserLevels.load_user_worlds()
 	_clear_button_list()
 	
 	if is_level_select: _populate_level_list()
-	else: _populate_world_list()
+	else:
+		UserLevels.load_user_worlds()
+		_populate_world_list()
 	
 	button_list.show()
 
@@ -29,21 +30,31 @@ func _populate_world_list():
 	for world in UserLevels.user_worlds:
 		var button = button_scene.instance()
 		button_list.add_child(button)
+		button.owner = button_list
 		button.connect("world_selected", self, "world_selected")
 		button.connect("world_opened", self, "world_opened")
 		button.connect("world_delete_prompt", self, "world_delete_prompt")
-		button.init(world)
-		button.owner = button_list
+		button.init_world(world)
 	
 	var first_world = UserLevels.user_worlds.keys().front()
 	world_selected(first_world)
 
 func _populate_level_list():
+	print("A")
+	
+	print(UserLevels.current_world)
+	
 	var levels = UserLevels.get_levels_in_world(UserLevels.current_world)
+	
+	print(levels)
+	
 	if levels.size() == 0: return
 	
 	for level in levels:
 		print(level)
+		var button = button_scene.instance()
+		button_list.add_child(button)
+		button.owner = button_list
 	
 	return
 
@@ -82,4 +93,3 @@ func _on_SelectLevelDialog_popup_hide():
 	var old_selected_world = selected_world
 	popup()
 	world_selected(old_selected_world)
-
