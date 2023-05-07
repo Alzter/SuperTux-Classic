@@ -234,7 +234,10 @@ func load_level_editor(filepath_of_level_to_edit : String):
 	var editor = current_scene
 	editor.load_level_from_path(filepath_of_level_to_edit)
 
+# Returns level attributes from whichever STC level you specify the directory of.
 func get_level_attribute(level_filepath : String, attribute_to_get : String):
+	# If we have already cached the level attribute, just use that instead and
+	# don't waste time and memory loading a level scene.
 	var cached_attributes_for_level = level_attributes_cache.get(level_filepath)
 	if cached_attributes_for_level is Dictionary:
 		var cached_attribute = cached_attributes_for_level.get(attribute_to_get)
@@ -244,7 +247,13 @@ func get_level_attribute(level_filepath : String, attribute_to_get : String):
 	var attribute_value = level_instance.get(attribute_to_get)
 	level_instance.queue_free()
 	
+	# Cache the level attribute so we can access it faster if we need it again.
 	var attribute = {attribute_to_get : attribute_value}
 	level_attributes_cache[level_filepath] = attribute
 	
 	return attribute_value
+
+func clear_cached_level_attribute(level_filepath : String, attribute_to_get : String):
+	var cached_attributes_for_level = level_attributes_cache.get(level_filepath)
+	if cached_attributes_for_level is Dictionary:
+		cached_attributes_for_level.erase(attribute_to_get)
