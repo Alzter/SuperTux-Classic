@@ -1,6 +1,7 @@
 extends PopupDialog
 
-onready var open_world_button = $VBoxContainer/OpenWorldButton
+onready var open_world_button = get_node_or_null("VBoxContainer/OpenWorldButton")
+onready var open_level_button = get_node_or_null("VBoxContainer/OpenLevelButton")
 onready var back_button = $VBoxContainer/Back
 
 export var is_level_select = false

@@ -242,20 +242,22 @@ func get_level_attribute(level_filepath : String, attribute_to_get : String):
 	if cached_attributes_for_level is Dictionary:
 		var cached_attribute = cached_attributes_for_level.get(attribute_to_get)
 		if cached_attribute:
-			print("Cached level attribute " + attribute_to_get)
+			#print("Cached level attribute " + attribute_to_get)
 			return cached_attribute
 	
-	print("Uncached level attribute " + attribute_to_get)
+	#print("Uncached level attribute " + attribute_to_get)
 	
 	var level_instance = load(level_filepath).instance()
 	var attribute_value = level_instance.get(attribute_to_get)
 	level_instance.queue_free()
 	
 	# Cache the level attribute so we can access it faster if we need it again.
-	var attribute = {attribute_to_get : attribute_value}
-	level_attributes_cache[level_filepath] = attribute
-	
-	##print("Caching level attribute " + attribute_to_get + " from level " + level_filepath)
+	var cache = level_attributes_cache.get(level_filepath)
+	if cache:
+		cache[attribute_to_get] = attribute_value
+	else:
+		var attribute = {attribute_to_get : attribute_value}
+		level_attributes_cache[level_filepath] = attribute
 	
 	return attribute_value
 
