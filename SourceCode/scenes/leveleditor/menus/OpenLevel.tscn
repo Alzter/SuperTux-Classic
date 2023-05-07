@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://theme/FontBig.tres" type="DynamicFont" id=1]
 [ext_resource path="res://theme/default_theme.tres" type="Theme" id=2]
 [ext_resource path="res://scenes/leveleditor/menus/OpenWorld.gd" type="Script" id=3]
 [ext_resource path="res://scenes/leveleditor/menus/LevelButton.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scenes/leveleditor/menus/DeleteLevelDialog.tscn" type="PackedScene" id=5]
 
 [node name="SelectLevelDialog" type="PopupDialog"]
 anchor_right = 1.0
@@ -69,6 +70,9 @@ rect_min_size = Vector2( 0, 50 )
 focus_neighbour_top = NodePath("../OpenLevelButton")
 text = "Back"
 
+[node name="DeleteLevelDialog" parent="." instance=ExtResource( 5 )]
+
 [connection signal="about_to_show" from="." to="." method="_on_Menu_about_to_show"]
 [connection signal="pressed" from="VBoxContainer/OpenLevelButton" to="." method="_on_OpenLevelButton_pressed"]
 [connection signal="pressed" from="VBoxContainer/Back" to="." method="_on_Back_pressed"]
+[connection signal="popup_hide" from="DeleteLevelDialog" to="." method="_on_DeleteLevelDialog_popup_hide"]

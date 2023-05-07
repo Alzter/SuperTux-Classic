@@ -1,8 +1,8 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=7 format=2]
 
-[ext_resource path="res://scenes/leveleditor/menus/DeleteWorldDialog.gd" type="Script" id=1]
-[ext_resource path="res://theme/FontGiant.tres" type="DynamicFont" id=2]
-[ext_resource path="res://theme/default_theme.tres" type="Theme" id=3]
+[ext_resource path="res://theme/default_theme.tres" type="Theme" id=1]
+[ext_resource path="res://scenes/leveleditor/menus/DeleteWorldDialog.gd" type="Script" id=2]
+[ext_resource path="res://theme/FontBig.tres" type="DynamicFont" id=3]
 
 [sub_resource type="StyleBoxFlat" id=2]
 bg_color = Color( 1, 0.8, 0.8, 1 )
@@ -59,72 +59,17 @@ shadow_size = 5
 anti_aliasing = false
 anti_aliasing_size = 0.01
 
-[sub_resource type="Animation" id=4]
-resource_name = "DeleteButtonAppear"
-length = 4.0
-tracks/0/type = "value"
-tracks/0/path = NodePath("VBoxContainer/VBoxContainer/ConfirmDelete/ProgressBar/ProgressFill:rect_scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 1, 4 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 0,
-"values": [ Vector2( 0, 1 ), Vector2( 0, 1 ), Vector2( 1, 1 ) ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("VBoxContainer/VBoxContainer/ConfirmDelete/ProgressBar:modulate")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 3.9, 4 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 0,
-"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
-}
-
-[sub_resource type="Animation" id=5]
-resource_name = "default"
-length = 0.001
-tracks/0/type = "value"
-tracks/0/path = NodePath("VBoxContainer/VBoxContainer/ConfirmDelete/ProgressBar/ProgressFill:rect_scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector2( 1, 1 ) ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("VBoxContainer/VBoxContainer/ConfirmDelete/ProgressBar:modulate")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Color( 1, 1, 1, 0 ) ]
-}
-
-[node name="DeleteWorldDialog" type="PopupDialog"]
-visible = true
+[node name="DeleteLevelDialog" type="PopupDialog"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 71.0
 margin_top = 40.0
 margin_right = -71.0
 margin_bottom = -40.0
-theme = ExtResource( 3 )
-script = ExtResource( 1 )
+theme = ExtResource( 1 )
+script = ExtResource( 2 )
+is_level_delete = true
+delay_delete_button = false
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 anchor_right = 1.0
@@ -134,26 +79,26 @@ margin_right = -234.0
 alignment = 1
 
 [node name="Title" type="RichTextLabel" parent="VBoxContainer"]
-margin_top = 171.0
+margin_top = 203.0
 margin_right = 670.0
-margin_bottom = 265.0
+margin_bottom = 233.0
 custom_colors/default_color = Color( 1, 0, 0, 1 )
-custom_fonts/normal_font = ExtResource( 2 )
+custom_fonts/normal_font = ExtResource( 3 )
 bbcode_enabled = true
-bbcode_text = "[shake][center]WARNING"
-text = "WARNING"
+bbcode_text = "[center]Delete Level"
+text = "Delete Level"
 fit_content_height = true
 
 [node name="HSeparator2" type="HSeparator" parent="VBoxContainer"]
-margin_top = 269.0
+margin_top = 237.0
 margin_right = 670.0
-margin_bottom = 299.0
+margin_bottom = 267.0
 
 [node name="Label" type="Label" parent="VBoxContainer"]
-margin_top = 303.0
+margin_top = 271.0
 margin_right = 670.0
-margin_bottom = 366.0
-text = "Are you sure you want to delete this world?
+margin_bottom = 334.0
+text = "Are you sure you want to delete this level?
 
 You will not be able to recover it."
 align = 1
@@ -161,14 +106,14 @@ valign = 1
 autowrap = true
 
 [node name="HSeparator" type="HSeparator" parent="VBoxContainer"]
-margin_top = 370.0
+margin_top = 338.0
 margin_right = 670.0
-margin_bottom = 400.0
+margin_bottom = 368.0
 
 [node name="VBoxContainer" type="HSplitContainer" parent="VBoxContainer"]
-margin_top = 404.0
+margin_top = 372.0
 margin_right = 670.0
-margin_bottom = 468.0
+margin_bottom = 436.0
 
 [node name="EscapeButton" type="Button" parent="VBoxContainer/VBoxContainer"]
 margin_right = 329.0
@@ -189,27 +134,7 @@ custom_styles/hover = SubResource( 2 )
 custom_styles/pressed = SubResource( 3 )
 custom_styles/focus = SubResource( 2 )
 custom_styles/normal = SubResource( 1 )
-disabled = true
 text = "Yes"
-
-[node name="ProgressBar" type="ColorRect" parent="VBoxContainer/VBoxContainer/ConfirmDelete"]
-modulate = Color( 1, 1, 1, 0 )
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-rect_min_size = Vector2( 0, 5 )
-color = Color( 0, 0, 0, 1 )
-
-[node name="ProgressFill" type="ColorRect" parent="VBoxContainer/VBoxContainer/ConfirmDelete/ProgressBar"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-rect_min_size = Vector2( 0, 5 )
-color = Color( 1, 0, 0, 1 )
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-autoplay = "default"
-anims/DeleteButtonAppear = SubResource( 4 )
-anims/default = SubResource( 5 )
 
 [node name="DeletionMessage" type="PopupDialog" parent="."]
 visible = true
@@ -231,7 +156,7 @@ alignment = 1
 margin_top = 228.0
 margin_right = 616.0
 margin_bottom = 249.0
-text = "The world has been deleted."
+text = "The level has been deleted."
 align = 1
 valign = 1
 autowrap = true
@@ -253,5 +178,4 @@ text = "OK"
 [connection signal="about_to_show" from="." to="." method="_on_DeleteWorldDialog_about_to_show"]
 [connection signal="pressed" from="VBoxContainer/VBoxContainer/EscapeButton" to="." method="_on_EscapeButton_pressed"]
 [connection signal="pressed" from="VBoxContainer/VBoxContainer/ConfirmDelete" to="." method="_on_ConfirmDelete_pressed"]
-[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
 [connection signal="pressed" from="DeletionMessage/VBoxContainer/FinishDelete" to="." method="_on_FinishDelete_pressed"]

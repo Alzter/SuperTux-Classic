@@ -64,7 +64,7 @@ anti_aliasing_size = 0.01
 margin_right = 513.0
 margin_bottom = 72.0
 rect_min_size = Vector2( 0, 72 )
-focus_neighbour_right = NodePath("DeleteLevel")
+focus_neighbour_right = NodePath("Delete")
 theme = ExtResource( 3 )
 custom_styles/hover = SubResource( 4 )
 custom_styles/pressed = SubResource( 5 )
@@ -95,7 +95,7 @@ margin_bottom = -16.0
 custom_fonts/font = ExtResource( 4 )
 text = "SuperTux Team"
 
-[node name="DeleteLevel" type="Button" parent="."]
+[node name="Delete" type="Button" parent="."]
 anchor_left = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -105,4 +105,4 @@ text = "Delete"
 
 [connection signal="pressed" from="." to="." method="_on_LevelButton_pressed"]
 [connection signal="toggled" from="." to="." method="_on_Button_toggled"]
-[connection signal="pressed" from="DeleteLevel" to="." method="_on_DeleteLevel_pressed"]
+[connection signal="pressed" from="Delete" to="." method="_on_DeleteLevel_pressed"]

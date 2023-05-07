@@ -27,7 +27,7 @@ func _on_Menu_about_to_show():
 	else:
 		UserLevels.load_user_worlds()
 		_populate_world_list()
-		open_world_button.disabled = button_list.get_child_count() == 0
+		open_world_button.disabled = UserLevels.user_worlds.empty()
 	
 	button_list.show()
 
@@ -47,10 +47,7 @@ func _populate_world_list():
 	world_selected(first_world)
 
 func _populate_level_list():
-	
 	var levels = UserLevels.get_levels_in_world(UserLevels.current_world)
-	
-	if levels.size() == 0: return
 	
 	var worldmap_level = UserLevels.get_worldmap_filepath_for_world(UserLevels.current_world)
 	
@@ -60,8 +57,6 @@ func _populate_level_list():
 		_add_level_button(level)
 	
 	level_selected(worldmap_level)
-	
-	return
 
 func _add_level_button(level_filepath, is_worldmap = false):
 		var button = button_scene.instance()
@@ -121,9 +116,9 @@ func world_delete_prompt(selected_world_folder_name):
 func level_delete_prompt(level_filename):
 	if !delete_level_dialog: return
 	
-	delete_world_dialog.init_level(selected_level)
+	delete_level_dialog.init_level(selected_level)
 	delete_level_dialog.popup()
-	delete_world_dialog.connect("delete_world", self, "delete_level")
+	delete_level_dialog.connect("delete_level", self, "delete_level")
 
 func _on_SelectLevelDialog_popup_hide():
 	var old_selected_world = selected_world
@@ -133,8 +128,11 @@ func _on_SelectLevelDialog_popup_hide():
 func delete_world(world_folder_name):
 	UserLevels.delete_user_world(world_folder_name)
 
+func delete_level(level_filepath):
+	UserLevels.delete_user_level(level_filepath)
+
 func _on_DeleteWorldDialog_popup_hide():
-	UserLevels.unload_user_worlds()
-	UserLevels.load_user_worlds()
-	_clear_button_list()
-	_populate_world_list()
+	_on_Menu_about_to_show()
+
+func _on_DeleteLevelDialog_popup_hide():
+	_on_Menu_about_to_show()

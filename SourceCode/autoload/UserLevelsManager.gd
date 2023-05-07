@@ -222,6 +222,10 @@ func delete_user_world(world_folder_name : String):
 	# Delete the world folder
 	dir.remove(user_worlds_directory + world_folder_name)
 
+func delete_user_level(level_filepath : String):
+	var dir = Directory.new()
+	dir.remove(level_filepath)
+
 func _create_world_data(world_name : String, author_name : String, worldmap_scene : String = worldmap_file, initial_scene : String = worldmap_file) -> Dictionary:
 	return {
 		"world_name" : world_name,

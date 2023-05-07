@@ -11,6 +11,7 @@ var number_of_levels = 0
 
 onready var title = $Title
 onready var subtitle = $Subtitle
+onready var delete_button = get_node_or_null("Delete")
 
 signal world_selected
 signal world_opened
@@ -38,7 +39,9 @@ func _update_level_filepath(new_value):
 	var level_name = ""
 	var level_author = ""
 	
-	if is_worldmap: level_name = "Worldmap"
+	if is_worldmap:
+		level_name = "Worldmap"
+		delete_button.hide()
 	else:
 		level_name = Global.get_level_attribute(level_filepath, "level_title")
 		level_author = Global.get_level_attribute(level_filepath, "level_author")
