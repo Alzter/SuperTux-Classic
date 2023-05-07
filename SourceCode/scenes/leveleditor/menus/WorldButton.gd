@@ -68,8 +68,8 @@ func _on_WorldButton_pressed():
 
 func _on_LevelButton_pressed():
 	pressed = !pressed
-	if pressed: emit_signal("level_opened", world_folder_name)
-	else: emit_signal("level_selected", world_folder_name)
+	if pressed: emit_signal("level_opened", level_filepath)
+	else: emit_signal("level_selected", level_filepath)
 
 func _on_DeleteWorld_pressed():
 	emit_signal("world_delete_prompt", world_folder_name)

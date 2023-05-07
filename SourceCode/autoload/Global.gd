@@ -232,7 +232,7 @@ func load_level_editor_with_level(filepath_of_level_to_edit : String):
 	yield(call("goto_scene", level_editor_scene), "completed")
 	
 	var editor = current_scene
-	editor.load_level_from_path(filepath_of_level_to_edit)
+	#editor.load_level_from_path(filepath_of_level_to_edit)
 
 # Returns level attributes from whichever STC level you specify the directory of.
 func get_level_attribute(level_filepath : String, attribute_to_get : String):
