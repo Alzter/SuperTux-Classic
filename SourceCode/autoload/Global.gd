@@ -261,7 +261,5 @@ func get_level_attribute(level_filepath : String, attribute_to_get : String):
 	
 	return attribute_value
 
-func clear_cached_level_attribute(level_filepath : String, attribute_to_get : String):
-	var cached_attributes_for_level = level_attributes_cache.get(level_filepath)
-	if cached_attributes_for_level is Dictionary:
-		cached_attributes_for_level.erase(attribute_to_get)
+func clear_level_cache(level_filepath : String):
+	level_attributes_cache.erase(level_filepath)
