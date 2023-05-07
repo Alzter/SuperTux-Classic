@@ -49,14 +49,8 @@ margin_right = 1153.0
 margin_bottom = 70.0
 focus_neighbour_bottom = NodePath("../ScrollContainer/ButtonList")
 
-[node name="HSeparator2" type="HSeparator" parent="VBoxContainer"]
-margin_top = 85.0
-margin_right = 1153.0
-margin_bottom = 95.0
-custom_constants/separation = 10
-
 [node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer"]
-margin_top = 110.0
+margin_top = 85.0
 margin_right = 1153.0
 margin_bottom = 509.0
 size_flags_vertical = 3
