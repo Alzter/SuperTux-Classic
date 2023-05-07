@@ -7,6 +7,7 @@
 [ext_resource path="res://scenes/leveleditor/menus/DeleteLevelDialog.tscn" type="PackedScene" id=5]
 
 [node name="SelectLevelDialog" type="PopupDialog"]
+visible = true
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 20.0
@@ -42,8 +43,20 @@ margin_right = 1153.0
 margin_bottom = 55.0
 custom_constants/separation = 10
 
-[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer"]
+[node name="WorldmapContainer" type="VBoxContainer" parent="VBoxContainer"]
 margin_top = 70.0
+margin_right = 1153.0
+margin_bottom = 70.0
+focus_neighbour_bottom = NodePath("../ScrollContainer/ButtonList")
+
+[node name="HSeparator2" type="HSeparator" parent="VBoxContainer"]
+margin_top = 85.0
+margin_right = 1153.0
+margin_bottom = 95.0
+custom_constants/separation = 10
+
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer"]
+margin_top = 110.0
 margin_right = 1153.0
 margin_bottom = 509.0
 size_flags_vertical = 3
@@ -51,6 +64,7 @@ scroll_horizontal_enabled = false
 
 [node name="ButtonList" type="VBoxContainer" parent="VBoxContainer/ScrollContainer"]
 margin_right = 1153.0
+focus_neighbour_top = NodePath("../../WorldmapContainer")
 size_flags_horizontal = 3
 custom_constants/separation = 20
 

@@ -50,7 +50,7 @@ anti_aliasing = false
 anti_aliasing_size = 0.01
 
 [sub_resource type="StyleBoxFlat" id=1]
-bg_color = Color( 0, 0, 0, 0.12549 )
+bg_color = Color( 0, 0, 0, 0.352941 )
 border_color = Color( 0.8, 0.8, 0.8, 0 )
 border_blend = true
 corner_radius_top_left = 8

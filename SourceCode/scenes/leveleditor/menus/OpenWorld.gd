@@ -7,6 +7,7 @@ onready var back_button = $VBoxContainer/Back
 export var is_level_select = false
 
 onready var button_list = get_node_or_null("VBoxContainer/ScrollContainer/ButtonList")
+onready var worldmap_container = get_node_or_null("VBoxContainer/WorldmapContainer")
 
 onready var select_level_dialog = get_node_or_null("SelectLevelDialog")
 
@@ -59,20 +60,24 @@ func _populate_level_list():
 	level_selected(worldmap_level)
 
 func _add_level_button(level_filepath, is_worldmap = false):
-		var button = button_scene.instance()
-		button_list.add_child(button)
-		button.owner = button_list
-		button.connect("level_selected", self, "level_selected")
-		button.connect("level_opened", self, "level_opened")
-		button.connect("level_delete_prompt", self, "level_delete_prompt")
-		button.init_level(level_filepath, is_worldmap)
+	var container = button_list if !is_worldmap else worldmap_container
+	
+	var button = button_scene.instance()
+	container.add_child(button)
+	button.owner = container
+	button.connect("level_selected", self, "level_selected")
+	button.connect("level_opened", self, "level_opened")
+	button.connect("level_delete_prompt", self, "level_delete_prompt")
+	button.init_level(level_filepath, is_worldmap)
 
 func _on_Back_pressed():
 	hide()
 
 func _clear_button_list():
-	for child in button_list.get_children():
-		child.queue_free()
+	if worldmap_container:
+		for child in worldmap_container.get_children(): child.queue_free()
+	
+	for child in button_list.get_children(): child.queue_free()
 	
 func _on_OpenWorldMenu_popup_hide():
 	_clear_button_list()
