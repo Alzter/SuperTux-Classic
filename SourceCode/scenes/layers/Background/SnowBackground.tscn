@@ -96,6 +96,7 @@ color = Color( 0.576471, 0.992157, 1, 0.32549 )
 [node name="Control" type="Control" parent="CanvasLayer"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+mouse_filter = 2
 
 [node name="ColorRect2" type="ColorRect" parent="CanvasLayer/Control"]
 material = SubResource( 3 )
@@ -104,4 +105,5 @@ anchor_bottom = 1.0
 margin_right = 99359.0
 margin_bottom = 99519.0
 rect_min_size = Vector2( 99999, 99999 )
+mouse_filter = 2
 color = Color( 0.27451, 0, 0.4, 0.160784 )

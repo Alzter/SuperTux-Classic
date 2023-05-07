@@ -60,12 +60,13 @@ anti_aliasing = false
 anti_aliasing_size = 0.01
 
 [node name="DeleteLevelDialog" type="PopupDialog"]
+visible = true
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 71.0
-margin_top = 40.0
-margin_right = -71.0
-margin_bottom = -40.0
+margin_left = 10.0
+margin_top = 5.0
+margin_right = -10.0
+margin_bottom = -5.0
 theme = ExtResource( 1 )
 script = ExtResource( 2 )
 is_level_delete = true
@@ -74,14 +75,16 @@ delay_delete_button = false
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 234.0
-margin_right = -234.0
+margin_left = 125.0
+margin_top = 69.0
+margin_right = -125.0
+margin_bottom = -69.0
 alignment = 1
 
 [node name="Title" type="RichTextLabel" parent="VBoxContainer"]
-margin_top = 203.0
-margin_right = 670.0
-margin_bottom = 233.0
+margin_top = 28.0
+margin_right = 370.0
+margin_bottom = 58.0
 custom_colors/default_color = Color( 1, 0, 0, 1 )
 custom_fonts/normal_font = ExtResource( 3 )
 bbcode_enabled = true
@@ -90,14 +93,14 @@ text = "Delete Level"
 fit_content_height = true
 
 [node name="HSeparator2" type="HSeparator" parent="VBoxContainer"]
-margin_top = 237.0
-margin_right = 670.0
-margin_bottom = 267.0
+margin_top = 62.0
+margin_right = 370.0
+margin_bottom = 92.0
 
 [node name="Label" type="Label" parent="VBoxContainer"]
-margin_top = 271.0
-margin_right = 670.0
-margin_bottom = 334.0
+margin_top = 96.0
+margin_right = 370.0
+margin_bottom = 201.0
 text = "Are you sure you want to delete this level?
 
 You will not be able to recover it."
@@ -106,25 +109,25 @@ valign = 1
 autowrap = true
 
 [node name="HSeparator" type="HSeparator" parent="VBoxContainer"]
-margin_top = 338.0
-margin_right = 670.0
-margin_bottom = 368.0
+margin_top = 205.0
+margin_right = 370.0
+margin_bottom = 235.0
 
 [node name="VBoxContainer" type="HSplitContainer" parent="VBoxContainer"]
-margin_top = 372.0
-margin_right = 670.0
-margin_bottom = 436.0
+margin_top = 239.0
+margin_right = 370.0
+margin_bottom = 303.0
 
 [node name="EscapeButton" type="Button" parent="VBoxContainer/VBoxContainer"]
-margin_right = 329.0
+margin_right = 179.0
 margin_bottom = 64.0
 rect_min_size = Vector2( 0, 64 )
 size_flags_horizontal = 3
 text = "No"
 
 [node name="ConfirmDelete" type="Button" parent="VBoxContainer/VBoxContainer"]
-margin_left = 341.0
-margin_right = 670.0
+margin_left = 191.0
+margin_right = 370.0
 margin_bottom = 64.0
 rect_min_size = Vector2( 0, 64 )
 size_flags_horizontal = 3
@@ -148,29 +151,31 @@ margin_bottom = -20.0
 [node name="VBoxContainer" type="VBoxContainer" parent="DeletionMessage"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 246.0
-margin_right = -246.0
+margin_left = 171.0
+margin_top = 57.0
+margin_right = -171.0
+margin_bottom = -57.0
 alignment = 1
 
 [node name="Label" type="Label" parent="DeletionMessage/VBoxContainer"]
-margin_top = 228.0
-margin_right = 616.0
-margin_bottom = 249.0
+margin_top = 76.0
+margin_right = 248.0
+margin_bottom = 118.0
 text = "The level has been deleted."
 align = 1
 valign = 1
 autowrap = true
 
 [node name="SpaceFiller" type="Control" parent="DeletionMessage/VBoxContainer"]
-margin_top = 253.0
-margin_right = 616.0
-margin_bottom = 303.0
+margin_top = 122.0
+margin_right = 248.0
+margin_bottom = 172.0
 rect_min_size = Vector2( 0, 50 )
 
 [node name="FinishDelete" type="Button" parent="DeletionMessage/VBoxContainer"]
-margin_top = 307.0
-margin_right = 616.0
-margin_bottom = 371.0
+margin_top = 176.0
+margin_right = 248.0
+margin_bottom = 240.0
 rect_min_size = Vector2( 0, 64 )
 size_flags_horizontal = 3
 text = "OK"

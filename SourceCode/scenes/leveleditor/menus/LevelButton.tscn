@@ -62,8 +62,8 @@ anti_aliasing_size = 0.01
 
 [node name="LevelButton" type="Button"]
 margin_right = 513.0
-margin_bottom = 72.0
-rect_min_size = Vector2( 0, 72 )
+margin_bottom = 55.0
+rect_min_size = Vector2( 0, 55 )
 focus_neighbour_right = NodePath("Delete")
 theme = ExtResource( 3 )
 custom_styles/hover = SubResource( 4 )
@@ -85,6 +85,7 @@ custom_fonts/font = ExtResource( 2 )
 text = "Welcome To Antarctica"
 
 [node name="Subtitle" type="Label" parent="."]
+visible = false
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
