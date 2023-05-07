@@ -103,4 +103,6 @@ margin_left = -134.0
 focus_neighbour_left = NodePath("..")
 text = "Delete"
 
+[connection signal="pressed" from="." to="." method="_on_LevelButton_pressed"]
 [connection signal="toggled" from="." to="." method="_on_Button_toggled"]
+[connection signal="pressed" from="DeleteLevel" to="." method="_on_DeleteLevel_pressed"]

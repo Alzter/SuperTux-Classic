@@ -71,3 +71,4 @@ text = "Back"
 
 [connection signal="about_to_show" from="." to="." method="_on_Menu_about_to_show"]
 [connection signal="pressed" from="VBoxContainer/OpenLevelButton" to="." method="_on_OpenLevelButton_pressed"]
+[connection signal="pressed" from="VBoxContainer/Back" to="." method="_on_Back_pressed"]

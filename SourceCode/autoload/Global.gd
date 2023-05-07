@@ -228,7 +228,7 @@ func list_files_in_directory(path):
 	return files
 
 # Horrible jank. Will break easily. JANK IT UP!!
-func load_level_editor(filepath_of_level_to_edit : String):
+func load_level_editor_with_level(filepath_of_level_to_edit : String):
 	yield(call("goto_scene", level_editor_scene), "completed")
 	
 	var editor = current_scene
