@@ -47,6 +47,8 @@ Alexander (Alzter) Small
 
 Matthew (Skyace65)
 
+Tulpenkiste
+
 
 New Graphics
 
@@ -218,6 +220,6 @@ align = 1
 clip_text = true
 
 [node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="RichTextLabel"]
-rect = Rect2( 0, 0, 640, 3200 )
+rect = Rect2( 0, 0, 640, 3300 )
 
 [connection signal="screen_exited" from="RichTextLabel/VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]
