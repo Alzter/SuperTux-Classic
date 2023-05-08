@@ -181,6 +181,7 @@ margin_right = -225.0
 color = Color( 0, 0, 0, 0.392157 )
 
 [node name="RetractTab" type="Button" parent="UI/Scale/EditorUI/LayersPanelOffset/LayersPanel"]
+visible = false
 margin_top = -45.0
 margin_right = 109.0
 margin_bottom = -2.0
@@ -204,7 +205,7 @@ margin_bottom = -10.0
 scroll_vertical_enabled = false
 
 [node name="LayersContainer" type="HBoxContainer" parent="UI/Scale/EditorUI/LayersPanelOffset/LayersPanel/ScrollContainer"]
-margin_right = 271.0
+margin_right = 911.0
 margin_bottom = 100.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -212,7 +213,6 @@ custom_constants/separation = 15
 alignment = 1
 
 [node name="AddLayerDialog" type="PopupDialog" parent="UI/Scale/EditorUI/LayersPanelOffset"]
-visible = true
 anchor_bottom = 1.0
 margin_right = 322.0
 margin_bottom = -122.0
@@ -275,18 +275,18 @@ text = "Tilemap"
 [node name="SpaceFiller" type="Control" parent="UI/Scale/EditorUI/LayersPanelOffset/AddLayerDialog/VBoxContainer"]
 margin_top = 125.0
 margin_right = 304.0
-margin_bottom = 258.0
+margin_bottom = 498.0
 size_flags_vertical = 3
 
 [node name="HSeparator2" type="HSeparator" parent="UI/Scale/EditorUI/LayersPanelOffset/AddLayerDialog/VBoxContainer"]
-margin_top = 262.0
+margin_top = 502.0
 margin_right = 304.0
-margin_bottom = 292.0
+margin_bottom = 532.0
 
 [node name="AddLayerButton" type="Button" parent="UI/Scale/EditorUI/LayersPanelOffset/AddLayerDialog/VBoxContainer"]
-margin_top = 296.0
+margin_top = 536.0
 margin_right = 304.0
-margin_bottom = 338.0
+margin_bottom = 578.0
 rect_min_size = Vector2( 0, 42 )
 focus_mode = 0
 text = "Add"
