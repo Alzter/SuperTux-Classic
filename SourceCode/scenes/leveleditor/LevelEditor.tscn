@@ -122,7 +122,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 theme = ExtResource( 1 )
 script = ExtResource( 2 )
-level_to_load = "res://scenes/leveleditor/samplelevel.tscn"
 layer_button_scene = ExtResource( 4 )
 
 [node name="TileFunctions" type="Node2D" parent="."]
@@ -205,7 +204,7 @@ margin_bottom = -10.0
 scroll_vertical_enabled = false
 
 [node name="LayersContainer" type="HBoxContainer" parent="UI/Scale/EditorUI/LayersPanelOffset/LayersPanel/ScrollContainer"]
-margin_right = 911.0
+margin_right = 271.0
 margin_bottom = 100.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -276,18 +275,18 @@ text = "Tilemap"
 [node name="SpaceFiller" type="Control" parent="UI/Scale/EditorUI/LayersPanelOffset/AddLayerDialog/VBoxContainer"]
 margin_top = 125.0
 margin_right = 304.0
-margin_bottom = 498.0
+margin_bottom = 258.0
 size_flags_vertical = 3
 
 [node name="HSeparator2" type="HSeparator" parent="UI/Scale/EditorUI/LayersPanelOffset/AddLayerDialog/VBoxContainer"]
-margin_top = 502.0
+margin_top = 262.0
 margin_right = 304.0
-margin_bottom = 532.0
+margin_bottom = 292.0
 
 [node name="AddLayerButton" type="Button" parent="UI/Scale/EditorUI/LayersPanelOffset/AddLayerDialog/VBoxContainer"]
-margin_top = 536.0
+margin_top = 296.0
 margin_right = 304.0
-margin_bottom = 578.0
+margin_bottom = 338.0
 rect_min_size = Vector2( 0, 42 )
 focus_mode = 0
 text = "Add"

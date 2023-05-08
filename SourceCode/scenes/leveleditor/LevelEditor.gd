@@ -1,6 +1,6 @@
 extends Control
 
-export var level_to_load = "res://scenes/levels/world1/level1.tscn"
+#export var level_to_load = "res://scenes/levels/world1/level1.tscn"
 
 export var cache_level_directory = "user://leveleditor/"
 export var cache_level_filename = "cache.tscn"
