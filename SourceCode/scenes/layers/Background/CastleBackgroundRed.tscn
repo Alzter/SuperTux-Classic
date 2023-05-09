@@ -1,0 +1,144 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://scenes/layers/Background/GradientBackground.tscn" type="PackedScene" id=1]
+[ext_resource path="res://images/background/castle_interior_glow.png" type="Texture" id=2]
+[ext_resource path="res://images/background/castle_interior.png" type="Texture" id=3]
+[ext_resource path="res://images/background/castle_glass_overlay.png" type="Texture" id=4]
+[ext_resource path="res://images/background/castle_interior_back.png" type="Texture" id=5]
+[ext_resource path="res://images/background/castle_glass_shine.png" type="Texture" id=6]
+
+[sub_resource type="CanvasItemMaterial" id=1]
+blend_mode = 3
+
+[sub_resource type="CanvasItemMaterial" id=2]
+blend_mode = 1
+
+[sub_resource type="CanvasItemMaterial" id=3]
+blend_mode = 1
+
+[sub_resource type="CanvasItemMaterial" id=4]
+blend_mode = 1
+
+[sub_resource type="CanvasItemMaterial" id=10]
+blend_mode = 3
+
+[node name="CastleBGRed" type="ParallaxBackground"]
+
+[node name="GradientBG" parent="." instance=ExtResource( 1 )]
+layer = -128
+top_colour = Color( 1, 0, 0, 1 )
+
+[node name="Multiply" type="CanvasLayer" parent="."]
+layer = -128
+
+[node name="Control" type="Control" parent="Multiply"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="ColorRect" type="ColorRect" parent="Multiply/Control"]
+material = SubResource( 1 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.192157, 0, 0, 1 )
+
+[node name="Add" type="CanvasLayer" parent="."]
+layer = -128
+visible = false
+
+[node name="Control" type="Control" parent="Add"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="ColorRect" type="ColorRect" parent="Add/Control"]
+material = SubResource( 2 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.364706, 0, 0, 0.470588 )
+
+[node name="InteriorBack" type="ParallaxLayer" parent="."]
+modulate = Color( 0.262745, 0, 0, 1 )
+motion_scale = Vector2( 0.4, 1 )
+motion_mirroring = Vector2( 2500, 0 )
+
+[node name="TextureRect" type="TextureRect" parent="InteriorBack"]
+use_parent_material = true
+margin_right = 5000.0
+margin_bottom = 1725.0
+rect_scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 5 )
+stretch_mode = 2
+
+[node name="Glow" type="TextureRect" parent="InteriorBack"]
+modulate = Color( 0.356863, 0.407843, 0.411765, 1 )
+material = SubResource( 3 )
+margin_right = 5000.0
+margin_bottom = 1725.0
+rect_scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 2 )
+stretch_mode = 2
+
+[node name="GlassShine" type="ParallaxLayer" parent="."]
+modulate = Color( 0.568627, 0, 0, 1 )
+material = SubResource( 4 )
+motion_scale = Vector2( 0.45, 1 )
+motion_mirroring = Vector2( 3456, 0 )
+
+[node name="TextureRect" type="TextureRect" parent="GlassShine"]
+use_parent_material = true
+margin_right = 6912.0
+margin_bottom = 855.0
+rect_scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 6 )
+stretch_mode = 2
+
+[node name="Interior" type="ParallaxLayer" parent="."]
+modulate = Color( 1, 0.137255, 0.137255, 1 )
+motion_scale = Vector2( 0.5, 1 )
+motion_mirroring = Vector2( 2500, 0 )
+
+[node name="TextureRect" type="TextureRect" parent="Interior"]
+margin_right = 5000.0
+margin_bottom = 1725.0
+rect_scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 3 )
+stretch_mode = 2
+
+[node name="Glow" type="TextureRect" parent="Interior"]
+modulate = Color( 0.215686, 0.14902, 0.054902, 1 )
+material = SubResource( 3 )
+margin_right = 5000.0
+margin_bottom = 1725.0
+rect_scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 2 )
+stretch_mode = 2
+
+[node name="GlassRim" type="ParallaxLayer" parent="."]
+motion_scale = Vector2( 0.5, 1 )
+motion_mirroring = Vector2( 2500, 0 )
+
+[node name="TextureRect" type="TextureRect" parent="GlassRim"]
+modulate = Color( 1, 0, 0, 1 )
+margin_right = 5000.0
+margin_bottom = 1725.0
+rect_scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 4 )
+stretch_mode = 2
+
+[node name="Darken" type="CanvasLayer" parent="."]
+layer = -90
+
+[node name="Control" type="Control" parent="Darken"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="ColorRect" type="ColorRect" parent="Darken/Control"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.423529, 0, 0, 0.262745 )
+
+[node name="ColorRect2" type="ColorRect" parent="Darken/Control"]
+material = SubResource( 10 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.384314, 0.345098, 0.345098, 0.262745 )
