@@ -9,7 +9,6 @@
 [ext_resource path="res://scenes/layers/Ambience.tscn" type="PackedScene" id=7]
 [ext_resource path="res://sounds/ambience_loops/AmbienceWaves.mp3" type="AudioStream" id=8]
 
-
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 6 )
 shader_param/overlay_color = Plane( 0.2, 0.5, 0.8, 0.5 )
