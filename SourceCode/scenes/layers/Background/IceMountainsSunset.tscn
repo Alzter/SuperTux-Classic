@@ -1,0 +1,169 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://images/background/arcticmountains-bg.png" type="Texture" id=1]
+[ext_resource path="res://images/background/arcticmountains-fg.png" type="Texture" id=2]
+[ext_resource path="res://images/particles/snow2.png" type="Texture" id=3]
+[ext_resource path="res://images/background/arcticmountains-sky.png" type="Texture" id=4]
+[ext_resource path="res://scenes/particles/SnowfallSmall.tres" type="Material" id=5]
+[ext_resource path="res://images/background/gradient2.png" type="Texture" id=6]
+[ext_resource path="res://images/background/gradient.png" type="Texture" id=7]
+
+[sub_resource type="CanvasItemMaterial" id=2]
+blend_mode = 1
+
+[sub_resource type="CanvasItemMaterial" id=4]
+blend_mode = 1
+
+[sub_resource type="CanvasItemMaterial" id=5]
+blend_mode = 1
+
+[sub_resource type="CanvasItemMaterial" id=6]
+blend_mode = 1
+
+[node name="IceMountainsSunset" type="ParallaxBackground"]
+
+[node name="Sky" type="ParallaxLayer" parent="."]
+modulate = Color( 0.890196, 0.368627, 0.403922, 1 )
+motion_scale = Vector2( 0, 1 )
+motion_offset = Vector2( 0, -400 )
+motion_mirroring = Vector2( 1700, 0 )
+
+[node name="Sprite" type="Sprite" parent="Sky"]
+scale = Vector2( 4, 4 )
+texture = ExtResource( 4 )
+centered = false
+
+[node name="Gradients2" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="TextureRect2" type="TextureRect" parent="Gradients2"]
+modulate = Color( 1, 0, 0, 0.607843 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 6 )
+expand = true
+flip_v = true
+
+[node name="BG" type="ParallaxLayer" parent="."]
+modulate = Color( 0.658824, 0.364706, 0.541176, 1 )
+motion_scale = Vector2( 0.18, 0.2 )
+motion_offset = Vector2( 0, -200 )
+motion_mirroring = Vector2( 1530, 0 )
+
+[node name="Sprite" type="Sprite" parent="BG"]
+scale = Vector2( 1, 0.5 )
+texture = ExtResource( 1 )
+centered = false
+
+[node name="FG" type="ParallaxLayer" parent="."]
+modulate = Color( 0.784314, 0.54902, 0.682353, 1 )
+motion_scale = Vector2( 0.2, 0.2 )
+motion_offset = Vector2( 0, -250 )
+motion_mirroring = Vector2( 1700, 0 )
+
+[node name="Sprite" type="Sprite" parent="FG"]
+scale = Vector2( 1, 0.5 )
+texture = ExtResource( 2 )
+centered = false
+
+[node name="Gradients" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="TextureRect2" type="TextureRect" parent="Gradients"]
+modulate = Color( 1, 0, 0.137255, 0.219608 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 6 )
+expand = true
+
+[node name="TextureRect" type="TextureRect" parent="Gradients"]
+modulate = Color( 1, 0, 0, 0.192157 )
+material = SubResource( 2 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 6 )
+expand = true
+flip_v = true
+
+[node name="ColorRect" type="ColorRect" parent="Gradients"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = 2672.0
+margin_bottom = 1000.0
+mouse_filter = 2
+color = Color( 0.364706, 0, 0, 0.447059 )
+
+[node name="TextureRect3" type="TextureRect" parent="Gradients"]
+modulate = Color( 1, 0.913725, 0, 0.45098 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 6 )
+expand = true
+flip_v = true
+
+[node name="Overlay" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="Overlay"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+
+[node name="TextureRect4" type="TextureRect" parent="Overlay/Control"]
+modulate = Color( 1, 0, 0, 0.305882 )
+material = SubResource( 4 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 6 )
+expand = true
+flip_v = true
+
+[node name="ParallaxLayer5" type="ParallaxLayer" parent="."]
+modulate = Color( 0.45098, 0.0862745, 0.0862745, 1 )
+motion_scale = Vector2( 0.25, 1 )
+motion_mirroring = Vector2( 1636, 0 )
+
+[node name="Particles2D" type="Particles2D" parent="ParallaxLayer5"]
+material = SubResource( 5 )
+position = Vector2( 256, 0 )
+scale = Vector2( 0.2, 0.2 )
+amount = 200
+lifetime = 3.0
+preprocess = 8.0
+speed_scale = 0.5
+visibility_rect = Rect2( -6500, 0, 8400, 3000 )
+process_material = ExtResource( 5 )
+texture = ExtResource( 3 )
+
+[node name="Particles2D2" type="Particles2D" parent="ParallaxLayer5"]
+material = SubResource( 5 )
+position = Vector2( 1074, 0 )
+scale = Vector2( 0.2, 0.2 )
+amount = 500
+lifetime = 3.0
+preprocess = 8.0
+visibility_rect = Rect2( -6500, 0, 8400, 3000 )
+process_material = ExtResource( 5 )
+texture = ExtResource( 3 )
+
+[node name="Gradients3" type="Control" parent="."]
+material = SubResource( 6 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+
+[node name="ColorRect" type="ColorRect" parent="Gradients3"]
+use_parent_material = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.364706, 0, 0, 0.0627451 )
+
+[node name="TextureRect2" type="TextureRect" parent="Gradients3"]
+modulate = Color( 1, 0, 0, 0.454902 )
+use_parent_material = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 7 )
+expand = true
+flip_v = true
