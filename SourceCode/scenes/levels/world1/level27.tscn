@@ -1,8 +1,8 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://scenes/master/Level.gd" type="Script" id=1]
 [ext_resource path="res://scenes/master/ObjectMap.tscn" type="PackedScene" id=2]
-[ext_resource path="res://scenes/layers/Background/CastleTilesBackground.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/layers/Background/CastleBackgroundRed.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/layers/Ambience.tscn" type="PackedScene" id=5]
 [ext_resource path="res://scenes/layers/TileMap.tscn" type="PackedScene" id=6]
 [ext_resource path="res://scenes/shaders/Overlay.gdshader" type="Shader" id=7]
@@ -11,9 +11,9 @@
 [ext_resource path="res://scenes/levels/world1/level27script.gd" type="Script" id=10]
 [ext_resource path="res://scenes/layers/Particles/LavaForeground.tscn" type="PackedScene" id=11]
 
-[sub_resource type="ShaderMaterial" id=7]
+[sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 7 )
-shader_param/overlay_color = Plane( 0.5, 0.4, 0.4, 0.5 )
+shader_param/overlay_color = Plane( 0.8, 0.3, 0.3, 0.5 )
 
 [sub_resource type="Animation" id=5]
 resource_name = "defeated"
@@ -28,7 +28,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ SubResource( 7 ) ]
+"values": [ SubResource( 1 ) ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("Overlay/CanvasLayer/ColorRect2:visible")
@@ -61,10 +61,10 @@ tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"times": PoolRealArray( 0, 0.2, 0.6, 1.6, 3.5 ),
+"times": PoolRealArray( 0, 0.7, 1.2, 2.5, 3.5 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
 "update": 0,
-"values": [ Color( 1, 1, 1, 1 ), Color( 1, 0, 0, 0.784314 ), Color( 0, 0, 0, 0.0117647 ), Color( 0.619608, 0.752941, 1, 0.654902 ), Color( 0, 0.0117647, 0.0352941, 1 ) ]
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 0, 0, 0.784314 ), Color( 0.317647, 0.270588, 0.321569, 0.666667 ), Color( 0, 0, 0, 0.0117647 ), Color( 0, 0.0117647, 0.0352941, 1 ) ]
 }
 tracks/4/type = "value"
 tracks/4/path = NodePath("Overlay/CanvasLayer/FadeOut:visible")
@@ -103,10 +103,6 @@ tracks/6/keys = {
 "values": [ -5.0, -5.0, -40.0 ]
 }
 
-[sub_resource type="ShaderMaterial" id=1]
-shader = ExtResource( 7 )
-shader_param/overlay_color = Plane( 0.8, 0.3, 0.3, 0.5 )
-
 [sub_resource type="Animation" id=3]
 resource_name = "lavaheat"
 length = 5.0
@@ -121,7 +117,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 2 ),
 "transitions": PoolRealArray( -2, -2 ),
 "update": 0,
-"values": [ Color( 1, 0, 0, 0.0117647 ), Color( 1, 0, 0, 0.156863 ) ]
+"values": [ Color( 1, 0, 0, 0 ), Color( 1, 0, 0, 0.0392157 ) ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("Shader:material")
@@ -230,6 +226,7 @@ rect_min_size = Vector2( 99999, 99999 )
 color = Color( 0.0823529, 0, 1, 1 )
 
 [node name="Heat" type="ParallaxBackground" parent="."]
+layer = 128
 
 [node name="HeatAdd" type="ColorRect" parent="Heat"]
 material = SubResource( 2 )
@@ -238,9 +235,7 @@ anchor_bottom = 1.0
 margin_right = 99359.0
 margin_bottom = 99519.0
 rect_min_size = Vector2( 99999, 99999 )
-color = Color( 1, 0, 0, 0.0117647 )
-
-[node name="CastleBG" parent="." instance=ExtResource( 3 )]
+color = Color( 1, 0, 0, 0.00176471 )
 
 [node name="Shader" type="Node2D" parent="."]
 material = SubResource( 1 )
@@ -257,6 +252,7 @@ volume_db = -5.0
 [node name="Overlay" type="ParallaxBackground" parent="."]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="Overlay"]
+layer = 128
 
 [node name="ColorRect2" type="ColorRect" parent="Overlay/CanvasLayer"]
 material = SubResource( 2 )
@@ -277,9 +273,11 @@ anchor_bottom = 1.0
 margin_right = 99359.0
 margin_bottom = 99519.0
 rect_min_size = Vector2( 99999, 99999 )
-color = Color( 0, 0, 0, 1 )
+color = Color( 0, 0, 0, 0 )
 
 [node name="LavaForeground" parent="." instance=ExtResource( 11 )]
 position = Vector2( -2048, 128 )
+
+[node name="CastleBGRed" parent="." instance=ExtResource( 3 )]
 
 [connection signal="animation_finished" from="AnimationPlayer" to="LevelScript" method="_on_AnimationPlayer_animation_finished"]

@@ -88,7 +88,7 @@ expand = true
 flip_v = true
 
 [node name="LavaEmbers" type="ParallaxBackground" parent="."]
-layer = 128
+layer = 50
 offset = Vector2( 0, 128 )
 transform = Transform2D( 1, 0, 0, 1, 0, 128 )
 
