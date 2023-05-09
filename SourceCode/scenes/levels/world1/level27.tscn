@@ -3,13 +3,13 @@
 [ext_resource path="res://scenes/master/Level.gd" type="Script" id=1]
 [ext_resource path="res://scenes/master/ObjectMap.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/layers/Background/CastleTilesBackground.tscn" type="PackedScene" id=3]
-[ext_resource path="res://scenes/layers/Particles/SnowLight.tscn" type="PackedScene" id=4]
 [ext_resource path="res://scenes/layers/Ambience.tscn" type="PackedScene" id=5]
 [ext_resource path="res://scenes/layers/TileMap.tscn" type="PackedScene" id=6]
 [ext_resource path="res://scenes/shaders/Overlay.gdshader" type="Shader" id=7]
 [ext_resource path="res://scenes/bosses/Nolok.tscn" type="PackedScene" id=8]
 [ext_resource path="res://scenes/master/Camera.gd" type="Script" id=9]
 [ext_resource path="res://scenes/levels/world1/level27script.gd" type="Script" id=10]
+[ext_resource path="res://scenes/layers/Particles/LavaForeground.tscn" type="PackedScene" id=11]
 
 [sub_resource type="ShaderMaterial" id=7]
 shader = ExtResource( 7 )
@@ -217,9 +217,6 @@ anims/lavaheat = SubResource( 3 )
 [node name="Nolok" parent="." instance=ExtResource( 8 )]
 position = Vector2( 512, 320 )
 
-[node name="LightSnowParticles" parent="." instance=ExtResource( 4 )]
-layer = 0
-
 [node name="Darken" type="ParallaxBackground" parent="."]
 
 [node name="ColorRect" type="ColorRect" parent="Darken"]
@@ -281,5 +278,8 @@ margin_right = 99359.0
 margin_bottom = 99519.0
 rect_min_size = Vector2( 99999, 99999 )
 color = Color( 0, 0, 0, 1 )
+
+[node name="LavaForeground" parent="." instance=ExtResource( 11 )]
+position = Vector2( -2048, 128 )
 
 [connection signal="animation_finished" from="AnimationPlayer" to="LevelScript" method="_on_AnimationPlayer_animation_finished"]

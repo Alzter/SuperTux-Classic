@@ -1,9 +1,11 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://scenes/layers/TileMap.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/master/ObjectMap.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/shaders/Overlay.gdshader" type="Shader" id=3]
 [ext_resource path="res://images/background/gradient2.png" type="Texture" id=4]
+[ext_resource path="res://images/enemies/flame/flame-1.png" type="Texture" id=5]
+[ext_resource path="res://scenes/particles/LavaEmbers.tres" type="Material" id=7]
 
 [sub_resource type="ShaderMaterial" id=4]
 shader = ExtResource( 3 )
@@ -20,9 +22,28 @@ shader_param/overlay_color = Color( 0, 0, 0, 1 )
 [sub_resource type="CanvasItemMaterial" id=3]
 blend_mode = 1
 
+[sub_resource type="CanvasItemMaterial" id=5]
+blend_mode = 1
+
 [node name="LavaForeground" type="Node2D"]
 material = SubResource( 4 )
 z_index = 300
+
+[node name="LavaGlowBG" type="CanvasLayer" parent="."]
+layer = -1
+
+[node name="Control" type="Control" parent="LavaGlowBG"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="TextureRect3" type="TextureRect" parent="LavaGlowBG/Control"]
+modulate = Color( 0, 0, 0, 1 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 317.0
+texture = ExtResource( 4 )
+expand = true
+flip_v = true
 
 [node name="LavaBottom" parent="." instance=ExtResource( 1 )]
 material = SubResource( 1 )
@@ -51,27 +72,77 @@ modulate = Color( 1, 0, 0, 0.27451 )
 material = SubResource( 3 )
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_top = 206.0
+margin_top = 103.0
 texture = ExtResource( 4 )
 expand = true
 flip_v = true
 
 [node name="TextureRect2" type="TextureRect" parent="LavaGlow/Control"]
-modulate = Color( 0.921569, 1, 0, 0.27451 )
+modulate = Color( 0.921569, 1, 0, 0.47451 )
 material = SubResource( 3 )
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_top = 456.0
+margin_top = 508.0
 texture = ExtResource( 4 )
 expand = true
 flip_v = true
 
-[node name="TextureRect3" type="TextureRect" parent="LavaGlow/Control"]
-modulate = Color( 1, 0, 0, 0.27451 )
-material = SubResource( 3 )
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_top = 156.0
-texture = ExtResource( 4 )
-expand = true
-flip_v = true
+[node name="LavaEmbers" type="ParallaxBackground" parent="."]
+layer = 128
+offset = Vector2( 0, 128 )
+transform = Transform2D( 1, 0, 0, 1, 0, 128 )
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="LavaEmbers"]
+motion_scale = Vector2( 1.25, 1 )
+motion_mirroring = Vector2( 2048, 0 )
+
+[node name="Particles2D" type="Particles2D" parent="LavaEmbers/ParallaxLayer"]
+material = SubResource( 5 )
+position = Vector2( 256, 720 )
+scale = Vector2( 0.2, 0.2 )
+amount = 15
+lifetime = 4.0
+preprocess = 8.0
+speed_scale = 2.0
+visibility_rect = Rect2( -7000, 0, 9000, -3000 )
+process_material = ExtResource( 7 )
+texture = ExtResource( 5 )
+
+[node name="Particles2D2" type="Particles2D" parent="LavaEmbers/ParallaxLayer"]
+material = SubResource( 5 )
+position = Vector2( 1280, 720 )
+scale = Vector2( 0.2, 0.2 )
+amount = 15
+lifetime = 4.0
+preprocess = 8.0
+visibility_rect = Rect2( -7000, 0, 9000, -3000 )
+process_material = ExtResource( 7 )
+texture = ExtResource( 5 )
+
+[node name="ParallaxLayer2" type="ParallaxLayer" parent="LavaEmbers"]
+motion_scale = Vector2( 1.5, 1 )
+motion_mirroring = Vector2( 2048, 0 )
+
+[node name="Particles2D" type="Particles2D" parent="LavaEmbers/ParallaxLayer2"]
+material = SubResource( 5 )
+position = Vector2( 256, 720 )
+scale = Vector2( 0.2, 0.2 )
+amount = 15
+lifetime = 4.0
+preprocess = 8.0
+speed_scale = 1.25
+visibility_rect = Rect2( -7000, 0, 9000, -3000 )
+process_material = ExtResource( 7 )
+texture = ExtResource( 5 )
+
+[node name="Particles2D2" type="Particles2D" parent="LavaEmbers/ParallaxLayer2"]
+material = SubResource( 5 )
+position = Vector2( 1280, 720 )
+scale = Vector2( 0.2, 0.2 )
+amount = 15
+lifetime = 4.0
+preprocess = 8.0
+speed_scale = 1.25
+visibility_rect = Rect2( -7000, 0, 9000, -3000 )
+process_material = ExtResource( 7 )
+texture = ExtResource( 5 )

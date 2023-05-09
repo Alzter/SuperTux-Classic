@@ -43,7 +43,7 @@ script = ExtResource( 4 )
 starting_angle = 180
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
-z_index = 1
+z_index = 15
 frames = SubResource( 7 )
 playing = true
 offset = Vector2( 0, -2 )
@@ -52,7 +52,7 @@ offset = Vector2( 0, -2 )
 modulate = Color( 1, 0, 0, 0.137255 )
 material = SubResource( 8 )
 scale = Vector2( 5, 5 )
-z_index = 1
+z_index = 15
 frames = SubResource( 7 )
 playing = true
 offset = Vector2( 0, -2 )
@@ -61,7 +61,7 @@ offset = Vector2( 0, -2 )
 modulate = Color( 1, 0, 0, 0.541176 )
 material = SubResource( 8 )
 scale = Vector2( 2, 2 )
-z_index = 1
+z_index = 15
 frames = SubResource( 7 )
 frame = 1
 playing = true
@@ -70,7 +70,7 @@ offset = Vector2( 0, -2 )
 [node name="Glow" type="AnimatedSprite" parent="."]
 material = SubResource( 8 )
 scale = Vector2( 1.02614, 1.02614 )
-z_index = 1
+z_index = 15
 frames = SubResource( 7 )
 playing = true
 offset = Vector2( 0, -2 )

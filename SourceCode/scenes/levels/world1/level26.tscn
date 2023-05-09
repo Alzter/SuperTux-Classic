@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://scenes/master/Level.gd" type="Script" id=1]
 [ext_resource path="res://scenes/layers/TileMap.tscn" type="PackedScene" id=2]
@@ -7,8 +7,7 @@
 [ext_resource path="res://scenes/shaders/Overlay.gdshader" type="Shader" id=5]
 [ext_resource path="res://scenes/layers/Particles/SnowLight.tscn" type="PackedScene" id=6]
 [ext_resource path="res://scenes/layers/Ambience.tscn" type="PackedScene" id=7]
-
-
+[ext_resource path="res://scenes/layers/Particles/LavaForeground.tscn" type="PackedScene" id=8]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 5 )
@@ -48,3 +47,6 @@ tile_data = PoolIntArray( 3, 5, 0, 131274, 536870924, 0, 196633, 536870920, 0, 1
 
 [node name="Ambience" parent="." instance=ExtResource( 7 )]
 volume_db = -5.0
+
+[node name="LavaForeground" parent="." instance=ExtResource( 8 )]
+position = Vector2( 0, 96 )
