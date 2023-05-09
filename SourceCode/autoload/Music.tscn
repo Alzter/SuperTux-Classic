@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://music/TuxRacer - Race2.mp3" type="AudioStream" id=1]
 [ext_resource path="res://autoload/Music.gd" type="Script" id=2]
@@ -22,6 +22,7 @@
 [ext_resource path="res://music/Scary.mp3" type="AudioStream" id=20]
 [ext_resource path="res://music/Prophecy.mp3" type="AudioStream" id=21]
 [ext_resource path="res://music/TuxRacer - Race1.mp3" type="AudioStream" id=22]
+[ext_resource path="res://music/StateOfTheArt.mp3" type="AudioStream" id=23]
 
 [node name="Music" type="CanvasLayer"]
 script = ExtResource( 2 )
@@ -64,6 +65,9 @@ bus = "Music"
 
 [node name="ChipDisko" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 4 )
+
+[node name="State of the Art" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 23 )
 
 [node name="Scary" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 20 )
