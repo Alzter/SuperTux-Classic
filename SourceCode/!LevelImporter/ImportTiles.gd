@@ -33,7 +33,7 @@ export var ignore_tiles = [
 	94, 95, 96, 97, 98, 99, 100]
 
 export var water_tiles = [
-	75, 76, 200, 201
+	75, 76, 200, 201, 173, 174
 ]
 
 export var object_tiles = {

@@ -151,6 +151,6 @@ texture = ExtResource( 5 )
 
 [node name="Ambience" parent="." instance=ExtResource( 8 )]
 stream = ExtResource( 6 )
-volume_db = -8.0
+volume_db = 2.0
 pitch_scale = 1.0
 bus = "Ambience2"
