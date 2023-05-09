@@ -6,7 +6,6 @@
 [ext_resource path="res://scenes/menus/WorldButton.tscn" type="PackedScene" id=4]
 
 [node name="BonusLevelsMenu" type="Popup"]
-visible = true
 anchor_right = 1.0
 anchor_bottom = 1.0
 theme = ExtResource( 1 )
@@ -42,7 +41,6 @@ __meta__ = {
 }
 
 [node name="Bonus1" parent="Panel/VBoxContainer" instance=ExtResource( 4 )]
-disabled = true
 text = "Bonus Island I"
 world_to_load = "bonus1"
 initial_scene_for_world = "res://scenes/levels/bonus1/worldmap.tscn"
