@@ -6,7 +6,7 @@
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 3 )
-shader_param/overlay_color = Color( 0.5, 0.5, 0.5, 0.5 )
+shader_param/overlay_color = Color( 0.501961, 0.501961, 0.501961, 0.501961 )
 
 [node name="TileMap" type="TileMap" groups=["stc_tilemaps"]]
 material = SubResource( 1 )
