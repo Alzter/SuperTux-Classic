@@ -1,11 +1,13 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://scenes/layers/TileMap.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/master/ObjectMap.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/shaders/Overlay.gdshader" type="Shader" id=3]
 [ext_resource path="res://images/background/gradient2.png" type="Texture" id=4]
 [ext_resource path="res://images/enemies/flame/flame-1.png" type="Texture" id=5]
+[ext_resource path="res://sounds/ambience_loops/AmbienceLava.mp3" type="AudioStream" id=6]
 [ext_resource path="res://scenes/particles/LavaEmbers.tres" type="Material" id=7]
+[ext_resource path="res://scenes/layers/Ambience.tscn" type="PackedScene" id=8]
 
 [sub_resource type="ShaderMaterial" id=4]
 shader = ExtResource( 3 )
@@ -146,3 +148,9 @@ speed_scale = 1.25
 visibility_rect = Rect2( -7000, 0, 9000, -3000 )
 process_material = ExtResource( 7 )
 texture = ExtResource( 5 )
+
+[node name="Ambience" parent="." instance=ExtResource( 8 )]
+stream = ExtResource( 6 )
+volume_db = -8.0
+pitch_scale = 1.0
+bus = "Ambience2"

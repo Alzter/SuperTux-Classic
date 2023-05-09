@@ -197,7 +197,6 @@ margin_bottom = 30.0
 text = " Delete "
 
 [node name="BonusLevelsMenu" parent="." instance=ExtResource( 8 )]
-visible = false
 
 [node name="OptionsMenu" parent="." instance=ExtResource( 7 )]
 
