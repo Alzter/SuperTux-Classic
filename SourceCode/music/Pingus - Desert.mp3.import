@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/Pingus - Desert.mp3-75d61fa2b0aa79995341e7d171305a16.mp3str"
+
+[deps]
+
+source_file="res://music/Pingus - Desert.mp3"
+dest_files=[ "res://.import/Pingus - Desert.mp3-75d61fa2b0aa79995341e7d171305a16.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0
