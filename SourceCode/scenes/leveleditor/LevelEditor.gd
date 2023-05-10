@@ -55,6 +55,8 @@ var layer_types = []
 
 var undo_stack = []
 
+signal undo_executed
+
 func _ready():
 	layer_types = get_layer_types()
 	
@@ -64,6 +66,7 @@ func _ready():
 	Music.stop_all()
 	ResolutionManager.connect("window_resized", self, "window_resized")
 	tiles_container.connect("update_selected_tile", self, "update_selected_tile")
+	edit_layer_dialog.connect("layer_parameter_changed", self, "add_undo_state")
 	window_resized()
 	
 	editor_camera.connect("set_camera_drag", self, "set_camera_drag")
@@ -133,11 +136,11 @@ func load_level_from_object(level_object: Node2D, free_level_immediately = false
 func unload_current_level():
 	if level:
 		level.free()
-		level = null
-		level_objects = null
-		selected_object = null
-		current_tile_id = -1
-		tile_functions.selected_tilemap = null
+		#level = null
+		#level_objects = null
+		#selected_object = null
+		#current_tile_id = -1
+		#tile_functions.selected_tilemap = null
 
 func initialise_level(level_object):
 	level = level_object
@@ -157,8 +160,6 @@ func initialise_level(level_object):
 	tile_functions.update_level_boundaries(level)
 	
 	editor_camera.initialise_tux_sprite(level.is_worldmap)
-	
-	add_undo_state()
 
 func create_level_cache():
 	make_all_tilemaps_opaque()
@@ -338,6 +339,7 @@ func edit_layer(layer_object : Node):
 	edit_layer_dialog.appear(layer_object)
 
 func delete_layer(layer_object : Node):
+	add_undo_state()
 	call_deferred("_deferred_delete_layer", layer_object)
 
 func _deferred_delete_layer(layer_object : Node):
@@ -362,15 +364,15 @@ func _on_UndoButton_pressed():
 	undo_stack.erase(last_state)
 	undo_button.disabled = undo_stack.empty()
 	
-	#print("Delete undo state")
+	emit_signal("undo_executed")
+	
+	#print("Remove undo state")
 	#print(undo_stack)
 
 func clear_undo_states():
 	undo_stack = []
 
 func add_undo_state():
-	if mouse_over_ui: return
-	
 	var level_packedscene = PackedScene.new()
 	level_packedscene.pack(level)
 	undo_stack.append(level_packedscene)

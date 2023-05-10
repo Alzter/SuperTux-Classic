@@ -6,6 +6,8 @@ export var parameter_editor_scene : PackedScene
 
 onready var layer_parameters = $VBoxContainer/PanelContainer/LayerParameters
 
+signal layer_parameter_changed
+
 func appear(layer_to_edit : Node):
 	layer_being_edited = layer_to_edit
 	popup()
@@ -33,6 +35,7 @@ func _create_parameter_editor(parameter_owner_object : Node, param_name : String
 	
 	layer_parameters.add_child(param_editor_node)
 	param_editor_node.set_owner(layer_parameters)
+	param_editor_node.connect("parameter_changed", self, "_layer_parameter_changed")
 	#print(layer_parameters.get_children())
 
 func _on_ConfirmEditLayer_pressed():
@@ -47,3 +50,7 @@ func _deferred_hide_layer_editor():
 	
 	for child in layer_parameters.get_children():
 		child.free()
+
+func _layer_parameter_changed():
+	print("CHANGED")
+	emit_signal("layer_parameter_changed")
