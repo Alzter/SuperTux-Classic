@@ -37,17 +37,15 @@ func _update_level_filepath(new_value):
 	level_filepath = new_value
 	
 	var level_name = ""
-	var level_author = ""
 	
 	if is_worldmap:
 		level_name = "Worldmap"
 		delete_button.hide()
 	else:
 		level_name = Global.get_level_attribute(level_filepath, "level_title")
-		level_author = Global.get_level_attribute(level_filepath, "level_author")
 	
 	title.text = level_name
-	subtitle.text = level_author
+	subtitle.text = ""#level_author
 
 func _update_world_folder(new_value):
 	world_folder_name = new_value

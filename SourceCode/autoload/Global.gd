@@ -239,28 +239,70 @@ func load_level_editor_with_level(filepath_of_level_to_edit : String):
 func get_level_attribute(level_filepath : String, attribute_to_get : String):
 	# If we have already cached the level attribute, just use that instead and
 	# don't waste time and memory loading a level scene.
+	
+	var cached_attribute = _get_cached_level_attribute(level_filepath, attribute_to_get)
+	if cached_attribute: return cached_attribute
+	
+	#print("Uncached level attribute " + attribute_to_get)
+	
+	var level_instance = load(level_filepath).instance()
+	print("Loading level " + level_filepath)
+	var attribute_value = level_instance.get(attribute_to_get)
+	level_instance.queue_free()
+	
+	# Cache the level attribute so we can access it faster if we need it again.
+	_cache_level_attribute(level_filepath, attribute_to_get, attribute_value)
+	
+	return attribute_value
+
+# Gets multiple attributes from a level (e.g. "level_title" and "level_author") as a string array.
+# This is more efficient than running get_level_attribute for every attribute.
+func get_level_attributes(level_filepath : String, attributes_to_get : Array) -> Array:
+	var attributes = []
+	var level_instance = null
+	
+	# For every level attribute:
+	for attribute in attributes_to_get:
+		
+		# If we have it cached, use the cached version
+		var cached_attribute = _get_cached_level_attribute(level_filepath, attribute)
+		if cached_attribute: attributes.append(cached_attribute)
+		
+		else:
+			# Otherwise load the level and get it from there.
+			if !level_instance:
+				level_instance = load(level_filepath).instance()
+				print("Loading level " + level_filepath)
+			
+			# Get the attribute from the level itself.
+			var attribute_value = level_instance.get(attribute)
+			attributes.append(attribute_value)
+			
+			# Cache it for faster future access.
+			_cache_level_attribute(level_filepath, attribute, attribute_value)
+	
+	# If we needed to load the level to get the attributes, free it from memory now.
+	if level_instance: level_instance.queue_free()
+	return attributes
+
+func clear_level_cache(level_filepath : String):
+	level_attributes_cache.erase(level_filepath)
+
+
+func _get_cached_level_attribute(level_filepath : String, attribute_to_get : String):
 	var cached_attributes_for_level = level_attributes_cache.get(level_filepath)
 	if cached_attributes_for_level is Dictionary:
 		var cached_attribute = cached_attributes_for_level.get(attribute_to_get)
 		if cached_attribute:
 			#print("Cached level attribute " + attribute_to_get)
 			return cached_attribute
-	
-	#print("Uncached level attribute " + attribute_to_get)
-	
-	var level_instance = load(level_filepath).instance()
-	var attribute_value = level_instance.get(attribute_to_get)
-	level_instance.queue_free()
-	
-	# Cache the level attribute so we can access it faster if we need it again.
+	return null
+
+func _cache_level_attribute(level_filepath : String, attribute_to_get : String, attribute_value):
 	var cache = level_attributes_cache.get(level_filepath)
+	
 	if cache:
 		cache[attribute_to_get] = attribute_value
 	else:
 		var attribute = {attribute_to_get : attribute_value}
 		level_attributes_cache[level_filepath] = attribute
-	
-	return attribute_value
-
-func clear_level_cache(level_filepath : String):
-	level_attributes_cache.erase(level_filepath)
