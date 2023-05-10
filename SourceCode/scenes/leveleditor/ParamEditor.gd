@@ -82,18 +82,12 @@ func _set_parameter_value(new_value):
 
 func _on_LineEdit_text_changed(new_text):
 	_set_parameter_value(new_text)
-	emit_signal("parameter_changed")
 
 func _on_SpinBox_value_changed(value):
 	_set_parameter_value(value)
-	emit_signal("parameter_changed")
 
 func _on_ColorPickerButton_color_changed(color):
 	_set_parameter_value(color)
 
 func _on_CheckBox_toggled(button_pressed):
 	_set_parameter_value(button_pressed)
-	emit_signal("parameter_changed")
-
-func _on_ColorPickerButton_popup_closed():
-	emit_signal("parameter_changed")
