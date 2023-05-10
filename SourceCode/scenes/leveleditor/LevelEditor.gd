@@ -24,14 +24,14 @@ var eyedropper_enabled = false setget update_eyedropper_enabled
 onready var button_rect_select = $UI/Scale/EditorUI/TilesPanelOffset/TilesPanel/PlacementOptions/RectSelect
 onready var button_eraser = $UI/Scale/EditorUI/TilesPanelOffset/TilesPanel/PlacementOptions/Eraser
 onready var button_eyedropper = $UI/Scale/EditorUI/TilesPanelOffset/TilesPanel/PlacementOptions/EyeDropper
-
-onready var undo_button = $UI/Scale/EditorUI/UndoButton
+onready var button_undo = $UI/Scale/EditorUI/UndoButton
 
 export var layer_button_scene : PackedScene
 
 onready var cache_level_path = cache_level_directory + cache_level_filename
 
 onready var edit_layer_dialog = $UI/Scale/EditorUI/EditLayerDialog
+onready var pause_menu = $PauseMenu
 
 signal eraser_toggled
 signal rect_select_toggled
@@ -68,6 +68,9 @@ func _ready():
 	tiles_container.connect("update_selected_tile", self, "update_selected_tile")
 	edit_layer_dialog.connect("layer_parameter_changed", self, "add_undo_state")
 	window_resized()
+	
+	pause_menu.connect("pause_changed", self, "pause_toggled")
+	pause_menu.connect("save_and_quit", self, "save_and_quit")
 	
 	editor_camera.connect("set_camera_drag", self, "set_camera_drag")
 
@@ -114,6 +117,7 @@ func _deferred_enter_edit_mode():
 	if !level: return
 	load_level_from_path(cache_level_path)
 	Scoreboard.hide()
+	Scoreboard.level_timer.paused = true
 	if ui_editor: ui_editor.show()
 	Music.stop_all()
 	get_tree().paused = false
@@ -167,6 +171,16 @@ func create_level_cache():
 	dir.make_dir_recursive(cache_level_directory)
 	Global.save_node_to_directory(level, cache_level_path)
 	update_tilemap_opacity()
+
+func save_level():
+	make_all_tilemaps_opaque()
+	var level_directory = UserLevels.current_level
+	Global.save_node_to_directory(level, level_directory)
+	update_tilemap_opacity()
+
+func save_and_quit():
+	save_level()
+	Global.goto_level_editor_main_menu()
 
 # Fills the layers panel with all layers in the current level
 func update_layers_panel(level_objects):
@@ -363,7 +377,7 @@ func _on_UndoButton_pressed():
 	call_deferred("load_level_from_object", level_object)
 	
 	undo_stack.erase(last_state)
-	undo_button.disabled = undo_stack.empty()
+	button_undo.disabled = undo_stack.empty()
 	
 	emit_signal("undo_executed")
 	
@@ -378,7 +392,11 @@ func add_undo_state():
 	level_packedscene.pack(level)
 	undo_stack.append(level_packedscene)
 	
-	undo_button.disabled = false
+	button_undo.disabled = false
 	
 	#print("Add undo state")
 	#print(undo_stack)
+
+func pause_toggled(is_paused : bool):
+	if ui_editor: ui_editor.visible = !is_paused and edit_mode
+	

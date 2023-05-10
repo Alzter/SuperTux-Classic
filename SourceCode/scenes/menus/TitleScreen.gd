@@ -20,7 +20,6 @@ extends Control
 export var intro_scene = ""
 export var options_scene = ""
 export var credits_scene = ""
-export var level_editor_scene = ""
 onready var title_content = $TitleContent
 
 onready var start_game_button = $TitleContent/Menu/VBoxContainer/StartGame
@@ -114,4 +113,4 @@ func _on_LevelEditor_mouse_entered():
 	level_editor_button.grab_focus()
 
 func _on_LevelEditor_pressed():
-	Global.goto_scene(level_editor_scene)
+	Global.goto_level_editor_main_menu()

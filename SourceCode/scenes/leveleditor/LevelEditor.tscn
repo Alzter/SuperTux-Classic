@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=2]
+[gd_scene load_steps=29 format=2]
 
 [ext_resource path="res://theme/default_theme.tres" type="Theme" id=1]
 [ext_resource path="res://scenes/leveleditor/LevelEditor.gd" type="Script" id=2]
@@ -17,6 +17,7 @@
 [ext_resource path="res://images/player/tux/worldmap/big/tux.png" type="Texture" id=15]
 [ext_resource path="res://images/player/tux/worldmap/small/smalltux.png" type="Texture" id=16]
 [ext_resource path="res://scenes/leveleditor/TuxSprite.gd" type="Script" id=17]
+[ext_resource path="res://scenes/leveleditor/menus/PauseScreen.tscn" type="PackedScene" id=18]
 
 [sub_resource type="ShaderMaterial" id=10]
 shader = ExtResource( 13 )
@@ -466,6 +467,8 @@ margin_top = -119.0
 focus_mode = 0
 theme = ExtResource( 1 )
 text = "PLAY"
+
+[node name="PauseMenu" parent="." instance=ExtResource( 18 )]
 
 [connection signal="mouse_entered" from="UI/Scale/EditorUI/MouseDetector" to="." method="_on_MouseDetector_mouse_entered"]
 [connection signal="mouse_exited" from="UI/Scale/EditorUI/MouseDetector" to="." method="_on_MouseDetector_mouse_exited"]

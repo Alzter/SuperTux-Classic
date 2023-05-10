@@ -18,6 +18,7 @@
 extends Node
 
 var title_screen_scene = "res://scenes/menus/TitleScreen.tscn"
+var level_editor_menu_scene = "res://scenes/leveleditor/menus/MainMenu.tscn"
 var level_editor_scene = "res://scenes/leveleditor/LevelEditor.tscn"
 
 var current_scene = null
@@ -80,6 +81,9 @@ func goto_level(path, reset_checkpoint = false):
 
 func goto_title_screen():
 	goto_scene(title_screen_scene)
+
+func goto_level_editor_main_menu():
+	goto_scene(level_editor_menu_scene)
 
 func goto_scene(path, loading_level = false):
 	call_deferred("_deferred_goto_scene", path, loading_level)
@@ -231,6 +235,7 @@ func list_files_in_directory(path):
 func load_level_editor_with_level(filepath_of_level_to_edit : String):
 	yield(call("goto_scene", level_editor_scene), "completed")
 	
+	UserLevels.current_level = filepath_of_level_to_edit
 	var editor = current_scene
 	editor.call_deferred("load_level_from_path", filepath_of_level_to_edit)
 	#editor.load_level_from_path(filepath_of_level_to_edit)

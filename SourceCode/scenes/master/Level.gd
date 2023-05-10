@@ -87,7 +87,7 @@ func start_level(in_editor = false):
 		Global.emit_signal("level_ready")
 	
 	# Then we load the pause menu into the level so you can pause the game
-	_load_pause_menu(in_editor)
+	if !in_editor: _load_pause_menu(in_editor)
 	
 	# If we're using a custom camera, make it override the player's camera
 	# (You can use custom cameras by adding a Camera2D node into the level)
