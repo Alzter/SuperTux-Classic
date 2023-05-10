@@ -25,6 +25,8 @@ onready var button_rect_select = $UI/Scale/EditorUI/TilesPanelOffset/TilesPanel/
 onready var button_eraser = $UI/Scale/EditorUI/TilesPanelOffset/TilesPanel/PlacementOptions/Eraser
 onready var button_eyedropper = $UI/Scale/EditorUI/TilesPanelOffset/TilesPanel/PlacementOptions/EyeDropper
 
+onready var undo_button = $UI/Scale/EditorUI/UndoButton
+
 export var layer_button_scene : PackedScene
 
 onready var cache_level_path = cache_level_directory + cache_level_filename
@@ -50,6 +52,8 @@ var can_place_tiles = true
 var mouse_over_ui = false
 
 var layer_types = []
+
+var undo_stack = []
 
 func _ready():
 	layer_types = get_layer_types()
@@ -120,11 +124,20 @@ func load_level_from_path(level_path: String):
 	load_level_from_object(level_object)
 
 func load_level_from_object(level_object: Node2D, free_level_immediately = false):
-	if level: level.free()
+	unload_current_level()
 	
 	add_child(level_object)
 	level_object.set_owner(self)
 	initialise_level(level_object)
+
+func unload_current_level():
+	if level:
+		level.free()
+		level = null
+		level_objects = null
+		selected_object = null
+		current_tile_id = -1
+		tile_functions.selected_tilemap = null
 
 func initialise_level(level_object):
 	level = level_object
@@ -144,6 +157,8 @@ func initialise_level(level_object):
 	tile_functions.update_level_boundaries(level)
 	
 	editor_camera.initialise_tux_sprite(level.is_worldmap)
+	
+	add_undo_state()
 
 func create_level_cache():
 	make_all_tilemaps_opaque()
@@ -334,3 +349,33 @@ func _deferred_delete_layer(layer_object : Node):
 func _update_current_tile_id(new_value):
 	current_tile_id = new_value
 	tiles_container.update_selected_tile(current_tile_id)
+
+func _on_UndoButton_pressed():
+	if undo_stack.empty(): return
+	
+	var last_state = undo_stack.back()
+	
+	var level_object = last_state.instance()
+	
+	call_deferred("load_level_from_object", level_object)
+	
+	undo_stack.erase(last_state)
+	undo_button.disabled = undo_stack.empty()
+	
+	#print("Delete undo state")
+	#print(undo_stack)
+
+func clear_undo_states():
+	undo_stack = []
+
+func add_undo_state():
+	if mouse_over_ui: return
+	
+	var level_packedscene = PackedScene.new()
+	level_packedscene.pack(level)
+	undo_stack.append(level_packedscene)
+	
+	undo_button.disabled = false
+	
+	#print("Add undo state")
+	#print(undo_stack)

@@ -78,6 +78,10 @@ func _input(event):
 			
 			if !about_to_use_eyedropper:
 				placing_tiles = event.pressed
+				
+				if !placing_tiles:
+					owner.add_undo_state()
+				
 				placing_rectangle_fill = false
 				
 				is_erasing = event.button_index == BUTTON_RIGHT or owner.eraser_enabled
