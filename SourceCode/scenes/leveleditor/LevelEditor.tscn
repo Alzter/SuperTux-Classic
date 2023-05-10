@@ -230,6 +230,7 @@ script = ExtResource( 2 )
 layer_button_scene = ExtResource( 4 )
 
 [node name="TileFunctions" type="Node2D" parent="."]
+z_index = 4096
 script = ExtResource( 5 )
 grid_color = Color( 0, 0, 0, 0.25 )
 
@@ -459,6 +460,7 @@ custom_constants/separation = 15
 alignment = 1
 
 [node name="AddLayerDialog" type="PopupDialog" parent="UI/Scale/EditorUI/LayersPanelOffset"]
+visible = true
 anchor_bottom = 1.0
 margin_right = 322.0
 margin_bottom = -122.0
