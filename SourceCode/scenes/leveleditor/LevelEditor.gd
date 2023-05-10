@@ -21,9 +21,9 @@ var rect_select_enabled = false setget update_rect_select_enabled
 var eraser_enabled = false setget update_eraser_enabled
 var eyedropper_enabled = false setget update_eyedropper_enabled
 
-onready var button_rect_select = $UI/Scale/EditorUI/TilesPanelOffset/TilesPanel/Buttons/RectSelect
-onready var button_eraser = $UI/Scale/EditorUI/TilesPanelOffset/TilesPanel/Buttons/Eraser
-onready var button_eyedropper = $UI/Scale/EditorUI/TilesPanelOffset/TilesPanel/Buttons/EyeDropper
+onready var button_rect_select = $UI/Scale/EditorUI/TilesPanelOffset/TilesPanel/PlacementOptions/RectSelect
+onready var button_eraser = $UI/Scale/EditorUI/TilesPanelOffset/TilesPanel/PlacementOptions/Eraser
+onready var button_eyedropper = $UI/Scale/EditorUI/TilesPanelOffset/TilesPanel/PlacementOptions/EyeDropper
 
 export var layer_button_scene : PackedScene
 
