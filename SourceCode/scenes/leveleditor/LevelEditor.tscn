@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=28 format=2]
 
 [ext_resource path="res://theme/default_theme.tres" type="Theme" id=1]
 [ext_resource path="res://scenes/leveleditor/LevelEditor.gd" type="Script" id=2]
@@ -12,14 +12,51 @@
 [ext_resource path="res://images/player/tux/small/idle.png" type="Texture" id=10]
 [ext_resource path="res://scenes/leveleditor/AddLayerDialog.gd" type="Script" id=11]
 [ext_resource path="res://scenes/leveleditor/EditLayerDialog.tscn" type="PackedScene" id=12]
+[ext_resource path="res://scenes/shaders/Overlay.gdshader" type="Shader" id=13]
+[ext_resource path="res://images/player/tux/big/idle.png" type="Texture" id=14]
+[ext_resource path="res://images/player/tux/worldmap/big/tux.png" type="Texture" id=15]
+[ext_resource path="res://images/player/tux/worldmap/small/smalltux.png" type="Texture" id=16]
+[ext_resource path="res://scenes/leveleditor/TuxSprite.gd" type="Script" id=17]
 
-[sub_resource type="SpriteFrames" id=7]
-animations = [ {
-"frames": [ ExtResource( 10 ) ],
-"loop": true,
-"name": "default",
-"speed": 5.0
-} ]
+[sub_resource type="ShaderMaterial" id=9]
+shader = ExtResource( 13 )
+shader_param/overlay_color = Plane( 0.8, 0.15, 0.1, 0.5 )
+
+[sub_resource type="ShaderMaterial" id=10]
+shader = ExtResource( 13 )
+shader_param/overlay_color = Plane( 0.5, 0.5, 0.5, 0.5 )
+
+[sub_resource type="Animation" id=11]
+resource_name = "black"
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:material")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ SubResource( 10 ) ]
+}
+
+[sub_resource type="Animation" id=12]
+resource_name = "red"
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:material")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ SubResource( 9 ) ]
+}
 
 [sub_resource type="Animation" id=1]
 resource_name = "default"
@@ -138,8 +175,34 @@ limit_top = 0
 limit_smoothed = true
 script = ExtResource( 7 )
 
-[node name="TuxPreview" type="AnimatedSprite" parent="EditorCamera"]
-frames = SubResource( 7 )
+[node name="TuxSprite" type="Node2D" parent="EditorCamera"]
+material = SubResource( 9 )
+script = ExtResource( 17 )
+
+[node name="SpriteColour" type="AnimationPlayer" parent="EditorCamera/TuxSprite"]
+autoplay = "black"
+anims/black = SubResource( 11 )
+anims/red = SubResource( 12 )
+
+[node name="TuxWorldmapBig" type="Sprite" parent="EditorCamera/TuxSprite"]
+visible = false
+use_parent_material = true
+texture = ExtResource( 15 )
+
+[node name="TuxWorldmapSmall" type="Sprite" parent="EditorCamera/TuxSprite"]
+visible = false
+use_parent_material = true
+texture = ExtResource( 16 )
+
+[node name="TuxBig" type="Sprite" parent="EditorCamera/TuxSprite"]
+use_parent_material = true
+position = Vector2( 0, -16 )
+texture = ExtResource( 14 )
+
+[node name="TuxSmall" type="Sprite" parent="EditorCamera/TuxSprite"]
+visible = false
+use_parent_material = true
+texture = ExtResource( 10 )
 
 [node name="UI" type="CanvasLayer" parent="."]
 layer = 128

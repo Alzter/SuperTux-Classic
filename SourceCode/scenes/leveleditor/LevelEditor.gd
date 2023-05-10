@@ -82,7 +82,6 @@ func enter_play_mode():
 	if !level: return
 	Scoreboard.reset_player_values(false, false)
 	Global.spawn_position = editor_camera.position
-	
 	editor_camera.current = false
 	self.selected_object = null
 	if !level: return
@@ -143,6 +142,8 @@ func initialise_level(level_object):
 	
 	update_tilemap_opacity()
 	tile_functions.update_level_boundaries(level)
+	
+	editor_camera.initialise_tux_sprite(level.is_worldmap)
 
 func create_level_cache():
 	make_all_tilemaps_opaque()

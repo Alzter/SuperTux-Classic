@@ -9,6 +9,8 @@ signal set_camera_drag(is_dragging)
 var mouse_motion = Vector2.ZERO
 var dragging_camera = false
 
+onready var tux_sprite = get_node("TuxSprite")
+
 func _input(event):
 	if owner.mouse_over_ui: return
 	
@@ -40,6 +42,11 @@ func camera_to_player_position(player : Node2D, worldmap = false):
 	
 	position = player.position
 	zoom = Vector2.ONE
+	
+	tux_sprite.update_tux_sprite(player.state, worldmap)
+
+func initialise_tux_sprite(worldmap):
+	tux_sprite.update_tux_sprite(0, worldmap)
 
 func _process(delta):
 	visible = owner.edit_mode
