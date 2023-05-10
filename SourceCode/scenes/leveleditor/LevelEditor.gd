@@ -173,6 +173,11 @@ func create_level_cache():
 	update_tilemap_opacity()
 
 func save_level():
+	call_deferred("_deferred_save_level")
+
+func _deferred_save_level():
+	if !edit_mode: _deferred_enter_edit_mode()
+	
 	make_all_tilemaps_opaque()
 	var level_directory = UserLevels.current_level
 	Global.save_node_to_directory(level, level_directory)
