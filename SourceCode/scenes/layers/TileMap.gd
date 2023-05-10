@@ -1,7 +1,7 @@
 extends TileMap
 
 export var editor_params = [
-	"solid", "multiply_color", "overlay_color"
+	"solid", "z_index", "multiply_color", "overlay_color"
 	]
 
 var solid : bool = get_collision_layer_bit(0) setget _update_solidity

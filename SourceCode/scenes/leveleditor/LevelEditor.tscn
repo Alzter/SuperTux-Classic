@@ -120,7 +120,7 @@ tracks/0/keys = {
 }
 
 [sub_resource type="StyleBoxFlat" id=16]
-bg_color = Color( 0, 0, 0, 0.45 )
+bg_color = Color( 0, 0, 0, 0.65 )
 corner_radius_top_left = 4
 corner_radius_top_right = 4
 corner_radius_bottom_right = 4
@@ -245,6 +245,8 @@ script = ExtResource( 7 )
 
 [node name="TuxSprite" type="Node2D" parent="EditorCamera"]
 material = SubResource( 10 )
+z_index = 1
+z_as_relative = false
 script = ExtResource( 17 )
 
 [node name="SpriteColour" type="AnimationPlayer" parent="EditorCamera/TuxSprite"]

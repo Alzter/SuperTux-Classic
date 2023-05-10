@@ -15,6 +15,8 @@ signal pause_changed
 signal save_and_quit
 
 func _ready():
+	show()
+	
 	# Make the music mute if we pause the game.
 	Music.pause_mode = PAUSE_MODE_INHERIT
 	menu.hide()
