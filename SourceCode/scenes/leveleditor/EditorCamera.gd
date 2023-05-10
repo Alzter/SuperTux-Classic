@@ -46,7 +46,7 @@ func camera_to_player_position(player : Node2D, worldmap = false):
 	tux_sprite.update_tux_sprite(player.state, worldmap)
 
 func initialise_tux_sprite(worldmap):
-	tux_sprite.update_tux_sprite(0, worldmap)
+	tux_sprite.initialise_tux_sprite(worldmap)
 
 func _process(delta):
 	visible = owner.edit_mode

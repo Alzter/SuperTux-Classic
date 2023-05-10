@@ -8,6 +8,11 @@ onready var tux_sprites = [sprite_big, sprite_small, sprite_worldmap_small, spri
 
 onready var sprite_colour = $SpriteColour
 
+var tux_state = 0
+
+func initialise_tux_sprite(is_in_worldmap : bool):
+	update_tux_sprite(tux_state, is_in_worldmap)
+
 func update_tux_sprite(powerup_state : int, is_in_worldmap : bool):
 	
 	for sprite in tux_sprites: sprite.hide()
@@ -22,3 +27,5 @@ func update_tux_sprite(powerup_state : int, is_in_worldmap : bool):
 	if powerup_state == 2:
 		sprite_colour.play("red")
 	else: sprite_colour.play("black")
+	
+	tux_state = powerup_state
