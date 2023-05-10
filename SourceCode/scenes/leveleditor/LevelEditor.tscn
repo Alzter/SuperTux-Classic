@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=2]
+[gd_scene load_steps=32 format=2]
 
 [ext_resource path="res://theme/default_theme.tres" type="Theme" id=1]
 [ext_resource path="res://scenes/leveleditor/LevelEditor.gd" type="Script" id=2]
@@ -57,6 +57,66 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 1,
 "values": [ SubResource( 9 ) ]
+}
+
+[sub_resource type="Animation" id=13]
+resource_name = "default"
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( -300, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+
+[sub_resource type="Animation" id=14]
+resource_name = "expand"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 0.5, 0.5 ),
+"update": 0,
+"values": [ Vector2( -300, 0 ), Vector2( 0, 0 ) ]
+}
+
+[sub_resource type="Animation" id=15]
+resource_name = "retract"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 0.5, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( -300, 0 ) ]
 }
 
 [sub_resource type="Animation" id=1]
@@ -221,15 +281,117 @@ anchor_bottom = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 
-[node name="UndoButton" type="Button" parent="UI/Scale/EditorUI"]
+[node name="Buttons" type="VBoxContainer" parent="UI/Scale/EditorUI"]
 margin_left = 16.0
 margin_top = 16.0
-margin_right = 105.0
-margin_bottom = 80.0
+margin_right = 112.0
+margin_bottom = 144.0
+
+[node name="UndoButton" type="Button" parent="UI/Scale/EditorUI/Buttons"]
+margin_right = 96.0
+margin_bottom = 62.0
 focus_mode = 0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 text = "UNDO"
+clip_text = true
+
+[node name="LevelProperties" type="Button" parent="UI/Scale/EditorUI/Buttons"]
+margin_top = 66.0
+margin_right = 96.0
+margin_bottom = 128.0
+focus_mode = 0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "SETTINGS"
+clip_text = true
+
+[node name="SettingsPanelOffset" type="Control" parent="UI/Scale/EditorUI"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -300.0
+margin_right = -300.0
+mouse_filter = 2
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_lock_": true
+}
+retracted = true
+
+[node name="RetractAnimation" type="AnimationPlayer" parent="UI/Scale/EditorUI/SettingsPanelOffset"]
+autoplay = "default"
+anims/default = SubResource( 13 )
+anims/expand = SubResource( 14 )
+anims/retract = SubResource( 15 )
+
+[node name="SettingsPanel" type="ColorRect" parent="UI/Scale/EditorUI/SettingsPanelOffset"]
+anchor_bottom = 1.0
+margin_top = 174.0
+margin_right = 300.0
+margin_bottom = -174.0
+color = Color( 0, 0, 0, 0.392157 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/Scale/EditorUI/SettingsPanelOffset/SettingsPanel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 22.0
+margin_top = 33.0
+margin_right = -22.0
+margin_bottom = -32.0
+custom_constants/separation = 15
+
+[node name="LevelName" type="Button" parent="UI/Scale/EditorUI/SettingsPanelOffset/SettingsPanel/VBoxContainer"]
+margin_right = 256.0
+margin_bottom = 92.0
+focus_mode = 0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Level Name"
+
+[node name="HSplitContainer" type="HSplitContainer" parent="UI/Scale/EditorUI/SettingsPanelOffset/SettingsPanel/VBoxContainer"]
+margin_top = 107.0
+margin_right = 256.0
+margin_bottom = 199.0
+size_flags_vertical = 3
+
+[node name="LevelMusic" type="Button" parent="UI/Scale/EditorUI/SettingsPanelOffset/SettingsPanel/VBoxContainer/HSplitContainer"]
+margin_right = 122.0
+margin_bottom = 92.0
+focus_mode = 0
+size_flags_horizontal = 3
+text = "Music"
+clip_text = true
+
+[node name="LevelTime" type="Button" parent="UI/Scale/EditorUI/SettingsPanelOffset/SettingsPanel/VBoxContainer/HSplitContainer"]
+margin_left = 134.0
+margin_right = 256.0
+margin_bottom = 92.0
+focus_mode = 0
+size_flags_horizontal = 3
+text = "Time"
+clip_text = true
+
+[node name="HSplitContainer2" type="HSplitContainer" parent="UI/Scale/EditorUI/SettingsPanelOffset/SettingsPanel/VBoxContainer"]
+margin_top = 214.0
+margin_right = 256.0
+margin_bottom = 307.0
+size_flags_vertical = 3
+
+[node name="LevelAutoscroll" type="Button" parent="UI/Scale/EditorUI/SettingsPanelOffset/SettingsPanel/VBoxContainer/HSplitContainer2"]
+margin_right = 122.0
+margin_bottom = 93.0
+focus_mode = 0
+size_flags_horizontal = 3
+text = "Scroll"
+clip_text = true
+
+[node name="LevelGravity" type="Button" parent="UI/Scale/EditorUI/SettingsPanelOffset/SettingsPanel/VBoxContainer/HSplitContainer2"]
+margin_left = 134.0
+margin_right = 256.0
+margin_bottom = 93.0
+focus_mode = 0
+size_flags_horizontal = 3
+text = "Grav"
 clip_text = true
 
 [node name="LayersPanelOffset" type="Control" parent="UI/Scale/EditorUI"]
@@ -469,10 +631,12 @@ theme = ExtResource( 1 )
 text = "PLAY"
 
 [node name="PauseMenu" parent="." instance=ExtResource( 18 )]
+visible = false
 
 [connection signal="mouse_entered" from="UI/Scale/EditorUI/MouseDetector" to="." method="_on_MouseDetector_mouse_entered"]
 [connection signal="mouse_exited" from="UI/Scale/EditorUI/MouseDetector" to="." method="_on_MouseDetector_mouse_exited"]
-[connection signal="pressed" from="UI/Scale/EditorUI/UndoButton" to="." method="_on_UndoButton_pressed"]
+[connection signal="pressed" from="UI/Scale/EditorUI/Buttons/UndoButton" to="." method="_on_UndoButton_pressed"]
+[connection signal="pressed" from="UI/Scale/EditorUI/Buttons/LevelProperties" to="UI/Scale/EditorUI/SettingsPanelOffset" method="_on_RetractTab_pressed"]
 [connection signal="pressed" from="UI/Scale/EditorUI/LayersPanelOffset/LayersPanel/RetractTab" to="UI/Scale/EditorUI/LayersPanelOffset" method="_on_RetractTab_pressed"]
 [connection signal="pressed" from="UI/Scale/EditorUI/LayersPanelOffset/LayersPanel/AddLayerButton" to="UI/Scale/EditorUI/LayersPanelOffset" method="_on_AddLayerButton_pressed"]
 [connection signal="about_to_show" from="UI/Scale/EditorUI/LayersPanelOffset/AddLayerDialog" to="UI/Scale/EditorUI/LayersPanelOffset/AddLayerDialog" method="_on_AddLayerDialog_about_to_show"]

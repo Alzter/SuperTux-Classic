@@ -24,7 +24,8 @@ var eyedropper_enabled = false setget update_eyedropper_enabled
 onready var button_rect_select = $UI/Scale/EditorUI/TilesPanelOffset/TilesPanel/PlacementOptions/RectSelect
 onready var button_eraser = $UI/Scale/EditorUI/TilesPanelOffset/TilesPanel/PlacementOptions/Eraser
 onready var button_eyedropper = $UI/Scale/EditorUI/TilesPanelOffset/TilesPanel/PlacementOptions/EyeDropper
-onready var button_undo = $UI/Scale/EditorUI/UndoButton
+onready var button_undo = $UI/Scale/EditorUI/Buttons/UndoButton
+onready var button_level_properties = $UI/Scale/EditorUI/Buttons/LevelProperties
 
 export var layer_button_scene : PackedScene
 
@@ -404,4 +405,3 @@ func add_undo_state():
 
 func pause_toggled(is_paused : bool):
 	if ui_editor: ui_editor.visible = !is_paused and edit_mode
-	
