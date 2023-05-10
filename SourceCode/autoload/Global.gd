@@ -246,7 +246,7 @@ func get_level_attribute(level_filepath : String, attribute_to_get : String):
 	#print("Uncached level attribute " + attribute_to_get)
 	
 	var level_instance = load(level_filepath).instance()
-	print("Loading level " + level_filepath)
+	#print("Loading level " + level_filepath)
 	var attribute_value = level_instance.get(attribute_to_get)
 	level_instance.queue_free()
 	
@@ -272,7 +272,7 @@ func get_level_attributes(level_filepath : String, attributes_to_get : Array) ->
 			# Otherwise load the level and get it from there.
 			if !level_instance:
 				level_instance = load(level_filepath).instance()
-				print("Loading level " + level_filepath)
+				#print("Loading level " + level_filepath)
 			
 			# Get the attribute from the level itself.
 			var attribute_value = level_instance.get(attribute)
