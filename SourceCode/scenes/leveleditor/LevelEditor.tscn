@@ -291,15 +291,16 @@ anchor_bottom = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 
-[node name="Buttons" type="VBoxContainer" parent="UI/Scale/EditorUI"]
+[node name="Buttons" type="HBoxContainer" parent="UI/Scale/EditorUI"]
 margin_left = 16.0
 margin_top = 16.0
-margin_right = 112.0
-margin_bottom = 144.0
+margin_right = 216.0
+margin_bottom = 80.0
+custom_constants/separation = 15
 
 [node name="UndoButton" type="Button" parent="UI/Scale/EditorUI/Buttons"]
-margin_right = 96.0
-margin_bottom = 62.0
+margin_right = 92.0
+margin_bottom = 64.0
 focus_mode = 0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -307,9 +308,9 @@ text = "UNDO"
 clip_text = true
 
 [node name="LevelProperties" type="Button" parent="UI/Scale/EditorUI/Buttons"]
-margin_top = 66.0
-margin_right = 96.0
-margin_bottom = 128.0
+margin_left = 107.0
+margin_right = 200.0
+margin_bottom = 64.0
 focus_mode = 0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -460,7 +461,6 @@ custom_constants/separation = 15
 alignment = 1
 
 [node name="AddLayerDialog" type="PopupDialog" parent="UI/Scale/EditorUI/LayersPanelOffset"]
-visible = true
 anchor_bottom = 1.0
 margin_right = 322.0
 margin_bottom = -122.0
