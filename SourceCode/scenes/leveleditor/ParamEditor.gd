@@ -45,6 +45,7 @@ func _ready():
 		TYPE_INT:
 			number_edit.rounded = true
 			number_edit.value = p_value
+			number_edit.step = 1
 			param_editor_ui_node = number_edit
 			
 		TYPE_REAL: # Float data type
