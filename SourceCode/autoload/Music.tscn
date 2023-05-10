@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://music/TuxRacer - Race2.mp3" type="AudioStream" id=1]
 [ext_resource path="res://autoload/Music.gd" type="Script" id=2]
@@ -23,6 +23,7 @@
 [ext_resource path="res://music/Prophecy.mp3" type="AudioStream" id=21]
 [ext_resource path="res://music/TuxRacer - Race1.mp3" type="AudioStream" id=22]
 [ext_resource path="res://music/StateOfTheArt.mp3" type="AudioStream" id=23]
+[ext_resource path="res://music/Pingus - Desert.mp3" type="AudioStream" id=24]
 
 [node name="Music" type="CanvasLayer"]
 script = ExtResource( 2 )
@@ -52,6 +53,11 @@ bus = "Music"
 [node name="Pingus - Snow Level" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 6 )
 volume_db = 4.0
+bus = "Music"
+
+[node name="Pingus - Desert Level" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 24 )
+volume_db = 1.0
 bus = "Music"
 
 [node name="Pingus - Level" type="AudioStreamPlayer" parent="."]
