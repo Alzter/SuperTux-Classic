@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=2]
+[gd_scene load_steps=33 format=2]
 
 [ext_resource path="res://theme/default_theme.tres" type="Theme" id=1]
 [ext_resource path="res://scenes/leveleditor/LevelEditor.gd" type="Script" id=2]
@@ -118,6 +118,13 @@ tracks/0/keys = {
 "update": 0,
 "values": [ Vector2( 0, 0 ), Vector2( -300, 0 ) ]
 }
+
+[sub_resource type="StyleBoxFlat" id=16]
+bg_color = Color( 0, 0, 0, 0.45 )
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
 
 [sub_resource type="Animation" id=1]
 resource_name = "default"
@@ -324,12 +331,12 @@ anims/default = SubResource( 13 )
 anims/expand = SubResource( 14 )
 anims/retract = SubResource( 15 )
 
-[node name="SettingsPanel" type="ColorRect" parent="UI/Scale/EditorUI/SettingsPanelOffset"]
+[node name="SettingsPanel" type="Panel" parent="UI/Scale/EditorUI/SettingsPanelOffset"]
 anchor_bottom = 1.0
 margin_top = 174.0
 margin_right = 300.0
 margin_bottom = -174.0
-color = Color( 0, 0, 0, 0.392157 )
+custom_styles/panel = SubResource( 16 )
 
 [node name="VBoxContainer" type="VBoxContainer" parent="UI/Scale/EditorUI/SettingsPanelOffset/SettingsPanel"]
 anchor_right = 1.0
@@ -409,13 +416,13 @@ anims/default = SubResource( 1 )
 anims/expand = SubResource( 2 )
 anims/retract = SubResource( 3 )
 
-[node name="LayersPanel" type="ColorRect" parent="UI/Scale/EditorUI/LayersPanelOffset"]
+[node name="LayersPanel" type="Panel" parent="UI/Scale/EditorUI/LayersPanelOffset"]
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_top = -120.0
 margin_right = -225.0
-color = Color( 0, 0, 0, 0.392157 )
+custom_styles/panel = SubResource( 16 )
 
 [node name="RetractTab" type="Button" parent="UI/Scale/EditorUI/LayersPanelOffset/LayersPanel"]
 visible = false
@@ -544,13 +551,13 @@ anims/default = SubResource( 4 )
 anims/expand = SubResource( 5 )
 anims/retract = SubResource( 6 )
 
-[node name="TilesPanel" type="ColorRect" parent="UI/Scale/EditorUI/TilesPanelOffset"]
+[node name="TilesPanel" type="Panel" parent="UI/Scale/EditorUI/TilesPanelOffset"]
 anchor_left = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = -225.0
 margin_bottom = -120.0
-color = Color( 0, 0, 0, 0.392157 )
+custom_styles/panel = SubResource( 16 )
 
 [node name="RetractTab" type="Button" parent="UI/Scale/EditorUI/TilesPanelOffset/TilesPanel"]
 visible = false
