@@ -26,7 +26,12 @@ func _on_OpenLevel_pressed():
 	dialog_open_level.popup()
 
 func _on_CreateLevel_pressed():
-	pass # Replace with function body.
+	var level_filepath = UserLevels.create_level_in_world()
+	if level_filepath != "":
+		Global.load_level_editor_with_level(level_filepath)
+	else:
+		# Give the user an error message for creating the level
+		pass
 
 func _on_EditWorldProperties_pressed():
 	pass # Replace with function body.

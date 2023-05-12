@@ -5,6 +5,7 @@ const user_worlds_folder = "contrib/"
 const world_data_file = "contrib.data"
 const worldmap_file = "worldmap.tscn"
 
+var default_level_template = "res://scenes/leveleditor/level_templates/level.tscn"
 var default_worldmap_level = "res://scenes/leveleditor/level_templates/worldmap.tscn"
 
 var user_worlds: Dictionary = {}
@@ -119,6 +120,33 @@ func create_user_world(world_name : String, author_name : String, create_worldma
 
 func unload_user_worlds():
 	user_worlds = {}
+
+
+# Creates a new level within the user world you specify.
+# Names the level "levelX.tscn" where X is an automatically incrementing integer.
+
+# Returns the file path of the created level.
+func create_level_in_world(world_folder : String = current_world) -> String:
+	var number_of_levels = get_levels_in_world(world_folder).size()
+	var level_name = "level" + str(number_of_levels + 1) + ".tscn"
+	
+	var world_directory = user_worlds_directory + world_folder
+	var level_filepath = world_directory + "/" + level_name
+	
+	var dir = Directory.new()
+	if !dir.dir_exists(world_directory):
+		push_error("Error creating level in world '" + world_folder + "': world folder does not exist.")
+	
+	if dir.file_exists(level_filepath):
+		push_error("Error creating level '" + level_filepath + "': level already exists!")
+	
+	var level_created = dir.copy(default_level_template, level_filepath)
+	if level_created == OK:
+		return level_filepath
+	else:
+		push_error("Error creating new level at filepath: " + level_filepath)
+	
+	return ""
 
 func get_world_name(world_folder : String = current_world) -> String:
 	return _get_world_parameter(world_folder, "world_name")
