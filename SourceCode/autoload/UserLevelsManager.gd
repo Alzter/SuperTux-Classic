@@ -120,22 +120,22 @@ func create_user_world(world_name : String, author_name : String, create_worldma
 func unload_user_worlds():
 	user_worlds = {}
 
-func get_world_name(world_folder : String) -> String:
+func get_world_name(world_folder : String = current_world) -> String:
 	return _get_world_parameter(world_folder, "world_name")
 
-func get_world_author(world_folder : String) -> String:
+func get_world_author(world_folder : String = current_world) -> String:
 	return _get_world_parameter(world_folder, "author_name")
 
-func get_worldmap_filename_for_world(world_folder : String) -> String:
+func get_worldmap_filename_for_world(world_folder : String = current_world) -> String:
 	return _get_world_parameter(world_folder, "worldmap_scene")
 
-func get_worldmap_filepath_for_world(world_folder : String) -> String:
+func get_worldmap_filepath_for_world(world_folder : String = current_world) -> String:
 	var worldmap_file = get_worldmap_filename_for_world(world_folder)
 	
 	var worldmap_path = user_worlds_directory + world_folder + "/" + worldmap_file
 	return worldmap_path
 
-func get_initial_scene_filepath_for_world(world_folder : String) -> String:
+func get_initial_scene_filepath_for_world(world_folder : String = current_world) -> String:
 	var initial_scene_file = _get_world_parameter(world_folder, "initial_scene")
 	
 	var initial_scene_path = user_worlds_directory + world_folder + "/" + initial_scene_file
