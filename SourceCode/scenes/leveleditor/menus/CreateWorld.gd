@@ -10,6 +10,8 @@ onready var world_name_container = $VBoxContainer/WorldProperties/WorldName
 
 onready var create_world_button = $VBoxContainer/CreateWorldButton
 
+signal show_world_menu
+
 func _on_CreateWorldMenu_about_to_show():
 	world_name.text = ""
 	author_name.text = ""
@@ -24,9 +26,11 @@ func _on_CreateWorldButton_pressed():
 	
 	if created_world == OK:
 		var world_folder = UserLevels.get_world_folder_from_name(world_name.text)
+		hide()
 		
-		var worldmap_scene_path = UserLevels.get_worldmap_filepath_for_world(world_folder)
-		Global.load_level_editor_with_level(worldmap_scene_path)
+		emit_signal("show_world_menu", world_folder)
+		#var worldmap_scene_path = UserLevels.get_worldmap_filepath_for_world(world_folder)
+		#Global.load_level_editor_with_level(worldmap_scene_path)
 	else:
 		error_dialog.popup()
 
