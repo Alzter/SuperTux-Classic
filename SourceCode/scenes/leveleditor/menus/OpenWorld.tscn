@@ -4,8 +4,8 @@
 [ext_resource path="res://theme/default_theme.tres" type="Theme" id=2]
 [ext_resource path="res://scenes/leveleditor/menus/WorldButton.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/leveleditor/menus/OpenWorld.gd" type="Script" id=4]
-[ext_resource path="res://scenes/leveleditor/menus/OpenLevel.tscn" type="PackedScene" id=5]
 [ext_resource path="res://scenes/leveleditor/menus/DeleteWorldDialog.tscn" type="PackedScene" id=6]
+[ext_resource path="res://scenes/leveleditor/menus/WorldMenu.tscn" type="PackedScene" id=7]
 
 [node name="OpenWorldMenu" type="PopupDialog"]
 anchor_right = 1.0
@@ -70,13 +70,13 @@ rect_min_size = Vector2( 0, 50 )
 focus_neighbour_top = NodePath("../OpenWorldButton")
 text = "Back"
 
-[node name="SelectLevelDialog" parent="." instance=ExtResource( 5 )]
-
 [node name="DeleteWorldDialog" parent="." instance=ExtResource( 6 )]
+
+[node name="WorldMenu" parent="." instance=ExtResource( 7 )]
 
 [connection signal="about_to_show" from="." to="." method="_on_Menu_about_to_show"]
 [connection signal="popup_hide" from="." to="." method="_on_OpenWorldMenu_popup_hide"]
 [connection signal="pressed" from="VBoxContainer/OpenWorldButton" to="." method="_on_OpenWorldButton_pressed"]
 [connection signal="pressed" from="VBoxContainer/Back" to="." method="_on_Back_pressed"]
-[connection signal="popup_hide" from="SelectLevelDialog" to="." method="_on_SelectLevelDialog_popup_hide"]
 [connection signal="popup_hide" from="DeleteWorldDialog" to="." method="_on_DeleteWorldDialog_popup_hide"]
+[connection signal="popup_hide" from="WorldMenu" to="." method="_on_WorldMenu_popup_hide"]

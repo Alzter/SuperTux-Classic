@@ -14,7 +14,8 @@ func _on_WorldMenu_about_to_show():
 		push_error("Error creating World menu dialog: No user world was specified to open in UserLevels")
 		return
 	
-	label_world_name = UserLevels.get_world_name()
+	var world_name = UserLevels.get_world_name()
+	label_world_name.bbcode_text = "[center][wave]" + world_name
 	
 	button_open_level.grab_focus()
 
@@ -29,3 +30,6 @@ func _on_CreateLevel_pressed():
 
 func _on_EditWorldProperties_pressed():
 	pass # Replace with function body.
+
+func _on_SelectLevelDialog_popup_hide():
+	button_open_level.grab_focus()

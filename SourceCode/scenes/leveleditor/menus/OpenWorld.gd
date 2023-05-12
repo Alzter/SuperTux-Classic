@@ -9,7 +9,7 @@ export var is_level_select = false
 onready var button_list = get_node_or_null("VBoxContainer/ScrollContainer/ButtonList")
 onready var worldmap_container = get_node_or_null("VBoxContainer/WorldmapContainer")
 
-onready var select_level_dialog = get_node_or_null("SelectLevelDialog")
+onready var world_menu = get_node_or_null("WorldMenu")
 
 onready var delete_world_dialog = get_node_or_null("DeleteWorldDialog")
 onready var delete_level_dialog = get_node_or_null("DeleteLevelDialog")
@@ -94,7 +94,8 @@ func level_selected(level_filepath):
 	
 	for button in button_list.get_children():
 		button.pressed = button.level_filepath == selected_level
-		if button.pressed: button.grab_focus()
+		if button.pressed:
+			button.grab_focus()
 
 func world_selected(selected_world_folder_name):
 	selected_world = selected_world_folder_name
@@ -106,7 +107,7 @@ func world_selected(selected_world_folder_name):
 func world_opened(selected_world_folder_name):
 	hide()
 	UserLevels.current_world = selected_world_folder_name
-	select_level_dialog.popup()
+	world_menu.popup()
 
 func level_opened(level_filepath):
 	Global.load_level_editor_with_level(level_filepath)
@@ -125,7 +126,7 @@ func level_delete_prompt(level_filename):
 	delete_level_dialog.popup()
 	delete_level_dialog.connect("delete_level", self, "delete_level")
 
-func _on_SelectLevelDialog_popup_hide():
+func _on_WorldMenu_popup_hide():
 	var old_selected_world = selected_world
 	popup()
 	world_selected(old_selected_world)
@@ -141,3 +142,4 @@ func _on_DeleteWorldDialog_popup_hide():
 
 func _on_DeleteLevelDialog_popup_hide():
 	_on_Menu_about_to_show()
+

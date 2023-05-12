@@ -43,44 +43,44 @@ custom_constants/separation = 10
 [node name="ButtonList" type="VBoxContainer" parent="VBoxContainer"]
 margin_top = 70.0
 margin_right = 1153.0
-margin_bottom = 240.0
+margin_bottom = 302.0
 size_flags_horizontal = 3
+size_flags_vertical = 3
 custom_constants/separation = 20
 
 [node name="HSplitContainer" type="HSplitContainer" parent="VBoxContainer/ButtonList"]
 margin_right = 1153.0
-margin_bottom = 100.0
+margin_bottom = 106.0
 rect_min_size = Vector2( 0, 100 )
-
-[node name="OpenLevel" type="Button" parent="VBoxContainer/ButtonList/HSplitContainer"]
-margin_right = 570.0
-margin_bottom = 100.0
-rect_min_size = Vector2( 0, 50 )
-focus_mode = 0
-size_flags_horizontal = 3
-text = "Open a Level"
-clip_text = true
+size_flags_vertical = 3
 
 [node name="CreateLevel" type="Button" parent="VBoxContainer/ButtonList/HSplitContainer"]
-margin_left = 582.0
-margin_right = 1153.0
-margin_bottom = 100.0
+margin_right = 570.0
+margin_bottom = 106.0
 rect_min_size = Vector2( 0, 50 )
-focus_mode = 0
 size_flags_horizontal = 3
 text = "Create a Level"
 clip_text = true
 
-[node name="EditWorldProperties" type="Button" parent="VBoxContainer/ButtonList"]
-margin_top = 120.0
+[node name="OpenLevel" type="Button" parent="VBoxContainer/ButtonList/HSplitContainer"]
+margin_left = 582.0
 margin_right = 1153.0
-margin_bottom = 170.0
+margin_bottom = 106.0
 rect_min_size = Vector2( 0, 50 )
-focus_mode = 0
+size_flags_horizontal = 3
+text = "Open a Level"
+clip_text = true
+
+[node name="EditWorldProperties" type="Button" parent="VBoxContainer/ButtonList"]
+margin_top = 126.0
+margin_right = 1153.0
+margin_bottom = 232.0
+rect_min_size = Vector2( 0, 50 )
+size_flags_vertical = 3
 text = "World Properties"
 
 [node name="SpaceFiller" type="Control" parent="VBoxContainer"]
-margin_top = 255.0
+margin_top = 317.0
 margin_right = 1153.0
 margin_bottom = 549.0
 size_flags_vertical = 3
@@ -96,13 +96,13 @@ margin_top = 589.0
 margin_right = 1153.0
 margin_bottom = 639.0
 rect_min_size = Vector2( 0, 50 )
-focus_mode = 0
 text = "Back"
 
 [node name="SelectLevelDialog" parent="." instance=ExtResource( 5 )]
 
 [connection signal="about_to_show" from="." to="." method="_on_WorldMenu_about_to_show"]
-[connection signal="pressed" from="VBoxContainer/ButtonList/HSplitContainer/OpenLevel" to="." method="_on_OpenLevel_pressed"]
 [connection signal="pressed" from="VBoxContainer/ButtonList/HSplitContainer/CreateLevel" to="." method="_on_CreateLevel_pressed"]
+[connection signal="pressed" from="VBoxContainer/ButtonList/HSplitContainer/OpenLevel" to="." method="_on_OpenLevel_pressed"]
 [connection signal="pressed" from="VBoxContainer/ButtonList/EditWorldProperties" to="." method="_on_EditWorldProperties_pressed"]
 [connection signal="pressed" from="VBoxContainer/Back" to="." method="_on_Back_pressed"]
+[connection signal="popup_hide" from="SelectLevelDialog" to="." method="_on_SelectLevelDialog_popup_hide"]
