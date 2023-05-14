@@ -1,27 +1,27 @@
 [gd_scene load_steps=34 format=2]
 
-[ext_resource path="res://theme/default_theme.tres" type="Theme" id=1]
-[ext_resource path="res://scenes/leveleditor/LevelEditor.gd" type="Script" id=2]
-[ext_resource path="res://scenes/leveleditor/RetractablePanel.gd" type="Script" id=3]
-[ext_resource path="res://scenes/leveleditor/LayerButton.tscn" type="PackedScene" id=4]
-[ext_resource path="res://scenes/leveleditor/TileFunctions.gd" type="Script" id=5]
-[ext_resource path="res://images/editor/GridCursor.png" type="Texture" id=6]
-[ext_resource path="res://scenes/leveleditor/EditorCamera.gd" type="Script" id=7]
-[ext_resource path="res://scenes/leveleditor/TileButton.tscn" type="PackedScene" id=8]
-[ext_resource path="res://scenes/leveleditor/TilesContainer.gd" type="Script" id=9]
-[ext_resource path="res://images/player/tux/small/idle.png" type="Texture" id=10]
-[ext_resource path="res://scenes/leveleditor/AddLayerDialog.gd" type="Script" id=11]
-[ext_resource path="res://scenes/leveleditor/EditLayerDialog.tscn" type="PackedScene" id=12]
-[ext_resource path="res://scenes/shaders/Overlay.gdshader" type="Shader" id=13]
-[ext_resource path="res://images/player/tux/big/idle.png" type="Texture" id=14]
-[ext_resource path="res://images/player/tux/worldmap/big/tux.png" type="Texture" id=15]
-[ext_resource path="res://images/player/tux/worldmap/small/smalltux.png" type="Texture" id=16]
-[ext_resource path="res://scenes/leveleditor/TuxSprite.gd" type="Script" id=17]
-[ext_resource path="res://scenes/leveleditor/menus/PauseScreen.tscn" type="PackedScene" id=18]
-[ext_resource path="res://theme/FontSmall.tres" type="DynamicFont" id=19]
+[ext_resource path="res://images/player/tux/big/idle.png" type="Texture" id=1]
+[ext_resource path="res://images/player/tux/small/idle.png" type="Texture" id=2]
+[ext_resource path="res://images/player/tux/worldmap/big/tux.png" type="Texture" id=3]
+[ext_resource path="res://images/player/tux/worldmap/small/smalltux.png" type="Texture" id=4]
+[ext_resource path="res://scenes/leveleditor/LevelEditor.gd" type="Script" id=5]
+[ext_resource path="res://scenes/leveleditor/RetractablePanel.gd" type="Script" id=6]
+[ext_resource path="res://scenes/leveleditor/TilesContainer.gd" type="Script" id=7]
+[ext_resource path="res://scenes/leveleditor/TileFunctions.gd" type="Script" id=8]
+[ext_resource path="res://scenes/leveleditor/TuxSprite.gd" type="Script" id=9]
+[ext_resource path="res://images/editor/GridCursor.png" type="Texture" id=10]
+[ext_resource path="res://scenes/leveleditor/EditorCamera.gd" type="Script" id=11]
+[ext_resource path="res://theme/FontSmall.tres" type="DynamicFont" id=12]
+[ext_resource path="res://theme/default_theme.tres" type="Theme" id=13]
+[ext_resource path="res://scenes/leveleditor/TileButton.tscn" type="PackedScene" id=14]
+[ext_resource path="res://scenes/leveleditor/LayerButton.tscn" type="PackedScene" id=15]
+[ext_resource path="res://scenes/leveleditor/EditLayerDialog.tscn" type="PackedScene" id=16]
+[ext_resource path="res://scenes/leveleditor/menus/PauseScreen.tscn" type="PackedScene" id=17]
+[ext_resource path="res://scenes/shaders/Overlay.gdshader" type="Shader" id=18]
+[ext_resource path="res://scenes/leveleditor/AddLayerDialog.gd" type="Script" id=19]
 
 [sub_resource type="ShaderMaterial" id=10]
-shader = ExtResource( 13 )
+shader = ExtResource( 18 )
 shader_param/overlay_color = Plane( 0.5, 0.5, 0.5, 0.5 )
 
 [sub_resource type="Animation" id=11]
@@ -41,7 +41,7 @@ tracks/0/keys = {
 }
 
 [sub_resource type="ShaderMaterial" id=9]
-shader = ExtResource( 13 )
+shader = ExtResource( 18 )
 shader_param/overlay_color = Plane( 0.8, 0.15, 0.1, 0.5 )
 
 [sub_resource type="Animation" id=12]
@@ -73,7 +73,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector2( -300, 0 ) ]
+"values": [ Vector2( -550, 0 ) ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath(".:visible")
@@ -101,7 +101,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.1 ),
 "transitions": PoolRealArray( 0.5, 0.5 ),
 "update": 0,
-"values": [ Vector2( -300, 0 ), Vector2( 0, 0 ) ]
+"values": [ Vector2( -550, 0 ), Vector2( 0, 0 ) ]
 }
 
 [sub_resource type="Animation" id=15]
@@ -117,15 +117,8 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.1 ),
 "transitions": PoolRealArray( 0.5, 1 ),
 "update": 0,
-"values": [ Vector2( 0, 0 ), Vector2( -300, 0 ) ]
+"values": [ Vector2( 0, 0 ), Vector2( -550, 0 ) ]
 }
-
-[sub_resource type="StyleBoxFlat" id=16]
-bg_color = Color( 0, 0, 0, 0.65 )
-corner_radius_top_left = 4
-corner_radius_top_right = 4
-corner_radius_bottom_right = 4
-corner_radius_bottom_left = 4
 
 [sub_resource type="Animation" id=1]
 resource_name = "default"
@@ -174,6 +167,13 @@ tracks/0/keys = {
 "update": 0,
 "values": [ Vector2( 0, 0 ), Vector2( 0, 120 ) ]
 }
+
+[sub_resource type="StyleBoxFlat" id=16]
+bg_color = Color( 0, 0, 0, 0.65 )
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
 
 [sub_resource type="Animation" id=4]
 resource_name = "default"
@@ -226,30 +226,30 @@ tracks/0/keys = {
 [node name="LevelEditor" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-theme = ExtResource( 1 )
-script = ExtResource( 2 )
-layer_button_scene = ExtResource( 4 )
+theme = ExtResource( 13 )
+script = ExtResource( 5 )
+layer_button_scene = ExtResource( 15 )
 
 [node name="TileFunctions" type="Node2D" parent="."]
 z_index = 4096
-script = ExtResource( 5 )
+script = ExtResource( 8 )
 grid_color = Color( 0, 0, 0, 0.25 )
 
 [node name="SelectedTile" type="Sprite" parent="TileFunctions"]
-texture = ExtResource( 6 )
+texture = ExtResource( 10 )
 
 [node name="EditorCamera" type="Camera2D" parent="."]
 current = true
 limit_left = 0
 limit_top = 0
 limit_smoothed = true
-script = ExtResource( 7 )
+script = ExtResource( 11 )
 
 [node name="TuxSprite" type="Node2D" parent="EditorCamera"]
 material = SubResource( 10 )
 z_index = 1
 z_as_relative = false
-script = ExtResource( 17 )
+script = ExtResource( 9 )
 
 [node name="SpriteColour" type="AnimationPlayer" parent="EditorCamera/TuxSprite"]
 autoplay = "black"
@@ -259,22 +259,22 @@ anims/red = SubResource( 12 )
 [node name="TuxWorldmapBig" type="Sprite" parent="EditorCamera/TuxSprite"]
 visible = false
 use_parent_material = true
-texture = ExtResource( 15 )
+texture = ExtResource( 3 )
 
 [node name="TuxWorldmapSmall" type="Sprite" parent="EditorCamera/TuxSprite"]
 visible = false
 use_parent_material = true
-texture = ExtResource( 16 )
+texture = ExtResource( 4 )
 
 [node name="TuxBig" type="Sprite" parent="EditorCamera/TuxSprite"]
 visible = false
 use_parent_material = true
 position = Vector2( 0, -16 )
-texture = ExtResource( 14 )
+texture = ExtResource( 1 )
 
 [node name="TuxSmall" type="Sprite" parent="EditorCamera/TuxSprite"]
 use_parent_material = true
-texture = ExtResource( 10 )
+texture = ExtResource( 2 )
 
 [node name="UI" type="CanvasLayer" parent="."]
 layer = 128
@@ -282,7 +282,7 @@ layer = 128
 [node name="Scale" type="Control" parent="UI"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-theme = ExtResource( 1 )
+theme = ExtResource( 13 )
 
 [node name="EditorUI" type="Control" parent="UI/Scale"]
 anchor_right = 1.0
@@ -322,7 +322,7 @@ clip_text = true
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
-script = ExtResource( 3 )
+script = ExtResource( 6 )
 __meta__ = {
 "_edit_lock_": true
 }
@@ -336,12 +336,178 @@ anims/retract = SubResource( 15 )
 
 [node name="SettingsPanel" type="Panel" parent="UI/Scale/EditorUI/SettingsPanelOffset"]
 anchor_bottom = 1.0
-margin_top = 174.0
-margin_right = 300.0
-margin_bottom = -174.0
-custom_styles/panel = SubResource( 16 )
+margin_top = 140.0
+margin_right = 550.0
+margin_bottom = -168.0
+rect_min_size = Vector2( 550, 0 )
+
+[node name="LevelProperties" type="VBoxContainer" parent="UI/Scale/EditorUI/SettingsPanelOffset/SettingsPanel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 16.0
+margin_top = 16.0
+margin_right = -16.0
+margin_bottom = -16.0
+alignment = 1
+
+[node name="EditLevelName" type="HSplitContainer" parent="UI/Scale/EditorUI/SettingsPanelOffset/SettingsPanel/LevelProperties"]
+margin_top = 42.0
+margin_right = 518.0
+margin_bottom = 71.0
+
+[node name="Label" type="Label" parent="UI/Scale/EditorUI/SettingsPanelOffset/SettingsPanel/LevelProperties/EditLevelName"]
+margin_top = 4.0
+margin_right = 100.0
+margin_bottom = 25.0
+rect_min_size = Vector2( 100, 0 )
+size_flags_vertical = 6
+text = "Name:"
+
+[node name="Name" type="LineEdit" parent="UI/Scale/EditorUI/SettingsPanelOffset/SettingsPanel/LevelProperties/EditLevelName"]
+margin_left = 112.0
+margin_right = 518.0
+margin_bottom = 29.0
+focus_mode = 0
+size_flags_vertical = 3
+text = "Welcome to Antarctica"
+
+[node name="EditLevelAuthor" type="HSplitContainer" parent="UI/Scale/EditorUI/SettingsPanelOffset/SettingsPanel/LevelProperties"]
+margin_top = 75.0
+margin_right = 518.0
+margin_bottom = 104.0
+
+[node name="Label" type="Label" parent="UI/Scale/EditorUI/SettingsPanelOffset/SettingsPanel/LevelProperties/EditLevelAuthor"]
+margin_top = 4.0
+margin_right = 101.0
+margin_bottom = 25.0
+rect_min_size = Vector2( 100, 0 )
+size_flags_vertical = 6
+text = "Author:"
+
+[node name="Author" type="LineEdit" parent="UI/Scale/EditorUI/SettingsPanelOffset/SettingsPanel/LevelProperties/EditLevelAuthor"]
+margin_left = 113.0
+margin_right = 518.0
+margin_bottom = 29.0
+focus_mode = 0
+size_flags_vertical = 3
+text = "Marek Moeckel"
+
+[node name="HSeparator2" type="HSeparator" parent="UI/Scale/EditorUI/SettingsPanelOffset/SettingsPanel/LevelProperties"]
+margin_top = 108.0
+margin_right = 518.0
+margin_bottom = 138.0
+
+[node name="EditLevelMusic" type="HSplitContainer" parent="UI/Scale/EditorUI/SettingsPanelOffset/SettingsPanel/LevelProperties"]
+margin_top = 142.0
+margin_right = 518.0
+margin_bottom = 171.0
+
+[node name="Label" type="Label" parent="UI/Scale/EditorUI/SettingsPanelOffset/SettingsPanel/LevelProperties/EditLevelMusic"]
+margin_top = 4.0
+margin_right = 100.0
+margin_bottom = 25.0
+rect_min_size = Vector2( 100, 0 )
+size_flags_vertical = 6
+text = "Music:"
+
+[node name="Music" type="OptionButton" parent="UI/Scale/EditorUI/SettingsPanelOffset/SettingsPanel/LevelProperties/EditLevelMusic"]
+margin_left = 112.0
+margin_right = 518.0
+margin_bottom = 29.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "ChipDisko"
+
+[node name="HSeparator3" type="HSeparator" parent="UI/Scale/EditorUI/SettingsPanelOffset/SettingsPanel/LevelProperties"]
+margin_top = 175.0
+margin_right = 518.0
+margin_bottom = 205.0
+
+[node name="EditLevelTimer2" type="HBoxContainer" parent="UI/Scale/EditorUI/SettingsPanelOffset/SettingsPanel/LevelProperties"]
+margin_top = 209.0
+margin_right = 518.0
+margin_bottom = 238.0
+
+[node name="TimerEnabled" type="CheckBox" parent="UI/Scale/EditorUI/SettingsPanelOffset/SettingsPanel/LevelProperties/EditLevelTimer2"]
+margin_right = 24.0
+margin_bottom = 29.0
+size_flags_vertical = 3
+pressed = true
+
+[node name="Label" type="Label" parent="UI/Scale/EditorUI/SettingsPanelOffset/SettingsPanel/LevelProperties/EditLevelTimer2"]
+margin_left = 28.0
+margin_top = 4.0
+margin_right = 128.0
+margin_bottom = 25.0
+rect_min_size = Vector2( 100, 0 )
+text = "Time:"
+align = 1
+
+[node name="SpaceFiller" type="Control" parent="UI/Scale/EditorUI/SettingsPanelOffset/SettingsPanel/LevelProperties/EditLevelTimer2"]
+margin_left = 132.0
+margin_right = 380.0
+margin_bottom = 29.0
+size_flags_horizontal = 3
+
+[node name="Time" type="SpinBox" parent="UI/Scale/EditorUI/SettingsPanelOffset/SettingsPanel/LevelProperties/EditLevelTimer2"]
+margin_left = 384.0
+margin_right = 518.0
+margin_bottom = 29.0
+size_flags_vertical = 3
+min_value = 10.0
+max_value = 999.0
+value = 300.0
+
+[node name="HSeparator4" type="HSeparator" parent="UI/Scale/EditorUI/SettingsPanelOffset/SettingsPanel/LevelProperties"]
+margin_top = 242.0
+margin_right = 518.0
+margin_bottom = 272.0
+
+[node name="EditLevelGravity" type="HSplitContainer" parent="UI/Scale/EditorUI/SettingsPanelOffset/SettingsPanel/LevelProperties"]
+margin_top = 276.0
+margin_right = 518.0
+margin_bottom = 305.0
+
+[node name="Label" type="Label" parent="UI/Scale/EditorUI/SettingsPanelOffset/SettingsPanel/LevelProperties/EditLevelGravity"]
+margin_top = 4.0
+margin_right = 372.0
+margin_bottom = 25.0
+size_flags_horizontal = 3
+size_flags_vertical = 6
+text = "Gravity:"
+
+[node name="Gravity" type="SpinBox" parent="UI/Scale/EditorUI/SettingsPanelOffset/SettingsPanel/LevelProperties/EditLevelGravity"]
+margin_left = 384.0
+margin_right = 518.0
+margin_bottom = 29.0
+size_flags_vertical = 3
+min_value = 1.0
+max_value = 50.0
+value = 10.0
+
+[node name="EditLevelAutoscroll" type="HSplitContainer" parent="UI/Scale/EditorUI/SettingsPanelOffset/SettingsPanel/LevelProperties"]
+margin_top = 309.0
+margin_right = 518.0
+margin_bottom = 338.0
+
+[node name="Label" type="Label" parent="UI/Scale/EditorUI/SettingsPanelOffset/SettingsPanel/LevelProperties/EditLevelAutoscroll"]
+margin_top = 4.0
+margin_right = 372.0
+margin_bottom = 25.0
+size_flags_horizontal = 3
+size_flags_vertical = 6
+text = "Autoscroll Speed:"
+
+[node name="Gravity" type="SpinBox" parent="UI/Scale/EditorUI/SettingsPanelOffset/SettingsPanel/LevelProperties/EditLevelAutoscroll"]
+margin_left = 384.0
+margin_right = 518.0
+margin_bottom = 29.0
+size_flags_vertical = 3
+max_value = 3.0
+step = 0.5
 
 [node name="VBoxContainer" type="VBoxContainer" parent="UI/Scale/EditorUI/SettingsPanelOffset/SettingsPanel"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 22.0
@@ -363,7 +529,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 margin_bottom = -12.0
 custom_colors/font_color = Color( 1, 1, 1, 1 )
-custom_fonts/font = ExtResource( 19 )
+custom_fonts/font = ExtResource( 12 )
 text = "Welcome to Antarctica"
 align = 1
 valign = 2
@@ -415,7 +581,6 @@ text = "Grav"
 clip_text = true
 
 [node name="LevelNameEditor" type="PopupDialog" parent="UI/Scale/EditorUI"]
-visible = true
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 325.0
@@ -423,77 +588,11 @@ margin_top = 194.0
 margin_right = -325.0
 margin_bottom = -194.0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="UI/Scale/EditorUI/LevelNameEditor"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = 19.0
-margin_top = 21.0
-margin_right = -19.0
-margin_bottom = -21.0
-alignment = 1
-__meta__ = {
-"_edit_lock_": true
-}
-
-[node name="EditLevelName" type="HSplitContainer" parent="UI/Scale/EditorUI/LevelNameEditor/VBoxContainer"]
-margin_top = 80.0
-margin_right = 592.0
-margin_bottom = 109.0
-
-[node name="Label" type="Label" parent="UI/Scale/EditorUI/LevelNameEditor/VBoxContainer/EditLevelName"]
-margin_top = 4.0
-margin_right = 200.0
-margin_bottom = 25.0
-rect_min_size = Vector2( 200, 0 )
-size_flags_vertical = 6
-text = "Level Name:"
-
-[node name="LineEdit" type="LineEdit" parent="UI/Scale/EditorUI/LevelNameEditor/VBoxContainer/EditLevelName"]
-margin_left = 212.0
-margin_right = 592.0
-margin_bottom = 29.0
-focus_mode = 0
-size_flags_vertical = 3
-text = "Welcome to Antarctica"
-
-[node name="EditLevelAuthor" type="HSplitContainer" parent="UI/Scale/EditorUI/LevelNameEditor/VBoxContainer"]
-margin_top = 113.0
-margin_right = 592.0
-margin_bottom = 142.0
-
-[node name="Label" type="Label" parent="UI/Scale/EditorUI/LevelNameEditor/VBoxContainer/EditLevelAuthor"]
-margin_top = 4.0
-margin_right = 200.0
-margin_bottom = 25.0
-rect_min_size = Vector2( 200, 0 )
-size_flags_vertical = 6
-text = "Level Author:"
-
-[node name="LineEdit" type="LineEdit" parent="UI/Scale/EditorUI/LevelNameEditor/VBoxContainer/EditLevelAuthor"]
-margin_left = 212.0
-margin_right = 592.0
-margin_bottom = 29.0
-focus_mode = 0
-size_flags_vertical = 3
-text = "Marek Moeckel"
-
-[node name="HSeparator" type="HSeparator" parent="UI/Scale/EditorUI/LevelNameEditor/VBoxContainer"]
-margin_top = 146.0
-margin_right = 592.0
-margin_bottom = 176.0
-
-[node name="Button" type="Button" parent="UI/Scale/EditorUI/LevelNameEditor/VBoxContainer"]
-margin_top = 180.0
-margin_right = 592.0
-margin_bottom = 210.0
-focus_mode = 0
-text = "OK"
-
 [node name="LayersPanelOffset" type="Control" parent="UI/Scale/EditorUI"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
-script = ExtResource( 3 )
+script = ExtResource( 6 )
 __meta__ = {
 "_edit_lock_": true
 }
@@ -548,7 +647,7 @@ alignment = 1
 anchor_bottom = 1.0
 margin_right = 322.0
 margin_bottom = -122.0
-script = ExtResource( 11 )
+script = ExtResource( 19 )
 
 [node name="VBoxContainer" type="VBoxContainer" parent="UI/Scale/EditorUI/LayersPanelOffset/AddLayerDialog"]
 anchor_right = 1.0
@@ -627,7 +726,7 @@ text = "Add"
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
-script = ExtResource( 3 )
+script = ExtResource( 6 )
 __meta__ = {
 "_edit_lock_": true
 }
@@ -667,8 +766,8 @@ scroll_horizontal_enabled = false
 margin_right = 193.0
 size_flags_horizontal = 3
 columns = 4
-script = ExtResource( 9 )
-tile_button_scene = ExtResource( 8 )
+script = ExtResource( 7 )
+tile_button_scene = ExtResource( 14 )
 
 [node name="PlacementOptions" type="VBoxContainer" parent="UI/Scale/EditorUI/TilesPanelOffset/TilesPanel"]
 anchor_right = 1.0
@@ -712,7 +811,7 @@ toggle_mode = true
 text = "EyeDropper"
 clip_text = true
 
-[node name="EditLayerDialog" parent="UI/Scale/EditorUI" instance=ExtResource( 12 )]
+[node name="EditLayerDialog" parent="UI/Scale/EditorUI" instance=ExtResource( 16 )]
 
 [node name="EditToggle" type="Button" parent="UI/Scale"]
 anchor_left = 1.0
@@ -722,10 +821,10 @@ anchor_bottom = 1.0
 margin_left = -224.0
 margin_top = -119.0
 focus_mode = 0
-theme = ExtResource( 1 )
+theme = ExtResource( 13 )
 text = "PLAY"
 
-[node name="PauseMenu" parent="." instance=ExtResource( 18 )]
+[node name="PauseMenu" parent="." instance=ExtResource( 17 )]
 visible = false
 
 [connection signal="mouse_entered" from="UI/Scale/EditorUI/MouseDetector" to="." method="_on_MouseDetector_mouse_entered"]
