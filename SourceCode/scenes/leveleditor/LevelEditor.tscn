@@ -296,12 +296,12 @@ anchor_bottom = 1.0
 [node name="Buttons" type="HBoxContainer" parent="UI/Scale/EditorUI"]
 margin_left = 16.0
 margin_top = 16.0
-margin_right = 216.0
+margin_right = 316.0
 margin_bottom = 80.0
 custom_constants/separation = 15
 
 [node name="UndoButton" type="Button" parent="UI/Scale/EditorUI/Buttons"]
-margin_right = 92.0
+margin_right = 90.0
 margin_bottom = 64.0
 focus_mode = 0
 size_flags_horizontal = 3
@@ -310,13 +310,23 @@ text = "UNDO"
 clip_text = true
 
 [node name="LevelProperties" type="Button" parent="UI/Scale/EditorUI/Buttons"]
-margin_left = 107.0
-margin_right = 200.0
+margin_left = 105.0
+margin_right = 195.0
 margin_bottom = 64.0
 focus_mode = 0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 text = "SETTINGS"
+clip_text = true
+
+[node name="SaveButton" type="Button" parent="UI/Scale/EditorUI/Buttons"]
+margin_left = 210.0
+margin_right = 300.0
+margin_bottom = 64.0
+focus_mode = 0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "SAVE"
 clip_text = true
 
 [node name="LevelPropertiesOffset" type="Control" parent="UI/Scale/EditorUI"]
@@ -831,6 +841,7 @@ visible = false
 [connection signal="mouse_exited" from="UI/Scale/EditorUI/MouseDetector" to="." method="_on_MouseDetector_mouse_exited"]
 [connection signal="pressed" from="UI/Scale/EditorUI/Buttons/UndoButton" to="." method="_on_UndoButton_pressed"]
 [connection signal="pressed" from="UI/Scale/EditorUI/Buttons/LevelProperties" to="UI/Scale/EditorUI/LevelPropertiesOffset" method="_on_RetractTab_pressed"]
+[connection signal="pressed" from="UI/Scale/EditorUI/Buttons/SaveButton" to="." method="_on_SaveButton_pressed"]
 [connection signal="animation_started" from="UI/Scale/EditorUI/LevelPropertiesOffset/RetractAnimation" to="UI/Scale/EditorUI/LevelPropertiesOffset/LevelPropertiesPanel" method="_on_RetractAnimation_animation_started"]
 [connection signal="text_changed" from="UI/Scale/EditorUI/LevelPropertiesOffset/LevelPropertiesPanel/LevelProperties/EditLevelName/Name" to="UI/Scale/EditorUI/LevelPropertiesOffset/LevelPropertiesPanel" method="_on_Name_text_changed"]
 [connection signal="text_changed" from="UI/Scale/EditorUI/LevelPropertiesOffset/LevelPropertiesPanel/LevelProperties/EditLevelAuthor/Author" to="UI/Scale/EditorUI/LevelPropertiesOffset/LevelPropertiesPanel" method="_on_Author_text_changed"]

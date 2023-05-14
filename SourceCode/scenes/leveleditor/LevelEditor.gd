@@ -386,6 +386,9 @@ func _update_current_tile_id(new_value):
 	current_tile_id = new_value
 	tiles_container.update_selected_tile(current_tile_id)
 
+func _on_SaveButton_pressed():
+	save_level()
+
 func _on_UndoButton_pressed():
 	if undo_stack.empty(): return
 	
