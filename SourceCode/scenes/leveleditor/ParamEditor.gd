@@ -83,6 +83,7 @@ func _set_parameter_value(new_value):
 
 func _on_LineEdit_text_changed(new_text):
 	_set_parameter_value(new_text)
+	emit_signal("parameter_changed")
 
 func _on_SpinBox_value_changed(value):
 	_set_parameter_value(value)

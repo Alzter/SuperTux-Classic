@@ -15,6 +15,9 @@ func appear(layer_to_edit : Node):
 func _on_EditLayerDialog_about_to_show():
 	if !layer_being_edited: return
 	
+	# Create a "Name" editor for the layer being edited
+	_create_parameter_editor(layer_being_edited, "name", TYPE_STRING)
+	
 	# Get the layer parameters of the desired layer, if any exist
 	var parameters = layer_being_edited.get("editor_params")
 	if parameters:

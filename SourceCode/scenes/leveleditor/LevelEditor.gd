@@ -71,7 +71,7 @@ func _ready():
 	Music.stop_all()
 	ResolutionManager.connect("window_resized", self, "window_resized")
 	tiles_container.connect("update_selected_tile", self, "update_selected_tile")
-	edit_layer_dialog.connect("layer_parameter_changed", self, "add_undo_state")
+	edit_layer_dialog.connect("layer_parameter_changed", self, "layer_parameter_changed")
 	window_resized()
 	
 	pause_menu.connect("pause_changed", self, "pause_toggled")
@@ -377,6 +377,10 @@ func _deferred_delete_layer(layer_object : Node):
 		self.selected_object = null
 	layer_object.free()
 	update_layers_panel(self.level_objects)
+
+func layer_parameter_changed():
+	update_layers_panel(self.level_objects)
+	add_undo_state()
 
 func _update_current_tile_id(new_value):
 	current_tile_id = new_value
