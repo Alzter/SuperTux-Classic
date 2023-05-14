@@ -13,3 +13,4 @@ func _on_RetractTab_pressed():
 func _on_AddLayerButton_pressed():
 	if !owner.level: return
 	add_layer_dialog.popup()
+

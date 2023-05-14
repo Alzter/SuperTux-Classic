@@ -25,7 +25,9 @@ onready var button_rect_select = $UI/Scale/EditorUI/TilesPanelOffset/TilesPanel/
 onready var button_eraser = $UI/Scale/EditorUI/TilesPanelOffset/TilesPanel/PlacementOptions/Eraser
 onready var button_eyedropper = $UI/Scale/EditorUI/TilesPanelOffset/TilesPanel/PlacementOptions/EyeDropper
 onready var button_undo = $UI/Scale/EditorUI/Buttons/UndoButton
+
 onready var button_level_properties = $UI/Scale/EditorUI/Buttons/LevelProperties
+onready var level_properties_panel = $UI/Scale/EditorUI/LevelPropertiesOffset/LevelPropertiesPanel
 
 export var layer_button_scene : PackedScene
 
@@ -33,6 +35,8 @@ onready var cache_level_path = cache_level_directory + cache_level_filename
 
 onready var edit_layer_dialog = $UI/Scale/EditorUI/EditLayerDialog
 onready var pause_menu = $PauseMenu
+
+signal level_loaded
 
 signal eraser_toggled
 signal rect_select_toggled
@@ -74,6 +78,8 @@ func _ready():
 	pause_menu.connect("save_and_quit", self, "save_and_quit")
 	
 	editor_camera.connect("set_camera_drag", self, "set_camera_drag")
+	
+	connect("level_loaded", level_properties_panel, "appear")
 
 func _process(delta):
 	if !level: return
@@ -165,6 +171,8 @@ func initialise_level(level_object):
 	tile_functions.update_level_boundaries(level)
 	
 	editor_camera.initialise_tux_sprite(level.is_worldmap)
+	
+	emit_signal("level_loaded")
 
 func create_level_cache():
 	make_all_tilemaps_opaque()
