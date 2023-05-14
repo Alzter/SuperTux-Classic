@@ -18,6 +18,10 @@ func _on_EditLayerDialog_about_to_show():
 	# Create a "Name" editor for the layer being edited
 	_create_parameter_editor(layer_being_edited, "name", TYPE_STRING)
 	
+	if layer_being_edited.is_in_group("swappables"):
+		print("A")
+		print(layer_being_edited)
+	
 	# Get the layer parameters of the desired layer, if any exist
 	var parameters = layer_being_edited.get("editor_params")
 	if parameters:
