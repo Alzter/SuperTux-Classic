@@ -129,6 +129,7 @@ func _deferred_enter_edit_mode():
 	Music.stop_all()
 	get_tree().paused = false
 	edit_mode = true
+	Global.can_pause = true
 
 # ==================================================================================
 # Level loading

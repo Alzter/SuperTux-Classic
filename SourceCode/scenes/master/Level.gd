@@ -207,6 +207,7 @@ func create_autoscroll_camera():
 	camera.limit_top = 0
 	camera.limit_bottom = 480
 	add_child(camera)
+	camera.name = "AutoscrollCamera"
 	custom_camera = camera
 	is_autoscrolling = true
 	window_resized()
@@ -214,6 +215,8 @@ func create_autoscroll_camera():
 	if Global.spawn_position != null:
 		camera_pos = Global.spawn_position.x
 	camera.position = Vector2(camera_pos, 320)
+	camera.current = true
+	yield(get_tree(), "idle_frame") # Disgusting madness
 	camera.current = true
 
 func autoscroll(delta):

@@ -26,7 +26,7 @@ func appear():
 		level_timer_enabled.pressed = level.uses_timer
 		level_time.value = level.time
 		level_gravity.value = level.gravity
-		level_autoscroll_speed = level.autoscroll_speed
+		level_autoscroll_speed.value = level.autoscroll_speed
 
 func _update_music_list():
 	var id = 0
