@@ -21,7 +21,14 @@ var previous_song = null
 var current_song = null
 var current_song_node = null
 
+var songs = []
+
 onready var tween = $Tween
+
+func _ready():
+	for song in get_children():
+		if song is AudioStreamPlayer:
+			songs.append(song.name)
 
 var special_songs = [
 	"Invincible"
