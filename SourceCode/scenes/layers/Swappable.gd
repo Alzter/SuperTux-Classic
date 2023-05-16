@@ -5,7 +5,7 @@ export var editor_params = ["type"]
 onready var scene_node = get_node_or_null("Default")
 export var name_of_default_node = "SnowBackground"
 
-onready var current_scene = name_of_default_node
+onready var current_scene = name_of_default_node setget _update_current_scene
 var swappable_scenes = []
 var folder_of_swappable_scenes = null
 
@@ -32,6 +32,12 @@ func _get_swappable_scenes():
 			if scene.ends_with(".tscn"):
 				swappable_scenes.append(scene.trim_suffix(".tscn"))
 
+func _update_current_scene(new_value):
+	if new_value == current_scene: return
+	
+	current_scene = new_value
+	swap_to_scene(new_value)
+
 func swap_to_scene(scene_name : String):
 	call_deferred("_deferred_swap_to_scene", scene_name)
 
@@ -51,8 +57,8 @@ func _deferred_swap_to_scene(scene_name : String):
 func _set_type(new_value):
 	if new_value is Array:
 		if new_value.size() == 2:
-			current_scene = new_value[0]
-			swappable_scenes = new_value[1]
+			self.current_scene = new_value[0]
+			self.swappable_scenes = new_value[1]
 
 func _get_type():
 	return [current_scene, swappable_scenes]

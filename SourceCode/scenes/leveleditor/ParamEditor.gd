@@ -9,7 +9,9 @@ onready var number_edit = $SpinBox
 onready var string_edit = $LineEdit
 onready var color_edit = $ColorPickerButton
 onready var bool_edit = $CheckBox
-onready var array_edit = $OptionButton
+onready var dropdown_edit = $OptionButton
+
+var dropdown_values : Dictionary = {}
 
 onready var editor_nodes = [
 	number_edit,
@@ -68,7 +70,8 @@ func _ready():
 		
 		TYPE_ARRAY:
 			if p_value.size() == 2:
-				param_editor_ui_node = array_edit
+				param_editor_ui_node = dropdown_edit
+				_populate_dropdown_menu(p_value)
 			else:
 				push_error("ERROR creating layer parameter editor. Arrays must follow format: [String, Array<String>], where String contains a current value and Array contains a list of all possible values")
 				queue_free()
@@ -80,6 +83,17 @@ func _ready():
 			return
 	
 	param_editor_ui_node.show()
+
+func _populate_dropdown_menu(dropdown_array):
+	var selected_item = dropdown_array[0]
+	var items = dropdown_array[1]
+	
+	var id = 0
+	for item in items:
+		dropdown_edit.add_item(item, id)
+		dropdown_values[item] = id
+		if selected_item == item: dropdown_edit.select(id)
+		id += 1
 
 func _get_parameter_value():
 	return parameter_owner_object.get(parameter_name)
@@ -103,5 +117,24 @@ func _on_ColorPickerButton_color_changed(color):
 func _on_CheckBox_toggled(button_pressed):
 	_set_parameter_value(button_pressed)
 
+# If we change the current selected option for the dropdown
 func _on_OptionButton_item_selected(index):
-	pass # Replace with function body.
+	
+	# Get the Value of the ID of the new selected option.
+	var dropdown_value = null
+	for id in dropdown_values.values():
+		if id == index:
+			dropdown_value = dropdown_values.keys()[id]
+	
+	if dropdown_value:
+		
+		# Dropdowns are stored in an array data structure
+		# where the first item is the currently selected item,
+		# and the second is an array of all items.
+		
+		# We update the dropdown array to reflect the new selected item.
+		var dropdown_array = _get_parameter_value()
+		dropdown_array[0] = dropdown_value
+		_set_parameter_value(dropdown_array)
+	else:
+		push_error("Error getting value for dropdown item with index " + str(index))
