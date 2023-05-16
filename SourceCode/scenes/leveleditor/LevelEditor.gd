@@ -80,6 +80,8 @@ func _ready():
 	editor_camera.connect("set_camera_drag", self, "set_camera_drag")
 	
 	connect("level_loaded", level_properties_panel, "appear")
+	
+	get_tree().paused = true
 
 func _process(delta):
 	if !level: return
@@ -106,6 +108,7 @@ func enter_play_mode():
 	if ui_editor: ui_editor.hide()
 	level.start_level(true)
 	edit_mode = false
+	get_tree().paused = false
 
 func enter_edit_mode():
 	if !level: return

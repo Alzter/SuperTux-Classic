@@ -225,6 +225,7 @@ tracks/0/keys = {
 }
 
 [node name="LevelEditor" type="Control"]
+pause_mode = 2
 anchor_right = 1.0
 anchor_bottom = 1.0
 theme = ExtResource( 13 )

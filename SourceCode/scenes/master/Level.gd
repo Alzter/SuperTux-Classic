@@ -47,6 +47,7 @@ signal level_ready
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	Global.current_level = self
+	set_pause_mode(PAUSE_MODE_STOP)
 	
 	# Only automatically start levels if the level is the root scene.
 	# This is not the case when we are in the level editor, because

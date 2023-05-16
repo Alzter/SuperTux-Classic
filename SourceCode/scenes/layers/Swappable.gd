@@ -2,10 +2,9 @@ extends Node2D
 
 export var editor_params = ["type"]
 
-onready var scene_node = get_node_or_null("Default")
-export var name_of_default_node = "SnowBackground"
+onready var scene_node = get_child(0)
+export var current_scene = "SnowBackground" setget _update_current_scene
 
-onready var current_scene = name_of_default_node setget _update_current_scene
 var swappable_scenes = []
 var folder_of_swappable_scenes = null
 
@@ -16,6 +15,9 @@ func _ready():
 		add_to_group("swappables", true)
 	
 	_get_swappable_scenes()
+	
+	if !scene_node:
+		swap_to_scene(current_scene)
 
 func _get_swappable_scenes():
 	var folder_name = filename.trim_suffix(".tscn") + "/"
@@ -45,7 +47,7 @@ func _deferred_swap_to_scene(scene_name : String):
 	if !swappable_scenes.has(scene_name): return
 	
 	var scene_file = folder_of_swappable_scenes + scene_name + ".tscn"
-	scene_node.free()
+	if scene_node: scene_node.free()
 	scene_node = null
 	
 	var new_scene = load(scene_file).instance()
