@@ -50,7 +50,14 @@ margin_right = 466.0
 margin_bottom = 29.0
 focus_mode = 0
 
+[node name="OptionButton" type="OptionButton" parent="."]
+visible = false
+margin_left = 444.0
+margin_right = 466.0
+margin_bottom = 29.0
+
 [connection signal="text_changed" from="LineEdit" to="." method="_on_LineEdit_text_changed"]
 [connection signal="value_changed" from="SpinBox" to="." method="_on_SpinBox_value_changed"]
 [connection signal="color_changed" from="ColorPickerButton" to="." method="_on_ColorPickerButton_color_changed"]
 [connection signal="toggled" from="CheckBox" to="." method="_on_CheckBox_toggled"]
+[connection signal="item_selected" from="OptionButton" to="." method="_on_OptionButton_item_selected"]

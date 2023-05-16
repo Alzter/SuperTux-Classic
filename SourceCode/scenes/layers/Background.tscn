@@ -5,6 +5,5 @@
 
 [node name="Background" type="Node2D"]
 script = ExtResource( 2 )
-name_of_default_node = "SnowBackground.tscn"
 
 [node name="Default" parent="." instance=ExtResource( 1 )]

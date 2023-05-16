@@ -9,6 +9,7 @@ onready var number_edit = $SpinBox
 onready var string_edit = $LineEdit
 onready var color_edit = $ColorPickerButton
 onready var bool_edit = $CheckBox
+onready var array_edit = $OptionButton
 
 onready var editor_nodes = [
 	number_edit,
@@ -65,6 +66,14 @@ func _ready():
 			color_edit.color = p_value
 			param_editor_ui_node = color_edit
 		
+		TYPE_ARRAY:
+			if p_value.size() == 2:
+				param_editor_ui_node = array_edit
+			else:
+				push_error("ERROR creating layer parameter editor. Arrays must follow format: [String, Array<String>], where String contains a current value and Array contains a list of all possible values")
+				queue_free()
+				return
+		
 		_: # If the data type is not matched, do not create a parameter editor.
 			push_error(str("ERROR creating layer parameter editor. Unrecognised parameter type: " + str(parameter_type)))
 			queue_free()
@@ -93,3 +102,6 @@ func _on_ColorPickerButton_color_changed(color):
 
 func _on_CheckBox_toggled(button_pressed):
 	_set_parameter_value(button_pressed)
+
+func _on_OptionButton_item_selected(index):
+	pass # Replace with function body.
