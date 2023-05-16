@@ -2,6 +2,9 @@ extends Control
 
 #export var level_to_load = "res://scenes/levels/world1/level1.tscn"
 
+# The Editor UI gets smaller when the screen resolution is lower than this
+export var target_resolution = Vector2(1000, 500)
+
 export var cache_level_directory = "user://leveleditor/"
 export var cache_level_filename = "cache.tscn"
 
@@ -226,8 +229,7 @@ func _on_EditToggle_pressed():
 
 # The Editor UI shrinks on smaller displays
 func window_resized():
-	# The Editor UI gets smaller when the screen resolution is lower than this
-	var target_resolution = Vector2(1000, 500)
+	# The Editor UI gets smaller when the screen resolution is lower than the target resolution
 	var scale = min(ResolutionManager.window_size.x / target_resolution.x, ResolutionManager.window_size.y / target_resolution.y)
 	scale = min(scale, 1)
 	scale /= ResolutionManager.screen_shrink # Make editor UI immune to magnification
