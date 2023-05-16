@@ -55,5 +55,4 @@ func _deferred_hide_layer_editor():
 		child.free()
 
 func _layer_parameter_changed():
-	print("CHANGED")
 	emit_signal("layer_parameter_changed")
