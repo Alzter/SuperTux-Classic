@@ -41,6 +41,11 @@ func _ready():
 	for ui_node in editor_nodes:
 		ui_node.hide()
 	
+	_update_parameter_value()
+	
+	param_editor_ui_node.show()
+
+func _update_parameter_value():
 	# Store the CURRENT VALUE of the parameter in p_value
 	var p_value = _get_parameter_value()
 	
@@ -81,8 +86,6 @@ func _ready():
 			push_error(str("ERROR creating layer parameter editor. Unrecognised parameter type: " + str(parameter_type)))
 			queue_free()
 			return
-	
-	param_editor_ui_node.show()
 
 func _populate_dropdown_menu(dropdown_array):
 	var selected_item = dropdown_array[0]
@@ -100,6 +103,9 @@ func _get_parameter_value():
 
 func _set_parameter_value(new_value):
 	parameter_owner_object.set(parameter_name, new_value)
+	
+	if [TYPE_INT, TYPE_REAL].has(parameter_type):
+		_update_parameter_value()
 
 # ==================================================
 # UPDATING THE PARAMETER WHEN THE UI NODE IS ADJUSTED BY THE USER

@@ -29,8 +29,9 @@ visible = false
 margin_left = 239.0
 margin_right = 466.0
 margin_bottom = 29.0
+focus_mode = 2
 size_flags_horizontal = 3
-step = 0.0
+step = 0.1
 allow_greater = true
 allow_lesser = true
 
@@ -55,6 +56,9 @@ visible = false
 margin_left = 444.0
 margin_right = 466.0
 margin_bottom = 29.0
+focus_mode = 0
+size_flags_horizontal = 3
+size_flags_vertical = 3
 
 [connection signal="text_changed" from="LineEdit" to="." method="_on_LineEdit_text_changed"]
 [connection signal="value_changed" from="SpinBox" to="." method="_on_SpinBox_value_changed"]
