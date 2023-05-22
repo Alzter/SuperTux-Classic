@@ -37,6 +37,7 @@ bus = "Music"
 [node name="Salcon" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 17 )
 volume_db = 1.0
+bus = "Music"
 
 [node name="TuxRacer - Race1" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 22 )
@@ -72,20 +73,26 @@ bus = "Music"
 
 [node name="ChipDisko" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 4 )
+bus = "Music"
 
 [node name="Cave" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 3 )
+volume_db = 1.0
+bus = "Music"
 
 [node name="Cave2" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 25 )
-volume_db = 2.0
+volume_db = 4.0
+bus = "Music"
 
 [node name="State of the Art" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 23 )
+bus = "Music"
 
 [node name="Scary" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 20 )
 volume_db = 5.0
+bus = "Music"
 
 [node name="Fortress" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 7 )
@@ -110,13 +117,16 @@ bus = "Music"
 [node name="Prophecy" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 21 )
 volume_db = 4.0
+bus = "Music"
 
 [node name="Invincible" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 9 )
+bus = "Music"
 
 [node name="GameOver" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 11 )
 volume_db = -1.0
+bus = "Music"
 
 [node name="TuxVictorious" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 15 )

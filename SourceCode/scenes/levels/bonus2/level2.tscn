@@ -18,7 +18,7 @@ shader_param/overlay_color = Color( 0.341176, 0.219608, 0.635294, 0.501961 )
 script = ExtResource( 1 )
 level_title = "Think Fast, or Die"
 level_author = "Kevin"
-music = "Cave"
+music = "Cave2"
 time = 350
 autoscroll_speed = 1.0
 
