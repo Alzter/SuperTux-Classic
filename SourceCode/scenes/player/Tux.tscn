@@ -328,6 +328,8 @@ limit_bottom = 480
 smoothing_speed = 25.0
 script = ExtResource( 46 )
 
+[node name="Tween" type="Tween" parent="Camera2D"]
+
 [node name="SFX" type="Node2D" parent="."]
 script = ExtResource( 30 )
 

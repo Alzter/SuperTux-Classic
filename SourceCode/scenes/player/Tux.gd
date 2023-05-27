@@ -543,6 +543,8 @@ func win():
 	
 	# Once this timer depletes, load in the next level
 	win_timer.start()
+	
+	camera.smooth_zoom(0.5, 1)
 
 func win_loop(jump_over_walls = true):
 	if jump_over_walls and grounded and is_on_wall():
