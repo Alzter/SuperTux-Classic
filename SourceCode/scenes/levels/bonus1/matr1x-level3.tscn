@@ -10,7 +10,7 @@
 script = ExtResource( 8 )
 level_title = "Fire In The Sky"
 level_author = "Matr1x"
-music = "Scary"
+music = "Cave2"
 particle_system = "snow"
 time = 250
 
