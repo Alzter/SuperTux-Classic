@@ -73,7 +73,7 @@ margin_right = 125.0
 margin_bottom = -2.0
 custom_colors/font_color = Color( 0.992157, 1, 0, 1 )
 custom_fonts/font = ExtResource( 5 )
-text = "Release v0.3.4"
+text = "Release v0.3.5"
 valign = 2
 
 [node name="Menu" type="Control" parent="TitleContent"]
@@ -123,7 +123,6 @@ margin_right = 350.0
 margin_bottom = 135.0
 focus_neighbour_top = NodePath("../Options")
 focus_neighbour_bottom = NodePath("../Credits")
-disabled = true
 text = "Level Editor"
 
 [node name="Credits" type="Button" parent="TitleContent/Menu/VBoxContainer"]
