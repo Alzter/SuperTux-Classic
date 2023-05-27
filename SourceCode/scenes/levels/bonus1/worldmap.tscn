@@ -116,11 +116,6 @@ level_file_path = "res://scenes/levels/bonus1/wansti-level4.tscn"
 position = Vector2( 1616, 720 )
 level_file_path = "res://scenes/levels/bonus1/wansti-level5.tscn"
 
-[node name="Message1" parent="Objects" instance=ExtResource( 2 )]
-position = Vector2( 1072, 1264 )
-message = "You found a secret place!"
-invisible = true
-
 [node name="Message2" parent="Objects" instance=ExtResource( 2 )]
 position = Vector2( 1136, 176 )
 message = "Hint: Use igloos to get back here."
