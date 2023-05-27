@@ -17,6 +17,26 @@
 
 extends Node2D
 
+onready var raycast = $RayCast2D
+onready var hitbox = $Node2D/Area2D/CollisionShape2D
+
 func _on_Area2D_body_entered(body):
 	if body.is_in_group("players"):
 		body.win()
+
+func _ready():
+	raycast.force_raycast_update()
+	if raycast.is_colliding():
+		# Make the hitbox shape unique since we're about to modify it
+		hitbox.shape = hitbox.shape.duplicate(true)
+		
+		# Use the raycast to get the position of the roof above us
+		var roof = raycast.get_collision_point() - raycast.global_position
+		
+		# Make the hitbox of the goal post not exceed this roof
+		var hitbox_size = Vector2(16, round(abs(roof.y * 0.5) + 8))
+		#print(hitbox_size)
+		
+		# Change the hitbox size to this new size (have to do it using this method or else)
+		hitbox.shape.set_deferred("extents", hitbox_size)
+		hitbox.position.y = 96 - abs(hitbox_size.y)

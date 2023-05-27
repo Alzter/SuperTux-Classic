@@ -4,7 +4,7 @@
 [ext_resource path="res://scenes/layers/TileMap.tscn" type="PackedScene" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 16, 512 )
+extents = Vector2( 16, 1024 )
 
 [node name="EndGoal" type="Node2D"]
 script = ExtResource( 1 )
@@ -18,7 +18,7 @@ collision_layer = 0
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D/Area2D"]
-position = Vector2( 48, -416 )
+position = Vector2( 48, -928 )
 shape = SubResource( 1 )
 
 [node name="GoalPoleFG" parent="Node2D" instance=ExtResource( 3 )]
@@ -29,5 +29,10 @@ tile_data = PoolIntArray( -262163, 19, 0, -196627, 19, 65536, -131091, 19, 65536
 modulate = Color( 0.423529, 0.458824, 0.541176, 1 )
 z_index = -10
 tile_data = PoolIntArray( -262165, 19, 0, -196629, 19, 65536, -131093, 19, 65536, -65557, 19, 65536, -21, 19, 65536, 65515, 19, 65536, 131051, 19, 65536, 196587, 19, 131072 )
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+position = Vector2( 32, 224 )
+cast_to = Vector2( 0, -960 )
+collide_with_areas = true
 
 [connection signal="body_entered" from="Node2D/Area2D" to="." method="_on_Area2D_body_entered"]
