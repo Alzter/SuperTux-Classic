@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/waterfall-autotile3.png-1d315dead8daa44fc32f10a1a6106af7.stex"
+path="res://.import/waterfall-2.png-897ad97c118500d1e50e938864654fdc.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://images/tile_animations/waterfall-autotile3.png"
-dest_files=[ "res://.import/waterfall-autotile3.png-1d315dead8daa44fc32f10a1a6106af7.stex" ]
+source_file="res://images/tile_animations/waterfall-2.png"
+dest_files=[ "res://.import/waterfall-2.png-897ad97c118500d1e50e938864654fdc.stex" ]
 
 [params]
 

@@ -19,7 +19,7 @@
 [ext_resource path="res://images/objects/brick/normal.png" type="Texture" id=18]
 [ext_resource path="res://images/tilesets/Tree.png" type="Texture" id=19]
 [ext_resource path="res://images/tile_animations/BonusBlock.tres" type="Texture" id=20]
-[ext_resource path="res://images/tile_animations/WaterfallAutotile.tres" type="Texture" id=21]
+[ext_resource path="res://images/tile_animations/Waterfall.tres" type="Texture" id=21]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
