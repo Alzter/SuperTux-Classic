@@ -1,10 +1,11 @@
 extends TileMap
 
 export var editor_params = [
-	"solid", "z_index", "multiply_color", "overlay_color"
+	"solid", "liquid", "z_index", "multiply_color", "overlay_color"
 	]
 
-var solid : bool = get_collision_layer_bit(0) setget _update_solidity
+onready var solid : bool = get_collision_layer_bit(0) setget _update_solidity
+onready var liquid : bool = get_collision_layer_bit(7) setget _update_liquid_collision
 onready var multiply_color : Color = modulate setget _update_multiply_color
 
 var overlay_color : Color = Color(0.5,0.5,0.5,0.5) setget _update_overlay_color
@@ -118,9 +119,16 @@ func get_tile_name(tile_id):
 	return tile_set.tile_get_name(tile_id)
 
 func _update_solidity(new_value):
+	#print("solid " + str(new_value))
 	solid = new_value
 	set_collision_layer_bit(0, new_value)
 	set_collision_mask_bit(0, new_value)
+
+func _update_liquid_collision(new_value):
+	#print("liquid " + str(new_value))
+	liquid = new_value
+	set_collision_layer_bit(7, new_value)
+	set_collision_mask_bit(7, new_value)
 
 func _update_multiply_color(new_value):
 	multiply_color = new_value
