@@ -1,6 +1,6 @@
 extends AudioStreamPlayer
 
-export var editor_params = ["sound", "volume", "pitch"]
+export var editor_params = ["volume", "pitch"] # "sound"
 
 export var volume = -10 setget _set_volume, _get_volume
 export var pitch = 1.25 setget _set_pitch, _get_pitch
