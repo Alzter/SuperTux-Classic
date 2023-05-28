@@ -3,7 +3,7 @@ extends Node2D
 export var editor_params = ["type"]
 
 onready var scene_node = get_child(0)
-export var current_scene = "Background" setget _update_current_scene
+export var current_scene = "Snow" setget _update_current_scene
 
 var swappable_scenes = []
 var folder_of_swappable_scenes = null
