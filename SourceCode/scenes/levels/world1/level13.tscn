@@ -3,7 +3,7 @@
 [ext_resource path="res://scenes/master/Level.gd" type="Script" id=1]
 [ext_resource path="res://scenes/master/ObjectMap.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/layers/TileMap.tscn" type="PackedScene" id=3]
-[ext_resource path="res://scenes/layers/Background/IceMountainsBackground.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scenes/layers/Background/IceMountains.tscn" type="PackedScene" id=4]
 [ext_resource path="res://images/background/gradient.png" type="Texture" id=5]
 
 [sub_resource type="CanvasItemMaterial" id=1]

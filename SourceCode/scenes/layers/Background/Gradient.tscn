@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://scenes/layers/Background/GradientBackground.gd" type="Script" id=1]
+[ext_resource path="res://scenes/layers/Background/Gradient.gd" type="Script" id=1]
 [ext_resource path="res://images/background/gradient2.png" type="Texture" id=2]
 
 [node name="GradientBG" type="ParallaxBackground"]

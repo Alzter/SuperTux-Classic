@@ -4,7 +4,7 @@
 [ext_resource path="res://scenes/master/Camera.gd" type="Script" id=2]
 [ext_resource path="res://scenes/master/Level.gd" type="Script" id=3]
 [ext_resource path="res://scenes/bosses/Grumbel.tscn" type="PackedScene" id=4]
-[ext_resource path="res://scenes/layers/Background/CastleBackground.tscn" type="PackedScene" id=5]
+[ext_resource path="res://scenes/layers/Background/Castle.tscn" type="PackedScene" id=5]
 [ext_resource path="res://scenes/layers/Particles/SnowLight.tscn" type="PackedScene" id=6]
 [ext_resource path="res://scenes/levels/bonus2/Grumboss.gd" type="Script" id=7]
 [ext_resource path="res://scenes/layers/TileMap.tscn" type="PackedScene" id=8]
@@ -28,6 +28,7 @@
 [ext_resource path="res://sounds/bosses/grumbel/glitching_4.mp3" type="AudioStream" id=26]
 [ext_resource path="res://scenes/shaders/Grumbel.gdshader" type="Shader" id=27]
 [ext_resource path="res://images/bosses/grumbel/sanity_effect.png" type="Texture" id=28]
+
 
 [sub_resource type="CanvasItemMaterial" id=2]
 blend_mode = 3

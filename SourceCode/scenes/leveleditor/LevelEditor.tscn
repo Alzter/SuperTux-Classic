@@ -364,9 +364,8 @@ margin_bottom = -16.0
 alignment = 1
 
 [node name="EditLevelName" type="HSplitContainer" parent="UI/Scale/EditorUI/LevelPropertiesOffset/LevelPropertiesPanel/LevelProperties"]
-margin_top = 42.0
 margin_right = 518.0
-margin_bottom = 71.0
+margin_bottom = 29.0
 
 [node name="Label" type="Label" parent="UI/Scale/EditorUI/LevelPropertiesOffset/LevelPropertiesPanel/LevelProperties/EditLevelName"]
 margin_top = 4.0
@@ -384,9 +383,9 @@ size_flags_vertical = 3
 text = "Welcome to Antarctica"
 
 [node name="EditLevelAuthor" type="HSplitContainer" parent="UI/Scale/EditorUI/LevelPropertiesOffset/LevelPropertiesPanel/LevelProperties"]
-margin_top = 75.0
+margin_top = 33.0
 margin_right = 518.0
-margin_bottom = 104.0
+margin_bottom = 62.0
 
 [node name="Label" type="Label" parent="UI/Scale/EditorUI/LevelPropertiesOffset/LevelPropertiesPanel/LevelProperties/EditLevelAuthor"]
 margin_top = 4.0
@@ -404,14 +403,14 @@ size_flags_vertical = 3
 text = "Marek Moeckel"
 
 [node name="HSeparator2" type="HSeparator" parent="UI/Scale/EditorUI/LevelPropertiesOffset/LevelPropertiesPanel/LevelProperties"]
-margin_top = 108.0
+margin_top = 66.0
 margin_right = 518.0
-margin_bottom = 138.0
+margin_bottom = 96.0
 
 [node name="EditLevelMusic" type="HSplitContainer" parent="UI/Scale/EditorUI/LevelPropertiesOffset/LevelPropertiesPanel/LevelProperties"]
-margin_top = 142.0
+margin_top = 100.0
 margin_right = 518.0
-margin_bottom = 171.0
+margin_bottom = 129.0
 
 [node name="Label" type="Label" parent="UI/Scale/EditorUI/LevelPropertiesOffset/LevelPropertiesPanel/LevelProperties/EditLevelMusic"]
 margin_top = 4.0
@@ -430,14 +429,14 @@ size_flags_vertical = 3
 text = "ChipDisko"
 
 [node name="HSeparator3" type="HSeparator" parent="UI/Scale/EditorUI/LevelPropertiesOffset/LevelPropertiesPanel/LevelProperties"]
-margin_top = 175.0
+margin_top = 133.0
 margin_right = 518.0
-margin_bottom = 205.0
+margin_bottom = 163.0
 
 [node name="EditLevelTimer" type="HBoxContainer" parent="UI/Scale/EditorUI/LevelPropertiesOffset/LevelPropertiesPanel/LevelProperties"]
-margin_top = 209.0
+margin_top = 167.0
 margin_right = 518.0
-margin_bottom = 238.0
+margin_bottom = 196.0
 
 [node name="TimerEnabled" type="CheckBox" parent="UI/Scale/EditorUI/LevelPropertiesOffset/LevelPropertiesPanel/LevelProperties/EditLevelTimer"]
 margin_right = 24.0
@@ -470,14 +469,14 @@ max_value = 999.0
 value = 300.0
 
 [node name="HSeparator4" type="HSeparator" parent="UI/Scale/EditorUI/LevelPropertiesOffset/LevelPropertiesPanel/LevelProperties"]
-margin_top = 242.0
+margin_top = 200.0
 margin_right = 518.0
-margin_bottom = 272.0
+margin_bottom = 230.0
 
 [node name="EditLevelGravity" type="HSplitContainer" parent="UI/Scale/EditorUI/LevelPropertiesOffset/LevelPropertiesPanel/LevelProperties"]
-margin_top = 276.0
+margin_top = 234.0
 margin_right = 518.0
-margin_bottom = 305.0
+margin_bottom = 263.0
 
 [node name="Label" type="Label" parent="UI/Scale/EditorUI/LevelPropertiesOffset/LevelPropertiesPanel/LevelProperties/EditLevelGravity"]
 margin_top = 4.0
@@ -497,9 +496,9 @@ max_value = 50.0
 value = 10.0
 
 [node name="EditLevelAutoscroll" type="HSplitContainer" parent="UI/Scale/EditorUI/LevelPropertiesOffset/LevelPropertiesPanel/LevelProperties"]
-margin_top = 309.0
+margin_top = 267.0
 margin_right = 518.0
-margin_bottom = 338.0
+margin_bottom = 296.0
 
 [node name="Label" type="Label" parent="UI/Scale/EditorUI/LevelPropertiesOffset/LevelPropertiesPanel/LevelProperties/EditLevelAutoscroll"]
 margin_top = 4.0
@@ -647,7 +646,7 @@ margin_bottom = -10.0
 scroll_vertical_enabled = false
 
 [node name="LayersContainer" type="HBoxContainer" parent="UI/Scale/EditorUI/LayersPanelOffset/LayersPanel/ScrollContainer"]
-margin_right = 911.0
+margin_right = 271.0
 margin_bottom = 100.0
 size_flags_horizontal = 3
 size_flags_vertical = 3

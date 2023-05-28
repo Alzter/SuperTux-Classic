@@ -1,7 +1,7 @@
 [gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://scenes/master/Level.gd" type="Script" id=1]
-[ext_resource path="res://scenes/layers/Background/CaveBackgroundDark.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/layers/Background/CaveDark.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/shaders/Overlay.gdshader" type="Shader" id=3]
 [ext_resource path="res://scenes/master/ObjectMap.tscn" type="PackedScene" id=4]
 [ext_resource path="res://scenes/layers/Particles/Fog.tscn" type="PackedScene" id=5]
@@ -9,6 +9,7 @@
 [ext_resource path="res://scenes/layers/Particles/CloudsDark.tscn" type="PackedScene" id=7]
 [ext_resource path="res://scenes/layers/Ambience.tscn" type="PackedScene" id=8]
 [ext_resource path="res://sounds/ambience_loops/AmbienceCave.mp3" type="AudioStream" id=9]
+
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 3 )

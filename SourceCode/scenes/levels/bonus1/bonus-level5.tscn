@@ -5,7 +5,7 @@
 [ext_resource path="res://scenes/layers/TileMap.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/master/ObjectMap.tscn" type="PackedScene" id=4]
 [ext_resource path="res://scenes/layers/Particles/Snow.tscn" type="PackedScene" id=5]
-[ext_resource path="res://scenes/layers/Background/IceMountainsBackgroundFog.tscn" type="PackedScene" id=6]
+[ext_resource path="res://scenes/layers/Background/IceMountainsFoggy.tscn" type="PackedScene" id=6]
 
 [node name="Level" type="Node2D"]
 position = Vector2( 1, 0 )

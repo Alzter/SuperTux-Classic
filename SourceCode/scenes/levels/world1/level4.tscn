@@ -3,7 +3,7 @@
 [ext_resource path="res://scenes/master/Level.gd" type="Script" id=1]
 [ext_resource path="res://scenes/master/ObjectMap.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/layers/TileMap.tscn" type="PackedScene" id=3]
-[ext_resource path="res://scenes/layers/Background/SnowBackground.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scenes/layers/Background/Snow.tscn" type="PackedScene" id=4]
 
 [sub_resource type="Shader" id=7]
 code = "// NOTE: Shader automatically converted from Godot Engine 3.4.4.stable's CanvasItemMaterial.
