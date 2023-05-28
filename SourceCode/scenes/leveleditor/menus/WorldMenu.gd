@@ -7,6 +7,7 @@ onready var button_back = $VBoxContainer/Back
 onready var label_world_name = $VBoxContainer/WorldName
 
 onready var dialog_open_level = $SelectLevelDialog
+onready var dialog_edit_world_properties = $EditWorldMenu
 
 func _on_WorldMenu_about_to_show():
 	if !UserLevels.current_world:
@@ -14,10 +15,14 @@ func _on_WorldMenu_about_to_show():
 		push_error("Error creating World menu dialog: No user world was specified to open in UserLevels")
 		return
 	
-	var world_name = UserLevels.get_world_name()
-	label_world_name.bbcode_text = "[center][wave]" + world_name
+	get_world_attributes()
 	
 	button_open_level.grab_focus()
+
+func get_world_attributes():
+	if !UserLevels.current_world: return
+	var world_name = UserLevels.get_world_name()
+	label_world_name.bbcode_text = "[center][wave]" + world_name
 
 func _on_Back_pressed():
 	hide()
@@ -34,7 +39,10 @@ func _on_CreateLevel_pressed():
 		pass
 
 func _on_EditWorldProperties_pressed():
-	pass # Replace with function body.
+	dialog_edit_world_properties.popup()
 
 func _on_SelectLevelDialog_popup_hide():
 	button_open_level.grab_focus()
+
+func _on_EditWorldMenu_hide():
+	get_world_attributes()

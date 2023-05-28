@@ -1,11 +1,11 @@
 [gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://theme/FontBig.tres" type="DynamicFont" id=1]
-[ext_resource path="res://scenes/leveleditor/menus/CreateWorld.gd" type="Script" id=2]
-[ext_resource path="res://theme/default_theme.tres" type="Theme" id=3]
-[ext_resource path="res://theme/FontGiant.tres" type="DynamicFont" id=4]
+[ext_resource path="res://scenes/leveleditor/menus/CreateWorld.gd" type="Script" id=1]
+[ext_resource path="res://theme/FontGiant.tres" type="DynamicFont" id=2]
+[ext_resource path="res://theme/FontBig.tres" type="DynamicFont" id=3]
+[ext_resource path="res://theme/default_theme.tres" type="Theme" id=4]
 
-[node name="CreateWorldMenu" type="PopupDialog"]
+[node name="EditWorldMenu" type="PopupDialog"]
 visible = true
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -13,8 +13,9 @@ margin_left = 20.0
 margin_top = 15.0
 margin_right = -20.0
 margin_bottom = -15.0
-theme = ExtResource( 3 )
-script = ExtResource( 2 )
+theme = ExtResource( 4 )
+script = ExtResource( 1 )
+is_edit_world_menu = true
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 anchor_right = 1.0
@@ -28,10 +29,10 @@ custom_constants/separation = 15
 [node name="Label" type="RichTextLabel" parent="VBoxContainer"]
 margin_right = 513.0
 margin_bottom = 30.0
-custom_fonts/normal_font = ExtResource( 1 )
+custom_fonts/normal_font = ExtResource( 3 )
 bbcode_enabled = true
-bbcode_text = "[center][wave]Create World"
-text = "Create World"
+bbcode_text = "[center][wave]Edit World Properties"
+text = "Edit World Properties"
 fit_content_height = true
 
 [node name="HSeparator" type="HSeparator" parent="VBoxContainer"]
@@ -71,7 +72,7 @@ margin_right = 513.0
 margin_bottom = 99.0
 rect_min_size = Vector2( 0, 42 )
 focus_neighbour_top = NodePath("../WorldName")
-focus_neighbour_bottom = NodePath("../../CreateWorldButton")
+focus_neighbour_bottom = NodePath("../../ConfirmEditProperties")
 
 [node name="Label" type="Label" parent="VBoxContainer/WorldProperties/AuthorName"]
 margin_top = 10.0
@@ -89,28 +90,18 @@ size_flags_horizontal = 3
 [node name="SpaceFiller" type="Control" parent="VBoxContainer"]
 margin_top = 184.0
 margin_right = 513.0
-margin_bottom = 269.0
+margin_bottom = 334.0
 size_flags_vertical = 3
 
-[node name="CreateWorldButton" type="Button" parent="VBoxContainer"]
-margin_top = 284.0
-margin_right = 513.0
-margin_bottom = 334.0
-rect_min_size = Vector2( 0, 50 )
-focus_neighbour_top = NodePath("../WorldProperties/AuthorName")
-focus_neighbour_bottom = NodePath("../Back")
-text = "Create World"
-
-[node name="Back" type="Button" parent="VBoxContainer"]
+[node name="ConfirmEditProperties" type="Button" parent="VBoxContainer"]
 margin_top = 349.0
 margin_right = 513.0
 margin_bottom = 399.0
 rect_min_size = Vector2( 0, 50 )
-focus_neighbour_top = NodePath("../CreateWorldButton")
-text = "Back"
+focus_neighbour_top = NodePath("../WorldProperties/AuthorName")
+text = "OK"
 
 [node name="ErrorDialog" type="PopupDialog" parent="."]
-visible = true
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 54.0
@@ -130,7 +121,7 @@ margin_top = 67.0
 margin_right = 364.0
 margin_bottom = 161.0
 custom_colors/default_color = Color( 1, 0, 0, 1 )
-custom_fonts/normal_font = ExtResource( 4 )
+custom_fonts/normal_font = ExtResource( 2 )
 bbcode_enabled = true
 bbcode_text = "[shake][center]Error!"
 text = "Error!"
@@ -142,18 +133,6 @@ margin_right = 364.0
 margin_bottom = 195.0
 
 [node name="Label" type="Label" parent="ErrorDialog/VBoxContainer"]
-visible = false
-margin_top = 155.0
-margin_right = 364.0
-margin_bottom = 239.0
-text = "Error creating new world!
-
-The world name may already be taken."
-align = 1
-valign = 1
-autowrap = true
-
-[node name="Label2" type="Label" parent="ErrorDialog/VBoxContainer"]
 margin_top = 199.0
 margin_right = 364.0
 margin_bottom = 220.0
@@ -177,7 +156,6 @@ text = "OK"
 [connection signal="about_to_show" from="." to="." method="_on_CreateWorldMenu_about_to_show"]
 [connection signal="text_changed" from="VBoxContainer/WorldProperties/WorldName/WorldNameEdit" to="." method="_on_WorldNameEdit_text_changed"]
 [connection signal="text_changed" from="VBoxContainer/WorldProperties/AuthorName/AuthorNameEdit" to="." method="_on_AuthorNameEdit_text_changed"]
-[connection signal="pressed" from="VBoxContainer/CreateWorldButton" to="." method="_on_CreateWorldButton_pressed"]
-[connection signal="pressed" from="VBoxContainer/Back" to="." method="_on_Back_pressed"]
+[connection signal="pressed" from="VBoxContainer/ConfirmEditProperties" to="." method="_on_ConfirmEditProperties_pressed"]
 [connection signal="about_to_show" from="ErrorDialog" to="." method="_on_ErrorDialog_about_to_show"]
 [connection signal="pressed" from="ErrorDialog/VBoxContainer/ErrorEscape" to="." method="_on_ErrorEscape_pressed"]

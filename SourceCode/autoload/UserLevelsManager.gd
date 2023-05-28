@@ -13,6 +13,10 @@ var user_worlds: Dictionary = {}
 var current_world = null
 var current_level = null
 
+func reload_user_worlds():
+	unload_user_worlds()
+	load_user_worlds()
+
 func load_user_worlds():
 	unload_user_worlds()
 	
@@ -117,6 +121,36 @@ func create_user_world(world_name : String, author_name : String, create_worldma
 		else:
 			push_error(str("Error creating User World data file at path: " + str(world_data_file) + ", Error code: " + str(world_data_file)))
 			return world_data_file
+
+
+# Change the name / author of an existing user world
+func modify_user_world(world_name : String, author_name : String, world_folder_name : String = current_world) -> int:
+	var world_directory = user_worlds_directory + world_folder_name
+	var dir = Directory.new()
+	
+	# Ensure the world exists before trying to modify it.
+	if !dir.dir_exists(world_directory):
+		push_error("Error modifying user world - no world exists under name: " + world_folder_name)
+		return ERR_DOES_NOT_EXIST
+	
+	var world_data_file_path = world_directory + "/" + world_data_file
+	
+	# Load the contrib data file for the world.
+	var file = File.new()
+	var world_data_file = file.open(world_data_file_path, file.WRITE)
+	
+	# If we can successfully open this file:
+	if world_data_file == OK:
+		var world_data = _create_world_data(world_name, author_name)
+		
+		file.store_var(world_data)
+		file.close()
+		reload_user_worlds()
+		
+		return OK
+	else:
+		push_error("Error modifying world data file for user world.")
+		return world_data_file
 
 func unload_user_worlds():
 	user_worlds = {}
