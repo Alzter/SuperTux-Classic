@@ -5,8 +5,7 @@ extends Control
 # The Editor UI gets smaller when the screen resolution is lower than this
 export var target_resolution = Vector2(1000, 500)
 
-export var cache_level_directory = "user://leveleditor/"
-export var cache_level_filename = "cache.tscn"
+var cache_level = null
 
 export var unselected_tilemap_opacity = 0.3
 
@@ -34,7 +33,7 @@ onready var level_properties_panel = $UI/Scale/EditorUI/LevelPropertiesOffset/Le
 
 export var layer_button_scene : PackedScene
 
-onready var cache_level_path = cache_level_directory + cache_level_filename
+#onready var cache_level_path = cache_level_directory + cache_level_filename
 
 onready var edit_layer_dialog = $UI/Scale/EditorUI/EditLayerDialog
 onready var pause_menu = $PauseMenu
@@ -128,7 +127,11 @@ func _deferred_enter_edit_mode():
 	editor_camera.current = true
 	
 	if !level: return
-	load_level_from_path(cache_level_path)
+	
+	if cache_level:
+		var level_object = cache_level.instance()
+		call_deferred("load_level_from_object", level_object)
+	
 	Scoreboard.hide()
 	Scoreboard.level_timer.paused = true
 	if ui_editor: ui_editor.show()
@@ -183,9 +186,14 @@ func initialise_level(level_object):
 
 func create_level_cache():
 	make_all_tilemaps_opaque()
-	var dir = Directory.new()
-	dir.make_dir_recursive(cache_level_directory)
-	Global.save_node_to_directory(level, cache_level_path)
+	
+	var level_packedscene = PackedScene.new()
+	level_packedscene.pack(level)
+	cache_level = level_packedscene
+	
+	#var dir = Directory.new()
+	#dir.make_dir_recursive(cache_level_directory)
+	#Global.save_node_to_directory(level, cache_level_path)
 	update_tilemap_opacity()
 
 func save_level():

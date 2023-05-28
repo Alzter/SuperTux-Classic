@@ -21,6 +21,8 @@ func _on_WorldMenu_about_to_show():
 
 func get_world_attributes():
 	if !UserLevels.current_world: return
+	if !label_world_name: return
+	
 	var world_name = UserLevels.get_world_name()
 	label_world_name.bbcode_text = "[center][wave]" + world_name
 
