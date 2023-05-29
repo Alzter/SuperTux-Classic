@@ -4,6 +4,7 @@
 
 [node name="ClickHitbox" type="Area2D"]
 pause_mode = 2
+priority = 128.0
 script = ExtResource( 1 )
 
 [connection signal="input_event" from="." to="." method="_on_ClickHitbox_input_event"]

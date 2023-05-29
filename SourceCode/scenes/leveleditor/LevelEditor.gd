@@ -441,5 +441,4 @@ func pause_toggled(is_paused : bool):
 
 func object_right_clicked(object : Node):
 	if !object: return
-	print("aSDF")
 	print(object)
