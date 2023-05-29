@@ -18,7 +18,6 @@ export var extro_level_file_path = "" # Upon clearing the level, load into this 
 export var editor_params = ["level_file_path", "is_teleporter", "message", "invisible", "extro_level_file_path"]
 
 func _ready():
-	$ClickHitbox.connect("left_clicked", self, "clicked")
 	_update_cleared_state(level_cleared)
 
 func _update_cleared_state(new_value):
@@ -53,6 +52,3 @@ func activate(player, player_position : Vector2, stop_direction : Vector2):
 			WorldmapManager.extro_level = null
 		
 		Global.goto_level(level_file_path)
-
-func clicked():
-	print("CLICK")

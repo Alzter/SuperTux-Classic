@@ -48,6 +48,8 @@ signal options_data_created
 signal player_died
 signal level_cleared
 
+signal object_right_clicked
+
 func _ready():
 	self.gravity = 1
 	var root = get_tree().get_root()
@@ -311,3 +313,7 @@ func _cache_level_attribute(level_filepath : String, attribute_to_get : String, 
 	else:
 		var attribute = {attribute_to_get : attribute_value}
 		level_attributes_cache[level_filepath] = attribute
+
+func object_right_clicked(object : Node):
+	print(object)
+	emit_signal("object_right_clicked", object)

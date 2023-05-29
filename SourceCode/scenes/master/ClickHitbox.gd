@@ -11,5 +11,6 @@ func _on_ClickHitbox_input_event(viewport, event, shape_idx):
 			BUTTON_RIGHT: emit_signal("right_clicked")
 			BUTTON_MIDDLE: emit_signal("middle_clicked")
 
-func _on_ClickHitbox_mouse_entered():
-	print("FUCK")
+
+func _on_ClickHitbox_right_clicked():
+	Global.object_right_clicked(owner)
