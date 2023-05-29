@@ -13,4 +13,5 @@ func _on_ClickHitbox_input_event(viewport, event, shape_idx):
 
 
 func _on_ClickHitbox_right_clicked():
+	#print("SADF")
 	Global.object_right_clicked(owner)

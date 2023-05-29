@@ -83,6 +83,8 @@ func _ready():
 	
 	connect("level_loaded", level_properties_panel, "appear")
 	
+	Global.connect("object_right_clicked", self, "object_right_clicked")
+	
 	get_tree().paused = true
 
 func _process(delta):
@@ -432,5 +434,12 @@ func add_undo_state():
 	#print("Add undo state")
 	#print(undo_stack)
 
+
 func pause_toggled(is_paused : bool):
 	if ui_editor: ui_editor.visible = !is_paused and edit_mode
+
+
+func object_right_clicked(object : Node):
+	if !object: return
+	print("aSDF")
+	print(object)

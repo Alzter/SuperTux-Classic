@@ -315,5 +315,4 @@ func _cache_level_attribute(level_filepath : String, attribute_to_get : String, 
 		level_attributes_cache[level_filepath] = attribute
 
 func object_right_clicked(object : Node):
-	print(object)
 	emit_signal("object_right_clicked", object)

@@ -284,15 +284,18 @@ layer = 128
 [node name="Scale" type="Control" parent="UI"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+mouse_filter = 2
 theme = ExtResource( 13 )
 
 [node name="EditorUI" type="Control" parent="UI/Scale"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+mouse_filter = 2
 
 [node name="MouseDetector" type="Control" parent="UI/Scale/EditorUI"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+mouse_filter = 2
 
 [node name="Buttons" type="HBoxContainer" parent="UI/Scale/EditorUI"]
 margin_left = 16.0
