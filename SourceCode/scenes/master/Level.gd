@@ -40,6 +40,8 @@ export var worldmap_spawn = Vector2()
 export var worldmap_player_object : PackedScene
 export var level_height = 15
 
+onready var objects = get_node("Objects").get_children() if has_node("Objects") else null
+
 onready var custom_camera = get_node_or_null("Camera2D")
 
 signal level_ready

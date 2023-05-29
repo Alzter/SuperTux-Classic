@@ -59,6 +59,7 @@ margin_left = -16.0
 margin_top = -16.0
 margin_right = 80.0
 margin_bottom = 80.0
+mouse_filter = 2
 texture = ExtResource( 9 )
 
 [node name="Timer" type="Label" parent="Control/ClockCounter"]
@@ -81,6 +82,7 @@ margin_left = -80.0
 margin_top = -16.0
 margin_right = 16.0
 margin_bottom = 80.0
+mouse_filter = 2
 texture = ExtResource( 5 )
 
 [node name="Coins" type="Label" parent="Control/CoinCounter"]
@@ -98,6 +100,7 @@ align = 2
 clip_text = true
 
 [node name="GameOverScreen" parent="Control" instance=ExtResource( 8 )]
+mouse_filter = 2
 
 [node name="LifeCounter" type="Control" parent="Control"]
 anchor_top = 1.0

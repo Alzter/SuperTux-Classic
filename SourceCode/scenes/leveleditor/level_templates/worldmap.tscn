@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://scenes/master/Level.gd" type="Script" id=1]
 [ext_resource path="res://scenes/worldmap/Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/layers/TileMap.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/tilesets/WorldmapTiles.tres" type="TileSet" id=4]
 [ext_resource path="res://scenes/worldmap/LevelDotContainer.gd" type="Script" id=5]
+[ext_resource path="res://scenes/worldmap/LevelDot.tscn" type="PackedScene" id=6]
 
 [node name="Level" type="Node2D"]
 script = ExtResource( 1 )
@@ -15,6 +16,9 @@ worldmap_player_object = ExtResource( 2 )
 
 [node name="Objects" type="Node2D" parent="."]
 script = ExtResource( 5 )
+
+[node name="LevelDot" parent="Objects" instance=ExtResource( 6 )]
+position = Vector2( 144, 240 )
 
 [node name="TileMap" parent="." instance=ExtResource( 3 )]
 z_index = -10
