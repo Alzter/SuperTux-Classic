@@ -2,7 +2,8 @@ extends Node2D
 export var debug = false
 
 func _ready():
-	if debug:
+	print(Global.is_in_editor)
+	if debug or Global.is_in_editor:
 		for leveldot in get_children():
 			if !leveldot.is_teleporter:
 				leveldot.level_cleared = true
