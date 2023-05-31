@@ -13,9 +13,9 @@ export var message = "" # Message that appears when standing on the level dot
 
 export var invisible = false
 
-export var extro_level_file_path = "" # Upon clearing the level, load into this level.
+export var extro_level_file_path = "[LevelPath]" # Upon clearing the level, load into this level.
 
-export var editor_params = ["level_file_path", "is_teleporter", "message", "invisible", "extro_level_file_path"]
+export var editor_params = ["level_file_path", "extro_level_file_path", "message", "invisible"]
 
 func _ready():
 	_update_cleared_state(level_cleared)
@@ -52,7 +52,7 @@ func activate(player, player_position : Vector2, stop_direction : Vector2):
 		WorldmapManager.player_stop_direction = stop_direction
 		WorldmapManager.worldmap_level = Global.current_level_path
 		
-		if extro_level_file_path != "":
+		if extro_level_file_path != "" and extro_level_file_path != Global.empty_level_path_string:
 			WorldmapManager.extro_level = extro_level_file_path
 		else:
 			WorldmapManager.extro_level = null
