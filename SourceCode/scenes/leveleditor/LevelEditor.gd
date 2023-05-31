@@ -381,7 +381,7 @@ func _get_level_objects(object_node = level, objects := []):
 
 func edit_layer(layer_object : Node):
 	add_undo_state()
-	edit_layer_dialog.appear(layer_object)
+	edit_layer_dialog.appear(layer_object, false)
 
 func delete_layer(layer_object : Node):
 	add_undo_state()
@@ -444,4 +444,4 @@ func object_right_clicked(object : Node):
 	
 	print(object)
 	add_undo_state()
-	edit_layer_dialog.appear(object)
+	edit_layer_dialog.appear(object, true)
