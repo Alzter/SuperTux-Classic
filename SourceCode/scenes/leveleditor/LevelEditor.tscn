@@ -263,11 +263,13 @@ anims/red = SubResource( 12 )
 visible = false
 use_parent_material = true
 texture = ExtResource( 3 )
+offset = Vector2( 0, -8 )
 
 [node name="TuxWorldmapSmall" type="Sprite" parent="EditorCamera/TuxSprite"]
 visible = false
 use_parent_material = true
 texture = ExtResource( 4 )
+offset = Vector2( 0, -8 )
 
 [node name="TuxBig" type="Sprite" parent="EditorCamera/TuxSprite"]
 visible = false

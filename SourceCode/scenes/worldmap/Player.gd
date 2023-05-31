@@ -210,14 +210,13 @@ func set_current_level_dot(new_value, sound = true):
 	Scoreboard.clear_message()
 	
 	if new_value:
+		if current_level_dot.message != "":
+			Scoreboard.display_message(current_level_dot.message)
 		
-		if current_level_dot.level_file_path != "":
+		elif current_level_dot.level_file_path != "":
 			var level_path = current_level_dot.level_file_path
 			var level_name = Global.get_level_attribute(level_path, "level_title")
 			Scoreboard.display_message(level_name)
-		
-		elif current_level_dot.message != "":
-			Scoreboard.display_message(current_level_dot.message)
 		
 		if sound: sfx.play("LevelDot")
 

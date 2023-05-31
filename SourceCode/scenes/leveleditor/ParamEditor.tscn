@@ -80,6 +80,7 @@ margin_left = 466.0
 margin_top = 0.0
 margin_right = 466.0
 margin_bottom = 24.0
+allow_deleting_levels_or_worlds = false
 include_worldmap = false
 
 [connection signal="text_changed" from="LineEdit" to="." method="_on_LineEdit_text_changed"]
