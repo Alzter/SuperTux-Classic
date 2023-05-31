@@ -438,8 +438,10 @@ func pause_toggled(is_paused : bool):
 	if ui_editor: ui_editor.visible = !is_paused and edit_mode
 
 func object_right_clicked(object : Node):
+	if !edit_mode: return
 	if edit_layer_dialog.visible: return
 	if !object: return
+	
 	print(object)
 	add_undo_state()
 	edit_layer_dialog.appear(object)

@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://theme/default_theme.tres" type="Theme" id=1]
 [ext_resource path="res://scenes/leveleditor/ParamEditor.gd" type="Script" id=2]
+[ext_resource path="res://scenes/leveleditor/menus/OpenLevel.tscn" type="PackedScene" id=3]
 
 [node name="ParamEditor" type="HSplitContainer"]
 margin_right = 466.0
@@ -11,7 +12,7 @@ script = ExtResource( 2 )
 
 [node name="Label" type="Label" parent="."]
 margin_top = 1.0
-margin_right = 466.0
+margin_right = 454.0
 margin_bottom = 22.0
 size_flags_horizontal = 3
 text = "Parameter Name"
@@ -70,6 +71,16 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 text = "Welcome to Antarctica"
 clip_text = true
+
+[node name="SelectLevelDialog" parent="." instance=ExtResource( 3 )]
+visible = true
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 466.0
+margin_top = 0.0
+margin_right = 466.0
+margin_bottom = 24.0
+include_worldmap = false
 
 [connection signal="text_changed" from="LineEdit" to="." method="_on_LineEdit_text_changed"]
 [connection signal="value_changed" from="SpinBox" to="." method="_on_SpinBox_value_changed"]

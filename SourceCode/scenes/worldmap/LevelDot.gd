@@ -46,7 +46,7 @@ func activate(player, player_position : Vector2, stop_direction : Vector2):
 		if Global.is_in_editor: return
 		
 		# Don't play the level if the file path doesn't point to a level
-		if !Global.is_string_level_path(level_file_path): return
+		if !Global.string_is_scene_path(level_file_path): return
 		
 		WorldmapManager.worldmap_player_position = player_position
 		WorldmapManager.player_stop_direction = stop_direction

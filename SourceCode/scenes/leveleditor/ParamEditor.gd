@@ -11,6 +11,7 @@ onready var color_edit = $ColorPickerButton
 onready var bool_edit = $CheckBox
 onready var dropdown_edit = $OptionButton
 onready var level_path_edit = $SelectLevel
+onready var dialog_select_level = $SelectLevelDialog
 
 var dropdown_values : Dictionary = {}
 
@@ -33,6 +34,8 @@ func init(owner_object : Node, param_name : String, param_type : int):
 	parameter_type = param_type
 
 func _ready():
+	dialog_select_level.connect("level_opened", self, "level_selected")
+	
 	if !parameter_name or !parameter_type or !parameter_owner_object:
 		push_error("Error creating Parameter Editor. Missing parameter name, type, or owner object.")
 		queue_free()
@@ -68,9 +71,11 @@ func _update_parameter_value():
 			# IF THE STRING IS A PATH TO A LEVEL (e.g. "res://scenes/levels/world1/level1.tscn")
 			# We treat it differently to a regular string and allow the user to choose a level
 			# from a dropdown.
-			if Global.is_string_level_path(p_value):
-				var level_name = Global.get_level_attribute(p_value, "level_title")
-				level_path_edit.text = level_name
+			print(p_value)
+			print(Global.string_is_scene_path(p_value))
+			
+			if Global.string_is_scene_path(p_value):
+				_update_level_selector_text()
 				param_editor_ui_node = level_path_edit
 			else:
 				string_edit.text = p_value
@@ -157,4 +162,15 @@ func _on_OptionButton_item_selected(index):
 		push_error("Error getting value for dropdown item with index " + str(index))
 
 func _on_SelectLevel_pressed():
-	pass # Replace with function body.
+	dialog_select_level.popup_centered_ratio()
+
+func level_selected(level_filepath : String):
+	_set_parameter_value(level_filepath)
+	_update_level_selector_text()
+
+func _update_level_selector_text():
+	var level_path = _get_parameter_value()
+	var level_name = Global.get_level_attribute(level_path, "level_title")
+	
+	if level_name:
+		level_path_edit.text = level_name

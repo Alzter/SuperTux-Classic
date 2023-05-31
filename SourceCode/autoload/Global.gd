@@ -17,6 +17,8 @@
 
 extends Node
 
+const empty_level_path_string = "[LevelPath]"
+
 var title_screen_scene = "res://scenes/menus/TitleScreen.tscn"
 var level_editor_menu_scene = "res://scenes/leveleditor/menus/MainMenu.tscn"
 var level_editor_scene = "res://scenes/leveleditor/LevelEditor.tscn"
@@ -90,6 +92,10 @@ func goto_level_editor_main_menu():
 	goto_scene(level_editor_menu_scene)
 
 func goto_scene(path, loading_level = false):
+	if !string_is_scene_path(path):
+		push_error("Scene not found at path: " + path)
+		return
+	
 	call_deferred("_deferred_goto_scene", path, loading_level)
 	yield(self, "level_loaded")
 
@@ -237,6 +243,10 @@ func list_files_in_directory(path):
 
 # Horrible jank. Will break easily. JANK IT UP!!
 func load_level_editor_with_level(filepath_of_level_to_edit : String):
+	if !string_is_scene_path(filepath_of_level_to_edit):
+		push_error("Level not found at path: " + filepath_of_level_to_edit)
+		return
+	
 	yield(call("goto_scene", level_editor_scene), "completed")
 	
 	UserLevels.current_level = filepath_of_level_to_edit
@@ -246,7 +256,8 @@ func load_level_editor_with_level(filepath_of_level_to_edit : String):
 
 # Returns true if a string is a path to a level file.
 # E.g. "res://scenes/levels/world1/level1.tscn"
-func is_string_level_path(string : String):
+func string_is_scene_path(string : String):
+	if string == empty_level_path_string: return true
 	
 	# If the string specifies a file path to a scene file
 	if string.ends_with(".tscn"):
@@ -259,6 +270,9 @@ func is_string_level_path(string : String):
 
 # Returns level attributes from whichever STC level you specify the directory of.
 func get_level_attribute(level_filepath : String, attribute_to_get : String):
+	if level_filepath == empty_level_path_string:
+		return "Select a level..."
+	
 	# If we have already cached the level attribute, just use that instead and
 	# don't waste time and memory loading a level scene.
 	

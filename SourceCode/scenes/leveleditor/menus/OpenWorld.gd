@@ -4,22 +4,32 @@ onready var open_world_button = get_node_or_null("VBoxContainer/OpenWorldButton"
 onready var open_level_button = get_node_or_null("VBoxContainer/OpenLevelButton")
 onready var back_button = $VBoxContainer/Back
 
+export var allow_deleting_levels_or_worlds = true
 export var is_level_select = false
 
 onready var button_list = get_node_or_null("VBoxContainer/ScrollContainer/ButtonList")
-onready var worldmap_container = get_node_or_null("VBoxContainer/WorldmapContainer")
+onready var worldmap_button = get_node_or_null("VBoxContainer/WorldmapSelect")
+onready var worldmap_container = get_node_or_null("VBoxContainer/WorldmapSelect/WorldmapContainer")
 
 onready var world_menu = get_node_or_null("WorldMenu")
 
 onready var delete_world_dialog = get_node_or_null("DeleteWorldDialog")
 onready var delete_level_dialog = get_node_or_null("DeleteLevelDialog")
 
+export var include_worldmap = true
+
 export var button_scene : PackedScene
 
 var selected_world = ""
 var selected_level = ""
 
+signal level_opened
+
 func _on_Menu_about_to_show():
+	if is_level_select:
+		if worldmap_button:
+			worldmap_button.visible = include_worldmap
+	
 	selected_world = ""
 	selected_level = ""
 	_clear_button_list()
@@ -37,6 +47,7 @@ func _populate_world_list():
 	
 	for world in UserLevels.user_worlds:
 		var button = button_scene.instance()
+		button.deleteable = allow_deleting_levels_or_worlds
 		button_list.add_child(button)
 		button.owner = button_list
 		button.connect("world_selected", self, "world_selected")
@@ -63,6 +74,7 @@ func _add_level_button(level_filepath, is_worldmap = false):
 	var container = button_list if !is_worldmap else worldmap_container
 	
 	var button = button_scene.instance()
+	button.deleteable = allow_deleting_levels_or_worlds
 	container.add_child(button)
 	button.owner = container
 	button.connect("level_selected", self, "level_selected")
@@ -110,7 +122,8 @@ func world_opened(selected_world_folder_name):
 	world_menu.popup()
 
 func level_opened(level_filepath):
-	Global.load_level_editor_with_level(level_filepath)
+	emit_signal("level_opened", level_filepath)
+	hide()
 
 func world_delete_prompt(selected_world_folder_name):
 	if !delete_world_dialog: return

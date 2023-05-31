@@ -1,7 +1,7 @@
 extends Control
 
 onready var anim_player = $RetractAnimation
-onready var add_layer_dialog = $AddLayerDialog
+onready var add_layer_dialog = get_node_or_null("AddLayerDialog")
 
 export var retracted = false
 
@@ -12,5 +12,6 @@ func _on_RetractTab_pressed():
 
 func _on_AddLayerButton_pressed():
 	if !owner.level: return
+	if !add_layer_dialog: return
 	add_layer_dialog.popup()
 

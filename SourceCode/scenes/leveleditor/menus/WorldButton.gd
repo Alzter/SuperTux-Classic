@@ -4,6 +4,8 @@ export var is_level = false
 
 export var world_folder_name = "" setget _update_world_folder
 export var level_filepath = "" setget _update_level_filepath
+export var deleteable = true
+
 var world_name = ""
 var world_author = ""
 var world_levels = []
@@ -31,6 +33,7 @@ func init_world(world_folder_name : String):
 	_update_world_folder(world_folder_name)
 
 func _ready():
+	if !deleteable: if delete_button: delete_button.hide()
 	_on_Button_toggled(false)
 
 func _update_level_filepath(new_value):

@@ -9,6 +9,9 @@ onready var label_world_name = $VBoxContainer/WorldName
 onready var dialog_open_level = $SelectLevelDialog
 onready var dialog_edit_world_properties = $EditWorldMenu
 
+func _ready():
+	dialog_open_level.connect("level_opened", self, "level_opened")
+
 func _on_WorldMenu_about_to_show():
 	if !UserLevels.current_world:
 		hide()
@@ -48,3 +51,6 @@ func _on_SelectLevelDialog_popup_hide():
 
 func _on_EditWorldMenu_hide():
 	get_world_attributes()
+
+func level_opened(level_filepath : String):
+	Global.load_level_editor_with_level(level_filepath)
