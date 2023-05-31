@@ -1,11 +1,36 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://scenes/master/ClickHitbox.gd" type="Script" id=1]
+[ext_resource path="res://images/particles/invincible_sparkle.png" type="Texture" id=2]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 64, 64 )
 
 [node name="ClickHitbox" type="Area2D"]
 pause_mode = 2
-priority = 128.0
+collision_layer = 0
+collision_mask = 0
+input_pickable = false
+monitoring = false
+monitorable = false
 script = ExtResource( 1 )
 
-[connection signal="input_event" from="." to="." method="_on_ClickHitbox_input_event"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 1 )
+
+[node name="Camera2D" type="Camera2D" parent="."]
+offset = Vector2( 99, 99 )
+current = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="Sprite" type="Sprite" parent="CanvasLayer"]
+scale = Vector2( 2, 2 )
+texture = ExtResource( 2 )
+
+[node name="Sprite2" type="Sprite" parent="CanvasLayer"]
+scale = Vector2( 2, 2 )
+texture = ExtResource( 2 )
+
 [connection signal="right_clicked" from="." to="." method="_on_ClickHitbox_right_clicked"]
