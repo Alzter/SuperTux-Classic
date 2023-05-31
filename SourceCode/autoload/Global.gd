@@ -244,6 +244,19 @@ func load_level_editor_with_level(filepath_of_level_to_edit : String):
 	editor.call_deferred("load_level_from_path", filepath_of_level_to_edit)
 	#editor.load_level_from_path(filepath_of_level_to_edit)
 
+# Returns true if a string is a path to a level file.
+# E.g. "res://scenes/levels/world1/level1.tscn"
+func is_string_level_path(string : String):
+	
+	# If the string specifies a file path to a scene file
+	if string.ends_with(".tscn"):
+		
+		# If the file exists, return true.
+		var f = File.new()
+		return f.file_exists(string)
+	
+	return false
+
 # Returns level attributes from whichever STC level you specify the directory of.
 func get_level_attribute(level_filepath : String, attribute_to_get : String):
 	# If we have already cached the level attribute, just use that instead and

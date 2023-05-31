@@ -10,6 +10,7 @@ onready var string_edit = $LineEdit
 onready var color_edit = $ColorPickerButton
 onready var bool_edit = $CheckBox
 onready var dropdown_edit = $OptionButton
+onready var level_path_edit = $SelectLevel
 
 var dropdown_values : Dictionary = {}
 
@@ -17,7 +18,9 @@ onready var editor_nodes = [
 	number_edit,
 	string_edit,
 	color_edit,
-	bool_edit
+	bool_edit,
+	string_edit,
+	level_path_edit
 ]
 
 var param_editor_ui_node = null
@@ -62,8 +65,16 @@ func _update_parameter_value():
 			param_editor_ui_node = number_edit
 			
 		TYPE_STRING:
-			string_edit.text = p_value
-			param_editor_ui_node = string_edit
+			# IF THE STRING IS A PATH TO A LEVEL (e.g. "res://scenes/levels/world1/level1.tscn")
+			# We treat it differently to a regular string and allow the user to choose a level
+			# from a dropdown.
+			if Global.is_string_level_path(p_value):
+				var level_name = Global.get_level_attribute(p_value, "level_title")
+				level_path_edit.text = level_name
+				param_editor_ui_node = level_path_edit
+			else:
+				string_edit.text = p_value
+				param_editor_ui_node = string_edit
 			
 		TYPE_BOOL:
 			bool_edit.pressed = p_value
@@ -144,3 +155,6 @@ func _on_OptionButton_item_selected(index):
 		_set_parameter_value(dropdown_array)
 	else:
 		push_error("Error getting value for dropdown item with index " + str(index))
+
+func _on_SelectLevel_pressed():
+	pass # Replace with function body.
