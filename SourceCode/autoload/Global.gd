@@ -40,6 +40,8 @@ var privacy_policy_url = "https://github.com/Alzter/SuperTux-Classic/blob/main/P
 
 var level_attributes_cache = {}
 
+var is_in_editor = false setget , _get_is_in_editor
+
 signal level_loaded
 signal player_loaded
 signal level_ready # EMITS AFTER THE LEVEL TITLE CARD HAS DISAPPEARED
@@ -316,3 +318,6 @@ func _cache_level_attribute(level_filepath : String, attribute_to_get : String, 
 
 func object_right_clicked(object : Node):
 	emit_signal("object_right_clicked", object)
+
+func _get_is_in_editor():
+	return current_level != current_scene

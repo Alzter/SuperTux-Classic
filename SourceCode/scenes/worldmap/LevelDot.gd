@@ -42,6 +42,8 @@ func activate(player, player_position : Vector2, stop_direction : Vector2):
 		return
 	
 	elif level_file_path != "":
+		if Global.is_in_editor: return
+		
 		WorldmapManager.worldmap_player_position = player_position
 		WorldmapManager.player_stop_direction = stop_direction
 		WorldmapManager.worldmap_level = Global.current_level_path
