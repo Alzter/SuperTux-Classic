@@ -3,7 +3,7 @@ extends Node2D
 onready var sprite = $AnimatedSprite
 onready var sfx = $SFX
 
-export var level_file_path = ""
+export var level_file_path = "[LevelPath]"
 export var level_cleared = false setget _update_cleared_state
 
 export var is_teleporter = false

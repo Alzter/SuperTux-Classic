@@ -71,8 +71,6 @@ func _update_parameter_value():
 			# IF THE STRING IS A PATH TO A LEVEL (e.g. "res://scenes/levels/world1/level1.tscn")
 			# We treat it differently to a regular string and allow the user to choose a level
 			# from a dropdown.
-			print(p_value)
-			print(Global.string_is_scene_path(p_value))
 			
 			if Global.string_is_scene_path(p_value):
 				_update_level_selector_text()
