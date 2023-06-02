@@ -135,7 +135,7 @@ func world_delete_prompt(selected_world_folder_name):
 func level_delete_prompt(level_filename):
 	if !delete_level_dialog: return
 	
-	delete_level_dialog.init_level(selected_level)
+	delete_level_dialog.init_level(level_filename)
 	delete_level_dialog.popup()
 	delete_level_dialog.connect("delete_level", self, "delete_level")
 
