@@ -859,7 +859,6 @@ theme = ExtResource( 13 )
 text = "PLAY"
 
 [node name="PauseMenu" parent="." instance=ExtResource( 17 )]
-visible = false
 
 [connection signal="mouse_entered" from="UI/Scale/EditorUI/MouseDetector" to="." method="_on_MouseDetector_mouse_entered"]
 [connection signal="mouse_exited" from="UI/Scale/EditorUI/MouseDetector" to="." method="_on_MouseDetector_mouse_exited"]

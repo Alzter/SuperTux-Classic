@@ -12,6 +12,7 @@ var object_scenes_folder = null setget , _get_object_scenes_folder
 export var ui_scale_min_resolution = Vector2(1000, 500)
 
 var cache_level = null
+var is_paused = false
 
 export var unselected_tilemap_opacity = 0.3
 
@@ -468,7 +469,9 @@ func add_undo_state():
 	#print("Add undo state")
 	#print(undo_stack)
 
-func pause_toggled(is_paused : bool):
+func pause_toggled(paused : bool):
+	is_paused = paused
+	if is_paused: mouse_over_ui = true
 	if ui_editor: ui_editor.visible = !is_paused and edit_mode
 
 func object_clicked(object : Node, click_type : int):
@@ -500,7 +503,7 @@ func object_clicked(object : Node, click_type : int):
 				edit_layer_dialog.appear(object, true)
 
 func _get_can_place_tiles():
-	return !editor_camera.dragging_camera and !object_functions.dragged_object
+	return !editor_camera.dragging_camera and !object_functions.dragged_object and !is_paused
 
 func _get_object_scenes_folder():
 	if !level: return null
