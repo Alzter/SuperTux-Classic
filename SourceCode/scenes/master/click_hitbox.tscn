@@ -23,4 +23,6 @@ texture = ExtResource( 2 )
 scale = Vector2( 2, 2 )
 texture = ExtResource( 2 )
 
+[connection signal="left_clicked" from="." to="." method="_on_ClickHitbox_left_clicked"]
+[connection signal="middle_clicked" from="." to="." method="_on_ClickHitbox_middle_clicked"]
 [connection signal="right_clicked" from="." to="." method="_on_ClickHitbox_right_clicked"]

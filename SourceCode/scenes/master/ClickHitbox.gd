@@ -52,6 +52,11 @@ func _get_hitbox_screen_area():
 	
 	return screen_area
 
+func _on_ClickHitbox_left_clicked():
+	Global.object_clicked(owner, BUTTON_LEFT)
+
+func _on_ClickHitbox_middle_clicked():
+	Global.object_clicked(owner, BUTTON_MIDDLE)
+
 func _on_ClickHitbox_right_clicked():
-	#print("Right Click")
-	Global.object_right_clicked(owner)
+	Global.object_clicked(owner, BUTTON_RIGHT)

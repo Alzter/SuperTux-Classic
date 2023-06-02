@@ -52,7 +52,7 @@ signal options_data_created
 signal player_died
 signal level_cleared
 
-signal object_right_clicked
+signal object_clicked
 
 func _ready():
 	self.gravity = 1
@@ -343,8 +343,8 @@ func _cache_level_attribute(level_filepath : String, attribute_to_get : String, 
 		var attribute = {attribute_to_get : attribute_value}
 		level_attributes_cache[level_filepath] = attribute
 
-func object_right_clicked(object : Node):
-	emit_signal("object_right_clicked", object)
+func object_clicked(object : Node, click_type : int):
+	emit_signal("object_clicked", object, click_type)
 
 func _get_is_in_editor():
 	return current_level != current_scene

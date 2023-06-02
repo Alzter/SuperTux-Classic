@@ -12,6 +12,7 @@ export var unselected_tilemap_opacity = 0.3
 export var editor_layers_directory = "res://scenes/layers/"
 
 onready var tile_functions = $TileFunctions
+onready var object_functions = $ObjectFunctions
 onready var editor_camera = $EditorCamera
 
 onready var ui_scale = $UI/Scale
@@ -54,7 +55,7 @@ var current_tile_id = -1 setget _update_current_tile_id # The ID of the tile the
 
 var edit_mode = true
 
-var can_place_tiles = true
+var can_place_tiles = true setget , _get_can_place_tiles
 
 var mouse_over_ui = false
 
@@ -63,6 +64,8 @@ var layer_types = []
 var undo_stack = []
 
 signal undo_executed
+
+signal object_clicked
 
 func _ready():
 	layer_types = get_layer_types()
@@ -83,7 +86,7 @@ func _ready():
 	
 	connect("level_loaded", level_properties_panel, "appear")
 	
-	Global.connect("object_right_clicked", self, "object_right_clicked")
+	Global.connect("object_clicked", self, "object_clicked")
 	
 	get_tree().paused = true
 
@@ -264,15 +267,21 @@ func update_selected_object(new_value):
 	update_tilemap_opacity()
 	
 	if is_tilemap(selected_object):
+		object_functions.object_container = null
 		tile_functions.selected_tilemap = selected_object
 		tiles_container.show_tiles_from_tilemap(selected_object)
-	else:
+		
+	elif is_object_container(selected_object):
+		object_functions.object_container = selected_object
 		tile_functions.selected_tilemap = null
+		tiles_container.empty_tiles()
+	
+	else:
 		tiles_container.empty_tiles()
 
 func update_tilemap_opacity():
 	if selected_object and edit_mode:
-		if is_tilemap(selected_object) and !is_objectmap(selected_object):
+		if (is_tilemap(selected_object) or is_object_container(selected_object)) and !is_objectmap(selected_object):
 			make_non_selected_tilemaps_transparent()
 		else:
 			make_all_tilemaps_opaque()
@@ -286,21 +295,25 @@ func make_non_selected_tilemaps_transparent():
 			if selected_object != child:
 				child.modulate.a = unselected_tilemap_opacity
 			else: child.modulate.a = 1
+		elif is_object_container(child): child.modulate.a = 1
 
 func make_all_tilemaps_opaque():
 	for child in self.level_objects:
 		if !is_instance_valid(child): continue
-		if is_tilemap(child):
+		if is_tilemap(child) or is_object_container(child):
 			child.modulate.a = 1
 
 func is_tilemap(node):
 	return node is TileMap# and not node.is_in_group("objectmaps")
 
+func is_object_container(node):
+	return node is Node2D
+
 func is_objectmap(node):
 	return node is TileMap and node.is_in_group("objectmaps")
 
 func set_camera_drag(is_dragging = true):
-	can_place_tiles = !is_dragging
+	pass
 
 func update_selected_tile(selected_tile_id : int):
 	current_tile_id = selected_tile_id
@@ -377,6 +390,9 @@ func _get_level_objects(object_node = level, objects := []):
 		else:
 			objects.append(child)
 	
+	#for child in level_objects:
+	#	print(child.name)
+	
 	return objects
 
 func edit_layer(layer_object : Node):
@@ -437,11 +453,20 @@ func add_undo_state():
 func pause_toggled(is_paused : bool):
 	if ui_editor: ui_editor.visible = !is_paused and edit_mode
 
-func object_right_clicked(object : Node):
+func object_clicked(object : Node, click_type : int):
 	if !edit_mode: return
 	if edit_layer_dialog.visible: return
 	if !object: return
 	
-	print(object)
-	add_undo_state()
-	edit_layer_dialog.appear(object, true)
+	match click_type:
+		BUTTON_LEFT:
+			object_functions.grab_object(object)
+		
+		BUTTON_RIGHT:
+			add_undo_state()
+			edit_layer_dialog.appear(object, true)
+		
+		BUTTON_MIDDLE: return
+
+func _get_can_place_tiles():
+	return !editor_camera.dragging_camera and !object_functions.dragged_object
