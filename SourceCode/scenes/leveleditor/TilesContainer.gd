@@ -59,6 +59,13 @@ func show_object_scenes_in_folder(folder_name : String):
 	for file in object_files:
 		var object_resource = load(file)
 		
+		var is_object_allowed = true
+		var object = object_resource.instance()
+		print(object.name)
+		if object.is_in_group("players"): is_object_allowed = false
+		object.queue_free()
+		if !is_object_allowed: continue
+		
 		var object_button = object_button_scene.instance()
 		add_child(object_button)
 		object_button.set_owner(self)

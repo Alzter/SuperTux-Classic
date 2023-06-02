@@ -131,7 +131,7 @@ tracks/0/keys = {
 "values": [ Color( 0.0470588, 1, 0.172549, 1 ), Color( 1, 1, 1, 1 ) ]
 }
 
-[node name="Player" type="Node2D"]
+[node name="Player" type="Node2D" groups=["players", "worldmap"]]
 script = ExtResource( 4 )
 
 [node name="Control" type="Control" parent="."]

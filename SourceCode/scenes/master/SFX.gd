@@ -23,7 +23,7 @@ func play(sound_to_play):
 	# If the player object is playing this sound,
 	# Use "Small" equivalents for sounds where possible
 	# If Tux is small
-	if host.is_in_group("players"):
+	if host.is_in_group("players") and !host.is_in_group("worldmap"):
 		var player_is_small = host.state == host.states.SMALL
 		var has_small_sound = has_node(sound_to_play + "Small")
 		
