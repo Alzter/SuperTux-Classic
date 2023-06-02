@@ -2,8 +2,14 @@ extends Control
 
 #export var level_to_load = "res://scenes/levels/world1/level1.tscn"
 
+export var object_scene_folder_for_levels = "res://scenes/objects/"
+export var object_scene_folder_for_worldmaps = "res://scenes/worldmap/"
+
+# The folder which contains all scenes for the objects
+var object_scenes_folder = null setget , _get_object_scenes_folder
+
 # The Editor UI gets smaller when the screen resolution is lower than this
-export var target_resolution = Vector2(1000, 500)
+export var ui_scale_min_resolution = Vector2(1000, 500)
 
 var cache_level = null
 
@@ -243,7 +249,7 @@ func _on_EditToggle_pressed():
 # The Editor UI shrinks on smaller displays
 func window_resized():
 	# The Editor UI gets smaller when the screen resolution is lower than the target resolution
-	var scale = min(ResolutionManager.window_size.x / target_resolution.x, ResolutionManager.window_size.y / target_resolution.y)
+	var scale = min(ResolutionManager.window_size.x / ui_scale_min_resolution.x, ResolutionManager.window_size.y / ui_scale_min_resolution.y)
 	scale = min(scale, 1)
 	scale /= ResolutionManager.screen_shrink # Make editor UI immune to magnification
 	set_ui_scale(scale)
@@ -274,7 +280,7 @@ func update_selected_object(new_value):
 	elif is_object_container(selected_object):
 		object_functions.object_container = selected_object
 		tile_functions.selected_tilemap = null
-		tiles_container.empty_tiles()
+		tiles_container.show_object_scenes_in_folder(self.object_scenes_folder)
 	
 	else:
 		tiles_container.empty_tiles()
@@ -473,3 +479,9 @@ func object_clicked(object : Node, click_type : int):
 
 func _get_can_place_tiles():
 	return !editor_camera.dragging_camera and !object_functions.dragged_object
+
+func _get_object_scenes_folder():
+	if !level: return null
+	if !is_instance_valid(level): return null
+	
+	return object_scene_folder_for_worldmaps if level.is_worldmap else object_scene_folder_for_levels

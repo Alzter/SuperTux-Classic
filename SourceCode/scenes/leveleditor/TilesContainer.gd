@@ -47,6 +47,16 @@ func show_tiles_from_tilemap(tilemap : TileMap):
 		tile_button.tileset = current_tileset
 		tile_button.tile_id = tile
 
+# Display all object scenes within a directory
+func show_object_scenes_in_folder(folder_name : String):
+	var object_files = Global.get_all_scene_files_in_folder(folder_name)
+	
+	for file in object_files:
+		var object = load(file).instance()
+		print(object.name)
+		object.queue_free()
+
+
 # Empties all tiles in the tile container
 func empty_tiles():
 	current_tileset = null

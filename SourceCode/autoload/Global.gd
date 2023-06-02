@@ -348,3 +348,23 @@ func object_clicked(object : Node, click_type : int):
 
 func _get_is_in_editor():
 	return current_level != current_scene
+
+# Returns an array of file paths for all scene files found within a folder.
+func get_all_scene_files_in_folder(folder_name : String):
+	
+	# Add a / at the end of the folder name if it doesn't exist
+	if !folder_name.ends_with("/"): folder_name = folder_name + "/"
+	
+	var object_file_list = []
+	var dir = Directory.new()
+	
+	if !dir.dir_exists(folder_name): return null
+	else:
+		var object_files = Global.list_files_in_directory(folder_name)
+		
+		for file in object_files:
+			if file.ends_with(".tscn"):
+				var file_path = folder_name + file
+				object_file_list.append(file_path)
+	
+	return object_file_list
