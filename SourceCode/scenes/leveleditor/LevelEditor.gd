@@ -59,7 +59,7 @@ var selected_layer = null setget update_selected_layer
 var selected_layer_name = ""
 
 var current_tile_id = -1 setget _update_current_tile_id # The ID of the tile the user is currently using
-var current_object_resource = null # The Resource of the object the user currently has selected
+var current_object_resource = null setget _update_current_object_resource # The Resource of the object the user currently has selected
 
 var edit_mode = true
 
@@ -431,6 +431,10 @@ func _update_current_tile_id(new_value):
 	current_tile_id = new_value
 	tiles_container.update_selected_tile(current_tile_id)
 
+func _update_current_object_resource(new_value):
+	current_object_resource = new_value
+	tiles_container.update_selected_object(current_object_resource)
+
 func _on_SaveButton_pressed():
 	save_level()
 
@@ -469,21 +473,31 @@ func pause_toggled(is_paused : bool):
 
 func object_clicked(object : Node, click_type : int):
 	if !edit_mode: return
-	if edit_layer_dialog.visible: return
+	if mouse_over_ui: return
 	if !object: return
 	
-	match click_type:
-		BUTTON_LEFT:
-			object_functions.grab_object(object)
-		
-		BUTTON_RIGHT:
-			add_undo_state()
-			object_functions.delete_object(object)
-		
-		BUTTON_MIDDLE:
-			mouse_over_ui = true # Prevent the camera dragging input from registering when middle clicking objects
-			add_undo_state()
-			edit_layer_dialog.appear(object, true)
+	object_functions.can_place_objects = false
+	
+	if eyedropper_enabled and is_object_container(selected_layer):
+		var object_resource = load(object.filename)
+		if object_resource:
+			self.current_object_resource = object_resource
+			self.eyedropper_enabled = false
+	
+	else:
+		match click_type:
+			BUTTON_LEFT:
+				if eraser_enabled: object_functions.delete_object(object)
+				else:
+					object_functions.grab_object(object)
+			
+			BUTTON_RIGHT:
+				object_functions.delete_object(object)
+			
+			BUTTON_MIDDLE:
+				mouse_over_ui = true # Prevent the camera dragging input from registering when middle clicking objects
+				add_undo_state()
+				edit_layer_dialog.appear(object, true)
 
 func _get_can_place_tiles():
 	return !editor_camera.dragging_camera and !object_functions.dragged_object

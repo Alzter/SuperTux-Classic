@@ -44,6 +44,8 @@ var level_attributes_cache = {}
 
 var is_in_editor = false setget , _get_is_in_editor
 
+#var hovered_objects = []
+
 signal level_loaded
 signal player_loaded
 signal level_ready # EMITS AFTER THE LEVEL TITLE CARD HAS DISAPPEARED
