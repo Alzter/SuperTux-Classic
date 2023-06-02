@@ -154,6 +154,7 @@ func is_tile_position_legal(tile_position : Vector2):
 func _draw():
 	var tilemap = selected_tilemap
 	if !tilemap: return
+	if !is_instance_valid(tilemap): return
 	
 	draw_tilemap_grid(tilemap)
 	if placing_rectangle_fill:
