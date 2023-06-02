@@ -2,7 +2,7 @@ extends Button
 
 var tileset : TileSet = null
 var tile_id : int = -1 setget update_current_tile_id
-signal tile_button_pressed(button_node, tile_id)
+signal tile_button_pressed(tile_id)
 
 onready var sprite = $Control/Sprite
 

@@ -43,7 +43,7 @@ func camera_to_player_position(player : Node2D, worldmap = false):
 	position = player.position
 	zoom = Vector2.ONE
 	
-	tux_sprite.update_(player.state, worldmap)
+	tux_sprite.update_tux_sprite(player.state, worldmap)
 
 func initialise_tux_sprite(worldmap):
 	tux_sprite.initialise_tux_sprite(worldmap)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=2]
+[gd_scene load_steps=39 format=2]
 
 [ext_resource path="res://images/player/tux/big/idle.png" type="Texture" id=1]
 [ext_resource path="res://images/player/tux/small/idle.png" type="Texture" id=2]
@@ -22,6 +22,7 @@
 [ext_resource path="res://scenes/leveleditor/LevelPropertiesPanel.gd" type="Script" id=20]
 [ext_resource path="res://scenes/leveleditor/ObjectFunctions.gd" type="Script" id=21]
 [ext_resource path="res://scenes/master/click_hitbox.tscn" type="PackedScene" id=22]
+[ext_resource path="res://scenes/leveleditor/ObjectButton.tscn" type="PackedScene" id=23]
 
 [sub_resource type="ShaderMaterial" id=10]
 shader = ExtResource( 18 )
@@ -797,6 +798,7 @@ size_flags_horizontal = 3
 columns = 4
 script = ExtResource( 7 )
 tile_button_scene = ExtResource( 14 )
+object_button_scene = ExtResource( 23 )
 
 [node name="PlacementOptions" type="VBoxContainer" parent="UI/Scale/EditorUI/TilesPanelOffset/TilesPanel"]
 anchor_right = 1.0

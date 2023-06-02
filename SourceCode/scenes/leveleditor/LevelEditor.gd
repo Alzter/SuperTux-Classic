@@ -55,9 +55,11 @@ var level = null
 var level_objects = null setget , _get_level_objects
 var object_map = null
 
-var selected_object = null setget update_selected_object
-var selected_object_name = ""
+var selected_layer = null setget update_selected_layer
+var selected_layer_name = ""
+
 var current_tile_id = -1 setget _update_current_tile_id # The ID of the tile the user is currently using
+var current_object_resource = null # The Resource of the object the user currently has selected
 
 var edit_mode = true
 
@@ -82,6 +84,7 @@ func _ready():
 	Music.stop_all()
 	ResolutionManager.connect("window_resized", self, "window_resized")
 	tiles_container.connect("update_selected_tile", self, "update_selected_tile")
+	tiles_container.connect("update_selected_object", self, "update_selected_object")
 	edit_layer_dialog.connect("layer_parameter_changed", self, "layer_parameter_changed")
 	window_resized()
 	
@@ -115,7 +118,7 @@ func enter_play_mode():
 	Scoreboard.reset_player_values(false, false)
 	Global.spawn_position = editor_camera.position
 	editor_camera.current = false
-	self.selected_object = null
+	self.selected_layer = null
 	if !level: return
 	create_level_cache()
 	if ui_editor: ui_editor.hide()
@@ -170,7 +173,7 @@ func unload_current_level():
 		level.free()
 		#level = null
 		#level_objects = null
-		#selected_object = null
+		#selected_layer = null
 		#current_tile_id = -1
 		#tile_functions.selected_tilemap = null
 
@@ -185,8 +188,8 @@ func initialise_level(level_object):
 		#	object_map = node
 		#	break
 		
-		if node.name == selected_object_name:
-			self.selected_object = node
+		if node.name == selected_layer_name:
+			self.selected_layer = node
 	
 	update_tilemap_opacity()
 	tile_functions.update_level_boundaries(level)
@@ -260,25 +263,25 @@ func set_ui_scale(scale):
 	ui_scale.anchor_right = 1 / scale
 
 func layer_button_pressed(button_node, layer_object):
-	self.selected_object = layer_object
+	self.selected_layer = layer_object
 
-func update_selected_object(new_value):
-	selected_object = new_value
-	if selected_object:
-		selected_object_name = selected_object.name
+func update_selected_layer(new_value):
+	selected_layer = new_value
+	if selected_layer:
+		selected_layer_name = selected_layer.name
 	
 	for button in layers_container.get_children():
-		button.disabled = button.layer_object == selected_object
+		button.disabled = button.layer_object == selected_layer
 	
 	update_tilemap_opacity()
 	
-	if is_tilemap(selected_object):
+	if is_tilemap(selected_layer):
 		object_functions.object_container = null
-		tile_functions.selected_tilemap = selected_object
-		tiles_container.show_tiles_from_tilemap(selected_object)
+		tile_functions.selected_tilemap = selected_layer
+		tiles_container.show_tiles_from_tilemap(selected_layer)
 		
-	elif is_object_container(selected_object):
-		object_functions.object_container = selected_object
+	elif is_object_container(selected_layer):
+		object_functions.object_container = selected_layer
 		tile_functions.selected_tilemap = null
 		tiles_container.show_object_scenes_in_folder(self.object_scenes_folder)
 	
@@ -286,8 +289,8 @@ func update_selected_object(new_value):
 		tiles_container.empty_tiles()
 
 func update_tilemap_opacity():
-	if selected_object and edit_mode:
-		if (is_tilemap(selected_object) or is_object_container(selected_object)) and !is_objectmap(selected_object):
+	if selected_layer and edit_mode:
+		if (is_tilemap(selected_layer) or is_object_container(selected_layer)) and !is_objectmap(selected_layer):
 			make_non_selected_tilemaps_transparent()
 		else:
 			make_all_tilemaps_opaque()
@@ -298,7 +301,7 @@ func make_non_selected_tilemaps_transparent():
 	for child in self.level_objects:
 		if !is_instance_valid(child): continue
 		if is_tilemap(child):
-			if selected_object != child:
+			if selected_layer != child:
 				child.modulate.a = unselected_tilemap_opacity
 			else: child.modulate.a = 1
 		elif is_object_container(child): child.modulate.a = 1
@@ -323,6 +326,11 @@ func set_camera_drag(is_dragging = true):
 
 func update_selected_tile(selected_tile_id : int):
 	current_tile_id = selected_tile_id
+	current_object_resource = null
+
+func update_selected_object(selected_object_resource : Resource):
+	current_object_resource = selected_object_resource
+	current_tile_id = -1
 
 func _on_Eraser_toggled(button_pressed):
 	eraser_enabled = button_pressed
@@ -410,8 +418,8 @@ func delete_layer(layer_object : Node):
 	call_deferred("_deferred_delete_layer", layer_object)
 
 func _deferred_delete_layer(layer_object : Node):
-	if selected_object == layer_object:
-		self.selected_object = null
+	if selected_layer == layer_object:
+		self.selected_layer = null
 	layer_object.free()
 	update_layers_panel(self.level_objects)
 
