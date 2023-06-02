@@ -210,18 +210,15 @@ func level_completed():
 			emit_signal("level_cleared")
 
 func save_node_to_directory(node : Node, dir : String):
-	while true:
-		for child in node.get_children():
-			child.owner = node
-			for baby in child.get_children():
-				baby.owner = node
-		var packed_scene = PackedScene.new()
-		packed_scene.pack(node)
-		var err = ResourceSaver.save(dir, packed_scene)
-		if err == OK:
-			break
-		else:
-			printerr("Error Code when saving: %s" % err)
+	for child in node.get_children():
+		child.owner = node
+		for baby in child.get_children():
+			baby.owner = node
+	var packed_scene = PackedScene.new()
+	packed_scene.pack(node)
+	var err = ResourceSaver.save(dir, packed_scene)
+	if err != OK:
+		printerr("Error Code when saving: %s" % err)
 
 # Gets ALL children in a node, including children of children.
 func get_all_children(node, array := []):
