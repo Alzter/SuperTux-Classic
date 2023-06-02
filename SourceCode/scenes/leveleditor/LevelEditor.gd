@@ -120,6 +120,7 @@ func enter_play_mode():
 	Global.spawn_position = editor_camera.position
 	editor_camera.current = false
 	self.selected_layer = null
+	tile_functions.selected_tilemap = null
 	if !level: return
 	create_level_cache()
 	if ui_editor: ui_editor.hide()
@@ -503,7 +504,7 @@ func object_clicked(object : Node, click_type : int):
 				edit_layer_dialog.appear(object, true)
 
 func _get_can_place_tiles():
-	return !editor_camera.dragging_camera and !object_functions.dragged_object and !is_paused
+	return !editor_camera.dragging_camera and !object_functions.dragged_object and !is_paused and edit_mode
 
 func _get_object_scenes_folder():
 	if !level: return null
