@@ -12,6 +12,8 @@ onready var debug_rect_end = $CanvasLayer/Sprite2
 var mouse_over_hitbox = false # Is the mouse hovering over this click hitbox?
 export var clickable = true # Can the hitbox be clicked?
 
+onready var object = get_parent()
+
 func _input(event):
 	if event is InputEventMouseMotion:
 		var screen_area = _get_hitbox_screen_area()
@@ -53,10 +55,10 @@ func _get_hitbox_screen_area():
 	return screen_area
 
 func _on_ClickHitbox_left_clicked():
-	Global.object_clicked(owner, BUTTON_LEFT)
+	Global.object_clicked(object, BUTTON_LEFT)
 
 func _on_ClickHitbox_middle_clicked():
-	Global.object_clicked(owner, BUTTON_MIDDLE)
+	Global.object_clicked(object, BUTTON_MIDDLE)
 
 func _on_ClickHitbox_right_clicked():
-	Global.object_clicked(owner, BUTTON_RIGHT)
+	Global.object_clicked(object, BUTTON_RIGHT)

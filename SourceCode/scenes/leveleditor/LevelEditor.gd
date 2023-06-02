@@ -464,9 +464,12 @@ func object_clicked(object : Node, click_type : int):
 		
 		BUTTON_RIGHT:
 			add_undo_state()
-			edit_layer_dialog.appear(object, true)
+			object_functions.delete_object(object)
 		
-		BUTTON_MIDDLE: return
+		BUTTON_MIDDLE:
+			mouse_over_ui = true # Prevent the camera dragging input from registering when middle clicking objects
+			add_undo_state()
+			edit_layer_dialog.appear(object, true)
 
 func _get_can_place_tiles():
 	return !editor_camera.dragging_camera and !object_functions.dragged_object
