@@ -55,7 +55,13 @@ func _on_Options_mouse_entered():
 	button_options.grab_focus()
 
 func _on_Quit_pressed():
-	emit_signal("save_and_quit")
+	var par = get_parent()
+	if par.edit_mode:
+		emit_signal("save_and_quit")
+	else:
+		par._deferred_enter_edit_mode()
+		menu.hide()
+		par.save_level()
 
 func _on_Quit_mouse_entered():
 	button_quit.grab_focus()

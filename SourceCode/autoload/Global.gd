@@ -216,7 +216,9 @@ func save_node_to_directory(node : Node, dir : String):
 			baby.owner = node
 	var packed_scene = PackedScene.new()
 	packed_scene.pack(node)
-	ResourceSaver.save(dir, packed_scene)
+	var err = ResourceSaver.save(dir, packed_scene)
+	if err != OK:
+		printerr("Error Code when saving: %s" % err)
 
 # Gets ALL children in a node, including children of children.
 func get_all_children(node, array := []):
