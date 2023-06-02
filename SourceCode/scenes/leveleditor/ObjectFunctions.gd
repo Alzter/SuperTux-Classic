@@ -10,6 +10,10 @@ func _ready():
 func _process(delta):
 	if dragged_object:
 		dragged_object.position = get_mouse_position(true)
+	
+	if object_container:
+		if owner.can_place_tiles and !owner.mouse_over_ui:
+			pass
 
 func _input(event):
 	if event is InputEventMouseButton:
@@ -20,6 +24,24 @@ func _input(event):
 				if is_instance_valid(dragged_object):
 					dragged_object.position = get_mouse_position(true)
 					dragged_object = null
+		
+		if event.pressed:
+			match event.button_index:
+				BUTTON_LEFT:
+					place_object()
+
+func place_object():
+	owner.add_undo_state()
+	var position = get_mouse_position(true)
+	var object_to_add = owner.current_object_resource
+	
+	if !object_to_add: return
+	if !object_container: return
+	
+	var object = object_to_add.instance()
+	object_container.add_child(object)
+	object.set_owner(object_container)
+	object.position = position
 
 func grab_object(object): # Begin allowing an object to be dragged by the mouse.
 	 # Only allow dragging objects which can have their position modified
