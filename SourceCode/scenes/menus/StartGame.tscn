@@ -1,13 +1,13 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://theme/FontBig.tres" type="DynamicFont" id=1]
 [ext_resource path="res://theme/default_theme.tres" type="Theme" id=2]
 [ext_resource path="res://scenes/menus/WorldButton.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/menus/StartGame.gd" type="Script" id=4]
 [ext_resource path="res://scenes/menus/BonusLevels.tscn" type="PackedScene" id=5]
+[ext_resource path="res://scenes/menus/CustomLevels.tscn" type="PackedScene" id=6]
 
 [node name="StartGameMenu" type="Popup"]
-visible = true
 anchor_right = 1.0
 anchor_bottom = 1.0
 theme = ExtResource( 2 )
@@ -100,7 +100,6 @@ focus_neighbour_left = NodePath("../BonusLevels")
 focus_neighbour_top = NodePath("../../StoryMode")
 focus_neighbour_bottom = NodePath("../../../../Back")
 size_flags_horizontal = 3
-disabled = true
 text = "Custom Levels"
 script = null
 
@@ -118,6 +117,8 @@ focus_neighbour_top = NodePath("../PanelContainer/VBoxContainer/HSplitContainer/
 text = "Back"
 
 [node name="BonusLevelsMenu" parent="." instance=ExtResource( 5 )]
+
+[node name="CustomLevelsMenu" parent="." instance=ExtResource( 6 )]
 
 [connection signal="about_to_show" from="." to="." method="_on_StartGameMenu_about_to_show"]
 [connection signal="focus_entered" from="Panel/VBoxContainer/PanelContainer/VBoxContainer/HSplitContainer/BonusLevels" to="." method="_on_BonusLevels_focus_entered"]

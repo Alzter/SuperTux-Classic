@@ -1,6 +1,6 @@
 extends Popup
 
-onready var back_button = $Panel/Back
+onready var back_button = $Panel/VBoxContainer/Back
 
 func _on_Back_mouse_entered():
 	back_button.grab_focus()

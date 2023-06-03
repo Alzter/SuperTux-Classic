@@ -6,6 +6,7 @@ onready var button_custom_levels = $Panel/VBoxContainer/PanelContainer/VBoxConta
 onready var button_back = $Panel/VBoxContainer/Back
 
 onready var menu_bonus_levels = $BonusLevelsMenu
+onready var menu_custom_levels = $CustomLevelsMenu
 
 
 func _on_StartGameMenu_about_to_show():
@@ -22,7 +23,7 @@ func _on_CustomLevels_focus_entered():
 	button_custom_levels.grab_focus()
 
 func _on_CustomLevels_pressed():
-	pass # Replace with function body.
+	menu_custom_levels.popup()
 
 func _on_Back_focus_entered():
 	button_back.grab_focus()
