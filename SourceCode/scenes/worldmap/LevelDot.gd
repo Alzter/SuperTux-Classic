@@ -42,6 +42,8 @@ func activate(player, player_position : Vector2, stop_direction : Vector2):
 		return
 	
 	elif level_file_path != "":
+		if level_file_path == Global.empty_level_path_string: return
+		
 		# Don't play the level if we're in the editor
 		if Global.is_in_editor: return
 		

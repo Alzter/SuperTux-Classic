@@ -19,6 +19,7 @@ func _on_CustomLevelsMenu_about_to_show():
 		button.world_to_load = world
 		button.initial_scene_for_world = UserLevels.get_initial_scene_filepath_for_world(world)
 		button.text = UserLevels.get_world_name(world)
+		button.rect_min_size.y = 42
 
 func _on_Back_mouse_entered():
 	back_button.grab_focus()
