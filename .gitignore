@@ -2,6 +2,7 @@
 # Godot-specific ignores
 .import/
 SourceCode/android/build
+SourceCode/IMPORTS
 
 # Mono-specific ignores
 .mono/
