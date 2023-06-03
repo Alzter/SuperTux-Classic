@@ -23,7 +23,6 @@ export var credits_scene = ""
 onready var title_content = $TitleContent
 
 onready var start_game_button = $TitleContent/Menu/VBoxContainer/StartGame
-onready var bonus_levels_button = $TitleContent/Menu/VBoxContainer/BonusLevels
 onready var options_button = $TitleContent/Menu/VBoxContainer/Options
 onready var level_editor_button = $TitleContent/Menu/VBoxContainer/LevelEditor
 onready var credits_button = $TitleContent/Menu/VBoxContainer/Credits
@@ -31,7 +30,7 @@ onready var quit_button = $TitleContent/Menu/VBoxContainer/Quit
 
 onready var new_game_warning = $TitleContent/Menu/NewGameWarning
 onready var options_menu = $OptionsMenu
-onready var bonus_levels_menu = $BonusLevelsMenu
+onready var start_game_menu = $StartGameMenu
 
 export var default_world = "world1"
 
@@ -52,16 +51,16 @@ func _ready():
 	
 	start_game_button.grab_focus()
 
-func _on_NewGame_pressed():
-	if SaveManager.has_savefile(default_world):
-		new_game_warning.popup_centered()
-	else: SaveManager.new_game(intro_scene)
+func _on_StartGame_mouse_entered():
+	start_game_button.grab_focus()
 
-func _on_NewGameWarning_confirmed():
-	SaveManager.new_game(intro_scene)
+func _on_StartGame_pressed():
+	title_content.hide()
+	start_game_menu.popup()
 
-func _on_LoadGame_pressed():
-	SaveManager.load_game(default_world)
+func _on_StartGameMenu_popup_hide():
+	title_content.show()
+	start_game_button.grab_focus()
 
 func _on_LevelSelectDebug_pressed():
 	$FileDialog.popup()
@@ -97,17 +96,6 @@ func _on_Quit_mouse_entered():
 func _on_OptionsMenu_popup_hide():
 	title_content.show()
 	options_button.grab_focus()
-
-func _on_BonusLevels_mouse_entered():
-	bonus_levels_button.grab_focus()
-
-func _on_BonusLevels_pressed():
-	title_content.hide()
-	bonus_levels_menu.popup()
-
-func _on_BonusLevelsMenu_popup_hide():
-	title_content.show()
-	bonus_levels_button.grab_focus()
 
 func _on_LevelEditor_mouse_entered():
 	level_editor_button.grab_focus()

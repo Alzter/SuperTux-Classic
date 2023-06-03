@@ -6,6 +6,7 @@
 [ext_resource path="res://scenes/menus/WorldButton.tscn" type="PackedScene" id=4]
 
 [node name="BonusLevelsMenu" type="Popup"]
+visible = true
 anchor_right = 1.0
 anchor_bottom = 1.0
 theme = ExtResource( 1 )
@@ -19,51 +20,78 @@ margin_top = 32.0
 margin_right = -32.0
 margin_bottom = -32.0
 
-[node name="Title" type="Label" parent="Panel"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
 anchor_right = 1.0
-margin_bottom = 60.0
+anchor_bottom = 1.0
+margin_left = 24.0
+margin_top = 24.0
+margin_right = -24.0
+margin_bottom = -24.0
+alignment = 1
+
+[node name="Title" type="Label" parent="Panel/VBoxContainer"]
+margin_right = 528.0
+margin_bottom = 30.0
 custom_colors/font_color = Color( 1, 1, 0, 1 )
 custom_fonts/font = ExtResource( 3 )
 text = "Bonus Levels"
 align = 1
 valign = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
-anchor_left = 0.5
-anchor_right = 0.5
-anchor_bottom = 1.0
-margin_left = -175.0
-margin_right = 175.0
+[node name="HSeparator2" type="HSeparator" parent="Panel/VBoxContainer"]
+margin_top = 34.0
+margin_right = 528.0
+margin_bottom = 64.0
+
+[node name="PanelContainer" type="PanelContainer" parent="Panel/VBoxContainer"]
+margin_top = 68.0
+margin_right = 528.0
+margin_bottom = 288.0
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/VBoxContainer/PanelContainer"]
+margin_left = 32.0
+margin_top = 32.0
+margin_right = 496.0
+margin_bottom = 188.0
 custom_constants/separation = 15
 alignment = 1
-__meta__ = {
-"_edit_lock_": true
-}
 
-[node name="Bonus1" parent="Panel/VBoxContainer" instance=ExtResource( 4 )]
+[node name="Bonus1" parent="Panel/VBoxContainer/PanelContainer/VBoxContainer" instance=ExtResource( 4 )]
+margin_top = 6.0
+margin_right = 464.0
+margin_bottom = 70.0
+rect_min_size = Vector2( 0, 64 )
+focus_neighbour_bottom = NodePath("../Bonus2")
 text = "Bonus Island I"
 world_to_load = "bonus1"
 initial_scene_for_world = "res://scenes/levels/bonus1/worldmap.tscn"
 
-[node name="Bonus2" parent="Panel/VBoxContainer" instance=ExtResource( 4 )]
-margin_top = 215.0
-margin_bottom = 245.0
+[node name="Bonus2" parent="Panel/VBoxContainer/PanelContainer/VBoxContainer" instance=ExtResource( 4 )]
+margin_top = 85.0
+margin_right = 464.0
+margin_bottom = 149.0
+rect_min_size = Vector2( 0, 64 )
+focus_neighbour_top = NodePath("../Bonus1")
+focus_neighbour_bottom = NodePath("../../../Back")
 text = "Bonus Island II"
 world_to_load = "bonus2"
 initial_scene_for_world = "res://scenes/levels/bonus2/worldmap.tscn"
 
-[node name="Back" type="Button" parent="Panel"]
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-margin_left = -96.0
-margin_top = -53.0
-margin_right = 96.0
-margin_bottom = -23.0
+[node name="HSeparator" type="HSeparator" parent="Panel/VBoxContainer"]
+margin_top = 292.0
+margin_right = 528.0
+margin_bottom = 322.0
+
+[node name="Back" type="Button" parent="Panel/VBoxContainer"]
+margin_top = 326.0
+margin_right = 528.0
+margin_bottom = 368.0
+rect_min_size = Vector2( 0, 42 )
+focus_neighbour_top = NodePath("../PanelContainer/VBoxContainer/Bonus2")
 text = "Back"
 
 [connection signal="about_to_show" from="." to="." method="_on_OptionsMenu_about_to_show"]
 [connection signal="popup_hide" from="." to="." method="_on_OptionsMenu_popup_hide"]
-[connection signal="mouse_entered" from="Panel/Back" to="." method="_on_Back_mouse_entered"]
-[connection signal="pressed" from="Panel/Back" to="." method="_on_Back_pressed"]
+[connection signal="mouse_entered" from="Panel/VBoxContainer/Back" to="." method="_on_Back_mouse_entered"]
+[connection signal="pressed" from="Panel/VBoxContainer/Back" to="." method="_on_Back_pressed"]
