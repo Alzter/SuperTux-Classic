@@ -464,6 +464,9 @@ func _on_SaveButton_pressed():
 	save_level()
 
 func _on_UndoButton_pressed():
+	undo()
+
+func undo():
 	if undo_stack.empty(): return
 	
 	var last_state = undo_stack.back()
@@ -539,7 +542,16 @@ func _get_object_scenes_folder():
 	
 	return object_scene_folder_for_worldmaps if level.is_worldmap else object_scene_folder_for_levels
 
+
 func _input(event):
+	# Keyboard shortcut support for UNDO and SAVE actions.
+	if Input.is_key_pressed(KEY_CONTROL):
+		if Input.is_key_pressed(KEY_S):
+			save_level()
+		elif Input.is_key_pressed(KEY_Z):
+			undo()
+	
+	# Make the editor buttons activate when user is holding down shortcuts
 	if Input.is_action_just_pressed("editor_erase"):
 		self.eraser_enabled = true
 	
