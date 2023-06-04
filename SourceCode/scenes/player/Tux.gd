@@ -560,7 +560,7 @@ func win_loop(jump_over_walls = true):
 		velocity.y = jump_height * 0.5
 		sfx.play("Jump")
 	
-	velocity.x = walk_min
+	velocity.x = run_min
 	var anim = "walk" if grounded else "jump"
 	play_animation(anim)
 
