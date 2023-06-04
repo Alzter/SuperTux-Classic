@@ -8,6 +8,8 @@ const worldmap_file = "worldmap.tscn"
 var default_level_template = "res://scenes/leveleditor/level_templates/level.tscn"
 var default_worldmap_level = "res://scenes/leveleditor/level_templates/worldmap.tscn"
 
+var levels_directory = "res://scenes/levels/"
+
 var user_worlds: Dictionary = {}
 
 var current_world = null
@@ -25,6 +27,7 @@ func load_user_worlds():
 	dir.open("user://")
 	if !dir.dir_exists(user_worlds_folder):
 		dir.make_dir(user_worlds_folder)
+		_add_base_game_worlds_to_user_worlds_folder()
 	else:
 		dir.change_dir(user_worlds_folder)
 		dir.list_dir_begin(true, true)
@@ -34,6 +37,38 @@ func load_user_worlds():
 				break
 			else:
 				_get_user_world_data(current)
+
+# Add all levels from the base game (world1, bonus1, bonus2)
+# into the User Levels directory so that users can edit them!
+func _add_base_game_worlds_to_user_worlds_folder():
+	var dir = Directory.new()
+	var file = File.new()
+	
+	if dir.dir_exists(levels_directory):
+		
+		var worlds = Global.list_files_in_directory(levels_directory)
+		for world in worlds:
+			var world_path = levels_directory + world + "/"
+			var user_world_path = user_worlds_directory + world + "/"
+			
+			# Don't copy the world if it lacks a world.data file.
+			var world_data_filepath = world_path + world_data_file
+			
+			if !file.file_exists(world_data_filepath):
+				push_error("No world data file found for base game world: " + world + ", expected file: " + world_data_filepath)
+				continue
+			
+			# If the world folder already exists in the user directory, don't copy it
+			if dir.dir_exists(user_world_path): continue
+			
+			var world_copy = Global.copy_directory_recursively(world_path, user_world_path)
+			
+			if world_copy != OK:
+				push_error("Error world from directory " + world_path + " to " + user_world_path + " Error code: " + str(world_copy))
+				return
+		
+	else:
+		push_error("Error copying base worlds levels into user worlds folder: Couldn't find levels directory.")
 
 func _get_user_world_data(dir_name: String) -> bool:
 	var dir = Directory.new()
@@ -46,7 +81,14 @@ func _get_user_world_data(dir_name: String) -> bool:
 		var world_data = file.open(world_data_file_path, File.READ)
 		
 		if world_data == OK:
-			var data : Dictionary = file.get_var()
+			
+			var world_variables = file.get_var()
+			
+			if !world_variables:
+				push_error("Error getting user world data in directory: " + str(dir_name))
+				return false
+			
+			var data : Dictionary = world_variables
 			file.close()
 			
 			user_worlds[dir_name] = data

@@ -385,3 +385,25 @@ func get_all_scene_files_in_folder(folder_name : String):
 				object_file_list.append(file_path)
 	
 	return object_file_list
+
+static func copy_directory_recursively(p_from : String, p_to : String) -> int:
+	var directory = Directory.new()
+	if not directory.dir_exists(p_to):
+		directory.make_dir_recursive(p_to)
+	
+	var open_status = directory.open(p_from)
+	
+	if open_status == OK:
+		directory.list_dir_begin(true)
+		var file_name = directory.get_next()
+		while (file_name != "" && file_name != "." && file_name != ".."):
+			if directory.current_is_dir():
+				copy_directory_recursively(p_from + "/" + file_name, p_to + "/" + file_name)
+			else:
+				directory.copy(p_from + "/" + file_name, p_to + "/" + file_name)
+			file_name = directory.get_next()
+	else:
+		push_error("Error copying " + p_from + " to " + p_to)
+		return open_status
+	
+	return OK
