@@ -534,12 +534,11 @@ func object_clicked(object : Node, click_type : int):
 		add_undo_state()
 		edit_layer_dialog.appear(object, true)
 	
-	elif is_editing_objects:
-		if eraser_enabled or click_type == BUTTON_RIGHT:
-			if is_editing_objects: object_functions.delete_object(object)
-		
-		else:
-			object_functions.grab_object(object)
+	elif eraser_enabled:
+		object_functions.delete_object(object)
+	
+	elif click_type == BUTTON_LEFT:
+		object_functions.grab_object(object)
 
 func _get_can_place_tiles():
 	return !editor_camera.dragging_camera and !object_functions.dragged_object and !is_paused and edit_mode
