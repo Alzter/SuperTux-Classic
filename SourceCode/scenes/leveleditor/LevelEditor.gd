@@ -155,7 +155,7 @@ func _deferred_enter_edit_mode():
 	Scoreboard.hide()
 	Scoreboard.level_timer.paused = true
 	if ui_editor: ui_editor.show()
-	Music.stop_all()
+	#Music.stop_all()
 	#get_tree().paused = false
 	edit_mode = true
 	Global.can_pause = true
