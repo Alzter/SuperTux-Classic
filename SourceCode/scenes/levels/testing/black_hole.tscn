@@ -8,7 +8,7 @@
 [ext_resource path="res://scenes/layers/Ambience.tscn" type="PackedScene" id=7]
 [ext_resource path="res://scenes/layers/Background/Castle.tscn" type="PackedScene" id=9]
 [ext_resource path="res://scenes/layers/Particles/SnowLight.tscn" type="PackedScene" id=10]
-[ext_resource path="res://scenes/master/ObjectMap.tscn" type="PackedScene" id=11]
+[ext_resource path="res://scenes/layers/ObjectMap.tscn" type="PackedScene" id=11]
 [ext_resource path="res://scenes/bosses/GrumbelBlackHole.tscn" type="PackedScene" id=12]
 [ext_resource path="res://scenes/layers/TileMap.tscn" type="PackedScene" id=13]
 

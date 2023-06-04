@@ -3,7 +3,7 @@
 [ext_resource path="res://scenes/master/Level.gd" type="Script" id=1]
 [ext_resource path="res://scenes/layers/Background/SnowMist.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/layers/TileMap.tscn" type="PackedScene" id=5]
-[ext_resource path="res://scenes/master/ObjectMap.tscn" type="PackedScene" id=6]
+[ext_resource path="res://scenes/layers/ObjectMap.tscn" type="PackedScene" id=6]
 
 [node name="Level" type="Node2D"]
 script = ExtResource( 1 )

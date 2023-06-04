@@ -7,7 +7,7 @@
 [ext_resource path="res://scenes/layers/Particles/Snow.tscn" type="PackedScene" id=5]
 [ext_resource path="res://scenes/layers/Particles/CloudsDark.tscn" type="PackedScene" id=6]
 [ext_resource path="res://scenes/layers/Particles/Fog.tscn" type="PackedScene" id=7]
-[ext_resource path="res://scenes/master/ObjectMap.tscn" type="PackedScene" id=8]
+[ext_resource path="res://scenes/layers/ObjectMap.tscn" type="PackedScene" id=8]
 [ext_resource path="res://scenes/layers/Ambience.tscn" type="PackedScene" id=9]
 
 
