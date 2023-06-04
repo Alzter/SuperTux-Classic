@@ -8,8 +8,6 @@ const worldmap_file = "worldmap.tscn"
 var default_level_template = "res://scenes/leveleditor/level_templates/level.tscn"
 var default_worldmap_level = "res://scenes/leveleditor/level_templates/worldmap.tscn"
 
-var levels_directory = "res://scenes/levels/"
-
 var user_worlds: Dictionary = {}
 
 var current_world = null
@@ -48,6 +46,8 @@ func _add_base_game_worlds_to_user_worlds_folder() -> int:
 	var dir = Directory.new()
 	var file = File.new()
 	
+	var levels_directory = Global.globalise_path(Global.worlds_folder)
+	
 	if dir.dir_exists(levels_directory):
 		
 		var worlds = Global.list_files_in_directory(levels_directory)
@@ -72,7 +72,7 @@ func _add_base_game_worlds_to_user_worlds_folder() -> int:
 				return world_copy
 		
 	else:
-		push_error("Error copying base worlds levels into user worlds folder: Couldn't find levels directory.")
+		push_error("Error copying base worlds levels into user worlds folder: Couldn't find levels directory at: " + levels_directory)
 		return ERR_FILE_NOT_FOUND
 	
 	return OK
@@ -346,32 +346,15 @@ func _create_world_data(world_name : String, author_name : String, worldmap_scen
 		"initial_scene" : initial_scene,
 	}
 
-func _get_absolute_user_worlds_path():
-		# We must get the absolute path of the user directory.
-	# Trying to open "user://" as a path won't work.
-	var absolute_user_worlds_dir = OS.get_user_data_dir()
-	
-	if !absolute_user_worlds_dir.ends_with("/"):
-		absolute_user_worlds_dir = absolute_user_worlds_dir + "/"
-	
-	absolute_user_worlds_dir += user_worlds_folder
-	
-	if !absolute_user_worlds_dir.ends_with("/"):
-		absolute_user_worlds_dir = absolute_user_worlds_dir + "/"
-	
-	return absolute_user_worlds_dir
-
 func open_user_worlds_folder():
 	load_user_worlds()
 	
-	var dir = _get_absolute_user_worlds_path()
+	var dir = Global.globalise_path(user_worlds_directory)
 	
 	OS.shell_open(dir)
 
 # Opens the folder of a specific user world
 func open_user_world_folder(world_folder_name : String):
-	var dir = _get_absolute_user_worlds_path()
-	
-	dir += world_folder_name
+	var dir = Global.globalise_path(user_worlds_directory + world_folder_name)
 	
 	OS.shell_open(dir)

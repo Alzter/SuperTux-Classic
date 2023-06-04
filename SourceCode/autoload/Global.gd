@@ -23,6 +23,8 @@ var title_screen_scene = "res://scenes/menus/TitleScreen.tscn"
 var level_editor_menu_scene = "res://scenes/leveleditor/menus/MainMenu.tscn"
 var level_editor_scene = "res://scenes/leveleditor/LevelEditor.tscn"
 
+var worlds_folder = "res://scenes/levels/"
+
 var current_scene = null
 var current_level = null
 var current_level_path = null
@@ -407,3 +409,37 @@ static func copy_directory_recursively(p_from : String, p_to : String) -> int:
 		return open_status
 	
 	return OK
+
+# Converts a local reference in the project files ("res://") or user directory ("user://")
+# to an absolute file path.
+
+static func globalise_path(local_path : String):
+	
+	if local_path.begins_with("res://"):
+		if OS.has_feature("editor"): return local_path
+		
+		var file_path = local_path.trim_prefix("res://")
+		
+		var global_path = OS.get_executable_path().get_base_dir()
+		
+		push_error(OS.get_executable_path())
+		push_error(global_path)
+		
+		if !global_path.ends_with("/"): global_path += "/"
+		
+		global_path += file_path
+		
+		push_error(global_path)
+		
+		return global_path
+	
+	elif local_path.begins_with("user://"):
+		var file_path = local_path.trim_prefix("user://")
+		
+		var global_path = OS.get_user_data_dir()
+		if !global_path.ends_with("/"): global_path += "/"
+		
+		global_path += file_path
+		return global_path
+	
+	else: return null
