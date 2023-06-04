@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=2]
+[gd_scene load_steps=47 format=2]
 
 [ext_resource path="res://images/player/tux/big/idle.png" type="Texture" id=1]
 [ext_resource path="res://images/player/tux/small/idle.png" type="Texture" id=2]
@@ -33,6 +33,7 @@
 [ext_resource path="res://sounds/objects/brick.wav" type="AudioStream" id=31]
 [ext_resource path="res://scenes/master/SFX.gd" type="Script" id=32]
 [ext_resource path="res://sounds/objects/brick_smash.wav" type="AudioStream" id=33]
+[ext_resource path="res://sounds/editor/undo.wav" type="AudioStream" id=34]
 
 [sub_resource type="ShaderMaterial" id=10]
 shader = ExtResource( 18 )
@@ -792,6 +793,10 @@ pitch_scale = 6.0
 stream = ExtResource( 33 )
 volume_db = -8.0
 pitch_scale = 3.0
+
+[node name="Undo" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource( 34 )
+volume_db = -6.0
 
 [connection signal="mouse_entered" from="UI/Scale/EditorUI/MouseDetector" to="." method="_on_MouseDetector_mouse_entered"]
 [connection signal="mouse_exited" from="UI/Scale/EditorUI/MouseDetector" to="." method="_on_MouseDetector_mouse_exited"]

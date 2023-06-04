@@ -499,6 +499,8 @@ func undo():
 	
 	emit_signal("undo_executed")
 	
+	play_sound("Undo")
+	
 	#print("Remove undo state")
 	#print(undo_stack)
 
