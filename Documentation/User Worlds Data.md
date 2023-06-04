@@ -1,7 +1,7 @@
 # User Worlds Data
-Every user-made world has a `contrib.data` file inside its world folder which contains information about the world.<br>
+Every user-made world has a `world.data` file inside its world folder which contains information about the world.<br>
 
-The `contrib.data` file follows the following format:<br>
+The `world.data` file stores a Dictionary of variables in the following format:<br>
 
 ```
 world_name="name"

@@ -1,8 +1,8 @@
 extends Node
 
-const user_worlds_directory = "user://contrib/"
-const user_worlds_folder = "contrib/"
-const world_data_file = "contrib.data"
+const user_worlds_directory = "user://addon_worlds/"
+const user_worlds_folder = "addon_worlds/"
+const world_data_file = "world.data"
 const worldmap_file = "worldmap.tscn"
 
 var default_level_template = "res://scenes/leveleditor/level_templates/level.tscn"
