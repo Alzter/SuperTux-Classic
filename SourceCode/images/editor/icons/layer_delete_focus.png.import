@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/rect_select.png-edaede71e332b98649ab107f6b907f69.stex"
+path="res://.import/layer_delete_focus.png-7ba60b0183ec7bc18248e331b56b577c.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://images/editor/icons/rect_select.png"
-dest_files=[ "res://.import/rect_select.png-edaede71e332b98649ab107f6b907f69.stex" ]
+source_file="res://images/editor/icons/layer_delete_focus.png"
+dest_files=[ "res://.import/layer_delete_focus.png-7ba60b0183ec7bc18248e331b56b577c.stex" ]
 
 [params]
 

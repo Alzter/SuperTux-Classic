@@ -1,7 +1,13 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://scenes/leveleditor/LayerButton.gd" type="Script" id=1]
 [ext_resource path="res://theme/default_theme.tres" type="Theme" id=2]
+[ext_resource path="res://images/editor/icons/layer_edit.png" type="Texture" id=3]
+[ext_resource path="res://images/editor/icons/layer_delete.png" type="Texture" id=4]
+[ext_resource path="res://images/editor/icons/layer_delete_selected.png" type="Texture" id=5]
+[ext_resource path="res://images/editor/icons/layer_delete_focus.png" type="Texture" id=6]
+[ext_resource path="res://images/editor/icons/layer_edit_focus.png" type="Texture" id=7]
+[ext_resource path="res://images/editor/icons/layer_edit_selected.png" type="Texture" id=8]
 
 [node name="LayerButton" type="Button"]
 anchor_left = 0.5
@@ -22,27 +28,35 @@ script = ExtResource( 1 )
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_top = -30.0
+margin_top = -34.0
 mouse_filter = 1
 
-[node name="Edit" type="Button" parent="LayerOptions"]
+[node name="Edit" type="TextureButton" parent="LayerOptions"]
 margin_right = 50.0
-margin_bottom = 30.0
+margin_bottom = 34.0
 focus_mode = 0
 mouse_filter = 1
 size_flags_horizontal = 3
-text = "Edit"
-clip_text = true
+texture_normal = ExtResource( 3 )
+texture_pressed = ExtResource( 7 )
+texture_hover = ExtResource( 8 )
+texture_focused = ExtResource( 7 )
+expand = true
+stretch_mode = 5
 
-[node name="Delete" type="Button" parent="LayerOptions"]
+[node name="Delete" type="TextureButton" parent="LayerOptions"]
 margin_left = 62.0
 margin_right = 112.0
-margin_bottom = 30.0
+margin_bottom = 34.0
 focus_mode = 0
 mouse_filter = 1
 size_flags_horizontal = 3
-text = "Delete"
-clip_text = true
+texture_normal = ExtResource( 4 )
+texture_pressed = ExtResource( 6 )
+texture_hover = ExtResource( 5 )
+texture_focused = ExtResource( 6 )
+expand = true
+stretch_mode = 5
 
 [connection signal="gui_input" from="." to="." method="_on_LayerButton_gui_input"]
 [connection signal="mouse_entered" from="." to="." method="_on_LayerButton_mouse_entered"]

@@ -44,16 +44,17 @@ func _process(delta):
 	if owner.can_place_tiles and !owner.mouse_over_ui:
 		
 		if selected_tilemap:
-			selected_tile_position = get_selected_tile()
-			
-			if using_eyedropper:
-				owner.current_tile_id = selected_tilemap.get_cellv(selected_tile_position)
-				owner.eyedropper_enabled = false
-				using_eyedropper = false
-			
-			if !placing_rectangle_fill:
-				tile_selection.show()
-				update_tile_selected_sprite()
+			if is_instance_valid(selected_tilemap):
+				selected_tile_position = get_selected_tile()
+				
+				if using_eyedropper:
+					owner.current_tile_id = selected_tilemap.get_cellv(selected_tile_position)
+					owner.eyedropper_enabled = false
+					using_eyedropper = false
+				
+				if !placing_rectangle_fill:
+					tile_selection.show()
+					update_tile_selected_sprite()
 		
 		if placing_tiles:
 			if placing_rectangle_fill:
