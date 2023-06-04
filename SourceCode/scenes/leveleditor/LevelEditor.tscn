@@ -734,7 +734,6 @@ text = "EyeDropper"
 clip_text = true
 
 [node name="EditLayerDialog" parent="UI/Scale/EditorUI" instance=ExtResource( 16 )]
-visible = false
 
 [node name="EditToggle" type="Button" parent="UI/Scale"]
 anchor_left = 1.0
@@ -756,6 +755,13 @@ visible = false
 [connection signal="pressed" from="UI/Scale/EditorUI/Buttons/LevelProperties" to="." method="_on_LevelProperties_pressed"]
 [connection signal="pressed" from="UI/Scale/EditorUI/Buttons/SaveButton" to="." method="_on_SaveButton_pressed"]
 [connection signal="about_to_show" from="UI/Scale/EditorUI/LevelPropertiesDialog" to="UI/Scale/EditorUI/LevelPropertiesDialog" method="_on_LevelPropertiesDialog_about_to_show"]
+[connection signal="text_changed" from="UI/Scale/EditorUI/LevelPropertiesDialog/VBoxContainer/PanelContainer/LevelProperties/EditLevelName/Name" to="UI/Scale/EditorUI/LevelPropertiesDialog" method="_on_Name_text_changed"]
+[connection signal="text_changed" from="UI/Scale/EditorUI/LevelPropertiesDialog/VBoxContainer/PanelContainer/LevelProperties/EditLevelAuthor/Author" to="UI/Scale/EditorUI/LevelPropertiesDialog" method="_on_Author_text_changed"]
+[connection signal="item_selected" from="UI/Scale/EditorUI/LevelPropertiesDialog/VBoxContainer/PanelContainer/LevelProperties/EditLevelMusic/Music" to="UI/Scale/EditorUI/LevelPropertiesDialog" method="_on_Music_item_selected"]
+[connection signal="toggled" from="UI/Scale/EditorUI/LevelPropertiesDialog/VBoxContainer/PanelContainer/LevelProperties/EditLevelTimer/TimerEnabled" to="UI/Scale/EditorUI/LevelPropertiesDialog" method="_on_TimerEnabled_toggled"]
+[connection signal="value_changed" from="UI/Scale/EditorUI/LevelPropertiesDialog/VBoxContainer/PanelContainer/LevelProperties/EditLevelTimer/Time" to="UI/Scale/EditorUI/LevelPropertiesDialog" method="_on_Time_value_changed"]
+[connection signal="value_changed" from="UI/Scale/EditorUI/LevelPropertiesDialog/VBoxContainer/PanelContainer/LevelProperties/EditLevelGravity/Gravity" to="UI/Scale/EditorUI/LevelPropertiesDialog" method="_on_Gravity_value_changed"]
+[connection signal="value_changed" from="UI/Scale/EditorUI/LevelPropertiesDialog/VBoxContainer/PanelContainer/LevelProperties/EditLevelAutoscroll/AutoscrollSpeed" to="UI/Scale/EditorUI/LevelPropertiesDialog" method="_on_AutoscrollSpeed_value_changed"]
 [connection signal="pressed" from="UI/Scale/EditorUI/LevelPropertiesDialog/VBoxContainer/HideLevelProperties" to="UI/Scale/EditorUI/LevelPropertiesDialog" method="_on_HideLevelProperties_pressed"]
 [connection signal="pressed" from="UI/Scale/EditorUI/LayersPanelOffset/LayersPanel/RetractTab" to="UI/Scale/EditorUI/LayersPanelOffset" method="_on_RetractTab_pressed"]
 [connection signal="pressed" from="UI/Scale/EditorUI/LayersPanelOffset/LayersPanel/AddLayerButton" to="UI/Scale/EditorUI/LayersPanelOffset" method="_on_AddLayerButton_pressed"]

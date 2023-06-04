@@ -43,10 +43,14 @@ func _set_music_to_song(song_name : String):
 		level_music.select(song_id)
 
 func _on_Name_text_changed(new_text):
-	if level: level.level_title = new_text
+	if level:
+		level.level_title = new_text
+		Global.clear_level_cache(UserLevels.current_level)
 
 func _on_Author_text_changed(new_text):
-	if level: level.level_author = new_text
+	if level:
+		level.level_author = new_text
+		Global.clear_level_cache(UserLevels.current_level)
 
 func _on_Music_item_selected(index):
 	if level:
@@ -58,7 +62,6 @@ func _on_Music_item_selected(index):
 func _on_TimerEnabled_toggled(button_pressed):
 	if level: level.uses_timer = button_pressed
 	level_time.editable = button_pressed
-	print(button_pressed)
 
 func _on_Time_value_changed(value):
 	if level: level.time = value
