@@ -14,7 +14,7 @@ signal layer_parameter_changed
 func appear(node_being_edited : Node, node_is_object : bool):
 	node_to_edit = node_being_edited
 	is_editing_object = node_is_object
-	popup_centered_ratio(0.6)
+	popup_centered_ratio()
 
 func _on_EditLayerDialog_about_to_show():
 	if !node_to_edit: return
