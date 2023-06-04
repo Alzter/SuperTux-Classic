@@ -553,18 +553,18 @@ expand_icon = true
 [node name="ScrollContainer" type="ScrollContainer" parent="UI/Scale/EditorUI/LayersPanelOffset/LayersPanel"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 131.0
-margin_top = 10.0
-margin_right = -13.0
-margin_bottom = -10.0
+margin_left = 123.0
+margin_top = 8.0
+margin_right = -5.0
+margin_bottom = -8.0
 scroll_vertical_enabled = false
 
 [node name="LayersContainer" type="HBoxContainer" parent="UI/Scale/EditorUI/LayersPanelOffset/LayersPanel/ScrollContainer"]
-margin_right = 911.0
-margin_bottom = 100.0
+margin_right = 927.0
+margin_bottom = 104.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-custom_constants/separation = 15
+custom_constants/separation = 5
 alignment = 1
 
 [node name="AddLayerDialog" type="PopupDialog" parent="UI/Scale/EditorUI/LayersPanelOffset"]

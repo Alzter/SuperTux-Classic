@@ -244,7 +244,7 @@ func update_layers_panel(level_objects):
 		#if is_objectmap(node): continue
 		var button = layer_button_scene.instance()
 		layers_container.add_child(button)
-		button.text = node.name
+		button.layer_name = node.name
 		button.layer_object = node
 		button.connect("layer_button_pressed", self, "layer_button_pressed")
 		button.connect("edit_layer", self, "edit_layer")
