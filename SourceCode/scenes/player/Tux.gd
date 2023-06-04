@@ -177,8 +177,6 @@ func horizontal_movement():
 #	if sign(velocity.x) == move_direction and running or abs(velocity.x) >= walk_max:
 #		running = true
 	
-	print(running)
-	
 	var speed = run_accel if running else walk_accel
 	if riding_entity: speed = riding_accel
 	
