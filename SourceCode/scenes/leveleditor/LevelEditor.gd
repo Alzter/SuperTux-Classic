@@ -529,8 +529,10 @@ func object_clicked(object : Node, click_type : int):
 	if !edit_mode: return
 	if mouse_over_ui: return
 	if !object: return
+	if !is_instance_valid(object): return
 	
-	var is_editing_objects = is_object_container(selected_layer) and !is_tilemap(selected_layer)
+	var is_editing_objects = false
+	if selected_layer: is_editing_objects = is_object_container(selected_layer)
 	
 	object_functions.can_place_objects = false
 	
