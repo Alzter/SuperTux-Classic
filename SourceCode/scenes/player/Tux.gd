@@ -42,13 +42,18 @@ var grabbed_object = null
 var fireball_speed = 16 * Global.TILE_SIZE
 var fireball_amount = 2 # Amount of fireballs which can be shot at once
 
-var walk_accel = 0.03 * pow(60, 2) / 4 # M1 SuperTux calculates acceleration by multiplying it by delta squared, so we cheat by multiplying the base movement acceleration values by that here
+var walk_accel = 0.03 * pow(60, 2) / 8 # M1 SuperTux calculates acceleration by multiplying it by delta squared, so we cheat by multiplying the base movement acceleration values by that here
 var run_accel = 0.04 * pow(60, 2) / 11
 
-var walk_min = 1.0 * 4.5 * Global.TILE_SIZE # Player speed gets set to this when beginning to move
+var walk_friction = 0.03 * pow(60, 2) / 8 # The speed at which the player slows down whilst walking
+var run_friction = 0.03 * pow(60, 2) / 4 # The speed at which the player slows down whilst walking
+
+var walk_min = 0.5 * Global.TILE_SIZE # Player speed gets set to this when beginning to move
+var run_min = 1.0 * 4.5 * Global.TILE_SIZE # Player speed gets set to this when beginning to move with RUN held down
+
 var walk_max = 2.3 * 4.5 * Global.TILE_SIZE # If X speed is over this, player is running
 var run_max = 3.2 * 4.5 * Global.TILE_SIZE
-var skid_min = 2.0 * 4 * Global.TILE_SIZE # Player can skid if travelling over this speed
+var skid_min = 2.0 * 3 * Global.TILE_SIZE # Player can skid if travelling over this speed
 
 var riding_accel = 0.025 * pow(60, 2) / 11
 var riding_max = 4 * 4.5 * Global.TILE_SIZE # Max speed whilst riding Ice Dragon is increased
@@ -169,8 +174,10 @@ func move_input():
 func horizontal_movement():
 	var running = Input.is_action_pressed("run") or Global.auto_run
 	
-	if sign(velocity.x) == move_direction or abs(velocity.x) >= walk_max:
-		running = true
+#	if sign(velocity.x) == move_direction and running or abs(velocity.x) >= walk_max:
+#		running = true
+	
+	print(running)
 	
 	var speed = run_accel if running else walk_accel
 	if riding_entity: speed = riding_accel
@@ -178,9 +185,13 @@ func horizontal_movement():
 	var speedcap = run_max if running else walk_max
 	if riding_entity: speedcap = riding_max
 	
+	var min_speed = run_min if running else walk_min
+	
+	var friction = run_friction if running else walk_friction
+	
 	# Set movement speed to min walk speed when initiating movement
-	if move_direction != 0 and abs(velocity.x) < walk_min:
-		velocity.x = walk_min * move_direction
+	if move_direction != 0 and abs(velocity.x) < min_speed:
+		velocity.x = min_speed * move_direction
 	
 	velocity.x += speed * move_direction
 	if abs(velocity.x) > speedcap:
@@ -188,7 +199,7 @@ func horizontal_movement():
 	
 	# Skidding
 	if grounded and sign(move_direction) == -sign(velocity.x):
-		if abs(velocity.x) > walk_min:
+		if abs(velocity.x) > min_speed:
 			if skid_timer.time_left == 0:
 				if abs(velocity.x) > skid_min:
 					sfx.play("Skid")
@@ -199,11 +210,11 @@ func horizontal_movement():
 	
 	# Slow down if not holding movement keys
 	if move_direction == 0:
-		if abs(velocity.x) < walk_min:
+		if abs(velocity.x) < min_speed:
 			velocity.x = 0
 		else:
 			# This is by far the wackiest way to slow down I've seen
-			velocity.x += walk_accel * -sign(velocity.x)
+			velocity.x += friction * -sign(velocity.x)
 
 func _set_grounded_state(new_value):
 	if grounded == new_value: return
