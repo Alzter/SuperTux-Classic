@@ -21,6 +21,7 @@ margin_right = 56.0
 margin_bottom = 48.0
 rect_min_size = Vector2( 120, 0 )
 focus_mode = 0
+size_flags_horizontal = 4
 theme = ExtResource( 2 )
 custom_fonts/font = ExtResource( 9 )
 clip_text = true
@@ -37,7 +38,7 @@ mouse_filter = 1
 [node name="Edit" type="TextureButton" parent="LayerOptions"]
 margin_right = 54.0
 margin_bottom = 34.0
-hint_tooltip = "Edit this layer..."
+hint_tooltip = "Edit this layer... (Right Click)"
 focus_mode = 0
 mouse_filter = 1
 size_flags_horizontal = 3
