@@ -215,9 +215,12 @@ func create_level_cache():
 	update_tilemap_opacity()
 
 func save_level():
+	if !level: return
 	call_deferred("_deferred_save_level")
 
 func _deferred_save_level():
+	if !level: return
+	
 	if !edit_mode: _deferred_enter_edit_mode()
 	
 	make_all_tilemaps_opaque()
@@ -467,6 +470,8 @@ func _on_UndoButton_pressed():
 	undo()
 
 func undo():
+	if !level: return
+	
 	if undo_stack.empty(): return
 	
 	var last_state = undo_stack.back()
@@ -484,6 +489,9 @@ func undo():
 	#print(undo_stack)
 
 func _on_LevelProperties_pressed():
+	level_properties_dialog()
+
+func level_properties_dialog():
 	add_undo_state()
 	level_properties_dialog.popup_centered_ratio()
 
@@ -550,6 +558,10 @@ func _input(event):
 			save_level()
 		elif Input.is_key_pressed(KEY_Z):
 			undo()
+		elif Input.is_key_pressed(KEY_P):
+			level_properties_dialog()
+		elif Input.is_key_pressed(KEY_ENTER):
+			toggle_edit_mode()
 	
 	# Make the editor buttons activate when user is holding down shortcuts
 	if Input.is_action_just_pressed("editor_erase"):
