@@ -510,28 +510,28 @@ func object_clicked(object : Node, click_type : int):
 	if mouse_over_ui: return
 	if !object: return
 	
+	var is_editing_objects = is_object_container(selected_layer) and !is_tilemap(selected_layer)
+	
 	object_functions.can_place_objects = false
 	
-	if eyedropper_enabled and is_object_container(selected_layer):
+	if eyedropper_enabled and is_editing_objects:
 		var object_resource = load(object.filename)
 		if object_resource:
 			self.current_object_resource = object_resource
 			self.eyedropper_enabled = false
+			return
 	
-	else:
-		match click_type:
-			BUTTON_LEFT:
-				if eraser_enabled: object_functions.delete_object(object)
-				else:
-					object_functions.grab_object(object)
-			
-			BUTTON_RIGHT:
-				object_functions.delete_object(object)
-			
-			BUTTON_MIDDLE:
-				mouse_over_ui = true # Prevent the camera dragging input from registering when middle clicking objects
-				add_undo_state()
-				edit_layer_dialog.appear(object, true)
+	elif click_type == BUTTON_MIDDLE:
+		mouse_over_ui = true # Prevent the camera dragging input from registering when middle clicking objects
+		add_undo_state()
+		edit_layer_dialog.appear(object, true)
+	
+	elif is_editing_objects:
+		if eraser_enabled or click_type == BUTTON_RIGHT:
+			if is_editing_objects: object_functions.delete_object(object)
+		
+		else:
+			object_functions.grab_object(object)
 
 func _get_can_place_tiles():
 	return !editor_camera.dragging_camera and !object_functions.dragged_object and !is_paused and edit_mode
