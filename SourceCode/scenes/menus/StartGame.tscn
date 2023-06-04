@@ -67,6 +67,7 @@ margin_bottom = 70.0
 focus_neighbour_bottom = NodePath("../HSplitContainer/BonusLevels")
 size_flags_vertical = 3
 text = "Story Mode"
+clip_text = true
 
 [node name="HSeparator" type="HSeparator" parent="Panel/VBoxContainer/PanelContainer/VBoxContainer"]
 visible = false
@@ -89,6 +90,7 @@ focus_neighbour_right = NodePath("../CustomLevels")
 focus_neighbour_bottom = NodePath("../../../../Back")
 size_flags_horizontal = 3
 text = "Bonus Levels"
+clip_text = true
 script = null
 
 [node name="CustomLevels" parent="Panel/VBoxContainer/PanelContainer/VBoxContainer/HSplitContainer" instance=ExtResource( 3 )]
@@ -101,6 +103,7 @@ focus_neighbour_top = NodePath("../../StoryMode")
 focus_neighbour_bottom = NodePath("../../../../Back")
 size_flags_horizontal = 3
 text = "Custom Levels"
+clip_text = true
 script = null
 
 [node name="HSeparator2" type="HSeparator" parent="Panel/VBoxContainer"]

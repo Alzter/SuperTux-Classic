@@ -6,7 +6,6 @@
 [ext_resource path="res://scenes/menus/WorldButton.tscn" type="PackedScene" id=4]
 
 [node name="BonusLevelsMenu" type="Popup"]
-visible = true
 anchor_right = 1.0
 anchor_bottom = 1.0
 theme = ExtResource( 1 )
@@ -61,9 +60,10 @@ alignment = 1
 margin_top = 6.0
 margin_right = 464.0
 margin_bottom = 70.0
-rect_min_size = Vector2( 0, 64 )
 focus_neighbour_bottom = NodePath("../Bonus2")
+size_flags_vertical = 3
 text = "Bonus Island I"
+clip_text = true
 world_to_load = "bonus1"
 initial_scene_for_world = "res://scenes/levels/bonus1/worldmap.tscn"
 
@@ -71,10 +71,11 @@ initial_scene_for_world = "res://scenes/levels/bonus1/worldmap.tscn"
 margin_top = 85.0
 margin_right = 464.0
 margin_bottom = 149.0
-rect_min_size = Vector2( 0, 64 )
 focus_neighbour_top = NodePath("../Bonus1")
 focus_neighbour_bottom = NodePath("../../../Back")
+size_flags_vertical = 3
 text = "Bonus Island II"
+clip_text = true
 world_to_load = "bonus2"
 initial_scene_for_world = "res://scenes/levels/bonus2/worldmap.tscn"
 
