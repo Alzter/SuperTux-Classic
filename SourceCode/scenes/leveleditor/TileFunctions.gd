@@ -67,8 +67,7 @@ func _process(delta):
 				var is_tile_new = old_selected_tile_position != selected_tile_position
 				
 				if placing_tiles and is_tile_new:
-					if tile_id_to_use == -1: owner.play_sound("EraseTile")
-					else: owner.play_sound("PlaceTile")
+					play_tile_sound(selected_tilemap, tile_id_to_use, selected_tile_position)
 					
 					if placing_rectangle_fill:
 						rect_selection = Rect2(rect_fill_origin, Vector2.ZERO).expand(selected_tile_position)
@@ -207,3 +206,15 @@ func draw_tilemap_grid(tilemap : TileMap):
 	
 	for x in range(0, ceil(res.x / tilemap_cell_size.x / zoom.x)):
 		draw_line(Vector2(x * tilemap_cell_size.x, 0) - edge_position, Vector2(x * tilemap_cell_size.x, y_end) - edge_position, grid_color)
+
+# ========================================================================================
+
+func play_tile_sound(selected_tilemap, tile_id, selected_tile_position):
+	if selected_tilemap.get_cellv(selected_tile_position) == tile_id_to_use: return
+	
+	if selected_tilemap.is_in_group("objectmaps"):
+		if tile_id == -1: owner.play_sound("EraseObject")
+		else: owner.play_sound("PlaceObject")
+	else:
+		if tile_id == -1: owner.play_sound("EraseTile")
+		else: owner.play_sound("PlaceTile")

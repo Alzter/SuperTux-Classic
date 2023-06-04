@@ -229,6 +229,8 @@ func _deferred_save_level():
 	var level_directory = UserLevels.current_level
 	Global.save_node_to_directory(level, level_directory)
 	update_tilemap_opacity()
+	
+	play_sound("Save")
 
 func save_and_quit():
 	save_level()
@@ -510,6 +512,7 @@ func _on_LevelProperties_pressed():
 func level_properties_dialog():
 	add_undo_state()
 	level_properties_dialog.popup_centered_ratio()
+	play_sound("LevelProperties")
 
 func clear_undo_states():
 	undo_stack = []
