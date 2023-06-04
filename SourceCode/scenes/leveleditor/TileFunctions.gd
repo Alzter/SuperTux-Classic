@@ -10,8 +10,10 @@ export var grid_color = Color(0,0,0,0.5)
 export var rect_select_add_color = Color(0.1, 1, 0.1, 0.4)
 export var rect_select_erase_color = Color(1, 0.1, 0.1, 0.4)
 
+
 var selected_tilemap = null
 var selected_tile_position = Vector2()
+var old_selected_tile_position = Vector2()
 var tile_id_to_use = -1
 
 var placing_tiles = false
@@ -56,12 +58,20 @@ func _process(delta):
 					tile_selection.show()
 					update_tile_selected_sprite()
 		
-		if placing_tiles:
-			if placing_rectangle_fill:
-				rect_selection = Rect2(rect_fill_origin, Vector2.ZERO).expand(selected_tile_position)
-				fill_tile_rect(selected_tilemap, rect_selection, tile_id_to_use)
-			else:
-				place_tile(selected_tilemap, selected_tile_position, tile_id_to_use)
+				
+				var is_tile_new = old_selected_tile_position != selected_tile_position
+				
+				if placing_tiles and is_tile_new:
+					if tile_id_to_use == -1: owner.play_sound("EraseTile")
+					else: owner.play_sound("PlaceTile")
+					
+					if placing_rectangle_fill:
+						rect_selection = Rect2(rect_fill_origin, Vector2.ZERO).expand(selected_tile_position)
+						fill_tile_rect(selected_tilemap, rect_selection, tile_id_to_use)
+					else:
+						place_tile(selected_tilemap, selected_tile_position, tile_id_to_use)
+				
+				old_selected_tile_position = selected_tile_position
 
 func get_selected_tile():
 	var mouse_pos = get_global_mouse_position()
@@ -82,6 +92,7 @@ func _input(event):
 				
 				if placing_tiles:
 					owner.add_undo_state()
+					old_selected_tile_position = Vector2.ZERO - Vector2.ONE
 				
 				placing_rectangle_fill = false
 				

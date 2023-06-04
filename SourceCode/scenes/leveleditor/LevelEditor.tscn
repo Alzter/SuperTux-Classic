@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=2]
+[gd_scene load_steps=46 format=2]
 
 [ext_resource path="res://images/player/tux/big/idle.png" type="Texture" id=1]
 [ext_resource path="res://images/player/tux/small/idle.png" type="Texture" id=2]
@@ -30,6 +30,9 @@
 [ext_resource path="res://images/editor/icons/save.png" type="Texture" id=28]
 [ext_resource path="res://images/editor/icons/add.png" type="Texture" id=29]
 [ext_resource path="res://images/editor/icons/flip.png" type="Texture" id=30]
+[ext_resource path="res://sounds/objects/brick.wav" type="AudioStream" id=31]
+[ext_resource path="res://scenes/master/SFX.gd" type="Script" id=32]
+[ext_resource path="res://sounds/objects/brick_smash.wav" type="AudioStream" id=33]
 
 [sub_resource type="ShaderMaterial" id=10]
 shader = ExtResource( 18 )
@@ -776,6 +779,19 @@ text = "PLAY"
 
 [node name="PauseMenu" parent="." instance=ExtResource( 17 )]
 visible = false
+
+[node name="SFX" type="Node2D" parent="."]
+script = ExtResource( 32 )
+
+[node name="PlaceTile" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource( 31 )
+volume_db = -8.0
+pitch_scale = 6.0
+
+[node name="EraseTile" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource( 33 )
+volume_db = -8.0
+pitch_scale = 3.0
 
 [connection signal="mouse_entered" from="UI/Scale/EditorUI/MouseDetector" to="." method="_on_MouseDetector_mouse_entered"]
 [connection signal="mouse_exited" from="UI/Scale/EditorUI/MouseDetector" to="." method="_on_MouseDetector_mouse_exited"]

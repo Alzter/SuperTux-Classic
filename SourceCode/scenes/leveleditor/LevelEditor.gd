@@ -18,6 +18,8 @@ export var unselected_tilemap_opacity = 0.3
 
 export var editor_layers_directory = "res://scenes/layers/"
 
+onready var sfx = $SFX
+
 onready var tile_functions = $TileFunctions
 onready var object_functions = $ObjectFunctions
 onready var editor_camera = $EditorCamera
@@ -597,3 +599,6 @@ func _input(event):
 	
 	if Input.is_action_just_pressed("editor_flip_tiles"):
 		self.flip_tiles_enabled = !flip_tiles_enabled
+
+func play_sound(sound_effect : String):
+	sfx.play(sound_effect)
