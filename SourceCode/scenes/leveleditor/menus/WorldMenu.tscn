@@ -7,7 +7,6 @@
 [ext_resource path="res://scenes/leveleditor/menus/OpenLevel.tscn" type="PackedScene" id=5]
 
 [node name="WorldMenu" type="PopupDialog"]
-visible = true
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 20.0
@@ -77,7 +76,7 @@ focus_neighbour_right = NodePath("../OpenLevel")
 focus_neighbour_bottom = NodePath("../../HSplitContainer2/EditWorldProperties")
 size_flags_horizontal = 3
 size_flags_vertical = 3
-text = "Create a Level"
+text = "Create a Level..."
 clip_text = true
 
 [node name="OpenLevel" type="Button" parent="VBoxContainer/PanelContainer/ButtonList/HSplitContainer"]
@@ -88,7 +87,7 @@ focus_neighbour_left = NodePath("../CreateLevel")
 focus_neighbour_bottom = NodePath("../../HSplitContainer2/OpenWorldFolder")
 size_flags_horizontal = 3
 size_flags_vertical = 3
-text = "Open a Level"
+text = "Open a Level..."
 clip_text = true
 
 [node name="HSeparator" type="HSeparator" parent="VBoxContainer/PanelContainer/ButtonList"]
@@ -116,7 +115,7 @@ focus_neighbour_top = NodePath("../../HSplitContainer/CreateLevel")
 focus_neighbour_right = NodePath("../OpenWorldFolder")
 size_flags_horizontal = 3
 size_flags_vertical = 3
-text = "World Properties"
+text = "World Properties..."
 clip_text = true
 
 [node name="OpenWorldFolder" type="Button" parent="VBoxContainer/PanelContainer/ButtonList/HSplitContainer2"]

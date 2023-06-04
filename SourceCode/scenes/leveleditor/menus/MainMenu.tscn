@@ -53,39 +53,42 @@ margin_bottom = 459.0
 size_flags_vertical = 3
 
 [node name="MenuItems" type="VBoxContainer" parent="MainMenu/VBoxContainer/PanelContainer"]
-margin_left = 16.0
-margin_top = 16.0
-margin_right = 996.0
-margin_bottom = 373.0
+margin_left = 32.0
+margin_top = 32.0
+margin_right = 980.0
+margin_bottom = 357.0
 custom_constants/separation = 15
 
 [node name="WorldCreate" type="Button" parent="MainMenu/VBoxContainer/PanelContainer/MenuItems"]
-margin_right = 980.0
-margin_bottom = 109.0
+margin_right = 948.0
+margin_bottom = 98.0
 rect_min_size = Vector2( 0, 50 )
 focus_neighbour_bottom = NodePath("../WorldOpen")
 size_flags_vertical = 3
-text = "Create World"
+text = "Create World..."
+clip_text = true
 
 [node name="WorldOpen" type="Button" parent="MainMenu/VBoxContainer/PanelContainer/MenuItems"]
-margin_top = 124.0
-margin_right = 980.0
-margin_bottom = 233.0
+margin_top = 113.0
+margin_right = 948.0
+margin_bottom = 211.0
 rect_min_size = Vector2( 0, 50 )
 focus_neighbour_top = NodePath("../WorldCreate")
 focus_neighbour_bottom = NodePath("../OpenWorldFolder")
 size_flags_vertical = 3
-text = "Open World"
+text = "Open World..."
+clip_text = true
 
 [node name="OpenWorldFolder" type="Button" parent="MainMenu/VBoxContainer/PanelContainer/MenuItems"]
-margin_top = 248.0
-margin_right = 980.0
-margin_bottom = 357.0
+margin_top = 226.0
+margin_right = 948.0
+margin_bottom = 325.0
 rect_min_size = Vector2( 0, 50 )
 focus_neighbour_top = NodePath("../WorldOpen")
 focus_neighbour_bottom = NodePath("../../../ExitToMenu")
 size_flags_vertical = 3
 text = "Open Worlds Folder..."
+clip_text = true
 
 [node name="HSeparator2" type="HSeparator" parent="MainMenu/VBoxContainer"]
 margin_top = 474.0
@@ -109,6 +112,7 @@ visible = false
 [node name="SnowBG" parent="." instance=ExtResource( 3 )]
 
 [node name="WorldMenu" parent="." instance=ExtResource( 7 )]
+visible = false
 
 [connection signal="mouse_entered" from="MainMenu/VBoxContainer/PanelContainer/MenuItems/WorldCreate" to="." method="_on_WorldCreate_mouse_entered"]
 [connection signal="pressed" from="MainMenu/VBoxContainer/PanelContainer/MenuItems/WorldCreate" to="." method="_on_WorldCreate_pressed"]
