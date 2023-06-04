@@ -47,6 +47,12 @@ func _update_level_filepath(new_value):
 	else:
 		level_name = Global.get_level_attribute(level_filepath, "level_title")
 	
+	if !level_name:
+		print("Unrecognised STC level at path: " + level_filepath)
+		push_error("Unrecognised STC level at path: " + level_filepath)
+		queue_free()
+		return
+	
 	title.text = level_name
 	subtitle.text = ""#level_author
 
