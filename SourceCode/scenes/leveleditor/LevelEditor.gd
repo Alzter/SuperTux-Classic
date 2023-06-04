@@ -274,26 +274,38 @@ func layer_button_pressed(button_node, layer_object):
 
 func update_selected_layer(new_value):
 	selected_layer = new_value
-	if selected_layer:
+	
+	var layer_exists = false
+	if selected_layer: layer_exists = is_instance_valid(selected_layer)
+	
+	if layer_exists:
 		selected_layer_name = selected_layer.name
-	
-	for button in layers_container.get_children():
-		button.disabled = button.layer_object == selected_layer
-	
-	update_tilemap_opacity()
-	
-	if is_tilemap(selected_layer):
-		object_functions.object_container = null
-		tile_functions.selected_tilemap = selected_layer
-		tiles_container.show_tiles_from_tilemap(selected_layer)
 		
-	elif is_object_container(selected_layer):
-		object_functions.object_container = selected_layer
-		tile_functions.selected_tilemap = null
-		tiles_container.show_object_scenes_in_folder(self.object_scenes_folder)
+		for button in layers_container.get_children():
+			button.disabled = button.layer_object == selected_layer
+		
+		update_tilemap_opacity()
+		
+		if is_tilemap(selected_layer):
+			object_functions.object_container = null
+			tile_functions.selected_tilemap = selected_layer
+			tiles_container.show_tiles_from_tilemap(selected_layer)
+			
+		elif is_object_container(selected_layer):
+			object_functions.object_container = selected_layer
+			tile_functions.selected_tilemap = null
+			tiles_container.show_object_scenes_in_folder(self.object_scenes_folder)
+		
+		else:
+			tiles_container.empty_tiles()
 	
 	else:
+		object_functions.object_container = null
+		tile_functions.selected_tilemap = null
 		tiles_container.empty_tiles()
+		
+		for button in layers_container.get_children():
+			button.disabled = false
 
 func update_tilemap_opacity():
 	if selected_layer and edit_mode:
@@ -323,7 +335,7 @@ func is_tilemap(node):
 	return node is TileMap# and not node.is_in_group("objectmaps")
 
 func is_object_container(node):
-	return node is Node2D
+	return node.is_in_group("object_container")
 
 func is_objectmap(node):
 	return node is TileMap and node.is_in_group("objectmaps")

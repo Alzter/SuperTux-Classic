@@ -1,0 +1,3 @@
+[gd_scene format=2]
+
+[node name="Objects" type="Node2D" groups=["object_container"]]

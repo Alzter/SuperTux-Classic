@@ -14,7 +14,7 @@ music = "Salcon"
 worldmap_spawn = Vector2( 4, 5 )
 worldmap_player_object = ExtResource( 2 )
 
-[node name="Objects" type="Node2D" parent="."]
+[node name="Objects" type="Node2D" parent="." groups=["object_container"]]
 script = ExtResource( 5 )
 
 [node name="LevelDot" parent="Objects" instance=ExtResource( 6 )]

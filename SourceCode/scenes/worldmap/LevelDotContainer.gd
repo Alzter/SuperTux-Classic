@@ -4,6 +4,10 @@ export var debug = false
 func _ready():
 	#print(Global.is_in_editor)
 	#print(debug)
+	
+	if !is_in_group("object_container"):
+		add_to_group("object_container")
+	
 	yield(get_tree(), "idle_frame") # Force godot to process parent before child
 	
 	if debug or Global.is_in_editor:
