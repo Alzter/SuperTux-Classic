@@ -343,6 +343,12 @@ func _on_RectSelect_toggled(button_pressed):
 func _on_EyeDropper_toggled(button_pressed):
 	eyedropper_enabled = button_pressed
 	emit_signal("eyedropper_toggled", button_pressed)
+	
+	if button_pressed:
+		rect_select_enabled = false
+		emit_signal("rect_select_toggled", false)
+		eraser_enabled = false
+		emit_signal("eraser_toggled", false)
 
 func update_rect_select_enabled(new_value):
 	button_rect_select.pressed = new_value

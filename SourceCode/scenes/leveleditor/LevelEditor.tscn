@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=2]
+[gd_scene load_steps=41 format=2]
 
 [ext_resource path="res://images/player/tux/big/idle.png" type="Texture" id=1]
 [ext_resource path="res://images/player/tux/small/idle.png" type="Texture" id=2]
@@ -25,6 +25,9 @@
 [ext_resource path="res://scenes/leveleditor/ObjectButton.tscn" type="PackedScene" id=23]
 [ext_resource path="res://images/editor/icons/eraser.png" type="Texture" id=24]
 [ext_resource path="res://images/editor/icons/rect_select.png" type="Texture" id=25]
+[ext_resource path="res://images/editor/icons/undo.png" type="Texture" id=26]
+[ext_resource path="res://images/editor/icons/settings.png" type="Texture" id=27]
+[ext_resource path="res://images/editor/icons/save.png" type="Texture" id=28]
 
 [sub_resource type="ShaderMaterial" id=10]
 shader = ExtResource( 18 )
@@ -262,44 +265,42 @@ mouse_filter = 1
 [node name="Buttons" type="HBoxContainer" parent="UI/Scale/EditorUI"]
 margin_left = 16.0
 margin_top = 16.0
-margin_right = 316.0
-margin_bottom = 80.0
+margin_right = 400.0
+margin_bottom = 88.0
 custom_constants/separation = 15
 
 [node name="UndoButton" type="Button" parent="UI/Scale/EditorUI/Buttons"]
-margin_right = 90.0
-margin_bottom = 64.0
+margin_right = 72.0
+margin_bottom = 72.0
 focus_mode = 0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-text = "UNDO"
+icon = ExtResource( 26 )
 clip_text = true
 
 [node name="LevelProperties" type="Button" parent="UI/Scale/EditorUI/Buttons"]
-margin_left = 105.0
-margin_right = 195.0
-margin_bottom = 64.0
+margin_left = 87.0
+margin_right = 159.0
+margin_bottom = 72.0
 focus_mode = 0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-text = "SETTINGS"
+icon = ExtResource( 27 )
 clip_text = true
 
 [node name="SaveButton" type="Button" parent="UI/Scale/EditorUI/Buttons"]
-margin_left = 210.0
-margin_right = 300.0
-margin_bottom = 64.0
+margin_left = 174.0
+margin_right = 246.0
+margin_bottom = 72.0
 focus_mode = 0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-text = "SAVE"
+icon = ExtResource( 28 )
 clip_text = true
 
 [node name="LevelPropertiesDialog" type="PopupDialog" parent="UI/Scale/EditorUI"]
-visible = true
-anchor_bottom = 1.0
-margin_right = 570.0
-margin_bottom = -122.0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -477.0
+margin_top = -275.0
+margin_right = 477.0
+margin_bottom = 275.0
 script = ExtResource( 20 )
 
 [node name="VBoxContainer" type="VBoxContainer" parent="UI/Scale/EditorUI/LevelPropertiesDialog"]
@@ -311,7 +312,7 @@ margin_right = -12.0
 margin_bottom = -12.0
 
 [node name="Title" type="Label" parent="UI/Scale/EditorUI/LevelPropertiesDialog/VBoxContainer"]
-margin_right = 546.0
+margin_right = 930.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 0, 32 )
 custom_colors/font_color = Color( 1, 1, 0, 1 )
@@ -321,27 +322,27 @@ valign = 2
 
 [node name="HSeparator" type="HSeparator" parent="UI/Scale/EditorUI/LevelPropertiesDialog/VBoxContainer"]
 margin_top = 36.0
-margin_right = 546.0
+margin_right = 930.0
 margin_bottom = 66.0
 
 [node name="PanelContainer" type="PanelContainer" parent="UI/Scale/EditorUI/LevelPropertiesDialog/VBoxContainer"]
 margin_top = 70.0
-margin_right = 546.0
-margin_bottom = 472.0
+margin_right = 930.0
+margin_bottom = 424.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="LevelProperties" type="VBoxContainer" parent="UI/Scale/EditorUI/LevelPropertiesDialog/VBoxContainer/PanelContainer"]
 margin_left = 16.0
 margin_top = 16.0
-margin_right = 530.0
-margin_bottom = 386.0
+margin_right = 914.0
+margin_bottom = 338.0
 alignment = 1
 
 [node name="EditLevelName" type="HSplitContainer" parent="UI/Scale/EditorUI/LevelPropertiesDialog/VBoxContainer/PanelContainer/LevelProperties"]
-margin_top = 37.0
-margin_right = 514.0
-margin_bottom = 66.0
+margin_top = 13.0
+margin_right = 898.0
+margin_bottom = 42.0
 
 [node name="Label" type="Label" parent="UI/Scale/EditorUI/LevelPropertiesDialog/VBoxContainer/PanelContainer/LevelProperties/EditLevelName"]
 margin_top = 4.0
@@ -353,15 +354,15 @@ text = "Name:"
 
 [node name="Name" type="LineEdit" parent="UI/Scale/EditorUI/LevelPropertiesDialog/VBoxContainer/PanelContainer/LevelProperties/EditLevelName"]
 margin_left = 112.0
-margin_right = 514.0
+margin_right = 898.0
 margin_bottom = 29.0
 size_flags_vertical = 3
 text = "Welcome to Antarctica"
 
 [node name="EditLevelAuthor" type="HSplitContainer" parent="UI/Scale/EditorUI/LevelPropertiesDialog/VBoxContainer/PanelContainer/LevelProperties"]
-margin_top = 70.0
-margin_right = 514.0
-margin_bottom = 99.0
+margin_top = 46.0
+margin_right = 898.0
+margin_bottom = 75.0
 
 [node name="Label" type="Label" parent="UI/Scale/EditorUI/LevelPropertiesDialog/VBoxContainer/PanelContainer/LevelProperties/EditLevelAuthor"]
 margin_top = 4.0
@@ -373,20 +374,20 @@ text = "Author:"
 
 [node name="Author" type="LineEdit" parent="UI/Scale/EditorUI/LevelPropertiesDialog/VBoxContainer/PanelContainer/LevelProperties/EditLevelAuthor"]
 margin_left = 113.0
-margin_right = 514.0
+margin_right = 898.0
 margin_bottom = 29.0
 size_flags_vertical = 3
 text = "Marek Moeckel"
 
 [node name="HSeparator2" type="HSeparator" parent="UI/Scale/EditorUI/LevelPropertiesDialog/VBoxContainer/PanelContainer/LevelProperties"]
-margin_top = 103.0
-margin_right = 514.0
-margin_bottom = 133.0
+margin_top = 79.0
+margin_right = 898.0
+margin_bottom = 109.0
 
 [node name="EditLevelMusic" type="HSplitContainer" parent="UI/Scale/EditorUI/LevelPropertiesDialog/VBoxContainer/PanelContainer/LevelProperties"]
-margin_top = 137.0
-margin_right = 514.0
-margin_bottom = 166.0
+margin_top = 113.0
+margin_right = 898.0
+margin_bottom = 142.0
 
 [node name="Label" type="Label" parent="UI/Scale/EditorUI/LevelPropertiesDialog/VBoxContainer/PanelContainer/LevelProperties/EditLevelMusic"]
 margin_top = 4.0
@@ -398,21 +399,21 @@ text = "Music:"
 
 [node name="Music" type="OptionButton" parent="UI/Scale/EditorUI/LevelPropertiesDialog/VBoxContainer/PanelContainer/LevelProperties/EditLevelMusic"]
 margin_left = 112.0
-margin_right = 514.0
+margin_right = 898.0
 margin_bottom = 29.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 text = "ChipDisko"
 
 [node name="HSeparator3" type="HSeparator" parent="UI/Scale/EditorUI/LevelPropertiesDialog/VBoxContainer/PanelContainer/LevelProperties"]
-margin_top = 170.0
-margin_right = 514.0
-margin_bottom = 200.0
+margin_top = 146.0
+margin_right = 898.0
+margin_bottom = 176.0
 
 [node name="EditLevelTimer" type="HBoxContainer" parent="UI/Scale/EditorUI/LevelPropertiesDialog/VBoxContainer/PanelContainer/LevelProperties"]
-margin_top = 204.0
-margin_right = 514.0
-margin_bottom = 233.0
+margin_top = 180.0
+margin_right = 898.0
+margin_bottom = 209.0
 
 [node name="TimerEnabled" type="CheckBox" parent="UI/Scale/EditorUI/LevelPropertiesDialog/VBoxContainer/PanelContainer/LevelProperties/EditLevelTimer"]
 margin_right = 24.0
@@ -431,13 +432,13 @@ align = 1
 
 [node name="SpaceFiller" type="Control" parent="UI/Scale/EditorUI/LevelPropertiesDialog/VBoxContainer/PanelContainer/LevelProperties/EditLevelTimer"]
 margin_left = 132.0
-margin_right = 376.0
+margin_right = 760.0
 margin_bottom = 29.0
 size_flags_horizontal = 3
 
 [node name="Time" type="SpinBox" parent="UI/Scale/EditorUI/LevelPropertiesDialog/VBoxContainer/PanelContainer/LevelProperties/EditLevelTimer"]
-margin_left = 380.0
-margin_right = 514.0
+margin_left = 764.0
+margin_right = 898.0
 margin_bottom = 29.0
 size_flags_vertical = 3
 min_value = 10.0
@@ -445,26 +446,26 @@ max_value = 999.0
 value = 300.0
 
 [node name="HSeparator4" type="HSeparator" parent="UI/Scale/EditorUI/LevelPropertiesDialog/VBoxContainer/PanelContainer/LevelProperties"]
-margin_top = 237.0
-margin_right = 514.0
-margin_bottom = 267.0
+margin_top = 213.0
+margin_right = 898.0
+margin_bottom = 243.0
 
 [node name="EditLevelGravity" type="HSplitContainer" parent="UI/Scale/EditorUI/LevelPropertiesDialog/VBoxContainer/PanelContainer/LevelProperties"]
-margin_top = 271.0
-margin_right = 514.0
-margin_bottom = 300.0
+margin_top = 247.0
+margin_right = 898.0
+margin_bottom = 276.0
 
 [node name="Label" type="Label" parent="UI/Scale/EditorUI/LevelPropertiesDialog/VBoxContainer/PanelContainer/LevelProperties/EditLevelGravity"]
 margin_top = 4.0
-margin_right = 368.0
+margin_right = 752.0
 margin_bottom = 25.0
 size_flags_horizontal = 3
 size_flags_vertical = 6
 text = "Gravity:"
 
 [node name="Gravity" type="SpinBox" parent="UI/Scale/EditorUI/LevelPropertiesDialog/VBoxContainer/PanelContainer/LevelProperties/EditLevelGravity"]
-margin_left = 380.0
-margin_right = 514.0
+margin_left = 764.0
+margin_right = 898.0
 margin_bottom = 29.0
 size_flags_vertical = 3
 min_value = 1.0
@@ -472,35 +473,35 @@ max_value = 50.0
 value = 10.0
 
 [node name="EditLevelAutoscroll" type="HSplitContainer" parent="UI/Scale/EditorUI/LevelPropertiesDialog/VBoxContainer/PanelContainer/LevelProperties"]
-margin_top = 304.0
-margin_right = 514.0
-margin_bottom = 333.0
+margin_top = 280.0
+margin_right = 898.0
+margin_bottom = 309.0
 
 [node name="Label" type="Label" parent="UI/Scale/EditorUI/LevelPropertiesDialog/VBoxContainer/PanelContainer/LevelProperties/EditLevelAutoscroll"]
 margin_top = 4.0
-margin_right = 368.0
+margin_right = 752.0
 margin_bottom = 25.0
 size_flags_horizontal = 3
 size_flags_vertical = 6
 text = "Autoscroll Speed:"
 
 [node name="AutoscrollSpeed" type="SpinBox" parent="UI/Scale/EditorUI/LevelPropertiesDialog/VBoxContainer/PanelContainer/LevelProperties/EditLevelAutoscroll"]
-margin_left = 380.0
-margin_right = 514.0
+margin_left = 764.0
+margin_right = 898.0
 margin_bottom = 29.0
 size_flags_vertical = 3
 max_value = 5.0
 step = 0.5
 
 [node name="HSeparator2" type="HSeparator" parent="UI/Scale/EditorUI/LevelPropertiesDialog/VBoxContainer"]
-margin_top = 476.0
-margin_right = 546.0
-margin_bottom = 506.0
+margin_top = 428.0
+margin_right = 930.0
+margin_bottom = 458.0
 
 [node name="HideLevelProperties" type="Button" parent="UI/Scale/EditorUI/LevelPropertiesDialog/VBoxContainer"]
-margin_top = 510.0
-margin_right = 546.0
-margin_bottom = 574.0
+margin_top = 462.0
+margin_right = 930.0
+margin_bottom = 526.0
 rect_min_size = Vector2( 0, 64 )
 text = "Done"
 
@@ -714,7 +715,7 @@ toggle_mode = true
 icon = ExtResource( 24 )
 clip_text = true
 
-[node name="EyeDropper" type="Button" parent="UI/Scale/EditorUI/TilesPanelOffset/TilesPanel/PlacementOptions"]
+[node name="RectSelect" type="Button" parent="UI/Scale/EditorUI/TilesPanelOffset/TilesPanel/PlacementOptions"]
 margin_top = 76.0
 margin_right = 72.0
 margin_bottom = 148.0
@@ -722,10 +723,10 @@ focus_mode = 0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 toggle_mode = true
-icon = ExtResource( 12 )
+icon = ExtResource( 25 )
 clip_text = true
 
-[node name="RectSelect" type="Button" parent="UI/Scale/EditorUI/TilesPanelOffset/TilesPanel/PlacementOptions"]
+[node name="EyeDropper" type="Button" parent="UI/Scale/EditorUI/TilesPanelOffset/TilesPanel/PlacementOptions"]
 margin_top = 152.0
 margin_right = 72.0
 margin_bottom = 224.0
@@ -733,7 +734,7 @@ focus_mode = 0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 toggle_mode = true
-icon = ExtResource( 25 )
+icon = ExtResource( 12 )
 clip_text = true
 
 [node name="EditLayerDialog" parent="UI/Scale/EditorUI" instance=ExtResource( 16 )]
@@ -773,6 +774,6 @@ visible = false
 [connection signal="pressed" from="UI/Scale/EditorUI/LayersPanelOffset/AddLayerDialog/VBoxContainer/AddLayerButton" to="UI/Scale/EditorUI/LayersPanelOffset/AddLayerDialog" method="_on_AddLayerButton_pressed"]
 [connection signal="pressed" from="UI/Scale/EditorUI/TilesPanelOffset/TilesPanel/RetractTab" to="UI/Scale/EditorUI/TilesPanelOffset" method="_on_RetractTab_pressed"]
 [connection signal="toggled" from="UI/Scale/EditorUI/TilesPanelOffset/TilesPanel/PlacementOptions/Eraser" to="." method="_on_Eraser_toggled"]
-[connection signal="toggled" from="UI/Scale/EditorUI/TilesPanelOffset/TilesPanel/PlacementOptions/EyeDropper" to="." method="_on_EyeDropper_toggled"]
 [connection signal="toggled" from="UI/Scale/EditorUI/TilesPanelOffset/TilesPanel/PlacementOptions/RectSelect" to="." method="_on_RectSelect_toggled"]
+[connection signal="toggled" from="UI/Scale/EditorUI/TilesPanelOffset/TilesPanel/PlacementOptions/EyeDropper" to="." method="_on_EyeDropper_toggled"]
 [connection signal="pressed" from="UI/Scale/EditToggle" to="." method="_on_EditToggle_pressed"]
