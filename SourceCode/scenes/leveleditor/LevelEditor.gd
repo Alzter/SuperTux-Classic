@@ -521,7 +521,7 @@ func object_clicked(object : Node, click_type : int):
 			self.eyedropper_enabled = false
 			return
 	
-	elif click_type == BUTTON_MIDDLE:
+	elif click_type == BUTTON_RIGHT:
 		mouse_over_ui = true # Prevent the camera dragging input from registering when middle clicking objects
 		add_undo_state()
 		edit_layer_dialog.appear(object, true)
