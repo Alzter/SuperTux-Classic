@@ -32,7 +32,7 @@ margin_bottom = -25.0
 custom_constants/separation = 15
 
 [node name="Label" type="RichTextLabel" parent="MainMenu/VBoxContainer"]
-margin_right = 372.0
+margin_right = 1012.0
 margin_bottom = 30.0
 custom_fonts/normal_font = ExtResource( 1 )
 bbcode_enabled = true
@@ -42,53 +42,80 @@ fit_content_height = true
 
 [node name="HSeparator" type="HSeparator" parent="MainMenu/VBoxContainer"]
 margin_top = 45.0
-margin_right = 372.0
+margin_right = 1012.0
 margin_bottom = 55.0
 custom_constants/separation = 10
 
-[node name="WorldCreate" type="Button" parent="MainMenu/VBoxContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="MainMenu/VBoxContainer"]
 margin_top = 70.0
-margin_right = 372.0
-margin_bottom = 120.0
-rect_min_size = Vector2( 0, 50 )
-focus_neighbour_bottom = NodePath("../WorldOpen")
-text = "Create World"
-
-[node name="WorldOpen" type="Button" parent="MainMenu/VBoxContainer"]
-margin_top = 135.0
-margin_right = 372.0
-margin_bottom = 185.0
-rect_min_size = Vector2( 0, 50 )
-focus_neighbour_top = NodePath("../WorldCreate")
-focus_neighbour_bottom = NodePath("../ExitToMenu")
-text = "Open World"
-
-[node name="SpaceFiller" type="Control" parent="MainMenu/VBoxContainer"]
-margin_top = 200.0
-margin_right = 372.0
-margin_bottom = 244.0
+margin_right = 1012.0
+margin_bottom = 459.0
 size_flags_vertical = 3
 
-[node name="ExitToMenu" type="Button" parent="MainMenu/VBoxContainer"]
-margin_top = 259.0
-margin_right = 372.0
-margin_bottom = 309.0
+[node name="MenuItems" type="VBoxContainer" parent="MainMenu/VBoxContainer/PanelContainer"]
+margin_left = 16.0
+margin_top = 16.0
+margin_right = 996.0
+margin_bottom = 373.0
+custom_constants/separation = 15
+
+[node name="WorldCreate" type="Button" parent="MainMenu/VBoxContainer/PanelContainer/MenuItems"]
+margin_right = 980.0
+margin_bottom = 109.0
+rect_min_size = Vector2( 0, 50 )
+focus_neighbour_bottom = NodePath("../WorldOpen")
+size_flags_vertical = 3
+text = "Create World"
+
+[node name="WorldOpen" type="Button" parent="MainMenu/VBoxContainer/PanelContainer/MenuItems"]
+margin_top = 124.0
+margin_right = 980.0
+margin_bottom = 233.0
+rect_min_size = Vector2( 0, 50 )
+focus_neighbour_top = NodePath("../WorldCreate")
+focus_neighbour_bottom = NodePath("../OpenWorldFolder")
+size_flags_vertical = 3
+text = "Open World"
+
+[node name="OpenWorldFolder" type="Button" parent="MainMenu/VBoxContainer/PanelContainer/MenuItems"]
+margin_top = 248.0
+margin_right = 980.0
+margin_bottom = 357.0
 rect_min_size = Vector2( 0, 50 )
 focus_neighbour_top = NodePath("../WorldOpen")
+focus_neighbour_bottom = NodePath("../../../ExitToMenu")
+size_flags_vertical = 3
+text = "Open Worlds Folder..."
+
+[node name="HSeparator2" type="HSeparator" parent="MainMenu/VBoxContainer"]
+margin_top = 474.0
+margin_right = 1012.0
+margin_bottom = 484.0
+custom_constants/separation = 10
+
+[node name="ExitToMenu" type="Button" parent="MainMenu/VBoxContainer"]
+margin_top = 499.0
+margin_right = 1012.0
+margin_bottom = 549.0
+rect_min_size = Vector2( 0, 50 )
+focus_neighbour_top = NodePath("../PanelContainer/MenuItems/OpenWorldFolder")
 text = "Exit"
 
 [node name="CreateWorldMenu" parent="." instance=ExtResource( 5 )]
 
 [node name="OpenWorldMenu" parent="." instance=ExtResource( 6 )]
+visible = false
 
 [node name="SnowBG" parent="." instance=ExtResource( 3 )]
 
 [node name="WorldMenu" parent="." instance=ExtResource( 7 )]
 
-[connection signal="mouse_entered" from="MainMenu/VBoxContainer/WorldCreate" to="." method="_on_WorldCreate_mouse_entered"]
-[connection signal="pressed" from="MainMenu/VBoxContainer/WorldCreate" to="." method="_on_WorldCreate_pressed"]
-[connection signal="mouse_entered" from="MainMenu/VBoxContainer/WorldOpen" to="." method="_on_WorldOpen_mouse_entered"]
-[connection signal="pressed" from="MainMenu/VBoxContainer/WorldOpen" to="." method="_on_WorldOpen_pressed"]
+[connection signal="mouse_entered" from="MainMenu/VBoxContainer/PanelContainer/MenuItems/WorldCreate" to="." method="_on_WorldCreate_mouse_entered"]
+[connection signal="pressed" from="MainMenu/VBoxContainer/PanelContainer/MenuItems/WorldCreate" to="." method="_on_WorldCreate_pressed"]
+[connection signal="mouse_entered" from="MainMenu/VBoxContainer/PanelContainer/MenuItems/WorldOpen" to="." method="_on_WorldOpen_mouse_entered"]
+[connection signal="pressed" from="MainMenu/VBoxContainer/PanelContainer/MenuItems/WorldOpen" to="." method="_on_WorldOpen_pressed"]
+[connection signal="mouse_entered" from="MainMenu/VBoxContainer/PanelContainer/MenuItems/OpenWorldFolder" to="." method="_on_OpenWorldFolder_mouse_entered"]
+[connection signal="pressed" from="MainMenu/VBoxContainer/PanelContainer/MenuItems/OpenWorldFolder" to="." method="_on_OpenWorldFolder_pressed"]
 [connection signal="mouse_entered" from="MainMenu/VBoxContainer/ExitToMenu" to="." method="_on_ExitToMenu_mouse_entered"]
 [connection signal="pressed" from="MainMenu/VBoxContainer/ExitToMenu" to="." method="_on_ExitToMenu_pressed"]
 [connection signal="popup_hide" from="CreateWorldMenu" to="." method="_on_CreateWorldMenu_popup_hide"]

@@ -7,6 +7,7 @@
 [ext_resource path="res://scenes/leveleditor/menus/OpenLevel.tscn" type="PackedScene" id=5]
 
 [node name="WorldMenu" type="PopupDialog"]
+visible = true
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 20.0
@@ -26,7 +27,7 @@ margin_bottom = -25.0
 custom_constants/separation = 15
 
 [node name="WorldName" type="RichTextLabel" parent="VBoxContainer"]
-margin_right = 513.0
+margin_right = 1153.0
 margin_bottom = 30.0
 custom_colors/default_color = Color( 1, 1, 0, 1 )
 custom_fonts/normal_font = ExtResource( 2 )
@@ -37,76 +38,128 @@ fit_content_height = true
 
 [node name="HSeparator" type="HSeparator" parent="VBoxContainer"]
 margin_top = 45.0
-margin_right = 513.0
+margin_right = 1153.0
 margin_bottom = 55.0
 custom_constants/separation = 10
 
-[node name="ButtonList" type="VBoxContainer" parent="VBoxContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer"]
 margin_top = 70.0
-margin_right = 513.0
-margin_bottom = 240.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-custom_constants/separation = 20
-
-[node name="HSplitContainer" type="HSplitContainer" parent="VBoxContainer/ButtonList"]
-margin_right = 513.0
-margin_bottom = 100.0
-rect_min_size = Vector2( 0, 100 )
+margin_right = 1153.0
+margin_bottom = 549.0
 size_flags_vertical = 3
 
-[node name="CreateLevel" type="Button" parent="VBoxContainer/ButtonList/HSplitContainer"]
-margin_right = 250.0
-margin_bottom = 100.0
-rect_min_size = Vector2( 0, 50 )
+[node name="ButtonList" type="VBoxContainer" parent="VBoxContainer/PanelContainer"]
+margin_left = 32.0
+margin_top = 32.0
+margin_right = 1121.0
+margin_bottom = 447.0
 size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/separation = 15
+alignment = 1
+
+[node name="Label2" type="Label" parent="VBoxContainer/PanelContainer/ButtonList"]
+margin_right = 1089.0
+margin_bottom = 21.0
+text = "Manage Levels..."
+align = 1
+
+[node name="HSplitContainer" type="HSplitContainer" parent="VBoxContainer/PanelContainer/ButtonList"]
+margin_top = 36.0
+margin_right = 1089.0
+margin_bottom = 177.0
+size_flags_vertical = 3
+
+[node name="CreateLevel" type="Button" parent="VBoxContainer/PanelContainer/ButtonList/HSplitContainer"]
+margin_right = 538.0
+margin_bottom = 141.0
+focus_neighbour_right = NodePath("../OpenLevel")
+focus_neighbour_bottom = NodePath("../../HSplitContainer2/EditWorldProperties")
+size_flags_horizontal = 3
+size_flags_vertical = 3
 text = "Create a Level"
 clip_text = true
 
-[node name="OpenLevel" type="Button" parent="VBoxContainer/ButtonList/HSplitContainer"]
-margin_left = 262.0
-margin_right = 513.0
-margin_bottom = 100.0
-rect_min_size = Vector2( 0, 50 )
+[node name="OpenLevel" type="Button" parent="VBoxContainer/PanelContainer/ButtonList/HSplitContainer"]
+margin_left = 550.0
+margin_right = 1089.0
+margin_bottom = 141.0
+focus_neighbour_left = NodePath("../CreateLevel")
+focus_neighbour_bottom = NodePath("../../HSplitContainer2/OpenWorldFolder")
 size_flags_horizontal = 3
+size_flags_vertical = 3
 text = "Open a Level"
 clip_text = true
 
-[node name="EditWorldProperties" type="Button" parent="VBoxContainer/ButtonList"]
-margin_top = 120.0
-margin_right = 513.0
-margin_bottom = 170.0
-rect_min_size = Vector2( 0, 50 )
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer/PanelContainer/ButtonList"]
+margin_top = 192.0
+margin_right = 1089.0
+margin_bottom = 222.0
+
+[node name="Label" type="Label" parent="VBoxContainer/PanelContainer/ButtonList"]
+margin_top = 237.0
+margin_right = 1089.0
+margin_bottom = 258.0
+text = "Manage World..."
+align = 1
+
+[node name="HSplitContainer2" type="HSplitContainer" parent="VBoxContainer/PanelContainer/ButtonList"]
+margin_top = 273.0
+margin_right = 1089.0
+margin_bottom = 415.0
+size_flags_vertical = 3
+
+[node name="EditWorldProperties" type="Button" parent="VBoxContainer/PanelContainer/ButtonList/HSplitContainer2"]
+margin_right = 538.0
+margin_bottom = 142.0
+focus_neighbour_top = NodePath("../../HSplitContainer/CreateLevel")
+focus_neighbour_right = NodePath("../OpenWorldFolder")
+size_flags_horizontal = 3
 size_flags_vertical = 3
 text = "World Properties"
+clip_text = true
+
+[node name="OpenWorldFolder" type="Button" parent="VBoxContainer/PanelContainer/ButtonList/HSplitContainer2"]
+margin_left = 550.0
+margin_right = 1089.0
+margin_bottom = 142.0
+focus_neighbour_left = NodePath("../EditWorldProperties")
+focus_neighbour_top = NodePath("../../HSplitContainer/OpenLevel")
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Open World Folder..."
+clip_text = true
 
 [node name="SpaceFiller" type="Control" parent="VBoxContainer"]
-margin_top = 255.0
-margin_right = 513.0
-margin_bottom = 309.0
+visible = false
+margin_top = 325.0
+margin_right = 1153.0
+margin_bottom = 549.0
 size_flags_vertical = 3
 
 [node name="HSeparator2" type="HSeparator" parent="VBoxContainer"]
-margin_top = 324.0
-margin_right = 513.0
-margin_bottom = 334.0
+margin_top = 564.0
+margin_right = 1153.0
+margin_bottom = 574.0
 custom_constants/separation = 10
 
 [node name="Back" type="Button" parent="VBoxContainer"]
-margin_top = 349.0
-margin_right = 513.0
-margin_bottom = 399.0
+margin_top = 589.0
+margin_right = 1153.0
+margin_bottom = 639.0
 rect_min_size = Vector2( 0, 50 )
 text = "Back"
 
 [node name="SelectLevelDialog" parent="." instance=ExtResource( 5 )]
 
 [node name="EditWorldMenu" parent="." instance=ExtResource( 4 )]
+visible = false
 
 [connection signal="about_to_show" from="." to="." method="_on_WorldMenu_about_to_show"]
-[connection signal="pressed" from="VBoxContainer/ButtonList/HSplitContainer/CreateLevel" to="." method="_on_CreateLevel_pressed"]
-[connection signal="pressed" from="VBoxContainer/ButtonList/HSplitContainer/OpenLevel" to="." method="_on_OpenLevel_pressed"]
-[connection signal="pressed" from="VBoxContainer/ButtonList/EditWorldProperties" to="." method="_on_EditWorldProperties_pressed"]
+[connection signal="pressed" from="VBoxContainer/PanelContainer/ButtonList/HSplitContainer/CreateLevel" to="." method="_on_CreateLevel_pressed"]
+[connection signal="pressed" from="VBoxContainer/PanelContainer/ButtonList/HSplitContainer/OpenLevel" to="." method="_on_OpenLevel_pressed"]
+[connection signal="pressed" from="VBoxContainer/PanelContainer/ButtonList/HSplitContainer2/EditWorldProperties" to="." method="_on_EditWorldProperties_pressed"]
+[connection signal="pressed" from="VBoxContainer/PanelContainer/ButtonList/HSplitContainer2/OpenWorldFolder" to="." method="_on_OpenWorldFolder_pressed"]
 [connection signal="pressed" from="VBoxContainer/Back" to="." method="_on_Back_pressed"]
 [connection signal="popup_hide" from="SelectLevelDialog" to="." method="_on_SelectLevelDialog_popup_hide"]
 [connection signal="hide" from="EditWorldMenu" to="." method="_on_EditWorldMenu_hide"]

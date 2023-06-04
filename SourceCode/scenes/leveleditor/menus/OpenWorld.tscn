@@ -8,6 +8,7 @@
 [ext_resource path="res://scenes/leveleditor/menus/WorldMenu.tscn" type="PackedScene" id=7]
 
 [node name="OpenWorldMenu" type="PopupDialog"]
+visible = true
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 20.0
@@ -71,6 +72,7 @@ focus_neighbour_top = NodePath("../OpenWorldButton")
 text = "Back"
 
 [node name="DeleteWorldDialog" parent="." instance=ExtResource( 6 )]
+visible = false
 
 [node name="WorldMenu" parent="." instance=ExtResource( 7 )]
 

@@ -1,8 +1,8 @@
 extends PopupDialog
 
-onready var button_create_level = $VBoxContainer/ButtonList/HSplitContainer/CreateLevel
-onready var button_open_level = $VBoxContainer/ButtonList/HSplitContainer/OpenLevel
-onready var button_edit_world = $VBoxContainer/ButtonList/EditWorldProperties
+onready var button_create_level = $VBoxContainer/PanelContainer/ButtonList/HSplitContainer/CreateLevel
+onready var button_open_level = $VBoxContainer/PanelContainer/ButtonList/HSplitContainer/OpenLevel
+onready var button_edit_world = $VBoxContainer/PanelContainer/ButtonList/EditWorldProperties
 onready var button_back = $VBoxContainer/Back
 onready var label_world_name = $VBoxContainer/WorldName
 
@@ -54,3 +54,6 @@ func _on_EditWorldMenu_hide():
 
 func level_opened(level_filepath : String):
 	Global.load_level_editor_with_level(level_filepath)
+
+func _on_OpenWorldFolder_pressed():
+	UserLevels.open_user_world_folder(UserLevels.current_world)

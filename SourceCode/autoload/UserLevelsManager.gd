@@ -296,3 +296,31 @@ func _create_world_data(world_name : String, author_name : String, worldmap_scen
 		"worldmap_scene" : worldmap_scene,
 		"initial_scene" : initial_scene,
 	}
+
+func _get_absolute_user_worlds_path():
+		# We must get the absolute path of the user directory.
+	# Trying to open "user://" as a path won't work.
+	var absolute_user_worlds_dir = OS.get_user_data_dir()
+	
+	if !absolute_user_worlds_dir.ends_with("/"):
+		absolute_user_worlds_dir = absolute_user_worlds_dir + "/"
+	
+	absolute_user_worlds_dir += user_worlds_folder
+	
+	if !absolute_user_worlds_dir.ends_with("/"):
+		absolute_user_worlds_dir = absolute_user_worlds_dir + "/"
+	
+	return absolute_user_worlds_dir
+
+func open_user_worlds_folder():
+	var dir = _get_absolute_user_worlds_path()
+	
+	OS.shell_open(dir)
+
+# Opens the folder of a specific user world
+func open_user_world_folder(world_folder_name : String):
+	var dir = _get_absolute_user_worlds_path()
+	
+	dir += world_folder_name
+	
+	OS.shell_open(dir)
