@@ -42,8 +42,8 @@ var grabbed_object = null
 var fireball_speed = 16 * Global.TILE_SIZE
 var fireball_amount = 2 # Amount of fireballs which can be shot at once
 
-var walk_accel = 0.03 * pow(60, 2) / 4 # SuperTux calculates acceleration by
-var run_accel = 0.04 * pow(60, 2) / 11 # multiplying it by delta squared
+var walk_accel = 0.03 * pow(60, 2) / 4 # M1 SuperTux calculates acceleration by multiplying it by delta squared, so we cheat by multiplying the base movement acceleration values by that here
+var run_accel = 0.04 * pow(60, 2) / 11
 
 var walk_min = 1.0 * 4.5 * Global.TILE_SIZE # Player speed gets set to this when beginning to move
 var walk_max = 2.3 * 4.5 * Global.TILE_SIZE # If X speed is over this, player is running
