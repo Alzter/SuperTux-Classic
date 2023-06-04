@@ -20,5 +20,5 @@ func add_layer_dialog():
 
 func _input(event):
 	if Input.is_key_pressed(KEY_CONTROL):
-		if Input.is_key_pressed(KEY_A):
+		if Input.is_key_pressed(KEY_A) and Input.is_key_pressed(KEY_SHIFT):
 			add_layer_dialog()
