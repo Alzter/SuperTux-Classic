@@ -51,6 +51,11 @@ func _process(delta):
 				
 				if using_eyedropper:
 					owner.current_tile_id = selected_tilemap.get_cellv(selected_tile_position)
+					
+					var tile_is_flipped = selected_tilemap.is_cell_x_flipped(selected_tile_position.x, selected_tile_position.y)
+					
+					owner.flip_tiles_enabled = tile_is_flipped
+					
 					owner.eyedropper_enabled = false
 					using_eyedropper = false
 				

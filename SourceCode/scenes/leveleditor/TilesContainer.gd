@@ -48,6 +48,7 @@ func show_tiles_from_tilemap(tilemap : TileMap):
 		tile_button.connect("tile_button_pressed", self, "update_selected_tile")
 		tile_button.tileset = current_tileset
 		tile_button.tile_id = tile
+		tile_button.flip_tiles_toggled(owner.flip_tiles_enabled)
 		owner.connect("flip_tiles_toggled", tile_button, "flip_tiles_toggled")
 
 # Display all object scenes within a directory
