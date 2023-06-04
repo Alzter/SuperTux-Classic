@@ -7,6 +7,7 @@
 margin_right = 32.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 42, 42 )
+rect_clip_content = true
 focus_mode = 0
 size_flags_horizontal = 3
 size_flags_vertical = 3

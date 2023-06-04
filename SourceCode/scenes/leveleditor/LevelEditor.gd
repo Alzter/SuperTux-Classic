@@ -522,7 +522,7 @@ func object_clicked(object : Node, click_type : int):
 	
 	object_functions.can_place_objects = false
 	
-	if eyedropper_enabled and is_editing_objects:
+	if (eyedropper_enabled or click_type == BUTTON_MIDDLE) and is_editing_objects:
 		var object_resource = load(object.filename)
 		if object_resource:
 			self.current_object_resource = object_resource
