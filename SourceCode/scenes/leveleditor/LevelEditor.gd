@@ -361,18 +361,22 @@ func _on_FlipTiles_toggled(button_pressed):
 func update_rect_select_enabled(new_value):
 	rect_select_enabled = new_value
 	button_rect_select.pressed = new_value
+	emit_signal("rect_select_toggled", new_value)
 
 func update_eraser_enabled(new_value):
 	eraser_enabled = new_value
 	button_eraser.pressed = new_value
+	emit_signal("eraser_toggled", new_value)
 
 func update_eyedropper_enabled(new_value):
 	eyedropper_enabled = new_value
 	button_eyedropper.pressed = new_value
+	emit_signal("eyedropper_toggled", new_value)
 
 func update_flip_tiles_enabled(new_value):
 	flip_tiles_enabled = new_value
 	button_flip_tiles.pressed = new_value
+	emit_signal("flip_tiles_toggled", new_value)
 
 # When User hovers over the UI
 func _on_MouseDetector_mouse_entered():
@@ -534,3 +538,25 @@ func _get_object_scenes_folder():
 	if !is_instance_valid(level): return null
 	
 	return object_scene_folder_for_worldmaps if level.is_worldmap else object_scene_folder_for_levels
+
+func _input(event):
+	if Input.is_action_just_pressed("editor_erase"):
+		self.eraser_enabled = true
+	
+	if Input.is_action_just_released("editor_erase"):
+		self.eraser_enabled = false
+	
+	if Input.is_action_just_pressed("editor_rect_select"):
+		self.rect_select_enabled = true
+	
+	if Input.is_action_just_released("editor_rect_select"):
+		self.rect_select_enabled = false
+	
+	if Input.is_action_just_pressed("editor_eyedrop_tool"):
+		self.eyedropper_enabled = true
+	
+	if Input.is_action_just_released("editor_eyedrop_tool"):
+		self.eyedropper_enabled = false
+	
+	if Input.is_action_just_pressed("editor_flip_tiles"):
+		self.flip_tiles_enabled = !flip_tiles_enabled

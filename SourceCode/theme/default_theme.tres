@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=19 format=2]
+[gd_resource type="Theme" load_steps=21 format=2]
 
 [ext_resource path="res://theme/FontMedium.tres" type="DynamicFont" id=1]
 [ext_resource path="res://theme/FontButton.tres" type="DynamicFont" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://images/menu/SliderDeselected.png" type="Texture" id=5]
 [ext_resource path="res://images/menu/SliderSelected.png" type="Texture" id=6]
 [ext_resource path="res://images/menu/SliderDisabled.png" type="Texture" id=7]
+[ext_resource path="res://theme/FontTooltip.tres" type="DynamicFont" id=8]
 
 [sub_resource type="StyleBoxFlat" id=4]
 bg_color = Color( 0.141176, 0.176471, 0.203922, 1 )
@@ -153,15 +154,26 @@ shadow_color = Color( 0, 0, 0, 0.247059 )
 shadow_size = 4
 
 [sub_resource type="StyleBoxFlat" id=12]
-content_margin_left = 16.0
-content_margin_right = 16.0
-content_margin_top = 16.0
-content_margin_bottom = 16.0
+content_margin_left = 32.0
+content_margin_right = 32.0
+content_margin_top = 32.0
+content_margin_bottom = 32.0
 bg_color = Color( 0, 0, 0, 0.262745 )
 corner_radius_top_left = 8
 corner_radius_top_right = 8
 corner_radius_bottom_right = 8
 corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id=14]
+bg_color = Color( 0, 0, 0, 0.74902 )
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+expand_margin_left = 16.0
+expand_margin_right = 16.0
+expand_margin_top = 16.0
+expand_margin_bottom = 16.0
 
 [resource]
 default_font = ExtResource( 1 )
@@ -238,6 +250,12 @@ RichTextLabel/fonts/mono_font = ExtResource( 1 )
 RichTextLabel/fonts/normal_font = ExtResource( 1 )
 RichTextLabel/styles/focus = null
 RichTextLabel/styles/normal = null
+TooltipLabel/colors/font_color = Color( 1, 1, 1, 1 )
+TooltipLabel/colors/font_color_shadow = Color( 0, 0, 0, 1 )
+TooltipLabel/constants/shadow_offset_x = 0
+TooltipLabel/constants/shadow_offset_y = 0
+TooltipLabel/fonts/font = ExtResource( 8 )
+TooltipPanel/styles/panel = SubResource( 14 )
 VSlider/icons/grabber = null
 VSlider/icons/grabber_disabled = null
 VSlider/icons/grabber_highlight = null
