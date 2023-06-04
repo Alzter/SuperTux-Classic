@@ -9,7 +9,7 @@ export var object_scene_folder_for_worldmaps = "res://scenes/worldmap/"
 var object_scenes_folder = null setget , _get_object_scenes_folder
 
 # The Editor UI gets smaller when the screen resolution is lower than this
-export var ui_scale_min_resolution = Vector2(1000, 500)
+export var ui_scale_min_resolution = Vector2(1280, 720)
 
 var cache_level = null
 var is_paused = false
