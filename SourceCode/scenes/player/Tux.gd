@@ -30,7 +30,6 @@ export var high_bounce_height_in_tiles = 5.0
 export var invincible_star_time = 10.0
 export var invincible_warning_time = 3.0 # Tux flashes green this many seconds before the invincible star wears out
 export var damage_safe_time = 1.0
-export var auto_run = true
 
 var grounded = false setget _set_grounded_state
 var jump_terminable = false
@@ -168,7 +167,7 @@ func move_input():
 	return input
 
 func horizontal_movement():
-	var running = Input.is_action_pressed("run") or auto_run
+	var running = Input.is_action_pressed("run") or Global.auto_run
 	
 	if sign(velocity.x) == move_direction or abs(velocity.x) >= walk_max:
 		running = true

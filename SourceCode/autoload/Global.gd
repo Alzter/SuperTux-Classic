@@ -33,6 +33,7 @@ var TILE_SIZE = 32
 var base_gravity = 1 * pow(60, 2) / 3
 var gravity = 1 setget _update_gravity
 var fireballs_on_screen = 0 setget _change_fireball_count
+var auto_run = true
 
 var controls = ["jump", "run", "move_left", "move_right", "move_up", "duck"]
 
@@ -176,6 +177,7 @@ func create_options_data():
 		"music_volume" : -6.0,
 		"sfx_volume" : 0.0,
 		"ambience_volume" : 0.0,
+		"auto_run" : true,
 	}
 	SaveManager.save_options_data(options_data)
 	yield(SaveManager, "save_completed")
@@ -186,11 +188,22 @@ func create_options_data():
 # E.g. sets the music volume to whatever the user previously set it to.
 func apply_options(options_data : Dictionary):
 	if SaveManager.does_options_data_exist():
-		AudioServer.set_bus_volume_db(2, options_data["music_volume"])
-		AudioServer.set_bus_volume_db(1, options_data["sfx_volume"])
-		AudioServer.set_bus_volume_db(3, options_data["ambience_volume"])
-		AudioServer.set_bus_volume_db(4, options_data["ambience_volume"])
-		AudioServer.set_bus_volume_db(5, options_data["ambience_volume"])
+		print("Applying Options Data:")
+		print(options_data)
+		print()
+		
+		if options_data.has("music_volume"):
+			AudioServer.set_bus_volume_db(2, options_data["music_volume"])
+		
+		if options_data.has("sfx_volume"):
+			AudioServer.set_bus_volume_db(1, options_data["sfx_volume"])
+		
+		if options_data.has("ambience_volume"):
+			AudioServer.set_bus_volume_db(3, options_data["ambience_volume"])
+			AudioServer.set_bus_volume_db(4, options_data["ambience_volume"])
+			AudioServer.set_bus_volume_db(5, options_data["ambience_volume"])
+		
+		if options_data.has("auto_run"): auto_run = options_data["auto_run"]
 
 func add_child_to_level(child_scene, owner):
 	if current_level:

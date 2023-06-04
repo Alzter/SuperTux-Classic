@@ -44,6 +44,12 @@ func get_options_data() -> Dictionary:
 	if options_file == OK:
 		var options : Dictionary = file.get_var()
 		file.close()
+		
+		
+		print("Loading Options Data:")
+		print(options)
+		print()
+		
 		return options
 	else:
 		push_error("Error reading options file")
@@ -60,7 +66,12 @@ func save_options_data(optionsData : Dictionary):
 	if options_file == OK:
 		file.store_var(optionsData)
 		file.close()
+		
+		print("Saved Options Data")
+		print(optionsData)
+		print()
 	else:
+		print("Error saving options data")
 		push_error("Failure saving options file")
 	
 	yield(get_tree(), "idle_frame")

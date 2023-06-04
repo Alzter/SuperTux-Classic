@@ -1,10 +1,12 @@
 extends Control
 
 var options_data = null
+var loading_options = false
 
 onready var volume_music_slider = $Panel/VBoxContainer/MusicVolume/VolumeMusic
 onready var volume_sfx_slider = $Panel/VBoxContainer/SFXVolume/VolumeSFX
 onready var volume_ambience_slider = $Panel/VBoxContainer/AmbienceVolume/VolumeAmbience
+onready var auto_run_checkbox = $Panel/VBoxContainer/AutoRun/AutoRun
 onready var controls_button = $Panel/VBoxContainer/Controls
 onready var privacy_policy_button = $Panel/VBoxContainer/PrivacyPolicy
 onready var done_button = $ControlsMenu/Panel/Done
@@ -19,7 +21,7 @@ func _on_OptionsMenu_about_to_show():
 		yield(Global, "options_data_created")
 	options_data = SaveManager.get_options_data()
 	load_options(options_data)
-	apply_options()
+	#apply_options()
 	if MobileControls.is_using_mobile:
 		controls_button.hide()
 
@@ -27,17 +29,32 @@ func load_options(options_data : Dictionary):
 	if options_data == null:
 		push_error("No options data to load")
 		return
-	volume_music_slider.value = options_data.get("music_volume")
-	volume_sfx_slider.value = options_data.get("sfx_volume")
-	volume_ambience_slider.value = options_data.get("ambience_volume")
+	
+	loading_options = true
+	
+	if options_data.has("music_volume"):
+		volume_music_slider.value = options_data.get("music_volume")
+	
+	if options_data.has("sfx_volume"):
+		volume_sfx_slider.value = options_data.get("sfx_volume")
+	
+	if options_data.has("ambience_volume"):
+		volume_ambience_slider.value = options_data.get("ambience_volume")
+	
+	if options_data.has("auto_run"):
+		#print("AUTO RUN")
+		#print(options_data.get("auto_run"))
+		auto_run_checkbox.pressed = options_data.get("auto_run")
+	
+	loading_options = false
 
-func save_slider_values_to_options_dictionary():
+func update_options_dictionary():
 	options_data["music_volume"] = volume_music_slider.value
 	options_data["sfx_volume"] = volume_sfx_slider.value
 	options_data["ambience_volume"] = volume_ambience_slider.value
+	options_data["auto_run"] = auto_run_checkbox.pressed
 
 func save_options():
-	print(options_data)
 	if options_data == null:
 		push_error("No options data to save")
 		return
@@ -47,23 +64,25 @@ func _on_Done_pressed():
 	hide()
 
 func apply_options():
-	save_slider_values_to_options_dictionary()
+	update_options_dictionary()
 	Global.apply_options(options_data)
 
+func _on_AutoRun_toggled(button_pressed):
+	if !loading_options: apply_options()
+
 func _on_VolumeMusic_value_changed(value):
-	apply_options()
+	if !loading_options: apply_options()
 
 func _on_VolumeSFX_value_changed(value):
-	apply_options()
+	if !loading_options: apply_options()
 
 func _on_VolumeAmbience_value_changed(value):
-	apply_options()
+	if !loading_options: apply_options()
 
 # ========================================================================================
 # SAVE EVERYTHING
 func _on_OptionsMenu_popup_hide():
-	print("Save Options")
-	save_slider_values_to_options_dictionary()
+	update_options_dictionary()
 	save_options()
 
 func _on_Controls_pressed():

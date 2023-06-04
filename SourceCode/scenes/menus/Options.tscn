@@ -40,10 +40,30 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="MusicVolume" type="VBoxContainer" parent="Panel/VBoxContainer"]
-margin_top = 67.0
+[node name="AutoRun" type="HSplitContainer" parent="Panel/VBoxContainer"]
+margin_top = 152.0
 margin_right = 350.0
-margin_bottom = 121.0
+margin_bottom = 206.0
+rect_min_size = Vector2( 0, 54 )
+
+[node name="Label" type="Label" parent="Panel/VBoxContainer/AutoRun"]
+margin_top = 16.0
+margin_right = 314.0
+margin_bottom = 37.0
+size_flags_horizontal = 3
+text = "Auto Run"
+
+[node name="AutoRun" type="CheckBox" parent="Panel/VBoxContainer/AutoRun"]
+margin_left = 326.0
+margin_top = 12.0
+margin_right = 350.0
+margin_bottom = 41.0
+size_flags_vertical = 4
+
+[node name="MusicVolume" type="VBoxContainer" parent="Panel/VBoxContainer"]
+margin_top = 221.0
+margin_right = 350.0
+margin_bottom = 275.0
 
 [node name="Label" type="Label" parent="Panel/VBoxContainer/MusicVolume"]
 margin_right = 350.0
@@ -58,9 +78,9 @@ min_value = -70.0
 max_value = 0.0
 
 [node name="SFXVolume" type="VBoxContainer" parent="Panel/VBoxContainer"]
-margin_top = 136.0
+margin_top = 290.0
 margin_right = 350.0
-margin_bottom = 190.0
+margin_bottom = 344.0
 
 [node name="Label" type="Label" parent="Panel/VBoxContainer/SFXVolume"]
 margin_right = 350.0
@@ -75,9 +95,9 @@ min_value = -70.0
 max_value = 0.0
 
 [node name="AmbienceVolume" type="VBoxContainer" parent="Panel/VBoxContainer"]
-margin_top = 205.0
+margin_top = 359.0
 margin_right = 350.0
-margin_bottom = 259.0
+margin_bottom = 413.0
 
 [node name="Label" type="Label" parent="Panel/VBoxContainer/AmbienceVolume"]
 margin_right = 350.0
@@ -92,15 +112,15 @@ min_value = -70.0
 max_value = 0.0
 
 [node name="Controls" type="Button" parent="Panel/VBoxContainer"]
-margin_top = 274.0
+margin_top = 428.0
 margin_right = 350.0
-margin_bottom = 304.0
+margin_bottom = 458.0
 text = "Configure Controls"
 
 [node name="PrivacyPolicy" type="Button" parent="Panel/VBoxContainer"]
-margin_top = 319.0
+margin_top = 473.0
 margin_right = 350.0
-margin_bottom = 349.0
+margin_bottom = 503.0
 text = "View Privacy Policy"
 
 [node name="Done" type="Button" parent="Panel"]
@@ -118,6 +138,7 @@ text = "Done"
 
 [connection signal="about_to_show" from="." to="." method="_on_OptionsMenu_about_to_show"]
 [connection signal="popup_hide" from="." to="." method="_on_OptionsMenu_popup_hide"]
+[connection signal="toggled" from="Panel/VBoxContainer/AutoRun/AutoRun" to="." method="_on_AutoRun_toggled"]
 [connection signal="value_changed" from="Panel/VBoxContainer/MusicVolume/VolumeMusic" to="." method="_on_VolumeMusic_value_changed"]
 [connection signal="value_changed" from="Panel/VBoxContainer/SFXVolume/VolumeSFX" to="." method="_on_VolumeSFX_value_changed"]
 [connection signal="value_changed" from="Panel/VBoxContainer/AmbienceVolume/VolumeAmbience" to="." method="_on_VolumeAmbience_value_changed"]
