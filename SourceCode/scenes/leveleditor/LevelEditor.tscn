@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=2]
+[gd_scene load_steps=38 format=2]
 
 [ext_resource path="res://images/player/tux/big/idle.png" type="Texture" id=1]
 [ext_resource path="res://images/player/tux/small/idle.png" type="Texture" id=2]
@@ -11,6 +11,7 @@
 [ext_resource path="res://scenes/leveleditor/TuxSprite.gd" type="Script" id=9]
 [ext_resource path="res://images/editor/GridCursor.png" type="Texture" id=10]
 [ext_resource path="res://scenes/leveleditor/EditorCamera.gd" type="Script" id=11]
+[ext_resource path="res://images/editor/icons/eyedropper.png" type="Texture" id=12]
 [ext_resource path="res://theme/default_theme.tres" type="Theme" id=13]
 [ext_resource path="res://scenes/leveleditor/TileButton.tscn" type="PackedScene" id=14]
 [ext_resource path="res://scenes/leveleditor/LayerButton.tscn" type="PackedScene" id=15]
@@ -22,6 +23,8 @@
 [ext_resource path="res://scenes/leveleditor/ObjectFunctions.gd" type="Script" id=21]
 [ext_resource path="res://scenes/master/click_hitbox.tscn" type="PackedScene" id=22]
 [ext_resource path="res://scenes/leveleditor/ObjectButton.tscn" type="PackedScene" id=23]
+[ext_resource path="res://images/editor/icons/eraser.png" type="Texture" id=24]
+[ext_resource path="res://images/editor/icons/rect_select.png" type="Texture" id=25]
 
 [sub_resource type="ShaderMaterial" id=10]
 shader = ExtResource( 18 )
@@ -702,35 +705,35 @@ size_flags_horizontal = 3
 alignment = 1
 
 [node name="Eraser" type="Button" parent="UI/Scale/EditorUI/TilesPanelOffset/TilesPanel/PlacementOptions"]
-margin_right = 64.0
-margin_bottom = 61.0
+margin_right = 72.0
+margin_bottom = 72.0
 focus_mode = 0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 toggle_mode = true
-text = "Erase"
-clip_text = true
-
-[node name="RectSelect" type="Button" parent="UI/Scale/EditorUI/TilesPanelOffset/TilesPanel/PlacementOptions"]
-margin_top = 65.0
-margin_right = 64.0
-margin_bottom = 126.0
-focus_mode = 0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-toggle_mode = true
-text = "RectSelect"
+icon = ExtResource( 24 )
 clip_text = true
 
 [node name="EyeDropper" type="Button" parent="UI/Scale/EditorUI/TilesPanelOffset/TilesPanel/PlacementOptions"]
-margin_top = 130.0
-margin_right = 64.0
-margin_bottom = 192.0
+margin_top = 76.0
+margin_right = 72.0
+margin_bottom = 148.0
 focus_mode = 0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 toggle_mode = true
-text = "EyeDropper"
+icon = ExtResource( 12 )
+clip_text = true
+
+[node name="RectSelect" type="Button" parent="UI/Scale/EditorUI/TilesPanelOffset/TilesPanel/PlacementOptions"]
+margin_top = 152.0
+margin_right = 72.0
+margin_bottom = 224.0
+focus_mode = 0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+toggle_mode = true
+icon = ExtResource( 25 )
 clip_text = true
 
 [node name="EditLayerDialog" parent="UI/Scale/EditorUI" instance=ExtResource( 16 )]
@@ -770,6 +773,6 @@ visible = false
 [connection signal="pressed" from="UI/Scale/EditorUI/LayersPanelOffset/AddLayerDialog/VBoxContainer/AddLayerButton" to="UI/Scale/EditorUI/LayersPanelOffset/AddLayerDialog" method="_on_AddLayerButton_pressed"]
 [connection signal="pressed" from="UI/Scale/EditorUI/TilesPanelOffset/TilesPanel/RetractTab" to="UI/Scale/EditorUI/TilesPanelOffset" method="_on_RetractTab_pressed"]
 [connection signal="toggled" from="UI/Scale/EditorUI/TilesPanelOffset/TilesPanel/PlacementOptions/Eraser" to="." method="_on_Eraser_toggled"]
-[connection signal="toggled" from="UI/Scale/EditorUI/TilesPanelOffset/TilesPanel/PlacementOptions/RectSelect" to="." method="_on_RectSelect_toggled"]
 [connection signal="toggled" from="UI/Scale/EditorUI/TilesPanelOffset/TilesPanel/PlacementOptions/EyeDropper" to="." method="_on_EyeDropper_toggled"]
+[connection signal="toggled" from="UI/Scale/EditorUI/TilesPanelOffset/TilesPanel/PlacementOptions/RectSelect" to="." method="_on_RectSelect_toggled"]
 [connection signal="pressed" from="UI/Scale/EditToggle" to="." method="_on_EditToggle_pressed"]
