@@ -75,7 +75,7 @@ func update_tile_selected_sprite():
 func _input(event):
 	if selected_tilemap and !owner.mouse_over_ui:
 		if event is InputEventMouseButton:
-			var about_to_use_eyedropper = event.button_index == BUTTON_MIDDLE or owner.eyedropper_enabled
+			var about_to_use_eyedropper = event.button_index == BUTTON_MIDDLE or Input.is_action_pressed("editor_eyedrop_tool") or owner.eyedropper_enabled
 			
 			if !about_to_use_eyedropper:
 				placing_tiles = event.pressed
@@ -104,7 +104,7 @@ func _input(event):
 func place_tile(tilemap : TileMap, tile_position : Vector2, tile_id : int, update_autotile = true, ignore_bounds = false):
 	if !is_tile_position_legal(tile_position) and !ignore_bounds: return
 	
-	var flip_horizontally = owner.flip_tiles_enabled
+	var flip_horizontally = owner.flip_tiles_enabled or Input.is_action_pressed("editor_flip_tiles")
 	
 	tilemap.set_cellv(tile_position, tile_id, flip_horizontally)
 	
