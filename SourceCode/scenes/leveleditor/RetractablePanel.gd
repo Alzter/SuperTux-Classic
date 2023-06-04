@@ -11,7 +11,14 @@ func _on_RetractTab_pressed():
 	retracted = !retracted
 
 func _on_AddLayerButton_pressed():
+	add_layer_dialog()
+
+func add_layer_dialog():
 	if !owner.level: return
 	if !add_layer_dialog: return
 	add_layer_dialog.popup()
 
+func _input(event):
+	if Input.is_key_pressed(KEY_CONTROL):
+		if Input.is_key_pressed(KEY_A):
+			add_layer_dialog()

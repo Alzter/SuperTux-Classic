@@ -545,7 +545,7 @@ margin_left = 9.0
 margin_top = 6.0
 margin_right = 115.0
 margin_bottom = 112.0
-hint_tooltip = "Add a new layer..."
+hint_tooltip = "Add a new layer... (CTRL+A)"
 focus_mode = 0
 icon = ExtResource( 29 )
 expand_icon = true
@@ -568,6 +568,7 @@ custom_constants/separation = 15
 alignment = 1
 
 [node name="AddLayerDialog" type="PopupDialog" parent="UI/Scale/EditorUI/LayersPanelOffset"]
+visible = true
 anchor_bottom = 1.0
 margin_right = 400.0
 margin_bottom = -122.0
@@ -651,7 +652,6 @@ margin_top = 510.0
 margin_right = 376.0
 margin_bottom = 574.0
 rect_min_size = Vector2( 0, 64 )
-focus_mode = 0
 text = "Add"
 
 [node name="TilesPanelOffset" type="Control" parent="UI/Scale/EditorUI"]
