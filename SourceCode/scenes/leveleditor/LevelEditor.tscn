@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=2]
+[gd_scene load_steps=42 format=2]
 
 [ext_resource path="res://images/player/tux/big/idle.png" type="Texture" id=1]
 [ext_resource path="res://images/player/tux/small/idle.png" type="Texture" id=2]
@@ -28,6 +28,7 @@
 [ext_resource path="res://images/editor/icons/undo.png" type="Texture" id=26]
 [ext_resource path="res://images/editor/icons/settings.png" type="Texture" id=27]
 [ext_resource path="res://images/editor/icons/save.png" type="Texture" id=28]
+[ext_resource path="res://images/editor/icons/add.png" type="Texture" id=29]
 
 [sub_resource type="ShaderMaterial" id=10]
 shader = ExtResource( 18 )
@@ -541,7 +542,8 @@ margin_top = 6.0
 margin_right = 115.0
 margin_bottom = 112.0
 focus_mode = 0
-text = "+"
+icon = ExtResource( 29 )
+expand_icon = true
 
 [node name="ScrollContainer" type="ScrollContainer" parent="UI/Scale/EditorUI/LayersPanelOffset/LayersPanel"]
 anchor_right = 1.0
