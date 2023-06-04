@@ -30,13 +30,16 @@ onready var layers_container = $UI/Scale/EditorUI/LayersPanelOffset/LayersPanel/
 var rect_select_enabled = false setget update_rect_select_enabled
 var eraser_enabled = false setget update_eraser_enabled
 var eyedropper_enabled = false setget update_eyedropper_enabled
+var flip_tiles_enabled = false setget update_flip_tiles_enabled
 
 onready var button_rect_select = $UI/Scale/EditorUI/TilesPanelOffset/TilesPanel/PlacementOptions/RectSelect
 onready var button_eraser = $UI/Scale/EditorUI/TilesPanelOffset/TilesPanel/PlacementOptions/Eraser
 onready var button_eyedropper = $UI/Scale/EditorUI/TilesPanelOffset/TilesPanel/PlacementOptions/EyeDropper
-onready var button_undo = $UI/Scale/EditorUI/Buttons/UndoButton
+onready var button_flip_tiles = $UI/Scale/EditorUI/TilesPanelOffset/TilesPanel/PlacementOptions/FlipTiles
 
+onready var button_undo = $UI/Scale/EditorUI/Buttons/UndoButton
 onready var button_level_properties = $UI/Scale/EditorUI/Buttons/LevelProperties
+
 onready var level_properties_dialog = $UI/Scale/EditorUI/LevelPropertiesDialog
 
 export var layer_button_scene : PackedScene
@@ -51,6 +54,7 @@ signal level_loaded
 signal eraser_toggled
 signal rect_select_toggled
 signal eyedropper_toggled
+signal flip_tiles_toggled
 
 var level = null
 var level_objects = null setget , _get_level_objects
@@ -345,19 +349,30 @@ func _on_EyeDropper_toggled(button_pressed):
 	emit_signal("eyedropper_toggled", button_pressed)
 	
 	if button_pressed:
-		rect_select_enabled = false
+		self.rect_select_enabled = false
 		emit_signal("rect_select_toggled", false)
-		eraser_enabled = false
+		self.eraser_enabled = false
 		emit_signal("eraser_toggled", false)
 
+func _on_FlipTiles_toggled(button_pressed):
+	flip_tiles_enabled = button_pressed
+	emit_signal("flip_tiles_toggled", button_pressed)
+
 func update_rect_select_enabled(new_value):
+	rect_select_enabled = new_value
 	button_rect_select.pressed = new_value
 
 func update_eraser_enabled(new_value):
+	eraser_enabled = new_value
 	button_eraser.pressed = new_value
 
 func update_eyedropper_enabled(new_value):
+	eyedropper_enabled = new_value
 	button_eyedropper.pressed = new_value
+
+func update_flip_tiles_enabled(new_value):
+	flip_tiles_enabled = new_value
+	button_flip_tiles.pressed = new_value
 
 # When User hovers over the UI
 func _on_MouseDetector_mouse_entered():

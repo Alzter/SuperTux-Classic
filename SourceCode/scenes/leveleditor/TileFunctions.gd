@@ -103,7 +103,10 @@ func _input(event):
 
 func place_tile(tilemap : TileMap, tile_position : Vector2, tile_id : int, update_autotile = true, ignore_bounds = false):
 	if !is_tile_position_legal(tile_position) and !ignore_bounds: return
-	tilemap.set_cellv(tile_position, tile_id)
+	
+	var flip_horizontally = owner.flip_tiles_enabled
+	
+	tilemap.set_cellv(tile_position, tile_id, flip_horizontally)
 	
 	# Tilemaps in STC have custom properties which we use here.
 	if tilemap.is_in_group("stc_tilemaps"):

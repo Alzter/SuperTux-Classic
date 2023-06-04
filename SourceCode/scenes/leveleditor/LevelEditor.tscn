@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=2]
+[gd_scene load_steps=43 format=2]
 
 [ext_resource path="res://images/player/tux/big/idle.png" type="Texture" id=1]
 [ext_resource path="res://images/player/tux/small/idle.png" type="Texture" id=2]
@@ -29,6 +29,7 @@
 [ext_resource path="res://images/editor/icons/settings.png" type="Texture" id=27]
 [ext_resource path="res://images/editor/icons/save.png" type="Texture" id=28]
 [ext_resource path="res://images/editor/icons/add.png" type="Texture" id=29]
+[ext_resource path="res://images/editor/icons/flip.png" type="Texture" id=30]
 
 [sub_resource type="ShaderMaterial" id=10]
 shader = ExtResource( 18 )
@@ -739,6 +740,18 @@ toggle_mode = true
 icon = ExtResource( 12 )
 clip_text = true
 
+[node name="FlipTiles" type="Button" parent="UI/Scale/EditorUI/TilesPanelOffset/TilesPanel/PlacementOptions"]
+margin_top = 228.0
+margin_right = 72.0
+margin_bottom = 300.0
+focus_mode = 0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+toggle_mode = true
+enabled_focus_mode = 0
+icon = ExtResource( 30 )
+clip_text = true
+
 [node name="EditLayerDialog" parent="UI/Scale/EditorUI" instance=ExtResource( 16 )]
 
 [node name="EditToggle" type="Button" parent="UI/Scale"]
@@ -778,4 +791,5 @@ visible = false
 [connection signal="toggled" from="UI/Scale/EditorUI/TilesPanelOffset/TilesPanel/PlacementOptions/Eraser" to="." method="_on_Eraser_toggled"]
 [connection signal="toggled" from="UI/Scale/EditorUI/TilesPanelOffset/TilesPanel/PlacementOptions/RectSelect" to="." method="_on_RectSelect_toggled"]
 [connection signal="toggled" from="UI/Scale/EditorUI/TilesPanelOffset/TilesPanel/PlacementOptions/EyeDropper" to="." method="_on_EyeDropper_toggled"]
+[connection signal="toggled" from="UI/Scale/EditorUI/TilesPanelOffset/TilesPanel/PlacementOptions/FlipTiles" to="." method="_on_FlipTiles_toggled"]
 [connection signal="pressed" from="UI/Scale/EditToggle" to="." method="_on_EditToggle_pressed"]

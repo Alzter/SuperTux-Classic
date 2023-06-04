@@ -34,3 +34,6 @@ func update_current_tile_id(new_value):
 
 func _on_TileButton_pressed():
 	emit_signal("tile_button_pressed", tile_id)
+
+func flip_tiles_toggled(flip_x_enabled : bool):
+	sprite.flip_h = flip_x_enabled

@@ -38,9 +38,9 @@ script = ExtResource( 1 )
 level_title = "Untitled Level"
 level_author = "Untitled Author"
 
-[node name="Background" parent="." instance=ExtResource( 2 )]
+[node name="BG" parent="." instance=ExtResource( 2 )]
 
-[node name="TilesBG" parent="." instance=ExtResource( 3 )]
+[node name="Background" parent="." instance=ExtResource( 3 )]
 material = SubResource( 6 )
 z_index = -20
 collision_layer = 0
@@ -57,7 +57,7 @@ z_index = -30
 collision_layer = 128
 collision_mask = 128
 
-[node name="TilesFG" parent="." instance=ExtResource( 3 )]
+[node name="Foreground" parent="." instance=ExtResource( 3 )]
 material = SubResource( 6 )
 z_index = 20
 collision_layer = 0
