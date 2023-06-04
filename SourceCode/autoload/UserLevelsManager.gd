@@ -27,8 +27,12 @@ func load_user_worlds():
 	dir.open("user://")
 	if !dir.dir_exists(user_worlds_folder):
 		dir.make_dir(user_worlds_folder)
-		_add_base_game_worlds_to_user_worlds_folder()
-	else:
+		
+		var copy_all_worlds = _add_base_game_worlds_to_user_worlds_folder()
+		
+		if copy_all_worlds != OK: return
+	
+	if dir.dir_exists(user_worlds_folder):
 		dir.change_dir(user_worlds_folder)
 		dir.list_dir_begin(true, true)
 		while true:
@@ -40,7 +44,7 @@ func load_user_worlds():
 
 # Add all levels from the base game (world1, bonus1, bonus2)
 # into the User Levels directory so that users can edit them!
-func _add_base_game_worlds_to_user_worlds_folder():
+func _add_base_game_worlds_to_user_worlds_folder() -> int:
 	var dir = Directory.new()
 	var file = File.new()
 	
@@ -65,10 +69,13 @@ func _add_base_game_worlds_to_user_worlds_folder():
 			
 			if world_copy != OK:
 				push_error("Error world from directory " + world_path + " to " + user_world_path + " Error code: " + str(world_copy))
-				return
+				return world_copy
 		
 	else:
 		push_error("Error copying base worlds levels into user worlds folder: Couldn't find levels directory.")
+		return ERR_FILE_NOT_FOUND
+	
+	return OK
 
 func _get_user_world_data(dir_name: String) -> bool:
 	var dir = Directory.new()
@@ -355,6 +362,8 @@ func _get_absolute_user_worlds_path():
 	return absolute_user_worlds_dir
 
 func open_user_worlds_folder():
+	load_user_worlds()
+	
 	var dir = _get_absolute_user_worlds_path()
 	
 	OS.shell_open(dir)
