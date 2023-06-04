@@ -37,7 +37,7 @@ onready var button_eyedropper = $UI/Scale/EditorUI/TilesPanelOffset/TilesPanel/P
 onready var button_undo = $UI/Scale/EditorUI/Buttons/UndoButton
 
 onready var button_level_properties = $UI/Scale/EditorUI/Buttons/LevelProperties
-onready var level_properties_panel = $UI/Scale/EditorUI/LevelPropertiesOffset/LevelPropertiesPanel
+onready var level_properties_dialog = $UI/Scale/EditorUI/LevelPropertiesDialog
 
 export var layer_button_scene : PackedScene
 
@@ -93,8 +93,6 @@ func _ready():
 	pause_menu.connect("save_and_quit", self, "save_and_quit")
 	
 	editor_camera.connect("set_camera_drag", self, "set_camera_drag")
-	
-	connect("level_loaded", level_properties_panel, "appear")
 	
 	Global.connect("object_clicked", self, "object_clicked")
 	
@@ -456,6 +454,10 @@ func _on_UndoButton_pressed():
 	
 	#print("Remove undo state")
 	#print(undo_stack)
+
+func _on_LevelProperties_pressed():
+	add_undo_state()
+	level_properties_dialog.popup_centered_ratio()
 
 func clear_undo_states():
 	undo_stack = []

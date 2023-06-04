@@ -1,7 +1,7 @@
 extends PopupDialog
 
-onready var layer_name = $VBoxContainer/NameEntry/Name
-onready var layer_type = $VBoxContainer/TypeEntry/LayerTypes
+onready var layer_name = $VBoxContainer/PanelContainer/LayerProperties/NameEntry/Name
+onready var layer_type = $VBoxContainer/PanelContainer/LayerProperties/TypeEntry/LayerTypes
 
 export var default_layer_type = "TileMap"
 

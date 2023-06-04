@@ -192,7 +192,6 @@ margin_bottom = 30.0
 text = " Delete "
 
 [node name="StartGameMenu" parent="." instance=ExtResource( 10 )]
-visible = false
 
 [node name="BonusLevelsMenu" parent="." instance=ExtResource( 8 )]
 
