@@ -12,7 +12,7 @@ var dragging_camera = false
 onready var tux_sprite = get_node("TuxSprite")
 
 func _input(event):
-	if owner.mouse_over_ui or !owner.edit_mode: return
+	if owner.mouse_over_ui or !owner.edit_mode or owner.is_paused: return
 	
 	
 	# If we press the spacebar, enable camera drag mode.
@@ -52,7 +52,7 @@ func initialise_tux_sprite(worldmap):
 func _process(delta):
 	visible = owner.edit_mode
 	
-	if owner.mouse_over_ui or !owner.edit_mode: return
+	if owner.is_paused or !owner.edit_mode: return
 	
 	var cam_zoom = Vector2(get_global_transform_with_canvas().x.x, get_global_transform_with_canvas().y.y)
 	
@@ -60,7 +60,7 @@ func _process(delta):
 	move_dir.x = int(Input.is_action_pressed("move_right") or Input.is_action_pressed("ui_right")) - int(Input.is_action_pressed("move_left") or Input.is_action_pressed("ui_left"))
 	move_dir.y = int(Input.is_action_pressed("duck") or Input.is_action_pressed("ui_down")) - int(Input.is_action_pressed("move_up") or Input.is_action_pressed("ui_up"))
 	
-	var velocity = move_dir * move_speed
+	var velocity = move_dir * move_speed * delta * 60
 	
 	var edge_top = limit_top# + ResolutionManager.window_resolution.y * 0.5 * zoom.y
 	var edge_left = limit_left# + ResolutionManager.window_resolution.x * 0.5 * zoom.x
