@@ -587,7 +587,9 @@ func _input(event):
 			undo()
 		elif Input.is_key_pressed(KEY_P):
 			level_properties_dialog()
-		elif Input.is_key_pressed(KEY_ENTER):
+	
+	if Input.is_action_just_pressed("editor_test_level"):
+		if !Global.is_popup_visible():
 			toggle_edit_mode()
 	
 	# Make the editor buttons activate when user is holding down shortcuts
