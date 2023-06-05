@@ -1,9 +1,51 @@
-[gd_resource type="AudioBusLayout" load_steps=5 format=2]
+[gd_resource type="AudioBusLayout" load_steps=14 format=2]
 
 [sub_resource type="AudioEffectEQ" id=4]
 resource_name = "EQ"
 band_db/32_hz = 10.0
 band_db/100_hz = 6.0
+
+[sub_resource type="AudioEffectPhaser" id=22]
+resource_name = "Phaser"
+range_min_hz = 10.0
+range_max_hz = 10000.0
+rate_hz = 0.01
+
+[sub_resource type="AudioEffectNotchFilter" id=5]
+resource_name = "NotchFilter"
+cutoff_hz = 4000.0
+resonance = 1.0
+
+[sub_resource type="AudioEffectBandLimitFilter" id=10]
+resource_name = "BandLimitFilter"
+
+[sub_resource type="AudioEffectHighShelfFilter" id=11]
+resource_name = "HighShelfFilter"
+resonance = 1.0
+gain = 0.93
+
+[sub_resource type="AudioEffectNotchFilter" id=19]
+resource_name = "NotchFilter"
+
+[sub_resource type="AudioEffectHighPassFilter" id=13]
+resource_name = "HighPassFilter"
+cutoff_hz = 200.0
+
+[sub_resource type="AudioEffectReverb" id=23]
+resource_name = "Reverb"
+predelay_msec = 20.0
+room_size = 0.2
+damping = 0.2
+spread = 0.5
+hipass = 1.0
+
+[sub_resource type="AudioEffectCompressor" id=24]
+resource_name = "Compressor"
+gain = -20.0
+
+[sub_resource type="AudioEffectAmplify" id=25]
+resource_name = "Amplify"
+volume_db = 7.0
 
 [sub_resource type="AudioEffectReverb" id=1]
 resource_name = "Reverb"
@@ -32,6 +74,24 @@ bus/2/mute = false
 bus/2/bypass_fx = false
 bus/2/volume_db = -6.24739
 bus/2/send = "Master"
+bus/2/effect/0/effect = SubResource( 22 )
+bus/2/effect/0/enabled = true
+bus/2/effect/1/effect = SubResource( 5 )
+bus/2/effect/1/enabled = true
+bus/2/effect/2/effect = SubResource( 10 )
+bus/2/effect/2/enabled = true
+bus/2/effect/3/effect = SubResource( 11 )
+bus/2/effect/3/enabled = false
+bus/2/effect/4/effect = SubResource( 19 )
+bus/2/effect/4/enabled = true
+bus/2/effect/5/effect = SubResource( 13 )
+bus/2/effect/5/enabled = false
+bus/2/effect/6/effect = SubResource( 23 )
+bus/2/effect/6/enabled = true
+bus/2/effect/7/effect = SubResource( 24 )
+bus/2/effect/7/enabled = true
+bus/2/effect/8/effect = SubResource( 25 )
+bus/2/effect/8/enabled = true
 bus/3/name = "Ambience"
 bus/3/solo = false
 bus/3/mute = false

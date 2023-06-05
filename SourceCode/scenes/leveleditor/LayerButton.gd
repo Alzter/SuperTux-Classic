@@ -19,7 +19,7 @@ func _ready():
 	layer_options.hide()
 
 func _on_LayerButton_pressed():
-	print(self.layer_type)
+	#print(self.layer_type)
 	emit_signal("layer_button_pressed", self, layer_object)
 
 func _on_LayerButton_mouse_entered():
@@ -58,6 +58,7 @@ func _set_layer_name(new_value):
 	else: label.rect_scale = Vector2.ONE
 
 func _set_layer_object(new_value):
+	if new_value == layer_object: return
 	layer_object = new_value
 	
 	_update_layer_icon()
@@ -72,6 +73,6 @@ func _update_layer_icon():
 	if !Global.get("layer_icons_directory"): return
 	var layer_icon_img = Global.layer_icons_directory + self.layer_type + ".png"
 	
-	print(layer_icon_img)
+	#print(layer_icon_img)
 	
 	layer_icon.texture = load(layer_icon_img)

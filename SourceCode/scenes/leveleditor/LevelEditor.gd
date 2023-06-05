@@ -108,6 +108,8 @@ func _ready():
 	
 	Global.connect("object_clicked", self, "object_clicked")
 	
+	Music.set_editor_music(true)
+	
 	#get_tree().paused = true
 
 func _process(delta):
@@ -137,6 +139,7 @@ func enter_play_mode():
 	level.start_level(true)
 	edit_mode = false
 	get_tree().paused = false
+	Music.set_editor_music(false)
 
 func enter_edit_mode():
 	if !level: return
@@ -168,6 +171,7 @@ func _deferred_enter_edit_mode():
 	get_tree().paused = false
 	yield(get_tree(), "idle_frame")
 	Global.can_pause = true
+	Music.set_editor_music(true)
 
 # ==================================================================================
 # Level loading

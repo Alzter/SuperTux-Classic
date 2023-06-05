@@ -11,6 +11,8 @@ onready var button_worlds_folder_open = $MainMenu/VBoxContainer/PanelContainer/M
 onready var button_exit = $MainMenu/VBoxContainer/ExitToMenu
 
 func _ready():
+	Music.set_editor_music(false)
+	
 	UserLevels.current_world = null
 	Scoreboard.hide()
 	Music.stop_all()

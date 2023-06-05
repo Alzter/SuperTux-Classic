@@ -26,6 +26,8 @@ var songs = []
 onready var tween = $Tween
 
 func _ready():
+	set_editor_music(false)
+	
 	for song in get_children():
 		if song is AudioStreamPlayer:
 			songs.append(song.name)
@@ -60,6 +62,7 @@ func continue(song):
 
 func stop_all():
 	current_song_node = null
+	current_song = null
 	for child in get_children():
 		if child.get_class() == "AudioStreamPlayer":
 			child.stop()
@@ -83,3 +86,7 @@ func pitch_slide_up():
 		tween.stop_all()
 		tween.interpolate_property(current_song_node, "pitch_scale", 0.1, 1, 0.5, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 		tween.start()
+
+# If true, applies filters to the music. Used for Edit Mode in the level editor.
+func set_editor_music(enabled : bool):
+	AudioServer.set_bus_bypass_effects(2, !enabled)

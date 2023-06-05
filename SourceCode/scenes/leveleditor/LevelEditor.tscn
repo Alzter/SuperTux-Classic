@@ -360,9 +360,9 @@ margin_right = 898.0
 margin_bottom = 42.0
 
 [node name="Label" type="Label" parent="UI/Scale/EditorUI/LevelPropertiesDialog/VBoxContainer/PanelContainer/LevelProperties/EditLevelName"]
-margin_top = 4.0
+margin_top = 5.0
 margin_right = 100.0
-margin_bottom = 25.0
+margin_bottom = 26.0
 rect_min_size = Vector2( 100, 0 )
 size_flags_vertical = 6
 text = "Name:"
@@ -370,7 +370,7 @@ text = "Name:"
 [node name="Name" type="LineEdit" parent="UI/Scale/EditorUI/LevelPropertiesDialog/VBoxContainer/PanelContainer/LevelProperties/EditLevelName"]
 margin_left = 112.0
 margin_right = 898.0
-margin_bottom = 29.0
+margin_bottom = 31.0
 size_flags_vertical = 3
 text = "Welcome to Antarctica"
 
@@ -380,9 +380,9 @@ margin_right = 898.0
 margin_bottom = 75.0
 
 [node name="Label" type="Label" parent="UI/Scale/EditorUI/LevelPropertiesDialog/VBoxContainer/PanelContainer/LevelProperties/EditLevelAuthor"]
-margin_top = 4.0
+margin_top = 5.0
 margin_right = 101.0
-margin_bottom = 25.0
+margin_bottom = 26.0
 rect_min_size = Vector2( 100, 0 )
 size_flags_vertical = 6
 text = "Author:"
@@ -390,7 +390,7 @@ text = "Author:"
 [node name="Author" type="LineEdit" parent="UI/Scale/EditorUI/LevelPropertiesDialog/VBoxContainer/PanelContainer/LevelProperties/EditLevelAuthor"]
 margin_left = 113.0
 margin_right = 898.0
-margin_bottom = 29.0
+margin_bottom = 31.0
 size_flags_vertical = 3
 text = "Marek Moeckel"
 
@@ -405,9 +405,9 @@ margin_right = 898.0
 margin_bottom = 142.0
 
 [node name="Label" type="Label" parent="UI/Scale/EditorUI/LevelPropertiesDialog/VBoxContainer/PanelContainer/LevelProperties/EditLevelMusic"]
-margin_top = 4.0
+margin_top = 5.0
 margin_right = 100.0
-margin_bottom = 25.0
+margin_bottom = 26.0
 rect_min_size = Vector2( 100, 0 )
 size_flags_vertical = 6
 text = "Music:"
@@ -415,7 +415,7 @@ text = "Music:"
 [node name="Music" type="OptionButton" parent="UI/Scale/EditorUI/LevelPropertiesDialog/VBoxContainer/PanelContainer/LevelProperties/EditLevelMusic"]
 margin_left = 112.0
 margin_right = 898.0
-margin_bottom = 29.0
+margin_bottom = 31.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 text = "ChipDisko"
@@ -471,17 +471,17 @@ margin_right = 898.0
 margin_bottom = 276.0
 
 [node name="Label" type="Label" parent="UI/Scale/EditorUI/LevelPropertiesDialog/VBoxContainer/PanelContainer/LevelProperties/EditLevelGravity"]
-margin_top = 4.0
-margin_right = 752.0
-margin_bottom = 25.0
+margin_top = 5.0
+margin_right = 772.0
+margin_bottom = 26.0
 size_flags_horizontal = 3
 size_flags_vertical = 6
 text = "Gravity:"
 
 [node name="Gravity" type="SpinBox" parent="UI/Scale/EditorUI/LevelPropertiesDialog/VBoxContainer/PanelContainer/LevelProperties/EditLevelGravity"]
-margin_left = 764.0
+margin_left = 784.0
 margin_right = 898.0
-margin_bottom = 29.0
+margin_bottom = 31.0
 size_flags_vertical = 3
 min_value = 1.0
 max_value = 50.0
@@ -493,17 +493,17 @@ margin_right = 898.0
 margin_bottom = 309.0
 
 [node name="Label" type="Label" parent="UI/Scale/EditorUI/LevelPropertiesDialog/VBoxContainer/PanelContainer/LevelProperties/EditLevelAutoscroll"]
-margin_top = 4.0
-margin_right = 752.0
-margin_bottom = 25.0
+margin_top = 5.0
+margin_right = 772.0
+margin_bottom = 26.0
 size_flags_horizontal = 3
 size_flags_vertical = 6
 text = "Autoscroll Speed:"
 
 [node name="AutoscrollSpeed" type="SpinBox" parent="UI/Scale/EditorUI/LevelPropertiesDialog/VBoxContainer/PanelContainer/LevelProperties/EditLevelAutoscroll"]
-margin_left = 764.0
+margin_left = 784.0
 margin_right = 898.0
-margin_bottom = 29.0
+margin_bottom = 31.0
 size_flags_vertical = 3
 max_value = 5.0
 step = 0.5
@@ -580,7 +580,7 @@ alignment = 1
 [node name="AddLayerDialog" type="PopupDialog" parent="UI/Scale/EditorUI/LayersPanelOffset"]
 visible = true
 anchor_bottom = 1.0
-margin_right = 400.0
+margin_right = 600.0
 margin_bottom = -122.0
 script = ExtResource( 19 )
 
@@ -593,7 +593,7 @@ margin_right = -12.0
 margin_bottom = -12.0
 
 [node name="Title" type="Label" parent="UI/Scale/EditorUI/LayersPanelOffset/AddLayerDialog/VBoxContainer"]
-margin_right = 376.0
+margin_right = 576.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 0, 32 )
 custom_colors/font_color = Color( 1, 1, 0, 1 )
@@ -603,64 +603,64 @@ valign = 2
 
 [node name="HSeparator" type="HSeparator" parent="UI/Scale/EditorUI/LayersPanelOffset/AddLayerDialog/VBoxContainer"]
 margin_top = 36.0
-margin_right = 376.0
+margin_right = 576.0
 margin_bottom = 66.0
 
 [node name="PanelContainer" type="PanelContainer" parent="UI/Scale/EditorUI/LayersPanelOffset/AddLayerDialog/VBoxContainer"]
 margin_top = 70.0
-margin_right = 376.0
+margin_right = 576.0
 margin_bottom = 472.0
 size_flags_vertical = 3
 
 [node name="LayerProperties" type="VBoxContainer" parent="UI/Scale/EditorUI/LayersPanelOffset/AddLayerDialog/VBoxContainer/PanelContainer"]
 margin_left = 32.0
 margin_top = 32.0
-margin_right = 344.0
+margin_right = 544.0
 margin_bottom = 370.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="NameEntry" type="HSplitContainer" parent="UI/Scale/EditorUI/LayersPanelOffset/AddLayerDialog/VBoxContainer/PanelContainer/LayerProperties"]
-margin_right = 312.0
-margin_bottom = 29.0
+margin_right = 512.0
+margin_bottom = 31.0
 
 [node name="Label" type="Label" parent="UI/Scale/EditorUI/LayersPanelOffset/AddLayerDialog/VBoxContainer/PanelContainer/LayerProperties/NameEntry"]
-margin_top = 4.0
+margin_top = 5.0
 margin_right = 76.0
-margin_bottom = 25.0
+margin_bottom = 26.0
 text = "Name:"
 
 [node name="Name" type="LineEdit" parent="UI/Scale/EditorUI/LayersPanelOffset/AddLayerDialog/VBoxContainer/PanelContainer/LayerProperties/NameEntry"]
 margin_left = 88.0
-margin_right = 312.0
-margin_bottom = 29.0
+margin_right = 512.0
+margin_bottom = 31.0
 
 [node name="TypeEntry" type="HSplitContainer" parent="UI/Scale/EditorUI/LayersPanelOffset/AddLayerDialog/VBoxContainer/PanelContainer/LayerProperties"]
-margin_top = 33.0
-margin_right = 312.0
-margin_bottom = 62.0
+margin_top = 35.0
+margin_right = 512.0
+margin_bottom = 66.0
 
 [node name="Label" type="Label" parent="UI/Scale/EditorUI/LayersPanelOffset/AddLayerDialog/VBoxContainer/PanelContainer/LayerProperties/TypeEntry"]
-margin_top = 4.0
+margin_top = 5.0
 margin_right = 74.0
-margin_bottom = 25.0
+margin_bottom = 26.0
 text = "Type:"
 
 [node name="LayerTypes" type="OptionButton" parent="UI/Scale/EditorUI/LayersPanelOffset/AddLayerDialog/VBoxContainer/PanelContainer/LayerProperties/TypeEntry"]
 margin_left = 86.0
-margin_right = 312.0
-margin_bottom = 29.0
+margin_right = 512.0
+margin_bottom = 31.0
 theme = ExtResource( 13 )
 text = "Tilemap"
 
 [node name="HSeparator2" type="HSeparator" parent="UI/Scale/EditorUI/LayersPanelOffset/AddLayerDialog/VBoxContainer"]
 margin_top = 476.0
-margin_right = 376.0
+margin_right = 576.0
 margin_bottom = 506.0
 
 [node name="AddLayerButton" type="Button" parent="UI/Scale/EditorUI/LayersPanelOffset/AddLayerDialog/VBoxContainer"]
 margin_top = 510.0
-margin_right = 376.0
+margin_right = 576.0
 margin_bottom = 574.0
 rect_min_size = Vector2( 0, 64 )
 text = "Add"
@@ -876,32 +876,34 @@ script = ExtResource( 32 )
 
 [node name="PlaceTile" type="AudioStreamPlayer" parent="SFX"]
 stream = ExtResource( 31 )
-volume_db = -8.0
+volume_db = -15.0
 pitch_scale = 6.0
 
 [node name="EraseTile" type="AudioStreamPlayer" parent="SFX"]
 stream = ExtResource( 33 )
-volume_db = -8.0
+volume_db = -13.0
 pitch_scale = 3.0
 
 [node name="PlaceObject" type="AudioStreamPlayer" parent="SFX"]
 stream = ExtResource( 35 )
-volume_db = -8.0
+volume_db = -9.0
+pitch_scale = 2.0
 
 [node name="EraseObject" type="AudioStreamPlayer" parent="SFX"]
 stream = ExtResource( 36 )
-volume_db = -8.0
+volume_db = -16.0
 
 [node name="Undo" type="AudioStreamPlayer" parent="SFX"]
 stream = ExtResource( 34 )
-volume_db = -6.0
+volume_db = -9.0
 
 [node name="Save" type="AudioStreamPlayer" parent="SFX"]
 stream = ExtResource( 37 )
-volume_db = -6.0
+volume_db = -11.0
 
 [node name="LevelProperties" type="AudioStreamPlayer" parent="SFX"]
 stream = ExtResource( 38 )
+volume_db = -5.0
 pitch_scale = 2.0
 
 [connection signal="mouse_entered" from="UI/Scale/EditorUI/MouseDetector" to="." method="_on_MouseDetector_mouse_entered"]

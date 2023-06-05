@@ -36,6 +36,9 @@ export var default_world = "world1"
 
 func _ready():
 	Music.play("Title")
+	
+	Music.set_editor_music(false)
+	
 	Scoreboard.hide()
 	WorldmapManager.reset()
 	

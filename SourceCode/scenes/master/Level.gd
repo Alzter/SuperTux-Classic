@@ -114,7 +114,9 @@ func start_level(in_editor = false):
 	else:
 		if in_editor:
 			Music.continue(music)
-		else: Music.play(music)
+		else:
+			Music.play(music)
+			Music.set_editor_music(false)
 	
 	emit_signal("level_ready")
 
