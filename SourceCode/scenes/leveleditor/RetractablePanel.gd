@@ -16,9 +16,12 @@ func _on_AddLayerButton_pressed():
 func add_layer_dialog():
 	if !owner.level: return
 	if !add_layer_dialog: return
+	if owner.is_paused: return
+	if !owner.edit_mode: return
 	add_layer_dialog.popup()
 
 func _input(event):
 	if Input.is_key_pressed(KEY_CONTROL):
-		if Input.is_key_pressed(KEY_A) and Input.is_key_pressed(KEY_SHIFT):
-			add_layer_dialog()
+		if Input.is_key_pressed(KEY_A):
+			if !Global.is_popup_visible():
+				add_layer_dialog()

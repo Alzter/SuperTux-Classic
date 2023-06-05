@@ -579,6 +579,19 @@ func _get_object_scenes_folder():
 
 
 func _input(event):
+	if is_paused: return
+	
+	# Toggle play/edit mode with ENTER
+	
+	if Input.is_action_just_pressed("editor_test_level"):
+		if !Global.is_popup_visible():
+			toggle_edit_mode()
+	
+	if !edit_mode: return
+	
+	# ========================================================================
+	# Editor-specific keyboard shortcuts
+	
 	# Keyboard shortcut support for UNDO and SAVE actions.
 	if Input.is_key_pressed(KEY_CONTROL):
 		if Input.is_key_pressed(KEY_S):
@@ -587,10 +600,6 @@ func _input(event):
 			undo()
 		elif Input.is_key_pressed(KEY_P):
 			level_properties_dialog()
-	
-	if Input.is_action_just_pressed("editor_test_level"):
-		if !Global.is_popup_visible():
-			toggle_edit_mode()
 	
 	# Make the editor buttons activate when user is holding down shortcuts
 	if Input.is_action_just_pressed("editor_erase"):
