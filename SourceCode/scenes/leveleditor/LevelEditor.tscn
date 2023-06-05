@@ -650,6 +650,7 @@ text = "Type:"
 margin_left = 86.0
 margin_right = 312.0
 margin_bottom = 29.0
+theme = ExtResource( 13 )
 text = "Tilemap"
 
 [node name="HSeparator2" type="HSeparator" parent="UI/Scale/EditorUI/LayersPanelOffset/AddLayerDialog/VBoxContainer"]
