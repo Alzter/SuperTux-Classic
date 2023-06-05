@@ -1,16 +1,14 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://scenes/master/Level.gd" type="Script" id=1]
 [ext_resource path="res://scenes/layers/ObjectMap.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/layers/Background/CastleRed.tscn" type="PackedScene" id=3]
-[ext_resource path="res://scenes/layers/Ambience.tscn" type="PackedScene" id=5]
 [ext_resource path="res://scenes/layers/TileMap.tscn" type="PackedScene" id=6]
 [ext_resource path="res://scenes/shaders/Overlay.gdshader" type="Shader" id=7]
 [ext_resource path="res://scenes/bosses/Nolok.tscn" type="PackedScene" id=8]
 [ext_resource path="res://scenes/master/Camera.gd" type="Script" id=9]
 [ext_resource path="res://scenes/levels/world1/level27script.gd" type="Script" id=10]
 [ext_resource path="res://scenes/layers/Liquid/Lava.tscn" type="PackedScene" id=11]
-
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 7 )
@@ -91,18 +89,6 @@ tracks/5/keys = {
 "update": 0,
 "values": [ Color( 0, 0, 0, 0 ), Color( 0, 0, 0, 0 ), Color( 0, 0, 0, 1 ) ]
 }
-tracks/6/type = "value"
-tracks/6/path = NodePath("Ambience:volume_db")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/keys = {
-"times": PoolRealArray( 0, 1.5, 3.7 ),
-"transitions": PoolRealArray( 1, 4.59479, 1 ),
-"update": 0,
-"values": [ -5.0, -5.0, -40.0 ]
-}
 
 [sub_resource type="Animation" id=3]
 resource_name = "lavaheat"
@@ -167,18 +153,6 @@ tracks/4/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 1,
 "values": [ false ]
-}
-tracks/5/type = "value"
-tracks/5/path = NodePath("Ambience:volume_db")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ -5.0 ]
 }
 
 [sub_resource type="CanvasItemMaterial" id=6]
@@ -246,9 +220,6 @@ tile_data = PoolIntArray( 851969, 33, 0, 851970, 33, 1, 851971, 33, 1, 851972, 3
 
 [node name="ObjectMap" parent="." instance=ExtResource( 2 )]
 tile_data = PoolIntArray( -65533, 5, 0 )
-
-[node name="Ambience" parent="." instance=ExtResource( 5 )]
-volume_db = -5.0
 
 [node name="Overlay" type="ParallaxBackground" parent="."]
 

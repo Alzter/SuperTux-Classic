@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://scenes/master/Level.gd" type="Script" id=1]
 [ext_resource path="res://scenes/layers/TileMap.tscn" type="PackedScene" id=2]
@@ -6,9 +6,6 @@
 [ext_resource path="res://scenes/layers/Background/SnowMist.tscn" type="PackedScene" id=4]
 [ext_resource path="res://scenes/shaders/Overlay.gdshader" type="Shader" id=5]
 [ext_resource path="res://scenes/layers/Particles/Snow.tscn" type="PackedScene" id=6]
-[ext_resource path="res://scenes/layers/Ambience.tscn" type="PackedScene" id=7]
-
-
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 5 )
@@ -61,5 +58,3 @@ rect_min_size = Vector2( 99999, 99999 )
 color = Color( 0.568627, 0.533333, 0.576471, 0.160784 )
 
 [node name="SnowfallParticles" parent="." instance=ExtResource( 6 )]
-
-[node name="Ambience" parent="." instance=ExtResource( 7 )]

@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=5 format=2]
 
+[ext_resource path="res://scenes/layers/Ambience.tscn" type="PackedScene" id=1]
 [ext_resource path="res://images/particles/rain.png" type="Texture" id=2]
 [ext_resource path="res://scenes/particles/Rainfall.tres" type="Material" id=3]
+[ext_resource path="res://sounds/ambience_loops/AmbienceWaves.mp3" type="AudioStream" id=4]
 
 [node name="RainParticles" type="ParallaxBackground"]
 layer = 100
@@ -29,3 +31,9 @@ preprocess = 8.0
 visibility_rect = Rect2( -9750, 0, 12600, 3000 )
 process_material = ExtResource( 3 )
 texture = ExtResource( 2 )
+
+[node name="Ambience" parent="." instance=ExtResource( 1 )]
+stream = ExtResource( 4 )
+volume_db = -20.0
+pitch_scale = 3.0
+bus = "Ambience2"

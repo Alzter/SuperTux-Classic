@@ -1,13 +1,11 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://scenes/master/Level.gd" type="Script" id=1]
 [ext_resource path="res://scenes/layers/TileMap.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/layers/ObjectMap.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/layers/Background/SnowMist.tscn" type="PackedScene" id=4]
 [ext_resource path="res://scenes/layers/Liquid/WaterForeground.tscn" type="PackedScene" id=5]
-[ext_resource path="res://scenes/layers/Ambience.tscn" type="PackedScene" id=6]
 [ext_resource path="res://scenes/layers/Particles/Snow.tscn" type="PackedScene" id=7]
-
 
 [sub_resource type="Shader" id=7]
 code = "// NOTE: Shader automatically converted from Godot Engine 3.4.4.stable's CanvasItemMaterial.
@@ -71,5 +69,3 @@ tile_data = PoolIntArray( 97, 536870924, 0, 65682, 4, 0, 65684, 4, 0, 65686, 4, 
 [node name="WaterFG" parent="." instance=ExtResource( 5 )]
 
 [node name="SnowBG2" parent="." instance=ExtResource( 4 )]
-
-[node name="Ambience" parent="." instance=ExtResource( 6 )]

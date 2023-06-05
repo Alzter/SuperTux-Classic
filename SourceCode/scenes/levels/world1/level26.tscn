@@ -9,7 +9,6 @@
 [ext_resource path="res://scenes/layers/Ambience.tscn" type="PackedScene" id=7]
 [ext_resource path="res://scenes/layers/Liquid/Lava.tscn" type="PackedScene" id=8]
 
-
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 5 )
 shader_param/overlay_color = Plane( 0.3, 0.4, 0.6, 0.5 )
@@ -46,8 +45,6 @@ tile_data = PoolIntArray( 3, 5, 0, 131274, 536870924, 0, 196633, 536870920, 0, 1
 
 [node name="LightSnowParticles" parent="." instance=ExtResource( 6 )]
 
-[node name="Ambience" parent="." instance=ExtResource( 7 )]
-volume_db = -5.0
-
 [node name="LavaForeground" parent="." instance=ExtResource( 8 )]
-position = Vector2( 0, 96 )
+
+[node name="Ambience" parent="." instance=ExtResource( 7 )]

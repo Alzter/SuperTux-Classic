@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://scenes/master/Level.gd" type="Script" id=1]
 [ext_resource path="res://scenes/layers/TileMap.tscn" type="PackedScene" id=2]
@@ -6,10 +6,6 @@
 [ext_resource path="res://scenes/layers/Background/Thunderstorm.tscn" type="PackedScene" id=4]
 [ext_resource path="res://scenes/layers/Particles/Fog.tscn" type="PackedScene" id=5]
 [ext_resource path="res://scenes/shaders/Overlay.gdshader" type="Shader" id=6]
-[ext_resource path="res://scenes/layers/Ambience.tscn" type="PackedScene" id=7]
-[ext_resource path="res://sounds/ambience_loops/AmbienceWaves.mp3" type="AudioStream" id=8]
-[ext_resource path="res://sounds/ambience_loops/AmbienceThunder.mp3" type="AudioStream" id=9]
-
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 6 )
@@ -22,18 +18,6 @@ level_author = "Kevin"
 music = "Fortress2"
 particle_system = "clouds"
 autoscroll_speed = 0.9
-
-[node name="Ambience" parent="." instance=ExtResource( 7 )]
-stream = ExtResource( 8 )
-volume_db = -20.0
-pitch_scale = 3.0
-bus = "Ambience2"
-
-[node name="Ambience2" parent="." instance=ExtResource( 7 )]
-stream = ExtResource( 9 )
-volume_db = 8.0
-pitch_scale = 1.0
-bus = "Ambience3"
 
 [node name="Shader" type="Node2D" parent="."]
 modulate = Color( 0.584314, 0.584314, 0.584314, 1 )

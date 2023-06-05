@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://scenes/master/Level.gd" type="Script" id=1]
 [ext_resource path="res://scenes/layers/ObjectMap.tscn" type="PackedScene" id=2]
@@ -6,9 +6,6 @@
 [ext_resource path="res://scenes/layers/Background/Ocean.tscn" type="PackedScene" id=4]
 [ext_resource path="res://scenes/layers/Liquid/WaterForeground.tscn" type="PackedScene" id=5]
 [ext_resource path="res://scenes/shaders/Overlay.gdshader" type="Shader" id=6]
-[ext_resource path="res://scenes/layers/Ambience.tscn" type="PackedScene" id=7]
-[ext_resource path="res://sounds/ambience_loops/AmbienceWaves.mp3" type="AudioStream" id=8]
-
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 6 )
@@ -64,9 +61,3 @@ tile_data = PoolIntArray( 290, 536870924, 0, 306, 536870924, 0, 479, 28, 0, 6588
 [node name="WaterFG" parent="." instance=ExtResource( 5 )]
 offset = Vector2( 0, -96 )
 transform = Transform2D( 1, 0, 0, 1, 0, -96 )
-
-[node name="Ambience" parent="." instance=ExtResource( 7 )]
-stream = ExtResource( 8 )
-volume_db = -21.0
-pitch_scale = 1.0
-bus = "Ambience2"
