@@ -25,6 +25,8 @@ var level_editor_scene = "res://scenes/leveleditor/LevelEditor.tscn"
 
 var worlds_folder = "res://scenes/levels/"
 
+var layer_icons_directory = "res://images/editor/layer_icons/"
+
 var current_scene = null
 var current_level = null
 var current_level_path = null
@@ -474,3 +476,15 @@ func _notification(what):
 			emit_signal("quit_game_requested")
 		else:
 			get_tree().quit() # default behavior
+
+# Takes in an image texture given from a file path,
+# and returns an ImageTexture object with the image as its texture
+func load_external_image_texture(path_to_image : String):
+	var image = Image.new()
+	var err = image.load(path_to_image)
+	if err != OK:
+		push_error("Error loading image texture from file: " + path_to_image + " Error code: " + str(err))
+		return null
+	var texture = ImageTexture.new()
+	texture.create_from_image(image)
+	return texture

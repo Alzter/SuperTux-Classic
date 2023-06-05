@@ -15,7 +15,9 @@ func _on_AddLayerDialog_about_to_show():
 	
 	var id = 0
 	for type in owner.layer_types:
-		layer_type.add_item(type)
+		var layer_icon_file = Global.layer_icons_directory + type + ".png"
+		var layer_icon_texture = load(layer_icon_file)
+		layer_type.add_icon_item(layer_icon_texture, type)
 		layer_types[type] = id
 		id += 1
 	

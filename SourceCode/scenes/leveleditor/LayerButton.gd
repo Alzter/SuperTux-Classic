@@ -2,11 +2,14 @@ extends Button
 
 onready var label = $Label
 onready var layer_options = $LayerOptions
+onready var layer_icon = $LayerIcon
 
 export var button_font : Font
 
-var layer_object = null
+var layer_object = null setget _set_layer_object
 var layer_name = null setget _set_layer_name
+
+var layer_type = null setget , _get_layer_type
 
 signal layer_button_pressed(button_node, layer_object)
 signal edit_layer(layer_object)
@@ -16,6 +19,7 @@ func _ready():
 	layer_options.hide()
 
 func _on_LayerButton_pressed():
+	print(self.layer_type)
 	emit_signal("layer_button_pressed", self, layer_object)
 
 func _on_LayerButton_mouse_entered():
@@ -52,3 +56,22 @@ func _set_layer_name(new_value):
 		label.rect_scale = new_size
 	
 	else: label.rect_scale = Vector2.ONE
+
+func _set_layer_object(new_value):
+	layer_object = new_value
+	
+	_update_layer_icon()
+
+func _get_layer_type():
+	if !layer_object: return null
+	if !is_instance_valid(layer_object): return null
+	return layer_object.filename.get_file().trim_suffix(".tscn")
+
+func _update_layer_icon():
+	if !self.layer_type: return
+	if !Global.get("layer_icons_directory"): return
+	var layer_icon_img = Global.layer_icons_directory + self.layer_type + ".png"
+	
+	print(layer_icon_img)
+	
+	layer_icon.texture = load(layer_icon_img)
