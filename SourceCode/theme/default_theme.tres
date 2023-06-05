@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=23 format=2]
+[gd_resource type="Theme" load_steps=24 format=2]
 
 [ext_resource path="res://theme/FontMedium.tres" type="DynamicFont" id=1]
 [ext_resource path="res://theme/FontButton.tres" type="DynamicFont" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://images/menu/SliderSelected.png" type="Texture" id=6]
 [ext_resource path="res://images/menu/SliderDisabled.png" type="Texture" id=7]
 [ext_resource path="res://theme/FontTooltip.tres" type="DynamicFont" id=8]
+[ext_resource path="res://theme/FontEditable.tres" type="DynamicFont" id=9]
 
 [sub_resource type="StyleBoxFlat" id=4]
 bg_color = Color( 0.141176, 0.176471, 0.203922, 1 )
@@ -262,12 +263,12 @@ LineEdit/colors/font_color_selected = Color( 1, 1, 0, 1 )
 LineEdit/colors/font_color_uneditable = Color( 0.298039, 0.298039, 0.298039, 1 )
 LineEdit/colors/selection_color = Color( 1, 1, 1, 0.5 )
 LineEdit/constants/minimum_spaces = 10
-LineEdit/fonts/font = ExtResource( 8 )
+LineEdit/fonts/font = ExtResource( 9 )
 LineEdit/icons/clear = null
 LineEdit/styles/focus = SubResource( 13 )
 LineEdit/styles/normal = SubResource( 3 )
 LineEdit/styles/read_only = SubResource( 4 )
-OptionButton/fonts/font = ExtResource( 2 )
+OptionButton/fonts/font = ExtResource( 9 )
 Panel/styles/panel = SubResource( 10 )
 PanelContainer/styles/panel = SubResource( 12 )
 PopupDialog/styles/panel = SubResource( 10 )
@@ -278,7 +279,7 @@ PopupMenu/colors/font_color_hover = Color( 0, 0.666667, 1, 1 )
 PopupMenu/colors/font_color_separator = Color( 0, 0.666667, 1, 1 )
 PopupMenu/constants/hseparation = 8
 PopupMenu/constants/vseparation = 8
-PopupMenu/fonts/font = ExtResource( 2 )
+PopupMenu/fonts/font = ExtResource( 9 )
 PopupMenu/fonts/font_separator = ExtResource( 8 )
 PopupMenu/icons/checked = null
 PopupMenu/icons/radio_checked = null
@@ -308,6 +309,7 @@ RichTextLabel/fonts/mono_font = ExtResource( 1 )
 RichTextLabel/fonts/normal_font = ExtResource( 1 )
 RichTextLabel/styles/focus = null
 RichTextLabel/styles/normal = null
+TextEdit/fonts/font = ExtResource( 9 )
 TooltipLabel/colors/font_color = Color( 1, 1, 1, 1 )
 TooltipLabel/colors/font_color_shadow = Color( 0, 0, 0, 1 )
 TooltipLabel/constants/shadow_offset_x = 0
