@@ -14,7 +14,7 @@ export var ui_scale_min_resolution = Vector2(1280, 720)
 var cache_level = null
 var is_paused = false
 
-export var unselected_tilemap_opacity = 0.3
+export var unselected_tilemap_opacity = 0.5
 
 export var editor_layers_directory = "res://scenes/layers/"
 
@@ -335,7 +335,7 @@ func update_selected_layer(new_value):
 
 func update_tilemap_opacity():
 	if selected_layer and edit_mode:
-		if (is_tilemap(selected_layer) or is_object_container(selected_layer)) and !is_objectmap(selected_layer):
+		if (is_tilemap(selected_layer) or is_object_container(selected_layer)):
 			make_non_selected_tilemaps_transparent()
 		else:
 			make_all_tilemaps_opaque()
@@ -345,7 +345,7 @@ func update_tilemap_opacity():
 func make_non_selected_tilemaps_transparent():
 	for child in self.level_objects:
 		if !is_instance_valid(child): continue
-		if is_tilemap(child):
+		if is_tilemap(child) or is_objectmap(child):
 			if selected_layer != child:
 				child.modulate.a = unselected_tilemap_opacity
 			else: child.modulate.a = 1
