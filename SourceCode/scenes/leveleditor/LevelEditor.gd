@@ -199,6 +199,8 @@ func initialise_level(level_object):
 	if music:
 		Music.continue(music)
 	
+	level.connect("music_changed", self, "level_music_changed")
+	
 	update_layers_panel(self.level_objects)
 	
 	object_map = null
@@ -677,3 +679,6 @@ func _on_ExitWithoutSaving_pressed():
 
 func _on_CancelExitProgram_pressed():
 	quit_without_saving_dialog.hide()
+
+func level_music_changed(new_music):
+	Music.continue(new_music)

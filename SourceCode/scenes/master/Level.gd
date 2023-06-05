@@ -29,7 +29,7 @@ onready var extro_level = WorldmapManager.extro_level
 export var is_worldmap = false
 export var level_title = ""
 export var level_author = ""
-export var music = "ChipDisko"
+export var music = "ChipDisko" setget _set_level_music
 export var particle_system = ""
 export var uses_timer = true
 export var time = 300
@@ -45,6 +45,7 @@ onready var objects = get_node("Objects").get_children() if has_node("Objects") 
 onready var custom_camera = get_node_or_null("Camera2D")
 
 signal level_ready
+signal music_changed
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -247,3 +248,7 @@ func window_resized():
 		var window_size = ResolutionManager.window_resolution
 		var zoom = max(max_size.x / window_size.x, max_size.y / window_size.y)
 		custom_camera.zoom = Vector2.ONE * zoom
+
+func _set_level_music(new_value):
+	music = new_value
+	emit_signal("music_changed", new_value)
