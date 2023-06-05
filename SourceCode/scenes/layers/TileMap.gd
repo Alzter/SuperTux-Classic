@@ -19,7 +19,6 @@ export var unique_material = false
 export var worldmap_tileset : TileSet
 
 func _ready():
-	print(is_in_worldmap)
 	if is_in_worldmap: set_tileset(worldmap_tileset)
 	
 	if unique_material: use_parent_material = false
