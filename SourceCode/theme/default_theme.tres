@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=21 format=2]
+[gd_resource type="Theme" load_steps=23 format=2]
 
 [ext_resource path="res://theme/FontMedium.tres" type="DynamicFont" id=1]
 [ext_resource path="res://theme/FontButton.tres" type="DynamicFont" id=2]
@@ -164,6 +164,41 @@ corner_radius_top_right = 8
 corner_radius_bottom_right = 8
 corner_radius_bottom_left = 8
 
+[sub_resource type="StyleBoxFlat" id=15]
+bg_color = Color( 0.8, 0.92, 1, 1 )
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color( 0.490196, 0.784314, 1, 1 )
+border_blend = true
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+expand_margin_left = 2.0
+expand_margin_right = 2.0
+expand_margin_top = 2.0
+expand_margin_bottom = 2.0
+shadow_color = Color( 0, 0, 0, 1 )
+shadow_size = 5
+anti_aliasing = false
+anti_aliasing_size = 0.01
+
+[sub_resource type="StyleBoxFlat" id=16]
+bg_color = Color( 0.223529, 0.262745, 0.305882, 1 )
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color( 0, 0, 0, 1 )
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+shadow_color = Color( 1, 1, 1, 1 )
+shadow_size = 4
+
 [sub_resource type="StyleBoxFlat" id=14]
 bg_color = Color( 0, 0, 0, 0.74902 )
 corner_radius_top_left = 16
@@ -188,6 +223,8 @@ Button/styles/focus = SubResource( 5 )
 Button/styles/hover = SubResource( 5 )
 Button/styles/normal = SubResource( 3 )
 Button/styles/pressed = SubResource( 6 )
+CheckBox/fonts/font = ExtResource( 2 )
+CheckButton/fonts/font = ExtResource( 2 )
 ColorPicker/constants/h_width = 0
 ColorPicker/constants/label_width = 0
 ColorPicker/constants/margin = 0
@@ -225,14 +262,35 @@ LineEdit/colors/font_color_selected = Color( 1, 1, 0, 1 )
 LineEdit/colors/font_color_uneditable = Color( 0.298039, 0.298039, 0.298039, 1 )
 LineEdit/colors/selection_color = Color( 1, 1, 1, 0.5 )
 LineEdit/constants/minimum_spaces = 10
-LineEdit/fonts/font = ExtResource( 1 )
+LineEdit/fonts/font = ExtResource( 8 )
 LineEdit/icons/clear = null
 LineEdit/styles/focus = SubResource( 13 )
 LineEdit/styles/normal = SubResource( 3 )
 LineEdit/styles/read_only = SubResource( 4 )
+OptionButton/fonts/font = ExtResource( 2 )
 Panel/styles/panel = SubResource( 10 )
 PanelContainer/styles/panel = SubResource( 12 )
 PopupDialog/styles/panel = SubResource( 10 )
+PopupMenu/colors/font_color = Color( 1, 1, 1, 1 )
+PopupMenu/colors/font_color_accel = Color( 1, 1, 0, 1 )
+PopupMenu/colors/font_color_disabled = Color( 0.298039, 0.298039, 0.298039, 1 )
+PopupMenu/colors/font_color_hover = Color( 0, 0.666667, 1, 1 )
+PopupMenu/colors/font_color_separator = Color( 0, 0.666667, 1, 1 )
+PopupMenu/constants/hseparation = 8
+PopupMenu/constants/vseparation = 8
+PopupMenu/fonts/font = ExtResource( 2 )
+PopupMenu/fonts/font_separator = ExtResource( 8 )
+PopupMenu/icons/checked = null
+PopupMenu/icons/radio_checked = null
+PopupMenu/icons/radio_unchecked = null
+PopupMenu/icons/submenu = null
+PopupMenu/icons/unchecked = null
+PopupMenu/styles/hover = SubResource( 15 )
+PopupMenu/styles/labeled_separator_left = SubResource( 11 )
+PopupMenu/styles/labeled_separator_right = SubResource( 11 )
+PopupMenu/styles/panel = SubResource( 16 )
+PopupMenu/styles/panel_disabled = null
+PopupMenu/styles/separator = SubResource( 11 )
 RichTextLabel/colors/default_color = Color( 1, 1, 1, 1 )
 RichTextLabel/colors/font_color_selected = Color( 0, 0, 0, 1 )
 RichTextLabel/colors/font_color_shadow = Color( 0, 0, 0, 1 )
