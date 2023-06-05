@@ -12,9 +12,16 @@ var overlay_color : Color = Color(0.5,0.5,0.5,0.5) setget _update_overlay_color
 
 var expand_on_bottom = true
 
+var is_in_worldmap = false
+
 export var unique_material = false
 
+export var worldmap_tileset : TileSet
+
 func _ready():
+	print(is_in_worldmap)
+	if is_in_worldmap: set_tileset(worldmap_tileset)
+	
 	if unique_material: use_parent_material = false
 	
 	var overlay = material.get_shader_param("overlay_color")

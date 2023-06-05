@@ -195,6 +195,7 @@ script = ExtResource( 5 )
 layer_button_scene = ExtResource( 15 )
 
 [node name="TileFunctions" type="Node2D" parent="."]
+z_index = 4096
 script = ExtResource( 8 )
 grid_color = Color( 0, 0, 0, 0.25 )
 
@@ -202,12 +203,14 @@ grid_color = Color( 0, 0, 0, 0.25 )
 texture = ExtResource( 10 )
 
 [node name="ObjectFunctions" type="Node2D" parent="."]
+z_index = 4096
 script = ExtResource( 21 )
 
 [node name="SelectedTile" type="Sprite" parent="ObjectFunctions"]
 texture = ExtResource( 10 )
 
 [node name="EditorCamera" type="Camera2D" parent="."]
+z_index = 4096
 current = true
 limit_left = 0
 limit_top = 0

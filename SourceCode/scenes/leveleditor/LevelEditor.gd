@@ -422,12 +422,19 @@ func _on_MouseDetector_mouse_exited():
 	mouse_over_ui = true
 
 func add_layer(layer_name : String, layer_type : String):
+	if !level: return
+	if !is_instance_valid(level): return
+	
 	var layer_node_path = editor_layers_directory + layer_type + ".tscn"
 	
 	var file = File.new()
 	if file.file_exists(layer_node_path):
 		var layer_node = load(layer_node_path).instance()
 		layer_node.set_name(layer_name)
+		
+		if layer_node.get("is_in_worldmap") != null:
+			layer_node.set("is_in_worldmap", level.is_worldmap)
+		
 		level.add_child(layer_node)
 		layer_node.set_owner(level)
 		update_layers_panel(self.level_objects)

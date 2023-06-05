@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://scenes/tilesets/LevelTiles.tres" type="TileSet" id=1]
 [ext_resource path="res://scenes/layers/TileMap.gd" type="Script" id=2]
 [ext_resource path="res://scenes/shaders/Overlay.gdshader" type="Shader" id=3]
+[ext_resource path="res://scenes/tilesets/WorldmapTiles.tres" type="TileSet" id=4]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 3 )
@@ -15,3 +16,4 @@ tile_set = ExtResource( 1 )
 cell_size = Vector2( 32, 32 )
 format = 1
 script = ExtResource( 2 )
+worldmap_tileset = ExtResource( 4 )
