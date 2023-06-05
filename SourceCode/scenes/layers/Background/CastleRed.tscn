@@ -1,11 +1,13 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=11 format=2]
 
+[ext_resource path="res://scenes/layers/Ambience.tscn" type="PackedScene" id=1]
 [ext_resource path="res://images/background/castle_interior_glow.png" type="Texture" id=2]
 [ext_resource path="res://images/background/castle_interior.png" type="Texture" id=3]
 [ext_resource path="res://images/background/castle_glass_overlay.png" type="Texture" id=4]
 [ext_resource path="res://images/background/castle_interior_back.png" type="Texture" id=5]
 [ext_resource path="res://images/background/castle_glass_shine.png" type="Texture" id=6]
 [ext_resource path="res://images/background/gradient2.png" type="Texture" id=7]
+[ext_resource path="res://sounds/ambience_loops/AmbienceThunder.mp3" type="AudioStream" id=8]
 
 [sub_resource type="CanvasItemMaterial" id=3]
 blend_mode = 1
@@ -127,3 +129,6 @@ anchor_bottom = 1.0
 texture = ExtResource( 7 )
 expand = true
 flip_v = true
+
+[node name="Ambience" parent="." instance=ExtResource( 1 )]
+stream = ExtResource( 8 )

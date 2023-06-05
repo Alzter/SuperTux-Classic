@@ -9,7 +9,6 @@
 [ext_resource path="res://images/background/gradient.png" type="Texture" id=7]
 [ext_resource path="res://scenes/layers/Ambience.tscn" type="PackedScene" id=8]
 
-
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 5 )
 shader_param/overlay_color = Color( 0.568627, 0.301961, 0.301961, 0.501961 )

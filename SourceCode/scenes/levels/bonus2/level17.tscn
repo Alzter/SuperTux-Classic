@@ -10,7 +10,6 @@
 [ext_resource path="res://scenes/shaders/Overlay.gdshader" type="Shader" id=8]
 [ext_resource path="res://scenes/layers/Ambience.tscn" type="PackedScene" id=9]
 
-
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 8 )
 shader_param/overlay_color = Color( 0.517647, 0.309804, 0.27451, 0.501961 )
@@ -65,5 +64,5 @@ tile_data = PoolIntArray( 57, 536870922, 0, 64, 536870922, 0, 129, 536870914, 0,
 [node name="CloudParticlesDark" parent="." instance=ExtResource( 7 )]
 
 [node name="Ambience" parent="." instance=ExtResource( 9 )]
-volume_db = -6.0
+volume_db = -12.0
 pitch_scale = 1.0

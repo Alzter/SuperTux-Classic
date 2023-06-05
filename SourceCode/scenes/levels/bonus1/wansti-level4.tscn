@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://scenes/master/Level.gd" type="Script" id=1]
 [ext_resource path="res://scenes/layers/Background/CaveDark.tscn" type="PackedScene" id=2]
@@ -7,9 +7,6 @@
 [ext_resource path="res://scenes/layers/Particles/Fog.tscn" type="PackedScene" id=5]
 [ext_resource path="res://scenes/layers/TileMap.tscn" type="PackedScene" id=6]
 [ext_resource path="res://scenes/layers/Particles/CloudsDark.tscn" type="PackedScene" id=7]
-[ext_resource path="res://scenes/layers/Ambience.tscn" type="PackedScene" id=8]
-[ext_resource path="res://sounds/ambience_loops/AmbienceCave.mp3" type="AudioStream" id=9]
-
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 3 )
@@ -55,7 +52,3 @@ tile_data = PoolIntArray( 346, 16, 0, 65819, 15, 0, 131263, 536870919, 0, 131267
 [node name="Fog" parent="." instance=ExtResource( 5 )]
 
 [node name="CloudParticlesDark" parent="." instance=ExtResource( 7 )]
-
-[node name="Ambience" parent="." instance=ExtResource( 8 )]
-stream = ExtResource( 9 )
-pitch_scale = 0.5

@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://scenes/layers/Particles/CloudsDark.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/layers/Particles/Fog.tscn" type="PackedScene" id=2]
@@ -7,8 +7,6 @@
 [ext_resource path="res://scenes/layers/Background/Gradient.tscn" type="PackedScene" id=5]
 [ext_resource path="res://images/background/gradient.png" type="Texture" id=6]
 [ext_resource path="res://scenes/master/Level.gd" type="Script" id=7]
-[ext_resource path="res://scenes/layers/Ambience.tscn" type="PackedScene" id=8]
-
 
 [sub_resource type="CanvasItemMaterial" id=1]
 blend_mode = 1
@@ -67,8 +65,5 @@ flip_v = true
 
 [node name="Fog" parent="." instance=ExtResource( 2 )]
 layer = -100
-
-[node name="Ambience" parent="." instance=ExtResource( 8 )]
-pitch_scale = 0.6
 
 [node name="CloudParticlesDark" parent="." instance=ExtResource( 1 )]

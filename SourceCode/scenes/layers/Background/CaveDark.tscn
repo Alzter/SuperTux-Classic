@@ -1,10 +1,12 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://scenes/layers/Background/assets/CaveBGTorch.tscn" type="PackedScene" id=1]
 [ext_resource path="res://images/background/cave-bg1.png" type="Texture" id=2]
 [ext_resource path="res://images/background/cave-bg5.png" type="Texture" id=3]
 [ext_resource path="res://images/background/cave-bg4.png" type="Texture" id=4]
 [ext_resource path="res://images/background/cave-bg2.png" type="Texture" id=5]
+[ext_resource path="res://scenes/layers/Ambience.tscn" type="PackedScene" id=6]
+[ext_resource path="res://sounds/ambience_loops/AmbienceCave.mp3" type="AudioStream" id=7]
 
 [sub_resource type="CanvasItemMaterial" id=1]
 blend_mode = 3
@@ -158,3 +160,8 @@ anchor_bottom = 1.0
 margin_right = 4483.0
 margin_bottom = 3005.0
 color = Color( 0.368627, 0.0705882, 0.419608, 1 )
+
+[node name="Ambience" parent="." instance=ExtResource( 6 )]
+stream = ExtResource( 7 )
+volume_db = -5.0
+pitch_scale = 0.5

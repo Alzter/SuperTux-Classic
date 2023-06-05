@@ -1,15 +1,11 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://scenes/layers/Background/Thunderstorm.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/layers/ObjectMap.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/layers/TileMap.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/master/Level.gd" type="Script" id=4]
-[ext_resource path="res://sounds/ambience_loops/AmbienceWaves.mp3" type="AudioStream" id=5]
-[ext_resource path="res://sounds/ambience_loops/AmbienceThunder.mp3" type="AudioStream" id=6]
-[ext_resource path="res://scenes/layers/Ambience.tscn" type="PackedScene" id=7]
 [ext_resource path="res://scenes/shaders/Overlay.gdshader" type="Shader" id=8]
 [ext_resource path="res://images/background/gradient.png" type="Texture" id=9]
-
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 8 )
@@ -55,18 +51,6 @@ z_index = 40
 tile_data = PoolIntArray( 233, 536870943, 0, 243, 536870943, 0, 253, 536870943, 0, 65602, 4, 0, 65603, 4, 0, 65604, 4, 0, 65605, 4, 0, 65606, 4, 0, 65607, 4, 0, 65608, 4, 0, 65678, 536870943, 0, 65683, 536870943, 0, 65688, 536870943, 0, 65693, 536870943, 0, 65698, 536870943, 0, 131138, 4, 0, 131139, 4, 0, 131140, 4, 0, 131141, 4, 0, 131142, 4, 0, 131143, 4, 0, 131144, 4, 0, 131254, 536870943, 0, 131258, 536870943, 0, 196613, 18, 0, 196614, 18, 0, 196615, 18, 0, 196616, 18, 0, 196617, 18, 0, 196618, 18, 0, 196619, 18, 0, 196674, 4, 0, 196675, 4, 0, 196676, 4, 0, 196677, 4, 0, 196678, 4, 0, 196679, 4, 0, 196680, 4, 0, 196741, 536870943, 0, 262149, 18, 0, 262155, 18, 0, 262210, 4, 0, 262211, 4, 0, 262212, 4, 0, 262213, 4, 0, 262214, 4, 0, 262215, 4, 0, 262216, 4, 0, 262244, 536870943, 0, 262251, 536870943, 0, 262259, 536870943, 0, 262366, 14, 0, 262438, 536870914, 0, 262440, 536870914, 0, 262442, 536870914, 0, 327685, 18, 0, 327691, 18, 0, 327729, 536870943, 0, 327774, 536870943, 0, 327818, 536870942, 0, 328005, 28, 0, 393221, 18, 0, 393224, 13, 0, 393225, 13, 0, 393226, 14, 0, 393227, 18, 0, 393305, 536870943, 0, 393345, 536870943, 0, 393398, 536870943, 0, 393402, 536870943, 0, 393418, 536870943, 0, 393442, 536870942, 0, 458795, 536870943, 0, 458890, 4, 0, 458893, 4, 0, 458895, 4, 0, 458898, 4, 0, 458900, 4, 0, 458903, 4, 0, 458905, 4, 0, 458908, 4, 0, 458910, 4, 0, 458913, 4, 0, 459071, 536870943, 0, 459090, 27, 0, 524373, 536870943, 0, 524481, 536870943, 0, 589827, 5, 0, 589883, 536870943, 0, 589943, 536870943, 0, 655397, 536870943, 0, 655440, 536870943, 0, 655486, 536870943, 0, 655573, 536870943, 0, 655666, 536870943, 0, 720928, 536870943, 0, 720950, 536870943, 0, 852154, 536870943, 0, 917627, 536870943, 0 )
 
 [node name="ThunderstormBackground" parent="." instance=ExtResource( 1 )]
-
-[node name="Ambience" parent="." instance=ExtResource( 7 )]
-stream = ExtResource( 5 )
-volume_db = -18.0
-pitch_scale = 3.0
-bus = "Ambience2"
-
-[node name="Ambience2" parent="." instance=ExtResource( 7 )]
-stream = ExtResource( 6 )
-volume_db = 0.0
-pitch_scale = 1.0
-bus = "Ambience3"
 
 [node name="Overlay" type="ParallaxBackground" parent="."]
 
