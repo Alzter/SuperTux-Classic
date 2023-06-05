@@ -645,6 +645,8 @@ func play_sound(sound_effect : String):
 # This function runs when the user attempts to quit the game while
 # the editor is open.
 func handle_closing_game():
+	if quit_without_saving_dialog.visible: return
+	
 	if !unsaved_changes:
 		get_tree().quit()
 	else:
