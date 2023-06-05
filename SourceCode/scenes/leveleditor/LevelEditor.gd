@@ -29,6 +29,7 @@ onready var ui_editor = $UI/Scale/EditorUI
 onready var tiles_container = $UI/Scale/EditorUI/TilesPanelOffset/TilesPanel/ScrollContainer/TilesContainer
 onready var layers_container = $UI/Scale/EditorUI/LayersPanelOffset/LayersPanel/ScrollContainer/LayersContainer
 
+var unsaved_changes = false
 var rect_select_enabled = false setget update_rect_select_enabled
 var eraser_enabled = false setget update_eraser_enabled
 var eyedropper_enabled = false setget update_eyedropper_enabled
@@ -49,6 +50,10 @@ export var layer_button_scene : PackedScene
 #onready var cache_level_path = cache_level_directory + cache_level_filename
 
 onready var edit_layer_dialog = $UI/Scale/EditorUI/EditLayerDialog
+
+# This dialog appears if you attempt to close the level editor with unsaved changes.
+onready var quit_without_saving_dialog = $UI/UnsavedChangesDialog
+
 onready var pause_menu = $PauseMenu
 
 signal level_loaded
@@ -85,6 +90,7 @@ signal object_clicked
 func _ready():
 	layer_types = get_layer_types()
 	
+	Global.connect("quit_game_requested", self, "handle_closing_game")
 	Global.connect("player_died", self, "enter_edit_mode")
 	Global.connect("level_cleared", self, "enter_edit_mode")
 	Scoreboard.hide()
@@ -234,10 +240,13 @@ func _deferred_save_level():
 	
 	make_all_tilemaps_opaque()
 	var level_directory = UserLevels.current_level
-	Global.save_node_to_directory(level, level_directory)
+	var save_status = Global.save_node_to_directory(level, level_directory)
 	update_tilemap_opacity()
 	
-	play_sound("Save")
+	if save_status == OK:
+		unsaved_changes = false
+		
+		play_sound("Save")
 
 func save_and_quit():
 	save_level()
@@ -508,6 +517,8 @@ func undo():
 	
 	emit_signal("undo_executed")
 	
+	unsaved_changes = true
+	
 	play_sound("Undo")
 	
 	#print("Remove undo state")
@@ -530,6 +541,8 @@ func add_undo_state():
 	undo_stack.append(level_packedscene)
 	
 	button_undo.disabled = false
+	
+	unsaved_changes = true
 	
 	#print("Add undo state")
 	#print(undo_stack)
@@ -628,3 +641,29 @@ func _input(event):
 
 func play_sound(sound_effect : String):
 	sfx.play(sound_effect)
+
+# This function runs when the user attempts to quit the game while
+# the editor is open.
+func handle_closing_game():
+	if !unsaved_changes:
+		get_tree().quit()
+	else:
+		quit_without_saving_dialog.popup_centered_ratio()
+	pass
+
+func _on_UnsavedChangesDialog_about_to_show():
+	if !edit_mode: enter_edit_mode()
+	pause_toggled(true)
+
+func _on_UnsavedChangesDialog_popup_hide():
+	pause_toggled(false)
+
+func _on_SaveAndExit_pressed():
+	save_level()
+	get_tree().quit()
+
+func _on_ExitWithoutSaving_pressed():
+	get_tree().quit()
+
+func _on_CancelExitProgram_pressed():
+	quit_without_saving_dialog.hide()

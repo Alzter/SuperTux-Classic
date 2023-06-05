@@ -174,6 +174,8 @@ func _draw():
 	var tilemap = selected_tilemap
 	if !tilemap: return
 	if !is_instance_valid(tilemap): return
+	if owner.ui_editor:
+		if !owner.ui_editor.visible: return
 	
 	draw_tilemap_grid(tilemap)
 	if placing_rectangle_fill:

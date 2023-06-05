@@ -194,18 +194,17 @@ theme = ExtResource( 13 )
 script = ExtResource( 5 )
 layer_button_scene = ExtResource( 15 )
 
-[node name="ObjectFunctions" type="Node2D" parent="."]
-script = ExtResource( 21 )
-
-[node name="SelectedTile" type="Sprite" parent="ObjectFunctions"]
-texture = ExtResource( 10 )
-
 [node name="TileFunctions" type="Node2D" parent="."]
-z_index = 4096
 script = ExtResource( 8 )
 grid_color = Color( 0, 0, 0, 0.25 )
 
 [node name="SelectedTile" type="Sprite" parent="TileFunctions"]
+texture = ExtResource( 10 )
+
+[node name="ObjectFunctions" type="Node2D" parent="."]
+script = ExtResource( 21 )
+
+[node name="SelectedTile" type="Sprite" parent="ObjectFunctions"]
 texture = ExtResource( 10 )
 
 [node name="EditorCamera" type="Camera2D" parent="."]
@@ -782,6 +781,89 @@ focus_mode = 0
 theme = ExtResource( 13 )
 text = "PLAY"
 
+[node name="UnsavedChangesDialog" type="PopupDialog" parent="UI"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -313.0
+margin_top = -135.0
+margin_right = 313.0
+margin_bottom = 135.0
+theme = ExtResource( 13 )
+popup_exclusive = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/UnsavedChangesDialog"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 12.0
+margin_top = 12.0
+margin_right = -12.0
+margin_bottom = -12.0
+alignment = 1
+
+[node name="Label" type="Label" parent="UI/UnsavedChangesDialog/VBoxContainer"]
+margin_top = 30.0
+margin_right = 602.0
+margin_bottom = 62.0
+rect_min_size = Vector2( 0, 32 )
+custom_colors/font_color = Color( 1, 1, 0, 1 )
+text = "Unsaved Changes"
+align = 1
+valign = 2
+autowrap = true
+
+[node name="HSeparator2" type="HSeparator" parent="UI/UnsavedChangesDialog/VBoxContainer"]
+margin_top = 66.0
+margin_right = 602.0
+margin_bottom = 96.0
+
+[node name="Label2" type="Label" parent="UI/UnsavedChangesDialog/VBoxContainer"]
+margin_top = 100.0
+margin_right = 602.0
+margin_bottom = 132.0
+rect_min_size = Vector2( 0, 32 )
+text = "Save changes to level before closing?"
+align = 1
+valign = 2
+autowrap = true
+
+[node name="HSeparator" type="HSeparator" parent="UI/UnsavedChangesDialog/VBoxContainer"]
+margin_top = 136.0
+margin_right = 602.0
+margin_bottom = 166.0
+
+[node name="HSplitContainer" type="HBoxContainer" parent="UI/UnsavedChangesDialog/VBoxContainer"]
+margin_top = 170.0
+margin_right = 602.0
+margin_bottom = 216.0
+rect_min_size = Vector2( 0, 46 )
+
+[node name="SaveAndExit" type="Button" parent="UI/UnsavedChangesDialog/VBoxContainer/HSplitContainer"]
+margin_right = 198.0
+margin_bottom = 46.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Save"
+clip_text = true
+
+[node name="ExitWithoutSaving" type="Button" parent="UI/UnsavedChangesDialog/VBoxContainer/HSplitContainer"]
+margin_left = 202.0
+margin_right = 400.0
+margin_bottom = 46.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Don't Save"
+
+[node name="CancelExitProgram" type="Button" parent="UI/UnsavedChangesDialog/VBoxContainer/HSplitContainer"]
+margin_left = 404.0
+margin_right = 602.0
+margin_bottom = 46.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Cancel"
+clip_text = true
+
 [node name="PauseMenu" parent="." instance=ExtResource( 17 )]
 visible = false
 
@@ -843,3 +925,8 @@ pitch_scale = 2.0
 [connection signal="toggled" from="UI/Scale/EditorUI/TilesPanelOffset/TilesPanel/PlacementOptions/EyeDropper" to="." method="_on_EyeDropper_toggled"]
 [connection signal="toggled" from="UI/Scale/EditorUI/TilesPanelOffset/TilesPanel/PlacementOptions/FlipTiles" to="." method="_on_FlipTiles_toggled"]
 [connection signal="pressed" from="UI/Scale/EditToggle" to="." method="_on_EditToggle_pressed"]
+[connection signal="about_to_show" from="UI/UnsavedChangesDialog" to="." method="_on_UnsavedChangesDialog_about_to_show"]
+[connection signal="popup_hide" from="UI/UnsavedChangesDialog" to="." method="_on_UnsavedChangesDialog_popup_hide"]
+[connection signal="pressed" from="UI/UnsavedChangesDialog/VBoxContainer/HSplitContainer/SaveAndExit" to="." method="_on_SaveAndExit_pressed"]
+[connection signal="pressed" from="UI/UnsavedChangesDialog/VBoxContainer/HSplitContainer/ExitWithoutSaving" to="." method="_on_ExitWithoutSaving_pressed"]
+[connection signal="pressed" from="UI/UnsavedChangesDialog/VBoxContainer/HSplitContainer/CancelExitProgram" to="." method="_on_CancelExitProgram_pressed"]

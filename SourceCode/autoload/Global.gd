@@ -59,7 +59,12 @@ signal level_cleared
 
 signal object_clicked
 
+signal quit_game_requested
+
 func _ready():
+	# Disable the game automatically quitting
+	get_tree().set_auto_accept_quit(false)
+	
 	self.gravity = 1
 	var root = get_tree().get_root()
 	current_scene = root.get_child(root.get_child_count() - 1)
@@ -233,7 +238,10 @@ func save_node_to_directory(node : Node, dir : String):
 	packed_scene.pack(node)
 	var err = ResourceSaver.save(dir, packed_scene)
 	if err != OK:
-		printerr("Error Code when saving: %s" % err)
+		var error_msg = str("Error saving node: " + str(node) + " at directory: " + dir + " Error code: " + str(err))
+		push_error(error_msg)
+		print(error_msg)
+	return err
 
 # Gets ALL children in a node, including children of children.
 func get_all_children(node, array := []):
@@ -458,3 +466,11 @@ func is_popup_visible(node = current_scene):
 func _is_open_dialog(node):
 	if node is Popup:
 		return node.visible
+
+# Override the default quitting behaviour
+func _notification(what):
+	if what == MainLoop.NOTIFICATION_WM_QUIT_REQUEST:
+		if self.is_in_editor:
+			emit_signal("quit_game_requested")
+		else:
+			get_tree().quit() # default behavior
