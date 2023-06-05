@@ -102,7 +102,7 @@ func _ready():
 	
 	Global.connect("object_clicked", self, "object_clicked")
 	
-	get_tree().paused = true
+	#get_tree().paused = true
 
 func _process(delta):
 	if !level: return
@@ -158,6 +158,8 @@ func _deferred_enter_edit_mode():
 	#Music.stop_all()
 	#get_tree().paused = false
 	edit_mode = true
+	get_tree().paused = false
+	yield(get_tree(), "idle_frame")
 	Global.can_pause = true
 
 # ==================================================================================
@@ -185,6 +187,10 @@ func unload_current_level():
 
 func initialise_level(level_object):
 	level = level_object
+	
+	var music = level.get("music")
+	if music:
+		Music.continue(music)
 	
 	update_layers_panel(self.level_objects)
 	
