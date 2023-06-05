@@ -387,7 +387,7 @@ script = ExtResource( 6 )
 
 [node name="Lightning" type="AudioStreamPlayer" parent="SFX"]
 stream = ExtResource( 7 )
-volume_db = -8.0
+volume_db = -5.0
 pitch_scale = 2.0
 bus = "Ambience3"
 

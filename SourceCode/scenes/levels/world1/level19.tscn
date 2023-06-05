@@ -5,7 +5,6 @@
 [ext_resource path="res://scenes/layers/TileMap.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/layers/Background/Cave.tscn" type="PackedScene" id=4]
 
-
 [node name="Level" type="Node2D"]
 script = ExtResource( 1 )
 level_title = "Miyamoto Monument"

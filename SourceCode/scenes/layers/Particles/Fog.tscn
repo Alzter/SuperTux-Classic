@@ -70,5 +70,11 @@ stretch_mode = 2
 flip_v = true
 
 [node name="Ambience" parent="." instance=ExtResource( 4 )]
-volume_db = -20.0
+volume_db = -25.0
+pitch_scale = 1.0
+bus = "Ambience3"
+
+[node name="Ambience2" parent="." instance=ExtResource( 4 )]
+volume_db = -30.0
 pitch_scale = 0.6
+bus = "Ambience3"
