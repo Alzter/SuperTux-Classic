@@ -604,6 +604,9 @@ func _input(event):
 	
 	if Input.is_action_just_pressed("editor_flip_tiles"):
 		self.flip_tiles_enabled = !flip_tiles_enabled
+	
+	if Input.is_action_just_pressed("editor_eraser_toggle"):
+		self.eraser_enabled = !eraser_enabled
 
 func play_sound(sound_effect : String):
 	sfx.play(sound_effect)

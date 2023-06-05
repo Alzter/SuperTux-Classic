@@ -723,7 +723,7 @@ alignment = 1
 [node name="Eraser" type="Button" parent="UI/Scale/EditorUI/TilesPanelOffset/TilesPanel/PlacementOptions"]
 margin_right = 72.0
 margin_bottom = 72.0
-hint_tooltip = "Eraser (Right Click)"
+hint_tooltip = "Eraser (Press E or Right Click)"
 focus_mode = 0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -759,7 +759,7 @@ clip_text = true
 margin_top = 228.0
 margin_right = 72.0
 margin_bottom = 300.0
-hint_tooltip = "Flip Tiles (X)"
+hint_tooltip = "Flip Tiles (Press X)"
 focus_mode = 0
 size_flags_horizontal = 3
 size_flags_vertical = 3
