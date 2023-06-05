@@ -12,7 +12,8 @@ var dragging_camera = false
 onready var tux_sprite = get_node("TuxSprite")
 
 func _input(event):
-	if owner.mouse_over_ui: return
+	if owner.mouse_over_ui or !owner.edit_mode: return
+	
 	
 	# If we press the spacebar, enable camera drag mode.
 	# This allows the camera to be moved by moving the mouse.
@@ -50,7 +51,8 @@ func initialise_tux_sprite(worldmap):
 
 func _process(delta):
 	visible = owner.edit_mode
-	if !owner.edit_mode: return
+	
+	if owner.mouse_over_ui or !owner.edit_mode: return
 	
 	var cam_zoom = Vector2(get_global_transform_with_canvas().x.x, get_global_transform_with_canvas().y.y)
 	
