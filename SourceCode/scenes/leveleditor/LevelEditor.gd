@@ -654,7 +654,8 @@ func handle_closing_game():
 	pass
 
 func _on_UnsavedChangesDialog_about_to_show():
-	if !edit_mode: enter_edit_mode()
+	if !edit_mode:
+		yield(call("_deferred_enter_edit_mode"), "completed")
 	pause_toggled(true)
 
 func _on_UnsavedChangesDialog_popup_hide():
