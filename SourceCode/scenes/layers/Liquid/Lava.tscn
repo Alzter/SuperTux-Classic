@@ -29,6 +29,7 @@ blend_mode = 1
 
 [node name="LavaForeground" type="Node2D"]
 material = SubResource( 4 )
+position = Vector2( 0, 96 )
 z_index = 300
 
 [node name="LavaGlowBG" type="CanvasLayer" parent="."]

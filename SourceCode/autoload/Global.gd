@@ -443,3 +443,18 @@ static func globalise_path(local_path : String):
 		return global_path
 	
 	else: return null
+
+# Recursive function to determine whether there is currently a Popup
+# node visible within the current scene.
+func is_popup_visible(node = current_scene):
+	
+	var popup_open = false
+	for child in node.get_children():
+		var open = is_popup_visible(child)
+		if open: return true
+	
+	return _is_open_dialog(node)
+
+func _is_open_dialog(node):
+	if node is Popup:
+		return node.visible

@@ -2,7 +2,7 @@
 
 [ext_resource path="res://scenes/layers/Ambience.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/layers/Particles/RainLight.tscn" type="PackedScene" id=2]
-[ext_resource path="res://scenes/layers/Particles/WaterForeground.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/layers/Liquid/WaterForeground.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/layers/TileMap.tscn" type="PackedScene" id=4]
 [ext_resource path="res://scenes/layers/ObjectMap.tscn" type="PackedScene" id=5]
 [ext_resource path="res://scenes/layers/Background/IceMountainsFoggy.tscn" type="PackedScene" id=6]
