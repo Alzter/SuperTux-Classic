@@ -39,9 +39,12 @@ func _input(event):
 			mouse_motion = event.relative * -1 * mouse_drag_strength
 
 func camera_to_player_position(player : Node2D, worldmap = false):
-	if !player: return
+	if !player:
+		print("Error setting camera to player position: No player given")
+		push_error("Error setting camera to player position: No player given")
+		return
 	
-	position = player.position
+	set_global_position( player.get_global_position() )
 	zoom = Vector2.ONE
 	
 	tux_sprite.update_tux_sprite(player.state, worldmap)
