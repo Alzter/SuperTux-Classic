@@ -151,6 +151,7 @@ func _deferred_enter_edit_mode():
 	get_tree().paused = true
 	if level and Global.player:
 		if is_instance_valid(level) and is_instance_valid(Global.player):
+			Global.player.can_die = false
 			editor_camera.camera_to_player_position(Global.player, level.is_worldmap)
 			Scoreboard.player_initial_state = Global.player.state
 	
