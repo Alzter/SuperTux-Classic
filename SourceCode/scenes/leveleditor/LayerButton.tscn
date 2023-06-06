@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://scenes/leveleditor/LayerButton.gd" type="Script" id=1]
 [ext_resource path="res://theme/default_theme.tres" type="Theme" id=2]
@@ -9,10 +9,7 @@
 [ext_resource path="res://images/editor/icons/layer_edit_focus.png" type="Texture" id=7]
 [ext_resource path="res://images/editor/icons/layer_edit_selected.png" type="Texture" id=8]
 [ext_resource path="res://theme/FontTooltip.tres" type="DynamicFont" id=9]
-[ext_resource path="res://images/editor/layer_icons/Ambience.png" type="Texture" id=10]
-
-[sub_resource type="CanvasItemMaterial" id=1]
-blend_mode = 3
+[ext_resource path="res://images/editor/layer_icons/TileMap.png" type="Texture" id=10]
 
 [node name="LayerButton" type="Button"]
 anchor_left = 0.5
@@ -33,7 +30,6 @@ script = ExtResource( 1 )
 button_font = ExtResource( 9 )
 
 [node name="LayerIcon" type="TextureRect" parent="."]
-material = SubResource( 1 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_top = 16.0
