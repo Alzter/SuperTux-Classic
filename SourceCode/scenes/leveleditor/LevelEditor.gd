@@ -85,6 +85,12 @@ var layer_types = []
 
 var undo_stack = []
 
+# Dictionary {TileSet: int}
+# Stores the Tile ID last used for tileset TileSet.
+# Used to restore the last used Tile ID for a TileSet when
+# the user selects a layer with that TileSet.
+var last_used_tile_for_tileset = {}
+
 signal undo_executed
 
 signal object_clicked
@@ -320,6 +326,15 @@ func layer_button_pressed(button_node, layer_object):
 				self.current_object_resource = null
 				self.current_tile_id = -1
 				
+				var tileset = selected_layer.get("tile_set")
+				# When selecting TileMap layers,
+				# the editor will restore whatever tile you had last selected
+				# for the TileSet.
+				if last_used_tile_for_tileset.has(tileset):
+					
+					var tile = last_used_tile_for_tileset[tileset]
+					self.current_tile_id = tile
+				
 				# Make Flip Tiles auto-enable when selecting object maps,
 				# and auto-disable when selecting tilemaps
 				self.flip_tiles_enabled = is_objectmap(selected_layer)
@@ -411,6 +426,17 @@ func update_selected_tile(selected_tile_id : int):
 	
 	current_tile_id = selected_tile_id
 	current_object_resource = null
+	
+	# Store the currently selected tile for this TileSet
+	# as its last used tile. If we select a TileMap layer with
+	# a different tileset, then go back to the layer with this TileSet,
+	# the editor will restore whatever tile you had last selected.
+	if selected_tile_id != -1:
+		if selected_layer:
+			if is_instance_valid(selected_layer):
+				var tileset = selected_layer.get("tile_set")
+				if tileset:
+					last_used_tile_for_tileset[tileset] = current_tile_id
 	
 	if selected_tile_id == -1:
 		update_tile_preview_texture(null, null)
