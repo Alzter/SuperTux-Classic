@@ -977,6 +977,11 @@ stream = ExtResource( 31 )
 volume_db = -15.0
 pitch_scale = 6.0
 
+[node name="SelectTile" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource( 46 )
+volume_db = -25.0
+pitch_scale = 7.0
+
 [node name="EraseTile" type="AudioStreamPlayer" parent="SFX"]
 stream = ExtResource( 33 )
 volume_db = -13.0
@@ -1000,17 +1005,17 @@ stream = ExtResource( 37 )
 
 [node name="LevelProperties" type="AudioStreamPlayer" parent="SFX"]
 stream = ExtResource( 38 )
-volume_db = -5.0
+volume_db = -8.0
 pitch_scale = 2.0
 
 [node name="LevelPropertiesClose" type="AudioStreamPlayer" parent="SFX"]
 stream = ExtResource( 49 )
-volume_db = 1.0
+volume_db = -10.0
 pitch_scale = 1.4
 
 [node name="LevelPropertiesChanged" type="AudioStreamPlayer" parent="SFX"]
 stream = ExtResource( 51 )
-volume_db = 1.0
+volume_db = -8.0
 
 [connection signal="mouse_entered" from="UI/Scale/EditorUI/MouseDetector" to="." method="_on_MouseDetector_mouse_entered"]
 [connection signal="mouse_exited" from="UI/Scale/EditorUI/MouseDetector" to="." method="_on_MouseDetector_mouse_exited"]

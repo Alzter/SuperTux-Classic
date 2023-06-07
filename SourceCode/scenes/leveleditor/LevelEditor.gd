@@ -457,9 +457,10 @@ func update_selected_tile(selected_tile_id : int):
 				var tileset = selected_layer.get("tile_set")
 				if tileset:
 					last_used_tile_for_tileset[tileset] = current_tile_id
-	
-	if selected_tile_id == -1:
+		
 		update_tile_preview_texture(null, null)
+	
+	play_sound("SelectTile")
 
 func update_selected_object(selected_object_resource : Resource):
 	self.eraser_enabled = false
@@ -470,6 +471,8 @@ func update_selected_object(selected_object_resource : Resource):
 	
 	if selected_object_resource == null:
 		update_tile_preview_texture(null, null)
+	
+	play_sound("SelectTile")
 
 func _on_Eraser_toggled(button_pressed):
 	eraser_enabled = button_pressed
@@ -812,6 +815,7 @@ func update_tile_preview_texture(new_texture, region_rect):
 
 func _on_LevelPropertiesDialog_popup_hide():
 	play_sound("LevelPropertiesClose")
+	play_sound("LevelPropertiesChanged")
 
 
 func _on_AddLayerDialog_about_to_show():
