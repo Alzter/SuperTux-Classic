@@ -318,6 +318,12 @@ func layer_button_pressed(button_node, layer_object):
 	
 	self.selected_layer = layer_object
 	
+	if selected_layer:
+		if is_instance_valid(selected_layer):
+			# Make Flip Tiles auto-enable when selecting object maps,
+			# and auto-disable when selecting tilemaps
+			self.flip_tiles_enabled = is_objectmap(selected_layer)
+	
 	# Reset the currently selected tile/object when
 	# selecting a layer with a different TileSet than the current one
 	if selected_layer and old_selected_layer:
@@ -334,10 +340,6 @@ func layer_button_pressed(button_node, layer_object):
 					
 					var tile = last_used_tile_for_tileset[tileset]
 					self.current_tile_id = tile
-				
-				# Make Flip Tiles auto-enable when selecting object maps,
-				# and auto-disable when selecting tilemaps
-				self.flip_tiles_enabled = is_objectmap(selected_layer)
 
 func update_selected_layer(new_value):
 	var layer_exists = false
