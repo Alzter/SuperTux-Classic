@@ -53,7 +53,7 @@ var is_in_editor = false setget , _get_is_in_editor
 
 #var hovered_objects = []
 
-signal level_loaded
+signal scene_loaded
 signal player_loaded
 signal level_ready # EMITS AFTER THE LEVEL TITLE CARD HAS DISAPPEARED
 signal options_data_created
@@ -119,7 +119,7 @@ func goto_scene(path, loading_level = false):
 		return
 	
 	call_deferred("_deferred_goto_scene", path, loading_level)
-	yield(self, "level_loaded")
+	yield(self, "scene_loaded")
 
 func _deferred_goto_scene(path, loading_level = false):
 	get_tree().paused = true
@@ -140,7 +140,7 @@ func _deferred_goto_scene(path, loading_level = false):
 	current_level_path = current_scene.filename
 	
 	get_tree().paused = false
-	emit_signal("level_loaded")
+	emit_signal("scene_loaded")
 
 # Triggered once the player loads and executes their _ready() script. Sets the value of player to the player's node.
 func player_set(new_value):
