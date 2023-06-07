@@ -890,7 +890,7 @@ pitch_scale = 14.0
 
 [node name="DeleteLayer" type="AudioStreamPlayer" parent="SFX"]
 stream = ExtResource( 33 )
-volume_db = -11.0
+volume_db = -7.0
 pitch_scale = 2.0
 
 [node name="EditLayer" type="AudioStreamPlayer" parent="SFX"]

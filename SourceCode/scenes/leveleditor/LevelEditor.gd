@@ -128,6 +128,8 @@ func toggle_edit_mode():
 
 func enter_play_mode():
 	if !level: return
+	save_level()
+	yield(get_tree(), "idle_frame")
 	Scoreboard.reset_player_values(false, false)
 	Global.spawn_position = editor_camera.position
 	editor_camera.current = false
@@ -343,7 +345,12 @@ func update_selected_layer(new_value):
 			button.disabled = false
 
 func update_tilemap_opacity():
-	if selected_layer and edit_mode:
+	var selected_layer_exists = false
+	if selected_layer:
+		if is_instance_valid(selected_layer):
+			selected_layer_exists = true
+	
+	if selected_layer_exists and edit_mode:
 		if (is_tilemap(selected_layer) or is_object_container(selected_layer)):
 			make_non_selected_tilemaps_transparent()
 		else:

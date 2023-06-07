@@ -57,6 +57,8 @@ func place_object():
 	object.position = position
 	object_container.add_child(object)
 	object.set_owner(object_container)
+	
+	owner.play_sound("PlaceObject")
 
 func grab_object(object): # Begin allowing an object to be dragged by the mouse.
 	 # Only allow dragging objects which can have their position modified

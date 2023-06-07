@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/LevelContainer.png-427ae58aadad4786a0b591edc03ffbc8.stex"
+path="res://.import/ObjectContainer.png-d47e5decf84647aadce8831f47c348ee.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://images/editor/layer_icons/LevelContainer.png"
-dest_files=[ "res://.import/LevelContainer.png-427ae58aadad4786a0b591edc03ffbc8.stex" ]
+source_file="res://images/editor/layer_icons/ObjectContainer.png"
+dest_files=[ "res://.import/ObjectContainer.png-d47e5decf84647aadce8831f47c348ee.stex" ]
 
 [params]
 
