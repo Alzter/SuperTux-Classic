@@ -521,7 +521,7 @@ func _on_VisibilityNotifier2D_screen_exited():
 	if state_machine.state != "dead":
 		die()
 	else:
-		if Scoreboard.lives == -1:
+		if Scoreboard.lives == -1 and !Global.is_in_editor:
 			Scoreboard.game_over()
 		else:
 			Global.respawn_player()
