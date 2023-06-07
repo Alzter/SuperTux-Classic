@@ -53,24 +53,24 @@ margin_bottom = 459.0
 size_flags_vertical = 3
 
 [node name="MenuItems" type="VBoxContainer" parent="MainMenu/VBoxContainer/PanelContainer"]
-margin_left = 32.0
-margin_top = 32.0
-margin_right = 980.0
-margin_bottom = 357.0
+margin_left = 24.0
+margin_top = 24.0
+margin_right = 988.0
+margin_bottom = 365.0
 custom_constants/separation = 15
 
 [node name="WorldCreate" type="Button" parent="MainMenu/VBoxContainer/PanelContainer/MenuItems"]
-margin_right = 948.0
-margin_bottom = 98.0
+margin_right = 964.0
+margin_bottom = 103.0
 focus_neighbour_bottom = NodePath("../WorldOpen")
 size_flags_vertical = 3
 text = "Create World..."
 clip_text = true
 
 [node name="WorldOpen" type="Button" parent="MainMenu/VBoxContainer/PanelContainer/MenuItems"]
-margin_top = 113.0
-margin_right = 948.0
-margin_bottom = 211.0
+margin_top = 118.0
+margin_right = 964.0
+margin_bottom = 222.0
 focus_neighbour_top = NodePath("../WorldCreate")
 focus_neighbour_bottom = NodePath("../OpenWorldFolder")
 size_flags_vertical = 3
@@ -78,9 +78,9 @@ text = "Open World..."
 clip_text = true
 
 [node name="OpenWorldFolder" type="Button" parent="MainMenu/VBoxContainer/PanelContainer/MenuItems"]
-margin_top = 226.0
-margin_right = 948.0
-margin_bottom = 325.0
+margin_top = 237.0
+margin_right = 964.0
+margin_bottom = 341.0
 focus_neighbour_top = NodePath("../WorldOpen")
 focus_neighbour_bottom = NodePath("../../../ExitToMenu")
 size_flags_vertical = 3

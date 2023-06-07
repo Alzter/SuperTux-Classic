@@ -23,7 +23,6 @@ var worldmap_player_node = preload("res://scenes/worldmap/Player.tscn")
 var pause_menu = preload("res://scenes/menus/PauseScreen.tscn")
 var is_autoscrolling = false
 
-onready var worldmap_objects = get_node("Objects") if has_node("Objects") else get_node_or_null("Levels")
 onready var extro_level = WorldmapManager.extro_level
 
 export var is_worldmap = false
@@ -195,11 +194,18 @@ func _create_worldmap_player(position : Vector2, player_object : PackedScene):
 	player.tilemaps = []
 	player.level_dots = []
 	
-	# Set the worldmap player's level dots variable to an array of all the level dot objects
-	for child in worldmap_objects.get_children():
-		if is_instance_valid(child):
-			if child.is_in_group("leveldots"):
-				player.level_dots.append(child)
+	var worldmap_objects = []
+	for child in get_children():
+		if child.is_in_group("object_container"):
+			worldmap_objects.append(child)
+	
+	for container in worldmap_objects:
+		# Set the worldmap player's level dots variable to an array of all the level dot objects
+		for child in container.get_children():
+			
+			if is_instance_valid(child):
+				if child.is_in_group("leveldots"):
+					player.level_dots.append(child)
 	
 	# Set the worldmap player's tile map variable to an array of all the level's tilemaps
 	for tilemap in get_children():
