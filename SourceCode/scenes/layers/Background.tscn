@@ -3,4 +3,5 @@
 [ext_resource path="res://scenes/layers/Swappable.gd" type="Script" id=2]
 
 [node name="Background" type="Node2D"]
+z_index = -4096
 script = ExtResource( 2 )
