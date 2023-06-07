@@ -28,6 +28,28 @@ func show_tiles_from_tilemap(tilemap : TileMap):
 		for array in tilemap.group_tiles.values():
 			group_tiles.append_array(array)
 	
+	# --------------------------------------------
+	# SORT TILES ALPHABETICALLY BASED ON THEIR TILE NAME.
+#	var tile_name_ids = []
+#	for tile_id in tile_ids:
+#		var tile_name = tileset.tile_get_name(tile_id)
+#		tile_name_ids.append( [tile_name, tile_id ])
+#
+#	tile_name_ids.sort()
+#	tile_name_ids.invert()
+#
+#	for name in tile_name_ids:
+#		print(name[0])
+#
+#	var sorted_tile_ids = []
+#
+#	for tile in tile_name_ids:
+#		sorted_tile_ids.append(tile[1])
+#
+#	tile_ids = sorted_tile_ids
+	
+	# -----------------------------------------------
+	
 	for tile in tile_ids:
 		
 		var tile_name = tileset.tile_get_name(tile)
