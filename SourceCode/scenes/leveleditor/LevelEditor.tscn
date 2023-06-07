@@ -1,4 +1,4 @@
-[gd_scene load_steps=55 format=2]
+[gd_scene load_steps=60 format=2]
 
 [ext_resource path="res://images/player/tux/big/idle.png" type="Texture" id=1]
 [ext_resource path="res://images/player/tux/small/idle.png" type="Texture" id=2]
@@ -42,6 +42,11 @@
 [ext_resource path="res://sounds/objects/1up.wav" type="AudioStream" id=40]
 [ext_resource path="res://sounds/objects/powerup_appear.wav" type="AudioStream" id=41]
 [ext_resource path="res://sounds/worldmap/warp.wav" type="AudioStream" id=42]
+[ext_resource path="res://theme/FontTooltip.tres" type="DynamicFont" id=43]
+[ext_resource path="res://scenes/leveleditor/EditToggle.gd" type="Script" id=44]
+[ext_resource path="res://images/editor/icons/play.png" type="Texture" id=45]
+[ext_resource path="res://images/editor/icons/edit.png" type="Texture" id=47]
+[ext_resource path="res://images/editor/icons/play_from_start.png" type="Texture" id=48]
 
 [sub_resource type="ShaderMaterial" id=10]
 shader = ExtResource( 18 )
@@ -795,10 +800,39 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = -224.0
 margin_top = -119.0
-hint_tooltip = "Play/Edit level (ENTER)"
+hint_tooltip = "Play/Edit level (ENTER)
+
+Play from Start (CTRL+ENTER)"
 focus_mode = 0
 theme = ExtResource( 13 )
+custom_fonts/font = ExtResource( 43 )
+icon_align = 1
+script = ExtResource( 44 )
+play_texture = ExtResource( 45 )
+play_from_start_texture = ExtResource( 48 )
+edit_texture = ExtResource( 47 )
+
+[node name="Icon" type="TextureRect" parent="UI/Scale/EditToggle"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 7.0
+margin_bottom = -29.0
+texture = ExtResource( 45 )
+stretch_mode = 6
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Label" type="Label" parent="UI/Scale/EditToggle"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 51.0
+margin_bottom = -9.0
+custom_fonts/font = ExtResource( 43 )
 text = "PLAY"
+align = 1
+valign = 2
+autowrap = true
 
 [node name="UnsavedChangesDialog" type="PopupDialog" parent="UI"]
 anchor_left = 0.5

@@ -20,6 +20,8 @@ export var editor_layers_directory = "res://scenes/layers/"
 
 onready var sfx = $SFX
 
+onready var toggle_edit_button = $UI/Scale/EditToggle
+
 onready var tile_functions = $TileFunctions
 onready var object_functions = $ObjectFunctions
 onready var editor_camera = $EditorCamera
@@ -127,10 +129,13 @@ func toggle_edit_mode():
 		enter_edit_mode()
 	update_tilemap_opacity()
 
-func enter_play_mode():
+func enter_play_mode(play_from_start = Input.is_action_pressed("editor_play_from_start")):
 	if !level: return
 	Scoreboard.reset_player_values(false, false)
-	Global.spawn_position = editor_camera.position
+	
+	Global.spawn_position = null if play_from_start else editor_camera.position
+	if play_from_start: Music.stop_all()
+
 	editor_camera.current = false
 	self.selected_layer = null
 	tile_functions.selected_tilemap = null
@@ -141,6 +146,7 @@ func enter_play_mode():
 	edit_mode = false
 	get_tree().paused = false
 	Music.set_editor_music(false)
+	toggle_edit_button.update()
 
 func enter_edit_mode():
 	if !level: return
@@ -177,6 +183,7 @@ func _deferred_enter_edit_mode():
 	yield(get_tree(), "idle_frame")
 	Global.can_pause = true
 	Music.set_editor_music(true)
+	toggle_edit_button.update()
 
 # ==================================================================================
 # Level loading
@@ -637,7 +644,9 @@ func object_clicked(object : Node, click_type : int):
 			return
 	
 	elif click_type == BUTTON_RIGHT:
-		edit_object(object)
+		if object.get("editor_params") == null:
+			if can_delete_object: object_functions.delete_object(object)
+		else: edit_object(object)
 	
 	elif eraser_enabled and can_delete_object:
 		object_functions.delete_object(object)
