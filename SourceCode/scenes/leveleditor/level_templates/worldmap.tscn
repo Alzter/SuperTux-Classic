@@ -4,7 +4,7 @@
 [ext_resource path="res://scenes/worldmap/Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/layers/TileMap.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/tilesets/WorldmapTiles.tres" type="TileSet" id=4]
-[ext_resource path="res://scenes/worldmap/LevelDotContainer.gd" type="Script" id=5]
+[ext_resource path="res://scenes/layers/ObjectContainer.tscn" type="PackedScene" id=5]
 [ext_resource path="res://scenes/worldmap/LevelDot.tscn" type="PackedScene" id=6]
 
 [node name="Level" type="Node2D"]
@@ -14,10 +14,9 @@ music = "Salcon"
 worldmap_spawn = Vector2( 4, 5 )
 worldmap_player_object = ExtResource( 2 )
 
-[node name="Objects" type="Node2D" parent="." groups=["object_container"]]
-script = ExtResource( 5 )
+[node name="Levels" parent="." instance=ExtResource( 5 )]
 
-[node name="LevelDot" parent="Objects" instance=ExtResource( 6 )]
+[node name="LevelDot" parent="Levels" instance=ExtResource( 6 )]
 position = Vector2( 144, 240 )
 
 [node name="Background" parent="." instance=ExtResource( 3 )]
