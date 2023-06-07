@@ -17,6 +17,8 @@
 
 extends Node
 
+enum POWERUP_STATES {Small, Big, Fire}
+
 const empty_level_path_string = "[LevelPath]"
 
 var title_screen_scene = "res://scenes/menus/TitleScreen.tscn"
@@ -496,3 +498,53 @@ func load_external_image_texture(path_to_image : String):
 	var texture = ImageTexture.new()
 	texture.create_from_image(image)
 	return texture
+
+# Better alphabetical sort algorithm that is used to sort level files.
+
+# If two strings have numbers at the end (e.g. "level10", "level12"),
+# Rather than sorting the two alphabetically,
+# the string with the lowest number precedes the one with the highest.
+
+# Normal sorting algorithm:
+# "level1" "level10" "level11" "level12" "level13" ... "level2" "level21" "level22"...
+
+# This sorting algorithm:
+# "level1" "level2" "level3" "level4" "level5" "level6" ...
+
+func sort_alphabetically(a, b):
+	if a is String and b is String:
+		
+		# Remove file extensions from strings
+		if a.get_extension(): a = a.trim_suffix("." + a.get_extension())
+		if b.get_extension(): b = b.trim_suffix("." + b.get_extension())
+		
+		#if b.get_extension(): b.trim_suffix("." + b.get_extension())
+		
+		var end_num_a = ""
+		var end_num_b = ""
+		
+		# If string A has a number at the end (e.g. "level27"),
+		# Store that number in string str_num_a (e.g. "27")
+		for character in a: if character.is_valid_integer(): end_num_a += character
+		
+		if end_num_a != "": a = a.trim_suffix(end_num_a)
+		
+		for character in b: if character.is_valid_integer(): end_num_b += character
+		if end_num_b != "": b = b.trim_suffix(end_num_b)
+		
+		# If both strings are the same with end numbers removed:
+		# E.g. "level25", "level21" become "level" and "level"
+		if a == b:
+			
+			# We compare the two strings by how high the number at the end is instead.
+			return int(end_num_a) < int(end_num_b)
+		else:
+			return a < b
+		
+		#print("=====")
+		
+		#for character in b:
+		#	print(character)
+		
+	else:
+		return a < b

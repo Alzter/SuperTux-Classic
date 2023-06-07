@@ -306,6 +306,8 @@ func get_levels_in_world(world_folder_name : String) -> Array:
 				if current != worldmap_file:
 					levels.append(current)
 	
+	levels.sort_custom(Global, "sort_alphabetically")
+	
 	var level_filepaths = []
 	
 	for level_name in levels:
