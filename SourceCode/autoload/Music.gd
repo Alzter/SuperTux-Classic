@@ -30,6 +30,7 @@ func _ready():
 	set_editor_music(false)
 	
 	for song in get_children():
+		if song == custom_song: continue
 		if song is AudioStreamPlayer:
 			songs.append(song.name)
 
@@ -39,6 +40,8 @@ var special_songs = [
 
 func play(song, keep_other_songs = false, from_position = 0.0):
 	if !keep_other_songs: stop_all()
+	
+	# Try seeing if we have the song as a child node (Base game songs)
 	if has_node(song):
 		var s = get_node(song)
 		if s != null:
@@ -54,11 +57,11 @@ func play(song, keep_other_songs = false, from_position = 0.0):
 			
 			current_song = song
 			current_song_node = s
+	
+	# If that doesn't work, try playing the song as a custom song
 	else:
-		var f = File.new()
-		if f.file_exists(song) and song.ends_with(".mp3"):
-			play_custom_song(song)
-		else:
+		
+		if !play_custom_song(song) == OK:
 			push_error("Error playing music track! Unrecognised song: " + song)
 
 func play_custom_song(song_filepath : String):
@@ -72,7 +75,7 @@ func play_custom_song(song_filepath : String):
 		
 		f.close()
 		
-		if !buffer: return
+		if !buffer: return ERR_BUG
 		
 		var stream = AudioStreamMP3.new()
 		stream.set_data(buffer)
@@ -83,8 +86,10 @@ func play_custom_song(song_filepath : String):
 		
 		current_song = song_filepath
 		current_song_node = custom_song
-		
-		print("A")
+	
+		return OK
+	
+	return ERR_FILE_NOT_FOUND
 
 # Identical to play(), but continues playing a song if it is already playing rather than restarting it.
 # I.e. running continue("Invincible") while the Invincible music is already playing will result in no change.
