@@ -64,6 +64,11 @@ func grab_object(object): # Begin allowing an object to be dragged by the mouse.
 		dragged_object = object
 
 func delete_object(object):
+	
+	if object.get_owner() == owner: return
+	
+	owner.play_sound("EraseObject")
+	
 	owner.add_undo_state()
 	object.queue_free()
 	

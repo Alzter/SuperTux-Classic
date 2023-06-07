@@ -58,6 +58,8 @@ func _process(delta):
 					
 					owner.eyedropper_enabled = false
 					using_eyedropper = false
+					
+					owner.play_sound("Eyedrop")
 				
 				if !placing_rectangle_fill:
 					tile_selection.show()
@@ -111,7 +113,8 @@ func _input(event):
 						rect_fill_origin = rect_start
 						placing_rectangle_fill = true
 			else:
-				using_eyedropper = true
+				if event.pressed:
+					using_eyedropper = true
 
 # ===================================================================================
 # Tile placement

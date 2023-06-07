@@ -303,12 +303,17 @@ func layer_button_pressed(button_node, layer_object):
 	self.selected_layer = layer_object
 
 func update_selected_layer(new_value):
-	selected_layer = new_value
-	
 	var layer_exists = false
-	if selected_layer: layer_exists = is_instance_valid(selected_layer)
+	if new_value: layer_exists = is_instance_valid(new_value)
 	
 	if layer_exists:
+		
+		# Select Layer Sound
+		if new_value != null:
+			if selected_layer_name != new_value.name:
+				play_sound("SelectLayer")
+		
+		selected_layer = new_value
 		selected_layer_name = selected_layer.name
 		
 		for button in layers_container.get_children():
@@ -374,10 +379,16 @@ func set_camera_drag(is_dragging = true):
 	pass
 
 func update_selected_tile(selected_tile_id : int):
+	self.eraser_enabled = false
+	emit_signal("eraser_toggled", false)
+	
 	current_tile_id = selected_tile_id
 	current_object_resource = null
 
 func update_selected_object(selected_object_resource : Resource):
+	self.eraser_enabled = false
+	emit_signal("eraser_toggled", false)
+	
 	current_object_resource = selected_object_resource
 	current_tile_id = -1
 
@@ -448,6 +459,8 @@ func add_layer(layer_name : String, layer_type : String):
 		level.add_child(layer_node)
 		layer_node.set_owner(level)
 		update_layers_panel(self.level_objects)
+		
+		play_sound("AddLayer")
 	else:
 		push_error("ERROR ADDING LAYER: Layer scene for layer '" + layer_type + "' not found!")
 
@@ -499,6 +512,7 @@ func _deferred_delete_layer(layer_object : Node):
 		self.selected_layer = null
 	layer_object.free()
 	update_layers_panel(self.level_objects)
+	play_sound("DeleteLayer")
 
 func layer_parameter_changed():
 	update_layers_panel(self.level_objects)
@@ -575,6 +589,8 @@ func object_clicked(object : Node, click_type : int):
 	if !object: return
 	if !is_instance_valid(object): return
 	
+	var can_delete_object = object.get_owner() != self
+	
 	var is_editing_objects = false
 	if selected_layer: is_editing_objects = is_object_container(selected_layer)
 	
@@ -585,6 +601,7 @@ func object_clicked(object : Node, click_type : int):
 		if object_resource:
 			self.current_object_resource = object_resource
 			self.eyedropper_enabled = false
+			play_sound("Eyedrop")
 			return
 	
 	elif click_type == BUTTON_RIGHT:
@@ -592,7 +609,7 @@ func object_clicked(object : Node, click_type : int):
 		add_undo_state()
 		edit_layer_dialog.appear(object, true)
 	
-	elif eraser_enabled:
+	elif eraser_enabled and can_delete_object:
 		object_functions.delete_object(object)
 	
 	elif click_type == BUTTON_LEFT:
@@ -690,3 +707,7 @@ func _on_CancelExitProgram_pressed():
 
 func level_music_changed(new_music):
 	Music.continue(new_music)
+
+
+func _on_EditLayerDialog_about_to_show():
+	play_sound("EditLayer")
