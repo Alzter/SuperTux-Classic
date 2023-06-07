@@ -1004,7 +1004,7 @@ pitch_scale = 2.0
 
 [node name="LevelPropertiesClose" type="AudioStreamPlayer" parent="SFX"]
 stream = ExtResource( 49 )
-volume_db = -4.0
+volume_db = 1.0
 pitch_scale = 1.4
 
 [connection signal="mouse_entered" from="UI/Scale/EditorUI/MouseDetector" to="." method="_on_MouseDetector_mouse_entered"]

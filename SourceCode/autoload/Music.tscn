@@ -28,6 +28,9 @@
 [node name="Music" type="CanvasLayer"]
 script = ExtResource( 2 )
 
+[node name="Custom" type="AudioStreamPlayer" parent="."]
+bus = "Music"
+
 [node name="Title" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 12 )
 volume_db = 10.0

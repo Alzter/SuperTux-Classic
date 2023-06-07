@@ -31,6 +31,16 @@ func _update_music_list():
 	var id = 0
 	music_tracks = {}
 	level_music.clear()
+	
+	# Load custom music tracks
+	var custom_tracks = UserLevels.get_custom_music_tracks_for_world()
+	if custom_tracks:
+		for song in custom_tracks:
+			level_music.add_item(song, id)
+			music_tracks[song] = id
+			id += 1
+	
+	# Load all base-game music tracks
 	for song in Music.songs:
 		level_music.add_item(song, id)
 		music_tracks[song] = id

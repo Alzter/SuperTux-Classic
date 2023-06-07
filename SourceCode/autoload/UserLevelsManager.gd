@@ -360,3 +360,23 @@ func open_user_world_folder(world_folder_name : String):
 	var dir = Global.globalise_path(user_worlds_directory + world_folder_name)
 	
 	OS.shell_open(dir)
+
+func get_custom_music_tracks_for_world(world : String = UserLevels.current_world):
+	if !world: return
+	
+	var custom_music_folder = user_worlds_directory.plus_file(world).plus_file("assets/music")
+	
+	var dir = Directory.new()
+	
+	var tracks = []
+	
+	if dir.dir_exists(custom_music_folder):
+		var files = Global.list_files_in_directory(custom_music_folder)
+		for file in files:
+			var file_path = custom_music_folder.plus_file(file)
+			if file.ends_with(".mp3"):
+				tracks.append(file_path)
+	
+	if tracks == []: return null
+	
+	else: return tracks

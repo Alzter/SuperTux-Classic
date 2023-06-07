@@ -24,6 +24,7 @@ var current_song_node = null
 var songs = []
 
 onready var tween = $Tween
+onready var custom_song = $Custom
 
 func _ready():
 	set_editor_music(false)
@@ -53,6 +54,37 @@ func play(song, keep_other_songs = false, from_position = 0.0):
 			
 			current_song = song
 			current_song_node = s
+	else:
+		var f = File.new()
+		if f.file_exists(song) and song.ends_with(".mp3"):
+			play_custom_song(song)
+		else:
+			push_error("Error playing music track! Unrecognised song: " + song)
+
+func play_custom_song(song_filepath : String):
+	var f = File.new()
+	
+	if f.file_exists(song_filepath) and song_filepath.ends_with(".mp3"):
+		
+		f.open(song_filepath, f.READ)
+		
+		var buffer = f.get_buffer(f.get_len())
+		
+		f.close()
+		
+		if !buffer: return
+		
+		var stream = AudioStreamMP3.new()
+		stream.set_data(buffer)
+		stream.set_loop(true)
+		
+		custom_song.set_stream(stream)
+		custom_song.play()
+		
+		current_song = song_filepath
+		current_song_node = custom_song
+		
+		print("A")
 
 # Identical to play(), but continues playing a song if it is already playing rather than restarting it.
 # I.e. running continue("Invincible") while the Invincible music is already playing will result in no change.
