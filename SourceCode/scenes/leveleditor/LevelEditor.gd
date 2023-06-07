@@ -757,6 +757,7 @@ func handle_closing_game():
 	pass
 
 func _on_UnsavedChangesDialog_about_to_show():
+	pause_menu.paused = false
 	if !edit_mode:
 		yield(call("_deferred_enter_edit_mode"), "completed")
 	pause_toggled(true)
