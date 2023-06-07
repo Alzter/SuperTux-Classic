@@ -83,9 +83,12 @@ func _on_AutoscrollSpeed_value_changed(value):
 	if level: level.autoscroll_speed = value
 
 func _on_HideLevelProperties_pressed():
+	owner.play_sound("LevelPropertiesChanged")
 	hide()
 
 func _input(event):
+	if !visible: return
 	if Input.is_action_pressed("ui_accept"):
 		yield(get_tree(), "idle_frame") # This has to be here or else the play level input registers too
+		owner.play_sound("LevelPropertiesChanged")
 		hide()

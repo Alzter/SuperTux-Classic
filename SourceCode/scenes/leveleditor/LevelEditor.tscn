@@ -1,4 +1,4 @@
-[gd_scene load_steps=63 format=2]
+[gd_scene load_steps=64 format=2]
 
 [ext_resource path="res://images/player/tux/big/idle.png" type="Texture" id=1]
 [ext_resource path="res://images/player/tux/small/idle.png" type="Texture" id=2]
@@ -36,7 +36,7 @@
 [ext_resource path="res://sounds/editor/undo.wav" type="AudioStream" id=34]
 [ext_resource path="res://sounds/objects/powerup-bumped.wav" type="AudioStream" id=35]
 [ext_resource path="res://sounds/enemies/squish.wav" type="AudioStream" id=36]
-[ext_resource path="res://sounds/objects/checkpoint.wav" type="AudioStream" id=37]
+[ext_resource path="res://sounds/editor/level_saved.wav" type="AudioStream" id=37]
 [ext_resource path="res://sounds/objects/time_over.wav" type="AudioStream" id=38]
 [ext_resource path="res://sounds/editor/eyedrop.wav" type="AudioStream" id=39]
 [ext_resource path="res://sounds/objects/1up.wav" type="AudioStream" id=40]
@@ -50,6 +50,7 @@
 [ext_resource path="res://images/editor/icons/play_from_start.png" type="Texture" id=48]
 [ext_resource path="res://sounds/editor/close_level_properties.wav" type="AudioStream" id=49]
 [ext_resource path="res://sounds/editor/add_layer_dialog.wav" type="AudioStream" id=50]
+[ext_resource path="res://sounds/editor/level_properties_changed.wav" type="AudioStream" id=51]
 
 [sub_resource type="ShaderMaterial" id=10]
 shader = ExtResource( 18 )
@@ -996,7 +997,6 @@ volume_db = -4.0
 
 [node name="Save" type="AudioStreamPlayer" parent="SFX"]
 stream = ExtResource( 37 )
-volume_db = -4.0
 
 [node name="LevelProperties" type="AudioStreamPlayer" parent="SFX"]
 stream = ExtResource( 38 )
@@ -1007,6 +1007,10 @@ pitch_scale = 2.0
 stream = ExtResource( 49 )
 volume_db = 1.0
 pitch_scale = 1.4
+
+[node name="LevelPropertiesChanged" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource( 51 )
+volume_db = 1.0
 
 [connection signal="mouse_entered" from="UI/Scale/EditorUI/MouseDetector" to="." method="_on_MouseDetector_mouse_entered"]
 [connection signal="mouse_exited" from="UI/Scale/EditorUI/MouseDetector" to="." method="_on_MouseDetector_mouse_exited"]
