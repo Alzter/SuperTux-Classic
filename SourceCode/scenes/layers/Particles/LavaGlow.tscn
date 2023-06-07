@@ -7,6 +7,22 @@ blend_mode = 1
 
 [node name="LavaGlow" type="CanvasLayer"]
 
+[node name="LavaGlowBG" type="CanvasLayer" parent="."]
+layer = -1
+
+[node name="Control" type="Control" parent="LavaGlowBG"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="TextureRect3" type="TextureRect" parent="LavaGlowBG/Control"]
+modulate = Color( 0, 0, 0, 1 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 317.0
+texture = ExtResource( 1 )
+expand = true
+flip_v = true
+
 [node name="Control" type="Control" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0

@@ -1,13 +1,10 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://scenes/layers/TileMap.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/layers/ObjectMap.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/shaders/Overlay.gdshader" type="Shader" id=3]
-[ext_resource path="res://scenes/layers/Particles/LavaGlowBG.tscn" type="PackedScene" id=4]
 [ext_resource path="res://scenes/layers/Particles/LavaGlow.tscn" type="PackedScene" id=5]
-[ext_resource path="res://sounds/ambience_loops/AmbienceLava.mp3" type="AudioStream" id=6]
 [ext_resource path="res://scenes/layers/Particles/LavaEmbers.tscn" type="PackedScene" id=7]
-[ext_resource path="res://scenes/layers/Ambience.tscn" type="PackedScene" id=8]
 
 [sub_resource type="ShaderMaterial" id=4]
 shader = ExtResource( 3 )
@@ -25,8 +22,6 @@ shader_param/overlay_color = Color( 0, 0, 0, 1 )
 material = SubResource( 4 )
 position = Vector2( 0, 96 )
 z_index = 300
-
-[node name="LavaGlowBG" parent="." instance=ExtResource( 4 )]
 
 [node name="LavaTiles" parent="." instance=ExtResource( 1 )]
 material = SubResource( 1 )
@@ -47,9 +42,3 @@ tile_data = PoolIntArray( 851968, 37, 0, 851969, 37, 0, 851970, 37, 0, 851971, 3
 [node name="LavaGlow" parent="." instance=ExtResource( 5 )]
 
 [node name="LavaEmbers" parent="." instance=ExtResource( 7 )]
-
-[node name="Ambience" parent="." instance=ExtResource( 8 )]
-stream = ExtResource( 6 )
-volume_db = 2.0
-pitch_scale = 1.0
-bus = "Ambience2"
