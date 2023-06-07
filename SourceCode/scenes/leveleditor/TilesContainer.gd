@@ -95,6 +95,8 @@ func update_selected_tile(selected_tile_id : int):
 			tile_button.set_preview_texture()
 
 func update_selected_object(selected_object_resource : Resource):
+	if !selected_object_resource: return
+	
 	emit_signal("update_selected_object", selected_object_resource)
 	
 	for object_button in get_children():

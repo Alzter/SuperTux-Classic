@@ -301,7 +301,15 @@ func set_ui_scale(scale):
 	ui_scale.anchor_right = 1 / scale
 
 func layer_button_pressed(button_node, layer_object):
+	var old_selected_layer = selected_layer
+	
 	self.selected_layer = layer_object
+	
+	if selected_layer and old_selected_layer:
+		if is_instance_valid(selected_layer) and is_instance_valid(old_selected_layer):
+			if selected_layer.get("tile_set") != old_selected_layer.get("tile_set"):
+				self.current_object_resource = null
+				self.current_tile_id = -1
 
 func update_selected_layer(new_value):
 	var layer_exists = false
