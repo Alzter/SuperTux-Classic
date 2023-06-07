@@ -313,6 +313,8 @@ func layer_button_pressed(button_node, layer_object):
 				self.current_object_resource = null
 				self.current_tile_id = -1
 				
+				# Make Flip Tiles auto-enable when selecting object maps,
+				# and auto-disable when selecting tilemaps
 				self.flip_tiles_enabled = is_objectmap(selected_layer)
 
 func update_selected_layer(new_value):

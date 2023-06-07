@@ -89,6 +89,7 @@ func update_selected_tile(selected_tile_id : int):
 	emit_signal("update_selected_tile", selected_tile_id)
 	
 	for tile_button in get_children():
+		if !tile_button.get("tile_id"): continue
 		tile_button.disabled = tile_button.tile_id == selected_tile_id
 		
 		if tile_button.tile_id == selected_tile_id:
@@ -100,6 +101,7 @@ func update_selected_object(selected_object_resource : Resource):
 	emit_signal("update_selected_object", selected_object_resource)
 	
 	for object_button in get_children():
+		if !object_button.get("object_resource"): continue
 		object_button.disabled = object_button.object_resource == selected_object_resource
 		
 		if object_button.object_resource == selected_object_resource:
