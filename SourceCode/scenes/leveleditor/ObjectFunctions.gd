@@ -15,14 +15,14 @@ func _process(delta):
 	tile_selection.hide()
 	
 	if dragged_object:
-		dragged_object.position = get_mouse_position(true)
+		dragged_object.set_position(get_mouse_position(true))
 	
 	if object_container:
 		
 		if owner.can_place_tiles and !owner.mouse_over_ui:
 			var selected_tile_position = get_mouse_position(true)
 			tile_selection.show()
-			tile_selection.position = selected_tile_position
+			tile_selection.set_position(selected_tile_position)
 
 func _input(event):
 	
@@ -54,9 +54,9 @@ func place_object():
 	if !object_container: return
 	
 	var object = object_to_add.instance()
+	object.position = position
 	object_container.add_child(object)
 	object.set_owner(object_container)
-	object.position = position
 
 func grab_object(object): # Begin allowing an object to be dragged by the mouse.
 	 # Only allow dragging objects which can have their position modified

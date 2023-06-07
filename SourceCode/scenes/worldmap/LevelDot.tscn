@@ -36,7 +36,7 @@ animations = [ {
 [sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 16, 16 )
 
-[node name="LevelDot" type="Node2D"]
+[node name="LevelDot" type="Node2D" groups=["leveldots"]]
 script = ExtResource( 2 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]

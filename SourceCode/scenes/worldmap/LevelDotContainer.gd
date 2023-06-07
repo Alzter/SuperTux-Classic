@@ -11,13 +11,17 @@ func _ready():
 	yield(get_tree(), "idle_frame") # Force godot to process parent before child
 	
 	var clear = debug or Global.is_in_editor
-	for leveldot in get_children():
-		if !leveldot.is_teleporter:
-			leveldot.level_cleared = clear
+	for child in get_children():
+		if !child.is_in_group("leveldots"): continue
+		
+		if !child.is_teleporter:
+			child.level_cleared = clear
 	
 	if WorldmapManager.cleared_levels != []:
 		
-		for leveldot in get_children():
-			if !leveldot.is_teleporter:
-				if WorldmapManager.cleared_levels.has(leveldot.level_file_path):
-					leveldot.level_cleared = true
+		for child in get_children():
+			if !child.is_in_group("leveldots"): continue
+			
+			if !child.is_teleporter:
+				if WorldmapManager.cleared_levels.has(child.level_file_path):
+					child.level_cleared = true

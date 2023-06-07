@@ -223,7 +223,7 @@ func initialise_level(level_object):
 	update_tilemap_opacity()
 	tile_functions.update_level_boundaries(level)
 	
-	editor_camera.initialise_tux_sprite(level.is_worldmap)
+	editor_camera.initialise_tux_sprite(level)
 	
 	emit_signal("level_loaded")
 

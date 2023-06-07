@@ -198,7 +198,8 @@ func _create_worldmap_player(position : Vector2, player_object : PackedScene):
 	# Set the worldmap player's level dots variable to an array of all the level dot objects
 	for child in worldmap_objects.get_children():
 		if is_instance_valid(child):
-			player.level_dots.append(child)
+			if child.is_in_group("leveldots"):
+				player.level_dots.append(child)
 	
 	# Set the worldmap player's tile map variable to an array of all the level's tilemaps
 	for tilemap in get_children():

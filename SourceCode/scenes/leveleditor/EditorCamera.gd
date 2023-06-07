@@ -49,7 +49,16 @@ func camera_to_player_position(player : Node2D, worldmap = false):
 	
 	tux_sprite.update_tux_sprite(player.state, worldmap)
 
-func initialise_tux_sprite(worldmap):
+func initialise_tux_sprite(level : Node2D):
+	var worldmap = level.get("is_worldmap")
+	
+	# When loading into a worldmap, set Tux's position to the worldmap spawn point
+	if position == Vector2.ZERO:
+		if worldmap:
+			var spawn_pos = level.get("worldmap_spawn")
+			if spawn_pos:
+				position = spawn_pos * Global.TILE_SIZE + Global.TILE_SIZE * Vector2.ONE * 0.5
+	
 	tux_sprite.initialise_tux_sprite(worldmap)
 
 func _process(delta):
