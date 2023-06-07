@@ -284,7 +284,10 @@ func update_layers_panel(level_objects):
 		layers_container.remove_child(layer)
 		layer.free()
 	
-	for node in level_objects:
+	var sorted_layers = level_objects
+	sorted_layers.sort_custom(self, "sort_layers")
+	
+	for node in sorted_layers:
 		#if is_objectmap(node): continue
 		var button = layer_button_scene.instance()
 		layers_container.add_child(button)
@@ -293,6 +296,14 @@ func update_layers_panel(level_objects):
 		button.connect("layer_button_pressed", self, "layer_button_pressed")
 		button.connect("edit_layer", self, "edit_layer")
 		button.connect("delete_layer", self, "delete_layer")
+	
+	update_selected_layer(selected_layer)
+
+func sort_layers(a, b):
+	if a.get("z_index") != null and b.get("z_index") != null:
+		return a.z_index < b.z_index
+	else:
+		return a.name < b.name
 
 # ====================================================================================
 # Editor UI
@@ -359,6 +370,9 @@ func update_selected_layer(new_value):
 			button.disabled = button.layer_object == selected_layer
 		
 		update_tilemap_opacity()
+		
+		object_functions.object_container = null
+		tile_functions.selected_tilemap = null
 		
 		if is_tilemap(selected_layer):
 			object_functions.object_container = null

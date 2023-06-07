@@ -55,6 +55,10 @@ func _on_ConfirmEditLayer_pressed():
 	hide()
 
 func _on_EditLayerDialog_popup_hide():
+	for param_editor in layer_parameters.get_children():
+		param_editor.release_focus()
+	yield(get_tree(), "idle_frame")
+	
 	owner.play_sound("EditLayerComplete")
 	
 	call_deferred("_deferred_hide_layer_editor")

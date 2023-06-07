@@ -39,6 +39,7 @@ level_title = "Untitled Level"
 level_author = "Untitled Author"
 
 [node name="BG Image" parent="." instance=ExtResource( 2 )]
+z_index = -4096
 
 [node name="Background" parent="." instance=ExtResource( 3 )]
 material = SubResource( 6 )
@@ -64,4 +65,5 @@ collision_layer = 128
 collision_mask = 128
 
 [node name="ObjectMap" parent="." instance=ExtResource( 4 )]
+z_index = 4096
 tile_data = PoolIntArray( 851971, 5, 0 )

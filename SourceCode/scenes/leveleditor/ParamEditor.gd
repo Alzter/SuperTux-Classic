@@ -101,6 +101,13 @@ func _update_parameter_value():
 			queue_free()
 			return
 
+# Normally, spinboxes only register that their value is changed when ENTER is pressed.
+# We try to circumvent this by constantly feeding the spinbox value to the object editor.
+func _process(delta):
+	if param_editor_ui_node == number_edit:
+		if number_edit.value:
+			_on_SpinBox_value_changed(number_edit.value)
+
 func _populate_dropdown_menu(dropdown_array):
 	var selected_item = dropdown_array[0]
 	var items = dropdown_array[1]
@@ -130,6 +137,7 @@ func _on_LineEdit_text_changed(new_text):
 
 func _on_SpinBox_value_changed(value):
 	_set_parameter_value(value)
+	emit_signal("parameter_changed")
 
 func _on_ColorPickerButton_color_changed(color):
 	_set_parameter_value(color)

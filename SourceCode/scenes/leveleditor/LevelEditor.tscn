@@ -947,9 +947,9 @@ volume_db = -11.0
 pitch_scale = 2.0
 
 [node name="SelectLayer" type="AudioStreamPlayer" parent="SFX"]
-stream = ExtResource( 41 )
-volume_db = -12.0
-pitch_scale = 14.0
+stream = ExtResource( 39 )
+volume_db = -8.0
+pitch_scale = 1.2
 
 [node name="DeleteLayer" type="AudioStreamPlayer" parent="SFX"]
 stream = ExtResource( 33 )
@@ -967,9 +967,9 @@ volume_db = -11.0
 pitch_scale = 1.25
 
 [node name="Eyedrop" type="AudioStreamPlayer" parent="SFX"]
-stream = ExtResource( 39 )
-volume_db = -8.0
-pitch_scale = 1.2
+stream = ExtResource( 41 )
+volume_db = -12.0
+pitch_scale = 14.0
 
 [node name="PlaceTile" type="AudioStreamPlayer" parent="SFX"]
 stream = ExtResource( 31 )
