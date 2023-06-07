@@ -631,7 +631,9 @@ func object_clicked(object : Node, click_type : int):
 	var can_delete_object = object.get_owner() != self
 	
 	var is_editing_objects = false
-	if selected_layer: is_editing_objects = is_object_container(selected_layer)
+	if selected_layer:
+		if is_instance_valid(selected_layer):
+			is_editing_objects = is_object_container(selected_layer)
 	
 	object_functions.can_place_objects = false
 	
