@@ -4,6 +4,7 @@
 [ext_resource path="res://scenes/tilesets/ObjectTiles.tres" type="TileSet" id=2]
 
 [node name="ObjectMap" type="TileMap" groups=["objectmaps"]]
+z_index = 3000
 tile_set = ExtResource( 2 )
 cell_size = Vector2( 32, 32 )
 format = 1

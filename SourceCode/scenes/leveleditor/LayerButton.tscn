@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://scenes/leveleditor/LayerButton.gd" type="Script" id=1]
 [ext_resource path="res://theme/default_theme.tres" type="Theme" id=2]
@@ -10,6 +10,23 @@
 [ext_resource path="res://images/editor/icons/layer_edit_selected.png" type="Texture" id=8]
 [ext_resource path="res://theme/FontTooltip.tres" type="DynamicFont" id=9]
 [ext_resource path="res://images/editor/layer_icons/TileMap.png" type="Texture" id=10]
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0.25098, 0.403922, 0.482353, 1 )
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color( 0.235294, 0.411765, 0.47451, 1 )
+border_blend = true
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+shadow_color = Color( 0, 0, 0, 1 )
+shadow_size = 5
+anti_aliasing = false
+anti_aliasing_size = 0.01
 
 [node name="LayerButton" type="Button"]
 anchor_left = 0.5
@@ -28,6 +45,7 @@ custom_fonts/font = ExtResource( 9 )
 clip_text = true
 script = ExtResource( 1 )
 button_font = ExtResource( 9 )
+uneditable_style_box = SubResource( 1 )
 
 [node name="LayerIcon" type="TextureRect" parent="."]
 modulate = Color( 1, 1, 1, 0.501961 )

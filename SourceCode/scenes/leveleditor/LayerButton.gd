@@ -6,6 +6,9 @@ onready var layer_icon = $LayerIcon
 
 export var button_font : Font
 
+export var uneditable_style_box : StyleBox
+export var editable_layer_types = ["TileMap", "ObjectMap", "ObjectContainer"]
+
 var layer_object = null setget _set_layer_object
 var layer_name = null setget _set_layer_name
 
@@ -76,3 +79,6 @@ func _update_layer_icon():
 	#print(layer_icon_img)
 	
 	layer_icon.texture = load(layer_icon_img)
+	
+	if !editable_layer_types.has(self.layer_type):
+		add_stylebox_override("normal", uneditable_style_box)

@@ -299,9 +299,13 @@ func update_layers_panel(level_objects):
 	
 	update_selected_layer(selected_layer)
 
+# Custom sorting algorithm for Nodes.
+# If both nodes have a Z index, sort them by lowest Z index.
+# Otherwise, sort the nodes by name.
 func sort_layers(a, b):
 	if a.get("z_index") != null and b.get("z_index") != null:
-		return a.z_index < b.z_index
+		if a.z_index == b.z_index: return a.name < b.name
+		else: return a.z_index < b.z_index
 	else:
 		return a.name < b.name
 
