@@ -74,3 +74,8 @@ func _on_AutoscrollSpeed_value_changed(value):
 
 func _on_HideLevelProperties_pressed():
 	hide()
+
+func _input(event):
+	if Input.is_action_pressed("ui_accept"):
+		yield(get_tree(), "idle_frame") # This has to be here or else the play level input registers too
+		hide()

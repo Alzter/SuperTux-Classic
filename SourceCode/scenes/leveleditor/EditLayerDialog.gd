@@ -64,3 +64,8 @@ func _deferred_hide_layer_editor():
 
 func _layer_parameter_changed():
 	emit_signal("layer_parameter_changed")
+
+func _input(event):
+	if Input.is_action_pressed("ui_accept"):
+		yield(get_tree(), "idle_frame") # This has to be here or else the play level input registers too
+		hide()

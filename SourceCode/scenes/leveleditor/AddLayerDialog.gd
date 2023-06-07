@@ -63,3 +63,9 @@ func _on_LayerTypes_item_selected(index):
 		layer_name.text = new_type
 	
 	current_layer_type = new_type
+
+func _input(event):
+	if !visible: return
+	if Input.is_action_pressed("ui_accept"):
+		yield(get_tree(), "idle_frame") # This has to be here or else the play level input registers too
+		_on_AddLayerButton_pressed()
