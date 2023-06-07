@@ -534,7 +534,6 @@ func _get_level_objects(object_node = level, objects := []):
 
 func edit_layer(layer_object : Node, object_is_layer = true):
 	if edit_layer_dialog.visible: return
-	if layer_object.get("editor_params") == null: return
 	add_undo_state()
 	edit_layer_dialog.appear(layer_object, !object_is_layer)
 
