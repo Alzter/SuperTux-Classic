@@ -57,7 +57,7 @@ z_index = 20
 collision_layer = 0
 collision_mask = 0
 
-[node name="Liquids" parent="." instance=ExtResource( 3 )]
+[node name="LiquidTiles" parent="." instance=ExtResource( 3 )]
 material = SubResource( 6 )
 z_index = -30
 collision_layer = 128
