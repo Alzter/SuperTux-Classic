@@ -58,6 +58,8 @@ func initialise_tux_sprite(level : Node2D):
 			var spawn_pos = level.get("worldmap_spawn")
 			if spawn_pos:
 				position = spawn_pos * Global.TILE_SIZE + Global.TILE_SIZE * Vector2.ONE * 0.5
+		else:
+			position = Vector2.ONE * Global.TILE_SIZE * Vector2(3.5, 13.5)
 	
 	tux_sprite.initialise_tux_sprite(worldmap)
 

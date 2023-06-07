@@ -17,7 +17,9 @@ func appear(node_being_edited : Node, node_is_object : bool):
 	popup_centered_ratio()
 
 func _on_EditLayerDialog_about_to_show():
-	if !node_to_edit: return
+	if !node_to_edit:
+		hide()
+		return
 	
 	if is_editing_object: title.text = "Edit Object..."
 	else: title.text = "Edit Layer..."
