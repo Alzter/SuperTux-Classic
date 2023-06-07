@@ -127,3 +127,6 @@ func pitch_slide_up():
 # If true, applies filters to the music. Used for Edit Mode in the level editor.
 func set_editor_music(enabled : bool):
 	AudioServer.set_bus_bypass_effects(2, !enabled)
+	AudioServer.set_bus_effect_enabled(3, 2, enabled)
+	AudioServer.set_bus_effect_enabled(4, 1, enabled)
+	AudioServer.set_bus_effect_enabled(5, 0, enabled)

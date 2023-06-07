@@ -1,4 +1,4 @@
-[gd_resource type="AudioBusLayout" load_steps=12 format=2]
+[gd_resource type="AudioBusLayout" load_steps=15 format=2]
 
 [sub_resource type="AudioEffectEQ" id=4]
 resource_name = "EQ"
@@ -34,9 +34,9 @@ hipass = 1.0
 resource_name = "Compressor"
 gain = -20.0
 
-[sub_resource type="AudioEffectAmplify" id=25]
+[sub_resource type="AudioEffectAmplify" id=29]
 resource_name = "Amplify"
-volume_db = 7.0
+volume_db = 3.0
 
 [sub_resource type="AudioEffectReverb" id=1]
 resource_name = "Reverb"
@@ -45,9 +45,21 @@ damping = 0.0
 [sub_resource type="AudioEffectStereoEnhance" id=2]
 resource_name = "StereoEnhance"
 
+[sub_resource type="AudioEffectAmplify" id=26]
+resource_name = "Amplify"
+volume_db = -25.0
+
 [sub_resource type="AudioEffectReverb" id=3]
 resource_name = "Reverb"
 wet = 0.2
+
+[sub_resource type="AudioEffectAmplify" id=27]
+resource_name = "Amplify"
+volume_db = -25.0
+
+[sub_resource type="AudioEffectAmplify" id=28]
+resource_name = "Amplify"
+volume_db = -25.0
 
 [resource]
 bus/0/volume_db = 0.0672607
@@ -77,8 +89,8 @@ bus/2/effect/4/effect = SubResource( 23 )
 bus/2/effect/4/enabled = true
 bus/2/effect/5/effect = SubResource( 24 )
 bus/2/effect/5/enabled = true
-bus/2/effect/6/effect = SubResource( 25 )
-bus/2/effect/6/enabled = false
+bus/2/effect/6/effect = SubResource( 29 )
+bus/2/effect/6/enabled = true
 bus/3/name = "Ambience"
 bus/3/solo = false
 bus/3/mute = false
@@ -89,6 +101,8 @@ bus/3/effect/0/effect = SubResource( 1 )
 bus/3/effect/0/enabled = true
 bus/3/effect/1/effect = SubResource( 2 )
 bus/3/effect/1/enabled = true
+bus/3/effect/2/effect = SubResource( 26 )
+bus/3/effect/2/enabled = false
 bus/4/name = "Ambience2"
 bus/4/solo = false
 bus/4/mute = false
@@ -97,9 +111,13 @@ bus/4/volume_db = -0.0638371
 bus/4/send = "Master"
 bus/4/effect/0/effect = SubResource( 3 )
 bus/4/effect/0/enabled = true
+bus/4/effect/1/effect = SubResource( 27 )
+bus/4/effect/1/enabled = false
 bus/5/name = "Ambience3"
 bus/5/solo = false
 bus/5/mute = false
 bus/5/bypass_fx = false
 bus/5/volume_db = 0.0
 bus/5/send = "Master"
+bus/5/effect/0/effect = SubResource( 28 )
+bus/5/effect/0/enabled = false
