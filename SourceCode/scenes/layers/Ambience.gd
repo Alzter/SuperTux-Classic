@@ -23,7 +23,7 @@ func _ready():
 		volume_db = volume
 		pitch_scale = pitch
 	
-	_get_ambient_sounds()
+	#_get_ambient_sounds()
 
 func _get_ambient_sounds():
 	var dir = Directory.new()

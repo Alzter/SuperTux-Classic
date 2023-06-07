@@ -9,7 +9,7 @@ export var default_layer_type = "TileMap"
 export var level_exclude_layers = ["ObjectContainer"]
 
 # Don't show these layers in the Add layer dialog when editing worldmaps
-export var worldmap_exclude_layers = []
+export var worldmap_exclude_layers = ["ObjectMap"]
 
 var current_layer_type = null
 
