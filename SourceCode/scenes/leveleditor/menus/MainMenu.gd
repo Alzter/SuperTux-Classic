@@ -11,15 +11,14 @@ onready var button_worlds_folder_open = $MainMenu/VBoxContainer/PanelContainer/M
 onready var button_exit = $MainMenu/VBoxContainer/ExitToMenu
 
 func _ready():
-	Music.set_editor_music(false)
-	
 	UserLevels.current_world = null
 	Scoreboard.hide()
 	Music.stop_all()
 	button_world_create.grab_focus()
 	
 	menu_create_world.connect("show_world_menu", self, "open_world_menu")
-
+	
+	Global.connect("open_world_menu", self, "open_world_menu")
 
 
 func _on_WorldCreate_mouse_entered():

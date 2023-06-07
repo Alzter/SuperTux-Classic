@@ -63,6 +63,9 @@ signal object_clicked
 
 signal quit_game_requested
 
+# When in the level editor main menu, this signal opens the World Menu for a given world
+signal open_world_menu(world_folder_name)
+
 func _ready():
 	# Disable the game automatically quitting
 	get_tree().set_auto_accept_quit(false)
@@ -102,6 +105,11 @@ func goto_title_screen():
 
 func goto_level_editor_main_menu():
 	goto_scene(level_editor_menu_scene)
+
+func goto_level_editor_world_menu(world_folder_name : String):
+	yield(call("goto_scene", level_editor_menu_scene), "completed")
+	
+	emit_signal("open_world_menu", world_folder_name)
 
 func goto_scene(path, loading_level = false):
 	if !string_is_scene_path(path):

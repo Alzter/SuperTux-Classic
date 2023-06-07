@@ -274,7 +274,7 @@ func _deferred_save_level():
 
 func save_and_quit():
 	save_level()
-	Global.goto_level_editor_main_menu()
+	Global.goto_level_editor_world_menu(UserLevels.current_world)
 
 # Fills the layers panel with all layers in the current level
 func update_layers_panel(level_objects):
