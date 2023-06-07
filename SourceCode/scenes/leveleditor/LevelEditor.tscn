@@ -329,6 +329,7 @@ icon = ExtResource( 28 )
 clip_text = true
 
 [node name="LevelPropertiesDialog" type="PopupDialog" parent="UI/Scale/EditorUI"]
+visible = true
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -368,19 +369,28 @@ margin_bottom = 424.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="LevelProperties" type="VBoxContainer" parent="UI/Scale/EditorUI/LevelPropertiesDialog/VBoxContainer/PanelContainer"]
-margin_left = 16.0
-margin_top = 16.0
-margin_right = 914.0
-margin_bottom = 338.0
+[node name="ScrollContainer" type="ScrollContainer" parent="UI/Scale/EditorUI/LevelPropertiesDialog/VBoxContainer/PanelContainer"]
+margin_left = 24.0
+margin_top = 24.0
+margin_right = 906.0
+margin_bottom = 330.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+follow_focus = true
+scroll_horizontal_enabled = false
+
+[node name="LevelProperties" type="VBoxContainer" parent="UI/Scale/EditorUI/LevelPropertiesDialog/VBoxContainer/PanelContainer/ScrollContainer"]
+margin_right = 870.0
+margin_bottom = 308.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
 alignment = 1
 
-[node name="EditLevelName" type="HSplitContainer" parent="UI/Scale/EditorUI/LevelPropertiesDialog/VBoxContainer/PanelContainer/LevelProperties"]
-margin_top = 13.0
-margin_right = 898.0
-margin_bottom = 42.0
+[node name="EditLevelName" type="HSplitContainer" parent="UI/Scale/EditorUI/LevelPropertiesDialog/VBoxContainer/PanelContainer/ScrollContainer/LevelProperties"]
+margin_right = 870.0
+margin_bottom = 31.0
 
-[node name="Label" type="Label" parent="UI/Scale/EditorUI/LevelPropertiesDialog/VBoxContainer/PanelContainer/LevelProperties/EditLevelName"]
+[node name="Label" type="Label" parent="UI/Scale/EditorUI/LevelPropertiesDialog/VBoxContainer/PanelContainer/ScrollContainer/LevelProperties/EditLevelName"]
 margin_top = 5.0
 margin_right = 100.0
 margin_bottom = 26.0
@@ -388,19 +398,19 @@ rect_min_size = Vector2( 100, 0 )
 size_flags_vertical = 6
 text = "Name:"
 
-[node name="Name" type="LineEdit" parent="UI/Scale/EditorUI/LevelPropertiesDialog/VBoxContainer/PanelContainer/LevelProperties/EditLevelName"]
+[node name="Name" type="LineEdit" parent="UI/Scale/EditorUI/LevelPropertiesDialog/VBoxContainer/PanelContainer/ScrollContainer/LevelProperties/EditLevelName"]
 margin_left = 112.0
-margin_right = 898.0
+margin_right = 870.0
 margin_bottom = 31.0
 size_flags_vertical = 3
 text = "Welcome to Antarctica"
 
-[node name="EditLevelAuthor" type="HSplitContainer" parent="UI/Scale/EditorUI/LevelPropertiesDialog/VBoxContainer/PanelContainer/LevelProperties"]
-margin_top = 46.0
-margin_right = 898.0
-margin_bottom = 75.0
+[node name="EditLevelAuthor" type="HSplitContainer" parent="UI/Scale/EditorUI/LevelPropertiesDialog/VBoxContainer/PanelContainer/ScrollContainer/LevelProperties"]
+margin_top = 35.0
+margin_right = 870.0
+margin_bottom = 66.0
 
-[node name="Label" type="Label" parent="UI/Scale/EditorUI/LevelPropertiesDialog/VBoxContainer/PanelContainer/LevelProperties/EditLevelAuthor"]
+[node name="Label" type="Label" parent="UI/Scale/EditorUI/LevelPropertiesDialog/VBoxContainer/PanelContainer/ScrollContainer/LevelProperties/EditLevelAuthor"]
 margin_top = 5.0
 margin_right = 101.0
 margin_bottom = 26.0
@@ -408,24 +418,24 @@ rect_min_size = Vector2( 100, 0 )
 size_flags_vertical = 6
 text = "Author:"
 
-[node name="Author" type="LineEdit" parent="UI/Scale/EditorUI/LevelPropertiesDialog/VBoxContainer/PanelContainer/LevelProperties/EditLevelAuthor"]
+[node name="Author" type="LineEdit" parent="UI/Scale/EditorUI/LevelPropertiesDialog/VBoxContainer/PanelContainer/ScrollContainer/LevelProperties/EditLevelAuthor"]
 margin_left = 113.0
-margin_right = 898.0
+margin_right = 870.0
 margin_bottom = 31.0
 size_flags_vertical = 3
 text = "Marek Moeckel"
 
-[node name="HSeparator2" type="HSeparator" parent="UI/Scale/EditorUI/LevelPropertiesDialog/VBoxContainer/PanelContainer/LevelProperties"]
-margin_top = 79.0
-margin_right = 898.0
-margin_bottom = 109.0
+[node name="HSeparator2" type="HSeparator" parent="UI/Scale/EditorUI/LevelPropertiesDialog/VBoxContainer/PanelContainer/ScrollContainer/LevelProperties"]
+margin_top = 70.0
+margin_right = 870.0
+margin_bottom = 100.0
 
-[node name="EditLevelMusic" type="HSplitContainer" parent="UI/Scale/EditorUI/LevelPropertiesDialog/VBoxContainer/PanelContainer/LevelProperties"]
-margin_top = 113.0
-margin_right = 898.0
-margin_bottom = 142.0
+[node name="EditLevelMusic" type="HSplitContainer" parent="UI/Scale/EditorUI/LevelPropertiesDialog/VBoxContainer/PanelContainer/ScrollContainer/LevelProperties"]
+margin_top = 104.0
+margin_right = 870.0
+margin_bottom = 135.0
 
-[node name="Label" type="Label" parent="UI/Scale/EditorUI/LevelPropertiesDialog/VBoxContainer/PanelContainer/LevelProperties/EditLevelMusic"]
+[node name="Label" type="Label" parent="UI/Scale/EditorUI/LevelPropertiesDialog/VBoxContainer/PanelContainer/ScrollContainer/LevelProperties/EditLevelMusic"]
 margin_top = 5.0
 margin_right = 100.0
 margin_bottom = 26.0
@@ -433,97 +443,97 @@ rect_min_size = Vector2( 100, 0 )
 size_flags_vertical = 6
 text = "Music:"
 
-[node name="Music" type="OptionButton" parent="UI/Scale/EditorUI/LevelPropertiesDialog/VBoxContainer/PanelContainer/LevelProperties/EditLevelMusic"]
+[node name="Music" type="OptionButton" parent="UI/Scale/EditorUI/LevelPropertiesDialog/VBoxContainer/PanelContainer/ScrollContainer/LevelProperties/EditLevelMusic"]
 margin_left = 112.0
-margin_right = 898.0
+margin_right = 870.0
 margin_bottom = 31.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 text = "ChipDisko"
 
-[node name="HSeparator3" type="HSeparator" parent="UI/Scale/EditorUI/LevelPropertiesDialog/VBoxContainer/PanelContainer/LevelProperties"]
-margin_top = 146.0
-margin_right = 898.0
-margin_bottom = 176.0
+[node name="HSeparator3" type="HSeparator" parent="UI/Scale/EditorUI/LevelPropertiesDialog/VBoxContainer/PanelContainer/ScrollContainer/LevelProperties"]
+margin_top = 139.0
+margin_right = 870.0
+margin_bottom = 169.0
 
-[node name="EditLevelTimer" type="HBoxContainer" parent="UI/Scale/EditorUI/LevelPropertiesDialog/VBoxContainer/PanelContainer/LevelProperties"]
-margin_top = 180.0
-margin_right = 898.0
-margin_bottom = 209.0
+[node name="EditLevelTimer" type="HBoxContainer" parent="UI/Scale/EditorUI/LevelPropertiesDialog/VBoxContainer/PanelContainer/ScrollContainer/LevelProperties"]
+margin_top = 173.0
+margin_right = 870.0
+margin_bottom = 204.0
 
-[node name="TimerEnabled" type="CheckBox" parent="UI/Scale/EditorUI/LevelPropertiesDialog/VBoxContainer/PanelContainer/LevelProperties/EditLevelTimer"]
+[node name="TimerEnabled" type="CheckBox" parent="UI/Scale/EditorUI/LevelPropertiesDialog/VBoxContainer/PanelContainer/ScrollContainer/LevelProperties/EditLevelTimer"]
 margin_right = 24.0
-margin_bottom = 29.0
+margin_bottom = 31.0
 size_flags_vertical = 3
 pressed = true
 
-[node name="Label" type="Label" parent="UI/Scale/EditorUI/LevelPropertiesDialog/VBoxContainer/PanelContainer/LevelProperties/EditLevelTimer"]
+[node name="Label" type="Label" parent="UI/Scale/EditorUI/LevelPropertiesDialog/VBoxContainer/PanelContainer/ScrollContainer/LevelProperties/EditLevelTimer"]
 margin_left = 28.0
-margin_top = 4.0
+margin_top = 5.0
 margin_right = 128.0
-margin_bottom = 25.0
+margin_bottom = 26.0
 rect_min_size = Vector2( 100, 0 )
 text = "Time:"
 align = 1
 
-[node name="SpaceFiller" type="Control" parent="UI/Scale/EditorUI/LevelPropertiesDialog/VBoxContainer/PanelContainer/LevelProperties/EditLevelTimer"]
+[node name="SpaceFiller" type="Control" parent="UI/Scale/EditorUI/LevelPropertiesDialog/VBoxContainer/PanelContainer/ScrollContainer/LevelProperties/EditLevelTimer"]
 margin_left = 132.0
-margin_right = 760.0
-margin_bottom = 29.0
+margin_right = 752.0
+margin_bottom = 31.0
 size_flags_horizontal = 3
 
-[node name="Time" type="SpinBox" parent="UI/Scale/EditorUI/LevelPropertiesDialog/VBoxContainer/PanelContainer/LevelProperties/EditLevelTimer"]
-margin_left = 764.0
-margin_right = 898.0
-margin_bottom = 29.0
+[node name="Time" type="SpinBox" parent="UI/Scale/EditorUI/LevelPropertiesDialog/VBoxContainer/PanelContainer/ScrollContainer/LevelProperties/EditLevelTimer"]
+margin_left = 756.0
+margin_right = 870.0
+margin_bottom = 31.0
 size_flags_vertical = 3
 min_value = 10.0
 max_value = 999.0
 value = 300.0
 
-[node name="HSeparator4" type="HSeparator" parent="UI/Scale/EditorUI/LevelPropertiesDialog/VBoxContainer/PanelContainer/LevelProperties"]
-margin_top = 213.0
-margin_right = 898.0
-margin_bottom = 243.0
+[node name="HSeparator4" type="HSeparator" parent="UI/Scale/EditorUI/LevelPropertiesDialog/VBoxContainer/PanelContainer/ScrollContainer/LevelProperties"]
+margin_top = 208.0
+margin_right = 870.0
+margin_bottom = 238.0
 
-[node name="EditLevelGravity" type="HSplitContainer" parent="UI/Scale/EditorUI/LevelPropertiesDialog/VBoxContainer/PanelContainer/LevelProperties"]
-margin_top = 247.0
-margin_right = 898.0
-margin_bottom = 276.0
+[node name="EditLevelGravity" type="HSplitContainer" parent="UI/Scale/EditorUI/LevelPropertiesDialog/VBoxContainer/PanelContainer/ScrollContainer/LevelProperties"]
+margin_top = 242.0
+margin_right = 870.0
+margin_bottom = 273.0
 
-[node name="Label" type="Label" parent="UI/Scale/EditorUI/LevelPropertiesDialog/VBoxContainer/PanelContainer/LevelProperties/EditLevelGravity"]
+[node name="Label" type="Label" parent="UI/Scale/EditorUI/LevelPropertiesDialog/VBoxContainer/PanelContainer/ScrollContainer/LevelProperties/EditLevelGravity"]
 margin_top = 5.0
-margin_right = 772.0
+margin_right = 744.0
 margin_bottom = 26.0
 size_flags_horizontal = 3
 size_flags_vertical = 6
 text = "Gravity:"
 
-[node name="Gravity" type="SpinBox" parent="UI/Scale/EditorUI/LevelPropertiesDialog/VBoxContainer/PanelContainer/LevelProperties/EditLevelGravity"]
-margin_left = 784.0
-margin_right = 898.0
+[node name="Gravity" type="SpinBox" parent="UI/Scale/EditorUI/LevelPropertiesDialog/VBoxContainer/PanelContainer/ScrollContainer/LevelProperties/EditLevelGravity"]
+margin_left = 756.0
+margin_right = 870.0
 margin_bottom = 31.0
 size_flags_vertical = 3
 min_value = 1.0
 max_value = 50.0
 value = 10.0
 
-[node name="EditLevelAutoscroll" type="HSplitContainer" parent="UI/Scale/EditorUI/LevelPropertiesDialog/VBoxContainer/PanelContainer/LevelProperties"]
-margin_top = 280.0
-margin_right = 898.0
-margin_bottom = 309.0
+[node name="EditLevelAutoscroll" type="HSplitContainer" parent="UI/Scale/EditorUI/LevelPropertiesDialog/VBoxContainer/PanelContainer/ScrollContainer/LevelProperties"]
+margin_top = 277.0
+margin_right = 870.0
+margin_bottom = 308.0
 
-[node name="Label" type="Label" parent="UI/Scale/EditorUI/LevelPropertiesDialog/VBoxContainer/PanelContainer/LevelProperties/EditLevelAutoscroll"]
+[node name="Label" type="Label" parent="UI/Scale/EditorUI/LevelPropertiesDialog/VBoxContainer/PanelContainer/ScrollContainer/LevelProperties/EditLevelAutoscroll"]
 margin_top = 5.0
-margin_right = 772.0
+margin_right = 744.0
 margin_bottom = 26.0
 size_flags_horizontal = 3
 size_flags_vertical = 6
 text = "Autoscroll Speed:"
 
-[node name="AutoscrollSpeed" type="SpinBox" parent="UI/Scale/EditorUI/LevelPropertiesDialog/VBoxContainer/PanelContainer/LevelProperties/EditLevelAutoscroll"]
-margin_left = 784.0
-margin_right = 898.0
+[node name="AutoscrollSpeed" type="SpinBox" parent="UI/Scale/EditorUI/LevelPropertiesDialog/VBoxContainer/PanelContainer/ScrollContainer/LevelProperties/EditLevelAutoscroll"]
+margin_left = 756.0
+margin_right = 870.0
 margin_bottom = 31.0
 size_flags_vertical = 3
 max_value = 5.0
@@ -588,6 +598,7 @@ margin_left = 123.0
 margin_top = 8.0
 margin_right = -5.0
 margin_bottom = -8.0
+follow_focus = true
 scroll_vertical_enabled = false
 
 [node name="LayersContainer" type="HBoxContainer" parent="UI/Scale/EditorUI/LayersPanelOffset/LayersPanel/ScrollContainer"]
@@ -986,13 +997,13 @@ pitch_scale = 2.0
 [connection signal="pressed" from="UI/Scale/EditorUI/Buttons/LevelProperties" to="." method="_on_LevelProperties_pressed"]
 [connection signal="pressed" from="UI/Scale/EditorUI/Buttons/SaveButton" to="." method="_on_SaveButton_pressed"]
 [connection signal="about_to_show" from="UI/Scale/EditorUI/LevelPropertiesDialog" to="UI/Scale/EditorUI/LevelPropertiesDialog" method="_on_LevelPropertiesDialog_about_to_show"]
-[connection signal="text_changed" from="UI/Scale/EditorUI/LevelPropertiesDialog/VBoxContainer/PanelContainer/LevelProperties/EditLevelName/Name" to="UI/Scale/EditorUI/LevelPropertiesDialog" method="_on_Name_text_changed"]
-[connection signal="text_changed" from="UI/Scale/EditorUI/LevelPropertiesDialog/VBoxContainer/PanelContainer/LevelProperties/EditLevelAuthor/Author" to="UI/Scale/EditorUI/LevelPropertiesDialog" method="_on_Author_text_changed"]
-[connection signal="item_selected" from="UI/Scale/EditorUI/LevelPropertiesDialog/VBoxContainer/PanelContainer/LevelProperties/EditLevelMusic/Music" to="UI/Scale/EditorUI/LevelPropertiesDialog" method="_on_Music_item_selected"]
-[connection signal="toggled" from="UI/Scale/EditorUI/LevelPropertiesDialog/VBoxContainer/PanelContainer/LevelProperties/EditLevelTimer/TimerEnabled" to="UI/Scale/EditorUI/LevelPropertiesDialog" method="_on_TimerEnabled_toggled"]
-[connection signal="value_changed" from="UI/Scale/EditorUI/LevelPropertiesDialog/VBoxContainer/PanelContainer/LevelProperties/EditLevelTimer/Time" to="UI/Scale/EditorUI/LevelPropertiesDialog" method="_on_Time_value_changed"]
-[connection signal="value_changed" from="UI/Scale/EditorUI/LevelPropertiesDialog/VBoxContainer/PanelContainer/LevelProperties/EditLevelGravity/Gravity" to="UI/Scale/EditorUI/LevelPropertiesDialog" method="_on_Gravity_value_changed"]
-[connection signal="value_changed" from="UI/Scale/EditorUI/LevelPropertiesDialog/VBoxContainer/PanelContainer/LevelProperties/EditLevelAutoscroll/AutoscrollSpeed" to="UI/Scale/EditorUI/LevelPropertiesDialog" method="_on_AutoscrollSpeed_value_changed"]
+[connection signal="text_changed" from="UI/Scale/EditorUI/LevelPropertiesDialog/VBoxContainer/PanelContainer/ScrollContainer/LevelProperties/EditLevelName/Name" to="UI/Scale/EditorUI/LevelPropertiesDialog" method="_on_Name_text_changed"]
+[connection signal="text_changed" from="UI/Scale/EditorUI/LevelPropertiesDialog/VBoxContainer/PanelContainer/ScrollContainer/LevelProperties/EditLevelAuthor/Author" to="UI/Scale/EditorUI/LevelPropertiesDialog" method="_on_Author_text_changed"]
+[connection signal="item_selected" from="UI/Scale/EditorUI/LevelPropertiesDialog/VBoxContainer/PanelContainer/ScrollContainer/LevelProperties/EditLevelMusic/Music" to="UI/Scale/EditorUI/LevelPropertiesDialog" method="_on_Music_item_selected"]
+[connection signal="toggled" from="UI/Scale/EditorUI/LevelPropertiesDialog/VBoxContainer/PanelContainer/ScrollContainer/LevelProperties/EditLevelTimer/TimerEnabled" to="UI/Scale/EditorUI/LevelPropertiesDialog" method="_on_TimerEnabled_toggled"]
+[connection signal="value_changed" from="UI/Scale/EditorUI/LevelPropertiesDialog/VBoxContainer/PanelContainer/ScrollContainer/LevelProperties/EditLevelTimer/Time" to="UI/Scale/EditorUI/LevelPropertiesDialog" method="_on_Time_value_changed"]
+[connection signal="value_changed" from="UI/Scale/EditorUI/LevelPropertiesDialog/VBoxContainer/PanelContainer/ScrollContainer/LevelProperties/EditLevelGravity/Gravity" to="UI/Scale/EditorUI/LevelPropertiesDialog" method="_on_Gravity_value_changed"]
+[connection signal="value_changed" from="UI/Scale/EditorUI/LevelPropertiesDialog/VBoxContainer/PanelContainer/ScrollContainer/LevelProperties/EditLevelAutoscroll/AutoscrollSpeed" to="UI/Scale/EditorUI/LevelPropertiesDialog" method="_on_AutoscrollSpeed_value_changed"]
 [connection signal="pressed" from="UI/Scale/EditorUI/LevelPropertiesDialog/VBoxContainer/HideLevelProperties" to="UI/Scale/EditorUI/LevelPropertiesDialog" method="_on_HideLevelProperties_pressed"]
 [connection signal="pressed" from="UI/Scale/EditorUI/LayersPanelOffset/LayersPanel/RetractTab" to="UI/Scale/EditorUI/LayersPanelOffset" method="_on_RetractTab_pressed"]
 [connection signal="pressed" from="UI/Scale/EditorUI/LayersPanelOffset/LayersPanel/AddLayerButton" to="UI/Scale/EditorUI/LayersPanelOffset" method="_on_AddLayerButton_pressed"]

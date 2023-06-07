@@ -155,10 +155,10 @@ shadow_color = Color( 0, 0, 0, 0.247059 )
 shadow_size = 4
 
 [sub_resource type="StyleBoxFlat" id=12]
-content_margin_left = 32.0
-content_margin_right = 32.0
-content_margin_top = 32.0
-content_margin_bottom = 32.0
+content_margin_left = 24.0
+content_margin_right = 24.0
+content_margin_top = 24.0
+content_margin_bottom = 24.0
 bg_color = Color( 0, 0, 0, 0.262745 )
 corner_radius_top_left = 8
 corner_radius_top_right = 8

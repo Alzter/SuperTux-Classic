@@ -1,6 +1,6 @@
 extends PopupDialog
 
-onready var level_properties = get_node("VBoxContainer/PanelContainer/LevelProperties")
+onready var level_properties = get_node("VBoxContainer/PanelContainer/ScrollContainer/LevelProperties")
 
 onready var level_name = level_properties.get_node("EditLevelName/Name")
 onready var level_author = level_properties.get_node("EditLevelAuthor/Author")

@@ -62,7 +62,6 @@ custom_constants/separation = 15
 [node name="WorldCreate" type="Button" parent="MainMenu/VBoxContainer/PanelContainer/MenuItems"]
 margin_right = 948.0
 margin_bottom = 98.0
-rect_min_size = Vector2( 0, 50 )
 focus_neighbour_bottom = NodePath("../WorldOpen")
 size_flags_vertical = 3
 text = "Create World..."
@@ -72,7 +71,6 @@ clip_text = true
 margin_top = 113.0
 margin_right = 948.0
 margin_bottom = 211.0
-rect_min_size = Vector2( 0, 50 )
 focus_neighbour_top = NodePath("../WorldCreate")
 focus_neighbour_bottom = NodePath("../OpenWorldFolder")
 size_flags_vertical = 3
@@ -83,7 +81,6 @@ clip_text = true
 margin_top = 226.0
 margin_right = 948.0
 margin_bottom = 325.0
-rect_min_size = Vector2( 0, 50 )
 focus_neighbour_top = NodePath("../WorldOpen")
 focus_neighbour_bottom = NodePath("../../../ExitToMenu")
 size_flags_vertical = 3
@@ -107,12 +104,10 @@ text = "Exit"
 [node name="CreateWorldMenu" parent="." instance=ExtResource( 5 )]
 
 [node name="OpenWorldMenu" parent="." instance=ExtResource( 6 )]
-visible = false
 
 [node name="SnowBG" parent="." instance=ExtResource( 3 )]
 
 [node name="WorldMenu" parent="." instance=ExtResource( 7 )]
-visible = false
 
 [connection signal="mouse_entered" from="MainMenu/VBoxContainer/PanelContainer/MenuItems/WorldCreate" to="." method="_on_WorldCreate_mouse_entered"]
 [connection signal="pressed" from="MainMenu/VBoxContainer/PanelContainer/MenuItems/WorldCreate" to="." method="_on_WorldCreate_pressed"]

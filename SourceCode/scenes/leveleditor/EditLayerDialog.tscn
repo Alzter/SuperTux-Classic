@@ -44,11 +44,20 @@ margin_right = 554.0
 margin_bottom = 312.0
 size_flags_vertical = 3
 
-[node name="LayerParameters" type="VBoxContainer" parent="VBoxContainer/PanelContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/PanelContainer"]
 margin_left = 32.0
 margin_top = 32.0
-margin_right = 522.0
-margin_bottom = 221.0
+margin_right = 72.0
+margin_bottom = 72.0
+follow_focus = true
+scroll_horizontal_enabled = false
+
+[node name="LayerParameters" type="VBoxContainer" parent="VBoxContainer/PanelContainer/ScrollContainer"]
+margin_right = 40.0
+margin_bottom = 40.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+alignment = 1
 
 [node name="HSeparator2" type="HSeparator" parent="VBoxContainer"]
 margin_top = 316.0

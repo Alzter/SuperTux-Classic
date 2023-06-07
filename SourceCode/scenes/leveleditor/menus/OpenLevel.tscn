@@ -64,6 +64,7 @@ margin_top = 100.0
 margin_right = 533.0
 margin_bottom = 289.0
 size_flags_vertical = 3
+follow_focus = true
 scroll_horizontal_enabled = false
 
 [node name="ButtonList" type="VBoxContainer" parent="VBoxContainer/ScrollContainer"]

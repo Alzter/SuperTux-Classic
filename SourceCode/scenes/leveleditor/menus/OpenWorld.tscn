@@ -8,7 +8,6 @@
 [ext_resource path="res://scenes/leveleditor/menus/WorldMenu.tscn" type="PackedScene" id=7]
 
 [node name="OpenWorldMenu" type="PopupDialog"]
-visible = true
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 20.0
@@ -48,6 +47,7 @@ margin_top = 70.0
 margin_right = 1153.0
 margin_bottom = 509.0
 size_flags_vertical = 3
+follow_focus = true
 scroll_horizontal_enabled = false
 
 [node name="ButtonList" type="VBoxContainer" parent="VBoxContainer/ScrollContainer"]

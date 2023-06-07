@@ -533,6 +533,7 @@ func _get_level_objects(object_node = level, objects := []):
 	return objects
 
 func edit_layer(layer_object : Node, object_is_layer = true):
+	if edit_layer_dialog.visible: return
 	if layer_object.get("editor_params") == null: return
 	add_undo_state()
 	edit_layer_dialog.appear(layer_object, !object_is_layer)
@@ -599,7 +600,7 @@ func _on_LevelProperties_pressed():
 
 func level_properties_dialog():
 	add_undo_state()
-	level_properties_dialog.popup_centered_ratio()
+	level_properties_dialog.popup_centered_ratio(0.8)
 	play_sound("LevelProperties")
 
 func clear_undo_states():
