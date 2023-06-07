@@ -46,6 +46,10 @@ func _input(event):
 					place_object()
 
 func place_object():
+	var level = owner.get("level")
+	if !level: return
+	if !is_instance_valid(level): return
+	
 	owner.add_undo_state()
 	var position = get_mouse_position(true)
 	var object_to_add = owner.current_object_resource
@@ -56,7 +60,7 @@ func place_object():
 	var object = object_to_add.instance()
 	object.position = position
 	object_container.add_child(object)
-	object.set_owner(object_container)
+	object.set_owner(level)
 	
 	owner.play_sound("PlaceObject")
 
