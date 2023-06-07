@@ -534,8 +534,10 @@ func add_layer(layer_name : String, layer_type : String):
 		level.add_child(layer_node)
 		layer_node.set_owner(level)
 		update_layers_panel(self.level_objects)
+		update_selected_layer(layer_node)
 		
 		play_sound("AddLayer")
+		
 	else:
 		push_error("ERROR ADDING LAYER: Layer scene for layer '" + layer_type + "' not found!")
 
