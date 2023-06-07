@@ -44,6 +44,7 @@ margin_bottom = 29.0
 focus_mode = 0
 size_flags_horizontal = 3
 color = Color( 1, 0, 0, 1 )
+edit_alpha = false
 
 [node name="CheckBox" type="CheckBox" parent="."]
 visible = false
