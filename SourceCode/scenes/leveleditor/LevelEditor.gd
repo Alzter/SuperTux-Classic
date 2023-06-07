@@ -759,3 +759,11 @@ func update_tile_preview_texture(new_texture, region_rect):
 		sprite.region_enabled = region_rect != null
 		if region_rect: sprite.region_rect = region_rect
 		sprite.texture = new_texture
+
+
+func _on_LevelPropertiesDialog_popup_hide():
+	play_sound("LevelPropertiesClose")
+
+
+func _on_AddLayerDialog_about_to_show():
+	play_sound("AddLayerDialog")

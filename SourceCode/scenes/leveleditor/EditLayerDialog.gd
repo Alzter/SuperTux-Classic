@@ -53,6 +53,8 @@ func _on_ConfirmEditLayer_pressed():
 	hide()
 
 func _on_EditLayerDialog_popup_hide():
+	owner.play_sound("EditLayerComplete")
+	
 	call_deferred("_deferred_hide_layer_editor")
 
 # It is now safe to hide the layer editor and delete all parameter editors

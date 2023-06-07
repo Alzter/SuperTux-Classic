@@ -1,4 +1,4 @@
-[gd_scene load_steps=60 format=2]
+[gd_scene load_steps=63 format=2]
 
 [ext_resource path="res://images/player/tux/big/idle.png" type="Texture" id=1]
 [ext_resource path="res://images/player/tux/small/idle.png" type="Texture" id=2]
@@ -45,8 +45,11 @@
 [ext_resource path="res://theme/FontTooltip.tres" type="DynamicFont" id=43]
 [ext_resource path="res://scenes/leveleditor/EditToggle.gd" type="Script" id=44]
 [ext_resource path="res://images/editor/icons/play.png" type="Texture" id=45]
+[ext_resource path="res://sounds/editor/close_dialog.wav" type="AudioStream" id=46]
 [ext_resource path="res://images/editor/icons/edit.png" type="Texture" id=47]
 [ext_resource path="res://images/editor/icons/play_from_start.png" type="Texture" id=48]
+[ext_resource path="res://sounds/editor/close_level_properties.wav" type="AudioStream" id=49]
+[ext_resource path="res://sounds/editor/add_layer_dialog.wav" type="AudioStream" id=50]
 
 [sub_resource type="ShaderMaterial" id=10]
 shader = ExtResource( 18 )
@@ -329,7 +332,6 @@ icon = ExtResource( 28 )
 clip_text = true
 
 [node name="LevelPropertiesDialog" type="PopupDialog" parent="UI/Scale/EditorUI"]
-visible = true
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -380,7 +382,7 @@ follow_focus = true
 scroll_horizontal_enabled = false
 
 [node name="LevelProperties" type="VBoxContainer" parent="UI/Scale/EditorUI/LevelPropertiesDialog/VBoxContainer/PanelContainer/ScrollContainer"]
-margin_right = 870.0
+margin_right = 882.0
 margin_bottom = 308.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -934,6 +936,10 @@ visible = false
 [node name="SFX" type="Node2D" parent="."]
 script = ExtResource( 32 )
 
+[node name="AddLayerDialog" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource( 50 )
+volume_db = -7.0
+
 [node name="AddLayer" type="AudioStreamPlayer" parent="SFX"]
 stream = ExtResource( 40 )
 volume_db = -11.0
@@ -953,6 +959,11 @@ pitch_scale = 2.0
 stream = ExtResource( 42 )
 volume_db = -11.0
 pitch_scale = 5.0
+
+[node name="EditLayerComplete" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource( 46 )
+volume_db = -11.0
+pitch_scale = 1.25
 
 [node name="Eyedrop" type="AudioStreamPlayer" parent="SFX"]
 stream = ExtResource( 39 )
@@ -991,12 +1002,18 @@ stream = ExtResource( 38 )
 volume_db = -5.0
 pitch_scale = 2.0
 
+[node name="LevelPropertiesClose" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource( 49 )
+volume_db = -4.0
+pitch_scale = 1.4
+
 [connection signal="mouse_entered" from="UI/Scale/EditorUI/MouseDetector" to="." method="_on_MouseDetector_mouse_entered"]
 [connection signal="mouse_exited" from="UI/Scale/EditorUI/MouseDetector" to="." method="_on_MouseDetector_mouse_exited"]
 [connection signal="pressed" from="UI/Scale/EditorUI/Buttons/UndoButton" to="." method="_on_UndoButton_pressed"]
 [connection signal="pressed" from="UI/Scale/EditorUI/Buttons/LevelProperties" to="." method="_on_LevelProperties_pressed"]
 [connection signal="pressed" from="UI/Scale/EditorUI/Buttons/SaveButton" to="." method="_on_SaveButton_pressed"]
 [connection signal="about_to_show" from="UI/Scale/EditorUI/LevelPropertiesDialog" to="UI/Scale/EditorUI/LevelPropertiesDialog" method="_on_LevelPropertiesDialog_about_to_show"]
+[connection signal="popup_hide" from="UI/Scale/EditorUI/LevelPropertiesDialog" to="." method="_on_LevelPropertiesDialog_popup_hide"]
 [connection signal="text_changed" from="UI/Scale/EditorUI/LevelPropertiesDialog/VBoxContainer/PanelContainer/ScrollContainer/LevelProperties/EditLevelName/Name" to="UI/Scale/EditorUI/LevelPropertiesDialog" method="_on_Name_text_changed"]
 [connection signal="text_changed" from="UI/Scale/EditorUI/LevelPropertiesDialog/VBoxContainer/PanelContainer/ScrollContainer/LevelProperties/EditLevelAuthor/Author" to="UI/Scale/EditorUI/LevelPropertiesDialog" method="_on_Author_text_changed"]
 [connection signal="item_selected" from="UI/Scale/EditorUI/LevelPropertiesDialog/VBoxContainer/PanelContainer/ScrollContainer/LevelProperties/EditLevelMusic/Music" to="UI/Scale/EditorUI/LevelPropertiesDialog" method="_on_Music_item_selected"]
@@ -1007,6 +1024,7 @@ pitch_scale = 2.0
 [connection signal="pressed" from="UI/Scale/EditorUI/LevelPropertiesDialog/VBoxContainer/HideLevelProperties" to="UI/Scale/EditorUI/LevelPropertiesDialog" method="_on_HideLevelProperties_pressed"]
 [connection signal="pressed" from="UI/Scale/EditorUI/LayersPanelOffset/LayersPanel/RetractTab" to="UI/Scale/EditorUI/LayersPanelOffset" method="_on_RetractTab_pressed"]
 [connection signal="pressed" from="UI/Scale/EditorUI/LayersPanelOffset/LayersPanel/AddLayerButton" to="UI/Scale/EditorUI/LayersPanelOffset" method="_on_AddLayerButton_pressed"]
+[connection signal="about_to_show" from="UI/Scale/EditorUI/LayersPanelOffset/AddLayerDialog" to="." method="_on_AddLayerDialog_about_to_show"]
 [connection signal="about_to_show" from="UI/Scale/EditorUI/LayersPanelOffset/AddLayerDialog" to="UI/Scale/EditorUI/LayersPanelOffset/AddLayerDialog" method="_on_AddLayerDialog_about_to_show"]
 [connection signal="item_selected" from="UI/Scale/EditorUI/LayersPanelOffset/AddLayerDialog/VBoxContainer/PanelContainer/LayerProperties/TypeEntry/LayerTypes" to="UI/Scale/EditorUI/LayersPanelOffset/AddLayerDialog" method="_on_LayerTypes_item_selected"]
 [connection signal="pressed" from="UI/Scale/EditorUI/LayersPanelOffset/AddLayerDialog/VBoxContainer/AddLayerButton" to="UI/Scale/EditorUI/LayersPanelOffset/AddLayerDialog" method="_on_AddLayerButton_pressed"]
