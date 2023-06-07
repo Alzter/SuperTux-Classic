@@ -20,6 +20,7 @@ signal delete_layer(layer_object)
 
 func _ready():
 	layer_options.hide()
+	set_disabled(false)
 
 func _on_LayerButton_pressed():
 	#print(self.layer_type)
@@ -82,3 +83,8 @@ func _update_layer_icon():
 	
 	if !editable_layer_types.has(self.layer_type):
 		add_stylebox_override("normal", uneditable_style_box)
+
+func set_disabled(value):
+	disabled = value
+	layer_icon.modulate.a = 1 if disabled else 0.5
+	#label.modulate = Color(1,1,1) if disabled else Color(1,1,1)

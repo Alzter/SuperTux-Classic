@@ -371,7 +371,7 @@ func update_selected_layer(new_value):
 		selected_layer_name = selected_layer.name
 		
 		for button in layers_container.get_children():
-			button.disabled = button.layer_object == selected_layer
+			button.set_disabled(button.layer_object == selected_layer)
 		
 		update_tilemap_opacity()
 		
@@ -397,7 +397,7 @@ func update_selected_layer(new_value):
 		tiles_container.empty_tiles()
 		
 		for button in layers_container.get_children():
-			button.disabled = false
+			button.set_disabled(false)
 
 func update_tilemap_opacity():
 	var selected_layer_exists = false
