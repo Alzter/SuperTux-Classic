@@ -939,6 +939,7 @@ script = ExtResource( 32 )
 [node name="AddLayerDialog" type="AudioStreamPlayer" parent="SFX"]
 stream = ExtResource( 50 )
 volume_db = -7.0
+pitch_scale = 2.0
 
 [node name="AddLayer" type="AudioStreamPlayer" parent="SFX"]
 stream = ExtResource( 40 )
