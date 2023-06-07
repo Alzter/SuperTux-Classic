@@ -206,12 +206,24 @@ grid_color = Color( 0, 0, 0, 0.25 )
 [node name="SelectedTile" type="Sprite" parent="TileFunctions"]
 texture = ExtResource( 10 )
 
+[node name="TilePreview" type="Sprite" parent="TileFunctions/SelectedTile"]
+modulate = Color( 1, 1, 1, 0.501961 )
+show_behind_parent = true
+position = Vector2( -16, -16 )
+centered = false
+
 [node name="ObjectFunctions" type="Node2D" parent="."]
 z_index = 4096
 script = ExtResource( 21 )
 
 [node name="SelectedTile" type="Sprite" parent="ObjectFunctions"]
 texture = ExtResource( 10 )
+
+[node name="TilePreview" type="Sprite" parent="ObjectFunctions/SelectedTile"]
+modulate = Color( 1, 1, 1, 0.501961 )
+show_behind_parent = true
+position = Vector2( -16, -16 )
+centered = false
 
 [node name="EditorCamera" type="Camera2D" parent="."]
 z_index = 4096

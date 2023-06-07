@@ -98,6 +98,7 @@ func _ready():
 	ResolutionManager.connect("window_resized", self, "window_resized")
 	tiles_container.connect("update_selected_tile", self, "update_selected_tile")
 	tiles_container.connect("update_selected_object", self, "update_selected_object")
+	tiles_container.connect("update_tile_preview_texture", self, "update_tile_preview_texture")
 	edit_layer_dialog.connect("layer_parameter_changed", self, "layer_parameter_changed")
 	window_resized()
 	
@@ -389,6 +390,9 @@ func update_selected_tile(selected_tile_id : int):
 	
 	current_tile_id = selected_tile_id
 	current_object_resource = null
+	
+	if selected_tile_id == -1:
+		update_tile_preview_texture(null, null)
 
 func update_selected_object(selected_object_resource : Resource):
 	self.eraser_enabled = false
@@ -396,6 +400,9 @@ func update_selected_object(selected_object_resource : Resource):
 	
 	current_object_resource = selected_object_resource
 	current_tile_id = -1
+	
+	if selected_object_resource == null:
+		update_tile_preview_texture(null, null)
 
 func _on_Eraser_toggled(button_pressed):
 	eraser_enabled = button_pressed
@@ -504,9 +511,15 @@ func _get_level_objects(object_node = level, objects := []):
 	
 	return objects
 
-func edit_layer(layer_object : Node):
+func edit_layer(layer_object : Node, object_is_layer = true):
+	if layer_object.get("editor_params") == null: return
 	add_undo_state()
-	edit_layer_dialog.appear(layer_object, false)
+	edit_layer_dialog.appear(layer_object, !object_is_layer)
+
+func edit_object(object : Node):
+	if object.get("editor_params") == null: return
+	mouse_over_ui = true
+	edit_layer(object, false)
 
 func delete_layer(layer_object : Node):
 	add_undo_state()
@@ -610,9 +623,7 @@ func object_clicked(object : Node, click_type : int):
 			return
 	
 	elif click_type == BUTTON_RIGHT:
-		mouse_over_ui = true # Prevent the camera dragging input from registering when middle clicking objects
-		add_undo_state()
-		edit_layer_dialog.appear(object, true)
+		edit_object(object)
 	
 	elif eraser_enabled and can_delete_object:
 		object_functions.delete_object(object)
@@ -713,6 +724,13 @@ func _on_CancelExitProgram_pressed():
 func level_music_changed(new_music):
 	Music.continue(new_music)
 
-
 func _on_EditLayerDialog_about_to_show():
 	play_sound("EditLayer")
+
+func update_tile_preview_texture(new_texture, region_rect):
+	var preview_sprites = [tile_functions.tile_preview, object_functions.tile_preview]
+	
+	for sprite in preview_sprites:
+		sprite.region_enabled = region_rect != null
+		if region_rect: sprite.region_rect = region_rect
+		sprite.texture = new_texture

@@ -7,6 +7,7 @@ var current_tileset = null
 
 signal update_selected_tile
 signal update_selected_object
+signal update_tile_preview_texture(texture)
 
 # Fills the Tiles container with all the tiles within the tileset of the tilemap
 func show_tiles_from_tilemap(tilemap : TileMap):
@@ -46,6 +47,7 @@ func show_tiles_from_tilemap(tilemap : TileMap):
 		add_child(tile_button)
 		tile_button.set_owner(self)
 		tile_button.connect("tile_button_pressed", self, "update_selected_tile")
+		tile_button.connect("update_tile_preview_texture", self, "update_tile_preview_texture")
 		tile_button.tileset = current_tileset
 		tile_button.tile_id = tile
 		tile_button.flip_tiles_toggled(owner.flip_tiles_enabled)
@@ -72,6 +74,7 @@ func show_object_scenes_in_folder(folder_name : String):
 		add_child(object_button)
 		object_button.set_owner(self)
 		object_button.connect("object_button_pressed", self, "update_selected_object")
+		object_button.connect("update_tile_preview_texture", self, "update_tile_preview_texture")
 		object_button.object_resource = object_resource
 
 
@@ -84,11 +87,21 @@ func empty_tiles():
 
 func update_selected_tile(selected_tile_id : int):
 	emit_signal("update_selected_tile", selected_tile_id)
+	
 	for tile_button in get_children():
 		tile_button.disabled = tile_button.tile_id == selected_tile_id
+		
+		if tile_button.tile_id == selected_tile_id:
+			tile_button.set_preview_texture()
 
 func update_selected_object(selected_object_resource : Resource):
 	emit_signal("update_selected_object", selected_object_resource)
 	
 	for object_button in get_children():
 		object_button.disabled = object_button.object_resource == selected_object_resource
+		
+		if object_button.object_resource == selected_object_resource:
+			object_button.set_preview_texture()
+
+func update_tile_preview_texture(new_texture : Texture, region_rect):
+	emit_signal("update_tile_preview_texture", new_texture, region_rect)

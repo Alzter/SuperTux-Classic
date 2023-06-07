@@ -3,6 +3,7 @@ extends Button
 var tileset : TileSet = null
 var tile_id : int = -1 setget update_current_tile_id
 signal tile_button_pressed(tile_id)
+signal update_tile_preview_texture(texture)
 
 onready var sprite = $Control/Sprite
 
@@ -34,6 +35,10 @@ func update_current_tile_id(new_value):
 
 func _on_TileButton_pressed():
 	emit_signal("tile_button_pressed", tile_id)
+	set_preview_texture()
+
+func set_preview_texture():
+	emit_signal("update_tile_preview_texture", sprite.texture, sprite.region_rect)
 
 func flip_tiles_toggled(flip_x_enabled : bool):
 	sprite.flip_h = flip_x_enabled

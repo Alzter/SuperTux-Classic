@@ -5,6 +5,7 @@ extends Node2D
 # displaying a grid for the currently selected tilemap, etc.
 
 onready var tile_selection = $SelectedTile
+onready var tile_preview = $SelectedTile/TilePreview
 
 export var grid_color = Color(0,0,0,0.5)
 export var rect_select_add_color = Color(0.1, 1, 0.1, 0.4)
@@ -63,6 +64,9 @@ func _process(delta):
 				
 				if !placing_rectangle_fill:
 					tile_selection.show()
+					
+					tile_preview.visible = !owner.eraser_enabled and !owner.eyedropper_enabled
+					tile_preview.flip_h = owner.flip_tiles_enabled
 					update_tile_selected_sprite()
 		
 				

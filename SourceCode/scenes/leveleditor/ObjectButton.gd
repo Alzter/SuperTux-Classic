@@ -5,6 +5,7 @@ onready var sprite = $Control/Sprite
 
 var object_resource : Resource = null setget update_object_resource
 signal object_button_pressed(object_resource)
+signal update_tile_preview_texture(texture)
 
 export var object_icons_dir = "res://images/editor/object_icons/"
 
@@ -36,3 +37,7 @@ func _get_object_icon(path : String, texture : Texture, user_data):
 
 func _on_TileButton_pressed():
 	emit_signal("object_button_pressed", object_resource)
+	set_preview_texture()
+
+func set_preview_texture():
+	emit_signal("update_tile_preview_texture", sprite.texture, null)

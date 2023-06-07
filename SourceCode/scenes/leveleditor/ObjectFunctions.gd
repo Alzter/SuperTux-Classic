@@ -7,6 +7,7 @@ var dragged_object = null
 var can_place_objects = true
 
 onready var tile_selection = $SelectedTile
+onready var tile_preview = $SelectedTile/TilePreview
 
 func _ready():
 	set_process(true)
@@ -22,6 +23,10 @@ func _process(delta):
 		if owner.can_place_tiles and !owner.mouse_over_ui:
 			var selected_tile_position = get_mouse_position(true)
 			tile_selection.show()
+			
+			tile_preview.visible = !owner.eraser_enabled and !owner.eyedropper_enabled and !owner.current_object_resource == null
+			tile_preview.flip_h = owner.flip_tiles_enabled
+			
 			tile_selection.set_position(selected_tile_position)
 
 func _input(event):
