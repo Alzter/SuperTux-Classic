@@ -15,7 +15,7 @@ export var invisible = false
 
 export var extro_level_file_path = "[LevelPath]" # Upon clearing the level, load into this level.
 
-export var editor_params = ["level_file_path", "extro_level_file_path", "message", "invisible"]
+export var editor_params = ["level_file_path", "message", "invisible"]
 
 func _ready():
 	if Global.is_in_editor: level_cleared = true

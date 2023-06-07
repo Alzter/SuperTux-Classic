@@ -12,7 +12,6 @@ onready var layer_parameters = $VBoxContainer/PanelContainer/ScrollContainer/Lay
 signal layer_parameter_changed
 
 func appear(node_being_edited : Node, node_is_object : bool):
-	if visible: return
 	node_to_edit = node_being_edited
 	is_editing_object = node_is_object
 	popup_centered_ratio()
