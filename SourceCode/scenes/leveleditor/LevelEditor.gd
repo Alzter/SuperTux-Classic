@@ -128,8 +128,6 @@ func toggle_edit_mode():
 
 func enter_play_mode():
 	if !level: return
-	save_level()
-	yield(get_tree(), "idle_frame")
 	Scoreboard.reset_player_values(false, false)
 	Global.spawn_position = editor_camera.position
 	editor_camera.current = false
