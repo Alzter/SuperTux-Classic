@@ -23,7 +23,7 @@ var worldmap_player_node = preload("res://scenes/worldmap/Player.tscn")
 var pause_menu = preload("res://scenes/menus/PauseScreen.tscn")
 var is_autoscrolling = false
 
-onready var worldmap_objects = get_node_or_null("Objects")
+onready var worldmap_objects = get_node("Objects") if has_node("Objects") else get_node_or_null("Levels")
 onready var extro_level = WorldmapManager.extro_level
 
 export var is_worldmap = false

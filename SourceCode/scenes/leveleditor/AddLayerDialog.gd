@@ -5,7 +5,15 @@ onready var layer_type = $VBoxContainer/PanelContainer/LayerProperties/TypeEntry
 
 export var default_layer_type = "TileMap"
 
+# Don't show these layers in the Add layer dialog when editing levels
+export var level_exclude_layers = ["ObjectContainer"]
+
+# Don't show these layers in the Add layer dialog when editing worldmaps
+export var worldmap_exclude_layers = []
+
 var current_layer_type = null
+
+var is_in_worldmap = false
 
 var layer_types = {}
 
@@ -13,8 +21,12 @@ func _on_AddLayerDialog_about_to_show():
 	layer_name.clear()
 	layer_type.clear()
 	
+	var exclude_layers = worldmap_exclude_layers if is_in_worldmap else level_exclude_layers
+	
 	var id = 0
 	for type in owner.layer_types:
+		if exclude_layers.has(type): continue
+		
 		var layer_icon_file = Global.layer_icons_directory + type + ".png"
 		var layer_icon_texture = load(layer_icon_file)
 		layer_type.add_icon_item(layer_icon_texture, type)

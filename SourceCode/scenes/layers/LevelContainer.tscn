@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://scenes/worldmap/LevelDotContainer.gd" type="Script" id=1]
+
+[node name="Levels" type="Node2D" groups=["object_container"]]
+script = ExtResource( 1 )

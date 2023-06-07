@@ -18,6 +18,7 @@ func add_layer_dialog():
 	if !add_layer_dialog: return
 	if owner.is_paused: return
 	if !owner.edit_mode: return
+	add_layer_dialog.is_in_worldmap = owner.level.is_worldmap
 	add_layer_dialog.popup()
 
 func _input(event):
