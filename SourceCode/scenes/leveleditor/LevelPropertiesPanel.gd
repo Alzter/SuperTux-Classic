@@ -47,6 +47,13 @@ func _update_music_list():
 	if custom_tracks:
 		for song_file in custom_tracks:
 			
+			# Translate custom song file names into readable names.
+			# e.g. user://addon_worlds/Alex/assets/music/PlateauDark.mp3
+			# is translated to "PlateauDark".
+			
+			# Keep the file path of the custom song in a dictionary;
+			# we will need it when the song is selected, so we know
+			# which song file to load and play.
 			var custom_song_extension = song_file.get_extension()
 			var custom_song_name = song_file.get_file().trim_suffix("." + custom_song_extension)
 			
@@ -68,6 +75,9 @@ func _update_music_list():
 func _set_music_to_song(song_name : String):
 	
 	# Translate a custom song filepath from URL to string format
+	# e.g. user://addon_worlds/Alex/assets/music/PlateauDark.mp3
+	# is translated to "PlateauDark".
+	
 	var id := 0
 	for custom_song_file in custom_music_files.values():
 		if custom_song_file == song_name:
