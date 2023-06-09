@@ -10,7 +10,6 @@ onready var level_time = level_properties.get_node("EditLevelTimer/Time")
 onready var level_gravity = level_properties.get_node("EditLevelGravity/Gravity")
 onready var level_autoscroll_speed = level_properties.get_node("EditLevelAutoscroll/AutoscrollSpeed")
 
-var music_tracks := {}
 var custom_music_files := {}
 
 var level = null
@@ -29,19 +28,15 @@ func _on_LevelPropertiesDialog_about_to_show():
 		level_autoscroll_speed.value = level.autoscroll_speed
 
 func _update_music_list():
-	var id = 0
-	music_tracks = {}
 	level_music.clear()
 	
 	# -------------------------------------------------------------------------
 	# "Add custom track..." button
 	var plus_icon = preload("res://images/editor/icons/add_small.png")
 	
-	level_music.add_icon_item(plus_icon, "Add custom track...", id)
-	music_tracks["Custom"] = id
-	id += 1
+	level_music.add_icon_item(plus_icon, "Add custom track...")
 	
-	#level_music.add_separator()
+	level_music.add_separator()
 	
 	# -------------------------------------------------------------------------
 	
@@ -57,11 +52,9 @@ func _update_music_list():
 			
 			custom_music_files[custom_song_name] = song_file
 			
-			level_music.add_item(custom_song_name, id)
-			music_tracks[custom_song_name] = id
-			id += 1
+			level_music.add_item(custom_song_name)
 		
-		#level_music.add_separator()
+		level_music.add_separator()
 	
 	# -------------------------------------------------------------------------
 	
@@ -70,10 +63,7 @@ func _update_music_list():
 	songs.sort()
 	
 	for song in songs:
-		print(str(song) + ", " + str(id))
-		level_music.add_item(song, id)
-		music_tracks[song] = id
-		id += 1
+		level_music.add_item(song)
 
 # WHY GODOT?! WHY MUST I JUMP THROUGH SUCH HOOPS?!
 func _set_music_to_song(song_name : String):
@@ -86,9 +76,16 @@ func _set_music_to_song(song_name : String):
 			song_name = custom_song_name
 		id += 1
 	
-	if music_tracks.has(song_name):
-		var song_id = music_tracks.get(song_name)
-		level_music.select(song_id)
+	
+	# Get the song ID for the song name selected
+	var song_id = null
+	for index in level_music.get_item_count():
+		if level_music.get_item_text(index) == song_name:
+			song_id = index
+			continue
+	
+	if !song_id: return
+	level_music.select(song_id)
 
 func _on_Name_text_changed(new_text):
 	if level:
@@ -105,22 +102,20 @@ func _on_Music_item_selected(index):
 	# "Add custom song" button
 	if index == 0:
 		_set_music_to_song(level.music)
-		print("Add custom song...")
+		
+		UserLevels.open_user_world_custom_assets_folder("music")
 		
 	elif level:
 		
-		# Set music to selected song.
-		for song_id in music_tracks.values():
-			if song_id == index:
-				var song_name = music_tracks.keys()[song_id]
-				
-				# If song is custom music track,
-				# actually set the level music to the filepath (URL)
-				# of the custom music track.
-				if custom_music_files.has(song_name):
-					song_name = custom_music_files.get(song_name)
-				
-				level.music = song_name
+		var song_name = level_music.get_item_text(index)
+		
+		# If song is custom music track,
+		# actually set the level music to the filepath (URL)
+		# of the custom music track.
+		if custom_music_files.has(song_name):
+			song_name = custom_music_files.get(song_name)
+		
+		level.music = song_name
 
 func _on_TimerEnabled_toggled(button_pressed):
 	if level: level.uses_timer = button_pressed
