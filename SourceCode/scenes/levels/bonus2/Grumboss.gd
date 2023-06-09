@@ -145,6 +145,7 @@ func defeated():
 	anim_player.play("defeated")
 	sanity_effect_animation.stop()
 	sanity_effect_animation.play("stop")
+	Global.can_pause = false
 
 func hurt():
 	sfx.stop_all()

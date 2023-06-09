@@ -162,12 +162,13 @@ func hitstop(time, shake_intensity = 0, shake_damping = 0.8):
 	if shake_intensity > 0:
 		camera_shake(shake_intensity, shake_damping)
 	
+	var pause_enabled = Global.can_pause
 	if time > 0:
 		Global.can_pause = false
 		get_tree().paused = true
 		yield(get_tree().create_timer(time, true), "timeout")
 		get_tree().paused = false
-		Global.can_pause = true
+		if pause_enabled: Global.can_pause = true
 
 func camera_shake(intensity, damping):
 	if intensity <= 0: return
