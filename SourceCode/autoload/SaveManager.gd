@@ -252,6 +252,26 @@ func _deencapsulate_player_controls(scancode_array : Array):
 		InputMap.action_add_event(control_action, inputeventkey)
 		
 		i += 1
+	
+	# Make the controls set for moving Tux also be used to navigate the UI
+	
+	var ui_actions = [
+		["ui_left", "move_left"],
+		["ui_right", "move_right"],
+		["ui_up", "move_up"],
+		["ui_down", "duck"]]
+	
+	for action in ui_actions:
+		var ui_action = action[0]
+		var move_action = action[1]
+		
+		InputMap.action_erase_events(ui_action)
+		
+		var inputs = InputMap.get_action_list(move_action)
+		
+		for input in inputs:
+			InputMap.action_add_event(ui_action, input)
+		
 
 func _list_files_in_directory(path):
 	var files = []

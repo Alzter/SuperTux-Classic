@@ -52,4 +52,5 @@ margin_bottom = -23.0
 text = "Done"
 
 [connection signal="about_to_show" from="." to="." method="_on_ControlsMenu_about_to_show"]
+[connection signal="popup_hide" from="." to="." method="_on_ControlsMenu_popup_hide"]
 [connection signal="pressed" from="Panel/Done" to="." method="_on_Done_pressed"]

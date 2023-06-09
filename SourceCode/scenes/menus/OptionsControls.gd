@@ -23,5 +23,10 @@ func _populate_controls_menu():
 	control_button_container.get_children().front().grab_focus()
 
 func _on_Done_pressed():
-	SaveManager.save_current_controls()
 	hide()
+
+func _on_ControlsMenu_popup_hide():
+	yield(get_tree(), "idle_frame")
+	SaveManager.save_current_controls()
+	yield(get_tree(), "idle_frame")
+	SaveManager.load_current_controls()
