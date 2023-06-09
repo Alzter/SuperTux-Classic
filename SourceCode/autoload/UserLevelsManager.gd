@@ -380,3 +380,12 @@ func get_custom_music_tracks_for_world(world : String = UserLevels.current_world
 	if tracks == []: return null
 	
 	else: return tracks
+
+# Opens the folder for custom assets in a user world.
+# Also creates said folder if it does not yet exist.
+# If subfolder is specified, creates a folder within the custom assets folder for the subfolder.
+
+func open_user_world_custom_assets_folder(subfolder : String = "", world_folder : String = current_world):
+	print("Open user assets folder: " + subfolder)
+	pass
+	#var custom_assets_folder = User
