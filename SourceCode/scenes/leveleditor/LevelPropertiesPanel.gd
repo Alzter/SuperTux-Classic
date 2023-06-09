@@ -65,7 +65,6 @@ func _update_music_list():
 	for song in songs:
 		level_music.add_item(song)
 
-# WHY GODOT?! WHY MUST I JUMP THROUGH SUCH HOOPS?!
 func _set_music_to_song(song_name : String):
 	
 	# Translate a custom song filepath from URL to string format
@@ -76,7 +75,6 @@ func _set_music_to_song(song_name : String):
 			song_name = custom_song_name
 		id += 1
 	
-	
 	# Get the song ID for the song name selected
 	var song_id = null
 	for index in level_music.get_item_count():
@@ -85,6 +83,7 @@ func _set_music_to_song(song_name : String):
 			continue
 	
 	if !song_id: return
+	
 	level_music.select(song_id)
 
 func _on_Name_text_changed(new_text):
@@ -97,21 +96,30 @@ func _on_Author_text_changed(new_text):
 		level.level_author = new_text
 		Global.clear_level_cache(UserLevels.current_level)
 
-# SET LEVEL MUSIC TO ITEM SELECTED ON SONG SELECTOR
+# Set the level music to the song selected by the user from the OptionButton.
 func _on_Music_item_selected(index):
-	# "Add custom song" button
-	if index == 0:
+	
+	# If the user has selected the "Add custom song" option:
+	if index == 0: 
+		
+		# If this button is selected, automatically
+		# select the previous option. We don't actually want
+		# the level music button set to "Add custom music..."
 		_set_music_to_song(level.music)
 		
+		# Open the custom music folder for the level
+		# to allow users to add their own song files.
 		UserLevels.open_user_world_custom_assets_folder("music")
 		
+	
+	# Otherwise, set the level music to the song selected by the user.
 	elif level:
 		
 		var song_name = level_music.get_item_text(index)
 		
 		# If song is custom music track,
 		# actually set the level music to the filepath (URL)
-		# of the custom music track.
+		# of the custom music track, which is not displayed to the user.
 		if custom_music_files.has(song_name):
 			song_name = custom_music_files.get(song_name)
 		
