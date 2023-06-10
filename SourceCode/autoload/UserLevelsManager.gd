@@ -387,5 +387,17 @@ func get_custom_music_tracks_for_world(world : String = UserLevels.current_world
 
 func open_user_world_custom_assets_folder(subfolder : String = "", world_folder : String = current_world):
 	print("Open user assets folder: " + subfolder)
-	pass
-	#var custom_assets_folder = User
+	
+	var folder_to_open = user_worlds_directory.plus_file(world_folder).plus_file("assets")
+	if subfolder != "":
+		folder_to_open = folder_to_open.plus_file(subfolder)
+	
+	var dir = Directory.new()
+	if !dir.dir_exists(folder_to_open):
+		dir.make_dir_recursive(folder_to_open)
+	
+	yield(get_tree(), "idle_frame")
+	
+	folder_to_open = Global.globalise_path(folder_to_open)
+	
+	OS.shell_open(folder_to_open)
