@@ -75,7 +75,7 @@ var selected_layer_name = ""
 var current_tile_id = -1 setget _update_current_tile_id # The ID of the tile the user is currently using
 var current_object_resource = null setget _update_current_object_resource # The Resource of the object the user currently has selected
 
-var edit_mode = true
+var edit_mode = true setget _update_edit_mode
 
 var can_place_tiles = true setget , _get_can_place_tiles
 
@@ -119,6 +119,8 @@ func _ready():
 	
 	Music.set_editor_music(true)
 	
+	ResolutionManager.enable_zoom_in = false
+	
 	#get_tree().paused = true
 
 func _process(delta):
@@ -140,7 +142,9 @@ func enter_play_mode(play_from_start = Input.is_action_pressed("editor_play_from
 	Scoreboard.reset_player_values(false, false)
 	
 	Global.spawn_position = null if play_from_start else editor_camera.position
-	if play_from_start: Music.stop_all()
+	if play_from_start:
+		#Scoreboard.player_initial_state = 0
+		Music.stop_all()
 
 	editor_camera.current = false
 	self.selected_layer = null
@@ -149,7 +153,7 @@ func enter_play_mode(play_from_start = Input.is_action_pressed("editor_play_from
 	create_level_cache()
 	if ui_editor: ui_editor.hide()
 	level.start_level(true)
-	edit_mode = false
+	self.edit_mode = false
 	get_tree().paused = false
 	Music.set_editor_music(false)
 	toggle_edit_button.update()
@@ -184,7 +188,7 @@ func _deferred_enter_edit_mode():
 	if ui_editor: ui_editor.show()
 	#Music.stop_all()
 	#get_tree().paused = false
-	edit_mode = true
+	self.edit_mode = true
 	get_tree().paused = false
 	yield(get_tree(), "idle_frame")
 	Global.can_pause = true
@@ -826,3 +830,7 @@ func _on_LevelPropertiesDialog_popup_hide():
 
 func _on_AddLayerDialog_about_to_show():
 	play_sound("AddLayerDialog")
+
+func _update_edit_mode(new_value):
+	edit_mode = new_value
+	ResolutionManager.enable_zoom_in = !edit_mode

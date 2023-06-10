@@ -57,7 +57,7 @@ text = "Auto Run"
 margin_left = 326.0
 margin_top = 12.0
 margin_right = 350.0
-margin_bottom = 41.0
+margin_bottom = 42.0
 size_flags_vertical = 4
 
 [node name="MusicVolume" type="VBoxContainer" parent="Panel/VBoxContainer"]
@@ -121,6 +121,7 @@ text = "Configure Controls"
 margin_top = 473.0
 margin_right = 350.0
 margin_bottom = 503.0
+focus_neighbour_bottom = NodePath("../../Done")
 text = "View Privacy Policy"
 
 [node name="Done" type="Button" parent="Panel"]
@@ -132,6 +133,7 @@ margin_left = -96.0
 margin_top = -53.0
 margin_right = 96.0
 margin_bottom = -23.0
+focus_neighbour_top = NodePath("../VBoxContainer/PrivacyPolicy")
 text = "Done"
 
 [node name="ControlsMenu" parent="." instance=ExtResource( 3 )]

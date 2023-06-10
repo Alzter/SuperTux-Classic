@@ -15,6 +15,10 @@
 #  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
+# =====================================================================================
+# This node zooms in the screen by multiplying the pixel size at higher resolutions.
+# It can be disabled by setting variable "enable_zoom_in" to false.
+
 extends Node
 
 var min_size = Vector2.ZERO
@@ -29,24 +33,35 @@ var window_resolution = null
 
 signal window_resized
 
+var enable_zoom_in = true setget _set_zoom_in
+
 func _ready():
 	get_viewport().connect("size_changed", self, "window_resized")
 	window_resized()
 
 func window_resized():
-	var ratio = ratio_size_mobile if OS.has_feature("mobile") else ratio_size
 	
-	window_size = get_viewport().size
-	var pixel_ratio = Vector2.ONE
+	var pixel_size = 1
 	
-	pixel_ratio.x = floor(window_size.x / ratio.x)
-	pixel_ratio.y = floor(window_size.y / ratio.y)
-	
-	var pixel_size = min(pixel_ratio.x, pixel_ratio.y)
-	pixel_size = max(pixel_size, 1)
+	if enable_zoom_in:
+		var ratio = ratio_size_mobile if OS.has_feature("mobile") else ratio_size
+		
+		window_size = get_viewport().size
+		var pixel_ratio = Vector2.ONE
+		
+		pixel_ratio.x = floor(window_size.x / ratio.x)
+		pixel_ratio.y = floor(window_size.y / ratio.y)
+		
+		pixel_size = min(pixel_ratio.x, pixel_ratio.y)
+		pixel_size = max(pixel_size, 1)
 	screen_shrink = pixel_size
 	
 	window_resolution = window_size / pixel_size
+
 	
 	get_tree().set_screen_stretch(SceneTree.STRETCH_ASPECT_IGNORE, SceneTree.STRETCH_ASPECT_IGNORE, min_size, pixel_size)
 	emit_signal("window_resized")
+
+func _set_zoom_in(new_value):
+	enable_zoom_in = new_value
+	window_resized()
