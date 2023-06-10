@@ -134,7 +134,7 @@ func phase_two_transition():
 
 func phase_two():
 	anim_player.play("phase_two")
-	Music.play("Prophecy", false, 30.6)
+	Music.play("Prophecy", 30.6)
 	Music.pitch_slide_up()
 	grumbel_sanity_effect()
 
@@ -197,7 +197,7 @@ func random_glitch_noise():
 	sfx.stop(sound)
 
 func dying():
-	Music.play("Prophecy", false, 19.5)
+	Music.play("Prophecy", 19.5)
 	Music.pitch_slide_up()
 	
 	anim_player.play("dying")

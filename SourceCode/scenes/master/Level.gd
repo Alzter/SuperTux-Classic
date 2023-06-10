@@ -39,6 +39,11 @@ export var worldmap_spawn = Vector2()
 export var worldmap_player_object : PackedScene
 export var level_height = 15
 
+# If the level uses custom music, this variable specifies
+# the time (in seconds) at which the custom music stream
+# starts after being looped.
+export var custom_music_loop_offset = 0.0
+
 onready var objects = get_node("Objects").get_children() if has_node("Objects") else null
 
 onready var custom_camera = get_node_or_null("Camera2D")

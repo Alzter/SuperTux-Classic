@@ -22,6 +22,7 @@ var current_song = null
 var current_song_node = null
 
 var songs = []
+var custom_song_loop_offset = 0.0
 
 onready var tween = $Tween
 onready var custom_song = $Custom
@@ -38,8 +39,12 @@ var special_songs = [
 	"Invincible"
 ]
 
-func play(song, keep_other_songs = false, from_position = 0.0):
-	if !keep_other_songs: stop_all()
+func play(song : String, from_position := 0.0, custom_song_loop_offset := 0.0):
+	stop_all()
+	
+	if is_custom_song(song):
+		_play_custom_song(song, custom_song_loop_offset)
+		return
 	
 	# Try seeing if we have the song as a child node (Base game songs)
 	if has_node(song):
@@ -58,14 +63,32 @@ func play(song, keep_other_songs = false, from_position = 0.0):
 			current_song = song
 			current_song_node = s
 	
-	# If that doesn't work, try playing the song as a custom song
 	else:
-		
-		if !play_custom_song(song) == OK:
-			push_error("Error playing music track! Unrecognised song: " + song)
+		push_error("Error playing music track! Unrecognised song: " + song)
 
-func play_custom_song(song_filepath : String):
-	var stream = Global.get_audio_stream_from_audio_file(song_filepath)
+# Returns true if the song given is a file path to a custom song.
+func is_custom_song(song : String):
+	
+	# If the song name is the same as a base game song, return false.
+	if has_node(song): return false
+	
+	# Otherwise, check the file exists.
+	var dir = Directory.new()
+	if dir.file_exists(song):
+		var song_extension = song.get_extension()
+		if !song_extension: return false
+		
+		# Check the file is of a supported type. (WAV, OGG, MP3)
+		song_extension = "." + song_extension
+		if Global.accepted_music_file_types.has(song_extension):
+			return true
+	
+	return false
+
+func _play_custom_song(song_filepath : String, loop_offset : float):
+	stop_all()
+	
+	var stream = Global.get_audio_stream_from_audio_file(song_filepath, true, loop_offset)
 	
 	if !stream: return
 	
@@ -74,16 +97,16 @@ func play_custom_song(song_filepath : String):
 	
 	current_song = song_filepath
 	current_song_node = custom_song
-
-	return OK
 	
-	return ERR_FILE_NOT_FOUND
+	previous_song = song_filepath
+	
+	custom_song_loop_offset = loop_offset
 
 # Identical to play(), but continues playing a song if it is already playing rather than restarting it.
 # I.e. running continue("Invincible") while the Invincible music is already playing will result in no change.
-func continue(song):
+func continue(song : String, custom_song_loop_offset := 0.0):
 	if current_song != song:
-		play(song)
+		play(song, custom_song_loop_offset)
 
 func stop_all():
 	current_song_node = null
@@ -94,7 +117,7 @@ func stop_all():
 
 func _on_Invincible_finished():
 	if current_song != "Invincible": return
-	play(previous_song)
+	play(previous_song, custom_song_loop_offset)
 
 func speed_up():
 	if current_song_node != null:

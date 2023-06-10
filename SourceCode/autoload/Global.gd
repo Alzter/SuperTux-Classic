@@ -555,7 +555,7 @@ func sort_alphabetically(a, b):
 
 # Loads in an audio file (MP3, OGG, or WAV) and converts it into an
 # Audio Stream which can be played by an AudioStreamPlayer node.
-func get_audio_stream_from_audio_file(audio_file_path : String, loop_audio : bool = true):
+func get_audio_stream_from_audio_file(audio_file_path : String, loop_audio : bool = true, loop_offset : float = 0.0):
 	var f = File.new()
 	
 	if f.file_exists(audio_file_path):
@@ -587,6 +587,7 @@ func get_audio_stream_from_audio_file(audio_file_path : String, loop_audio : boo
 		
 		var stream : AudioStream = null
 		
+		# ADD LOOP OFFSET CODE HERE
 		match file_type:
 			".mp3":
 				stream = AudioStreamMP3.new()
