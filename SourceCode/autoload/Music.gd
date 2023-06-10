@@ -40,6 +40,13 @@ var special_songs = [
 ]
 
 func play(song : String, from_position := 0.0, custom_song_loop_offset := 0.0):
+	
+	# This is here because we don't ever want the Invincible star theme to go into our
+	# previous songs list, because if it did then we wouldn't know what song to
+	# play once it had finished.
+	if ![special_songs].has(current_song):
+		previous_song = current_song
+	
 	#print("Playing song. Custom song loop offset = " + str(custom_song_loop_offset))
 	stop_all()
 	
@@ -54,12 +61,6 @@ func play(song : String, from_position := 0.0, custom_song_loop_offset := 0.0):
 			s.pitch_scale = 1
 			s.bus = "Music"
 			s.play(from_position)
-			
-			# This is here because we don't ever want the Invincible star theme to go into our
-			# previous songs list, because if it did then we wouldn't know what song to
-			# play once it had finished.
-			if ![special_songs].has(current_song):
-				previous_song = current_song
 			
 			current_song = song
 			current_song_node = s
@@ -99,13 +100,12 @@ func _play_custom_song(song_filepath : String, loop_offset := 0.0):
 	current_song = song_filepath
 	current_song_node = custom_song
 	
-	previous_song = song_filepath
-	
 	custom_song_loop_offset = loop_offset
 
 # Identical to play(), but continues playing a song if it is already playing rather than restarting it.
 # I.e. running continue("Invincible") while the Invincible music is already playing will result in no change.
 func continue(song : String, custom_song_loop_offset := 0.0):
+	
 	#print("Continuing song. Custom LOOP OFFSET = " + str(custom_song_loop_offset))
 	if current_song != song:
 		play(song, 0.0, custom_song_loop_offset)
@@ -119,6 +119,8 @@ func stop_all():
 
 func _on_Invincible_finished():
 	if current_song != "Invincible": return
+	
+	if !previous_song: return
 	play(previous_song, custom_song_loop_offset)
 
 func speed_up():

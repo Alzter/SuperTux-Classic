@@ -42,7 +42,7 @@ export var level_height = 15
 # If the level uses custom music, this variable specifies
 # the time (in seconds) at which the custom music stream
 # starts after being looped.
-export var custom_music_loop_offset : float = 0.0 setget _update_custom_music_loop_offset
+export var custom_music_loop_offset : float = 0.0
 
 onready var objects = get_node("Objects").get_children() if has_node("Objects") else null
 
@@ -273,10 +273,3 @@ func play_music(continue_music : bool = false):
 		Music.continue(music, custom_music_loop_offset)
 	else:
 		Music.play(music, 0.0, custom_music_loop_offset)
-
-# When custom loop offset is updated, reload the custom music track
-func _update_custom_music_loop_offset(new_value):
-	custom_music_loop_offset = new_value
-	
-	if Music.current_song == music:
-		play_music(false)

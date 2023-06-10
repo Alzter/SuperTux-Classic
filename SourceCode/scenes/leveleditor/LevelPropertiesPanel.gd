@@ -162,7 +162,9 @@ func _on_AutoscrollSpeed_value_changed(value):
 	if level: level.autoscroll_speed = value
 
 func _on_CustomMusicLoopOffset_value_changed(value):
-	if level: level.custom_music_loop_offset = value
+	if level:
+		level.custom_music_loop_offset = value
+		level.play_music(false)
 
 func _on_HideLevelProperties_pressed():
 	hide()
