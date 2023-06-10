@@ -1,5 +1,6 @@
 extends Control
 
+export var menu_music = ""
 onready var menu_main = $MainMenu
 onready var menu_create_world = $CreateWorldMenu
 onready var menu_open_world = $OpenWorldMenu
@@ -11,6 +12,9 @@ onready var button_worlds_folder_open = $MainMenu/VBoxContainer/PanelContainer/M
 onready var button_exit = $MainMenu/VBoxContainer/ExitToMenu
 
 func _ready():
+	Music.set_editor_music(false)
+	if menu_music != "": Music.play(menu_music)
+	
 	UserLevels.current_world = null
 	ResolutionManager.enable_zoom_in = false
 	Scoreboard.hide()

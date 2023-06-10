@@ -13,6 +13,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 theme = ExtResource( 2 )
 script = ExtResource( 4 )
+menu_music = "TuxRacer - Title"
 
 [node name="MainMenu" type="Panel" parent="."]
 anchor_right = 1.0
