@@ -217,9 +217,7 @@ func unload_current_level():
 func initialise_level(level_object):
 	level = level_object
 	
-	var music = level.get("music")
-	if music:
-		Music.continue(music)
+	level.play_music(true)
 	
 	level.connect("music_changed", self, "level_music_changed")
 	
@@ -805,7 +803,9 @@ func _on_CancelExitProgram_pressed():
 	quit_without_saving_dialog.hide()
 
 func level_music_changed(new_music):
-	Music.continue(new_music)
+	if level:
+		if is_instance_valid(level):
+			level.play_music(true)
 
 func _on_EditLayerDialog_about_to_show():
 	play_sound("EditLayer")

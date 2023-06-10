@@ -10,6 +10,11 @@ onready var level_time = level_properties.get_node("EditLevelTimer/Time")
 onready var level_gravity = level_properties.get_node("EditLevelGravity/Gravity")
 onready var level_autoscroll_speed = level_properties.get_node("EditLevelAutoscroll/AutoscrollSpeed")
 
+onready var custom_music_controls = get_node("VBoxContainer/PanelContainer/ScrollContainer/LevelProperties/CustomMusicControls")
+onready var custom_music_loop_offset = get_node("VBoxContainer/PanelContainer/ScrollContainer/LevelProperties/CustomMusicControls/EditLevelMusicLoopOffset/CustomMusicLoopOffset")
+
+var using_custom_music = false setget _set_using_custom_music
+
 var custom_music_files := {}
 
 var level = null
@@ -80,11 +85,14 @@ func _set_music_to_song(song_name : String):
 	# e.g. user://addon_worlds/Alex/assets/music/PlateauDark.mp3
 	# is translated to "PlateauDark".
 	
+	self.using_custom_music = false
+	
 	var id := 0
 	for custom_song_file in custom_music_files.values():
 		if custom_song_file == song_name:
 			var custom_song_name = custom_music_files.keys()[id]
 			song_name = custom_song_name
+			self.using_custom_music = true
 		id += 1
 	
 	# Get the song ID for the song name selected
@@ -129,6 +137,8 @@ func _on_Music_item_selected(index):
 		
 		var song_name = level_music.get_item_text(index)
 		
+		self.using_custom_music = custom_music_files.has(song_name)
+		
 		# If song is custom music track,
 		# actually set the level music to the filepath (URL)
 		# of the custom music track, which is not displayed to the user.
@@ -158,3 +168,7 @@ func _input(event):
 	if Input.is_action_pressed("ui_accept"):
 		yield(get_tree(), "idle_frame") # This has to be here or else the play level input registers too
 		hide()
+
+func _set_using_custom_music(new_value):
+	using_custom_music = new_value
+	custom_music_controls.visible = new_value

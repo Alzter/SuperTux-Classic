@@ -111,11 +111,9 @@ func start_level(in_editor = false):
 	if music == "" or !music:
 		Music.stop_all()
 	else:
-		if in_editor:
-			Music.continue(music)
-		else:
-			Music.play(music)
-			Music.set_editor_music(false)
+		play_music(in_editor)
+		
+		if !in_editor: Music.set_editor_music(false)
 	
 	emit_signal("level_ready")
 
@@ -261,3 +259,11 @@ func window_resized():
 func _set_level_music(new_value):
 	music = new_value
 	emit_signal("music_changed", new_value)
+
+func play_music(continue_music : bool = false):
+	if !music: return
+	
+	if continue_music:
+		Music.continue(music)
+	else:
+		Music.play(music)
