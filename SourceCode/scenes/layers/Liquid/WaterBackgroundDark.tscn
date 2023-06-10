@@ -3,6 +3,7 @@
 [ext_resource path="res://scenes/layers/TileMap.tscn" type="PackedScene" id=1]
 
 [node name="WaterBGDark" type="Node2D"]
+z_as_relative = false
 
 [node name="Appearance" type="ParallaxBackground" parent="."]
 layer = -80

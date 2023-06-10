@@ -5,6 +5,7 @@
 [ext_resource path="res://sounds/ambience_loops/AmbienceWaves.mp3" type="AudioStream" id=3]
 
 [node name="WaterFGDark" type="Node2D"]
+z_as_relative = false
 
 [node name="Appearance" type="ParallaxBackground" parent="."]
 layer = 100
