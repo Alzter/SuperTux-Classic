@@ -36,7 +36,7 @@ gain = -20.0
 
 [sub_resource type="AudioEffectAmplify" id=29]
 resource_name = "Amplify"
-volume_db = 3.0
+volume_db = 4.0
 
 [sub_resource type="AudioEffectReverb" id=1]
 resource_name = "Reverb"

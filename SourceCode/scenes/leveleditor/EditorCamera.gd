@@ -60,7 +60,7 @@ func initialise_tux_sprite(level : Node2D):
 			if spawn_pos:
 				position = spawn_pos * Global.TILE_SIZE + Global.TILE_SIZE * Vector2.ONE * 0.5
 		else:
-			position = Vector2.ONE * Global.TILE_SIZE * Vector2(3.5, 13.5)
+			position = Vector2.ONE * Global.TILE_SIZE * Vector2(5.5, 13.5)
 	
 	tux_sprite.initialise_tux_sprite(worldmap)
 
@@ -73,8 +73,8 @@ func _process(delta):
 	var cam_zoom = Vector2(get_global_transform_with_canvas().x.x, get_global_transform_with_canvas().y.y)
 	
 	var move_dir = Vector2()
-	move_dir.x = int(Input.is_action_pressed("move_right") or Input.is_action_pressed("ui_right")) - int(Input.is_action_pressed("move_left") or Input.is_action_pressed("ui_left"))
-	move_dir.y = int(Input.is_action_pressed("duck") or Input.is_action_pressed("ui_down")) - int(Input.is_action_pressed("move_up") or Input.is_action_pressed("ui_up"))
+	move_dir.x = int(Input.is_action_pressed("move_right") or Input.is_action_pressed("editor_right")) - int(Input.is_action_pressed("move_left") or Input.is_action_pressed("editor_left"))
+	move_dir.y = int(Input.is_action_pressed("duck") or Input.is_action_pressed("editor_down")) - int(Input.is_action_pressed("move_up") or Input.is_action_pressed("editor_up"))
 	
 	var velocity = move_dir * move_speed * delta * 60
 	
