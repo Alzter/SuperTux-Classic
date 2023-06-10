@@ -87,4 +87,4 @@ func _update_layer_icon():
 func set_disabled(value):
 	disabled = value
 	layer_icon.modulate.a = 1 if disabled else 0.5
-	#label.modulate = Color(1,1,1) if disabled else Color(1,1,1)
+	label.modulate = Color(0,0.67,1) if disabled else Color(1,1,1)
