@@ -12,6 +12,7 @@ var dragging_camera = false
 onready var tux_sprite = get_node("TuxSprite")
 
 func _input(event):
+	if Global.is_popup_visible(): return
 	if owner.mouse_over_ui or !owner.edit_mode or owner.is_paused: return
 	
 	
@@ -64,6 +65,7 @@ func initialise_tux_sprite(level : Node2D):
 	tux_sprite.initialise_tux_sprite(worldmap)
 
 func _process(delta):
+	if Global.is_popup_visible(): return
 	visible = owner.edit_mode
 	
 	if owner.is_paused or !owner.edit_mode: return

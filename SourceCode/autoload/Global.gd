@@ -472,13 +472,14 @@ func is_popup_visible(node = current_scene):
 	var popup_open = false
 	for child in node.get_children():
 		var open = is_popup_visible(child)
-		if open: return true
+		if open == true: return true
 	
 	return _is_open_dialog(node)
 
 func _is_open_dialog(node):
 	if node is Popup:
 		return node.visible
+	else: return false
 
 # Override the default quitting behaviour
 func _notification(what):
