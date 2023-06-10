@@ -9,12 +9,18 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Reference",
+"class": "AudioLoader",
+"language": "GDScript",
+"path": "res://autoload/WAVAudioImporter.gd"
+}, {
 "base": "Node",
 "class": "StateMachine",
 "language": "GDScript",
 "path": "res://scenes/state_machine.gd"
 } ]
 _global_script_class_icons={
+"AudioLoader": "",
 "StateMachine": ""
 }
 
@@ -40,6 +46,7 @@ ResolutionManager="*res://autoload/ResolutionManager.gd"
 WorldmapManager="*res://autoload/WorldmapManager.gd"
 MobileControls="*res://autoload/MobileControls.tscn"
 UserLevels="*res://autoload/UserLevelsManager.gd"
+WAVAudioImporter="*res://autoload/WAVAudioImporter.gd"
 
 [display]
 

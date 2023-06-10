@@ -57,6 +57,8 @@ func _update_music_list():
 			var custom_song_extension = song_file.get_extension()
 			var custom_song_name = song_file.get_file().trim_suffix("." + custom_song_extension)
 			
+			custom_song_name += custom_song_extension
+			
 			custom_music_files[custom_song_name] = song_file
 			
 			level_music.add_item(custom_song_name)

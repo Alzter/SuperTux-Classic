@@ -572,14 +572,18 @@ func get_audio_stream_from_audio_file(audio_file_path : String, loop_audio : boo
 			push_error("Error loading song from file: " + audio_file_path + " - Song file type not supported")
 			return null
 		
-		# Open the song, read the data, and then close it
-		f.open(audio_file_path, f.READ)
-		var buffer = f.get_buffer(f.get_len())
-		f.close()
+		var buffer = null
 		
-		if !buffer:
-			push_error("Error loading song from file: " + audio_file_path + " - Song data (buffer) not found")
-			return null
+		# For MP3/OGG files: open the song, read the data, and then close it
+		if [".mp3", ".ogg"].has(file_type):
+			
+			f.open(audio_file_path, f.READ)
+			buffer = f.get_buffer(f.get_len())
+			f.close()
+		
+			if !buffer:
+				push_error("Error loading song from file: " + audio_file_path + " - Song data (buffer) not found")
+				return null
 		
 		var stream : AudioStream = null
 		
@@ -591,9 +595,13 @@ func get_audio_stream_from_audio_file(audio_file_path : String, loop_audio : boo
 				
 				stream = AudioStreamOGGVorbis.new()
 				stream.set_data(buffer)
+			
+			# We have to do an entirely different method to load audio
+			# from wave files for some reason. Thanks to Giannino Clemente
+			# for supplying this code at https://github.com/Gianclgar/GDScriptAudioImport
 			".wav":
-				stream = AudioStreamSample.new() # Naming inconsistency fixed in Godot 4
-				stream.set_data(buffer)
+				var wav_loader = AudioLoader.new()
+				stream = wav_loader.load_file(audio_file_path)
 			
 			"_":
 				push_error("Error loading song from file: " + audio_file_path + " - Song file type not supported")
@@ -607,4 +615,5 @@ func get_audio_stream_from_audio_file(audio_file_path : String, loop_audio : boo
 			elif file_type == ".wav":
 				stream.set_loop_mode(1)
 		
+		print("OK")
 		return stream

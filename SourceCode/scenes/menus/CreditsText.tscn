@@ -49,6 +49,9 @@ Matthew (Skyace65)
 
 Tulpenkiste
 
+Giannino (Gianclgar) Clemente
+(GDScriptAudioImport code)
+
 
 Levels Ported by
 
@@ -230,6 +233,6 @@ align = 1
 clip_text = true
 
 [node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="RichTextLabel"]
-rect = Rect2( 0, 0, 640, 3500 )
+rect = Rect2( 0, 0, 640, 3550 )
 
 [connection signal="screen_exited" from="RichTextLabel/VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]
