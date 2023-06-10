@@ -49,6 +49,7 @@ func _ready():
 
 func _input(event):
 	if !Global.can_pause: return
+	if Global.is_popup_visible(): return
 	if Input.is_action_just_pressed("ui_cancel"):
 		self.paused = !paused
 
