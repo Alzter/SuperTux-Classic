@@ -12,7 +12,7 @@ onready var button_exit = $MainMenu/VBoxContainer/ExitToMenu
 
 func _ready():
 	UserLevels.current_world = null
-	ResolutionManager.enable_zoom_in = true
+	ResolutionManager.enable_zoom_in = false
 	Scoreboard.hide()
 	Music.stop_all()
 	button_world_create.grab_focus()
