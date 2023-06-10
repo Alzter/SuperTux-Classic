@@ -143,7 +143,7 @@ func enter_play_mode(play_from_start = Input.is_action_pressed("editor_play_from
 	
 	Global.spawn_position = null if play_from_start else editor_camera.position
 	if play_from_start:
-		#Scoreboard.player_initial_state = 0
+		Scoreboard.player_initial_state = 0
 		Music.stop_all()
 
 	editor_camera.current = false
