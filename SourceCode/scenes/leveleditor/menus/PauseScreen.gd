@@ -37,6 +37,10 @@ func _set_paused(new_value):
 	paused = new_value
 	get_tree().paused = paused
 	menu.visible = paused
+	
+	if !get_parent().edit_mode:
+		Scoreboard.level_timer.paused = paused
+	
 	emit_signal("pause_changed", paused)
 
 func _on_Continue_pressed():
