@@ -40,6 +40,7 @@ var special_songs = [
 ]
 
 func play(song : String, from_position := 0.0, custom_song_loop_offset := 0.0):
+	#print("Playing song. Custom song loop offset = " + str(custom_song_loop_offset))
 	stop_all()
 	
 	if is_custom_song(song):
@@ -85,7 +86,7 @@ func is_custom_song(song : String):
 	
 	return false
 
-func _play_custom_song(song_filepath : String, loop_offset : float):
+func _play_custom_song(song_filepath : String, loop_offset := 0.0):
 	stop_all()
 	
 	var stream = Global.get_audio_stream_from_audio_file(song_filepath, true, loop_offset)
@@ -105,8 +106,9 @@ func _play_custom_song(song_filepath : String, loop_offset : float):
 # Identical to play(), but continues playing a song if it is already playing rather than restarting it.
 # I.e. running continue("Invincible") while the Invincible music is already playing will result in no change.
 func continue(song : String, custom_song_loop_offset := 0.0):
+	#print("Continuing song. Custom LOOP OFFSET = " + str(custom_song_loop_offset))
 	if current_song != song:
-		play(song, custom_song_loop_offset)
+		play(song, 0.0, custom_song_loop_offset)
 
 func stop_all():
 	current_song_node = null

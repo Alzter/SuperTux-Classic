@@ -602,7 +602,7 @@ func get_audio_stream_from_audio_file(audio_file_path : String, loop_audio : boo
 			# for supplying this code at https://github.com/Gianclgar/GDScriptAudioImport
 			".wav":
 				var wav_loader = AudioLoader.new()
-				stream = wav_loader.load_file(audio_file_path)
+				stream = wav_loader.load_file(audio_file_path, loop_audio, loop_offset)
 			
 			"_":
 				push_error("Error loading song from file: " + audio_file_path + " - Song file type not supported")
@@ -611,10 +611,7 @@ func get_audio_stream_from_audio_file(audio_file_path : String, loop_audio : boo
 		if loop_audio:
 			if [".mp3", ".ogg"].has(file_type):
 				stream.set_loop(true)
-			
-			# WAV audio stream players have slightly different syntax to set looping
-			elif file_type == ".wav":
-				stream.set_loop_mode(1)
+				stream.set_loop_offset(loop_offset)
 		
-		print("OK")
+		print("Loaded custom music track.")
 		return stream

@@ -31,6 +31,7 @@ func _on_LevelPropertiesDialog_about_to_show():
 		level_time.editable = level_timer_enabled.pressed
 		level_gravity.value = level.gravity
 		level_autoscroll_speed.value = level.autoscroll_speed
+		custom_music_loop_offset.value = level.custom_music_loop_offset
 
 func _update_music_list():
 	level_music.clear()
@@ -159,6 +160,9 @@ func _on_Gravity_value_changed(value):
 
 func _on_AutoscrollSpeed_value_changed(value):
 	if level: level.autoscroll_speed = value
+
+func _on_CustomMusicLoopOffset_value_changed(value):
+	if level: level.custom_music_loop_offset = value
 
 func _on_HideLevelProperties_pressed():
 	hide()

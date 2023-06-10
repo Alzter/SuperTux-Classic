@@ -47,7 +47,7 @@ func report_errors(err, filepath):
 	else:
 		print("Unknown error with file ", filepath, " error code: ", err)
 
-func load_file(filepath):
+func load_file(filepath, loop_audio := true, loop_offset := 0.0):
 	var file = File.new()
 	var err = file.open(filepath, File.READ)
 	if err != OK:
@@ -64,6 +64,7 @@ func load_file(filepath):
 		#parrrrseeeeee!!! :D
 		
 		var bits_per_sample = 0
+		var sample_rate = null
 		
 		for i in range(0, 100):
 			var those4bytes = str(char(bytes[i])+char(bytes[i+1])+char(bytes[i+2])+char(bytes[i+3]))
@@ -104,7 +105,7 @@ func load_file(filepath):
 				if channel_num == 2: newstream.stereo = true
 				
 				#get sample rate [Bytes 4-7]
-				var sample_rate = bytes[fsc0+4] + (bytes[fsc0+5] << 8) + (bytes[fsc0+6] << 16) + (bytes[fsc0+7] << 24)
+				sample_rate = bytes[fsc0+4] + (bytes[fsc0+5] << 8) + (bytes[fsc0+6] << 16) + (bytes[fsc0+7] << 24)
 				print ("Sample rate: " + str(sample_rate))
 				#set our AudioStreamSample mixrate
 				newstream.mix_rate = sample_rate
@@ -139,25 +140,15 @@ func load_file(filepath):
 			# end of parsing
 			#---------------------------
 
-		#get samples and set loop end
-		var samplenum = newstream.data.size() / 4
-		newstream.loop_end = samplenum
-		newstream.loop_mode = 1 #change to 0 or delete this line if you don't want loop, also check out modes 2 and 3 in the docs
+		newstream.loop_mode = 1 if loop_audio else 0 #change to 0 or delete this line if you don't want loop, also check out modes 2 and 3 in the docs
+		
+		if loop_audio:
+			var samplenum = newstream.data.size() / 4 # get samples and set loop end
+			
+			newstream.set_loop_begin(loop_offset * sample_rate)
+			newstream.set_loop_end(samplenum)
+		
 		return newstream  #:D
-
-	#if file is ogg
-	elif filepath.ends_with(".ogg"):
-		var newstream = AudioStreamOGGVorbis.new()
-		newstream.loop = true #set to false or delete this line if you don't want to loop
-		newstream.data = bytes
-		return newstream
-
-	#if file is mp3
-	elif filepath.ends_with(".mp3"):
-		var newstream = AudioStreamMP3.new()
-		newstream.loop = true #set to false or delete this line if you don't want to loop
-		newstream.data = bytes
-		return newstream
 
 	else:
 		print ("ERROR: Wrong filetype or format")
