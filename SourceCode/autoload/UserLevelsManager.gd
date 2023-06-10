@@ -374,8 +374,11 @@ func get_custom_music_tracks_for_world(world : String = UserLevels.current_world
 		var files = Global.list_files_in_directory(custom_music_folder)
 		for file in files:
 			var file_path = custom_music_folder.plus_file(file)
-			if file.ends_with(".mp3"):
-				tracks.append(file_path)
+			
+			for music_file_type in Global.accepted_music_file_types:
+				if file.ends_with(music_file_type):
+					tracks.append(file_path)
+					continue
 	
 	if tracks == []: return null
 	

@@ -65,29 +65,17 @@ func play(song, keep_other_songs = false, from_position = 0.0):
 			push_error("Error playing music track! Unrecognised song: " + song)
 
 func play_custom_song(song_filepath : String):
-	var f = File.new()
+	var stream = Global.get_audio_stream_from_audio_file(song_filepath)
 	
-	if f.file_exists(song_filepath) and song_filepath.ends_with(".mp3"):
-		
-		f.open(song_filepath, f.READ)
-		
-		var buffer = f.get_buffer(f.get_len())
-		
-		f.close()
-		
-		if !buffer: return ERR_BUG
-		
-		var stream = AudioStreamMP3.new()
-		stream.set_data(buffer)
-		stream.set_loop(true)
-		
-		custom_song.set_stream(stream)
-		custom_song.play()
-		
-		current_song = song_filepath
-		current_song_node = custom_song
+	if !stream: return
 	
-		return OK
+	custom_song.set_stream(stream)
+	custom_song.play()
+	
+	current_song = song_filepath
+	current_song_node = custom_song
+
+	return OK
 	
 	return ERR_FILE_NOT_FOUND
 

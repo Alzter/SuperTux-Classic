@@ -51,6 +51,8 @@ var level_attributes_cache = {}
 
 var is_in_editor = false setget , _get_is_in_editor
 
+var accepted_music_file_types = [".mp3", ".wav", ".ogg"]
+
 #var hovered_objects = []
 
 signal scene_loaded
@@ -550,3 +552,59 @@ func sort_alphabetically(a, b):
 		
 	else:
 		return a < b
+
+# Loads in an audio file (MP3, OGG, or WAV) and converts it into an
+# Audio Stream which can be played by an AudioStreamPlayer node.
+func get_audio_stream_from_audio_file(audio_file_path : String, loop_audio : bool = true):
+	var f = File.new()
+	
+	if f.file_exists(audio_file_path):
+		
+		# Ensure the music file has a valid file extension
+		var file_type = audio_file_path.get_extension()
+		if file_type == "":
+			push_error("Error loading song from file: " + audio_file_path + " - Song file extension not found")
+			return null
+		
+		# Ensure the music file is of a type which is accepted by the game
+		file_type = "." + file_type
+		if !Global.accepted_music_file_types.has(file_type):
+			push_error("Error loading song from file: " + audio_file_path + " - Song file type not supported")
+			return null
+		
+		# Open the song, read the data, and then close it
+		f.open(audio_file_path, f.READ)
+		var buffer = f.get_buffer(f.get_len())
+		f.close()
+		
+		if !buffer:
+			push_error("Error loading song from file: " + audio_file_path + " - Song data (buffer) not found")
+			return null
+		
+		var stream : AudioStream = null
+		
+		match file_type:
+			".mp3":
+				stream = AudioStreamMP3.new()
+				stream.set_data(buffer)
+			".ogg":
+				
+				stream = AudioStreamOGGVorbis.new()
+				stream.set_data(buffer)
+			".wav":
+				stream = AudioStreamSample.new() # Naming inconsistency fixed in Godot 4
+				stream.set_data(buffer)
+			
+			"_":
+				push_error("Error loading song from file: " + audio_file_path + " - Song file type not supported")
+				return null
+		
+		if loop_audio:
+			if [".mp3", ".ogg"].has(file_type):
+				stream.set_loop(true)
+			
+			# WAV audio stream players have slightly different syntax to set looping
+			elif file_type == ".wav":
+				stream.set_loop_mode(1)
+		
+		return stream
