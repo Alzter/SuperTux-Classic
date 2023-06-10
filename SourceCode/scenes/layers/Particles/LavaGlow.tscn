@@ -6,9 +6,10 @@
 blend_mode = 1
 
 [node name="LavaGlow" type="CanvasLayer"]
+layer = 10
 
 [node name="LavaGlowBG" type="CanvasLayer" parent="."]
-layer = -1
+layer = -10
 
 [node name="Control" type="Control" parent="LavaGlowBG"]
 anchor_right = 1.0
@@ -28,7 +29,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 
 [node name="TextureRect" type="TextureRect" parent="Control"]
-modulate = Color( 1, 0, 0, 0.27451 )
+modulate = Color( 1, 0, 0, 0.32549 )
 material = SubResource( 3 )
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -38,7 +39,7 @@ expand = true
 flip_v = true
 
 [node name="TextureRect2" type="TextureRect" parent="Control"]
-modulate = Color( 0.921569, 1, 0, 0.47451 )
+modulate = Color( 0.921569, 1, 0, 0.560784 )
 material = SubResource( 3 )
 anchor_right = 1.0
 anchor_bottom = 1.0
