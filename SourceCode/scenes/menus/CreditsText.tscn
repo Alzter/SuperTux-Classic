@@ -53,6 +53,20 @@ Giannino (Gianclgar) Clemente
 (GDScriptAudioImport code)
 
 
+Level Editor Programming
+
+Alexander (Alzter) Small
+
+
+Level Editor Testing and QA
+
+Carsten (RustyBox) Wirtz
+
+FrostC
+
+Mal0gen
+
+
 Levels Ported by
 
 Alexander (Alzter) Small
@@ -100,7 +114,7 @@ Sound and Music Remastering
 Alexander (Alzter) Small
 
 
-New Music Tracks by:
+New Music Tracks by
 
 Joseph (ZhayTee) Toscano
 (Taken from TuxRacer and Pingus' soundtracks)
@@ -233,6 +247,6 @@ align = 1
 clip_text = true
 
 [node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="RichTextLabel"]
-rect = Rect2( 0, 0, 640, 3550 )
+rect = Rect2( 0, 0, 640, 3800 )
 
 [connection signal="screen_exited" from="RichTextLabel/VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]
