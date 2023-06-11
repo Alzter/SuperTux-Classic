@@ -14,7 +14,7 @@ onready var canvas_layers = [water_sprite, lava_embers, lava_glow, lava_glow_bg]
 
 func _ready():
 	if height == 0 && position.y != 0:
-		height = position.y * Global.TILE_SIZE * -1
+		height = (position.y / Global.TILE_SIZE) * -1
 	
 	ResolutionManager.connect("window_resized", self, "window_resized")
 	_set_height(height)
