@@ -1,4 +1,4 @@
-[gd_scene load_steps=64 format=2]
+[gd_scene load_steps=63 format=2]
 
 [ext_resource path="res://images/player/tux/big/idle.png" type="Texture" id=1]
 [ext_resource path="res://images/player/tux/small/idle.png" type="Texture" id=2]
@@ -35,7 +35,6 @@
 [ext_resource path="res://sounds/objects/brick_smash.wav" type="AudioStream" id=33]
 [ext_resource path="res://sounds/editor/undo.wav" type="AudioStream" id=34]
 [ext_resource path="res://sounds/objects/powerup-bumped.wav" type="AudioStream" id=35]
-[ext_resource path="res://sounds/enemies/squish.wav" type="AudioStream" id=36]
 [ext_resource path="res://sounds/editor/level_saved.wav" type="AudioStream" id=37]
 [ext_resource path="res://sounds/objects/time_over.wav" type="AudioStream" id=38]
 [ext_resource path="res://sounds/editor/eyedrop.wav" type="AudioStream" id=39]
@@ -1002,15 +1001,15 @@ stream = ExtResource( 41 )
 volume_db = -12.0
 pitch_scale = 14.0
 
-[node name="PlaceTile" type="AudioStreamPlayer" parent="SFX"]
-stream = ExtResource( 31 )
-volume_db = -15.0
-pitch_scale = 6.0
-
 [node name="SelectTile" type="AudioStreamPlayer" parent="SFX"]
 stream = ExtResource( 46 )
 volume_db = -25.0
 pitch_scale = 7.0
+
+[node name="PlaceTile" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource( 31 )
+volume_db = -15.0
+pitch_scale = 6.0
 
 [node name="EraseTile" type="AudioStreamPlayer" parent="SFX"]
 stream = ExtResource( 33 )
@@ -1023,8 +1022,9 @@ volume_db = -9.0
 pitch_scale = 2.0
 
 [node name="EraseObject" type="AudioStreamPlayer" parent="SFX"]
-stream = ExtResource( 36 )
-volume_db = -16.0
+stream = ExtResource( 33 )
+volume_db = -18.0
+pitch_scale = 1.5
 
 [node name="Undo" type="AudioStreamPlayer" parent="SFX"]
 stream = ExtResource( 34 )
