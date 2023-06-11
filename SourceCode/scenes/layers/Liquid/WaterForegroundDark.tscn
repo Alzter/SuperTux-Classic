@@ -1,11 +1,13 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://scenes/layers/TileMap.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/layers/Ambience.tscn" type="PackedScene" id=2]
 [ext_resource path="res://sounds/ambience_loops/AmbienceWaves.mp3" type="AudioStream" id=3]
+[ext_resource path="res://scenes/layers/Liquid/Liquid.gd" type="Script" id=4]
 
 [node name="WaterFGDark" type="Node2D"]
 z_as_relative = false
+script = ExtResource( 4 )
 
 [node name="Appearance" type="ParallaxBackground" parent="."]
 layer = 100

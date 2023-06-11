@@ -44,6 +44,7 @@ bus = "Music"
 
 [node name="TuxRacer - Title" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 23 )
+volume_db = -8.0
 bus = "Music"
 
 [node name="TuxRacer - Race1" type="AudioStreamPlayer" parent="."]
