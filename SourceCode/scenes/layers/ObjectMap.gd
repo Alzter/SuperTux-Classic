@@ -78,6 +78,20 @@ var tile_entities = {
 
 var entity_offset = Vector2(16, 16)
 
+func _ready():
+	set_spawn_point()
+
+func set_spawn_point():
+	for id in tile_ids:
+		var tile_name = tile_set.tile_get_name(id)
+		if tile_name == "!!Tux":
+			var spawn = get_used_cells_by_id(id)
+			
+			if spawn.empty(): return
+			spawn = spawn.front()
+			
+			owner.set("spawn_position", spawn)
+
 func tiles_to_objects():
 	if !enabled: return
 	
