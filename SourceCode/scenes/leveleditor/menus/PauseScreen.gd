@@ -66,8 +66,8 @@ func _on_Quit_pressed():
 		emit_signal("save_and_quit")
 	else:
 		par._deferred_enter_edit_mode()
-		menu.hide()
 		par.save_level()
+		_set_paused(false)
 
 func _on_Quit_mouse_entered():
 	button_quit.grab_focus()
