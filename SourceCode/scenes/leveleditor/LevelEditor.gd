@@ -321,7 +321,7 @@ func sort_layers(a, b):
 		return a.name < b.name
 
 func _is_layer_sorted_last(layer_node : Node):
-	return is_object_container(layer_node) or is_objectmap(layer_node)
+	return is_object_container(layer_node)
 
 # ====================================================================================
 # Editor UI
