@@ -305,17 +305,23 @@ func update_layers_panel(level_objects):
 # If both nodes have a Z index, sort them by lowest Z index.
 # Otherwise, sort the nodes by name.
 func sort_layers(a, b):
+	var sort_a_last = _is_layer_sorted_last(a)
+	var sort_b_last = _is_layer_sorted_last(b)
+	
 	# Objectmaps get sorted last in the layers dialog
 	# If one of the nodes (BUT NOT BOTH) are an object map
-	if is_object_container(a) != is_object_container(b):
-		if is_object_container(a): return b > a
-		elif is_object_container(b): return a > b
+	if sort_a_last != sort_b_last:
+		if sort_a_last: return b > a
+		elif sort_b_last: return a > b
 	
 	if a.get("z_index") != null and b.get("z_index") != null:
 		if a.z_index == b.z_index: return a.name < b.name
 		else: return a.z_index < b.z_index
 	else:
 		return a.name < b.name
+
+func _is_layer_sorted_last(layer_node : Node):
+	return is_object_container(layer_node) or is_objectmap(layer_node)
 
 # ====================================================================================
 # Editor UI
