@@ -35,6 +35,8 @@ func _ready():
 	
 	elif material:
 		get_overlay_color(material)
+	
+	_update_multiply_color(multiply_color)
 
 func get_overlay_color(material):
 	var overlay = material.get_shader_param("overlay_color")

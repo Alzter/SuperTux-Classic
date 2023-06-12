@@ -61,7 +61,7 @@ func _state_logic(delta):
 			return
 		"fall":
 			host.apply_gravity(delta)
-			host.jumpy_movement()
+			host.jumpy_movement(true)
 			host.update_sprite()
 			host.check_water_below(delta)
 			return

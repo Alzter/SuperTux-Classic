@@ -90,8 +90,10 @@ func hop_upwards_if_standing_on_another_badguy():
 			return
 		
 
-func jumpy_movement():
-	move_and_slide(velocity, Vector2(0, -1))
+func jumpy_movement(fish = false):
+	if fish:
+		velocity = move_and_slide(velocity, Vector2(0, -1))
+	else: move_and_slide(velocity, Vector2(0, -1))
 	grounded = is_on_floor()
 	touching_wall = is_on_wall()
 
