@@ -389,6 +389,7 @@ func object_clicked(object : Node, click_type : int):
 	emit_signal("object_clicked", object, click_type)
 
 func _get_is_in_editor():
+	if !current_level: return false
 	return current_level != current_scene
 
 # Returns an array of file paths for all scene files found within a folder.
