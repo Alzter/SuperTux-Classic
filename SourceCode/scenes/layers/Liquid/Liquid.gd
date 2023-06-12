@@ -5,12 +5,13 @@ export var height := 0 setget _set_height
 
 var height_in_blocks = null setget, _get_height_in_blocks
 
+onready var hitbox = get_node_or_null("KillBox")
 onready var water_sprite = get_node_or_null("Appearance")
 onready var lava_embers = get_node_or_null("LavaEmbers")
 onready var lava_glow = get_node_or_null("LavaGlow")
 onready var lava_glow_bg = get_node_or_null("LavaGlowBG")
 
-onready var canvas_layers = [water_sprite, lava_embers, lava_glow, lava_glow_bg]
+onready var canvas_layers = [water_sprite, lava_embers]
 
 func _ready():
 	if height == 0 && position.y != 0:
@@ -18,6 +19,8 @@ func _ready():
 	
 	ResolutionManager.connect("window_resized", self, "window_resized")
 	_set_height(height)
+	
+	if hitbox: hitbox.set_monitoring(true)
 
 func _set_height(new_value):
 	height = new_value
