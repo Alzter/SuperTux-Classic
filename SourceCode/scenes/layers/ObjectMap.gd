@@ -21,6 +21,11 @@ onready var tile_ids = tile_set.get_tiles_ids()
 
 export var enabled = true
 
+# Some entites (i.e. Tux) should only be spawned once.
+var one_only_entities = [
+	"!!Tux"
+]
+
 var tile_entities = {
 	# You! :D
 	"!!Tux" : "player/Tux",
@@ -76,17 +81,27 @@ var entity_offset = Vector2(16, 16)
 func tiles_to_objects():
 	if !enabled: return
 	
+	var once_only_entity_list = []
+	
 	# Iterate through all used Tile IDS
 	for id in tile_ids:
 		var tile_name = tile_set.tile_get_name(id)
 		
+		
 		# If the tile has a corresponding entity
 		if tile_entities.has(tile_name):
+			
 			# Load the entity
 			var entity_scene = load("res://scenes/" + tile_entities.get(tile_name) + ".tscn")
 			
 			# Instance it for as many times as it's used
 			for tile in get_used_cells_by_id(id):
+				
+				# Some entites (i.e. Tux) should only be spawned once.
+				if once_only_entity_list.has(tile_name): continue
+				elif one_only_entities.has(tile_name):
+					once_only_entity_list.append(tile_name)
+				
 				var entity = entity_scene.instance()
 				var entity_position = map_to_world(tile) + entity_offset + position
 				
