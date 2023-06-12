@@ -10,7 +10,7 @@
 
 [sub_resource type="ShaderMaterial" id=4]
 shader = ExtResource( 3 )
-shader_param/overlay_color = Color( 0.72549, 0.470588, 0.172549, 1 )
+shader_param/overlay_color = Color( 0.501961, 0.470588, 0.172549, 1 )
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 3 )

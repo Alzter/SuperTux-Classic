@@ -50,8 +50,8 @@ WAVAudioImporter="*res://autoload/WAVAudioImporter.gd"
 
 [display]
 
-window/size/width=640
-window/size/height=480
+window/size/width=1280
+window/size/height=720
 
 [importer_defaults]
 

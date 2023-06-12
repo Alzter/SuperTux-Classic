@@ -5,4 +5,4 @@
 [node name="Background" type="Node2D"]
 z_index = 4096
 script = ExtResource( 1 )
-current_scene = "WaterForeground"
+current_scene = "Water"

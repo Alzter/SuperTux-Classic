@@ -1,11 +1,17 @@
 extends Node2D
 
-export var editor_params = ["height"]
+export var editor_params = ["height", "multiply_color", "overlay_color", "in_front"]
 export var height := 0.0 setget _set_height
+
+onready var multiply_color : Color = modulate setget _update_multiply_color
+var overlay_color : Color = Color(0.5,0.5,0.5,0.5) setget _update_overlay_color
 
 var height_in_blocks = null setget, _get_height_in_blocks
 
+export var in_front = true setget _set_in_front
+
 onready var hitbox = get_node_or_null("KillBox")
+onready var water_layer = get_node_or_null("Appearance/ParallaxLayer")
 onready var water_sprite = get_node_or_null("Appearance")
 onready var lava_embers = get_node_or_null("LavaEmbers")
 onready var lava_glow = get_node_or_null("LavaGlow")
@@ -21,6 +27,22 @@ func _ready():
 	_set_height(height)
 	
 	if hitbox: hitbox.set_monitoring(true)
+	
+	if water_layer:
+		
+		if water_layer.material:
+			get_overlay_color(water_layer.material)
+	
+	elif material:
+		get_overlay_color(material)
+
+func get_overlay_color(material):
+	var overlay = material.get_shader_param("overlay_color")
+	
+	if overlay is Plane:
+		overlay_color = Color(overlay.x, overlay.y, overlay.z, overlay.d)
+	else:
+		overlay_color = overlay
 
 func _set_height(new_value):
 	height = new_value
@@ -44,3 +66,24 @@ func window_resized():
 func _get_height_in_blocks():
 	return height * Global.TILE_SIZE * -1.0
 
+func _update_multiply_color(new_value):
+	multiply_color = new_value
+	modulate = multiply_color
+	if water_layer: water_layer.modulate = multiply_color
+
+func _update_overlay_color(new_value):
+	overlay_color = new_value
+	
+	var overlay_plane = Plane(overlay_color.r, overlay_color.g, overlay_color.b, overlay_color.a)
+	
+	if water_layer:
+		if water_layer.material:
+			water_layer.material.set_shader_param("overlay_color", overlay_plane)
+	elif material:
+		material.set_shader_param("overlay_color", overlay_plane)
+
+func _set_in_front(new_value):
+	in_front = new_value
+	z_index = 300 if in_front else -300
+	if water_sprite:
+		water_sprite.layer = 100 if in_front else -80
