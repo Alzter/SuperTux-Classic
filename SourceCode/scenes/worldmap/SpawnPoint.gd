@@ -7,7 +7,7 @@ func _ready():
 	
 	Global.connect("level_ready", self, "start_level")
 	
-	set_worldmap_spawn_position()
+	set_spawn_position()
 
 # Spawn points are not visible when inside the worldmap, only in the editor
 func start_level():
@@ -15,15 +15,17 @@ func start_level():
 
 func set_position(value : Vector2):
 	position = value
-	set_worldmap_spawn_position()
+	set_spawn_position()
+	
+	print("Set player spawn position")
 
-func set_worldmap_spawn_position():
+func set_spawn_position():
 	var level = Global.current_level
 	if level:
 		if !is_instance_valid(level): return
 		
-		if level.get("worldmap_spawn"):
-			level.worldmap_spawn = get_tile_position()
+		if level.get("spawn_position") != null:
+			level.spawn_position = get_tile_position()
 
 func get_tile_position() -> Vector2:
 	var tile_pos = (global_position / Global.TILE_SIZE)

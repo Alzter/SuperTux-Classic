@@ -28,7 +28,7 @@ var one_only_entities = [
 
 var tile_entities = {
 	# You! :D
-	"!!Tux" : "player/Tux",
+	"!!Tux" : "player/SpawnPoint",
 	
 	# End Goal Igloo
 	"!EndGoalPosts" : "objects/EndGoalPosts",

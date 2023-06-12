@@ -18,8 +18,10 @@
 extends Node2D
 
 var level_intro = preload("res://scenes/menus/LevelIntroduction.tscn")
-var player_node = preload("res://scenes/player/Tux.tscn")
-var worldmap_player_node = preload("res://scenes/worldmap/Player.tscn")
+
+var player_object = preload("res://scenes/player/Tux.tscn")
+var worldmap_player_object = preload("res://scenes/worldmap/Player.tscn")
+
 var pause_menu = preload("res://scenes/menus/PauseScreen.tscn")
 var is_autoscrolling = false
 
@@ -35,8 +37,7 @@ export var time = 300
 export var gravity = 10
 export var autoscroll_speed = 0.0
 export var starting_powerup = 0
-export var worldmap_spawn = Vector2()
-export var worldmap_player_object : PackedScene
+export var spawn_position = Vector2()
 export var level_height = 15
 
 # If the level uses custom music, this variable specifies
@@ -70,17 +71,23 @@ func activate_objectmaps():
 
 func start_level(in_editor = false):
 	activate_objectmaps()
+	
+	yield(get_tree(), "idle_frame")
+	
+	#print(spawn_position)
+	
 	ResolutionManager.connect("window_resized", self, "window_resized")
 	Scoreboard.show(!in_editor)
 	WorldmapManager.is_level_worldmap = is_worldmap
+	
+	if is_worldmap:
+		_spawn_worldmap_player(spawn_position)
+	else: _spawn_player()
 	
 	if !is_worldmap:
 		_set_level_gravity()
 	else:
 		uses_timer = false
-		
-		if worldmap_player_object != null:
-			_create_worldmap_player(worldmap_spawn, worldmap_player_object)
 	
 	# Set the player's starting powerup
 	if !in_editor and Scoreboard.player_initial_state < starting_powerup:
@@ -152,10 +159,8 @@ func _level_title_card():
 	# Delete the player from the level
 	# (we're going to display the title card, so we don't want Tux
 	# to be able to move or die during this!)
-	var player_pos = Vector2.ZERO
 	if Global.player == null:
 		yield(Global, "player_loaded")
-		player_pos = Global.player.global_position
 	Global.player.queue_free()
 	
 	# Instantiate (spawn) the level title card
@@ -168,10 +173,8 @@ func _level_title_card():
 	yield(title, "tree_exited")
 	
 	# Then we re-add the player into the level
-	var player = player_node.instance()
-	player.global_position = player_pos
-	add_child(player)
-	player.set_owner(self)
+	
+	_spawn_player()
 	
 	Global.emit_signal("level_ready")
 	
@@ -183,13 +186,22 @@ func _load_pause_menu(in_editor = false):
 	pause_screen_instance.in_editor = in_editor
 	Global.current_level.add_child(pause_screen_instance)
 
-func _create_worldmap_player(position : Vector2, player_object : PackedScene):
-	var player_position = position
+func _spawn_player(tile_position : Vector2 = spawn_position):
+	var player = player_object.instance()
+	var spawn_pos = map_to_world_position(tile_position)
+	
+	add_child(player)
+	player.set_owner(self)
+	player.set_global_position(spawn_pos)
+
+func _spawn_worldmap_player(tile_position : Vector2):
+	var player_position = tile_position
+	
 	if WorldmapManager.worldmap_player_position != null:
 		player_position = WorldmapManager.worldmap_player_position
 	
-	var player = worldmap_player_node.instance()
-	player.global_position = player_position * 32 + Vector2(16,16)
+	var player = worldmap_player_object.instance()
+	player.global_position = map_to_world_position(player_position)
 	
 	if WorldmapManager.player_stop_direction != null:
 		player.stop_direction = WorldmapManager.player_stop_direction
@@ -273,3 +285,6 @@ func play_music(continue_music : bool = false):
 		Music.continue(music, custom_music_loop_offset)
 	else:
 		Music.play(music, 0.0, custom_music_loop_offset)
+
+func map_to_world_position(position : Vector2):
+	return position * Global.TILE_SIZE + Vector2.ONE * Global.TILE_SIZE * 0.5

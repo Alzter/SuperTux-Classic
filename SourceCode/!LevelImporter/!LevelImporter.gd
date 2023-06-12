@@ -177,7 +177,7 @@ func _import_level(is_worldmap = false):
 		var player_x = int(_get_section_of_string(level_data, "(start_pos_x ", ")"))
 		var player_y = int(_get_section_of_string(level_data, "(start_pos_y ", ")"))
 		
-		level.worldmap_spawn = Vector2(player_x, player_y)
+		level.spawn_position = Vector2(player_x, player_y)
 		level.is_worldmap = true
 	else:
 		tile_importer.import_tilemap(tiles_interactive, level_intact, objectmap, expand_interactive_tilemap, level_water)
