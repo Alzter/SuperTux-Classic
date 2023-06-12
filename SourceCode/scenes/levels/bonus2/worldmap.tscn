@@ -1,9 +1,8 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://scenes/master/Level.gd" type="Script" id=1]
 [ext_resource path="res://scenes/worldmap/LevelDotContainer.gd" type="Script" id=2]
 [ext_resource path="res://scenes/worldmap/LevelDot.tscn" type="PackedScene" id=3]
-[ext_resource path="res://scenes/worldmap/Player.tscn" type="PackedScene" id=4]
 [ext_resource path="res://scenes/layers/TileMap.tscn" type="PackedScene" id=5]
 [ext_resource path="res://scenes/tilesets/WorldmapTiles.tres" type="TileSet" id=6]
 
@@ -11,8 +10,7 @@
 script = ExtResource( 1 )
 is_worldmap = true
 music = "Salcon"
-worldmap_spawn = Vector2( 22, 17 )
-worldmap_player_object = ExtResource( 4 )
+spawn_position = Vector2( 22, 17 )
 
 [node name="Background" parent="." instance=ExtResource( 5 )]
 z_index = -25

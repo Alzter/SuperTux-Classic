@@ -10,6 +10,7 @@
 script = ExtResource( 4 )
 is_worldmap = true
 music = "Salcon"
+spawn_position = Vector2( 4, 5 )
 
 [node name="Objects" type="Node2D" parent="."]
 script = ExtResource( 5 )
