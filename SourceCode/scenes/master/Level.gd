@@ -187,8 +187,10 @@ func _load_pause_menu(in_editor = false):
 	Global.current_level.add_child(pause_screen_instance)
 
 func _spawn_player(tile_position : Vector2 = spawn_position):
+	var spawn_pos = map_to_world_position(spawn_position)
+	if Global.spawn_position != null: spawn_pos = Global.spawn_position
+	
 	var player = player_object.instance()
-	var spawn_pos = map_to_world_position(tile_position)
 	
 	add_child(player)
 	player.set_owner(self)
