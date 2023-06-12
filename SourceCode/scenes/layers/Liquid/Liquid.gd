@@ -1,7 +1,7 @@
 extends Node2D
 
 export var editor_params = ["height"]
-export var height := 0 setget _set_height
+export var height := 0.0 setget _set_height
 
 var height_in_blocks = null setget, _get_height_in_blocks
 
@@ -15,7 +15,7 @@ onready var canvas_layers = [water_sprite, lava_embers]
 
 func _ready():
 	if height == 0 && position.y != 0:
-		height = (position.y / Global.TILE_SIZE) * -1
+		height = (float(position.y) / float(Global.TILE_SIZE)) * -1.0
 	
 	ResolutionManager.connect("window_resized", self, "window_resized")
 	_set_height(height)
@@ -42,5 +42,5 @@ func window_resized():
 	_set_height(height)
 
 func _get_height_in_blocks():
-	return height * Global.TILE_SIZE * -1
+	return height * Global.TILE_SIZE * -1.0
 

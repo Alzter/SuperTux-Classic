@@ -288,7 +288,7 @@ func knock_out():
 	fall_off_screen()
 
 func fall_off_screen():
-	z_index = 999
+	#z_index = 999
 	face_player()
 	sfx.play("GruntDefeated")
 	sfx.play("GruntDefeated2")

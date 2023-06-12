@@ -52,6 +52,7 @@ offset = Vector2( 0, 0 )
 transform = Transform2D( 1, 0, 0, 1, 0, 0 )
 
 [node name="KillBox" type="Area2D" parent="."]
+visible = false
 position = Vector2( 36864, 512 )
 monitoring = false
 script = ExtResource( 2 )

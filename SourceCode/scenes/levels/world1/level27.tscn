@@ -248,7 +248,7 @@ rect_min_size = Vector2( 99999, 99999 )
 color = Color( 0, 0, 0, 0 )
 
 [node name="LavaForeground" parent="." instance=ExtResource( 11 )]
-position = Vector2( -2048, 128 )
+position = Vector2( -2048, -80 )
 
 [node name="CastleBGRed" parent="." instance=ExtResource( 3 )]
 

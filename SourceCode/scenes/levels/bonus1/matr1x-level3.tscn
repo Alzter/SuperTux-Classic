@@ -58,4 +58,4 @@ pitch_scale = 0.7
 layer = -100
 
 [node name="LavaForeground" parent="." instance=ExtResource( 7 )]
-position = Vector2( 0, 128 )
+position = Vector2( 0, -32 )
