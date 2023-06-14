@@ -13,13 +13,14 @@ onready var tux_sprite = get_node("TuxSprite")
 
 func _input(event):
 	if Global.is_popup_visible(): return
-	if owner.mouse_over_ui or !owner.edit_mode or owner.is_paused: return
-	
+	if !owner.edit_mode or owner.is_paused: return
 	
 	# If we press the spacebar, enable camera drag mode.
 	# This allows the camera to be moved by moving the mouse.
 	if event.is_action("editor_move_camera"):
-		dragging_camera = event.is_action_pressed("editor_move_camera", true)
+		var drag_pressed = event.is_action_pressed("editor_move_camera", true)
+		if drag_pressed and owner.mouse_over_ui: return
+		dragging_camera = drag_pressed
 		emit_signal("set_camera_drag", dragging_camera)
 		if !dragging_camera: mouse_motion = Vector2.ZERO
 	
