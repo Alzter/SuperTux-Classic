@@ -31,6 +31,8 @@ var level_boundaries = Rect2()
 
 var rect_selection = Rect2()
 
+var mouse_over_ui = false
+
 func _ready():
 	set_process(true)
 
@@ -44,8 +46,7 @@ func _process(delta):
 	
 	tile_selection.hide()
 	
-	if !placing_tiles:
-		if owner.mouse_over_ui: return
+	if !placing_tiles and mouse_over_ui: return
 	
 	if owner.can_place_tiles:
 		
@@ -96,6 +97,9 @@ func update_tile_selected_sprite():
 	tile_selection.position += selected_tilemap.cell_size * 0.5
 
 func _input(event):
+	if event is InputEventMouseMotion or event is InputEventMouseButton:
+		mouse_over_ui = owner.mouse_over_ui
+	
 	if selected_tilemap:
 		if event is InputEventMouseButton:
 			if event.pressed and owner.mouse_over_ui: return

@@ -6,6 +6,8 @@ var dragged_object = null
 
 var can_place_objects = true
 
+var mouse_over_ui = false
+
 onready var tile_selection = $SelectedTile
 onready var tile_preview = $SelectedTile/TilePreview
 
@@ -20,7 +22,7 @@ func _process(delta):
 	
 	if object_container:
 		
-		if owner.can_place_tiles and !owner.mouse_over_ui:
+		if owner.can_place_tiles and !mouse_over_ui:
 			var selected_tile_position = get_mouse_position(true)
 			tile_selection.show()
 			
@@ -30,6 +32,9 @@ func _process(delta):
 			tile_selection.set_position(selected_tile_position)
 
 func _input(event):
+	if event is InputEventMouseMotion or event is InputEventMouseButton:
+		mouse_over_ui = owner.mouse_over_ui
+	
 	if event is InputEventMouseButton:
 		
 		# Let go of dragged objects when mouse released
