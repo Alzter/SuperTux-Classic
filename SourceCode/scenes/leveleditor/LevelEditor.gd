@@ -119,8 +119,6 @@ func _ready():
 	pause_menu.connect("pause_changed", self, "pause_toggled")
 	pause_menu.connect("save_and_quit", self, "save_and_quit")
 	
-	editor_camera.connect("set_camera_drag", self, "set_camera_drag")
-	
 	connect("edit_objects_toggled", toggle_edit_button, "update")
 	
 	Global.connect("object_clicked", self, "object_clicked")
@@ -467,9 +465,6 @@ func is_object_container(node):
 
 func is_objectmap(node):
 	return node is TileMap and node.is_in_group("objectmaps")
-
-func set_camera_drag(is_dragging = true):
-	pass
 
 func update_selected_tile(selected_tile_id : int):
 	self.eraser_enabled = false
