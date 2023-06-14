@@ -2,14 +2,13 @@ extends Camera2D
 
 export var move_speed = 16.0
 export var mouse_drag_strength = 1.0
-export var zoom_speed = 0.1
+export var mouse_zoom_speed = 0.1
 
 export var min_zoom = (1.0 / 4.0) # 400% zoom in
-export var max_zoom = (1.0 * 2.0) # 200% zoom out
+export var max_zoom = (1.0 * 1.5) # 66% zoom out
 
-export var zoom_sensitivity = 10 # Minimum number of pixels needed to start a zoom
-
-var is_zooming = false
+export var touch_zoom_speed = 0.0001
+export var touch_zoom_sensitivity = 10 # Minimum number of pixels needed to start a zoom
 
 var mouse_motion = Vector2.ZERO
 var mouse_dragging_camera = false
@@ -36,7 +35,7 @@ func set_zoom(new_zoom : Vector2):
 
 # Touchscreen can drag/zoom camera using two fingers.
 # Code credit: https://kidscancode.org/godot_recipes/3.x/2d/touchscreen_camera/index.html
-func _unhandled_input(event):
+func handle_touchscreen_input(event : InputEvent):
 	if event is InputEventScreenTouch:
 		if event.pressed:
 			self.touch_events[event.index] = event
@@ -50,22 +49,31 @@ func _unhandled_input(event):
 			
 			# Calculate the drag motion of the two-fingure drag gesture
 			# by getting the movement (in px) of each finger and averaging them.
-			var drag_relative_1 = touch_events[0].relative.rotated(rotation)
-			var drag_relative_2 = touch_events[1].relative.rotated(rotation)
+			var drag_relative_1 = touch_events[0].relative
+			var drag_relative_2 = touch_events[1].relative
 			
 			# Use this to move the camera.
-			var touch_drag_motion = (drag_relative_1 + drag_relative_2) * 0.5
-			position += touch_drag_motion / self.cam_zoom
+			var touch_drag_motion = Vector2(
+				(drag_relative_1.x + drag_relative_2.x) * -0.5,
+				(drag_relative_1.y + drag_relative_2.y) * -0.5
+			)
 			
-			# If we're using a pinch gesture,
+			position += touch_drag_motion
+			
+			# If we're using a pinch gesture, zoom the camera
 			var drag_distance = touch_events[0].position.distance_to(touch_events[1].position)
 			
-			var can_drag_camera = abs(drag_distance - last_drag_distance) > zoom_sensitivity
+			var zoom_motion = drag_distance - last_drag_distance
+			
+			var can_drag_camera = abs(zoom_motion) > touch_zoom_sensitivity
 			
 			if can_drag_camera:
-				var zoom_factor = (1 + zoom_speed) if drag_distance < last_drag_distance else (1 - zoom_speed)
+				var zoom_amount = Vector2.ONE * zoom_motion * -1
 				
-				var new_zoom = Vector2.ONE * (zoom.x * zoom_factor)
+				zoom_amount *= touch_zoom_speed
+				
+				var new_zoom = zoom + zoom_amount
+				
 				set_zoom(new_zoom)
 				
 				last_drag_distance = drag_distance
@@ -73,6 +81,8 @@ func _unhandled_input(event):
 func _input(event):
 	if Global.is_popup_visible(): return
 	if !owner.edit_mode or owner.is_paused: return
+	
+	handle_touchscreen_input(event)
 	
 	# If we press the spacebar, enable camera drag mode.
 	# This allows the camera to be moved by moving the mouse.
@@ -86,13 +96,13 @@ func _input(event):
 	if event.is_action_pressed("editor_zoom_in") or event.is_action_pressed("editor_zoom_out"):
 		var zoom_factor = 1 if event.is_action_pressed("editor_zoom_in") else -1
 		
-		var new_zoom = zoom - Vector2.ONE * zoom_speed * zoom_factor
-		set_zoom(new_zoom) 
+		var new_zoom = zoom - Vector2.ONE * mouse_zoom_speed * zoom_factor
+		set_zoom(new_zoom)
 		
 		var mouse_pos = get_viewport().get_mouse_position()
 		var mouse_pos_relative_to_center_of_screen = mouse_pos - ResolutionManager.window_resolution * Vector2(0.5,0.5)
 		
-		position += (mouse_pos_relative_to_center_of_screen * zoom_factor) * zoom_speed
+		position += (mouse_pos_relative_to_center_of_screen * zoom_factor) * mouse_zoom_speed
 	
 	# If a mouse movement is detected and we are in camera drag mode,
 	# move the camera by the mouse's relative movement * the specified mouse drag strength
