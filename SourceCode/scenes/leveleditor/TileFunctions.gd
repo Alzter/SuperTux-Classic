@@ -25,8 +25,6 @@ var using_eyedropper = false
 
 var rect_fill_origin = Vector2()
 
-var can_place_tiles = true
-
 var level_boundaries = Rect2()
 
 var rect_selection = Rect2()
@@ -46,7 +44,7 @@ func _process(delta):
 	
 	tile_selection.hide()
 	
-	if !can_place_tiles: return
+	if !owner.can_place_tiles: return
 	
 	if !placing_tiles and mouse_over_ui: return
 	
