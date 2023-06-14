@@ -174,6 +174,7 @@ func is_tile_position_legal(tile_position : Vector2):
 
 func stop_placing_tiles():
 	placing_tiles = false
+	placing_rectangle_fill = false
 
 # =================================================================================
 # DRAW GRID
