@@ -13,6 +13,9 @@ var user_worlds: Dictionary = {}
 var current_world = null
 var current_level = null
 
+# If true, the target device supports opening folders and modifying files for user worlds.
+var custom_content_supported = null setget , _is_custom_content_supported
+
 func reload_user_worlds():
 	unload_user_worlds()
 	load_user_worlds()
@@ -404,3 +407,6 @@ func open_user_world_custom_assets_folder(subfolder : String = "", world_folder 
 	folder_to_open = Global.globalise_path(folder_to_open)
 	
 	OS.shell_open(folder_to_open)
+
+func _is_custom_content_supported():
+	return !OS.has_feature("mobile") and !OS.has_feature("HTML5")

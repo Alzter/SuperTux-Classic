@@ -3,6 +3,8 @@ extends PopupDialog
 onready var button_create_level = $VBoxContainer/PanelContainer/ButtonList/HSplitContainer/CreateLevel
 onready var button_open_level = $VBoxContainer/PanelContainer/ButtonList/HSplitContainer/OpenLevel
 onready var button_edit_world = $VBoxContainer/PanelContainer/ButtonList/EditWorldProperties
+onready var button_world_folder = $VBoxContainer/PanelContainer/ButtonList/HSplitContainer2/OpenWorldFolder
+
 onready var button_back = $VBoxContainer/Back
 onready var label_world_name = $VBoxContainer/WorldName
 
@@ -19,6 +21,9 @@ func _on_WorldMenu_about_to_show():
 		return
 	
 	get_world_attributes()
+	
+	if !UserLevels.custom_content_supported:
+		button_world_folder.disabled = true
 	
 	button_open_level.grab_focus()
 

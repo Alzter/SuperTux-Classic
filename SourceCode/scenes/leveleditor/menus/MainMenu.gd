@@ -21,6 +21,9 @@ func _ready():
 	Music.stop_all()
 	button_world_create.grab_focus()
 	
+	if !UserLevels.custom_content_supported:
+		button_worlds_folder_open.disabled = true
+	
 	menu_create_world.connect("show_world_menu", self, "open_world_menu")
 	
 	Global.connect("open_world_menu", self, "open_world_menu")
