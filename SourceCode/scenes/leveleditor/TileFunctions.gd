@@ -113,9 +113,8 @@ func _input(event):
 				
 				if can_rect_fill and placing_tiles:
 					var rect_start = get_selected_tile()
-					if is_tile_position_legal(rect_start):
-						rect_fill_origin = rect_start
-						placing_rectangle_fill = true
+					rect_fill_origin = rect_start
+					placing_rectangle_fill = true
 			else:
 				if event.pressed:
 					using_eyedropper = true
