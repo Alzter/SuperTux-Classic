@@ -16,7 +16,7 @@ title = "Test Title"
 author = "Alzter"
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2( -3000, 240 )
+position = Vector2( -1280, 240 )
 current = true
 limit_top = 0
 limit_bottom = 480
@@ -50,7 +50,7 @@ custom_colors/default_color = Color( 1, 1, 0, 1 )
 custom_fonts/normal_font = ExtResource( 4 )
 bbcode_enabled = true
 bbcode_text = "[center][wave]Welcome to Antarctica"
-text = "[center][wave]Welcome to Antarctica"
+text = "Welcome to Antarctica"
 fit_content_height = true
 scroll_active = false
 

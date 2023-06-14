@@ -6,6 +6,8 @@
 modulate = Color( 1, 1, 1, 0.501961 )
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_left = -2560.0
+margin_right = -2560.0
 
 [node name="TextureRect3" type="TextureRect" parent="."]
 modulate = Color( 0, 0, 0, 1 )
