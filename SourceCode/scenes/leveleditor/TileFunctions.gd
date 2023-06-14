@@ -98,11 +98,11 @@ func update_tile_selected_sprite():
 
 func _input(event):
 	if event is InputEventMouseMotion or event is InputEventMouseButton:
-		mouse_over_ui = owner.mouse_over_ui
+		mouse_over_ui = owner.mouse_over_ui or Global.is_popup_visible()
 	
 	if selected_tilemap:
 		if event is InputEventMouseButton:
-			if event.pressed and owner.mouse_over_ui: return
+			if event.pressed and mouse_over_ui: return
 			
 			var about_to_use_eyedropper = event.button_index == BUTTON_MIDDLE or Input.is_action_pressed("editor_eyedrop_tool") or owner.eyedropper_enabled
 			

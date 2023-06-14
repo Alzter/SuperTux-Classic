@@ -33,7 +33,7 @@ func _process(delta):
 
 func _input(event):
 	if event is InputEventMouseMotion or event is InputEventMouseButton:
-		mouse_over_ui = owner.mouse_over_ui
+		mouse_over_ui = owner.mouse_over_ui or Global.is_popup_visible()
 	
 	if event is InputEventMouseButton:
 		
@@ -49,7 +49,7 @@ func _input(event):
 		
 		if event.pressed and event.button_index == BUTTON_LEFT or event.button_index == BUTTON_RIGHT:
 		
-			if can_place_objects and !owner.mouse_over_ui and !dragged_object and object_container:
+			if can_place_objects and !mouse_over_ui and !dragged_object and object_container:
 				
 				var is_erasing = event.button_index == BUTTON_RIGHT or owner.eraser_enabled
 				
