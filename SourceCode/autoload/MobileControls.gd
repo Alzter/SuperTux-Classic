@@ -171,8 +171,6 @@ func _on_ActionButton_released():
 
 func _on_PauseButton_pressed():
 	Input.action_release("ui_cancel")
-	
-	$SFX/AudioStreamPlayer.play()
 	var a = InputEventAction.new()
 	a.action = "ui_cancel"
 	a.pressed = true
