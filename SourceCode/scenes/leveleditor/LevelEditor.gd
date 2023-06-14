@@ -178,6 +178,7 @@ func _deferred_enter_edit_mode():
 				Global.player.can_die = false
 	
 	editor_camera.current = true
+	self.edit_objects_enabled = false
 	
 	if !level: return
 	
@@ -307,16 +308,13 @@ func update_layers_panel(level_objects):
 # If both nodes have a Z index, sort them by lowest Z index.
 # Otherwise, sort the nodes by name.
 func sort_layers(a, b):
-	var sort_a_last = _is_layer_sorted_last(a)
-	var sort_b_last = _is_layer_sorted_last(b)
+	var a_priority = a.get("z_index")
+	var b_priority = b.get("z_index")
 	
-	# Objectmaps get sorted last in the layers dialog
-	# If one of the nodes (BUT NOT BOTH) are an object map
-	if sort_a_last != sort_b_last:
-		if sort_a_last: return b > a
-		elif sort_b_last: return a > b
+	if _is_layer_sorted_last(a): a_priority = 99999
+	if _is_layer_sorted_last(b): b_priority = 99999
 	
-	if a.get("z_index") != null and b.get("z_index") != null:
+	if a_priority != null and b_priority != null:
 		if a.z_index == b.z_index: return a.name < b.name
 		else: return a.z_index < b.z_index
 	else:
