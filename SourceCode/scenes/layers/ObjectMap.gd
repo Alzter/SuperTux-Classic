@@ -28,7 +28,7 @@ var one_only_entities = [
 
 var tile_entities = {
 	# You! :D
-	"!!Tux" : "player/SpawnPoint",
+	#"!!Tux" : "player/SpawnPoint",
 	
 	# End Goal Igloo
 	"!EndGoalPosts" : "objects/EndGoalPosts",
@@ -94,6 +94,8 @@ func set_spawn_point():
 
 func tiles_to_objects():
 	if !enabled: return
+	
+	set_spawn_point()
 	
 	var once_only_entity_list = []
 	
