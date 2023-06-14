@@ -93,9 +93,9 @@ func _input(event):
 func _physics_process(delta):
 	if !is_using_mobile: return
 	
-	var enabled = (Scoreboard.score_visible or Global.is_in_editor) and !get_tree().paused
+	var edit_mode_enabled = !Scoreboard.score_visible and Global.is_in_editor and !Global.is_popup_visible()
 	
-	var edit_mode_enabled = !Scoreboard.score_visible
+	var enabled = (Scoreboard.score_visible or edit_mode_enabled) and !get_tree().paused
 	
 	# Hide run and action buttons when not in editor.
 	scale_buttons.visible = !edit_mode_enabled
