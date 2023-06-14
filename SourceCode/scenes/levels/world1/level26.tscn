@@ -46,6 +46,5 @@ tile_data = PoolIntArray( 3, 5, 0, 131274, 536870924, 0, 196633, 536870920, 0, 1
 [node name="LightSnowParticles" parent="." instance=ExtResource( 6 )]
 
 [node name="LavaForeground" parent="." instance=ExtResource( 8 )]
-height = 2.5
 
 [node name="Ambience" parent="." instance=ExtResource( 7 )]

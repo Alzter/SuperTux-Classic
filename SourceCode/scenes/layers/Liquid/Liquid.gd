@@ -1,7 +1,7 @@
 extends Node2D
 
 export var editor_params = ["height", "multiply_color", "overlay_color", "in_front"]
-export var height := 1.5 setget _set_height
+export var height := 2.5 setget _set_height
 
 onready var multiply_color : Color = modulate setget _update_multiply_color
 var overlay_color : Color = Color(0.5,0.5,0.5,0.5) setget _update_overlay_color
