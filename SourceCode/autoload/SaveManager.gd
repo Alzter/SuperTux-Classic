@@ -20,13 +20,18 @@ extends Node
 const SAVE_DIR = "user://savefiles/"
 const OPTIONS_DIR = "user://options/"
 const OPTIONS_FILE = "user://options/options.dat"
-const CONTROLS_FILE = "user://options/controls.dat"
+
+# REMOVE AROUND A MONTH AFTER MERGED. ONLY USE THE NEW FILE PATH
+const CONTROLS_LEGACY_FILE = "user://options/controls.dat"
+const CONTROLS_FILE = "user://options/ctrl.json"
 
 const save_file_1 = SAVE_DIR + "file1/"
 const save_file_2 = SAVE_DIR + "file2/"
 const save_file_3 = SAVE_DIR + "file3/"
 const save_file_4 = SAVE_DIR + "file4/"
 const save_file_5 = SAVE_DIR + "file5/"
+
+enum CONTROLS_FILE_TYPE {None,Legacy,Current}
 
 var current_save_directory = save_file_1
 
@@ -79,6 +84,15 @@ func save_options_data(optionsData : Dictionary):
 func does_options_data_exist() -> bool:
 	var file = File.new()
 	return file.file_exists(OPTIONS_FILE)
+
+func does_control_data_exist() -> int:
+	var file = File.new()
+	if file.file_exists(CONTROLS_FILE):
+		return CONTROLS_FILE_TYPE.Current
+	elif file.file_exists(CONTROLS_LEGACY_FILE):
+		return CONTROLS_FILE_TYPE.Legacy
+	else:
+		return CONTROLS_FILE_TYPE.None
 
 func new_game(initial_level, worldmap_level = null):
 	WorldmapManager.reset()
@@ -202,46 +216,133 @@ func delete_save_file(save_path = current_save_directory):
 func save_current_controls():
 	print("Saving current player controls")
 	
-	# ENCAPSULATION:
-	# Store the list of controls as scancodes in an array.
-	var controls = []
+	var controls = {"Key": [], "Gamepad": []}
 	for control in Global.controls:
-		var input : InputEventKey = InputMap.get_action_list(control)[0]
+		var input_list = InputMap.get_action_list(control)
+		var input_key: InputEventKey = null
+		var input_button: InputEventJoypadButton = null
 		
-		if not input is InputEventKey:
-			push_error("Error saving controls: Cannot convert InputEvent " + input.as_text() + " into a scancode because it is not of type InputEventKey")
+		for i in input_list:
+			if i is InputEventKey:
+				input_key = i
+			elif i is InputEventJoypadButton:
+				input_button = i
 		
-		var scancode = input.get_scancode()
-		controls.append(scancode)
+		if input_key == null:
+			push_error("Error saving controls: Cannot convert null InputEvent into a scancode because it is not of type InputEventKey")
+			continue
+		if input_button == null:
+			push_error("Error saving controls: Cannot convert null InputEvent into a button_index because it is not of type InputEventJoypadButton")
+			continue
+		
+		var scancode = input_key.get_scancode()
+		controls["Key"].append(scancode)
+		controls["Gamepad"].append(input_button.button_index)
 	
 	# Save this array of scancodes to the controls file.
 	var file = File.new()
 	var controls_file = file.open(CONTROLS_FILE, File.WRITE)
 	if controls_file == OK:
-		file.store_var(controls)
+		file.store_string(to_json(controls))
 		file.close()
 	else:
 		push_error("Failure saving controls file")
 	
 	yield(get_tree(), "idle_frame")
 
-
 func load_current_controls(load_path = CONTROLS_FILE):
 	var file = File.new()
-	var controls: Array
-	if file.file_exists(load_path):
+	var type_of_controls_file: int = does_control_data_exist()
+	print_debug("Control File Type: %s" % CONTROLS_FILE_TYPE.keys()[type_of_controls_file])
+	if type_of_controls_file != CONTROLS_FILE_TYPE.None:
 		var load_state = file.open(load_path, file.READ)
-		
 		if load_state == OK:
-			controls = file.get_var()
+			match type_of_controls_file:
+				CONTROLS_FILE_TYPE.Current:
+					var controls: Dictionary = parse_json(file.get_line())
+					_deencapsulate_player_controls(controls)
+				CONTROLS_FILE_TYPE.Legacy:
+					var controls: Array = file.get_var()
+					_deencapsulate_player_controls_legacy(controls)
+					
+					# Remove old file and save to new file
+					var dir = Directory.new()
+					dir.open(OPTIONS_DIR)
+					dir.remove(CONTROLS_LEGACY_FILE)
+					save_current_controls()
+				_:
+					printerr("WHAT DID YOU DO")
 			file.close()
-			
-			_deencapsulate_player_controls(controls)
+	else:
+		print("No controls data exists. The default controls data will be used.")
 
+func _deencapsulate_player_controls(controls: Dictionary):
+	print("Loading saved player controls")
+	for i in range(len(controls["Key"])):
+		var control_action = Global.controls[i]
+		var ctrl_list = InputMap.get_action_list(control_action)
+		var inputeventkey = InputEventKey.new()
+		inputeventkey.scancode = controls["Key"][i]
+		var inputeventpad = InputEventJoypadButton.new()
+		inputeventpad.button_index = controls["Gamepad"][i]
+		
+		var del_inev_key: InputEventKey = null
+		var del_inev_pad: InputEventJoypadButton = null
+		
+		for event_id in range(2):
+			var tmp_inev = ctrl_list[event_id]
+			if tmp_inev is InputEventKey:
+				del_inev_key = tmp_inev
+			elif tmp_inev is InputEventJoypadButton:
+				del_inev_pad = tmp_inev
+		
+		if del_inev_key != null:
+			InputMap.action_erase_event(control_action, del_inev_key)
+			InputMap.action_add_event(control_action, inputeventkey)
+			
+		if del_inev_pad != null:
+			InputMap.action_erase_event(control_action, del_inev_pad)
+			InputMap.action_add_event(control_action, inputeventpad)
+
+	# Make the controls set for moving Tux also be used to navigate the UI
+	var ui_actions = [
+		["ui_left", "move_left"],
+		["ui_right", "move_right"],
+		["ui_up", "move_up"],
+		["ui_down", "duck"]]
+
+	for action in ui_actions:
+		var ui_action = action[0]
+		var move_action = action[1]
+
+		var ctrl_list = InputMap.get_action_list(ui_action)
+
+		var del_inev_key: InputEventKey = null
+		var del_inev_pad: InputEventJoypadButton = null
+
+		for tmp_inev in ctrl_list:
+			if tmp_inev is InputEventKey:
+				del_inev_key = tmp_inev
+			elif tmp_inev is InputEventJoypadButton:
+				del_inev_pad = tmp_inev
+
+		if del_inev_key != null:
+			InputMap.action_erase_event(ui_action, del_inev_key)
+
+		if del_inev_pad != null:
+			InputMap.action_erase_event(ui_action, del_inev_pad)
+
+		var inputs = InputMap.get_action_list(move_action)
+
+		for input in inputs:
+			if input is InputEventKey or input is InputEventJoypadButton:
+				InputMap.action_add_event(ui_action, input)
+
+# NOTE: this is for the legacy controls file. This will not contain InputEventJoypadButtons!
 # De-encapsulates the player controls from an array of scancodes into InputEventKeys
 # and assigns those to the relevant actions.
-func _deencapsulate_player_controls(scancode_array : Array):
-	print("Loading saved player controls")
+func _deencapsulate_player_controls_legacy(scancode_array : Array):
+	print("Loading saved player controls (LEGACY)")
 	var i = 0
 	for scancode in scancode_array:
 		var control_action = Global.controls[i]
@@ -251,8 +352,7 @@ func _deencapsulate_player_controls(scancode_array : Array):
 		
 		var del_inev: InputEvent = null
 		
-		for event_id in range(2):
-			var tmp_inev = ctrl_list[event_id]
+		for tmp_inev in ctrl_list:
 			if tmp_inev is InputEventKey:
 				del_inev = tmp_inev
 				break

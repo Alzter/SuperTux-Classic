@@ -18,6 +18,7 @@
 extends Node
 
 enum POWERUP_STATES {Small, Big, Fire}
+enum REBIND_TYPE {None, Key, Gamepad}
 
 const empty_level_path_string = "[LevelPath]"
 
