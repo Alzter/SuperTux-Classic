@@ -70,7 +70,6 @@ custom_styles/hover = SubResource( 4 )
 custom_styles/pressed = SubResource( 5 )
 custom_styles/focus = SubResource( 2 )
 custom_styles/normal = SubResource( 1 )
-toggle_mode = true
 align = 0
 script = ExtResource( 2 )
 
