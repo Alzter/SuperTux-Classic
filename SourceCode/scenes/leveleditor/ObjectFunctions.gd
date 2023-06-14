@@ -32,6 +32,8 @@ func _process(delta):
 			tile_selection.set_position(selected_tile_position)
 
 func _input(event):
+	if !owner.can_place_tiles: return
+	
 	if event is InputEventMouseMotion or event is InputEventMouseButton:
 		mouse_over_ui = owner.mouse_over_ui or Global.is_popup_visible()
 	

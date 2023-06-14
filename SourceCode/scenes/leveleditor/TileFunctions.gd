@@ -101,6 +101,8 @@ func update_tile_selected_sprite():
 	tile_selection.position += selected_tilemap.cell_size * 0.5
 
 func _input(event):
+	if !owner.can_place_tiles: return
+	
 	if event is InputEventMouseMotion or event is InputEventMouseButton:
 		mouse_over_ui = owner.mouse_over_ui or Global.is_popup_visible()
 	
