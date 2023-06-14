@@ -7,8 +7,8 @@ export var mouse_zoom_speed = 0.1
 export var min_zoom = (1.0 / 4.0) # 400% zoom in
 export var max_zoom = (1.0 * 1.5) # 66% zoom out
 
-export var touch_zoom_speed = 0.0001
-export var touch_zoom_sensitivity = 10 # Minimum number of pixels needed to start a zoom
+export var touch_zoom_speed = 0.05
+export var touch_zoom_sensitivity = 50 # Minimum number of pixels needed to start a zoom
 
 var mouse_motion = Vector2.ZERO
 var mouse_dragging_camera = false
@@ -68,11 +68,11 @@ func handle_touchscreen_input(event : InputEvent):
 			var can_drag_camera = abs(zoom_motion) > touch_zoom_sensitivity
 			
 			if can_drag_camera:
-				var zoom_amount = Vector2.ONE * zoom_motion * -1
 				
-				zoom_amount *= touch_zoom_speed
+				var new_zoom = (1 + touch_zoom_speed) if drag_distance < last_drag_distance else (1 - touch_zoom_speed)
+				new_zoom *= zoom.x
 				
-				var new_zoom = zoom + zoom_amount
+				zoom = Vector2.ONE * new_zoom
 				
 				set_zoom(new_zoom)
 				
