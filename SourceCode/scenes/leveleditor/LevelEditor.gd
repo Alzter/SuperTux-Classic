@@ -340,6 +340,7 @@ func window_resized():
 
 func set_ui_scale(scale):
 	ui_scale.rect_scale = Vector2.ONE * scale
+	
 	ui_scale.anchor_bottom = 1 / scale
 	ui_scale.anchor_right = 1 / scale
 
