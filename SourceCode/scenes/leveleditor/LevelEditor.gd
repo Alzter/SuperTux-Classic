@@ -82,7 +82,8 @@ var edit_mode = true setget _update_edit_mode
 
 var can_place_tiles = true setget , _get_can_place_tiles
 
-var mouse_over_ui = false
+var _mouse_over_ui = false
+var mouse_over_ui = null setget , _get_mouse_over_ui
 
 var layer_types = []
 
@@ -544,11 +545,11 @@ func update_flip_tiles_enabled(new_value):
 
 # When User hovers over the UI
 func _on_MouseDetector_mouse_entered():
-	mouse_over_ui = false
+	_mouse_over_ui = false
 
 # When user stops hovering over the UI
 func _on_MouseDetector_mouse_exited():
-	mouse_over_ui = true
+	_mouse_over_ui = true
 
 func add_layer(layer_name : String, layer_type : String):
 	if !level: return
@@ -616,7 +617,7 @@ func edit_layer(layer_object : Node, object_is_layer = true):
 
 func edit_object(object : Node):
 	if object.get("editor_params") == null: return
-	mouse_over_ui = true
+	_mouse_over_ui = true
 	edit_layer(object, false)
 
 func delete_layer(layer_object : Node):
@@ -696,14 +697,14 @@ func add_undo_state():
 
 func pause_toggled(paused : bool):
 	is_paused = paused
-	if is_paused: mouse_over_ui = true
+	if is_paused: _mouse_over_ui = true
 	if ui_editor: ui_editor.visible = !is_paused and edit_mode
 	
 	tile_functions.stop_placing_tiles()
 
 func object_clicked(object : Node, click_type : int):
 	if !edit_mode: return
-	if mouse_over_ui: return
+	if self.mouse_over_ui: return
 	if !object: return
 	if !is_instance_valid(object): return
 	
@@ -866,3 +867,6 @@ func _on_EditObject_toggled(button_pressed):
 func update_edit_objects_enabled(new_value):
 	edit_objects_enabled = new_value
 	button_edit_objects.pressed = new_value
+
+func _get_mouse_over_ui():
+	return _mouse_over_ui or MobileControls.joystick_active
