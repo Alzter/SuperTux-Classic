@@ -93,8 +93,15 @@ func _input(event):
 func _physics_process(delta):
 	if !is_using_mobile: return
 	
-	var enabled = Scoreboard.score_visible and !get_tree().paused
+	var enabled = (Scoreboard.score_visible or Global.is_in_editor) and !get_tree().paused
+	
+	var edit_mode_enabled = !Scoreboard.score_visible
+	
+	# Hide run and action buttons when not in editor.
+	scale_buttons.visible = !edit_mode_enabled
+	
 	mobile_controls.visible = enabled
+	buttons
 	if !enabled: return
 	
 	if joystick_active and movement_vector.length() > deadzone:
