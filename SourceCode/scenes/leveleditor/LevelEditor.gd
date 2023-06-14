@@ -38,15 +38,15 @@ var eyedropper_enabled = false setget update_eyedropper_enabled
 var flip_tiles_enabled = false setget update_flip_tiles_enabled
 var edit_objects_enabled = false setget update_edit_objects_enabled
 
-onready var tile_buttons = $UI/Scale/EditorUI/TilesPanelOffset/TilesPanel/MouseBlocker/PlacementOptions
+onready var tile_buttons = $UI/Scale/EditorUI/TilesPanelOffset/TilesPanel/PlacementOptionsContainer/PlacementOptions
 onready var button_rect_select = tile_buttons.get_node("RectSelect")
 onready var button_eraser = tile_buttons.get_node("Eraser")
 onready var button_eyedropper = tile_buttons.get_node("EyeDropper")
 onready var button_flip_tiles = tile_buttons.get_node("FlipTiles")
 onready var button_edit_objects = tile_buttons.get_node("EditObject")
 
-onready var button_undo = $UI/Scale/EditorUI/Buttons/UndoButton
-onready var button_level_properties = $UI/Scale/EditorUI/Buttons/LevelProperties
+onready var button_undo = $UI/Scale/EditorUI/ButtonsContainer/Buttons/UndoButton
+onready var button_level_properties = $UI/Scale/EditorUI/ButtonsContainer/Buttons/LevelProperties
 
 onready var level_properties_dialog = $UI/Scale/EditorUI/LevelPropertiesDialog
 
@@ -83,8 +83,9 @@ var edit_mode = true setget _update_edit_mode
 
 var can_place_tiles = true setget , _get_can_place_tiles
 
-var _mouse_over_ui = false
 var mouse_over_ui = null setget , _get_mouse_over_ui
+
+var edit_dialog_visible = false
 
 var layer_types = []
 
@@ -546,14 +547,6 @@ func update_flip_tiles_enabled(new_value):
 	button_flip_tiles.pressed = new_value
 	emit_signal("flip_tiles_toggled", new_value)
 
-# When User hovers over the UI
-func _on_MouseDetector_mouse_entered():
-	_mouse_over_ui = false
-
-# When user stops hovering over the UI
-func _on_MouseDetector_mouse_exited():
-	_mouse_over_ui = true
-
 func add_layer(layer_name : String, layer_type : String):
 	if !level: return
 	if !is_instance_valid(level): return
@@ -620,7 +613,6 @@ func edit_layer(layer_object : Node, object_is_layer = true):
 
 func edit_object(object : Node):
 	if object.get("editor_params") == null: return
-	_mouse_over_ui = true
 	edit_layer(object, false)
 
 func delete_layer(layer_object : Node):
@@ -700,7 +692,6 @@ func add_undo_state():
 
 func pause_toggled(paused : bool):
 	is_paused = paused
-	if is_paused: _mouse_over_ui = true
 	if ui_editor: ui_editor.visible = !is_paused and edit_mode
 	
 	tile_functions.stop_placing_tiles()
@@ -872,5 +863,25 @@ func update_edit_objects_enabled(new_value):
 	button_edit_objects.pressed = new_value
 	emit_signal("edit_objects_toggled")
 
-func _get_mouse_over_ui():
-	return _mouse_over_ui or MobileControls.joystick_active
+func _get_mouse_over_ui(node = ui_scale):
+	if MobileControls.joystick_active: return true
+	if is_paused: return true
+	if edit_layer_dialog.visible: return true
+	
+	if !node: return false
+	if !get("visible") == true: return false
+	
+	for child in node.get_children():
+		if child.get("visible") == true:
+			if _get_mouse_over_ui(child) == true:
+				return true
+	
+	if node is Control:
+		if node.mouse_filter == MOUSE_FILTER_STOP:
+			var hitbox = Rect2(Vector2.ZERO, node.rect_size)
+			if hitbox.has_point(node.get_local_mouse_position()):
+				return true
+	
+	return false
+
+

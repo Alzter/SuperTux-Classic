@@ -294,19 +294,18 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
 
-[node name="MouseDetector" type="Control" parent="UI/Scale/EditorUI"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-mouse_filter = 1
+[node name="ButtonsContainer" type="Control" parent="UI/Scale/EditorUI"]
+margin_right = 278.0
+margin_bottom = 104.0
 
-[node name="Buttons" type="HBoxContainer" parent="UI/Scale/EditorUI"]
+[node name="Buttons" type="HBoxContainer" parent="UI/Scale/EditorUI/ButtonsContainer"]
 margin_left = 16.0
 margin_top = 16.0
 margin_right = 262.0
 margin_bottom = 88.0
 custom_constants/separation = 15
 
-[node name="UndoButton" type="Button" parent="UI/Scale/EditorUI/Buttons"]
+[node name="UndoButton" type="Button" parent="UI/Scale/EditorUI/ButtonsContainer/Buttons"]
 margin_right = 72.0
 margin_bottom = 72.0
 hint_tooltip = "Undo the last action (CTRL+Z)"
@@ -314,7 +313,7 @@ focus_mode = 0
 icon = ExtResource( 26 )
 clip_text = true
 
-[node name="LevelProperties" type="Button" parent="UI/Scale/EditorUI/Buttons"]
+[node name="LevelProperties" type="Button" parent="UI/Scale/EditorUI/ButtonsContainer/Buttons"]
 margin_left = 87.0
 margin_right = 159.0
 margin_bottom = 72.0
@@ -323,7 +322,7 @@ focus_mode = 0
 icon = ExtResource( 27 )
 clip_text = true
 
-[node name="SaveButton" type="Button" parent="UI/Scale/EditorUI/Buttons"]
+[node name="SaveButton" type="Button" parent="UI/Scale/EditorUI/ButtonsContainer/Buttons"]
 margin_left = 174.0
 margin_right = 246.0
 margin_bottom = 72.0
@@ -777,12 +776,12 @@ script = ExtResource( 7 )
 tile_button_scene = ExtResource( 14 )
 object_button_scene = ExtResource( 23 )
 
-[node name="MouseBlocker" type="Control" parent="UI/Scale/EditorUI/TilesPanelOffset/TilesPanel"]
+[node name="PlacementOptionsContainer" type="Control" parent="UI/Scale/EditorUI/TilesPanelOffset/TilesPanel"]
 margin_left = -96.0
 margin_right = 8.0
 margin_bottom = 408.0
 
-[node name="PlacementOptions" type="VBoxContainer" parent="UI/Scale/EditorUI/TilesPanelOffset/TilesPanel/MouseBlocker"]
+[node name="PlacementOptions" type="VBoxContainer" parent="UI/Scale/EditorUI/TilesPanelOffset/TilesPanel/PlacementOptionsContainer"]
 anchor_right = 1.0
 margin_left = 16.0
 margin_top = 16.0
@@ -792,7 +791,7 @@ rect_min_size = Vector2( 64, 0 )
 size_flags_horizontal = 3
 alignment = 1
 
-[node name="Eraser" type="Button" parent="UI/Scale/EditorUI/TilesPanelOffset/TilesPanel/MouseBlocker/PlacementOptions"]
+[node name="Eraser" type="Button" parent="UI/Scale/EditorUI/TilesPanelOffset/TilesPanel/PlacementOptionsContainer/PlacementOptions"]
 margin_right = 72.0
 margin_bottom = 72.0
 hint_tooltip = "Eraser (Press E or Right Click)"
@@ -803,7 +802,7 @@ toggle_mode = true
 icon = ExtResource( 24 )
 clip_text = true
 
-[node name="RectSelect" type="Button" parent="UI/Scale/EditorUI/TilesPanelOffset/TilesPanel/MouseBlocker/PlacementOptions"]
+[node name="RectSelect" type="Button" parent="UI/Scale/EditorUI/TilesPanelOffset/TilesPanel/PlacementOptionsContainer/PlacementOptions"]
 margin_top = 76.0
 margin_right = 72.0
 margin_bottom = 148.0
@@ -815,7 +814,7 @@ toggle_mode = true
 icon = ExtResource( 25 )
 clip_text = true
 
-[node name="EyeDropper" type="Button" parent="UI/Scale/EditorUI/TilesPanelOffset/TilesPanel/MouseBlocker/PlacementOptions"]
+[node name="EyeDropper" type="Button" parent="UI/Scale/EditorUI/TilesPanelOffset/TilesPanel/PlacementOptionsContainer/PlacementOptions"]
 margin_top = 152.0
 margin_right = 72.0
 margin_bottom = 224.0
@@ -827,7 +826,7 @@ toggle_mode = true
 icon = ExtResource( 12 )
 clip_text = true
 
-[node name="FlipTiles" type="Button" parent="UI/Scale/EditorUI/TilesPanelOffset/TilesPanel/MouseBlocker/PlacementOptions"]
+[node name="FlipTiles" type="Button" parent="UI/Scale/EditorUI/TilesPanelOffset/TilesPanel/PlacementOptionsContainer/PlacementOptions"]
 margin_top = 228.0
 margin_right = 72.0
 margin_bottom = 300.0
@@ -840,7 +839,7 @@ enabled_focus_mode = 0
 icon = ExtResource( 30 )
 clip_text = true
 
-[node name="EditObject" type="Button" parent="UI/Scale/EditorUI/TilesPanelOffset/TilesPanel/MouseBlocker/PlacementOptions"]
+[node name="EditObject" type="Button" parent="UI/Scale/EditorUI/TilesPanelOffset/TilesPanel/PlacementOptionsContainer/PlacementOptions"]
 margin_top = 304.0
 margin_right = 72.0
 margin_bottom = 376.0
@@ -1066,11 +1065,9 @@ pitch_scale = 1.4
 stream = ExtResource( 51 )
 volume_db = -8.0
 
-[connection signal="mouse_entered" from="UI/Scale/EditorUI/MouseDetector" to="." method="_on_MouseDetector_mouse_entered"]
-[connection signal="mouse_exited" from="UI/Scale/EditorUI/MouseDetector" to="." method="_on_MouseDetector_mouse_exited"]
-[connection signal="pressed" from="UI/Scale/EditorUI/Buttons/UndoButton" to="." method="_on_UndoButton_pressed"]
-[connection signal="pressed" from="UI/Scale/EditorUI/Buttons/LevelProperties" to="." method="_on_LevelProperties_pressed"]
-[connection signal="pressed" from="UI/Scale/EditorUI/Buttons/SaveButton" to="." method="_on_SaveButton_pressed"]
+[connection signal="pressed" from="UI/Scale/EditorUI/ButtonsContainer/Buttons/UndoButton" to="." method="_on_UndoButton_pressed"]
+[connection signal="pressed" from="UI/Scale/EditorUI/ButtonsContainer/Buttons/LevelProperties" to="." method="_on_LevelProperties_pressed"]
+[connection signal="pressed" from="UI/Scale/EditorUI/ButtonsContainer/Buttons/SaveButton" to="." method="_on_SaveButton_pressed"]
 [connection signal="about_to_show" from="UI/Scale/EditorUI/LevelPropertiesDialog" to="UI/Scale/EditorUI/LevelPropertiesDialog" method="_on_LevelPropertiesDialog_about_to_show"]
 [connection signal="popup_hide" from="UI/Scale/EditorUI/LevelPropertiesDialog" to="." method="_on_LevelPropertiesDialog_popup_hide"]
 [connection signal="text_changed" from="UI/Scale/EditorUI/LevelPropertiesDialog/VBoxContainer/PanelContainer/ScrollContainer/LevelProperties/EditLevelName/Name" to="UI/Scale/EditorUI/LevelPropertiesDialog" method="_on_Name_text_changed"]
@@ -1089,11 +1086,11 @@ volume_db = -8.0
 [connection signal="item_selected" from="UI/Scale/EditorUI/LayersPanelOffset/AddLayerDialog/VBoxContainer/PanelContainer/LayerProperties/TypeEntry/LayerTypes" to="UI/Scale/EditorUI/LayersPanelOffset/AddLayerDialog" method="_on_LayerTypes_item_selected"]
 [connection signal="pressed" from="UI/Scale/EditorUI/LayersPanelOffset/AddLayerDialog/VBoxContainer/AddLayerButton" to="UI/Scale/EditorUI/LayersPanelOffset/AddLayerDialog" method="_on_AddLayerButton_pressed"]
 [connection signal="pressed" from="UI/Scale/EditorUI/TilesPanelOffset/TilesPanel/RetractTab" to="UI/Scale/EditorUI/TilesPanelOffset" method="_on_RetractTab_pressed"]
-[connection signal="toggled" from="UI/Scale/EditorUI/TilesPanelOffset/TilesPanel/MouseBlocker/PlacementOptions/Eraser" to="." method="_on_Eraser_toggled"]
-[connection signal="toggled" from="UI/Scale/EditorUI/TilesPanelOffset/TilesPanel/MouseBlocker/PlacementOptions/RectSelect" to="." method="_on_RectSelect_toggled"]
-[connection signal="toggled" from="UI/Scale/EditorUI/TilesPanelOffset/TilesPanel/MouseBlocker/PlacementOptions/EyeDropper" to="." method="_on_EyeDropper_toggled"]
-[connection signal="toggled" from="UI/Scale/EditorUI/TilesPanelOffset/TilesPanel/MouseBlocker/PlacementOptions/FlipTiles" to="." method="_on_FlipTiles_toggled"]
-[connection signal="toggled" from="UI/Scale/EditorUI/TilesPanelOffset/TilesPanel/MouseBlocker/PlacementOptions/EditObject" to="." method="_on_EditObject_toggled"]
+[connection signal="toggled" from="UI/Scale/EditorUI/TilesPanelOffset/TilesPanel/PlacementOptionsContainer/PlacementOptions/Eraser" to="." method="_on_Eraser_toggled"]
+[connection signal="toggled" from="UI/Scale/EditorUI/TilesPanelOffset/TilesPanel/PlacementOptionsContainer/PlacementOptions/RectSelect" to="." method="_on_RectSelect_toggled"]
+[connection signal="toggled" from="UI/Scale/EditorUI/TilesPanelOffset/TilesPanel/PlacementOptionsContainer/PlacementOptions/EyeDropper" to="." method="_on_EyeDropper_toggled"]
+[connection signal="toggled" from="UI/Scale/EditorUI/TilesPanelOffset/TilesPanel/PlacementOptionsContainer/PlacementOptions/FlipTiles" to="." method="_on_FlipTiles_toggled"]
+[connection signal="toggled" from="UI/Scale/EditorUI/TilesPanelOffset/TilesPanel/PlacementOptionsContainer/PlacementOptions/EditObject" to="." method="_on_EditObject_toggled"]
 [connection signal="about_to_show" from="UI/Scale/EditorUI/EditLayerDialog" to="." method="_on_EditLayerDialog_about_to_show"]
 [connection signal="pressed" from="UI/Scale/EditToggle" to="." method="_on_EditToggle_pressed"]
 [connection signal="about_to_show" from="UI/UnsavedChangesDialog" to="." method="_on_UnsavedChangesDialog_about_to_show"]
