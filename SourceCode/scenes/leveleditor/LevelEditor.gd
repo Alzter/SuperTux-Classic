@@ -864,9 +864,9 @@ func update_edit_objects_enabled(new_value):
 	emit_signal("edit_objects_toggled")
 
 func _get_mouse_over_ui(node = ui_scale):
-	if MobileControls.joystick_active: return true
 	if is_paused: return true
 	if edit_layer_dialog.visible: return true
+	if MobileControls.mouse_over_ui: return true
 	
 	if !node: return false
 	if !get("visible") == true: return false

@@ -17,13 +17,15 @@ var button_just_pressed = false
 var button_just_released = false
 
 onready var mobile_controls = $Control
-onready var joystick_button = $Control/JoystickScale/Joystick/JoystickButton
-onready var joystick_container = $Control/JoystickScale/Joystick
-onready var joystick_stick = $Control/JoystickScale/Joystick/Stick
+onready var joystick_button = $Control/JoystickScale/JoystickArea/Joystick/JoystickButton
+onready var joystick_container = $Control/JoystickScale/JoystickArea/Joystick
+onready var joystick_stick = $Control/JoystickScale/JoystickArea/Joystick/Stick
 onready var scale_joystick = $Control/JoystickScale
 onready var scale_buttons = $Control/ButtonsScale
 
-onready var buttons = [$Control/ButtonsScale/Jump/JumpButton, $Control/ButtonsScale/Action/ActionButton]
+onready var buttons = [$Control/ButtonsScale/ButtonsArea/Jump/JumpButton, $Control/ButtonsScale/ButtonsArea/Action/ActionButton]
+
+var mouse_over_ui = null setget , _get_mouse_over_ui
 
 var cardinal_directions = {
 	Vector2.LEFT : "move_left",
@@ -101,7 +103,7 @@ func _physics_process(delta):
 	scale_buttons.visible = !edit_mode_enabled
 	
 	mobile_controls.visible = enabled
-	buttons
+	
 	if !enabled: return
 	
 	if joystick_active and movement_vector.length() > deadzone:
@@ -182,3 +184,24 @@ func _on_PauseButton_pressed():
 	a.action = "ui_cancel"
 	a.pressed = true
 	Input.parse_input_event(a)
+
+func _get_mouse_over_ui(node = self):
+	if !is_using_mobile: return false
+	
+	if joystick_active: return true
+	
+	if !node: return false
+	if !get("visible") == true: return false
+	
+	for child in node.get_children():
+		if child.get("visible") == true:
+			if _get_mouse_over_ui(child) == true:
+				return true
+	
+	if node is Control:
+		if node.mouse_filter == Control.MOUSE_FILTER_STOP:
+			var hitbox = Rect2(Vector2.ZERO, node.rect_size)
+			if hitbox.has_point(node.get_local_mouse_position()):
+				return true
+	
+	return false
