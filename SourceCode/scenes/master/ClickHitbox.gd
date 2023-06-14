@@ -15,7 +15,7 @@ export var clickable = true # Can the hitbox be clicked?
 onready var object = get_parent()
 
 func _input(event):
-	if event is InputEventMouseMotion:
+	if event is InputEventMouseMotion or event is InputEventMouseButton:
 		var screen_area = _get_hitbox_screen_area()
 		if !screen_area: return
 		
