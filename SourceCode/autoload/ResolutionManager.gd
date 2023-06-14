@@ -42,18 +42,18 @@ func _ready():
 func window_resized():
 	
 	var pixel_size = 1
+	window_size = get_viewport().size
+	var pixel_ratio = Vector2.ONE
 	
 	if enable_zoom_in:
 		var ratio = ratio_size_mobile if OS.has_feature("mobile") else ratio_size
-		
-		window_size = get_viewport().size
-		var pixel_ratio = Vector2.ONE
 		
 		pixel_ratio.x = floor(window_size.x / ratio.x)
 		pixel_ratio.y = floor(window_size.y / ratio.y)
 		
 		pixel_size = min(pixel_ratio.x, pixel_ratio.y)
 		pixel_size = max(pixel_size, 1)
+	
 	screen_shrink = pixel_size
 	
 	window_resolution = window_size / pixel_size
