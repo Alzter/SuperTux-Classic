@@ -40,10 +40,12 @@ func _input(event):
 				if is_instance_valid(dragged_object):
 					dragged_object.position = get_mouse_position(true)
 					dragged_object = null
+			return
 		
-		if can_place_objects and !owner.mouse_over_ui and !dragged_object and object_container:
-			
-			if event.pressed:
+		if event.pressed and event.button_index == BUTTON_LEFT or event.button_index == BUTTON_RIGHT:
+		
+			if can_place_objects and !owner.mouse_over_ui and !dragged_object and object_container:
+				
 				var is_erasing = event.button_index == BUTTON_RIGHT or owner.eraser_enabled
 				
 				if !is_erasing and event.button_index == BUTTON_LEFT:
