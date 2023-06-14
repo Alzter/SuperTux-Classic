@@ -228,7 +228,7 @@ func save_current_controls():
 
 func load_current_controls(load_path = CONTROLS_FILE):
 	var file = File.new()
-	var controls = null
+	var controls: Array
 	if file.file_exists(load_path):
 		var load_state = file.open(load_path, file.READ)
 		
@@ -245,11 +245,21 @@ func _deencapsulate_player_controls(scancode_array : Array):
 	var i = 0
 	for scancode in scancode_array:
 		var control_action = Global.controls[i]
+		var ctrl_list = InputMap.get_action_list(control_action)
 		var inputeventkey = InputEventKey.new()
 		inputeventkey.scancode = scancode
 		
-		InputMap.action_erase_events(control_action)
-		InputMap.action_add_event(control_action, inputeventkey)
+		var del_inev: InputEvent = null
+		
+		for event_id in range(2):
+			var tmp_inev = ctrl_list[event_id]
+			if tmp_inev is InputEventKey:
+				del_inev = tmp_inev
+				break
+		
+		if del_inev != null:
+			InputMap.action_erase_event(control_action, del_inev)
+			InputMap.action_add_event(control_action, inputeventkey)
 		
 		i += 1
 	
@@ -265,13 +275,24 @@ func _deencapsulate_player_controls(scancode_array : Array):
 		var ui_action = action[0]
 		var move_action = action[1]
 		
-		InputMap.action_erase_events(ui_action)
+		var ctrl_list = InputMap.get_action_list(ui_action)
 		
-		var inputs = InputMap.get_action_list(move_action)
+		var del_inev: InputEvent = null
 		
-		for input in inputs:
-			InputMap.action_add_event(ui_action, input)
+		for event_id in range(2):
+			var tmp_inev = ctrl_list[event_id]
+			if tmp_inev is InputEventKey:
+				del_inev = tmp_inev
+				break
 		
+		if del_inev != null:
+			InputMap.action_erase_event(ui_action, del_inev)
+		
+			var inputs = InputMap.get_action_list(move_action)
+			
+			for input in inputs:
+				if input is InputEventKey:
+					InputMap.action_add_event(ui_action, input)
 
 func _list_files_in_directory(path):
 	var files = []

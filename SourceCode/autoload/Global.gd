@@ -319,7 +319,7 @@ func get_level_attribute(level_filepath : String, attribute_to_get : String):
 	# don't waste time and memory loading a level scene.
 	
 	var cached_attribute = _get_cached_level_attribute(level_filepath, attribute_to_get)
-	if cached_attribute: return cached_attribute
+	if cached_attribute != null: return cached_attribute
 	
 	#print("Uncached level attribute " + attribute_to_get)
 	
