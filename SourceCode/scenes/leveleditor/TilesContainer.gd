@@ -87,7 +87,7 @@ func show_object_scenes_in_folder(folder_name : String):
 		
 		var is_object_allowed = true
 		var object = object_resource.instance()
-		print(object.name)
+		#print(object.name)
 		if object.is_in_group("players"): is_object_allowed = false
 		object.queue_free()
 		if !is_object_allowed: continue
