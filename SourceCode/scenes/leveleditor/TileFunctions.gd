@@ -44,7 +44,10 @@ func _process(delta):
 	
 	tile_selection.hide()
 	
-	if owner.can_place_tiles and !owner.mouse_over_ui:
+	if !placing_tiles:
+		if owner.mouse_over_ui: return
+	
+	if owner.can_place_tiles:
 		
 		if selected_tilemap:
 			if is_instance_valid(selected_tilemap):
@@ -93,8 +96,10 @@ func update_tile_selected_sprite():
 	tile_selection.position += selected_tilemap.cell_size * 0.5
 
 func _input(event):
-	if selected_tilemap and !owner.mouse_over_ui:
+	if selected_tilemap:
 		if event is InputEventMouseButton:
+			if event.pressed and owner.mouse_over_ui: return
+			
 			var about_to_use_eyedropper = event.button_index == BUTTON_MIDDLE or Input.is_action_pressed("editor_eyedrop_tool") or owner.eyedropper_enabled
 			
 			if !about_to_use_eyedropper:
