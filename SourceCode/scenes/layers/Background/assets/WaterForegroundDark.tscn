@@ -10,7 +10,7 @@ shader = ExtResource( 3 )
 shader_param/overlay_color = Color( 0.5, 0.5, 0.5, 0.5 )
 
 [sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 36864, 480 )
+extents = Vector2( 36864, 16 )
 
 [node name="WaterFGDark" type="Node2D"]
 z_as_relative = false
@@ -38,8 +38,8 @@ tile_data = PoolIntArray( 983040, 20, 0, 983041, 21, 0, 983042, 22, 0, 983043, 2
 [node name="Collision" type="StaticBody2D" parent="."]
 position = Vector2( 36864, 512 )
 collision_layer = 128
-collision_mask = 128
+collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Collision"]
-position = Vector2( 0, 528 )
+position = Vector2( 0, 64 )
 shape = SubResource( 2 )
