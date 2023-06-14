@@ -173,6 +173,9 @@ func erase_tile_rect(tilemap : TileMap, rect : Rect2, update_autotile = true):
 func is_tile_position_legal(tile_position : Vector2):
 	return level_boundaries.has_point(tile_position)
 
+func stop_placing_tiles():
+	placing_tiles = false
+
 # =================================================================================
 # DRAW GRID
 

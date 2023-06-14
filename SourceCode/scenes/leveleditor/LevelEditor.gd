@@ -697,6 +697,8 @@ func pause_toggled(paused : bool):
 	is_paused = paused
 	if is_paused: mouse_over_ui = true
 	if ui_editor: ui_editor.visible = !is_paused and edit_mode
+	
+	tile_functions.stop_placing_tiles()
 
 func object_clicked(object : Node, click_type : int):
 	if !edit_mode: return
