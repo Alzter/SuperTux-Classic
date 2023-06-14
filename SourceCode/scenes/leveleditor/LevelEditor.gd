@@ -38,11 +38,12 @@ var eyedropper_enabled = false setget update_eyedropper_enabled
 var flip_tiles_enabled = false setget update_flip_tiles_enabled
 var edit_objects_enabled = false setget update_edit_objects_enabled
 
-onready var button_rect_select = $UI/Scale/EditorUI/TilesPanelOffset/TilesPanel/PlacementOptions/RectSelect
-onready var button_eraser = $UI/Scale/EditorUI/TilesPanelOffset/TilesPanel/PlacementOptions/Eraser
-onready var button_eyedropper = $UI/Scale/EditorUI/TilesPanelOffset/TilesPanel/PlacementOptions/EyeDropper
-onready var button_flip_tiles = $UI/Scale/EditorUI/TilesPanelOffset/TilesPanel/PlacementOptions/FlipTiles
-onready var button_edit_objects = $UI/Scale/EditorUI/TilesPanelOffset/TilesPanel/PlacementOptions/EditObject
+onready var tile_buttons = $UI/Scale/EditorUI/TilesPanelOffset/TilesPanel/MouseBlocker/PlacementOptions
+onready var button_rect_select = tile_buttons.get_node("RectSelect")
+onready var button_eraser = tile_buttons.get_node("Eraser")
+onready var button_eyedropper = tile_buttons.get_node("EyeDropper")
+onready var button_flip_tiles = tile_buttons.get_node("FlipTiles")
+onready var button_edit_objects = tile_buttons.get_node("EditObject")
 
 onready var button_undo = $UI/Scale/EditorUI/Buttons/UndoButton
 onready var button_level_properties = $UI/Scale/EditorUI/Buttons/LevelProperties
@@ -739,7 +740,7 @@ func object_clicked(object : Node, click_type : int):
 		object_functions.grab_object(object)
 
 func _get_can_place_tiles():
-	return !editor_camera.dragging_camera and !object_functions.dragged_object and !is_paused and edit_mode and !edit_objects_enabled
+	return !editor_camera.dragging_camera and !object_functions.dragged_object and !is_paused and edit_mode and !edit_objects_enabled and !MobileControls.joystick_active
 
 func _get_object_scenes_folder():
 	if !level: return null
