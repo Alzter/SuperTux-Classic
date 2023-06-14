@@ -3,12 +3,13 @@ extends Control
 var options_data = null
 var loading_options = false
 
-onready var volume_music_slider = $Panel/VBoxContainer/MusicVolume/VolumeMusic
-onready var volume_sfx_slider = $Panel/VBoxContainer/SFXVolume/VolumeSFX
-onready var volume_ambience_slider = $Panel/VBoxContainer/AmbienceVolume/VolumeAmbience
-onready var auto_run_checkbox = $Panel/VBoxContainer/AutoRun/AutoRun
-onready var controls_button = $Panel/VBoxContainer/Controls
-onready var privacy_policy_button = $Panel/VBoxContainer/PrivacyPolicy
+onready var options_container = $Panel/PanelContainer/ScrollContainer/Options
+onready var volume_music_slider = options_container.get_node("MusicVolume/VolumeMusic")
+onready var volume_sfx_slider = options_container.get_node("SFXVolume/VolumeSFX")
+onready var volume_ambience_slider = options_container.get_node("AmbienceVolume/VolumeAmbience")
+onready var auto_run_checkbox = options_container.get_node("AutoRun/AutoRun")
+onready var controls_button = options_container.get_node("Controls")
+onready var privacy_policy_button = options_container.get_node("PrivacyPolicy")
 onready var done_button = $ControlsMenu/Panel/Done
 
 onready var options_menu = $Panel
