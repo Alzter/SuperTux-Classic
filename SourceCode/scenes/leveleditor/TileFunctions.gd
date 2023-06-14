@@ -46,52 +46,52 @@ func _process(delta):
 	
 	tile_selection.hide()
 	
+	if !can_place_tiles: return
+	
 	if !placing_tiles and mouse_over_ui: return
 	
-	if owner.can_place_tiles:
-		
-		if selected_tilemap:
-			if is_instance_valid(selected_tilemap):
-				selected_tile_position = get_selected_tile()
+	if selected_tilemap:
+		if is_instance_valid(selected_tilemap):
+			selected_tile_position = get_selected_tile()
+			
+			if using_eyedropper:
+				var eyedrop_tile_id = selected_tilemap.get_cellv(selected_tile_position)
 				
-				if using_eyedropper:
-					var eyedrop_tile_id = selected_tilemap.get_cellv(selected_tile_position)
-					
-					if eyedrop_tile_id == -1:
-						using_eyedropper = false
-						return
-					
-					owner.current_tile_id = eyedrop_tile_id
-					
-					var tile_is_flipped = selected_tilemap.is_cell_x_flipped(selected_tile_position.x, selected_tile_position.y)
-					
-					owner.flip_tiles_enabled = tile_is_flipped
-					
-					owner.eyedropper_enabled = false
+				if eyedrop_tile_id == -1:
 					using_eyedropper = false
-					
-					owner.play_sound("Eyedrop")
+					return
 				
-				if !placing_rectangle_fill:
-					tile_selection.show()
-					
-					tile_preview.visible = !owner.eraser_enabled and !owner.eyedropper_enabled
-					tile_preview.flip_h = owner.flip_tiles_enabled
-					update_tile_selected_sprite()
-		
+				owner.current_tile_id = eyedrop_tile_id
 				
-				var is_tile_new = old_selected_tile_position != selected_tile_position
+				var tile_is_flipped = selected_tilemap.is_cell_x_flipped(selected_tile_position.x, selected_tile_position.y)
 				
-				if placing_tiles and is_tile_new:
-					play_tile_sound(selected_tilemap, tile_id_to_use, selected_tile_position)
-					
-					if placing_rectangle_fill:
-						rect_selection = Rect2(rect_fill_origin, Vector2.ZERO).expand(selected_tile_position)
-						fill_tile_rect(selected_tilemap, rect_selection, tile_id_to_use)
-					else:
-						place_tile(selected_tilemap, selected_tile_position, tile_id_to_use)
+				owner.flip_tiles_enabled = tile_is_flipped
 				
-				old_selected_tile_position = selected_tile_position
+				owner.eyedropper_enabled = false
+				using_eyedropper = false
+				
+				owner.play_sound("Eyedrop")
+			
+			if !placing_rectangle_fill:
+				tile_selection.show()
+				
+				tile_preview.visible = !owner.eraser_enabled and !owner.eyedropper_enabled
+				tile_preview.flip_h = owner.flip_tiles_enabled
+				update_tile_selected_sprite()
+	
+			
+			var is_tile_new = old_selected_tile_position != selected_tile_position
+			
+			if placing_tiles and is_tile_new:
+				play_tile_sound(selected_tilemap, tile_id_to_use, selected_tile_position)
+				
+				if placing_rectangle_fill:
+					rect_selection = Rect2(rect_fill_origin, Vector2.ZERO).expand(selected_tile_position)
+					fill_tile_rect(selected_tilemap, rect_selection, tile_id_to_use)
+				else:
+					place_tile(selected_tilemap, selected_tile_position, tile_id_to_use)
+			
+			old_selected_tile_position = selected_tile_position
 
 func get_selected_tile():
 	var mouse_pos = get_global_mouse_position()
