@@ -41,6 +41,8 @@ func _on_Delete_pressed():
 # RIGHT CLICKING THE LAYER BUTTON ACTIVATES THE EDIT LAYER DIALOG
 func _on_LayerButton_gui_input(event):
 	if event is InputEventMouseButton and event.pressed:
+		if event.button_index == BUTTON_LEFT:
+			_on_LayerButton_pressed()
 		if event.button_index == BUTTON_RIGHT:
 			_on_Edit_pressed()
 
