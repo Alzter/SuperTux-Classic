@@ -31,6 +31,11 @@ func _process(delta):
 
 func _input(event):
 	
+	# If we touch the screen, we need to wait 1 frame
+	# so that owner.mouse_over_ui becomes false.
+	if event is InputEventScreenTouch:
+		return
+	
 	if event is InputEventMouseButton:
 		
 		# Let go of dragged objects when mouse released

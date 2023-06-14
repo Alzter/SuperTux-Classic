@@ -23,7 +23,7 @@ func update():
 		label.text = "EDIT"
 		button_icon.texture = edit_texture
 	
-	elif Input.is_action_pressed("editor_play_from_start"):
+	elif Input.is_action_pressed("editor_play_from_start") or owner.edit_objects_enabled:
 		label.text = "PLAY FROM START"
 		button_icon.texture = play_from_start_texture
 	else:

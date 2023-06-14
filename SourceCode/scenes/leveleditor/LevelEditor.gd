@@ -67,6 +67,7 @@ signal eraser_toggled
 signal rect_select_toggled
 signal eyedropper_toggled
 signal flip_tiles_toggled
+signal edit_objects_toggled
 
 var level = null
 var level_objects = null setget , _get_level_objects
@@ -119,6 +120,8 @@ func _ready():
 	
 	editor_camera.connect("set_camera_drag", self, "set_camera_drag")
 	
+	connect("edit_objects_toggled", toggle_edit_button, "update")
+	
 	Global.connect("object_clicked", self, "object_clicked")
 	
 	Music.set_editor_music(true)
@@ -141,7 +144,7 @@ func toggle_edit_mode():
 		enter_edit_mode()
 	update_tilemap_opacity()
 
-func enter_play_mode(play_from_start = Input.is_action_pressed("editor_play_from_start")):
+func enter_play_mode(play_from_start = Input.is_action_pressed("editor_play_from_start") or edit_objects_enabled):
 	if !level: return
 	Scoreboard.reset_player_values(false, false)
 	
@@ -862,11 +865,12 @@ func _update_edit_mode(new_value):
 	ResolutionManager.enable_zoom_in = !edit_mode
 
 func _on_EditObject_toggled(button_pressed):
-	edit_objects_enabled = button_pressed
+	self.edit_objects_enabled = button_pressed
 
 func update_edit_objects_enabled(new_value):
 	edit_objects_enabled = new_value
 	button_edit_objects.pressed = new_value
+	emit_signal("edit_objects_toggled")
 
 func _get_mouse_over_ui():
 	return _mouse_over_ui or MobileControls.joystick_active

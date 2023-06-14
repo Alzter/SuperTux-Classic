@@ -93,6 +93,9 @@ func update_tile_selected_sprite():
 	tile_selection.position += selected_tilemap.cell_size * 0.5
 
 func _input(event):
+	if event is InputEventScreenTouch:
+		return
+	
 	if selected_tilemap and !owner.mouse_over_ui:
 		if event is InputEventMouseButton:
 			var about_to_use_eyedropper = event.button_index == BUTTON_MIDDLE or Input.is_action_pressed("editor_eyedrop_tool") or owner.eyedropper_enabled
