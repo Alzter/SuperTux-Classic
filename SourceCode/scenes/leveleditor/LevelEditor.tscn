@@ -1,4 +1,4 @@
-[gd_scene load_steps=63 format=2]
+[gd_scene load_steps=64 format=2]
 
 [ext_resource path="res://images/player/tux/big/idle.png" type="Texture" id=1]
 [ext_resource path="res://images/player/tux/small/idle.png" type="Texture" id=2]
@@ -35,6 +35,7 @@
 [ext_resource path="res://sounds/objects/brick_smash.wav" type="AudioStream" id=33]
 [ext_resource path="res://sounds/editor/undo.wav" type="AudioStream" id=34]
 [ext_resource path="res://sounds/objects/powerup-bumped.wav" type="AudioStream" id=35]
+[ext_resource path="res://images/editor/icons/edit.png" type="Texture" id=36]
 [ext_resource path="res://sounds/editor/level_saved.wav" type="AudioStream" id=37]
 [ext_resource path="res://sounds/objects/time_over.wav" type="AudioStream" id=38]
 [ext_resource path="res://sounds/editor/eyedrop.wav" type="AudioStream" id=39]
@@ -43,10 +44,10 @@
 [ext_resource path="res://sounds/worldmap/warp.wav" type="AudioStream" id=42]
 [ext_resource path="res://theme/FontTooltip.tres" type="DynamicFont" id=43]
 [ext_resource path="res://scenes/leveleditor/EditToggle.gd" type="Script" id=44]
-[ext_resource path="res://images/editor/icons/play.png" type="Texture" id=45]
+[ext_resource path="res://images/editor/icons/editbutton/play.png" type="Texture" id=45]
 [ext_resource path="res://sounds/editor/close_dialog.wav" type="AudioStream" id=46]
-[ext_resource path="res://images/editor/icons/edit.png" type="Texture" id=47]
-[ext_resource path="res://images/editor/icons/play_from_start.png" type="Texture" id=48]
+[ext_resource path="res://images/editor/icons/editbutton/edit.png" type="Texture" id=47]
+[ext_resource path="res://images/editor/icons/editbutton/play_from_start.png" type="Texture" id=48]
 [ext_resource path="res://sounds/editor/close_level_properties.wav" type="AudioStream" id=49]
 [ext_resource path="res://sounds/editor/add_layer_dialog.wav" type="AudioStream" id=50]
 [ext_resource path="res://sounds/editor/level_properties_changed.wav" type="AudioStream" id=51]
@@ -834,6 +835,19 @@ enabled_focus_mode = 0
 icon = ExtResource( 30 )
 clip_text = true
 
+[node name="EditObject" type="Button" parent="UI/Scale/EditorUI/TilesPanelOffset/TilesPanel/PlacementOptions"]
+margin_top = 304.0
+margin_right = 72.0
+margin_bottom = 376.0
+hint_tooltip = "Edit Objects / Layers (Right Click)"
+focus_mode = 0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+toggle_mode = true
+enabled_focus_mode = 0
+icon = ExtResource( 36 )
+clip_text = true
+
 [node name="EditLayerDialog" parent="UI/Scale/EditorUI" instance=ExtResource( 16 )]
 
 [node name="EditToggle" type="Button" parent="UI/Scale"]
@@ -1074,6 +1088,7 @@ volume_db = -8.0
 [connection signal="toggled" from="UI/Scale/EditorUI/TilesPanelOffset/TilesPanel/PlacementOptions/RectSelect" to="." method="_on_RectSelect_toggled"]
 [connection signal="toggled" from="UI/Scale/EditorUI/TilesPanelOffset/TilesPanel/PlacementOptions/EyeDropper" to="." method="_on_EyeDropper_toggled"]
 [connection signal="toggled" from="UI/Scale/EditorUI/TilesPanelOffset/TilesPanel/PlacementOptions/FlipTiles" to="." method="_on_FlipTiles_toggled"]
+[connection signal="toggled" from="UI/Scale/EditorUI/TilesPanelOffset/TilesPanel/PlacementOptions/EditObject" to="." method="_on_EditObject_toggled"]
 [connection signal="about_to_show" from="UI/Scale/EditorUI/EditLayerDialog" to="." method="_on_EditLayerDialog_about_to_show"]
 [connection signal="pressed" from="UI/Scale/EditToggle" to="." method="_on_EditToggle_pressed"]
 [connection signal="about_to_show" from="UI/UnsavedChangesDialog" to="." method="_on_UnsavedChangesDialog_about_to_show"]

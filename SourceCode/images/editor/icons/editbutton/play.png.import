@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/edit.png-7051303f97bb68fc782d35f5de696886.stex"
+path="res://.import/play.png-1c4ccd2d2926203e8b24485eee308a03.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://images/editor/icons/edit.png"
-dest_files=[ "res://.import/edit.png-7051303f97bb68fc782d35f5de696886.stex" ]
+source_file="res://images/editor/icons/editbutton/play.png"
+dest_files=[ "res://.import/play.png-1c4ccd2d2926203e8b24485eee308a03.stex" ]
 
 [params]
 
@@ -20,8 +20,8 @@ compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=true
-flags/mipmaps=true
+flags/filter=false
+flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2
 process/fix_alpha_border=true

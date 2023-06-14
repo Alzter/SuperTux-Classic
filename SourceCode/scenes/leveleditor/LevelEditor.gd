@@ -36,11 +36,13 @@ var rect_select_enabled = false setget update_rect_select_enabled
 var eraser_enabled = false setget update_eraser_enabled
 var eyedropper_enabled = false setget update_eyedropper_enabled
 var flip_tiles_enabled = false setget update_flip_tiles_enabled
+var edit_objects_enabled = false setget update_edit_objects_enabled
 
 onready var button_rect_select = $UI/Scale/EditorUI/TilesPanelOffset/TilesPanel/PlacementOptions/RectSelect
 onready var button_eraser = $UI/Scale/EditorUI/TilesPanelOffset/TilesPanel/PlacementOptions/Eraser
 onready var button_eyedropper = $UI/Scale/EditorUI/TilesPanelOffset/TilesPanel/PlacementOptions/EyeDropper
 onready var button_flip_tiles = $UI/Scale/EditorUI/TilesPanelOffset/TilesPanel/PlacementOptions/FlipTiles
+onready var button_edit_objects = $UI/Scale/EditorUI/TilesPanelOffset/TilesPanel/PlacementOptions/EditObject
 
 onready var button_undo = $UI/Scale/EditorUI/Buttons/UndoButton
 onready var button_level_properties = $UI/Scale/EditorUI/Buttons/LevelProperties
@@ -343,6 +345,15 @@ func set_ui_scale(scale):
 	ui_scale.anchor_right = 1 / scale
 
 func layer_button_pressed(button_node, layer_object):
+	
+	# If we have edit layers mode enabled
+	if edit_objects_enabled:
+		if layer_object:
+			if is_instance_valid(layer_object):
+				self.edit_objects_enabled = false
+				edit_layer(layer_object)
+		return
+	
 	var old_selected_layer = selected_layer
 	
 	self.selected_layer = layer_object
@@ -369,6 +380,7 @@ func layer_button_pressed(button_node, layer_object):
 					
 					var tile = last_used_tile_for_tileset[tileset]
 					self.current_tile_id = tile
+	
 
 func update_selected_layer(new_value):
 	var layer_exists = false
@@ -695,14 +707,21 @@ func object_clicked(object : Node, click_type : int):
 	
 	var can_delete_object = object.get_owner() != self
 	
-	var is_editing_objects = false
+	var can_edit_objects = false
 	if selected_layer:
 		if is_instance_valid(selected_layer):
-			is_editing_objects = is_object_container(selected_layer)
+			can_edit_objects = is_object_container(selected_layer)
 	
 	object_functions.can_place_objects = false
 	
-	if (eyedropper_enabled or click_type == BUTTON_MIDDLE) and is_editing_objects:
+	if edit_objects_enabled:
+		edit_object(object)
+		self.edit_objects_enabled = false
+		return
+	
+	var eyedropping = eyedropper_enabled or click_type == BUTTON_MIDDLE
+	
+	if eyedropping and can_edit_objects:
 		var object_resource = load(object.filename)
 		if object_resource:
 			self.current_object_resource = object_resource
@@ -722,7 +741,7 @@ func object_clicked(object : Node, click_type : int):
 		object_functions.grab_object(object)
 
 func _get_can_place_tiles():
-	return !editor_camera.dragging_camera and !object_functions.dragged_object and !is_paused and edit_mode
+	return !editor_camera.dragging_camera and !object_functions.dragged_object and !is_paused and edit_mode and !edit_objects_enabled
 
 func _get_object_scenes_folder():
 	if !level: return null
@@ -828,11 +847,9 @@ func update_tile_preview_texture(new_texture, region_rect):
 		if region_rect: sprite.region_rect = region_rect
 		sprite.texture = new_texture
 
-
 func _on_LevelPropertiesDialog_popup_hide():
 	play_sound("LevelPropertiesClose")
 	play_sound("LevelPropertiesChanged")
-
 
 func _on_AddLayerDialog_about_to_show():
 	play_sound("AddLayerDialog")
@@ -840,3 +857,10 @@ func _on_AddLayerDialog_about_to_show():
 func _update_edit_mode(new_value):
 	edit_mode = new_value
 	ResolutionManager.enable_zoom_in = !edit_mode
+
+func _on_EditObject_toggled(button_pressed):
+	edit_objects_enabled = button_pressed
+
+func update_edit_objects_enabled(new_value):
+	edit_objects_enabled = new_value
+	button_edit_objects.pressed = new_value
