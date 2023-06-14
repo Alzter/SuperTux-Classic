@@ -863,18 +863,23 @@ func update_edit_objects_enabled(new_value):
 	button_edit_objects.pressed = new_value
 	emit_signal("edit_objects_toggled")
 
-func _get_mouse_over_ui(node = ui_scale):
+func _get_mouse_over_ui():
 	if is_paused: return true
 	if edit_layer_dialog.visible: return true
 	if MobileControls.mouse_over_ui: return true
 	
-	if !node: return false
-	if !get("visible") == true: return false
-	
+	return is_mouse_hovering_over_node(ui_scale)
+
+# Recursive function which determines if the mouse is
+# hovering over a control node, or any visible children
+# of the control node.
+func is_mouse_hovering_over_node(node : Control):
 	for child in node.get_children():
-		if child.get("visible") == true:
-			if _get_mouse_over_ui(child) == true:
-				return true
+		if !(child is Control): continue
+		if !child.visible: continue
+		
+		if is_mouse_hovering_over_node(child) == true:
+			return true
 	
 	if node is Control:
 		if node.mouse_filter == MOUSE_FILTER_STOP:
@@ -883,5 +888,3 @@ func _get_mouse_over_ui(node = ui_scale):
 				return true
 	
 	return false
-
-
