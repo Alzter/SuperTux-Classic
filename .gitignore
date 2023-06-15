@@ -2,6 +2,7 @@
 .import/
 SourceCode/android/build
 SourceCode/IMPORTS
+SourceCode/.godot
 
 # Mono-specific ignores
 .mono/
