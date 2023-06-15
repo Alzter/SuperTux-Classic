@@ -26,6 +26,7 @@ onready var label = $ButContainer/Label
 
 func _ready():
 	label.text = action_to_remap.capitalize()
+	_set_button_text_to_control_action()
 
 func _set_button_text_to_control_action(ignore_which: int = IGNORE_BUTTON.None):
 	var keyact: InputEventKey = null
@@ -54,36 +55,38 @@ func _on_RemapButtonGamepad_pressed():
 
 func _input(event):
 	if being_changed == Global.REBIND_TYPE.None: return
-
-	if not event.is_echo():
-		match being_changed:
-			Global.REBIND_TYPE.Key:
-				if event is InputEventKey:
-					var del_event: InputEvent
-					var list = InputMap.get_action_list(action_to_remap)
-					
-					for i in list:
-						if i is InputEventKey:
-							del_event = i
-					
-					InputMap.action_erase_event(action_to_remap, del_event)
-					InputMap.action_add_event(action_to_remap, event)
-					
-					print("Remapped key " + str(action_to_remap) + " to input " + event.as_text())
-			Global.REBIND_TYPE.Gamepad:
-				if event is InputEventJoypadButton:
-					var del_event: InputEvent
-					var list = InputMap.get_action_list(action_to_remap)
-					
-					for i in list:
-						if i is InputEventJoypadButton:
-							del_event = i
-					
-					InputMap.action_erase_event(action_to_remap, del_event)
-					InputMap.action_add_event(action_to_remap, event)
-					
-					print("Remapped gamepad button " + str(action_to_remap) + " to input " + Input.get_joy_button_string(event.button_index))
-	self.being_changed = Global.REBIND_TYPE.None
+	if event.is_echo(): return
+	
+	match being_changed:
+		Global.REBIND_TYPE.Key:
+			if event is InputEventKey:
+				self.being_changed = Global.REBIND_TYPE.None
+				var del_event: InputEvent
+				var list = InputMap.get_action_list(action_to_remap)
+				
+				for i in list:
+					if i is InputEventKey:
+						del_event = i
+				
+				InputMap.action_erase_event(action_to_remap, del_event)
+				InputMap.action_add_event(action_to_remap, event)
+				
+				print("Remapped key " + str(action_to_remap) + " to input " + event.as_text())
+		Global.REBIND_TYPE.Gamepad:
+			if event is InputEventJoypadButton:
+				if not Input.is_joy_button_pressed(0, event.button_index): return
+				self.being_changed = Global.REBIND_TYPE.None
+				var del_event: InputEvent
+				var list = InputMap.get_action_list(action_to_remap)
+				
+				for i in list:
+					if i is InputEventJoypadButton:
+						del_event = i
+				
+				InputMap.action_erase_event(action_to_remap, del_event)
+				InputMap.action_add_event(action_to_remap, event)
+				
+				print("Remapped gamepad button " + str(action_to_remap) + " to input " + Input.get_joy_button_string(event.button_index))
 
 # Makes the button say "Press a key..." when the button is being remapped
 func _update_button_state(new_value):
