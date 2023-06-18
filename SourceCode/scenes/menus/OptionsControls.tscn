@@ -6,6 +6,7 @@
 [ext_resource path="res://scenes/menus/ControlRemapper.tscn" type="PackedScene" id=4]
 
 [node name="ControlsMenu" type="Popup"]
+visible = true
 anchor_right = 1.0
 anchor_bottom = 1.0
 theme = ExtResource( 1 )
@@ -32,15 +33,15 @@ valign = 2
 [node name="PanelContainer" type="PanelContainer" parent="Panel"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 35.0
+margin_left = 30.0
 margin_top = 76.0
-margin_right = -35.0
+margin_right = -30.0
 margin_bottom = -76.0
 
 [node name="ScrollContainer" type="ScrollContainer" parent="Panel/PanelContainer"]
 margin_left = 24.0
 margin_top = 24.0
-margin_right = 1122.0
+margin_right = 1132.0
 margin_bottom = 480.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -48,11 +49,11 @@ follow_focus = true
 scroll_horizontal_enabled = false
 
 [node name="Controls" type="VBoxContainer" parent="Panel/PanelContainer/ScrollContainer"]
-margin_right = 1098.0
+margin_right = 1108.0
 margin_bottom = 456.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-custom_constants/separation = 15
+custom_constants/separation = 5
 alignment = 1
 __meta__ = {
 "_edit_lock_": true

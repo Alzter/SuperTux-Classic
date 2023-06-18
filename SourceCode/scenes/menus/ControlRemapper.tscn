@@ -21,19 +21,20 @@ grow_vertical = 2
 alignment = 1
 
 [node name="Label" type="Label" parent="ButContainer"]
-margin_left = 16.0
 margin_top = 9.0
-margin_right = 417.0
+margin_right = 100.0
 margin_bottom = 32.0
-size_flags_horizontal = 3
+rect_min_size = Vector2( 100, 0 )
+rect_clip_content = true
+size_flags_horizontal = 9
 custom_fonts/font = ExtResource( 4 )
 text = "Key"
 valign = 1
 clip_text = true
 
 [node name="RemapButtonKey" type="Button" parent="ButContainer"]
-margin_left = 421.0
-margin_right = 839.0
+margin_left = 104.0
+margin_right = 680.0
 margin_bottom = 42.0
 size_flags_horizontal = 3
 custom_fonts/font = ExtResource( 3 )
@@ -41,13 +42,13 @@ text = "Change Key"
 clip_text = true
 
 [node name="VSeparator" type="VSeparator" parent="ButContainer"]
-margin_left = 843.0
-margin_right = 858.0
+margin_left = 684.0
+margin_right = 699.0
 margin_bottom = 42.0
 custom_constants/separation = 15
 
 [node name="RemapButtonGamepad" type="Button" parent="ButContainer"]
-margin_left = 862.0
+margin_left = 703.0
 margin_right = 1280.0
 margin_bottom = 42.0
 size_flags_horizontal = 3
