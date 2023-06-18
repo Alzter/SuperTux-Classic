@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=21 format=2]
+[gd_resource type="Theme" load_steps=22 format=2]
 
 [ext_resource path="res://theme/FontMedium.tres" type="DynamicFont" id=1]
 [ext_resource path="res://theme/FontButton.tres" type="DynamicFont" id=2]
@@ -208,6 +208,11 @@ expand_margin_right = 16.0
 expand_margin_top = 16.0
 expand_margin_bottom = 16.0
 
+[sub_resource type="StyleBoxLine" id=17]
+color = Color( 0, 0, 0, 0.75 )
+thickness = 3
+vertical = true
+
 [resource]
 default_font = ExtResource( 1 )
 Button/colors/font_color = Color( 1, 1, 1, 1 )
@@ -313,6 +318,8 @@ TooltipLabel/constants/shadow_offset_x = 0
 TooltipLabel/constants/shadow_offset_y = 0
 TooltipLabel/fonts/font = ExtResource( 8 )
 TooltipPanel/styles/panel = SubResource( 14 )
+VSeparator/constants/separation = 30
+VSeparator/styles/separator = SubResource( 17 )
 VSlider/icons/grabber = null
 VSlider/icons/grabber_disabled = null
 VSlider/icons/grabber_highlight = null

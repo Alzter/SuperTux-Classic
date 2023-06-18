@@ -3,7 +3,7 @@ extends Popup
 var key_to_remap = null
 var remap_button = null
 
-onready var control_button_container = $Panel/Controls
+onready var control_button_container = $Panel/PanelContainer/ScrollContainer/Controls
 onready var done_button = $Panel/Done
 
 export var control_remapper : PackedScene

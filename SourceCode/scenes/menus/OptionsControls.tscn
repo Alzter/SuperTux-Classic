@@ -25,16 +25,34 @@ anchor_right = 1.0
 margin_bottom = 60.0
 custom_colors/font_color = Color( 1, 1, 0, 1 )
 custom_fonts/font = ExtResource( 3 )
-text = "Configure Controls"
+text = "Configure Controls..."
 align = 1
 valign = 2
 
-[node name="Controls" type="VBoxContainer" parent="Panel"]
-anchor_left = 0.5
-anchor_right = 0.5
+[node name="PanelContainer" type="PanelContainer" parent="Panel"]
+anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -200.0
-margin_right = 200.0
+margin_left = 35.0
+margin_top = 76.0
+margin_right = -35.0
+margin_bottom = -76.0
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Panel/PanelContainer"]
+margin_left = 24.0
+margin_top = 24.0
+margin_right = 1122.0
+margin_bottom = 480.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+follow_focus = true
+scroll_horizontal_enabled = false
+
+[node name="Controls" type="VBoxContainer" parent="Panel/PanelContainer/ScrollContainer"]
+margin_right = 1098.0
+margin_bottom = 456.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/separation = 15
 alignment = 1
 __meta__ = {
 "_edit_lock_": true
