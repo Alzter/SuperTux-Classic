@@ -58,30 +58,10 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="AutoRun" type="HSplitContainer" parent="Panel/PanelContainer/ScrollContainer/Options"]
-margin_top = 49.0
-margin_right = 1066.0
-margin_bottom = 103.0
-rect_min_size = Vector2( 0, 54 )
-
-[node name="Label" type="Label" parent="Panel/PanelContainer/ScrollContainer/Options/AutoRun"]
-margin_top = 16.0
-margin_right = 1030.0
-margin_bottom = 37.0
-size_flags_horizontal = 3
-text = "Auto Run"
-
-[node name="AutoRun" type="CheckBox" parent="Panel/PanelContainer/ScrollContainer/Options/AutoRun"]
-margin_left = 1042.0
-margin_top = 12.0
-margin_right = 1066.0
-margin_bottom = 42.0
-size_flags_vertical = 4
-
 [node name="MusicVolume" type="VBoxContainer" parent="Panel/PanelContainer/ScrollContainer/Options"]
-margin_top = 118.0
+margin_top = 24.0
 margin_right = 1066.0
-margin_bottom = 172.0
+margin_bottom = 65.0
 
 [node name="Label" type="Label" parent="Panel/PanelContainer/ScrollContainer/Options/MusicVolume"]
 margin_right = 1066.0
@@ -91,14 +71,14 @@ text = "Music Volume"
 [node name="VolumeMusic" type="HSlider" parent="Panel/PanelContainer/ScrollContainer/Options/MusicVolume"]
 margin_top = 25.0
 margin_right = 1066.0
-margin_bottom = 54.0
+margin_bottom = 41.0
 min_value = -70.0
 max_value = 0.0
 
 [node name="SFXVolume" type="VBoxContainer" parent="Panel/PanelContainer/ScrollContainer/Options"]
-margin_top = 187.0
+margin_top = 80.0
 margin_right = 1066.0
-margin_bottom = 241.0
+margin_bottom = 121.0
 
 [node name="Label" type="Label" parent="Panel/PanelContainer/ScrollContainer/Options/SFXVolume"]
 margin_right = 1066.0
@@ -108,14 +88,14 @@ text = "Sound Volume"
 [node name="VolumeSFX" type="HSlider" parent="Panel/PanelContainer/ScrollContainer/Options/SFXVolume"]
 margin_top = 25.0
 margin_right = 1066.0
-margin_bottom = 54.0
+margin_bottom = 41.0
 min_value = -70.0
 max_value = 0.0
 
 [node name="AmbienceVolume" type="VBoxContainer" parent="Panel/PanelContainer/ScrollContainer/Options"]
-margin_top = 256.0
+margin_top = 136.0
 margin_right = 1066.0
-margin_bottom = 310.0
+margin_bottom = 177.0
 
 [node name="Label" type="Label" parent="Panel/PanelContainer/ScrollContainer/Options/AmbienceVolume"]
 margin_right = 1066.0
@@ -125,20 +105,50 @@ text = "Ambience Volume"
 [node name="VolumeAmbience" type="HSlider" parent="Panel/PanelContainer/ScrollContainer/Options/AmbienceVolume"]
 margin_top = 25.0
 margin_right = 1066.0
-margin_bottom = 54.0
+margin_bottom = 41.0
 min_value = -70.0
 max_value = 0.0
 
-[node name="Controls" type="Button" parent="Panel/PanelContainer/ScrollContainer/Options"]
-margin_top = 325.0
+[node name="HSeparator" type="HSeparator" parent="Panel/PanelContainer/ScrollContainer/Options"]
+margin_top = 192.0
 margin_right = 1066.0
-margin_bottom = 355.0
+margin_bottom = 222.0
+
+[node name="AutoRun" type="HSplitContainer" parent="Panel/PanelContainer/ScrollContainer/Options"]
+margin_top = 237.0
+margin_right = 1066.0
+margin_bottom = 267.0
+
+[node name="Label" type="Label" parent="Panel/PanelContainer/ScrollContainer/Options/AutoRun"]
+margin_top = 4.0
+margin_right = 1030.0
+margin_bottom = 25.0
+size_flags_horizontal = 3
+text = "Auto Run"
+
+[node name="AutoRun" type="CheckBox" parent="Panel/PanelContainer/ScrollContainer/Options/AutoRun"]
+margin_left = 1042.0
+margin_right = 1066.0
+margin_bottom = 30.0
+size_flags_vertical = 4
+
+[node name="HSeparator2" type="HSeparator" parent="Panel/PanelContainer/ScrollContainer/Options"]
+margin_top = 282.0
+margin_right = 1066.0
+margin_bottom = 312.0
+
+[node name="Controls" type="Button" parent="Panel/PanelContainer/ScrollContainer/Options"]
+margin_top = 327.0
+margin_right = 1066.0
+margin_bottom = 369.0
+rect_min_size = Vector2( 0, 42 )
 text = "Configure Controls"
 
 [node name="PrivacyPolicy" type="Button" parent="Panel/PanelContainer/ScrollContainer/Options"]
-margin_top = 370.0
+margin_top = 384.0
 margin_right = 1066.0
-margin_bottom = 400.0
+margin_bottom = 426.0
+rect_min_size = Vector2( 0, 42 )
 focus_neighbour_bottom = NodePath("../../../../Done")
 text = "View Privacy Policy"
 
@@ -158,10 +168,10 @@ text = "Done"
 
 [connection signal="about_to_show" from="." to="." method="_on_OptionsMenu_about_to_show"]
 [connection signal="popup_hide" from="." to="." method="_on_OptionsMenu_popup_hide"]
-[connection signal="toggled" from="Panel/PanelContainer/ScrollContainer/Options/AutoRun/AutoRun" to="." method="_on_AutoRun_toggled"]
 [connection signal="value_changed" from="Panel/PanelContainer/ScrollContainer/Options/MusicVolume/VolumeMusic" to="." method="_on_VolumeMusic_value_changed"]
 [connection signal="value_changed" from="Panel/PanelContainer/ScrollContainer/Options/SFXVolume/VolumeSFX" to="." method="_on_VolumeSFX_value_changed"]
 [connection signal="value_changed" from="Panel/PanelContainer/ScrollContainer/Options/AmbienceVolume/VolumeAmbience" to="." method="_on_VolumeAmbience_value_changed"]
+[connection signal="toggled" from="Panel/PanelContainer/ScrollContainer/Options/AutoRun/AutoRun" to="." method="_on_AutoRun_toggled"]
 [connection signal="mouse_entered" from="Panel/PanelContainer/ScrollContainer/Options/Controls" to="." method="_on_Controls_mouse_entered"]
 [connection signal="pressed" from="Panel/PanelContainer/ScrollContainer/Options/Controls" to="." method="_on_Controls_pressed"]
 [connection signal="mouse_entered" from="Panel/PanelContainer/ScrollContainer/Options/PrivacyPolicy" to="." method="_on_PrivacyPolicy_mouse_entered"]
