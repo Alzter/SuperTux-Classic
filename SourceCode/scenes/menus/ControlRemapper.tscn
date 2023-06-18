@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://theme/default_theme.tres" type="Theme" id=1]
 [ext_resource path="res://scenes/menus/ControlRemapper.gd" type="Script" id=2]
+[ext_resource path="res://theme/FontTooltip.tres" type="DynamicFont" id=3]
+[ext_resource path="res://theme/FontEditable.tres" type="DynamicFont" id=4]
 
 [node name="ControlRemapper" type="Control"]
 anchor_top = 0.5
@@ -19,10 +21,12 @@ grow_vertical = 2
 alignment = 1
 
 [node name="Label" type="Label" parent="ButContainer"]
-margin_top = 10.0
+margin_left = 16.0
+margin_top = 9.0
 margin_right = 417.0
-margin_bottom = 31.0
+margin_bottom = 32.0
 size_flags_horizontal = 3
+custom_fonts/font = ExtResource( 4 )
 text = "Key"
 valign = 1
 clip_text = true
@@ -32,6 +36,7 @@ margin_left = 421.0
 margin_right = 839.0
 margin_bottom = 42.0
 size_flags_horizontal = 3
+custom_fonts/font = ExtResource( 3 )
 text = "Change Key"
 clip_text = true
 
@@ -46,6 +51,7 @@ margin_left = 862.0
 margin_right = 1280.0
 margin_bottom = 42.0
 size_flags_horizontal = 3
+custom_fonts/font = ExtResource( 3 )
 text = "Change Button"
 clip_text = true
 
