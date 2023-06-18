@@ -12,6 +12,7 @@ export var touch_zoom_sensitivity = 50 # Minimum number of pixels needed to star
 
 var mouse_motion = Vector2.ZERO
 var mouse_dragging_camera = false
+var mouse_drag_pressed = false
 
 var touch_dragging_camera = false
 
@@ -87,11 +88,11 @@ func _input(event):
 	# If we press the spacebar, enable camera drag mode.
 	# This allows the camera to be moved by moving the mouse.
 	if event.is_action("editor_move_camera"):
-		var drag_pressed = event.is_action_pressed("editor_move_camera", true)
-		if drag_pressed and owner.mouse_over_ui: return
-		mouse_dragging_camera = drag_pressed
-		emit_signal("set_camera_drag", mouse_dragging_camera)
-		if !mouse_dragging_camera: mouse_motion = Vector2.ZERO
+		mouse_drag_pressed = event.is_action_pressed("editor_move_camera", true)
+		if mouse_drag_pressed and owner.mouse_over_ui: return
+		if !mouse_drag_pressed:
+			mouse_dragging_camera = false
+			mouse_motion = Vector2.ZERO
 	
 	if event.is_action_pressed("editor_zoom_in") or event.is_action_pressed("editor_zoom_out"):
 		var zoom_factor = 1 if event.is_action_pressed("editor_zoom_in") else -1
@@ -107,7 +108,8 @@ func _input(event):
 	# If a mouse movement is detected and we are in camera drag mode,
 	# move the camera by the mouse's relative movement * the specified mouse drag strength
 	if event is InputEventMouseMotion:
-		if mouse_dragging_camera:
+		if mouse_drag_pressed:
+			mouse_dragging_camera = true
 			mouse_motion = event.relative * -1 * mouse_drag_strength
 
 func camera_to_player_position(player : Node2D, worldmap = false):

@@ -55,7 +55,7 @@ func _process(delta):
 			if using_eyedropper:
 				var eyedrop_tile_id = selected_tilemap.get_cellv(selected_tile_position)
 				
-				if eyedrop_tile_id == -1:
+				if eyedrop_tile_id == -1: # You can't eyedrop air
 					using_eyedropper = false
 					return
 				
@@ -131,7 +131,7 @@ func _input(event):
 					rect_fill_origin = rect_start
 					placing_rectangle_fill = true
 			else:
-				if event.pressed:
+				if !event.pressed:
 					using_eyedropper = true
 
 # ===================================================================================
