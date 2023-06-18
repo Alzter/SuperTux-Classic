@@ -43,10 +43,4 @@ func _update_worldmap_level_file(new_value):
 	
 	# Set "worldmap name" to the name of the folder the worldmap file is located in.
 	# E.g. for "res://scenes/levels/world1/worldmap.tscn" the folder name is "world1"
-	var worldmap_folder_getter = RegEx.new()
-	worldmap_folder_getter.compile("\/([^\/]+)\/[^\/]+$") # THANKS CHATGPT
-	
-	var worldmap_folder_search = worldmap_folder_getter.search(worldmap_level)
-	
-	if worldmap_folder_search:
-		worldmap_name = worldmap_folder_search.get_strings()[1]
+	worldmap_name = worldmap_level.get_base_dir().split("/")[-1]

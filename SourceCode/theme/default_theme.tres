@@ -1,12 +1,9 @@
-[gd_resource type="Theme" load_steps=24 format=2]
+[gd_resource type="Theme" load_steps=21 format=2]
 
 [ext_resource path="res://theme/FontMedium.tres" type="DynamicFont" id=1]
 [ext_resource path="res://theme/FontButton.tres" type="DynamicFont" id=2]
 [ext_resource path="res://theme/FontBig.tres" type="DynamicFont" id=3]
 [ext_resource path="res://theme/FontSmall.tres" type="DynamicFont" id=4]
-[ext_resource path="res://images/menu/SliderDeselected.png" type="Texture" id=5]
-[ext_resource path="res://images/menu/SliderSelected.png" type="Texture" id=6]
-[ext_resource path="res://images/menu/SliderDisabled.png" type="Texture" id=7]
 [ext_resource path="res://theme/FontTooltip.tres" type="DynamicFont" id=8]
 [ext_resource path="res://theme/FontEditable.tres" type="DynamicFont" id=9]
 
@@ -239,9 +236,9 @@ ColorPicker/icons/preset_bg = null
 ColorPicker/icons/screen_picker = null
 HSeparator/constants/separation = 30
 HSeparator/styles/separator = SubResource( 11 )
-HSlider/icons/grabber = ExtResource( 5 )
-HSlider/icons/grabber_disabled = ExtResource( 7 )
-HSlider/icons/grabber_highlight = ExtResource( 6 )
+HSlider/icons/grabber = null
+HSlider/icons/grabber_disabled = null
+HSlider/icons/grabber_highlight = null
 HSlider/icons/tick = null
 HSlider/styles/grabber_area = SubResource( 9 )
 HSlider/styles/grabber_area_highlight = SubResource( 8 )

@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://scenes/particles/SnowfallSmall.tres" type="Material" id=1]
 [ext_resource path="res://images/background/arcticmountains-sky.png" type="Texture" id=2]
 [ext_resource path="res://images/background/arcticmountains-bg.png" type="Texture" id=3]
 [ext_resource path="res://images/background/arcticmountains-fg.png" type="Texture" id=4]
 [ext_resource path="res://images/particles/snow2.png" type="Texture" id=5]
+[ext_resource path="res://scenes/layers/Background/IceMountainsParticles.gd" type="Script" id=6]
 
 [sub_resource type="CanvasItemMaterial" id=1]
 blend_mode = 3
@@ -46,10 +47,12 @@ centered = false
 [node name="ParallaxLayer5" type="ParallaxLayer" parent="."]
 motion_scale = Vector2( 0.25, 1 )
 motion_mirroring = Vector2( 1636, 0 )
+script = ExtResource( 6 )
 
 [node name="Particles2D" type="Particles2D" parent="ParallaxLayer5"]
 position = Vector2( 256, -50 )
 scale = Vector2( 0.2, 0.2 )
+emitting = false
 amount = 200
 lifetime = 3.0
 preprocess = 8.0
@@ -61,6 +64,7 @@ texture = ExtResource( 5 )
 [node name="Particles2D2" type="Particles2D" parent="ParallaxLayer5"]
 position = Vector2( 1074, -50 )
 scale = Vector2( 0.2, 0.2 )
+emitting = false
 amount = 200
 lifetime = 3.0
 preprocess = 8.0

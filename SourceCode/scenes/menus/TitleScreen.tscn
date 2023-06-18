@@ -55,8 +55,9 @@ color = Color( 0.443137, 0.533333, 0.658824, 1 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 132.0
+margin_top = -1.0
 margin_right = -8.0
-margin_bottom = -4.0
+margin_bottom = -5.0
 custom_fonts/font = ExtResource( 6 )
 text = "This game comes under ABSOLUTELY NO WARRANTY! This is free, open-source software, and you are welcome to modify and redistribute it under certain conditions; see COPYING.TXT for details.
 
