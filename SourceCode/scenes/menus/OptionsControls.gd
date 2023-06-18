@@ -15,10 +15,14 @@ func _on_ControlsMenu_about_to_show():
 		_populate_controls_menu()
 
 func _populate_controls_menu():
+	var show_text = true
+	
 	for control in Global.controls:
 		var remapper = control_remapper.instance()
 		remapper.action_to_remap = control
+		remapper.show_button_type_names = show_text
 		control_button_container.add_child(remapper)
+		show_text = false
 	
 	control_button_container.get_children().front().grab_focus()
 

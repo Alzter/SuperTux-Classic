@@ -22,9 +22,9 @@ alignment = 1
 
 [node name="Label" type="Label" parent="ButContainer"]
 margin_top = 9.0
-margin_right = 100.0
+margin_right = 150.0
 margin_bottom = 32.0
-rect_min_size = Vector2( 100, 0 )
+rect_min_size = Vector2( 150, 0 )
 rect_clip_content = true
 size_flags_horizontal = 9
 custom_fonts/font = ExtResource( 4 )
@@ -33,28 +33,50 @@ valign = 1
 clip_text = true
 
 [node name="RemapButtonKey" type="Button" parent="ButContainer"]
-margin_left = 104.0
-margin_right = 680.0
+margin_left = 154.0
+margin_right = 705.0
 margin_bottom = 42.0
 size_flags_horizontal = 3
 custom_fonts/font = ExtResource( 3 )
 text = "Change Key"
 clip_text = true
 
+[node name="KeyboardText" type="Label" parent="ButContainer/RemapButtonKey"]
+show_behind_parent = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -42.0
+margin_bottom = -42.0
+custom_constants/shadow_offset_x = 0
+custom_fonts/font = ExtResource( 3 )
+text = "Keyboard:"
+align = 1
+
 [node name="VSeparator" type="VSeparator" parent="ButContainer"]
-margin_left = 684.0
-margin_right = 699.0
+margin_left = 709.0
+margin_right = 724.0
 margin_bottom = 42.0
 custom_constants/separation = 15
 
 [node name="RemapButtonGamepad" type="Button" parent="ButContainer"]
-margin_left = 703.0
+margin_left = 728.0
 margin_right = 1280.0
 margin_bottom = 42.0
 size_flags_horizontal = 3
 custom_fonts/font = ExtResource( 3 )
 text = "Change Button"
 clip_text = true
+
+[node name="ControllerText" type="Label" parent="ButContainer/RemapButtonGamepad"]
+show_behind_parent = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -42.0
+margin_bottom = -42.0
+custom_constants/shadow_offset_x = 0
+custom_fonts/font = ExtResource( 3 )
+text = "Controller:"
+align = 1
 
 [connection signal="mouse_entered" from="ButContainer/RemapButtonKey" to="." method="_on_RemapButtonKey_mouse_entered"]
 [connection signal="mouse_exited" from="ButContainer/RemapButtonKey" to="." method="_on_RemapButtonKey_mouse_exited"]

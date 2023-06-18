@@ -17,14 +17,19 @@ extends Control
 
 enum IGNORE_BUTTON {Key,Pad,None}
 
+export var show_button_type_names = false
 export var action_to_remap = "move_left"
 var being_changed = Global.REBIND_TYPE.None
 
 onready var keyrebind = $ButContainer/RemapButtonKey
 onready var gamepadrebind = $ButContainer/RemapButtonGamepad
 onready var label = $ButContainer/Label
+onready var button_type_text = [$ButContainer/RemapButtonKey/KeyboardText, $ButContainer/RemapButtonGamepad/ControllerText]
 
 func _ready():
+	for label in button_type_text:
+		label.visible = show_button_type_names
+	
 	label.text = action_to_remap.capitalize()
 	_set_button_text_to_control_action()
 
