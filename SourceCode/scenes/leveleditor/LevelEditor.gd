@@ -183,6 +183,7 @@ func _deferred_enter_edit_mode():
 	
 	editor_camera.current = true
 	self.edit_objects_enabled = false
+	self.eyedropper_enabled = false
 	
 	if !level: return
 	
