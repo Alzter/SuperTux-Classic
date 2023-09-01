@@ -197,7 +197,6 @@ text = " Delete "
 [node name="BonusLevelsMenu" parent="." instance=ExtResource( 8 )]
 
 [node name="OptionsMenu" parent="." instance=ExtResource( 7 )]
-visible = false
 
 [node name="FileDialog" type="FileDialog" parent="."]
 anchor_right = 1.0

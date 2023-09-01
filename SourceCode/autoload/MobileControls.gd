@@ -44,7 +44,7 @@ var movement_directions = []
 
 func _ready():
 	mobile_controls.hide()
-	if OS.has_feature("mobile") or force_mobile_controls: activate_mobile_controls()
+	if force_mobile_controls: activate_mobile_controls()
 	ResolutionManager.connect("window_resized", self, "window_resized")
 	window_resized()
 
