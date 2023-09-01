@@ -64,10 +64,15 @@ func update_mobile_controls_scale(ui_scale : float):
 	scale_buttons.rect_scale = Vector2.ONE * ui_scale
 
 func _input(event):
+	
 	if event is InputEventScreenTouch or event is InputEventScreenDrag:
 		if !is_using_mobile: activate_mobile_controls()
 	
 	if !is_using_mobile: return
+	
+	# Disable mobile controls if a keyboard or controller input is detected.
+	if event is InputEventKey or event is InputEventJoypadButton or event is InputEventJoypadMotion:
+		deactivate_mobile_controls()
 	
 	if button_just_released:
 		button_just_released = false
@@ -166,6 +171,10 @@ func update_joystick_sprite():
 func activate_mobile_controls():
 	is_using_mobile = true
 	mobile_controls.show()
+
+func deactivate_mobile_controls():
+	is_using_mobile = false
+	mobile_controls.hide()
 
 func _on_JumpButton_pressed():
 	Input.action_press("jump")
