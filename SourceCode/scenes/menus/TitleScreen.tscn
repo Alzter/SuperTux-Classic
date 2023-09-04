@@ -75,7 +75,7 @@ margin_right = 125.0
 margin_bottom = -2.0
 custom_colors/font_color = Color( 0.992157, 1, 0, 1 )
 custom_fonts/font = ExtResource( 5 )
-text = "Release v0.4.1"
+text = "Release v0.4.2"
 valign = 2
 
 [node name="Menu" type="Control" parent="TitleContent"]
