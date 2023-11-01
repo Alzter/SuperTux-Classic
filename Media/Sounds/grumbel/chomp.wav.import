@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/chomp.wav-4f5a65417768c1e9631d17ddbbd4bb6a.sample"
+
+[deps]
+
+source_file="res://sounds/bosses/grumbel/chomp.wav"
+dest_files=[ "res://.import/chomp.wav-4f5a65417768c1e9631d17ddbbd4bb6a.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=1

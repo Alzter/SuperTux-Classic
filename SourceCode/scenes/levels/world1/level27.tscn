@@ -3,11 +3,11 @@
 [ext_resource path="res://scenes/master/Level.gd" type="Script" id=1]
 [ext_resource path="res://scenes/layers/ObjectMap.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/layers/Background/CastleRed.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/levels/world1/level27script.gd" type="Script" id=4]
 [ext_resource path="res://scenes/layers/TileMap.tscn" type="PackedScene" id=6]
 [ext_resource path="res://scenes/shaders/Overlay.gdshader" type="Shader" id=7]
 [ext_resource path="res://scenes/bosses/Nolok.tscn" type="PackedScene" id=8]
 [ext_resource path="res://scenes/master/Camera.gd" type="Script" id=9]
-[ext_resource path="res://scenes/levels/world1/Level27Script.gd" type="Script" id=10]
 [ext_resource path="res://scenes/layers/Liquid/Lava.tscn" type="PackedScene" id=11]
 
 [sub_resource type="ShaderMaterial" id=1]
@@ -177,7 +177,7 @@ limit_bottom = 480
 script = ExtResource( 9 )
 
 [node name="LevelScript" type="Node" parent="."]
-script = ExtResource( 10 )
+script = ExtResource( 4 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 pause_mode = 2
