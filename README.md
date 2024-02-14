@@ -4,9 +4,9 @@
 A **remake of SuperTux Milestone 1** (versions 0.1.0 - 0.1.4) created from the ground up in **Godot v3.5.2**!
 
 ## Downloads
-Stable releases of SuperTux Classic for major platforms can be found at: https://github.com/Alzter/SuperTux-Classic/releases
+testa releases of SuperTux Classic for major platforms can be found at: https://github.com/xga-cga/SuperTux-Classic/Releases
 
-Alternatively, you can find releases of the game on itch.io: https://alzter-s.itch.io/supertux-classic
+
 
 ## Creating your own content
 Would you like to create your own levels for SuperTux Classic?
