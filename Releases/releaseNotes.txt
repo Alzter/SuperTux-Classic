@@ -1,0 +1,2 @@
+windows build binaries 32-bit and 64 bit.
+SuperTuxClassicWindows0.42testa.zip
